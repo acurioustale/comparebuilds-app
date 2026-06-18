@@ -1,6 +1,6 @@
 # comparebuilds
 
-WoW talent build comparison tool — deployed at comparebuilds.app.
+WoW talent build comparison tool — deployed as a static site behind your own domain.
 
 ## Deployment
 
@@ -14,14 +14,14 @@ This produces a `dist/` folder containing the static site.
 
 ### 2. Upload files to the server
 
-Upload the **contents** of `dist/` to the web root folder (the folder that comparebuilds.app points to). Upload `api/share.php` into an `api/` subfolder inside that same web root.
+Upload the **contents** of `dist/` to the web root folder (the folder that your domain points to). Upload `api/share.php` into an `api/` subfolder inside that same web root.
 
 Expected layout on the server:
 
 ```
 /home/username/
 ├── config.php          ← credentials file, above the web root
-└── www/                ← web root (comparebuilds.app → this folder)
+└── www/                ← web root (your domain → this folder)
     ├── index.html
     ├── assets/
     ├── sw.js
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS comparebuilds_shares (
 
 ### 5. Point the domain
 
-In your hosting control panel, point the `comparebuilds.app` domain to the web root folder you uploaded to. No `.htaccess` rewrite rules are needed — the app uses hash-based routing and all routes are served by `index.html`.
+In your hosting control panel, point your domain to the web root folder you uploaded to. No `.htaccess` rewrite rules are needed — the app uses hash-based routing and all routes are served by `index.html`.
 
 ---
 
