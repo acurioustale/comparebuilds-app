@@ -4,7 +4,7 @@
 //
 // Typical server layout:
 //   /home/username/          ← place config.php here
-//   /home/username/www/      ← web root (comparebuilds.app points here)
+//   /home/username/www/      ← web root (your domain points here)
 //   /home/username/www/api/  ← share.php lives here
 //
 // share.php loads this file via: require_once __DIR__ . '/../../config.php';
