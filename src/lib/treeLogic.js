@@ -1,9 +1,5 @@
 // ─── Prerequisite and gate logic — shared between interactive and import views ─
 
-// Set to true to log adjacency list, gate thresholds, sort order, and invalid
-// set for every computeInvalidNodeIds call (useful for per-spec debugging).
-const DEBUG_TREE_LOGIC = false
-
 /**
  * Returns true if at least one directly connected upper parent (posY < node.posY)
  * is fully selected. alreadyGranted parents are treated as permanently satisfied.
@@ -80,17 +76,6 @@ export function computeInvalidNodeIds(allNodes, selected, nodeById) {
     .filter((n) => selected[n.id] && !n.alreadyGranted)
     .sort((a, b) => a.posY !== b.posY ? a.posY - b.posY : a.posX - b.posX)
 
-  if (DEBUG_TREE_LOGIC) {
-    const gateNodes = sorted.filter((n) => n.spentRequired > 0)
-    console.group('[treeLogic] computeInvalidNodeIds')
-    console.log('Sort order (posY,posX):', sorted.map((n) => `${n.id}(y=${n.posY},x=${n.posX})`).join(' → '))
-    console.log('Gate thresholds:', gateNodes.map((n) => `${n.id}:spentRequired=${n.spentRequired}`))
-    console.log('Adjacency (child → parents):', sorted.map((n) => {
-      const parents = n.connections.filter((cid) => nodeById[cid] && nodeById[cid].posY < n.posY)
-      return `${n.id}→[${parents}]`
-    }))
-  }
-
   for (const node of sorted) {
     let shouldFlag = false
 
@@ -117,11 +102,6 @@ export function computeInvalidNodeIds(allNodes, selected, nodeById) {
     }
 
     if (shouldFlag) invalid.add(node.id)
-  }
-
-  if (DEBUG_TREE_LOGIC) {
-    console.log('Invalid set:', [...invalid])
-    console.groupEnd()
   }
 
   return invalid

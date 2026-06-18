@@ -25,7 +25,6 @@ import {
   generateBuildString,
   parseSpecId,
   collectClassNodes,
-  areSameSpec,
 } from './buildString.js'
 
 const require = createRequire(import.meta.url)
@@ -86,7 +85,6 @@ function assertSameSelection(actual, expected, label) {
 // ── Per-class round-trip ──────────────────────────────────────────────────────
 
 for (const cls of classIndex.filter((c) => c.implemented)) {
-  console.log(`\n${cls.displayName}:`)
   const data = require(`../data/${cls.name}.json`)
   const classNodes = collectClassNodes(data)
 
@@ -132,19 +130,6 @@ for (const cls of classIndex.filter((c) => c.implemented)) {
     })
   }
 }
-
-// ── areSameSpec sanity ────────────────────────────────────────────────────────
-
-console.log('\nHelpers:')
-
-test('areSameSpec true for matching specIds, false otherwise', () => {
-  assert.strictEqual(areSameSpec({ specId: 1 }, { specId: 1 }, { specId: 1 }), true)
-  assert.strictEqual(areSameSpec({ specId: 1 }, { specId: 2 }), false)
-})
-
-test('areSameSpec throws with fewer than two builds', () => {
-  assert.throws(() => areSameSpec({ specId: 1 }))
-})
 
 // ── Error paths ───────────────────────────────────────────────────────────────
 // A truncated or corrupt string must fail loudly, never return garbage — the

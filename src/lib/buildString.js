@@ -185,7 +185,7 @@ export function parseBuildString(buildString, nodes) {
 
   const version = reader.readBits(8)
   const specId  = reader.readBits(16)
-  reader.skipBits(128)  // Blizzard internal hash — all zeros in practice
+  reader.skipBits(128)  // Blizzard internal hash — opaque, carries a real (non-zero) value in game exports but is not needed to decode the selection
 
   // Sort ascending — must match the order used during serialisation
   const sorted = [...nodes].sort((a, b) => a.id - b.id)
@@ -247,6 +247,9 @@ class BitWriter {
 
   writeBit(bit) { this.#bits.push(bit & 1) }
 
+  // NOTE: only safe for count <= 31 with non-zero values — JS masks shift amounts
+  // to 5 bits, so (value >> i) is wrong for i >= 32. All real fields here are <= 16
+  // bits; the only wide write is the 128-bit hash, which is always 0.
   writeBits(value, count) {
     for (let i = 0; i < count; i++) this.#bits.push((value >> i) & 1)
   }
@@ -328,21 +331,6 @@ export function generateBuildString(selectedNodes, specId, classNodes, grantedId
   }
 
   return writer.toString()
-}
-
-/**
- * Returns `true` if every provided parsed build belongs to the same
- * specialisation (same `specId`).
- *
- * @param {...{ specId: number }} builds  Two or more objects from `parseBuildString`.
- * @returns {boolean}
- */
-export function areSameSpec(...builds) {
-  if (builds.length < 2) {
-    throw new TypeError('areSameSpec requires at least two builds')
-  }
-  const { specId } = builds[0]
-  return builds.every((b) => b.specId === specId)
 }
 
 /**

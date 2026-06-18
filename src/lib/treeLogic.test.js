@@ -110,7 +110,6 @@ const GATE = [
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
 
-console.log('\nLinear chain:')
 
 test('nothing invalid when all selected', () => {
   const selected = { 1: sel(), 2: sel(), 3: sel() }
@@ -143,7 +142,6 @@ test('removing middle node: child invalid, root still valid', () => {
   assertInvalid(computeInvalidNodeIds(CHAIN, selected, byId(CHAIN)), 3)
 })
 
-console.log('\nDiamond — two paths to leaf:')
 
 test('all selected → nothing invalid', () => {
   const selected = { 1: sel(), 2: sel(), 3: sel(), 4: sel() }
@@ -168,7 +166,6 @@ test('removing A and B leaves C valid, D valid (C path survives)', () => {
   assertInvalid(computeInvalidNodeIds(DIAMOND, selected, byId(DIAMOND)), 3, 4)
 })
 
-console.log('\nGate threshold:')
 
 test('all selected at full rank → nothing invalid', () => {
   // P=2pts, Q=1pt, R=1pt, S=1pt → total=5, threshold=3 → fine
@@ -204,7 +201,6 @@ test('decrementing P one rank keeps gate met (total still ≥ 3)', () => {
   assertInvalid(computeInvalidNodeIds(GATE, selected, byId(GATE)))
 })
 
-console.log('\nalreadyGranted nodes:')
 
 test('alreadyGranted parent is always satisfied — child never invalid', () => {
   const root  = node(20, 0, { alreadyGranted: true, connections: [21] })
@@ -223,7 +219,6 @@ test('alreadyGranted node itself is never flagged even when selected', () => {
   assertInvalid(computeInvalidNodeIds(nodes, selected, byId(nodes)))
 })
 
-console.log('\nMulti-rank nodes:')
 
 test('parent at partial rank does not satisfy child prereq', () => {
   // A has maxRanks=2; B requires A to be FULLY selected (2/2)
@@ -266,7 +261,6 @@ function invalidAfterRemoving(allNodes, fullySelected, ...removeIds) {
 
 // ─── Feral Druid integration test ─────────────────────────────────────────────
 
-console.log('\nFeral Druid integration (Tiger\'s Fury cascade):')
 
 test('removing Tiger\'s Fury invalidates all connection-dependent spec nodes, not class or hero', () => {
   const druid = require('../data/druid.json')
@@ -409,7 +403,6 @@ function runSpecRootCascadeTest(allNodes, rootId) {
 
 // ─── Warrior Protection integration test (tank) ───────────────────────────────
 
-console.log('\nWarrior Protection integration (Ignore Pain cascade):')
 
 test('removing Ignore Pain invalidates all connection-dependent spec nodes, not class or hero', () => {
   const warrior = require('../data/warrior.json')
@@ -421,7 +414,6 @@ test('removing Ignore Pain invalidates all connection-dependent spec nodes, not 
 
 // ─── Paladin Holy integration test (healer) ───────────────────────────────────
 
-console.log('\nPaladin Holy integration (Holy Shock cascade):')
 
 test('removing Holy Shock invalidates all connection-dependent spec nodes, not class or hero', () => {
   const paladin = require('../data/paladin.json')
@@ -433,7 +425,6 @@ test('removing Holy Shock invalidates all connection-dependent spec nodes, not c
 
 // ─── Hunter Marksmanship integration test (ranged DPS) ───────────────────────
 
-console.log('\nHunter Marksmanship integration (Aimed Shot cascade):')
 
 test('removing Aimed Shot invalidates all connection-dependent spec nodes, not class or hero', () => {
   const hunter = require('../data/hunter.json')

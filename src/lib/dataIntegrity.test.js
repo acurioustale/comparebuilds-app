@@ -34,7 +34,6 @@ const implemented = classIndex.filter((c) => c.implemented)
 
 // ── 1. Schema validation ──────────────────────────────────────────────────────
 
-console.log('\nSchema validation:')
 
 for (const cls of implemented) {
   test(`${cls.displayName} validates against the schema + index`, () => {
@@ -54,7 +53,6 @@ test('every implemented class in the index has a data file', () => {
 
 // ── 2. Wire-layout snapshot ───────────────────────────────────────────────────
 
-console.log('\nWire layout snapshot:')
 
 const current = {}
 for (const cls of implemented) {
