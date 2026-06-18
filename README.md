@@ -51,10 +51,15 @@ This location keeps the credentials inaccessible to the public even if PHP proce
 CREATE TABLE IF NOT EXISTS comparebuilds_shares (
     id         CHAR(6)    NOT NULL PRIMARY KEY,
     data       MEDIUMTEXT NOT NULL,
+    ip_hash    CHAR(64)   NULL,
     created_at TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_created (created_at)
+    INDEX idx_created (created_at),
+    INDEX idx_ip_created (ip_hash, created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
+
+`ip_hash` stores a salted SHA-256 of the creator's IP, used only for per-IP rate
+limiting (20 shares/hour by default).
 
 ### 5. Point the domain
 
@@ -72,6 +77,19 @@ In your hosting control panel, point your domain to the web root folder you uplo
 | `GET`  | `?id=xxxxxx` | Stored JSON payload |
 
 Rows older than 90 days are deleted on each `POST` request.
+
+### Security & limits
+
+`share.php` is hardened for public exposure:
+
+- **Per-IP rate limit** — 20 creates per IP per hour (`429` past that), tracked via a
+  salted IP hash; set `SHARE_IP_SALT` in `config.php` to a random secret.
+- **Body cap** — requests over 16 KB are rejected (`413`) before parsing; JSON depth is capped.
+- **Strict validation** — `classId`/`specId` must be positive integers, 2–5 builds, each a
+  base64 build string ≤ 2000 chars; only the validated fields are stored (never the raw body).
+- **Same-origin only** — no CORS headers are sent, so other sites can't call the API from a browser.
+- **No error leakage** — DB/runtime errors return a generic JSON message; details are never exposed.
+- All queries use prepared statements; IDs use a CSPRNG (`random_int`).
 
 ## Development
 
