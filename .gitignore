@@ -3,3 +3,6 @@ dist/
 api/config.php
 .DS_Store
 coverage/
+
+# Claude Code: commit shared run config (launch.json); keep personal/local settings out
+.claude/settings.local.json
