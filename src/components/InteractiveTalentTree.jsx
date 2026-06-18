@@ -5,6 +5,7 @@ import TalentTree from './TalentTree'
 import { generateBuildString } from '../lib/buildString'
 import { computeInvalidNodeIds, buildGrantedSeed } from '../lib/treeLogic'
 import { sectionPoints, canSpendPoint, activeHeroSubtree } from '../lib/spendRules'
+import { byId } from './treeLayout'
 import { useBuildsStore } from '../store/buildsStore'
 
 // ─── Section bar (label + counter + per-section clear) ───────────────────────
@@ -95,11 +96,7 @@ export default function InteractiveTalentTree({ treeData, classNodes }) {
 
   const budget = treeData.pointBudget
 
-  const nodeById = useMemo(() => {
-    const m = {}
-    for (const n of treeData.nodes) m[n.id] = n
-    return m
-  }, [treeData])
+  const nodeById = useMemo(() => byId(treeData.nodes), [treeData])
 
   // ── Invalid-node detection ──────────────────────────────────────────────────
 

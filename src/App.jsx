@@ -6,14 +6,11 @@ import SideBySideDiff from './components/SideBySideDiff'
 import TalentTree from './components/TalentTree'
 import { useBuildsStore, MAX_BUILDS } from './store/buildsStore'
 import { buildGrantedSeed, computeInvalidNodeIds } from './lib/treeLogic'
+import { byId } from './components/treeLayout'
 
 // Computes invalidity for a single imported build and wraps TalentTree.
 function SingleBuildView({ treeData, parsedBuild }) {
-  const nodeById = useMemo(() => {
-    const m = {}
-    for (const n of treeData.nodes) m[n.id] = n
-    return m
-  }, [treeData])
+  const nodeById = useMemo(() => byId(treeData.nodes), [treeData])
 
   // Include alreadyGranted nodes so prerequisite checks evaluate correctly
   const fullSelected = useMemo(

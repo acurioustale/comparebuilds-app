@@ -4,6 +4,7 @@ import 'tippy.js/dist/tippy.css'
 import { useBuildsStore, MAX_BUILDS } from '../store/buildsStore'
 import classesIndex from '../data/classes.json'
 import { zamimg } from '../lib/zamimg'
+import { activeHeroSubtree } from '../lib/spendRules'
 
 function ClassIcon({ name, size = 36 }) {
   // WoW class icons on zamimg use classicon_{name} with underscores removed.
@@ -134,16 +135,6 @@ function pointSummary(parsed, treeData) {
     if (s) pts[n.treeType] = (pts[n.treeType] ?? 0) + (s.pointsInvested ?? 0)
   }
   return `Class: ${pts.class}/${budget.class} · Spec: ${pts.spec}/${budget.spec} · Hero: ${pts.hero}/${budget.hero}`
-}
-
-function activeHeroSpec(parsedBuild, treeData) {
-  if (!parsedBuild || !treeData) return null
-  for (const n of treeData.nodes) {
-    if (n.treeType === 'hero' && !n.alreadyGranted && parsedBuild.nodes[n.id]) {
-      return n.heroSubtree
-    }
-  }
-  return null
 }
 
 function FilledSlot({ index, label, summary, value, parsed, loading, onRemove }) {
@@ -342,7 +333,7 @@ export default function BuildManager() {
   const classDisplayName = activeClass?.displayName ?? ''
   const buildLabel = (n, parsedBuild) => {
     if (!specDisplayName || !classDisplayName) return `Build ${n}`
-    const heroSpec = activeHeroSpec(parsedBuild, treeData)
+    const heroSpec = parsedBuild && treeData ? activeHeroSubtree(treeData.nodes, parsedBuild.nodes) : null
     const prefix = heroSpec ? `${heroSpec} ` : ''
     return `Build ${n} — ${prefix}${specDisplayName} ${classDisplayName}`
   }

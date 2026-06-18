@@ -3,15 +3,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import { zamimg } from '../lib/zamimg'
 import { rarityTier, computeStats, computeLegendTiers } from '../lib/heatmap'
-
-// ─── Layout constants (match TalentTree) ─────────────────────────────────────
-
-const CELL = 36
-const ICON = 26
-const CHOICE_ICON = 20
-const APEX_ICON = 34
-const CHOICE_GAP = 4
-const PAD = 24
+import { CELL, ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP, PAD, byId, panelBounds, panelEdges } from './treeLayout'
 
 // Dot indicators for choice nodes (one dot per build)
 const DOT = 5
@@ -289,49 +281,8 @@ function HeatmapNode({ node, px, py, stat, totalBuilds, alreadyGranted }) {
 // ─── Heatmap panel ────────────────────────────────────────────────────────────
 
 function HeatmapPanel({ nodes, nodeById, stats, totalBuilds }) {
-  const { minX, minY, W, H } = useMemo(() => {
-    const xs = nodes.map((n) => n.posX)
-    const ys = nodes.map((n) => n.posY)
-    const minX = Math.min(...xs)
-    const maxX = Math.max(...xs)
-    const minY = Math.min(...ys)
-    const maxY = Math.max(...ys)
-    return {
-      minX,
-      minY,
-      W: (maxX - minX) * CELL + PAD * 2,
-      H: (maxY - minY) * CELL + PAD * 2,
-    }
-  }, [nodes])
-
-  const nodeIds = useMemo(() => new Set(nodes.map((n) => n.id)), [nodes])
-
-  const edges = useMemo(() => {
-    const seen = new Set()
-    const result = []
-    for (const node of nodes) {
-      const connSeen = new Set()
-      for (const connId of node.connections) {
-        if (connSeen.has(connId)) continue
-        connSeen.add(connId)
-        if (!nodeIds.has(connId) || !nodeById[connId]) continue
-        const a = Math.min(node.id, connId)
-        const b = Math.max(node.id, connId)
-        if (seen.has(`${a}:${b}`)) continue
-        seen.add(`${a}:${b}`)
-        const conn = nodeById[connId]
-        result.push({
-          x1: (node.posX - minX) * CELL + PAD,
-          y1: (node.posY - minY) * CELL + PAD,
-          x2: (conn.posX - minX) * CELL + PAD,
-          y2: (conn.posY - minY) * CELL + PAD,
-          fromId: node.id,
-          toId: connId,
-        })
-      }
-    }
-    return result
-  }, [nodes, nodeIds, nodeById, minX, minY])
+  const { minX, minY, W, H } = useMemo(() => panelBounds(nodes), [nodes])
+  const edges = useMemo(() => panelEdges(nodes, nodeById, minX, minY), [nodes, nodeById, minX, minY])
 
   return (
     <div style={{ position: 'relative', width: W, height: H, flexShrink: 0 }}>
@@ -390,11 +341,7 @@ function PanelLabel({ children }) {
 export default function HeatmapTree({ treeData, builds }) {
   const totalBuilds = builds.length
 
-  const nodeById = useMemo(() => {
-    const m = {}
-    for (const n of treeData.nodes) m[n.id] = n
-    return m
-  }, [treeData])
+  const nodeById = useMemo(() => byId(treeData.nodes), [treeData])
 
   const classNodes = useMemo(
     () => treeData.nodes.filter((n) => n.treeType === 'class'),
