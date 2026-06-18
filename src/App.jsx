@@ -7,6 +7,19 @@ import TalentTree from './components/TalentTree'
 import { useBuildsStore, MAX_BUILDS } from './store/buildsStore'
 import { buildGrantedSeed, computeInvalidNodeIds } from './lib/treeLogic'
 import { byId } from './components/treeLayout'
+import FitToWidth from './components/FitToWidth'
+
+// Wraps a tree/comparison panel so it scales to fit the viewport width, centered.
+// FitToWidth is the full-width measurer; the inner card hugs its content (w-max).
+function TreeCard({ children }) {
+  return (
+    <div className="mt-6">
+      <FitToWidth>
+        <div className="p-4 wow-panel rounded w-max">{children}</div>
+      </FitToWidth>
+    </div>
+  )
+}
 
 // Computes invalidity for a single imported build and wraps TalentTree.
 function SingleBuildView({ treeData, parsedBuild }) {
@@ -24,15 +37,13 @@ function SingleBuildView({ treeData, parsedBuild }) {
   )
 
   return (
-    <div className="mt-6 flex justify-center">
-      <div className="p-4 wow-panel rounded">
-        <TalentTree
-          treeData={treeData}
-          selectedNodes={parsedBuild.nodes}
-          invalidNodeIds={invalidNodeIds}
-        />
-      </div>
-    </div>
+    <TreeCard>
+      <TalentTree
+        treeData={treeData}
+        selectedNodes={parsedBuild.nodes}
+        invalidNodeIds={invalidNodeIds}
+      />
+    </TreeCard>
   )
 }
 
@@ -43,11 +54,9 @@ function MainView() {
   // No builds yet: pure interactive mode
   if (buildStrings.length === 0) {
     return (
-      <div className="mt-6 flex justify-center">
-        <div className="p-4 wow-panel rounded">
-          <InteractiveTalentTree treeData={treeData} classNodes={classNodes} />
-        </div>
-      </div>
+      <TreeCard>
+        <InteractiveTalentTree treeData={treeData} classNodes={classNodes} />
+      </TreeCard>
     )
   }
 
@@ -59,25 +68,21 @@ function MainView() {
   let comparisonEl = null
   if (valid.length >= 3) {
     comparisonEl = (
-      <div className="mt-6 flex justify-center">
-        <div className="p-4 wow-panel rounded">
-          <HeatmapTree treeData={treeData} builds={valid.map((v) => v.parsed)} />
-        </div>
-      </div>
+      <TreeCard>
+        <HeatmapTree treeData={treeData} builds={valid.map((v) => v.parsed)} />
+      </TreeCard>
     )
   } else if (valid.length === 2) {
     comparisonEl = (
-      <div className="mt-6 flex justify-center">
-        <div className="p-4 wow-panel rounded">
-          <SideBySideDiff
-            treeData={treeData}
-            buildA={valid[0].parsed}
-            buildB={valid[1].parsed}
-            labelA={valid[0].label}
-            labelB={valid[1].label}
-          />
-        </div>
-      </div>
+      <TreeCard>
+        <SideBySideDiff
+          treeData={treeData}
+          buildA={valid[0].parsed}
+          buildB={valid[1].parsed}
+          labelA={valid[0].label}
+          labelB={valid[1].label}
+        />
+      </TreeCard>
     )
   } else if (valid.length === 1) {
     comparisonEl = <SingleBuildView treeData={treeData} parsedBuild={valid[0].parsed} />
@@ -89,11 +94,9 @@ function MainView() {
     <>
       {/* Interactive tree shown while building another */}
       {addingBuild && (
-        <div className="mt-6 flex justify-center">
-          <div className="p-4 wow-panel rounded">
-            <InteractiveTalentTree treeData={treeData} classNodes={classNodes} />
-          </div>
-        </div>
+        <TreeCard>
+          <InteractiveTalentTree treeData={treeData} classNodes={classNodes} />
+        </TreeCard>
       )}
 
       {/* Offer to add another build when not already in interactive mode */}
