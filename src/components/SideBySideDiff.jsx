@@ -136,28 +136,27 @@ export default function SideBySideDiff({
 
   return (
     <div>
-      {/* ── Two trees side by side ──────────────────────────────────────────── */}
-      <div className="overflow-x-auto pb-2">
-        <div className="inline-flex gap-10 min-w-max">
-          <div>
-            <BuildLabel label={labelA} color="A" />
-            <TalentTree
-              treeData={treeData}
-              selectedNodes={buildA.nodes}
-              highlights={highlights}
-            />
-          </div>
+      {/* ── Two trees: side by side on wide screens, stacked on narrow ───────── */}
+      <div className="flex flex-col gap-10 pb-2 xl:flex-row xl:items-start">
+        <div>
+          <BuildLabel label={labelA} color="A" />
+          <TalentTree
+            treeData={treeData}
+            selectedNodes={buildA.nodes}
+            highlights={highlights}
+          />
+        </div>
 
-          <div className="self-stretch w-px bg-wow-dim" />
+        {/* Divider: horizontal between stacked builds, vertical when side by side */}
+        <div className="h-px w-full bg-wow-dim xl:h-auto xl:w-px xl:self-stretch" />
 
-          <div>
-            <BuildLabel label={labelB} color="B" />
-            <TalentTree
-              treeData={treeData}
-              selectedNodes={buildB.nodes}
-              highlights={highlights}
-            />
-          </div>
+        <div>
+          <BuildLabel label={labelB} color="B" />
+          <TalentTree
+            treeData={treeData}
+            selectedNodes={buildB.nodes}
+            highlights={highlights}
+          />
         </div>
       </div>
 
