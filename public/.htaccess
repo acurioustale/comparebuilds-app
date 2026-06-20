@@ -1,0 +1,25 @@
+# comparebuilds.app — Apache config for the static site root.
+# Lives in public/ so Vite copies it into dist/ and the rsync deploy ships it
+# to the web root. Hash-based routing means no SPA rewrite is needed.
+
+# ─── Security headers ──────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  # Content-Security-Policy: the app loads only its own bundled JS/CSS/fonts and
+  # talent icons from wow.zamimg.com; share API calls are same-origin. Inline
+  # styles are allowed because React sets element style attributes; no inline
+  # scripts are emitted by the build.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://wow.zamimg.com; font-src 'self'; connect-src 'self' https://wow.zamimg.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "no-referrer"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ─── Deny sensitive files (defense in depth) ───────────────────────────────────
+# config.php normally lives ONE LEVEL ABOVE the web root and is already
+# unreachable; this guards against a stray copy or template ever landing here,
+# and blocks dotfiles (e.g. this .htaccess, any .env) from being served.
+<FilesMatch "(^\.|\.example$|^config\.php$)">
+  Require all denied
+</FilesMatch>

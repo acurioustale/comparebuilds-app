@@ -22,6 +22,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { validateClassData } from '../src/lib/validateClassData.js'
 import { wireLayout } from '../src/lib/wireLayout.js'
+import { sanitizeDescription } from '../src/lib/sanitizeDescription.js'
 
 const BASE_URL = 'https://static.icy-veins.com/json/midnight-talent-calculator'
 const VERSION = 46
@@ -78,13 +79,15 @@ function normaliseNode(raw, treeType, heroSubtree = null) {
     maxRanks: isChoice ? 1 : spell.maxRanks,
     name: isChoice ? null : spell.name,
     icon: isChoice ? null : spell.icon,
-    description: isChoice ? null : spell.description,
+    // Descriptions are rendered as HTML (TalentTree.jsx); sanitise at ingest so
+    // the committed data is the trust boundary regardless of source.
+    description: isChoice ? null : sanitizeDescription(spell.description),
     choices: isChoice
       ? raw.spells.map((s) => ({
           spellId: s.spellId,
           name: s.name,
           icon: s.icon,
-          description: s.description,
+          description: sanitizeDescription(s.description),
           maxRanks: s.maxRanks,
         }))
       : null,
@@ -128,7 +131,7 @@ function normaliseApexNode(raw, specNodes) {
     levels: raw.levels,
     ranks: raw.spells.map((s) => ({
       spellId: s.spellId,
-      description: s.description,
+      description: sanitizeDescription(s.description),
       maxRanks: s.maxRanks,
     })),
   }
