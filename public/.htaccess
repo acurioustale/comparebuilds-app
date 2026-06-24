@@ -16,6 +16,14 @@
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
 
+# ─── MIME types ────────────────────────────────────────────────────────────────
+# Some hosts don't map .webmanifest by default; browsers reject the manifest
+# unless it is served as application/manifest+json.
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType image/svg+xml .svg
+</IfModule>
+
 # ─── Deny sensitive files (defense in depth) ───────────────────────────────────
 # config.php normally lives ONE LEVEL ABOVE the web root and is already
 # unreachable; this guards against a stray copy or template ever landing here,

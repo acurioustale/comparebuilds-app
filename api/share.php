@@ -98,6 +98,11 @@ if ($method === 'GET') {
         fail(404, 'Share not found or has expired');
     }
 
+    // Share payloads are immutable once written, so let browsers/CDNs cache the
+    // hit (overrides the global no-store, which only matters for POST). Capped at
+    // a day so a since-pruned link recovers to a 404 reasonably soon.
+    header('Cache-Control: public, max-age=86400');
+
     // Stored blob was validated on write — return it verbatim.
     echo $row['data'];
     exit;

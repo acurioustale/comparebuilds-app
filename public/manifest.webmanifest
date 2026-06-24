@@ -1,0 +1,15 @@
+{
+  "name": "Compare Builds",
+  "short_name": "Compare Builds",
+  "description": "Import, build, and compare World of Warcraft talent loadouts side by side.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0d0d14",
+  "theme_color": "#0d0d14",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}

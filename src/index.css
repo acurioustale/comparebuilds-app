@@ -78,6 +78,16 @@ body {
   box-shadow: 0 0 0 2px #c8a84b, 0 0 14px rgba(200,168,75,0.65);
 }
 
+/* ─── Talent node keyboard focus ─────────────────────────────────────────── */
+
+/* Interactive tree nodes are focusable (role="button", tabindex=0). Show a clear
+ * gold ring on keyboard focus only, so mouse users aren't distracted by it. */
+.tnode { outline: none; border-radius: 5px; }
+.tnode:focus-visible {
+  outline: 2px solid #e8c96b;
+  outline-offset: 3px;
+}
+
 /* ─── WoW action button ──────────────────────────────────────────────────── */
 
 .wow-btn {

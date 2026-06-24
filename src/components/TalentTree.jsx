@@ -106,6 +106,27 @@ function TalentNode({
     ? (e) => { e.preventDefault(); onNodeContextMenu?.(node.id) }
     : undefined
 
+  // Keyboard accessibility: only the interactive tree wires onNodeClick. Static
+  // comparison/heatmap views stay non-focusable (their textual diff/legend is the
+  // screen-reader path) so we don't add hundreds of tab stops to a read-only grid.
+  const interactive = !!onNodeClick
+  const ariaLabel = alreadyGranted
+    ? `${node.name} — passive, always active`
+    : `${node.name} — ${pointsInvested > 0 ? 'selected' : 'not selected'}` +
+      (node.maxRanks > 1 ? `, ${pointsInvested} of ${node.maxRanks} points` : '')
+  // Enter/Space spend a point; Delete/Backspace refund (keyboard analogue of right-click).
+  const onKeyDown = interactive
+    ? (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onNodeClick(node.id)
+        } else if (e.key === 'Delete' || e.key === 'Backspace') {
+          e.preventDefault()
+          onNodeContextMenu?.(node.id)
+        }
+      }
+    : undefined
+
   const nodeOpacity = isSelected ? 1 : highlight ? 0.5 : locked ? 0.1 : 0.3
   const nodeBorder  = isSelected
     ? (invalid ? 'rgba(200,60,60,0.85)' : '#c8a84b')
@@ -138,6 +159,15 @@ function TalentNode({
               <div
                 key={i}
                 onClick={onNodeClick ? () => onNodeClick(node.id, i) : undefined}
+                className={interactive ? 'tnode' : undefined}
+                role={interactive ? 'button' : undefined}
+                tabIndex={interactive ? 0 : undefined}
+                aria-pressed={interactive ? chosen : undefined}
+                aria-label={interactive ? `${ch.name}${chosen ? ' — selected' : ''}` : undefined}
+                onKeyDown={interactive ? (e) => {
+                  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onNodeClick(node.id, i) }
+                  else if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); onNodeContextMenu?.(node.id) }
+                } : undefined}
                 style={{
                   position: 'relative',
                   width: CHOICE_ICON,
@@ -190,6 +220,12 @@ function TalentNode({
         <div
           onClick={hasHandlers ? () => onNodeClick?.(node.id) : undefined}
           onContextMenu={onContextMenu}
+          className={interactive ? 'tnode' : undefined}
+          role={interactive ? 'button' : undefined}
+          tabIndex={interactive ? 0 : undefined}
+          aria-pressed={interactive ? isSelected : undefined}
+          aria-label={interactive ? ariaLabel : undefined}
+          onKeyDown={onKeyDown}
           style={{
             position: 'absolute',
             left: px - S / 2,
@@ -266,6 +302,12 @@ function TalentNode({
       <div
         onClick={hasHandlers ? () => onNodeClick?.(node.id) : undefined}
         onContextMenu={onContextMenu}
+        className={interactive ? 'tnode' : undefined}
+        role={interactive ? 'button' : undefined}
+        tabIndex={interactive ? 0 : undefined}
+        aria-pressed={interactive ? isSelected : undefined}
+        aria-label={interactive ? ariaLabel : undefined}
+        onKeyDown={onKeyDown}
         style={{
           position: 'absolute',
           left: px - S / 2,
