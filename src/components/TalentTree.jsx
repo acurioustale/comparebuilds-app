@@ -626,7 +626,7 @@ export default function TalentTree({
       <div style={{ display: 'inline-flex', flexDirection: 'column', gap: 16, minWidth: 'max-content' }}>
 
         {/* ── Class + Spec panels (stack below md, side by side at md+) ──────── */}
-        <div className="flex flex-col items-center gap-5 xl:flex-row xl:items-start xl:gap-0">
+        <div className="flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start 2xl:gap-0">
           <div>
             <PanelLabel
               spent={sectionSpent?.class}
@@ -648,7 +648,7 @@ export default function TalentTree({
             />
           </div>
 
-          <div className="hidden xl:block self-stretch w-px bg-wow-dim mx-3 mt-5" />
+          <div className="hidden 2xl:block self-stretch w-px bg-wow-dim mx-3 mt-5" />
 
           <div>
             <PanelLabel
@@ -690,7 +690,7 @@ export default function TalentTree({
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-5 xl:flex-row xl:items-start xl:justify-center xl:gap-0">
+          <div className="flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start 2xl:justify-center 2xl:gap-0">
             <TreePanel
               nodes={leftNodes}
               selectedNodes={selectedNodes}
@@ -703,7 +703,7 @@ export default function TalentTree({
               onClear={onClearSection ? () => onClearSection('hero') : null}
               clearDisabled={activeHero !== treeData.heroSubtrees.left.name}
             />
-            <div className="hidden xl:block self-stretch w-px bg-wow-dim mx-3" />
+            <div className="hidden 2xl:block self-stretch w-px bg-wow-dim mx-3" />
             <TreePanel
               nodes={rightNodes}
               selectedNodes={selectedNodes}

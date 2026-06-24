@@ -162,17 +162,17 @@ export default function SideBySideDiff({
   // A section row: the two builds' panels for one section, paired side by side at
   // xl and stacked below. Build tags act as one-time column headers when paired
   // (only the first row shows them, via `tagsAlways`); when stacked, every row
-  // shows them (xl:hidden flips them back on) so each panel stays identifiable.
+  // shows them (2xl:hidden flips them back on) so each panel stays identifiable.
   const Row = ({ label, a, b, tagsAlways = false }) => (
     <div>
       <SectionDivider>{label}</SectionDivider>
-      <div className="flex flex-col items-center gap-6 xl:flex-row xl:items-start xl:justify-center xl:gap-8">
+      <div className="flex flex-col items-center gap-6 2xl:flex-row 2xl:items-start 2xl:justify-center 2xl:gap-8">
         <div>
-          <div className={tagsAlways ? undefined : 'xl:hidden'}><BuildTag label={labelA} color="A" /></div>
+          <div className={tagsAlways ? undefined : '2xl:hidden'}><BuildTag label={labelA} color="A" /></div>
           {a}
         </div>
         <div>
-          <div className={tagsAlways ? undefined : 'xl:hidden'}><BuildTag label={labelB} color="B" /></div>
+          <div className={tagsAlways ? undefined : '2xl:hidden'}><BuildTag label={labelB} color="B" /></div>
           {b}
         </div>
       </div>
