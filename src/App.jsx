@@ -8,6 +8,10 @@ import { useBuildsStore, MAX_BUILDS } from './store/buildsStore'
 import { buildGrantedSeed, computeInvalidNodeIds } from './lib/treeLogic'
 import { byId } from './components/treeLayout'
 import FitToWidth from './components/FitToWidth'
+import DevHud from './components/DevHud'
+
+// Rework branch: HUD always on for frictionless testing. REMOVE before merging.
+const SHOW_HUD = true
 
 // Tracks a CSS media query. Falls back to false where matchMedia is unavailable
 // (e.g. jsdom in tests), preserving the wide-layout defaults.
@@ -263,6 +267,7 @@ export default function App() {
       </footer>
 
     </div>
+    {SHOW_HUD && <DevHud />}
     </>
   )
 }
