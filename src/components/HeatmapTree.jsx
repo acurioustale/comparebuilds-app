@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import { zamimg } from '../lib/zamimg'
 import { rarityTier, computeStats, computeLegendTiers } from '../lib/heatmap'
-import { CELL, ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP, PAD, byId, panelBounds, panelEdges } from './treeLayout'
+import { CELL, ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP, PAD, byId, panelBounds, panelEdges, sectionRowClass, dividerClass } from './treeLayout'
 
 // Dot indicators for choice nodes (one dot per build)
 const DOT = 5
@@ -338,7 +338,7 @@ function PanelLabel({ children }) {
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 
-export default function HeatmapTree({ treeData, builds }) {
+export default function HeatmapTree({ treeData, builds, layout = null }) {
   const totalBuilds = builds.length
 
   const nodeById = useMemo(() => byId(treeData.nodes), [treeData])
@@ -374,14 +374,14 @@ export default function HeatmapTree({ treeData, builds }) {
       <div className="overflow-x-auto pb-1">
         <div className="inline-flex flex-col gap-4 min-w-max">
 
-          {/* ── Class + Spec panels (stack below md, side by side at md+) ────── */}
-          <div className="flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start 2xl:gap-0">
+          {/* ── Class + Spec panels (stack when narrow, side by side when wide) ── */}
+          <div className={sectionRowClass(layout)}>
             <div>
               <PanelLabel>Class</PanelLabel>
               <HeatmapPanel nodes={classNodes} {...sharedPanel} />
             </div>
 
-            <div className="hidden 2xl:block self-stretch w-px bg-wow-dim mx-3 mt-5" />
+            <div className={dividerClass(layout, 'mt-5')} />
 
             <div>
               <PanelLabel>Spec</PanelLabel>
@@ -403,9 +403,9 @@ export default function HeatmapTree({ treeData, builds }) {
               <div className="flex-1 h-px bg-wow-dim" />
             </div>
 
-            <div className="flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start 2xl:justify-center 2xl:gap-0">
+            <div className={sectionRowClass(layout, true)}>
               <HeatmapPanel nodes={leftNodes} {...sharedPanel} />
-              <div className="hidden 2xl:block self-stretch w-px bg-wow-dim mx-3" />
+              <div className={dividerClass(layout)} />
               <HeatmapPanel nodes={rightNodes} {...sharedPanel} />
             </div>
           </div>

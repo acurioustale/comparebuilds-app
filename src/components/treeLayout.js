@@ -10,6 +10,31 @@ export const APEX_ICON   = 34 // apex (capstone) node size
 export const CHOICE_GAP  = 4  // gap between a choice node's two options
 export const PAD         = 24 // panel padding around the node grid
 
+// ─── Responsive stacking classes ──────────────────────────────────────────────
+//
+// Tailwind classes for a section's row container and its inter-panel divider,
+// shared by TalentTree and HeatmapTree so the two can't drift. `layout` null keeps
+// the responsive media query (interactive tree); 'row' / 'stacked' force the layout
+// when a coordinator (FitToWidth) drives it from the zoom scale.
+
+/** Section container: panels side by side ('row') or stacked. `justify` centres a row. */
+export function sectionRowClass(layout, justify = false) {
+  if (layout == null) {
+    return `flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start ${justify ? '2xl:justify-center ' : ''}2xl:gap-0`
+  }
+  if (layout === 'row') {
+    return `flex flex-row items-start gap-0${justify ? ' justify-center' : ''}`
+  }
+  return 'flex flex-col items-center gap-5'
+}
+
+/** Inter-panel divider: shown only in row layout. `extra` adds layout-specific classes. */
+export function dividerClass(layout, extra = '') {
+  if (layout == null) return `hidden 2xl:block self-stretch w-px bg-wow-dim mx-3 ${extra}`
+  if (layout === 'row') return `self-stretch w-px bg-wow-dim mx-3 ${extra}`
+  return 'hidden'
+}
+
 /** Builds an `{ id: node }` lookup map from a node array. */
 export function byId(nodes) {
   const m = {}
@@ -39,7 +64,8 @@ export function panelBounds(nodes) {
 // Layout chrome widths used between/around panels, in px. Kept here next to the
 // geometry so the natural-width math can't drift from what the renderer draws.
 const SECTION_DIVIDER = 25 // w-px (1) + mx-3 either side (12 + 12)
-const CARD_PADDING    = 32 // card p-4 (16 + 16)
+const CARD_CHROME     = 34 // card p-4 (16 + 16) plus the .wow-panel 1px border, both
+                           // sides (box-sizing: border-box, so the border adds width)
 
 /**
  * Natural (unscaled) card widths of a single talent tree in each layout, computed
@@ -61,8 +87,8 @@ export function treeNaturalWidths(treeData) {
   const row = Math.max(
     classW + SECTION_DIVIDER + specW,
     leftW  + SECTION_DIVIDER + rightW,
-  ) + CARD_PADDING
-  const stacked = Math.max(classW, specW, leftW, rightW) + CARD_PADDING
+  ) + CARD_CHROME
+  const stacked = Math.max(classW, specW, leftW, rightW) + CARD_CHROME
   return { row, stacked }
 }
 
@@ -90,8 +116,8 @@ export function pairedNaturalWidths(treeData) {
     2 * classW + COLUMN_GAP,
     2 * specW + COLUMN_GAP,
     2 * heroBlock + COLUMN_GAP,
-  ) + CARD_PADDING
-  const stacked = Math.max(classW, specW, heroBlock) + CARD_PADDING
+  ) + CARD_CHROME
+  const stacked = Math.max(classW, specW, heroBlock) + CARD_CHROME
   return { row, stacked }
 }
 

@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import { zamimg } from '../lib/zamimg'
 import { activeHeroSubtree } from '../lib/spendRules'
-import { CELL, ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP, PAD, byId, panelBounds, panelEdges } from './treeLayout'
+import { CELL, ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP, PAD, byId, panelBounds, panelEdges, sectionRowClass, dividerClass } from './treeLayout'
 
 // Box-shadow strings for diff highlight glows
 const HL_SHADOW = {
@@ -603,22 +603,6 @@ export default function TalentTree({
   // mode), where stacking falls back to the global 2xl media query.
   layout = null,
 }) {
-  // Section row + divider classes. `layout == null` keeps the responsive media
-  // query; an explicit layout forces row or stacked so it can be coordinated with
-  // the zoom scale rather than a fixed pixel breakpoint.
-  const sectionRowClass = (justify = false) =>
-    layout == null
-      ? `flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start ${justify ? '2xl:justify-center ' : ''}2xl:gap-0`
-      : layout === 'row'
-        ? `flex flex-row items-start gap-0${justify ? ' justify-center' : ''}`
-        : 'flex flex-col items-center gap-5'
-  const dividerClass = (extra = '') =>
-    layout == null
-      ? `hidden 2xl:block self-stretch w-px bg-wow-dim mx-3 ${extra}`
-      : layout === 'row'
-        ? `self-stretch w-px bg-wow-dim mx-3 ${extra}`
-        : 'hidden'
-
   const nodeById = useMemo(() => byId(treeData.nodes), [treeData])
   const budget = treeData.pointBudget
 
@@ -646,7 +630,7 @@ export default function TalentTree({
       <div style={{ display: 'inline-flex', flexDirection: 'column', gap: 16, minWidth: 'max-content' }}>
 
         {/* ── Class + Spec panels (stack when narrow, side by side when wide) ── */}
-        <div className={sectionRowClass()}>
+        <div className={sectionRowClass(layout)}>
           <div>
             <PanelLabel
               spent={sectionSpent?.class}
@@ -668,7 +652,7 @@ export default function TalentTree({
             />
           </div>
 
-          <div className={dividerClass('mt-5')} />
+          <div className={dividerClass(layout, 'mt-5')} />
 
           <div>
             <PanelLabel
@@ -710,7 +694,7 @@ export default function TalentTree({
             </div>
           </div>
 
-          <div className={sectionRowClass(true)}>
+          <div className={sectionRowClass(layout, true)}>
             <TreePanel
               nodes={leftNodes}
               selectedNodes={selectedNodes}
@@ -723,7 +707,7 @@ export default function TalentTree({
               onClear={onClearSection ? () => onClearSection('hero') : null}
               clearDisabled={activeHero !== treeData.heroSubtrees.left.name}
             />
-            <div className={dividerClass()} />
+            <div className={dividerClass(layout)} />
             <TreePanel
               nodes={rightNodes}
               selectedNodes={selectedNodes}

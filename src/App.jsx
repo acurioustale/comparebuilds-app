@@ -21,8 +21,9 @@ function TreeCard({ children }) {
   )
 }
 
-// Computes invalidity for a single imported build and wraps TalentTree.
-function SingleBuildView({ treeData, parsedBuild }) {
+// Computes invalidity for a single imported build and wraps TalentTree. `widths`
+// (single-tree geometry) drives the FitToWidth coordinator's layout + zoom.
+function SingleBuildView({ treeData, parsedBuild, widths }) {
   const nodeById = useMemo(() => byId(treeData.nodes), [treeData])
 
   // Include alreadyGranted nodes so prerequisite checks evaluate correctly
@@ -35,10 +36,6 @@ function SingleBuildView({ treeData, parsedBuild }) {
     () => computeInvalidNodeIds(treeData.nodes, fullSelected, nodeById),
     [treeData.nodes, fullSelected, nodeById],
   )
-
-  // Natural widths of this build's two layouts; the coordinator picks layout +
-  // zoom from them (see FitToWidth two-tier mode).
-  const widths = useMemo(() => treeNaturalWidths(treeData), [treeData])
 
   return (
     <div className="mt-6">
@@ -60,8 +57,10 @@ function SingleBuildView({ treeData, parsedBuild }) {
 
 function MainView() {
   const { treeData, parsedBuilds, buildStrings, classNodes, addingBuild, startAddingBuild } = useBuildsStore()
-  // Two builds use the section-paired diff; 3+ builds use the heatmap. Natural
-  // widths feed the FitToWidth coordinator (zoom + reflow per build).
+  // Comparison views are width-fit per build by the FitToWidth coordinator. The
+  // single tree and the 3+ build heatmap share the single-tree geometry; the
+  // two-build diff has its own (paired) geometry.
+  const treeWidths   = useMemo(() => (treeData ? treeNaturalWidths(treeData) : null), [treeData])
   const pairedWidths = useMemo(() => (treeData ? pairedNaturalWidths(treeData) : null), [treeData])
   if (!treeData) return null
 
@@ -82,9 +81,15 @@ function MainView() {
   let comparisonEl = null
   if (valid.length >= 3) {
     comparisonEl = (
-      <TreeCard>
-        <HeatmapTree treeData={treeData} builds={valid.map((v) => v.parsed)} />
-      </TreeCard>
+      <div className="mt-6">
+        <FitToWidth widths={treeWidths}>
+          {(layout) => (
+            <div className="p-4 wow-panel rounded w-max">
+              <HeatmapTree treeData={treeData} builds={valid.map((v) => v.parsed)} layout={layout} />
+            </div>
+          )}
+        </FitToWidth>
+      </div>
     )
   } else if (valid.length === 2) {
     comparisonEl = (
@@ -106,7 +111,7 @@ function MainView() {
       </div>
     )
   } else if (valid.length === 1) {
-    comparisonEl = <SingleBuildView treeData={treeData} parsedBuild={valid[0].parsed} />
+    comparisonEl = <SingleBuildView treeData={treeData} parsedBuild={valid[0].parsed} widths={treeWidths} />
   }
 
   const canAddMore = buildStrings.length < MAX_BUILDS
