@@ -198,15 +198,26 @@ export default function App() {
         className="wow-chrome py-6 px-4 text-center select-none"
         style={{ borderBottom: '1px solid transparent', borderImage: 'linear-gradient(to right, transparent 8%, rgba(200,168,75,0.55), transparent 92%) 1' }}
       >
-        <h1
-          className="text-[2.75rem] text-wow-gold tracking-[0.16em] leading-none"
-          style={{
-            fontFamily: "'FrizQuadrata', 'Palatino Linotype', serif",
-            textShadow: '0 0 18px rgba(200,168,75,0.35), 0 2px 5px rgba(0,0,0,0.6)',
-          }}
-        >
-          Compare Builds
-        </h1>
+        <div className="flex items-center justify-center gap-3">
+          <img
+            src={`${import.meta.env.BASE_URL}favicon.svg`}
+            alt=""
+            width={50}
+            height={50}
+            draggable={false}
+            className="shrink-0"
+            style={{ filter: 'drop-shadow(0 0 10px rgba(200,168,75,0.35))' }}
+          />
+          <h1
+            className="text-[2.75rem] text-wow-gold tracking-[0.16em] leading-none"
+            style={{
+              fontFamily: "'FrizQuadrata', 'Palatino Linotype', serif",
+              textShadow: '0 0 18px rgba(200,168,75,0.35), 0 2px 5px rgba(0,0,0,0.6)',
+            }}
+          >
+            Compare Builds
+          </h1>
+        </div>
         <p className="text-wow-muted text-xs uppercase tracking-[0.35em] mt-2">
           WoW Talent Build Comparison
         </p>
