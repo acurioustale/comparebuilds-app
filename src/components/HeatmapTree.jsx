@@ -374,14 +374,14 @@ export default function HeatmapTree({ treeData, builds }) {
       <div className="overflow-x-auto pb-1">
         <div className="inline-flex flex-col gap-4 min-w-max">
 
-          {/* ── Class + Spec panels ────────────────────────────────────────── */}
-          <div className="flex items-start">
+          {/* ── Class + Spec panels (stack below md, side by side at md+) ────── */}
+          <div className="flex flex-col items-center gap-5 md:flex-row md:items-start md:gap-0">
             <div>
               <PanelLabel>Class</PanelLabel>
               <HeatmapPanel nodes={classNodes} {...sharedPanel} />
             </div>
 
-            <div className="self-stretch w-px bg-wow-dim mx-3 mt-5" />
+            <div className="hidden md:block self-stretch w-px bg-wow-dim mx-3 mt-5" />
 
             <div>
               <PanelLabel>Spec</PanelLabel>
@@ -403,9 +403,9 @@ export default function HeatmapTree({ treeData, builds }) {
               <div className="flex-1 h-px bg-wow-dim" />
             </div>
 
-            <div className="flex items-start">
+            <div className="flex flex-col items-center gap-5 md:flex-row md:items-start md:justify-center md:gap-0">
               <HeatmapPanel nodes={leftNodes} {...sharedPanel} />
-              <div className="self-stretch w-px bg-wow-dim mx-3" />
+              <div className="hidden md:block self-stretch w-px bg-wow-dim mx-3" />
               <HeatmapPanel nodes={rightNodes} {...sharedPanel} />
             </div>
           </div>

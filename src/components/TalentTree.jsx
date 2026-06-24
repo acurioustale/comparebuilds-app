@@ -595,8 +595,8 @@ export default function TalentTree({
   invalidNodeIds = null,
   onNodeClick = null, onNodeContextMenu = null,
   // Interactive-only: per-section spent totals and a clear handler. When present,
-  // each panel header shows its counter and a Clear button. Omitted by the
-  // read-only diff/heatmap/single views.
+  // each panel header shows its counter and each panel a corner Clear button.
+  // Omitted by the read-only diff/heatmap/single views.
   sectionSpent = null, onClearSection = null,
 }) {
   const nodeById = useMemo(() => byId(treeData.nodes), [treeData])

@@ -195,8 +195,8 @@ export default function InteractiveTalentTree({ treeData, classNodes }) {
       />
 
       {/* ── Action bar (below the trees) ─────────────────────────────────────── */}
-      {/* Per-section counters and clears live in each panel header; this bar
-          carries only the global hint and actions. */}
+      {/* Per-section counters live in each panel header and clears in each panel
+          corner; this bar carries only the global hint and actions. */}
       <div className="mt-5 px-3 py-2.5 rounded wow-subpanel">
         <div className="flex items-center justify-between gap-6 flex-wrap">
           <span className="text-wow-muted text-xs select-none">
