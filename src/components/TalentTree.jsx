@@ -625,8 +625,8 @@ export default function TalentTree({
     <div className="overflow-x-auto pb-1">
       <div style={{ display: 'inline-flex', flexDirection: 'column', gap: 16, minWidth: 'max-content' }}>
 
-        {/* ── Class + Spec panels ──────────────────────────────────────────── */}
-        <div className="flex items-start">
+        {/* ── Class + Spec panels (stack below md, side by side at md+) ──────── */}
+        <div className="flex flex-col items-center gap-5 md:flex-row md:items-start md:gap-0">
           <div>
             <PanelLabel
               spent={sectionSpent?.class}
@@ -647,7 +647,7 @@ export default function TalentTree({
             {onClearSection && <SectionClear onClick={() => onClearSection('class')} disabled={!sectionSpent?.class} />}
           </div>
 
-          <div className="self-stretch w-px bg-wow-dim mx-3 mt-5" />
+          <div className="hidden md:block self-stretch w-px bg-wow-dim mx-3 mt-5" />
 
           <div>
             <PanelLabel
@@ -688,7 +688,7 @@ export default function TalentTree({
             </div>
           </div>
 
-          <div className="flex items-start justify-center">
+          <div className="flex flex-col items-center gap-5 md:flex-row md:items-start md:justify-center md:gap-0">
             <TreePanel
               nodes={leftNodes}
               selectedNodes={selectedNodes}
@@ -699,7 +699,7 @@ export default function TalentTree({
               onNodeClick={onNodeClick}
               onNodeContextMenu={onNodeContextMenu}
             />
-            <div className="self-stretch w-px bg-wow-dim mx-3" />
+            <div className="hidden md:block self-stretch w-px bg-wow-dim mx-3" />
             <TreePanel
               nodes={rightNodes}
               selectedNodes={selectedNodes}

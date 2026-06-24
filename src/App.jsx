@@ -9,6 +9,23 @@ import { buildGrantedSeed, computeInvalidNodeIds } from './lib/treeLogic'
 import { byId } from './components/treeLayout'
 import FitToWidth from './components/FitToWidth'
 
+// Tracks a CSS media query. Falls back to false where matchMedia is unavailable
+// (e.g. jsdom in tests), preserving the wide-layout defaults.
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(
+    () => typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia(query).matches,
+  )
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+    const mql = window.matchMedia(query)
+    const onChange = () => setMatches(mql.matches)
+    setMatches(mql.matches)
+    mql.addEventListener('change', onChange)
+    return () => mql.removeEventListener('change', onChange)
+  }, [query])
+  return matches
+}
+
 // Wraps a tree/comparison panel so it scales to fit the viewport width, centered.
 // FitToWidth is the full-width measurer; the inner card hugs its content (w-max).
 function TreeCard({ children }) {
@@ -49,6 +66,9 @@ function SingleBuildView({ treeData, parsedBuild }) {
 
 function MainView() {
   const { treeData, parsedBuilds, buildStrings, classNodes, addingBuild, startAddingBuild } = useBuildsStore()
+  // Below 768px the two-build side-by-side (two full trees) is too wide, so fall
+  // back to the single-tree heatmap, matching the 3+ build behaviour.
+  const isNarrow = useMediaQuery('(max-width: 767px)')
   if (!treeData) return null
 
   // No builds yet: pure interactive mode
@@ -75,13 +95,17 @@ function MainView() {
   } else if (valid.length === 2) {
     comparisonEl = (
       <TreeCard>
-        <SideBySideDiff
-          treeData={treeData}
-          buildA={valid[0].parsed}
-          buildB={valid[1].parsed}
-          labelA={valid[0].label}
-          labelB={valid[1].label}
-        />
+        {isNarrow ? (
+          <HeatmapTree treeData={treeData} builds={valid.map((v) => v.parsed)} />
+        ) : (
+          <SideBySideDiff
+            treeData={treeData}
+            buildA={valid[0].parsed}
+            buildB={valid[1].parsed}
+            labelA={valid[0].label}
+            labelB={valid[1].label}
+          />
+        )}
       </TreeCard>
     )
   } else if (valid.length === 1) {
