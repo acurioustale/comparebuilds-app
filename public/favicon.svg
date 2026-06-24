@@ -1,0 +1,34 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Compare Builds">
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a2a0a"/>
+      <stop offset="100%" stop-color="#c8a84b"/>
+    </linearGradient>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#16162a"/>
+      <stop offset="100%" stop-color="#0a0a12"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Panel -->
+  <rect x="16" y="16" width="480" height="480" rx="72" fill="url(#bg)"/>
+  <rect x="16" y="16" width="480" height="480" rx="72" fill="none" stroke="#8b6914" stroke-width="10"/>
+  <rect x="33" y="33" width="446" height="446" rx="58" fill="none" stroke="rgba(200,168,75,0.35)" stroke-width="3"/>
+
+  <!-- Talent-tree motif: one selected root branching to two children -->
+  <g stroke-linecap="round">
+    <line x1="256" y1="168" x2="168" y2="332" stroke="url(#edge)" stroke-width="12"/>
+    <line x1="256" y1="168" x2="344" y2="332" stroke="#2a2a2a" stroke-width="8"/>
+  </g>
+
+  <!-- Root node (selected/gold) -->
+  <circle cx="256" cy="160" r="54" fill="#1a1508" stroke="#c8a84b" stroke-width="9"/>
+  <circle cx="256" cy="160" r="30" fill="#c8a84b"/>
+
+  <!-- Left child (selected/gold) -->
+  <circle cx="168" cy="344" r="46" fill="#1a1508" stroke="#c8a84b" stroke-width="8"/>
+  <circle cx="168" cy="344" r="24" fill="#c8a84b"/>
+
+  <!-- Right child (unselected/dim) -->
+  <circle cx="344" cy="344" r="46" fill="#12121e" stroke="#3a2e1a" stroke-width="8"/>
+</svg>
