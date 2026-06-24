@@ -182,10 +182,22 @@ export default function InteractiveTalentTree({ treeData, classNodes }) {
 
   return (
     <div>
-      {/* ── Toolbar ──────────────────────────────────────────────────────────── */}
-      {/* Per-section counters and clears now live in each panel header; the toolbar
+      {/* ── Tree ─────────────────────────────────────────────────────────────── */}
+      <TalentTree
+        treeData={treeData}
+        selectedNodes={selected}
+        invalidNodeIds={invalidNodeIds}
+        specId={specId}
+        onNodeClick={handleClick}
+        onNodeContextMenu={handleRightClick}
+        sectionSpent={{ class: classSpent, spec: specSpent, hero: heroSpent }}
+        onClearSection={handleClearSection}
+      />
+
+      {/* ── Action bar (below the trees) ─────────────────────────────────────── */}
+      {/* Per-section counters and clears live in each panel header; this bar
           carries only the global hint and actions. */}
-      <div className="mb-5 px-3 py-2.5 rounded wow-subpanel">
+      <div className="mt-5 px-3 py-2.5 rounded wow-subpanel">
         <div className="flex items-center justify-between gap-6 flex-wrap">
           <span className="text-wow-muted text-xs select-none">
             Left-click to spend · Right-click to refund
@@ -208,18 +220,6 @@ export default function InteractiveTalentTree({ treeData, classNodes }) {
           </div>
         </div>
       </div>
-
-      {/* ── Tree ─────────────────────────────────────────────────────────────── */}
-      <TalentTree
-        treeData={treeData}
-        selectedNodes={selected}
-        invalidNodeIds={invalidNodeIds}
-        specId={specId}
-        onNodeClick={handleClick}
-        onNodeContextMenu={handleRightClick}
-        sectionSpent={{ class: classSpent, spec: specSpent, hero: heroSpent }}
-        onClearSection={handleClearSection}
-      />
     </div>
   )
 }
