@@ -36,6 +36,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  /* Supported floor: 320px (covers every real device). Below it the page scrolls
+   * horizontally as a whole rather than squeezing the layout further. */
+  min-width: 320px;
+
   background-color: #0d0d14;
   /* Layered radial glow for depth: warm gold from the top, cool arcane from the
    * bottom, over the near-black base. Fixed so it doesn't scroll with content. */
