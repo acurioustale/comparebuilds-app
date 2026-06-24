@@ -6,29 +6,8 @@ import SideBySideDiff from './components/SideBySideDiff'
 import TalentTree from './components/TalentTree'
 import { useBuildsStore, MAX_BUILDS } from './store/buildsStore'
 import { buildGrantedSeed, computeInvalidNodeIds } from './lib/treeLogic'
-import { byId } from './components/treeLayout'
+import { byId, treeNaturalWidths, pairedNaturalWidths } from './components/treeLayout'
 import FitToWidth from './components/FitToWidth'
-import DevHud from './components/DevHud'
-
-// Rework branch: HUD always on for frictionless testing. REMOVE before merging.
-const SHOW_HUD = true
-
-// Tracks a CSS media query. Falls back to false where matchMedia is unavailable
-// (e.g. jsdom in tests), preserving the wide-layout defaults.
-function useMediaQuery(query) {
-  const [matches, setMatches] = useState(
-    () => typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia(query).matches,
-  )
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
-    const mql = window.matchMedia(query)
-    const onChange = () => setMatches(mql.matches)
-    setMatches(mql.matches)
-    mql.addEventListener('change', onChange)
-    return () => mql.removeEventListener('change', onChange)
-  }, [query])
-  return matches
-}
 
 // Wraps a tree/comparison panel so it scales to fit the viewport width, centered.
 // FitToWidth is the full-width measurer; the inner card hugs its content (w-max).
@@ -57,22 +36,33 @@ function SingleBuildView({ treeData, parsedBuild }) {
     [treeData.nodes, fullSelected, nodeById],
   )
 
+  // Natural widths of this build's two layouts; the coordinator picks layout +
+  // zoom from them (see FitToWidth two-tier mode).
+  const widths = useMemo(() => treeNaturalWidths(treeData), [treeData])
+
   return (
-    <TreeCard>
-      <TalentTree
-        treeData={treeData}
-        selectedNodes={parsedBuild.nodes}
-        invalidNodeIds={invalidNodeIds}
-      />
-    </TreeCard>
+    <div className="mt-6">
+      <FitToWidth widths={widths}>
+        {(layout) => (
+          <div className="p-4 wow-panel rounded w-max">
+            <TalentTree
+              treeData={treeData}
+              selectedNodes={parsedBuild.nodes}
+              invalidNodeIds={invalidNodeIds}
+              layout={layout}
+            />
+          </div>
+        )}
+      </FitToWidth>
+    </div>
   )
 }
 
 function MainView() {
   const { treeData, parsedBuilds, buildStrings, classNodes, addingBuild, startAddingBuild } = useBuildsStore()
-  // Responsive rework: the 2-build heatmap fallback is disabled for now, so two
-  // builds always use the side-by-side diff (3+ builds still use the heatmap).
-  const isNarrow = false // useMediaQuery('(max-width: 767px)')
+  // Two builds use the section-paired diff; 3+ builds use the heatmap. Natural
+  // widths feed the FitToWidth coordinator (zoom + reflow per build).
+  const pairedWidths = useMemo(() => (treeData ? pairedNaturalWidths(treeData) : null), [treeData])
   if (!treeData) return null
 
   // No builds yet: pure interactive mode
@@ -98,19 +88,22 @@ function MainView() {
     )
   } else if (valid.length === 2) {
     comparisonEl = (
-      <TreeCard>
-        {isNarrow ? (
-          <HeatmapTree treeData={treeData} builds={valid.map((v) => v.parsed)} />
-        ) : (
-          <SideBySideDiff
-            treeData={treeData}
-            buildA={valid[0].parsed}
-            buildB={valid[1].parsed}
-            labelA={valid[0].label}
-            labelB={valid[1].label}
-          />
-        )}
-      </TreeCard>
+      <div className="mt-6">
+        <FitToWidth widths={pairedWidths}>
+          {(layout) => (
+            <div className="p-4 wow-panel rounded w-max">
+              <SideBySideDiff
+                treeData={treeData}
+                buildA={valid[0].parsed}
+                buildB={valid[1].parsed}
+                labelA={valid[0].label}
+                labelB={valid[1].label}
+                layout={layout}
+              />
+            </div>
+          )}
+        </FitToWidth>
+      </div>
     )
   } else if (valid.length === 1) {
     comparisonEl = <SingleBuildView treeData={treeData} parsedBuild={valid[0].parsed} />
@@ -194,7 +187,6 @@ export default function App() {
   const { shareError, dismissShareError } = useShareRehydration()
 
   return (
-    <>
     <div className="min-h-screen text-wow-text flex flex-col relative">
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
@@ -267,8 +259,6 @@ export default function App() {
       </footer>
 
     </div>
-    {SHOW_HUD && <DevHud />}
-    </>
   )
 }
 

@@ -598,7 +598,27 @@ export default function TalentTree({
   // each panel header shows its counter and each panel a corner Clear button.
   // Omitted by the read-only diff/heatmap/single views.
   sectionSpent = null, onClearSection = null,
+  // Responsive coordination: when the parent (FitToWidth) drives layout per-build,
+  // it passes 'row' or 'stacked' explicitly. Left null elsewhere (interactive
+  // mode), where stacking falls back to the global 2xl media query.
+  layout = null,
 }) {
+  // Section row + divider classes. `layout == null` keeps the responsive media
+  // query; an explicit layout forces row or stacked so it can be coordinated with
+  // the zoom scale rather than a fixed pixel breakpoint.
+  const sectionRowClass = (justify = false) =>
+    layout == null
+      ? `flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start ${justify ? '2xl:justify-center ' : ''}2xl:gap-0`
+      : layout === 'row'
+        ? `flex flex-row items-start gap-0${justify ? ' justify-center' : ''}`
+        : 'flex flex-col items-center gap-5'
+  const dividerClass = (extra = '') =>
+    layout == null
+      ? `hidden 2xl:block self-stretch w-px bg-wow-dim mx-3 ${extra}`
+      : layout === 'row'
+        ? `self-stretch w-px bg-wow-dim mx-3 ${extra}`
+        : 'hidden'
+
   const nodeById = useMemo(() => byId(treeData.nodes), [treeData])
   const budget = treeData.pointBudget
 
@@ -625,8 +645,8 @@ export default function TalentTree({
     <div className="overflow-x-auto pb-1">
       <div style={{ display: 'inline-flex', flexDirection: 'column', gap: 16, minWidth: 'max-content' }}>
 
-        {/* ── Class + Spec panels (stack below md, side by side at md+) ──────── */}
-        <div className="flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start 2xl:gap-0">
+        {/* ── Class + Spec panels (stack when narrow, side by side when wide) ── */}
+        <div className={sectionRowClass()}>
           <div>
             <PanelLabel
               spent={sectionSpent?.class}
@@ -648,7 +668,7 @@ export default function TalentTree({
             />
           </div>
 
-          <div className="hidden 2xl:block self-stretch w-px bg-wow-dim mx-3 mt-5" />
+          <div className={dividerClass('mt-5')} />
 
           <div>
             <PanelLabel
@@ -690,7 +710,7 @@ export default function TalentTree({
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start 2xl:justify-center 2xl:gap-0">
+          <div className={sectionRowClass(true)}>
             <TreePanel
               nodes={leftNodes}
               selectedNodes={selectedNodes}
@@ -703,7 +723,7 @@ export default function TalentTree({
               onClear={onClearSection ? () => onClearSection('hero') : null}
               clearDisabled={activeHero !== treeData.heroSubtrees.left.name}
             />
-            <div className="hidden 2xl:block self-stretch w-px bg-wow-dim mx-3" />
+            <div className={dividerClass()} />
             <TreePanel
               nodes={rightNodes}
               selectedNodes={selectedNodes}

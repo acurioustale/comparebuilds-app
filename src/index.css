@@ -28,7 +28,13 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { font-size: 16px; }
+html {
+  font-size: 16px;
+  /* Reserve the scrollbar gutter permanently so the page width doesn't jump when
+   * a tall (stacked) layout makes the vertical scrollbar appear. Removes the
+   * resize hysteresis at the responsive breakpoints. */
+  scrollbar-gutter: stable;
+}
 
 body {
   color: #f0e6c8;
@@ -36,9 +42,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Responsive rework: 320px floor disabled for now (revisit with the new
-   * fit strategy). */
-  /* min-width: 320px; */
+  /* Hard floor: below this the stacked tree stops shrinking (minScale) and
+   * scrolls horizontally instead of becoming unreadable. */
+  min-width: 320px;
 
   background-color: #0d0d14;
   /* Layered radial glow for depth: warm gold from the top, cool arcane from the

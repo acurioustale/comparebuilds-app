@@ -121,6 +121,9 @@ export default function SideBySideDiff({
   buildB,
   labelA = 'Build A',
   labelB = 'Build B',
+  // Responsive coordination: 'row' | 'stacked' from the FitToWidth coordinator, so
+  // reflow lines up with the zoom scale.
+  layout = 'row',
 }) {
   const { highlights, aOnly, bOnly, differing } = useMemo(
     () => computeDiff(buildA.nodes, buildB.nodes, treeData.nodes),
@@ -159,20 +162,26 @@ export default function SideBySideDiff({
     </div>
   )
 
-  // A section row: the two builds' panels for one section, paired side by side at
-  // xl and stacked below. Build tags act as one-time column headers when paired
-  // (only the first row shows them, via `tagsAlways`); when stacked, every row
-  // shows them (2xl:hidden flips them back on) so each panel stays identifiable.
+  // Section row layout: builds side by side when 'row', stacked per section when
+  // narrow — driven by the FitToWidth coordinator so reflow matches the zoom scale.
+  const pairRowClass = layout === 'row'
+    ? 'flex flex-row items-start justify-center gap-8'
+    : 'flex flex-col items-center gap-6'
+  // Build tags are one-time column headers when paired (first row only) and repeat
+  // on every section when stacked, so each panel stays identifiable.
+  const tagWrapClass = (tagsAlways) =>
+    tagsAlways ? undefined : layout === 'row' ? 'hidden' : undefined
+
   const Row = ({ label, a, b, tagsAlways = false }) => (
     <div>
       <SectionDivider>{label}</SectionDivider>
-      <div className="flex flex-col items-center gap-6 2xl:flex-row 2xl:items-start 2xl:justify-center 2xl:gap-8">
+      <div className={pairRowClass}>
         <div>
-          <div className={tagsAlways ? undefined : '2xl:hidden'}><BuildTag label={labelA} color="A" /></div>
+          <div className={tagWrapClass(tagsAlways)}><BuildTag label={labelA} color="A" /></div>
           {a}
         </div>
         <div>
-          <div className={tagsAlways ? undefined : '2xl:hidden'}><BuildTag label={labelB} color="B" /></div>
+          <div className={tagWrapClass(tagsAlways)}><BuildTag label={labelB} color="B" /></div>
           {b}
         </div>
       </div>

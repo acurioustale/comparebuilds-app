@@ -1,76 +1,116 @@
 import { useRef, useState, useLayoutEffect } from 'react'
 
 /**
- * Scales its child down to fit the available width by uniform CSS transform — the
- * right model for a fixed-aspect diagram like a talent tree (scale, don't reflow).
+ * Fits a fixed-aspect diagram (a talent tree) to the available width by uniform
+ * CSS transform — scale, don't reflow — with two cooperating mechanisms:
  *
- *   - Never upscales past 1× (bitmap icons would blur).
- *   - Below `minScale`, stops shrinking and scrolls horizontally instead of
- *     becoming unreadably small (phones).
+ *   1. ZOOM. Scale the current layout to fill the width, never past 1× (bitmap
+ *      icons would blur), never below `minScale` (then it scrolls instead).
+ *   2. REFLOW. When zoom alone would push the wide "row" layout below `floorScale`,
+ *      switch to the narrower "stacked" layout — which jumps back near 1× — and
+ *      keep zooming from there. Each reflow is thus motivated by readability, not a
+ *      fixed pixel breakpoint, and the stack point adapts per build (a narrow class
+ *      stays side-by-side longer than a wide one).
  *
- * IMPORTANT: this must be the full-width element wrapping a shrink-to-fit child
- * (e.g. a card that hugs the tree). It measures its OWN 100%-width box for the
- * available width — never the child — so the child's scaled size can't feed back
- * into the measurement (which would lock the scale at the floor). CSS transforms
- * don't affect layout boxes, so the child's natural size reads straight from
- * offsetWidth. Falls back to an unscaled passthrough where there's no layout
- * (e.g. jsdom tests).
+ * Two modes:
+ *   - `widths` given → two-tier mode. `children` is a function `(layout) => node`
+ *     that renders at the chosen layout ('row' | 'stacked'). Layout and scale are
+ *     decided from the *computed* natural widths (no DOM measurement of width), so
+ *     there's no measure→render feedback loop; only height is measured, to size the
+ *     centred footprint (a transform leaves the original box, which would otherwise
+ *     leave a gap below).
+ *   - `widths` omitted → passthrough. Renders `children` at natural size, scrolling
+ *     when too wide. Used by the views not yet migrated to the two-tier model.
+ *
+ * The full-width container's `clientWidth` is the true available width; with
+ * `scrollbar-gutter: stable` on <html> it doesn't jump when a tall layout summons
+ * the scrollbar, so the layout decision is free of scrollbar hysteresis.
  */
-export default function FitToWidth({ minScale = 0.45, className = '', children }) {
+export default function FitToWidth({
+  widths = null,
+  minScale = 0.45,
+  floorScale = 0.62,
+  className = '',
+  children,
+}) {
   const containerRef = useRef(null)
   const contentRef = useRef(null)
-  const [scale, setScale] = useState(1)
-  const [nat, setNat] = useState({ w: 0, h: 0 })
+  const [avail, setAvail] = useState(0)
+  const [contentH, setContentH] = useState(0)
 
   useLayoutEffect(() => {
     const container = containerRef.current
-    const content = contentRef.current
-    if (!container || !content) return
+    if (!container) return
 
     const measure = () => {
-      const w = content.offsetWidth
-      const h = content.offsetHeight
-      const avail = container.clientWidth
-      if (!w || !avail) return // not laid out (e.g. jsdom) → leave scale at 1
-      setScale(Math.max(minScale, Math.min(1, avail / w)))
-      setNat({ w, h })
+      setAvail(container.clientWidth)
+      // offsetHeight is the untransformed height (transforms don't change layout
+      // boxes), so this never feeds back into the scale it's used to size.
+      if (contentRef.current) setContentH(contentRef.current.offsetHeight)
     }
 
     measure()
     window.addEventListener('resize', measure)
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null
     ro?.observe(container)
-    ro?.observe(content)
+    if (contentRef.current) ro?.observe(contentRef.current)
     return () => {
       window.removeEventListener('resize', measure)
       ro?.disconnect()
     }
-  }, [minScale])
+  }, [])
 
-  // Responsive rework: zoom disabled for now. Render children at natural size and
-  // let the container scroll when too wide; rework the fit strategy from here.
-  const scaled = false // (scale !== 1 && nat.w > 0)
+  // ── Passthrough mode (no computed widths) ─────────────────────────────────────
+  if (!widths) {
+    return (
+      <div ref={containerRef} className={`overflow-x-auto ${className}`} style={{ width: '100%' }}>
+        <div style={{ width: 'max-content', maxWidth: '100%', margin: '0 auto' }}>
+          <div ref={contentRef} style={{ width: 'max-content' }}>
+            {children}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Two-tier mode ─────────────────────────────────────────────────────────────
+  // Default to 'row' until measured (avail === 0, e.g. jsdom) so SSR/tests get the
+  // wide layout at 1×.
+  let layout = 'row'
+  let scale = 1
+  if (avail > 0) {
+    // Keep the row layout while it can be shown at >= floorScale; below that the
+    // stacked layout (≈ half the width) reads better even though it's taller.
+    layout = avail >= floorScale * widths.row ? 'row' : 'stacked'
+    const natW = layout === 'row' ? widths.row : widths.stacked
+    scale = Math.max(minScale, Math.min(1, avail / natW))
+  }
+  const natW = layout === 'row' ? widths.row : widths.stacked
 
   return (
-    // Full-width measurer — clientWidth here is the true available width.
-    <div ref={containerRef} className={`overflow-x-auto ${className}`} style={{ width: '100%' }}>
-      {/* Centered footprint, sized to the scaled child so layout flows correctly. */}
+    <div
+      ref={containerRef}
+      className={`overflow-x-auto ${className}`}
+      style={{ width: '100%' }}
+    >
+      {/* Footprint sized to the scaled box so the page reserves exactly what's
+          visible (no phantom gap) and the tree stays centred. */}
       <div
-        style={
-          scaled
-            ? { width: nat.w * scale, height: nat.h * scale, margin: '0 auto' }
-            : { width: 'max-content', maxWidth: '100%', margin: '0 auto' }
-        }
+        style={{
+          width: natW * scale,
+          height: contentH ? contentH * scale : undefined,
+          margin: '0 auto',
+        }}
       >
         <div
           ref={contentRef}
           style={{
             width: 'max-content',
             transformOrigin: 'top left',
-            transform: scaled ? `scale(${scale})` : undefined,
+            transform: scale !== 1 ? `scale(${scale})` : undefined,
           }}
         >
-          {children}
+          {children(layout)}
         </div>
       </div>
     </div>
