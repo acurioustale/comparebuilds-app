@@ -556,11 +556,11 @@ function SectionCounter({ spent, max }) {
   )
 }
 
-// Centered "Clear" button placed beneath a section's talent grid; only rendered
-// in interactive mode (when onClick is provided).
+// Right-aligned "Clear" button placed beneath a section's talent grid (aligning
+// with the global Clear All); only rendered in interactive mode.
 function SectionClear({ onClick, disabled }) {
   return (
-    <div className="flex justify-center mt-2.5">
+    <div className="flex justify-end mt-2.5">
       <button
         onClick={onClick}
         disabled={disabled}
@@ -688,30 +688,34 @@ export default function TalentTree({
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-5 md:flex-row md:items-start md:justify-center md:gap-0">
-            <TreePanel
-              nodes={leftNodes}
-              selectedNodes={selectedNodes}
-              nodeById={nodeById}
-              highlights={highlights}
-              invalidNodeIds={invalidNodeIds}
-              heroLocked={leftLocked}
-              onNodeClick={onNodeClick}
-              onNodeContextMenu={onNodeContextMenu}
-            />
-            <div className="hidden md:block self-stretch w-px bg-wow-dim mx-3" />
-            <TreePanel
-              nodes={rightNodes}
-              selectedNodes={selectedNodes}
-              nodeById={nodeById}
-              highlights={highlights}
-              invalidNodeIds={invalidNodeIds}
-              heroLocked={rightLocked}
-              onNodeClick={onNodeClick}
-              onNodeContextMenu={onNodeContextMenu}
-            />
+          {/* Wrap grids + clear to the grids' width so the clear right-aligns to
+              the hero trees' edge, not the full-width section. */}
+          <div className="w-max max-w-full mx-auto">
+            <div className="flex flex-col items-center gap-5 md:flex-row md:items-start md:gap-0">
+              <TreePanel
+                nodes={leftNodes}
+                selectedNodes={selectedNodes}
+                nodeById={nodeById}
+                highlights={highlights}
+                invalidNodeIds={invalidNodeIds}
+                heroLocked={leftLocked}
+                onNodeClick={onNodeClick}
+                onNodeContextMenu={onNodeContextMenu}
+              />
+              <div className="hidden md:block self-stretch w-px bg-wow-dim mx-3" />
+              <TreePanel
+                nodes={rightNodes}
+                selectedNodes={selectedNodes}
+                nodeById={nodeById}
+                highlights={highlights}
+                invalidNodeIds={invalidNodeIds}
+                heroLocked={rightLocked}
+                onNodeClick={onNodeClick}
+                onNodeContextMenu={onNodeContextMenu}
+              />
+            </div>
+            {onClearSection && <SectionClear onClick={() => onClearSection('hero')} disabled={!sectionSpent?.hero} />}
           </div>
-          {onClearSection && <SectionClear onClick={() => onClearSection('hero')} disabled={!sectionSpent?.hero} />}
         </div>
 
       </div>
