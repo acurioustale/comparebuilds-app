@@ -25,3 +25,12 @@ define('SHARE_IP_SALT', 'change-me-to-a-long-random-string');
 // (which would otherwise be the proxy, lumping all visitors into one bucket).
 // Leave it undefined/false on direct hosting — the header is client-spoofable.
 // define('TRUST_PROXY', true);
+
+// Optional: canonical site origin used in the /s/<id> share page's Open Graph
+// tags and redirect. Defaults to https://comparebuilds.app — override for staging.
+// define('SITE_ORIGIN', 'https://comparebuilds.app');
+
+// Optional: absolute path to a bold .ttf for the OG image text. og.php probes the
+// usual DejaVu/Liberation locations automatically; set this only if your host
+// keeps fonts elsewhere (or to use a custom one).
+// define('OG_FONT_PATH', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf');

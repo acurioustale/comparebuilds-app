@@ -14,7 +14,9 @@ This produces a `dist/` folder containing the static site.
 
 ### 2. Upload files to the server
 
-Upload the **contents** of `dist/` to the web root folder (the folder that comparebuilds.app points to). Upload `api/share.php` into an `api/` subfolder inside that same web root.
+Upload the **contents** of `dist/` to the web root folder (the folder that comparebuilds.app points to). Upload `api/share.php` and `api/og.php` into an `api/` subfolder inside that same web root.
+
+`og.php` renders the Open Graph preview image for shared links and needs PHP's **GD** extension (with FreeType for text — standard on most hosts). It auto-detects a bold TTF in the usual DejaVu/Liberation locations; set `OG_FONT_PATH` in `config.php` if your host keeps fonts elsewhere. Pretty share URLs (`/s/<id>`) rely on `mod_rewrite` (configured in the shipped `.htaccess`).
 
 Expected layout on the server:
 

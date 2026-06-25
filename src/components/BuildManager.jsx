@@ -368,7 +368,9 @@ export default function BuildManager() {
         throw new Error(err.error ?? `HTTP ${res.status}`)
       }
       const { id } = await res.json()
-      const url = `${window.location.origin}${window.location.pathname}#${id}`
+      // /s/<id> is the server-rendered share page (link previews); it redirects
+      // humans to the SPA. Old #<id> links keep working via the route resolver.
+      const url = `${window.location.origin}/s/${id}`
       await navigator.clipboard.writeText(url)
       setCopyState('copied')
     } catch {

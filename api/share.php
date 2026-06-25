@@ -38,6 +38,61 @@ function fail(int $code, string $msg): void {
     exit;
 }
 
+/** The canonical site origin (overridable in config.php for staging). */
+function site_origin(): string {
+    return defined('SITE_ORIGIN') ? SITE_ORIGIN : 'https://comparebuilds.app';
+}
+
+/**
+ * Renders the HTML share page served at /s/<id>. Crawlers read the Open Graph
+ * tags + generated image; humans are redirected to the SPA (#id) via a meta
+ * refresh — no inline script, so it stays within the site's strict CSP.
+ * `$data` may be null (share missing/expired) — then a generic card is shown.
+ */
+function render_share_page(string $id, ?array $data): void {
+    $origin = site_origin();
+    $count  = is_array($data['builds'] ?? null) ? count($data['builds']) : 0;
+    $class  = is_string($data['className'] ?? null) ? $data['className'] : '';
+    $spec   = is_string($data['specName'] ?? null) ? $data['specName'] : '';
+
+    $name  = trim("$spec $class");
+    $title = $name !== '' ? "$name — Compare Builds" : 'Compare Builds — WoW talent build comparison';
+    $desc  = $count >= 2
+        ? "$count " . ($class !== '' ? "$class " : '') . 'talent builds compared on comparebuilds.app.'
+        : 'A World of Warcraft talent build on comparebuilds.app.';
+    $image   = "$origin/api/og.php?id=$id";
+    $appUrl  = "$origin/#$id";
+    $pageUrl = "$origin/s/$id";
+
+    $e = fn (string $s): string => htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+
+    header('Content-Type: text/html; charset=utf-8');
+    header('Cache-Control: public, max-age=86400');
+    echo "<!doctype html>\n<html lang=\"en\">\n<head>\n"
+       . "<meta charset=\"utf-8\">\n"
+       . "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+       . "<title>" . $e($title) . "</title>\n"
+       . "<meta name=\"description\" content=\"" . $e($desc) . "\">\n"
+       . "<link rel=\"canonical\" href=\"" . $e($pageUrl) . "\">\n"
+       . "<meta property=\"og:type\" content=\"website\">\n"
+       . "<meta property=\"og:site_name\" content=\"Compare Builds\">\n"
+       . "<meta property=\"og:title\" content=\"" . $e($title) . "\">\n"
+       . "<meta property=\"og:description\" content=\"" . $e($desc) . "\">\n"
+       . "<meta property=\"og:url\" content=\"" . $e($pageUrl) . "\">\n"
+       . "<meta property=\"og:image\" content=\"" . $e($image) . "\">\n"
+       . "<meta property=\"og:image:width\" content=\"1200\">\n"
+       . "<meta property=\"og:image:height\" content=\"630\">\n"
+       . "<meta name=\"twitter:card\" content=\"summary_large_image\">\n"
+       . "<meta name=\"twitter:title\" content=\"" . $e($title) . "\">\n"
+       . "<meta name=\"twitter:description\" content=\"" . $e($desc) . "\">\n"
+       . "<meta name=\"twitter:image\" content=\"" . $e($image) . "\">\n"
+       . "<meta http-equiv=\"refresh\" content=\"0; url=" . $e($appUrl) . "\">\n"
+       . "</head>\n<body>\n"
+       . "<p>Opening this build in <a href=\"" . $e($appUrl) . "\">Compare Builds</a>…</p>\n"
+       . "</body>\n</html>\n";
+    exit;
+}
+
 /**
  * The client IP used for rate limiting.
  *
@@ -105,8 +160,12 @@ $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 // is not rate limited here (rely on the host/CDN for raw request flooding).
 if ($method === 'GET') {
     $id = $_GET['id'] ?? '';
+    // `page` mode (the /s/<id> rewrite) returns an HTML page for link unfurls;
+    // otherwise this is the SPA's JSON fetch.
+    $pageMode = isset($_GET['page']);
 
     if (!is_string($id) || !preg_match('/^[A-Za-z0-9]{6}$/', $id)) {
+        if ($pageMode) { http_response_code(400); render_share_page('', null); }
         fail(400, 'Invalid ID format');
     }
 
@@ -115,11 +174,17 @@ if ($method === 'GET') {
         $stmt->execute([$id]);
         $row = $stmt->fetch();
     } catch (Throwable $e) {
+        if ($pageMode) { http_response_code(500); render_share_page($id, null); }
         fail(500, 'Database error');
     }
 
     if (!$row) {
+        if ($pageMode) { http_response_code(404); render_share_page($id, null); }
         fail(404, 'Share not found or has expired');
+    }
+
+    if ($pageMode) {
+        render_share_page($id, json_decode($row['data'], true) ?: null);
     }
 
     // Share payloads are immutable once written, so let browsers/CDNs cache the

@@ -1,6 +1,16 @@
 # comparebuilds.app — Apache config for the static site root.
 # Lives in public/ so Vite copies it into dist/ and the rsync deploy ships it
-# to the web root. Hash-based routing means no SPA rewrite is needed.
+# to the web root. The SPA itself uses hash routing; the rewrite below adds
+# server-rendered share pages so links unfurl with a per-build preview.
+
+# ─── Pretty share URLs ─────────────────────────────────────────────────────────
+# /s/<id> → the PHP share page (Open Graph meta + image; redirects humans to the
+# SPA at /#<id>). Requires mod_rewrite; harmless if the module is absent.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^s/([A-Za-z0-9]{6})$ api/share.php?page=1&id=$1 [L,QSA]
+</IfModule>
+
 
 # ─── Security headers ──────────────────────────────────────────────────────────
 <IfModule mod_headers.c>
