@@ -41,6 +41,28 @@ const OUT_DIR = join(__dirname, "..", "public", "talent-icons");
 const BASE_URL = "https://wow.zamimg.com/images/wow/icons/medium";
 const CONCURRENCY = 16;
 
+// Some slugs in src/data don't match a real zamimg filename: the upstream data
+// flattened hyphens to underscores (e.g. ring_of_frost vs the real ring-of-frost),
+// so iconUrl(node.icon) 404s and the talent node renders blank. Map the requested
+// slug to the slug that actually serves the art; we still SAVE the file under the
+// requested name, so the app resolves it without touching the committed data
+// (which the ingest would overwrite). Corrected slugs were verified via the spell
+// IDs on Wowhead. Re-derive with: node scripts/fetchIcons.js.
+const SLUG_FIXES = {
+  spell_frost_ring_of_frost: "spell_frost_ring-of-frost",
+  spell_frost_ice_shards: "spell_frost_ice-shards",
+  spell_firefrost_orb: "spell_firefrost-orb",
+  spell_frostfire_orb: "spell_frostfire-orb",
+  spell_priest_power_word: "spell_priest_power-word",
+  spell_priest_void_flay: "spell_priest_void-flay",
+  spell_priest_void_blast: "spell_priest_void-blast",
+  ability_rogue_shuriken_storm: "ability_rogue_shuriken-storm",
+  achievement_guildperk_havegroup_willtravel:
+    "achievement_guildperk_havegroup-willtravel",
+  inv_10_specialreagentfoozles_tuskclaw_ice:
+    "inv_10_specialreagentfoozles_tuskclaw-ice",
+};
+
 // Walk an arbitrary JSON value, collecting every non-empty `icon` string.
 function collectIcons(value, sink) {
   if (Array.isArray(value)) {
@@ -74,10 +96,11 @@ function gatherIconNames() {
 async function fetchOne(name) {
   const dest = join(OUT_DIR, `${name}.jpg`);
   if (existsSync(dest)) return "skipped";
+  const remote = SLUG_FIXES[name] ?? name;
   let lastErr;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const res = await fetch(`${BASE_URL}/${name}.jpg`, {
+      const res = await fetch(`${BASE_URL}/${remote}.jpg`, {
         signal: AbortSignal.timeout(15000),
       });
       if (res.status === 404) return "missing";

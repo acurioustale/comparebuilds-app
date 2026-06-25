@@ -11,3 +11,11 @@ const BLANK =
 
 export const iconUrl = (icon) =>
   icon ? `/talent-icons/${icon.toLowerCase()}.jpg` : BLANK;
+
+// onError handler for icon <img>s: swap a failed load for the blank pixel so a
+// missing file (a handful of upstream slugs have no real art) degrades to a
+// clean empty slot instead of the browser's broken-image glyph. The guard stops
+// the swap from re-triggering once the src is already the blank.
+export const onIconError = (e) => {
+  if (e.currentTarget.src !== BLANK) e.currentTarget.src = BLANK;
+};

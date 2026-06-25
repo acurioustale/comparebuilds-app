@@ -9,7 +9,7 @@ import {
 } from "../store/buildsStore";
 import { encodeBuildsHash } from "../lib/shareLink";
 import classesIndex from "../data/classes.json";
-import { iconUrl } from "../lib/iconUrl";
+import { iconUrl, onIconError } from "../lib/iconUrl";
 import { activeHeroSubtree } from "../lib/spendRules";
 
 function ClassIcon({ name, size = 36 }) {
@@ -17,6 +17,7 @@ function ClassIcon({ name, size = 36 }) {
   return (
     <img
       src={iconUrl("classicon_" + name.replaceAll("_", ""))}
+      onError={onIconError}
       width={size}
       height={size}
       alt=""
@@ -30,6 +31,7 @@ function SpecIcon({ icon, size = 24 }) {
   return (
     <img
       src={iconUrl(icon)}
+      onError={onIconError}
       width={size}
       height={size}
       alt=""

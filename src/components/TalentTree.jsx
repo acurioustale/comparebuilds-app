@@ -1,7 +1,7 @@
 import { useMemo, useId, useRef, useState, useContext } from "react";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-import { iconUrl } from "../lib/iconUrl";
+import { iconUrl, onIconError } from "../lib/iconUrl";
 import { activeHeroSubtree } from "../lib/spendRules";
 import { prereqChain } from "../lib/prereqChain";
 import { SearchContext } from "./SearchContext";
@@ -370,6 +370,7 @@ function TalentNode({
               >
                 <img
                   src={iconUrl(ch.icon)}
+                  onError={onIconError}
                   width={CHOICE_ICON}
                   height={CHOICE_ICON}
                   alt=""
@@ -450,6 +451,7 @@ function TalentNode({
           >
             <img
               src={iconUrl(node.icon)}
+              onError={onIconError}
               width={S}
               height={S}
               alt=""
@@ -549,6 +551,7 @@ function TalentNode({
         >
           <img
             src={iconUrl(node.icon)}
+            onError={onIconError}
             width={S}
             height={S}
             alt=""
