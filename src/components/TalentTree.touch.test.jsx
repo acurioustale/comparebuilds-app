@@ -116,7 +116,7 @@ describe("TalentTree touch gestures", () => {
     const { onNodeTap } = renderTree();
     const el = round();
     startAt(el);
-    vi.advanceTimersByTime(400); // ≥ TAP_HOLD_MS — Tippy shows the tooltip
+    vi.advanceTimersByTime(400); // ≥ TAP_HOLD_MS — the tooltip peeks instead
     end(el);
     expect(onNodeTap).not.toHaveBeenCalled();
   });

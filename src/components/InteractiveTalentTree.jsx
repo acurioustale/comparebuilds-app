@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
+import Tooltip from "./Tooltip";
 import TalentTree from "./TalentTree";
 import { generateBuildString } from "../lib/buildString";
 import { computeInvalidNodeIds, buildGrantedSeed } from "../lib/treeLogic";
@@ -43,25 +42,25 @@ function ExportButton({ onClick, state, invalidCount, hasSelection }) {
 
   if (hasInvalid) {
     return (
-      <Tippy
+      <Tooltip
         content={`${invalidCount} node${invalidCount > 1 ? "s have" : " has"} unmet prerequisites or gate requirements. Right-click the red-flagged nodes to remove them, or re-activate the missing prerequisite.`}
         placement="bottom"
-        delay={[200, 0]}
+        delay={200}
       >
         <span style={{ display: "inline-block" }}>{btn}</span>
-      </Tippy>
+      </Tooltip>
     );
   }
 
   if (!hasSelection) {
     return (
-      <Tippy
+      <Tooltip
         content="Spend at least one point to export."
         placement="bottom"
-        delay={[200, 0]}
+        delay={200}
       >
         <span style={{ display: "inline-block" }}>{btn}</span>
-      </Tippy>
+      </Tooltip>
     );
   }
 

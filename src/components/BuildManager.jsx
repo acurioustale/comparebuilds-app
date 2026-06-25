@@ -1,7 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { useShallow } from "zustand/react/shallow";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
+import Tooltip from "./Tooltip";
 import {
   useBuildsStore,
   MAX_BUILDS,
@@ -51,7 +50,7 @@ function ClassGrid({ classes, activeClassId, locked, onSelect }) {
         .map((cls) => {
           const isActive = cls.id === activeClassId;
           return (
-            <Tippy
+            <Tooltip
               key={cls.id}
               content={
                 locked && !isActive
@@ -59,7 +58,7 @@ function ClassGrid({ classes, activeClassId, locked, onSelect }) {
                   : cls.displayName
               }
               placement="top"
-              delay={[400, 0]}
+              delay={400}
             >
               <button
                 onClick={() => onSelect(cls.id)}
@@ -79,7 +78,7 @@ function ClassGrid({ classes, activeClassId, locked, onSelect }) {
               >
                 <ClassIcon name={cls.name} size={36} />
               </button>
-            </Tippy>
+            </Tooltip>
           );
         })}
     </div>
@@ -133,11 +132,11 @@ function SlotStatus({ parsed, loading }) {
   }
   if (parsed === undefined || parsed === null) {
     return (
-      <Tippy content="Failed to parse" placement="left">
+      <Tooltip content="Failed to parse" placement="left">
         <span className="w-4 text-center text-red-500 text-sm cursor-default select-none leading-none">
           ✕
         </span>
-      </Tippy>
+      </Tooltip>
     );
   }
   return (
@@ -207,10 +206,10 @@ function FilledSlot({
         }}
       />
 
-      <Tippy
+      <Tooltip
         content={flash ? "Copied!" : (summary ?? "Copy build string")}
         placement="bottom"
-        delay={[300, 0]}
+        delay={300}
       >
         <button
           onClick={handleCopy}
@@ -220,7 +219,7 @@ function FilledSlot({
         >
           {flash ? "✓" : "⧉"}
         </button>
-      </Tippy>
+      </Tooltip>
 
       <button
         onClick={onRemove}
@@ -638,7 +637,7 @@ function ShareButton({
           : idleLabel;
 
   return (
-    <Tippy content={tooltip} placement="top" delay={[300, 0]}>
+    <Tooltip content={tooltip} placement="top" delay={300}>
       <button
         onClick={onClick}
         disabled={state !== "idle"}
@@ -653,6 +652,6 @@ function ShareButton({
       >
         {label}
       </button>
-    </Tippy>
+    </Tooltip>
   );
 }

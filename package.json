@@ -46,10 +46,9 @@
     "vitest": "^4.1.9"
   },
   "dependencies": {
-    "@tippyjs/react": "^4.2.6",
+    "@floating-ui/react": "^0.27.19",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "tippy.js": "^6.3.7",
     "zustand": "^5.0.13"
   }
 }

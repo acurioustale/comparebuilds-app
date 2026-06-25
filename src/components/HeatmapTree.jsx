@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
+import Tooltip from "./Tooltip";
 import { iconUrl, onIconError } from "../lib/iconUrl";
 import { useNodeEmphasis } from "./SearchContext";
 import {
@@ -125,8 +124,8 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
           top: py - CHOICE_ICON / 2,
         }}
       >
-        {/* Icons + rarity ring — Tippy wraps only this area */}
-        <Tippy content={tipContent} placement="top" delay={[300, 0]}>
+        {/* Icons + rarity ring — the tooltip wraps only this area */}
+        <Tooltip content={tipContent} placement="top" delay={300}>
           <div style={{ position: "relative", cursor: "default" }}>
             <div
               style={{
@@ -173,7 +172,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
               })}
             </div>
           </div>
-        </Tippy>
+        </Tooltip>
 
         {/* Per-build choice dots — purely visual, no pointer events */}
         {count > 0 && (
@@ -221,7 +220,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
   if (node.type === "apex") {
     const S = APEX_ICON;
     return (
-      <Tippy
+      <Tooltip
         content={
           <div className="py-0.5" style={{ maxWidth: 280 }}>
             <p className="font-semibold text-xs text-wow-gold mb-1">
@@ -233,7 +232,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
           </div>
         }
         placement="top"
-        delay={[300, 0]}
+        delay={300}
       >
         <div
           style={{
@@ -267,7 +266,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
             />
           </div>
         </div>
-      </Tippy>
+      </Tooltip>
     );
   }
 
@@ -276,7 +275,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
   const isRound = node.type === "round";
 
   return (
-    <Tippy
+    <Tooltip
       content={
         <div className="py-0.5" style={{ maxWidth: 260 }}>
           <p className="font-semibold text-xs text-wow-gold">{node.name}</p>
@@ -292,7 +291,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
         </div>
       }
       placement="top"
-      delay={[300, 0]}
+      delay={300}
     >
       <div
         style={{
@@ -326,7 +325,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
           />
         </div>
       </div>
-    </Tippy>
+    </Tooltip>
   );
 }
 

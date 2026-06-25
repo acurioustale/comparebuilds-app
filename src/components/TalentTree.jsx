@@ -1,6 +1,5 @@
 import { useMemo, useId, useRef, useState } from "react";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
+import Tooltip from "./Tooltip";
 import { iconUrl, onIconError } from "../lib/iconUrl";
 import { activeHeroSubtree } from "../lib/spendRules";
 import { prereqChain } from "../lib/prereqChain";
@@ -25,7 +24,7 @@ const CHAIN_RING =
   "0 0 0 2px rgba(232,201,107,0.9), 0 0 10px rgba(232,201,107,0.45)";
 
 // Touch gesture thresholds (interactive tree). A press held ≥ TAP_HOLD_MS is a
-// tooltip peek (Tippy shows it) rather than a tap; a tap moved more than
+// tooltip peek (the Tooltip shows it) rather than a tap; a tap moved more than
 // TAP_MOVE_TOL px is a scroll, not a tap.
 const TAP_HOLD_MS = 350;
 const TAP_MOVE_TOL = 10;
@@ -168,7 +167,7 @@ function TalentNode({
 
   // Touch gesture model (interactive only): a short tap cycles the node's rank
   // (unselected → +1 → … → max → cleared), folding spend and refund into one
-  // unambiguous gesture. A long hold is left to Tippy as a tooltip peek — so
+  // unambiguous gesture. A long hold is left to the Tooltip as a tooltip peek — so
   // reading a talent no longer spends into it. Desktop is untouched: it keeps
   // click=spend, right-click=refund, hover=tooltip. `tapFired` swallows the
   // synthetic click the browser emits after a tap so it doesn't double-fire with
@@ -290,11 +289,11 @@ function TalentNode({
   if (node.type === "choice") {
     const totalW = CHOICE_ICON * 2 + CHOICE_GAP;
     return (
-      <Tippy
+      <Tooltip
         content={tip}
         placement="top"
-        delay={[300, 0]}
-        touch={interactive ? ["hold", TAP_HOLD_MS] : true}
+        delay={300}
+        touch={interactive ? "hold" : "tap"}
       >
         <div
           onContextMenu={onContextMenu}
@@ -399,7 +398,7 @@ function TalentNode({
             />
           )}
         </div>
-      </Tippy>
+      </Tooltip>
     );
   }
 
@@ -408,11 +407,11 @@ function TalentNode({
     const S = APEX_ICON;
     const showApexRank = isSelected && node.maxRanks > 1;
     return (
-      <Tippy
+      <Tooltip
         content={tip}
         placement="top"
-        delay={[300, 0]}
-        touch={interactive ? ["hold", TAP_HOLD_MS] : true}
+        delay={300}
+        touch={interactive ? "hold" : "tap"}
       >
         <div
           onClick={
@@ -497,7 +496,7 @@ function TalentNode({
             </div>
           )}
         </div>
-      </Tippy>
+      </Tooltip>
     );
   }
 
@@ -508,10 +507,10 @@ function TalentNode({
   const radius = isRound ? "50%" : 4;
 
   return (
-    <Tippy
+    <Tooltip
       content={tip}
       placement="top"
-      delay={[300, 0]}
+      delay={300}
       touch={interactive ? ["hold", TAP_HOLD_MS] : true}
     >
       <div
@@ -598,7 +597,7 @@ function TalentNode({
           </div>
         )}
       </div>
-    </Tippy>
+    </Tooltip>
   );
 }
 

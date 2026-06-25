@@ -258,34 +258,18 @@ body {
   cursor: not-allowed;
 }
 
-/* ─── Tippy tooltip overrides ────────────────────────────────────────────── */
+/* ─── Floating UI tooltip ─────────────────────────────────────────────────── */
 
-.tippy-box {
-  background-color: var(--wow-tooltip-bg) !important;
-  border: 1px solid var(--wow-border) !important;
-  box-shadow: var(--wow-tooltip-shadow) !important;
-  color: var(--wow-text) !important;
-  font-family: FrizQuadrata, "Palatino Linotype", serif !important;
-}
-
-.tippy-box .tippy-content {
+.wow-tooltip {
+  z-index: 9999;
+  max-width: 320px;
   padding: 6px 10px;
-}
-
-.tippy-box[data-placement^="top"] > .tippy-arrow::before {
-  border-top-color: var(--wow-border) !important;
-}
-
-.tippy-box[data-placement^="bottom"] > .tippy-arrow::before {
-  border-bottom-color: var(--wow-border) !important;
-}
-
-.tippy-box[data-placement^="left"] > .tippy-arrow::before {
-  border-left-color: var(--wow-border) !important;
-}
-
-.tippy-box[data-placement^="right"] > .tippy-arrow::before {
-  border-right-color: var(--wow-border) !important;
+  border: 1px solid var(--wow-border);
+  border-radius: 4px;
+  background-color: var(--wow-tooltip-bg);
+  box-shadow: var(--wow-tooltip-shadow);
+  color: var(--wow-text);
+  font-family: FrizQuadrata, "Palatino Linotype", serif;
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────────────── */
