@@ -5,7 +5,7 @@
 // it is left out of the finder (php -l still syntax-checks it in CI).
 
 $finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__ . '/api')
+    ->in([__DIR__ . '/api', __DIR__ . '/tests'])
     ->name('*.php');
 
 return (new PhpCsFixer\Config())

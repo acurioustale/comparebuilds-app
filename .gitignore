@@ -5,6 +5,8 @@ api/config.php
 coverage/
 .lycheecache
 .php-cs-fixer.cache
+.phpunit.result.cache
+.phpunit.cache
 
 # Claude Code: commit shared run config (launch.json); keep personal/local settings out
 .claude/settings.local.json

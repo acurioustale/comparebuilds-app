@@ -18,11 +18,13 @@ jobs:
           chmod +x /tmp/shfmt
           /tmp/shfmt -d ./*.sh
 
-      - name: PHP (syntax + format)
+      - name: PHP (syntax, format, tests)
         run: |
           for f in $(git ls-files '*.php' '*.php.example'); do php -l "$f"; done
           curl -sSfL https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v3.95.10/php-cs-fixer.phar -o /tmp/php-cs-fixer
           php /tmp/php-cs-fixer fix --dry-run --config .php-cs-fixer.dist.php
+          curl -sSfL https://phar.phpunit.de/phpunit-13.2.1.phar -o /tmp/phpunit
+          php /tmp/phpunit
 
       - name: Workflows (actionlint)
         run: |

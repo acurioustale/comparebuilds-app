@@ -64,6 +64,13 @@ else
 	echo "note: php-cs-fixer not installed - skipping (CI enforces it)." >&2
 fi
 
+if command -v phpunit >/dev/null; then
+	step "PHP tests (phpunit)"
+	phpunit
+else
+	echo "note: phpunit not installed - skipping (CI enforces it)." >&2
+fi
+
 if command -v actionlint >/dev/null; then
 	step "Workflows (actionlint)"
 	actionlint
