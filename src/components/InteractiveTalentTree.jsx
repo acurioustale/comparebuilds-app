@@ -324,7 +324,6 @@ export default function InteractiveTalentTree({ treeData, classNodes }) {
         treeData={treeData}
         selectedNodes={selected}
         invalidNodeIds={invalidNodeIds}
-        specId={specId}
         onNodeClick={handleClick}
         onNodeContextMenu={handleRightClick}
         onNodeTap={handleTap}
