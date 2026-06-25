@@ -20,7 +20,7 @@ npm run coverage     # run with coverage; FAILS below the thresholds in vite.con
 npx vitest run src/lib/buildString.test.js   # run a single test file
 npx vitest run -t "round-trip"               # run tests matching a name
 node scripts/ingestIcyVeins.js               # regenerate src/data/ from the Icy Veins source
-node scripts/fetchIcons.js                   # download referenced icons into public/icons/ (incremental; commit the result)
+node scripts/fetchIcons.js                   # download referenced icons into public/talent-icons/ (incremental; commit the result)
 UPDATE_SNAPSHOTS=1 npm test                  # deliberately rewrite wireLayout snapshots (see below)
 ```
 
@@ -39,7 +39,7 @@ CI is the `validate` job in `.github/workflows/deploy.yml`, run on every push/PR
   - `diff.js` / `heatmap.js` — pure comparison + adoption-counting logic, extracted from their components for testing.
   - `validateClassData.js`, `wireLayout.js`, `sanitizeDescription.js` — schema validation, wire-layout fingerprinting, HTML sanitisation at ingest.
 - `src/store/buildsStore.js` — single Zustand store; the app's state machine. Holds the raw build strings, their parsed results (kept parallel — `null` = not-yet-parsed or failed), the loaded `treeData`/`classNodes`, and interactive selections. Class JSON is dynamically imported per-class (lazy Vite chunks via `import.meta.glob`). A module-level `loadGen` counter cancels stale async loads on reset/spec-switch. `MAX_BUILDS`/`MAX_BUILD_LEN` here are mirrored server-side in `api/share.php` — keep them in sync.
-- `src/components/` — thin React renderers. `App.jsx`/`MainView` picks the view by valid-build count: 0 → `InteractiveTalentTree`, 1 → `TalentTree`, 2 → `SideBySideDiff`, 3+ → `HeatmapTree`. `treeLayout.js` holds shared geometry constants so `TalentTree` and `HeatmapTree` can't diverge. `FitToWidth.jsx` scales each tree/comparison panel to the viewport width via a uniform CSS transform (scale, don't reflow). Icons are served first-party from `/icons` (URL built by `lib/iconUrl.js`); they're downloaded from Wowhead's CDN by `scripts/fetchIcons.js` and committed under `public/icons/`, because hotlinking the third-party CDN got the images blocked by content blockers and browser tracking protection.
+- `src/components/` — thin React renderers. `App.jsx`/`MainView` picks the view by valid-build count: 0 → `InteractiveTalentTree`, 1 → `TalentTree`, 2 → `SideBySideDiff`, 3+ → `HeatmapTree`. `treeLayout.js` holds shared geometry constants so `TalentTree` and `HeatmapTree` can't diverge. `FitToWidth.jsx` scales each tree/comparison panel to the viewport width via a uniform CSS transform (scale, don't reflow). Icons are served first-party from `/talent-icons` (URL built by `lib/iconUrl.js`); they're downloaded from Wowhead's CDN by `scripts/fetchIcons.js` and committed under `public/talent-icons/`, because hotlinking the third-party CDN got the images blocked by content blockers and browser tracking protection. (The path is `/talent-icons`, not `/icons`, because Apache reserves `/icons` for mod_autoindex's directory-listing graphics — that server-level alias shadows a web-root `icons/` folder.)
 
 Routing is hash-based (a 6-char share id in the URL hash); the SPA's own routes are all served by `index.html`. The one server-side rewrite (`public/.htaccess`) is unrelated to SPA routing: it maps the pretty share URLs `/s/<id>` to `api/share.php` for link-unfurl previews.
 

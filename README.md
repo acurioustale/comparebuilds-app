@@ -76,7 +76,7 @@ Expected layout on the server:
     ├── index.html
     ├── .htaccess        ← shipped from dist/ (mod_rewrite for /s/<id>, security headers)
     ├── assets/
-    ├── icons/           ← self-hosted talent icons (committed; see scripts/fetchIcons.js)
+    ├── talent-icons/    ← self-hosted talent icons (committed; see scripts/fetchIcons.js)
     └── api/
         ├── share.php
         ├── og.php

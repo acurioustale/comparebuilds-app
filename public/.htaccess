@@ -32,10 +32,11 @@
   Header always set Referrer-Policy "no-referrer"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 
-  # Long-cache static images. The self-hosted icons under /icons are keyed by a
-  # stable game slug (fetchIcons.js only ever adds files, never mutates one), so
-  # they're safe to cache aggressively — this replaces the icon-cache service
-  # worker that used to do this client-side.
+  # Long-cache static images. The self-hosted icons under /talent-icons are keyed
+  # by a stable game slug (fetchIcons.js only ever adds files, never mutates one),
+  # so they're safe to cache aggressively — this replaces the icon-cache service
+  # worker that used to do this client-side. (The path is /talent-icons rather
+  # than /icons because Apache reserves /icons for its autoindex graphics.)
   <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
     Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>

@@ -2,7 +2,7 @@
  * fetchIcons.js
  * -------------
  * Downloads every talent/spec/class icon referenced by src/data/ into
- * public/icons/, so the app can serve icons first-party instead of hotlinking
+ * public/talent-icons/, so the app can serve icons first-party instead of hotlinking
  * wow.zamimg.com. Third-party icon requests are blocked by common content
  * blockers and browser tracking protection (the icons live on a Fandom/ZAM
  * domain), which left users staring at broken images; same-origin icons are
@@ -14,8 +14,8 @@
  *
  *   node scripts/fetchIcons.js
  *
- * It is incremental: icons already present in public/icons/ are skipped, so a
- * re-run only fetches what's new. Delete public/icons/ to force a full refetch.
+ * It is incremental: icons already present in public/talent-icons/ are skipped, so a
+ * re-run only fetches what's new. Delete public/talent-icons/ to force a full refetch.
  *
  * Source/size mirror what the app requests: the "medium" (36x36) JPEGs at
  *   https://wow.zamimg.com/images/wow/icons/medium/<name>.jpg
@@ -37,7 +37,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "src", "data");
-const OUT_DIR = join(__dirname, "..", "public", "icons");
+const OUT_DIR = join(__dirname, "..", "public", "talent-icons");
 const BASE_URL = "https://wow.zamimg.com/images/wow/icons/medium";
 const CONCURRENCY = 16;
 
