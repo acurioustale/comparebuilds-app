@@ -1,12 +1,55 @@
+# ─── Dependencies ────────────────────────────────────────────────────────────
 node_modules/
+# Composer (PHP) — not used today, but ignore a vendor dir if one ever appears.
+/vendor/
+
+# ─── Build output ──────────────────────────────────────────────────────────────
 dist/
-api/config.php
-.DS_Store
+dist-ssr/
+*.local
+
+# ─── Tests / coverage ────────────────────────────────────────────────────────
 coverage/
+*.lcov
+
+# ─── Tool caches ───────────────────────────────────────────────────────────────
+.eslintcache
+.stylelintcache
 .lycheecache
 .php-cs-fixer.cache
-.phpunit.result.cache
 .phpunit.cache
+.phpunit.result.cache
 
-# Claude Code: commit shared run config (launch.json); keep personal/local settings out
+# ─── Logs ───────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─── Environment / secrets ─────────────────────────────────────────────────────
+.env
+.env.*
+# The share API's DB credentials + SHARE_IP_SALT live one level above the web
+# root in production; a local copy must never be committed (the template
+# api/config.php.example is tracked).
+api/config.php
+
+# ─── OS files ────────────────────────────────────────────────────────────────────
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# ─── Editors / IDEs ─────────────────────────────────────────────────────────────
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.sw?
+
+# ─── Claude Code ────────────────────────────────────────────────────────────────
+# Commit shared run config (launch.json); keep personal/local settings out.
 .claude/settings.local.json
