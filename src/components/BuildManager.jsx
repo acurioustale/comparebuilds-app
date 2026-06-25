@@ -320,7 +320,7 @@ export default function BuildManager() {
   )
 
   const [copyState, setCopyState] = useState('idle') // 'idle' | 'copying' | 'copied' | 'error'
-  const [directState, setDirectState] = useState('idle') // 'idle' | 'copied' | 'error'
+  const [permalinkState, setPermalinkState] = useState('idle') // 'idle' | 'copied' | 'error'
 
   // Local class selection used before any builds are loaded
   const [localClassId, setLocalClassId] = useState(null)
@@ -341,21 +341,22 @@ export default function BuildManager() {
   const specDisplayName  = activeClass?.specs.find((s) => s.id === specId)?.displayName ?? ''
   const classDisplayName = activeClass?.displayName ?? ''
 
-  // Instant link: encodes the builds straight into the URL hash — no server
-  // round-trip, no rate limit, works offline. The sibling of the short link.
-  const handleCopyDirectLink = useCallback(async () => {
-    if (directState !== 'idle') return
+  // Permalink: encodes the builds straight into the URL hash — self-contained, so
+  // it never expires and needs no server (unlike the short link), at the cost of a
+  // long URL with no preview.
+  const handleCopyPermalink = useCallback(async () => {
+    if (permalinkState !== 'idle') return
     try {
       const token = encodeBuildsHash({ builds: buildStrings, names: buildNames })
       const url = `${window.location.origin}${window.location.pathname}#b=${token}`
       await navigator.clipboard.writeText(url)
-      setDirectState('copied')
+      setPermalinkState('copied')
     } catch {
-      setDirectState('error')
+      setPermalinkState('error')
     } finally {
-      setTimeout(() => setDirectState('idle'), 2000)
+      setTimeout(() => setPermalinkState('idle'), 2000)
     }
-  }, [directState, buildStrings, buildNames])
+  }, [permalinkState, buildStrings, buildNames])
 
   const handleCopyLink = useCallback(async () => {
     if (copyState !== 'idle') return
@@ -506,8 +507,8 @@ export default function BuildManager() {
       {/* ── Action buttons ─────────────────────────── */}
       {allParsed && (
         <section className="flex justify-end items-center gap-2 pt-3 border-t border-wow-dim">
-          <DirectLinkButton state={directState} onClick={handleCopyDirectLink} />
           <CopyLinkButton state={copyState} onClick={handleCopyLink} />
+          <PermalinkButton state={permalinkState} onClick={handleCopyPermalink} />
         </section>
       )}
     </div>
@@ -522,6 +523,7 @@ function SectionLabel({ children }) {
   )
 }
 
+// Short server link: stored for a clean URL that unfurls with a preview card.
 function CopyLinkButton({ state, onClick }) {
   const label =
     state === 'copying' ? 'Saving…' :
@@ -529,30 +531,32 @@ function CopyLinkButton({ state, onClick }) {
     state === 'error'   ? 'Failed'  : 'Copy link'
 
   return (
-    <button
-      onClick={onClick}
-      disabled={state !== 'idle'}
-      className="wow-btn px-3 py-1.5 text-xs rounded select-none"
-      style={
-        state === 'copied' ? { color: '#4ade80', borderColor: '#166534' } :
-        state === 'error'  ? { color: '#f87171', borderColor: '#7f1d1d' } :
-        undefined
-      }
-    >
-      {label}
-    </button>
+    <Tippy content="A short link that shows a preview when posted. Expires after 90 days." placement="top" delay={[300, 0]}>
+      <button
+        onClick={onClick}
+        disabled={state !== 'idle'}
+        className="wow-btn px-3 py-1.5 text-xs rounded select-none"
+        style={
+          state === 'copied' ? { color: '#4ade80', borderColor: '#166534' } :
+          state === 'error'  ? { color: '#f87171', borderColor: '#7f1d1d' } :
+          undefined
+        }
+      >
+        {label}
+      </button>
+    </Tippy>
   )
 }
 
-// Instant (client-side) link: encodes the builds into the URL hash, copied
-// straight to the clipboard with no server call.
-function DirectLinkButton({ state, onClick }) {
+// Permalink: the build encoded in the URL itself — never expires and needs no
+// server, but it's a long URL with no preview.
+function PermalinkButton({ state, onClick }) {
   const label =
     state === 'copied' ? 'Copied!' :
-    state === 'error'  ? 'Failed'  : 'Copy instant link'
+    state === 'error'  ? 'Failed'  : 'Copy permalink'
 
   return (
-    <Tippy content="A link with the builds encoded in the URL — no server, works offline." placement="top" delay={[300, 0]}>
+    <Tippy content="A permanent link with the build encoded in it — never expires and works offline, but it's long and shows no preview." placement="top" delay={[300, 0]}>
       <button
         onClick={onClick}
         disabled={state !== 'idle'}
