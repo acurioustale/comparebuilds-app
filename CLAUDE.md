@@ -38,7 +38,7 @@ CI (`.github/workflows`) runs `npm run lint`, then `npm run coverage` (enforcing
 - `src/store/buildsStore.js` — single Zustand store; the app's state machine. Holds the raw build strings, their parsed results (kept parallel — `null` = not-yet-parsed or failed), the loaded `treeData`/`classNodes`, and interactive selections. Class JSON is dynamically imported per-class (lazy Vite chunks via `import.meta.glob`). A module-level `loadGen` counter cancels stale async loads on reset/spec-switch. `MAX_BUILDS`/`MAX_BUILD_LEN` here are mirrored server-side in `api/share.php` — keep them in sync.
 - `src/components/` — thin React renderers. `App.jsx`/`MainView` picks the view by valid-build count: 0 → `InteractiveTalentTree`, 1 → `TalentTree`, 2 → `SideBySideDiff`, 3+ → `HeatmapTree`. `treeLayout.js` holds shared geometry constants so `TalentTree` and `HeatmapTree` can't diverge. `FitToWidth.jsx` scales each tree/comparison panel to the viewport width via a uniform CSS transform (scale, don't reflow). Icons come from Wowhead's CDN via `lib/zamimg.js`.
 
-Routing is hash-based (a 6-char share id in the URL hash); there are no rewrite rules — `index.html` serves every route.
+Routing is hash-based (a 6-char share id in the URL hash); the SPA's own routes are all served by `index.html`. The one server-side rewrite (`public/.htaccess`) is unrelated to SPA routing: it maps the pretty share URLs `/s/<id>` to `api/share.php` for link-unfurl previews.
 
 ## The wire-layout snapshot — read before editing `src/data/`
 

@@ -31,10 +31,14 @@ Expected layout on the server:
 ├── config.php          ← credentials file, above the web root
 └── www/                ← web root (comparebuilds.app → this folder)
     ├── index.html
+    ├── .htaccess        ← shipped from dist/ (mod_rewrite for /s/<id>, security headers)
     ├── assets/
     ├── sw.js
     └── api/
-        └── share.php
+        ├── share.php
+        ├── og.php
+        └── fonts/
+            └── DejaVuSans-Bold.ttf
 ```
 
 ### 3. Create config.php above the web root
@@ -71,7 +75,7 @@ limiting (20 shares/hour by default).
 
 ### 5. Point the domain
 
-In your hosting control panel, point the `comparebuilds.app` domain to the web root folder you uploaded to. No `.htaccess` rewrite rules are needed — the app uses hash-based routing and all routes are served by `index.html`.
+In your hosting control panel, point the `comparebuilds.app` domain to the web root folder you uploaded to. The SPA itself uses hash-based routing, so its own routes are all served by `index.html` with no rewrite. The shipped `.htaccess` does add one `mod_rewrite` rule — it maps the pretty share URLs (`/s/<id>`) to `api/share.php` so links unfurl with a preview — along with the site's security headers. It needs `mod_rewrite` and `mod_headers`; both rules are wrapped in `<IfModule>` guards, so the site still works (minus pretty share links / headers) on a host where they're unavailable.
 
 ---
 
@@ -157,8 +161,8 @@ npm run test:watch  # watch mode
 npm run coverage    # run with a coverage report (text + html in coverage/)
 ```
 
-The suite spans the logic layer and the components (Vitest, ~390 tests across a
-dozen files in `src/`). The ones that specifically guard data correctness — the
+The suite spans the logic layer and the components (Vitest, ~430 tests across a
+dozen-plus files in `src/`). The ones that specifically guard data correctness — the
 most important to understand before editing `src/data/`:
 
 - **`treeLogic.test.js`** — prerequisite/gate cascade logic.
