@@ -9,14 +9,14 @@ import {
 } from "../store/buildsStore";
 import { encodeBuildsHash } from "../lib/shareLink";
 import classesIndex from "../data/classes.json";
-import { zamimg } from "../lib/zamimg";
+import { iconUrl } from "../lib/iconUrl";
 import { activeHeroSubtree } from "../lib/spendRules";
 
 function ClassIcon({ name, size = 36 }) {
-  // WoW class icons on zamimg use classicon_{name} with underscores removed.
+  // WoW class icons use the slug classicon_{name} with underscores removed.
   return (
     <img
-      src={zamimg("classicon_" + name.replaceAll("_", ""))}
+      src={iconUrl("classicon_" + name.replaceAll("_", ""))}
       width={size}
       height={size}
       alt=""
@@ -29,7 +29,7 @@ function ClassIcon({ name, size = 36 }) {
 function SpecIcon({ icon, size = 24 }) {
   return (
     <img
-      src={zamimg(icon)}
+      src={iconUrl(icon)}
       width={size}
       height={size}
       alt=""

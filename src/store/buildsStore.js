@@ -83,7 +83,7 @@ async function importClassData(classSlug) {
   const loader = CLASS_MODULES[key];
   if (!loader) {
     throw new Error(
-      `No local data for "${classSlug}" — run "node scripts/ingestTalentData.js" to generate it`,
+      `No local data for "${classSlug}" — run "node scripts/ingestIcyVeins.js" to generate it`,
     );
   }
   const mod = await loader();

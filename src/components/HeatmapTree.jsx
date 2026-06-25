@@ -1,7 +1,7 @@
 import { useMemo, useContext } from "react";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-import { zamimg } from "../lib/zamimg";
+import { iconUrl } from "../lib/iconUrl";
 import { SearchContext } from "./SearchContext";
 import { rarityTier, computeStats, computeLegendTiers } from "../lib/heatmap";
 import {
@@ -150,7 +150,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
                     }}
                   >
                     <img
-                      src={zamimg(ch.icon)}
+                      src={iconUrl(ch.icon)}
                       width={CHOICE_ICON}
                       height={CHOICE_ICON}
                       alt=""
@@ -245,7 +245,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
             }}
           >
             <img
-              src={zamimg(node.icon)}
+              src={iconUrl(node.icon)}
               width={S}
               height={S}
               alt=""
@@ -303,7 +303,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
           }}
         >
           <img
-            src={zamimg(node.icon)}
+            src={iconUrl(node.icon)}
             width={S}
             height={S}
             alt=""

@@ -7,7 +7,7 @@
  * TalentTree.jsx), so they must be trusted HTML. They originate from whatever
  * data source the ingest pulls from. To keep the committed data files safe
  * REGARDLESS of source, every HTML-rendered description is run through this
- * sanitiser at ingest time (scripts/ingestTalentData.js). The committed JSON is
+ * sanitiser at ingest time (scripts/ingestIcyVeins.js). The committed JSON is
  * therefore the security boundary: the app renders it without trusting upstream.
  *
  * SCOPE — this covers exactly the fields that are rendered as HTML:

@@ -19,7 +19,8 @@ npm run coverage     # run with coverage; FAILS below the thresholds in vite.con
 ./validate.sh        # run the FULL gate locally: shell, php, lint, format, css/md/svg, tests, build
 npx vitest run src/lib/buildString.test.js   # run a single test file
 npx vitest run -t "round-trip"               # run tests matching a name
-node scripts/ingestTalentData.js             # regenerate src/data/ from the upstream source
+node scripts/ingestIcyVeins.js               # regenerate src/data/ from the Icy Veins source
+node scripts/fetchIcons.js                   # download referenced icons into public/icons/ (incremental; commit the result)
 UPDATE_SNAPSHOTS=1 npm test                  # deliberately rewrite wireLayout snapshots (see below)
 ```
 
@@ -38,7 +39,7 @@ CI is the `validate` job in `.github/workflows/deploy.yml`, run on every push/PR
   - `diff.js` / `heatmap.js` — pure comparison + adoption-counting logic, extracted from their components for testing.
   - `validateClassData.js`, `wireLayout.js`, `sanitizeDescription.js` — schema validation, wire-layout fingerprinting, HTML sanitisation at ingest.
 - `src/store/buildsStore.js` — single Zustand store; the app's state machine. Holds the raw build strings, their parsed results (kept parallel — `null` = not-yet-parsed or failed), the loaded `treeData`/`classNodes`, and interactive selections. Class JSON is dynamically imported per-class (lazy Vite chunks via `import.meta.glob`). A module-level `loadGen` counter cancels stale async loads on reset/spec-switch. `MAX_BUILDS`/`MAX_BUILD_LEN` here are mirrored server-side in `api/share.php` — keep them in sync.
-- `src/components/` — thin React renderers. `App.jsx`/`MainView` picks the view by valid-build count: 0 → `InteractiveTalentTree`, 1 → `TalentTree`, 2 → `SideBySideDiff`, 3+ → `HeatmapTree`. `treeLayout.js` holds shared geometry constants so `TalentTree` and `HeatmapTree` can't diverge. `FitToWidth.jsx` scales each tree/comparison panel to the viewport width via a uniform CSS transform (scale, don't reflow). Icons come from Wowhead's CDN via `lib/zamimg.js`.
+- `src/components/` — thin React renderers. `App.jsx`/`MainView` picks the view by valid-build count: 0 → `InteractiveTalentTree`, 1 → `TalentTree`, 2 → `SideBySideDiff`, 3+ → `HeatmapTree`. `treeLayout.js` holds shared geometry constants so `TalentTree` and `HeatmapTree` can't diverge. `FitToWidth.jsx` scales each tree/comparison panel to the viewport width via a uniform CSS transform (scale, don't reflow). Icons are served first-party from `/icons` (URL built by `lib/iconUrl.js`); they're downloaded from Wowhead's CDN by `scripts/fetchIcons.js` and committed under `public/icons/`, because hotlinking the third-party CDN got the images blocked by content blockers and browser tracking protection.
 
 Routing is hash-based (a 6-char share id in the URL hash); the SPA's own routes are all served by `index.html`. The one server-side rewrite (`public/.htaccess`) is unrelated to SPA routing: it maps the pretty share URLs `/s/<id>` to `api/share.php` for link-unfurl previews.
 
@@ -47,7 +48,7 @@ Routing is hash-based (a 6-char share id in the URL hash); the SPA's own routes 
 `src/lib/wireLayout.snapshot.json` fingerprints each class's build-string bit layout. After any data change, run `npm test`:
 
 - A **schema** failure (`dataIntegrity.test.js` / `validateClassData`) means the file is structurally wrong — fix it.
-- A **wire-layout snapshot** failure means your change shifted build-string bit positions, so **every existing build string and share link for that class now parses differently**. Only if that's intentional (e.g. a new game patch added nodes) regenerate it deliberately with `UPDATE_SNAPSHOTS=1 npm test`. `scripts/ingestTalentData.js` refreshes the snapshot automatically and aborts without updating it if any class fails validation.
+- A **wire-layout snapshot** failure means your change shifted build-string bit positions, so **every existing build string and share link for that class now parses differently**. Only if that's intentional (e.g. a new game patch added nodes) regenerate it deliberately with `UPDATE_SNAPSHOTS=1 npm test`. `scripts/ingestIcyVeins.js` refreshes the snapshot automatically and aborts without updating it if any class fails validation.
 
 The data-correctness tests most worth understanding: `buildString.test.js` (per-class encode→decode round-trips), `buildFixtures.test.js` (decodes real in-game-exported strings to confirm node IDs/ordering/budgets), `dataIntegrity.test.js` (schema + snapshot), `treeLogic.test.js` (prereq/gate cascade).
 

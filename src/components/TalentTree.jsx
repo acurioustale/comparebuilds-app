@@ -1,7 +1,7 @@
 import { useMemo, useId, useRef, useState, useContext } from "react";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-import { zamimg } from "../lib/zamimg";
+import { iconUrl } from "../lib/iconUrl";
 import { activeHeroSubtree } from "../lib/spendRules";
 import { prereqChain } from "../lib/prereqChain";
 import { SearchContext } from "./SearchContext";
@@ -369,7 +369,7 @@ function TalentNode({
                 }}
               >
                 <img
-                  src={zamimg(ch.icon)}
+                  src={iconUrl(ch.icon)}
                   width={CHOICE_ICON}
                   height={CHOICE_ICON}
                   alt=""
@@ -449,7 +449,7 @@ function TalentNode({
             }}
           >
             <img
-              src={zamimg(node.icon)}
+              src={iconUrl(node.icon)}
               width={S}
               height={S}
               alt=""
@@ -548,7 +548,7 @@ function TalentNode({
           }}
         >
           <img
-            src={zamimg(node.icon)}
+            src={iconUrl(node.icon)}
             width={S}
             height={S}
             alt=""

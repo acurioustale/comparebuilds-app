@@ -76,7 +76,7 @@ Expected layout on the server:
     ├── index.html
     ├── .htaccess        ← shipped from dist/ (mod_rewrite for /s/<id>, security headers)
     ├── assets/
-    ├── sw.js
+    ├── icons/           ← self-hosted talent icons (committed; see scripts/fetchIcons.js)
     └── api/
         ├── share.php
         ├── og.php
@@ -265,11 +265,12 @@ change, run `npm test`:
   UPDATE_SNAPSHOTS=1 npm test
   ```
 
-`scripts/ingestTalentData.js` (the current Icy Veins importer) runs the same
+`scripts/ingestIcyVeins.js` (the current Icy Veins importer) runs the same
 validation on every class and refreshes the snapshot automatically; it aborts
 without updating the snapshot if any class fails validation. To target a
-different source, rewrite its normaliser to emit the same schema — the validator
-and round-trip tests will tell you when the output is correct.
+different source, add a sibling importer (e.g. `ingestWowhead.js`) that emits the
+same schema — the validator and round-trip tests will tell you when the output
+is correct.
 
 ## License
 
