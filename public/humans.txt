@@ -1,0 +1,20 @@
+/* TEAM */
+
+Markus Spitzner
+Contact: me [at] acurioustale.de
+GitHub: @acurioustale
+Location: Cork, Ireland
+
+/* SITE */
+
+Last update: 2026-06-25
+Language: English
+Standards: HTML5, CSS
+Components: React, Vite, Tailwind CSS
+Backend: PHP + MariaDB (share-link API only; the app itself is static)
+Software: A text editor and a curious mind
+
+/* THANKS */
+
+An unofficial fan project. World of Warcraft and all related talent data,
+names, and icons are trademarks of Blizzard Entertainment, Inc.
