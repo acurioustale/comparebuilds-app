@@ -3,6 +3,7 @@ import { useShallow } from 'zustand/react/shallow'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import { useBuildsStore, MAX_BUILDS } from '../store/buildsStore'
+import { encodeBuildsHash } from '../lib/shareLink'
 import classesIndex from '../data/classes.json'
 import { zamimg } from '../lib/zamimg'
 import { activeHeroSubtree } from '../lib/spendRules'
@@ -309,6 +310,23 @@ export default function BuildManager() {
   )
 
   const [copyState, setCopyState] = useState('idle') // 'idle' | 'copying' | 'copied' | 'error'
+  const [directState, setDirectState] = useState('idle') // 'idle' | 'copied' | 'error'
+
+  // Instant link: encodes the builds straight into the URL hash — no server
+  // round-trip, no rate limit, works offline. The sibling of the short link.
+  const handleCopyDirectLink = useCallback(async () => {
+    if (directState !== 'idle') return
+    try {
+      const token = encodeBuildsHash({ builds: buildStrings })
+      const url = `${window.location.origin}${window.location.pathname}#b=${token}`
+      await navigator.clipboard.writeText(url)
+      setDirectState('copied')
+    } catch {
+      setDirectState('error')
+    } finally {
+      setTimeout(() => setDirectState('idle'), 2000)
+    }
+  }, [directState, buildStrings])
 
   const handleCopyLink = useCallback(async () => {
     if (copyState !== 'idle') return
@@ -461,7 +479,8 @@ export default function BuildManager() {
 
       {/* ── Action buttons ─────────────────────────── */}
       {allParsed && (
-        <section className="flex justify-end pt-3 border-t border-wow-dim">
+        <section className="flex justify-end items-center gap-2 pt-3 border-t border-wow-dim">
+          <DirectLinkButton state={directState} onClick={handleCopyDirectLink} />
           <CopyLinkButton state={copyState} onClick={handleCopyLink} />
         </section>
       )}
@@ -496,5 +515,30 @@ function CopyLinkButton({ state, onClick }) {
     >
       {label}
     </button>
+  )
+}
+
+// Instant (client-side) link: encodes the builds into the URL hash, copied
+// straight to the clipboard with no server call.
+function DirectLinkButton({ state, onClick }) {
+  const label =
+    state === 'copied' ? 'Copied!' :
+    state === 'error'  ? 'Failed'  : 'Copy instant link'
+
+  return (
+    <Tippy content="A link with the builds encoded in the URL — no server, works offline." placement="top" delay={[300, 0]}>
+      <button
+        onClick={onClick}
+        disabled={state !== 'idle'}
+        className="wow-btn px-3 py-1.5 text-xs rounded select-none"
+        style={
+          state === 'copied' ? { color: '#4ade80', borderColor: '#166534' } :
+          state === 'error'  ? { color: '#f87171', borderColor: '#7f1d1d' } :
+          undefined
+        }
+      >
+        {label}
+      </button>
+    </Tippy>
   )
 }

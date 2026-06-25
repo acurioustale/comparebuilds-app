@@ -93,6 +93,17 @@ Rows older than 90 days are deleted on each `POST` request.
 - **No error leakage** — DB/runtime errors return a generic JSON message; details are never exposed.
 - All queries use prepared statements; IDs use a CSPRNG (`random_int`).
 
+## Sharing
+
+Two ways to share builds:
+
+- **Copy link** — POSTs the builds to `api/share.php`, which returns a 6-char id; the
+  link is `…/#xxxxxx` (or `…/s/xxxxxx`). Persistent, short, backed by the DB.
+- **Copy instant link** — encodes the builds straight into the URL hash
+  (`…/#b=<token>`, base64url of the build strings). No server call, no rate limit,
+  works offline; the trade-off is a long URL. Opening either kind loads the builds
+  on page load (a share in the URL takes precedence over locally saved state).
+
 ## Local persistence
 
 Your work is autosaved to the browser's `localStorage` (key `comparebuilds-state`),
