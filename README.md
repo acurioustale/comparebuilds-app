@@ -4,6 +4,46 @@ WoW talent build comparison tool — deployed at comparebuilds.app.
 
 ## Deployment
 
+### Automated deploys
+
+Pushing to `main` deploys automatically. The
+[`deploy` workflow](.github/workflows/deploy.yml) runs on every push to `main`
+(and can be triggered manually from the Actions tab), builds the site, and runs
+`deploy.sh`. `deploy.sh` stages the built `dist/` together with the PHP API
+(`api/share.php`, `api/og.php`, `api/fonts/`) into one tree and mirrors it with a
+single `rsync -avz --delete` to the web root:
+
+```
+web4186@http2.core-networks.de:html/comparebuilds.app/
+```
+
+Staging the two sources into one tree is what makes `--delete` safe: `dist/` has
+no `api/`, so deleting against `dist/` alone would wipe the live API folder.
+`config.php` (below) lives one level above the web root and is never touched.
+
+CI authenticates with a dedicated SSH deploy key, stored as the repository
+secrets `DEPLOY_SSH_KEY` and `DEPLOY_KNOWN_HOSTS`. The key is harmless if leaked:
+on the host it's pinned to a forced command
+(`~web4186/bin/rsync-jail-comparebuilds.sh`, wired up in that account's
+`authorized_keys`) that allows only an rsync *push* into `html/comparebuilds.app/`
+— no shell, no pull, and no path traversal outside that directory. This is why
+the deploy target in `deploy.sh` must keep its trailing slash; the jail matches
+on that exact prefix.
+
+To deploy by hand instead (uses your own SSH access), run:
+
+```bash
+./deploy.sh            # live
+./deploy.sh --dry-run  # preview what would change
+```
+
+### First-time server setup
+
+The steps below prepare the host that the automated deploy relies on but does
+not perform — the credentials file, database, and domain. Steps 1 and 2 also
+document the build output and on-server file layout, which `deploy.sh` now
+handles for you.
+
 ### 1. Build the frontend
 
 ```bash
