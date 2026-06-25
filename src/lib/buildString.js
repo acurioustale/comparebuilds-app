@@ -229,21 +229,20 @@ export function parseBuildString(buildString, nodes) {
       entryChosen = reader.readBits(2)
     }
 
-    // Resolve pointsInvested
-    let pointsInvested
-    if (partialPoints !== null) {
-      pointsInvested = partialPoints
-    } else {
-      // Fully purchased — look up max rank from tree data.
-      // For choice/apex nodes, prefer the chosen option's maxRanks since
-      // individual choices can have different ranks (e.g. apex with maxRanks=2).
-      const node = nodeById.get(id)
-      if (isChoiceNode && node?.choices && entryChosen !== null) {
-        pointsInvested = node.choices[entryChosen]?.maxRanks ?? 1
-      } else {
-        pointsInvested = node?.maxRanks ?? 1
-      }
-    }
+    // Resolve the node's effective max rank (choice/apex options can differ from
+    // node.maxRanks — e.g. an apex with maxRanks=2 or per-option choice ranks).
+    const node = nodeById.get(id)
+    const effectiveMax =
+      isChoiceNode && node?.choices && entryChosen !== null
+        ? (node.choices[entryChosen]?.maxRanks ?? 1)
+        : (node?.maxRanks ?? 1)
+
+    // Resolve pointsInvested. A partially-ranked stream value is clamped to the
+    // node's max so a corrupt or hand-crafted string can't yield ranks like 7/5
+    // that would inflate section totals or render nonsensically. Fully-purchased
+    // nodes omit the explicit rank and take the max directly.
+    const pointsInvested =
+      partialPoints !== null ? Math.min(partialPoints, effectiveMax) : effectiveMax
 
     result[id] = { pointsInvested, entryChosen }
   }

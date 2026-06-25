@@ -6,6 +6,7 @@ import { generateBuildString } from '../lib/buildString'
 import { computeInvalidNodeIds, buildGrantedSeed } from '../lib/treeLogic'
 import { sectionPoints, canSpendPoint, activeHeroSubtree } from '../lib/spendRules'
 import { byId } from './treeLayout'
+import { useShallow } from 'zustand/react/shallow'
 import { useBuildsStore } from '../store/buildsStore'
 
 // ─── Export button ────────────────────────────────────────────────────────────
@@ -58,7 +59,15 @@ function ExportButton({ onClick, state, invalidCount, hasSelection }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function InteractiveTalentTree({ treeData, classNodes }) {
-  const { specId, interactiveNodes: selected, setInteractiveNodes, addBuild, finishAddingBuild } = useBuildsStore()
+  const { specId, interactiveNodes: selected, setInteractiveNodes, addBuild, finishAddingBuild } = useBuildsStore(
+    useShallow((s) => ({
+      specId: s.specId,
+      interactiveNodes: s.interactiveNodes,
+      setInteractiveNodes: s.setInteractiveNodes,
+      addBuild: s.addBuild,
+      finishAddingBuild: s.finishAddingBuild,
+    })),
+  )
   const [exportState, setExportState] = useState('idle')
 
   const budget = treeData.pointBudget
@@ -94,7 +103,7 @@ export default function InteractiveTalentTree({ treeData, classNodes }) {
       if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget)) return
       setInteractiveNodes({ ...selected, [nodeId]: { ...sel, pointsInvested: sel.pointsInvested + 1 } })
     }
-  }, [selected, nodeById, treeData.nodes, setInteractiveNodes])
+  }, [selected, nodeById, treeData.nodes, budget, setInteractiveNodes])
 
   const handleRightClick = useCallback((nodeId) => {
     const node = nodeById[nodeId]

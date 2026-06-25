@@ -57,7 +57,7 @@ function RarityLegend({ n }) {
 
 // ─── Individual heatmap node ──────────────────────────────────────────────────
 
-function HeatmapNode({ node, px, py, stat, totalBuilds, alreadyGranted }) {
+function HeatmapNode({ node, px, py, stat, totalBuilds }) {
   const count = stat?.count ?? 0
   const choiceVotes = stat?.choiceVotes ?? []
   const tier = rarityTier(count, totalBuilds)
@@ -319,7 +319,6 @@ function HeatmapPanel({ nodes, nodeById, stats, totalBuilds }) {
           py={(node.posY - minY) * CELL + PAD}
           stat={stats[node.id]}
           totalBuilds={totalBuilds}
-          alreadyGranted={node.alreadyGranted}
         />
       ))}
     </div>

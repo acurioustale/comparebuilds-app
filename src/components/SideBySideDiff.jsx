@@ -3,6 +3,7 @@ import { TreePanel } from './TalentTree'
 import { computeDiff, selectionLabel } from '../lib/diff'
 import { byId } from './treeLayout'
 import { activeHeroSubtree } from '../lib/spendRules'
+import { computeInvalidNodeIds, buildGrantedSeed } from '../lib/treeLogic'
 
 // ─── Diff summary panel ───────────────────────────────────────────────────────
 
@@ -81,7 +82,7 @@ function DiffSummary({ aOnly, bOnly, differing, labelA, labelB }) {
         <span className="ml-1.5 normal-case tracking-normal text-wow-dim">({total})</span>
       </p>
 
-      <div className="grid grid-cols-[1fr_1fr_1fr] gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <SummarySection title={`Only in ${labelA}`} color="red"   entries={aOnly}     type="a-only" />
         <SummarySection title={`Only in ${labelB}`} color="blue"  entries={bOnly}     type="b-only" />
         <SummarySection title="Different rank or choice" color="amber" entries={differing} type="diff" />
@@ -142,23 +143,37 @@ export default function SideBySideDiff({
   const activeA = activeHeroSubtree(treeData.nodes, buildA.nodes)
   const activeB = activeHeroSubtree(treeData.nodes, buildB.nodes)
 
+  // Flag nodes that violate their own prereqs/gates within each build. Imported
+  // (and especially shared) builds are only validated for shape, not budget or
+  // prerequisites, so a malformed loadout would otherwise render as legitimate.
+  // Granted nodes are seeded in so prereq checks see the full effective selection.
+  const invalidA = useMemo(
+    () => computeInvalidNodeIds(treeData.nodes, { ...buildGrantedSeed(treeData), ...buildA.nodes }, nodeById),
+    [treeData, buildA, nodeById],
+  )
+  const invalidB = useMemo(
+    () => computeInvalidNodeIds(treeData.nodes, { ...buildGrantedSeed(treeData), ...buildB.nodes }, nodeById),
+    [treeData, buildB, nodeById],
+  )
+
   // One build's class/spec section panel.
-  const panel = (nodes, build, checkpoints = []) => (
+  const panel = (nodes, build, invalid, checkpoints = []) => (
     <TreePanel
       nodes={nodes}
       selectedNodes={build.nodes}
       nodeById={nodeById}
       highlights={highlights}
+      invalidNodeIds={invalid}
       checkpoints={checkpoints}
     />
   )
 
   // One build's hero block (both subtrees side by side, inactive one locked).
-  const heroBlock = (build, active) => (
+  const heroBlock = (build, active, invalid) => (
     <div className="flex items-start">
-      <TreePanel nodes={leftNodes}  selectedNodes={build.nodes} nodeById={nodeById} highlights={highlights} heroLocked={active !== null && active !== leftName} />
+      <TreePanel nodes={leftNodes}  selectedNodes={build.nodes} nodeById={nodeById} highlights={highlights} invalidNodeIds={invalid} heroLocked={active !== null && active !== leftName} />
       <div className="self-stretch w-px bg-wow-dim mx-3" />
-      <TreePanel nodes={rightNodes} selectedNodes={build.nodes} nodeById={nodeById} highlights={highlights} heroLocked={active !== null && active !== rightName} />
+      <TreePanel nodes={rightNodes} selectedNodes={build.nodes} nodeById={nodeById} highlights={highlights} invalidNodeIds={invalid} heroLocked={active !== null && active !== rightName} />
     </div>
   )
 
@@ -194,18 +209,18 @@ export default function SideBySideDiff({
         <Row
           label="Class"
           tagsAlways
-          a={panel(classNodes, buildA, treeData.checkpoints?.class ?? [])}
-          b={panel(classNodes, buildB, treeData.checkpoints?.class ?? [])}
+          a={panel(classNodes, buildA, invalidA, treeData.checkpoints?.class ?? [])}
+          b={panel(classNodes, buildB, invalidB, treeData.checkpoints?.class ?? [])}
         />
         <Row
           label="Spec"
-          a={panel(specNodes, buildA, treeData.checkpoints?.spec ?? [])}
-          b={panel(specNodes, buildB, treeData.checkpoints?.spec ?? [])}
+          a={panel(specNodes, buildA, invalidA, treeData.checkpoints?.spec ?? [])}
+          b={panel(specNodes, buildB, invalidB, treeData.checkpoints?.spec ?? [])}
         />
         <Row
           label={`${leftName} ✦ ${rightName}`}
-          a={heroBlock(buildA, activeA)}
-          b={heroBlock(buildB, activeB)}
+          a={heroBlock(buildA, activeA, invalidA)}
+          b={heroBlock(buildB, activeB, invalidB)}
         />
       </div>
 

@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 npm run dev          # Vite dev server (PHP API is NOT available locally — share links 404 locally)
 npm run build        # produce static site in dist/
+npm run lint         # ESLint (flat config); CI runs this before the tests
 npm test             # run all Vitest suites once
 npm run test:watch   # watch mode
 npm run coverage     # run with coverage; FAILS below the thresholds in vite.config.js
@@ -20,7 +21,7 @@ node scripts/ingestTalentData.js             # regenerate src/data/ from the ups
 UPDATE_SNAPSHOTS=1 npm test                  # deliberately rewrite wireLayout snapshots (see below)
 ```
 
-CI (`.github/workflows`) runs `npm run coverage` (enforcing thresholds) then `npm run build` on every push/PR. Coverage is gated only over `src/lib/**` and `src/store/**` — keep logic there, keep components thin. The thresholds in `vite.config.js` are a ratchet: raise as coverage climbs, never lower.
+CI (`.github/workflows`) runs `npm run lint`, then `npm run coverage` (enforcing thresholds), then `npm run build` on every push/PR. Coverage is gated only over `src/lib/**` and `src/store/**` — keep logic there, keep components thin. The thresholds in `vite.config.js` are a ratchet: raise as coverage climbs, never lower.
 
 ## Architecture
 

@@ -83,7 +83,9 @@ Rows older than 90 days are deleted on each `POST` request.
 `share.php` is hardened for public exposure:
 
 - **Per-IP rate limit** — 20 creates per IP per hour (`429` past that), tracked via a
-  salted IP hash; set `SHARE_IP_SALT` in `config.php` to a random secret.
+  salted IP hash; set `SHARE_IP_SALT` in `config.php` to a random secret. Behind a
+  trusted reverse proxy/CDN, also set `TRUST_PROXY` so the limit keys on the real
+  client (the first `X-Forwarded-For` hop) instead of the proxy address.
 - **Body cap** — requests over 16 KB are rejected (`413`) before parsing; JSON depth is capped.
 - **Strict validation** — `classId`/`specId` must be positive integers, 2–5 builds, each a
   base64 build string ≤ 2000 chars; only the validated fields are stored (never the raw body).
@@ -130,6 +132,7 @@ builds is not tied to any particular data provider.
 ### Tests
 
 ```bash
+npm run lint        # ESLint (flat config) — also enforced in CI
 npm test            # run all suites once (Vitest)
 npm run test:watch  # watch mode
 npm run coverage    # run with a coverage report (text + html in coverage/)

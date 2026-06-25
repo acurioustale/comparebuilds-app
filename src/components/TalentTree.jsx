@@ -1,4 +1,4 @@
-import { useMemo, useId } from 'react'
+import { useMemo, useId, useRef } from 'react'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import { zamimg } from '../lib/zamimg'
@@ -106,6 +106,32 @@ function TalentNode({
     ? (e) => { e.preventDefault(); onNodeContextMenu?.(node.id) }
     : undefined
 
+  // Touch refund: right-click has no touch equivalent, so a long press is the
+  // mobile analogue — hold ~450ms to refund. A flag swallows the click that the
+  // browser synthesises after the press so it doesn't immediately re-spend; any
+  // movement (a scroll) cancels the pending refund.
+  const longPressFired = useRef(false)
+  const longPressTimer = useRef(null)
+  const touchHandlers = onNodeContextMenu
+    ? {
+        onTouchStart: () => {
+          longPressFired.current = false
+          longPressTimer.current = setTimeout(() => {
+            longPressFired.current = true
+            onNodeContextMenu(node.id)
+          }, 450)
+        },
+        onTouchEnd:    () => clearTimeout(longPressTimer.current),
+        onTouchMove:   () => clearTimeout(longPressTimer.current),
+        onTouchCancel: () => clearTimeout(longPressTimer.current),
+      }
+    : null
+  // Wraps a click handler so the synthetic post-long-press click is ignored.
+  const guardClick = (fn) => (...args) => {
+    if (longPressFired.current) { longPressFired.current = false; return }
+    fn(...args)
+  }
+
   // Keyboard accessibility: only the interactive tree wires onNodeClick. Static
   // comparison/heatmap views stay non-focusable (their textual diff/legend is the
   // screen-reader path) so we don't add hundreds of tab stops to a read-only grid.
@@ -140,6 +166,7 @@ function TalentNode({
       <Tippy content={tip} placement="top" delay={[300, 0]}>
         <div
           onContextMenu={onContextMenu}
+          {...touchHandlers}
           style={{
             position: 'absolute',
             left: px - totalW / 2,
@@ -158,7 +185,7 @@ function TalentNode({
             return (
               <div
                 key={i}
-                onClick={onNodeClick ? () => onNodeClick(node.id, i) : undefined}
+                onClick={onNodeClick ? guardClick(() => onNodeClick(node.id, i)) : undefined}
                 className={interactive ? 'tnode' : undefined}
                 role={interactive ? 'button' : undefined}
                 tabIndex={interactive ? 0 : undefined}
@@ -218,8 +245,9 @@ function TalentNode({
     return (
       <Tippy content={tip} placement="top" delay={[300, 0]}>
         <div
-          onClick={hasHandlers ? () => onNodeClick?.(node.id) : undefined}
+          onClick={hasHandlers ? guardClick(() => onNodeClick?.(node.id)) : undefined}
           onContextMenu={onContextMenu}
+          {...touchHandlers}
           className={interactive ? 'tnode' : undefined}
           role={interactive ? 'button' : undefined}
           tabIndex={interactive ? 0 : undefined}
@@ -300,8 +328,9 @@ function TalentNode({
   return (
     <Tippy content={tip} placement="top" delay={[300, 0]}>
       <div
-        onClick={hasHandlers ? () => onNodeClick?.(node.id) : undefined}
+        onClick={hasHandlers ? guardClick(() => onNodeClick?.(node.id)) : undefined}
         onContextMenu={onContextMenu}
+        {...touchHandlers}
         className={interactive ? 'tnode' : undefined}
         role={interactive ? 'button' : undefined}
         tabIndex={interactive ? 0 : undefined}

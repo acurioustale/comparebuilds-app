@@ -183,3 +183,38 @@ describe('error handling', () => {
     assert.strictEqual(parseSpecId(str + '==').specId, data.specs.blood.specId)
   })
 })
+
+// ── Hardening against corrupt input ───────────────────────────────────────────
+
+describe('parseBuildString clamps an over-max partial rank', () => {
+  const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  // LSB-first bit packing, mirroring the encoder, so we can hand-craft a stream
+  // the encoder itself would never emit (a partial rank above the node's max).
+  const pushInt = (bits, value, count) => { for (let i = 0; i < count; i++) bits.push((value >> i) & 1) }
+  const bitsToStr = (bits) => {
+    const b = [...bits]
+    while (b.length % 6 !== 0) b.push(0)
+    let out = ''
+    for (let i = 0; i < b.length; i += 6) {
+      let v = 0
+      for (let j = 0; j < 6; j++) v |= b[i + j] << j
+      out += CHARSET[v]
+    }
+    return out
+  }
+
+  test('a partial value beyond maxRanks is capped to the node max', () => {
+    const bits = []
+    pushInt(bits, 2, 8)    // version
+    pushInt(bits, 250, 16) // specId
+    for (let i = 0; i < 128; i++) bits.push(0) // hash
+    // One node (id 100, maxRanks 5): selected, purchased, partially-ranked with a
+    // corrupt rank of 63, non-choice.
+    bits.push(1, 1, 1)
+    pushInt(bits, 63, 6)
+    bits.push(0)
+
+    const parsed = parseBuildString(bitsToStr(bits), [{ id: 100, maxRanks: 5, choices: null }])
+    assert.strictEqual(parsed.nodes[100].pointsInvested, 5)
+  })
+})

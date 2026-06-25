@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 import BuildManager from './components/BuildManager'
 import HeatmapTree from './components/HeatmapTree'
 import InteractiveTalentTree from './components/InteractiveTalentTree'
@@ -56,7 +57,16 @@ function SingleBuildView({ treeData, parsedBuild, widths }) {
 }
 
 function MainView() {
-  const { treeData, parsedBuilds, buildStrings, classNodes, addingBuild, startAddingBuild } = useBuildsStore()
+  const { treeData, parsedBuilds, buildStrings, classNodes, addingBuild, startAddingBuild } = useBuildsStore(
+    useShallow((s) => ({
+      treeData: s.treeData,
+      parsedBuilds: s.parsedBuilds,
+      buildStrings: s.buildStrings,
+      classNodes: s.classNodes,
+      addingBuild: s.addingBuild,
+      startAddingBuild: s.startAddingBuild,
+    })),
+  )
   // Comparison views are width-fit per build by the FitToWidth coordinator. The
   // single tree and the 3+ build heatmap share the single-tree geometry; the
   // two-build diff has its own (paired) geometry.
@@ -145,7 +155,13 @@ function MainView() {
 // ─── Share rehydration ────────────────────────────────────────────────────────
 
 function useShareRehydration() {
-  const { addBuild, clearAllBuilds, rehydrateTreeData } = useBuildsStore()
+  const { addBuild, clearAllBuilds, rehydrateTreeData } = useBuildsStore(
+    useShallow((s) => ({
+      addBuild: s.addBuild,
+      clearAllBuilds: s.clearAllBuilds,
+      rehydrateTreeData: s.rehydrateTreeData,
+    })),
+  )
   const [shareError, setShareError] = useState(null)
   // Guard against React StrictMode invoking this effect twice in development,
   // which would otherwise rehydrate (and add) every shared build twice.

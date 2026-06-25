@@ -394,11 +394,38 @@ const createStore = (set, get) => ({
     if (specId == null) return
 
     const match = findClassForSpec(specId)
-    if (!match) return
+    // The persisted spec no longer exists in the data (e.g. a game patch or a
+    // data regen removed it). Don't strand the user on saved-but-unloadable
+    // builds — clear back to a clean slate.
+    if (!match) {
+      loadGen++
+      set({ ...EMPTY })
+      return
+    }
 
     await loadTreeData(set, get, match.cls.name, match.spec.name, specId, {
       preserveInteractive: true,
     })
+
+    // If the load failed, the restored build strings can never render — discard
+    // the stale persisted state rather than leaving a tree-less dead end.
+    if (!get().treeData) {
+      loadGen++
+      set({ ...EMPTY })
+      return
+    }
+
+    // Drop any restored interactive selections for nodes that no longer exist in
+    // the loaded tree, so a stale persisted id can't linger in the selection.
+    const known = new Set(get().treeData.nodes.map((n) => n.id))
+    const current = get().interactiveNodes
+    const reconciled = {}
+    let changed = false
+    for (const [id, sel] of Object.entries(current)) {
+      if (known.has(Number(id))) reconciled[id] = sel
+      else changed = true
+    }
+    if (changed) set({ interactiveNodes: reconciled })
   },
 })
 
@@ -425,5 +452,9 @@ export const useBuildsStore = create(
       interactiveNodes: state.interactiveNodes,
       addingBuild: state.addingBuild,
     }),
+    // Forward-compat hook: if the persisted shape ever changes, bump `version`
+    // above and translate older payloads here. v1 is the initial shape, so this
+    // is a passthrough; returning the state unchanged keeps current saves valid.
+    migrate: (persisted) => persisted,
   }),
 )

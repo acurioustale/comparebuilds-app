@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import { useBuildsStore, MAX_BUILDS } from '../store/buildsStore'
@@ -291,7 +292,21 @@ export default function BuildManager() {
     removeBuild,
     clearAllBuilds,
     preloadSpec,
-  } = useBuildsStore()
+  } = useBuildsStore(
+    useShallow((s) => ({
+      buildStrings: s.buildStrings,
+      parsedBuilds: s.parsedBuilds,
+      classId: s.classId,
+      specId: s.specId,
+      treeData: s.treeData,
+      isLoading: s.isLoading,
+      error: s.error,
+      addBuild: s.addBuild,
+      removeBuild: s.removeBuild,
+      clearAllBuilds: s.clearAllBuilds,
+      preloadSpec: s.preloadSpec,
+    })),
+  )
 
   const [copyState, setCopyState] = useState('idle') // 'idle' | 'copying' | 'copied' | 'error'
 

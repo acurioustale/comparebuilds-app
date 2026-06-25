@@ -220,7 +220,6 @@ export function validateClassData(data, indexEntry = null) {
     if (indexEntry.name !== data.classSlug) {
       err(`index name "${indexEntry.name}" != classSlug "${data.classSlug}"`)
     }
-    const dataSpecIds = new Set(Object.values(data.specs ?? {}).map((s) => s?.specId))
     for (const s of indexEntry.specs ?? []) {
       const match = data.specs?.[s.name]
       if (!match) err(`index spec "${s.name}" has no entry in specs`)
@@ -231,7 +230,6 @@ export function validateClassData(data, indexEntry = null) {
         err(`spec "${slug}" exists in data but not in the index`)
       }
     }
-    void dataSpecIds
   }
 
   return errors

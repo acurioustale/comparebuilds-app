@@ -36,11 +36,30 @@ function fail(int $code, string $msg): void {
     exit;
 }
 
+/**
+ * The client IP used for rate limiting.
+ *
+ * Direct hosting: REMOTE_ADDR is the real client. Behind a reverse proxy or CDN
+ * (Cloudflare, etc.) REMOTE_ADDR is the proxy, collapsing every visitor into one
+ * rate-limit bucket — so the real client is the first hop in X-Forwarded-For.
+ * That header is client-spoofable, so it is ONLY trusted when the operator opts
+ * in by defining TRUST_PROXY truthy in config.php (i.e. you know a trusted proxy
+ * always sets it). Defaults to REMOTE_ADDR.
+ */
+function client_ip(): string {
+    if (defined('TRUST_PROXY') && TRUST_PROXY && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $first = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0]);
+        if (filter_var($first, FILTER_VALIDATE_IP) !== false) {
+            return $first;
+        }
+    }
+    return $_SERVER['REMOTE_ADDR'] ?? '';
+}
+
 /** Salted hash of the client IP, used only for rate limiting (not reversible to an IP in practice). */
 function client_ip_hash(): string {
-    $ip   = $_SERVER['REMOTE_ADDR'] ?? '';
     $salt = defined('SHARE_IP_SALT') ? SHARE_IP_SALT : 'comparebuilds-default-salt';
-    return hash('sha256', $salt . '|' . $ip);
+    return hash('sha256', $salt . '|' . client_ip());
 }
 
 // ─── DB connection ────────────────────────────────────────────────────────────

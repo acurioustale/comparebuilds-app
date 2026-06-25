@@ -123,4 +123,43 @@ describe('persistence', () => {
     // The in-progress pick must survive — not be clobbered by the granted seed.
     assert.ok(st.interactiveNodes[pick.id], 'interactive selection preserved through rehydration')
   })
+
+  test('drops a restored interactive node that no longer exists in the tree', async () => {
+    await useBuildsStore.getState().preloadSpec(DK_BLOOD)
+    const pick = DK.specs.blood.nodes.find((nd) => !nd.alreadyGranted)
+    // A real pick plus a stale id that isn't in the tree (e.g. removed by a patch).
+    const sel = {
+      ...useBuildsStore.getState().interactiveNodes,
+      [pick.id]: { pointsInvested: 1, entryChosen: null },
+      999999999: { pointsInvested: 1, entryChosen: null },
+    }
+    useBuildsStore.getState().setInteractiveNodes(sel)
+
+    const fresh = await reload()
+    assert.ok(fresh.getState().interactiveNodes['999999999'], 'stale id is in storage pre-reconcile')
+
+    await fresh.getState().rehydrateTreeData()
+
+    const st = fresh.getState()
+    assert.ok(st.interactiveNodes[pick.id], 'valid pick survives reconciliation')
+    assert.ok(!st.interactiveNodes['999999999'], 'stale node id is dropped')
+  })
+
+  test('clears stale persisted state when the spec no longer resolves', async () => {
+    // Seed localStorage directly with a build referencing a non-existent spec.
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      version: 1,
+      state: { buildStrings: ['CoPAAA'], specId: 99999999, classId: 1, interactiveNodes: {}, addingBuild: false },
+    }))
+
+    const fresh = await reload()
+    assert.strictEqual(fresh.getState().specId, 99999999, 'unresolved spec restored before recovery')
+
+    await fresh.getState().rehydrateTreeData()
+
+    const st = fresh.getState()
+    assert.strictEqual(st.specId, null, 'specId cleared')
+    assert.strictEqual(st.buildStrings.length, 0, 'unloadable builds cleared')
+    assert.strictEqual(st.treeData, null)
+  })
 })
