@@ -66,8 +66,19 @@ function find_font(): ?string {
     return null;
 }
 
-/** Draws text at a left x / baseline y, using the TTF if present, else a scaled built-in font. */
-function draw_text($img, ?string $font, float $size, int $x, int $yBaseline, $color, string $text): void {
+/**
+ * Draws text at a left x / baseline y, using the TTF if present, else a scaled
+ * built-in font.
+ *
+ * The fallback only runs on the rare GD build that has neither FreeType nor a
+ * usable TTF (the card normally ships its own bold TTF, so this path is almost
+ * never taken). It scales the largest built-in glyph up via a temp tile. The tile
+ * is filled with the card background colour (not transparency) because
+ * imagecopyresized does not blend source alpha — a transparent tile would
+ * composite as an opaque black box behind the text. Every caller draws onto the
+ * flat $bg-coloured card area, so an opaque $bg tile is invisible at its edges.
+ */
+function draw_text($img, ?string $font, float $size, int $x, int $yBaseline, $color, string $text, string $bg = '#0d0d14'): void {
     // Use TrueType only when the font exists AND this GD build has FreeType.
     if ($font !== null && function_exists('imagettftext')) {
         imagettftext($img, $size, 0, $x, $yBaseline, $color, $font, $text);
@@ -78,8 +89,7 @@ function draw_text($img, ?string $font, float $size, int $x, int $yBaseline, $co
     $w = imagefontwidth(5) * strlen($text) * $scale;
     $h = imagefontheight(5) * $scale;
     $tmp = imagecreatetruecolor(max(1, imagefontwidth(5) * strlen($text)), imagefontheight(5));
-    imagealphablending($tmp, false);
-    imagefilledrectangle($tmp, 0, 0, imagesx($tmp), imagesy($tmp), imagecolorallocatealpha($tmp, 0, 0, 0, 127));
+    imagefilledrectangle($tmp, 0, 0, imagesx($tmp), imagesy($tmp), hexcolor($tmp, $bg));
     $rgb = imagecolorsforindex($img, $color);
     $c2 = imagecolorallocate($tmp, $rgb['red'], $rgb['green'], $rgb['blue']);
     imagestring($tmp, 5, 0, 0, $text, $c2);
