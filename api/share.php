@@ -125,6 +125,94 @@ function client_ip_hash(): string
     return hash('sha256', $salt . '|' . client_ip());
 }
 
+/** Whether a string is a well-formed share id (the 6-char id space). */
+function valid_share_id(string $id): bool
+{
+    return preg_match('/^[A-Za-z0-9]{6}$/', $id) === 1;
+}
+
+/**
+ * Validates a decoded POST body for share creation. Pure: no DB, no superglobals,
+ * no output — so it is unit-testable. Returns ['error' => string] on the first
+ * failure (always a 400-class client error), or ['payload' => array] with the
+ * normalised, storable payload on success.
+ */
+function validate_share_input(mixed $body): array
+{
+    if (!is_array($body)) {
+        return ['error' => 'Expected a JSON object'];
+    }
+
+    $classId = $body['classId'] ?? null;
+    $specId  = $body['specId']  ?? null;
+    $builds  = $body['builds']  ?? null;
+
+    if (
+        !is_int($classId) || $classId <= 0 || $classId > 1000000 ||
+        !is_int($specId) || $specId <= 0 || $specId > 1000000
+    ) {
+        return ['error' => 'classId and specId must be positive integers'];
+    }
+    if (!is_array($builds)) {
+        return ['error' => 'builds must be a JSON array'];
+    }
+    if (count($builds) < MIN_BUILDS || count($builds) > MAX_BUILDS) {
+        return ['error' => 'builds must contain ' . MIN_BUILDS . '–' . MAX_BUILDS . ' entries'];
+    }
+    foreach ($builds as $b) {
+        if (!is_string($b) || !preg_match(BUILD_PATTERN, $b)) {
+            return ['error' => 'Each build must be a base64 build string ≤ ' . MAX_BUILD_LEN . ' chars'];
+        }
+    }
+
+    // Optional per-slot labels: must parallel builds, each a short string.
+    $labels = $body['labels'] ?? null;
+    if ($labels !== null) {
+        if (!is_array($labels) || count($labels) !== count($builds)) {
+            return ['error' => 'labels, when present, must be an array parallel to builds'];
+        }
+        foreach ($labels as $l) {
+            if (!is_string($l) || mb_strlen($l) > MAX_LABEL_LEN) {
+                return ['error' => 'Each label must be a string ≤ ' . MAX_LABEL_LEN . ' chars'];
+            }
+        }
+        // Drop an all-empty labels array so we never store noise.
+        if (count(array_filter($labels, fn ($l) => $l !== '')) === 0) {
+            $labels = null;
+        }
+    }
+
+    // Optional class/spec display names (used by the OG image so it needs no
+    // class index of its own). Validated as short plain strings.
+    $className = $body['className'] ?? null;
+    $specName  = $body['specName']  ?? null;
+    foreach (['className' => $className, 'specName' => $specName] as $k => $v) {
+        if ($v !== null && (!is_string($v) || mb_strlen($v) > MAX_NAME_LEN)) {
+            return ['error' => "$k, when present, must be a string ≤ " . MAX_NAME_LEN . ' chars'];
+        }
+    }
+
+    $payload = ['classId' => $classId, 'specId' => $specId, 'builds' => $builds];
+    if ($labels !== null) {
+        $payload['labels'] = $labels;
+    }
+    if ($className !== null) {
+        $payload['className'] = $className;
+    }
+    if ($specName !== null) {
+        $payload['specName'] = $specName;
+    }
+
+    return ['payload' => $payload];
+}
+
+// When this file is included for unit testing (with SHARE_API_NO_MAIN defined),
+// stop here: everything above is pure and testable, everything below opens a DB
+// connection and handles the live request.
+if (defined('SHARE_API_NO_MAIN')) {
+    return;
+}
+
 // ─── DB connection ────────────────────────────────────────────────────────────
 // config.php lives one level above the web root so it is never publicly
 // accessible. Adjust the path if your host's directory layout differs.
@@ -170,7 +258,7 @@ if ($method === 'GET') {
     // otherwise this is the SPA's JSON fetch.
     $pageMode = isset($_GET['page']);
 
-    if (!is_string($id) || !preg_match('/^[A-Za-z0-9]{6}$/', $id)) {
+    if (!is_string($id) || !valid_share_id($id)) {
         if ($pageMode) {
             http_response_code(400);
             render_share_page('', null);
@@ -230,57 +318,11 @@ if ($method === 'POST') {
     } catch (Throwable $e) {
         fail(400, 'Expected a valid JSON body');
     }
-    if (!is_array($body)) {
-        fail(400, 'Expected a JSON object');
+    $result = validate_share_input($body);
+    if (isset($result['error'])) {
+        fail(400, $result['error']);
     }
-
-    // ── Field validation ─────────────────────────────────────────────────────
-    $classId = $body['classId'] ?? null;
-    $specId  = $body['specId']  ?? null;
-    $builds  = $body['builds']  ?? null;
-
-    if (!is_int($classId) || $classId <= 0 || $classId > 1000000 ||
-        !is_int($specId)  || $specId  <= 0 || $specId  > 1000000) {
-        fail(400, 'classId and specId must be positive integers');
-    }
-    if (!is_array($builds)) {
-        fail(400, 'builds must be a JSON array');
-    }
-    if (count($builds) < MIN_BUILDS || count($builds) > MAX_BUILDS) {
-        fail(400, 'builds must contain ' . MIN_BUILDS . '–' . MAX_BUILDS . ' entries');
-    }
-    foreach ($builds as $b) {
-        if (!is_string($b) || !preg_match(BUILD_PATTERN, $b)) {
-            fail(400, 'Each build must be a base64 build string ≤ ' . MAX_BUILD_LEN . ' chars');
-        }
-    }
-
-    // Optional per-slot labels: must parallel builds, each a short string.
-    $labels = $body['labels'] ?? null;
-    if ($labels !== null) {
-        if (!is_array($labels) || count($labels) !== count($builds)) {
-            fail(400, 'labels, when present, must be an array parallel to builds');
-        }
-        foreach ($labels as $l) {
-            if (!is_string($l) || mb_strlen($l) > MAX_LABEL_LEN) {
-                fail(400, 'Each label must be a string ≤ ' . MAX_LABEL_LEN . ' chars');
-            }
-        }
-        // Drop an all-empty labels array so we never store noise.
-        if (count(array_filter($labels, fn ($l) => $l !== '')) === 0) {
-            $labels = null;
-        }
-    }
-
-    // Optional class/spec display names (used by the OG image so it needs no
-    // class index of its own). Validated as short plain strings.
-    $className = $body['className'] ?? null;
-    $specName  = $body['specName']  ?? null;
-    foreach (['className' => $className, 'specName' => $specName] as $k => $v) {
-        if ($v !== null && (!is_string($v) || mb_strlen($v) > MAX_NAME_LEN)) {
-            fail(400, "$k, when present, must be a string ≤ " . MAX_NAME_LEN . ' chars');
-        }
-    }
+    $payload = $result['payload'];
 
     $ipHash = client_ip_hash();
 
@@ -308,16 +350,6 @@ if ($method === 'POST') {
     }
 
     // ── Generate a unique ID and insert ──────────────────────────────────────
-    $payload = ['classId' => $classId, 'specId' => $specId, 'builds' => $builds];
-    if ($labels   !== null) {
-        $payload['labels']    = $labels;
-    }
-    if ($className !== null) {
-        $payload['className'] = $className;
-    }
-    if ($specName  !== null) {
-        $payload['specName']  = $specName;
-    }
     $stored = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
     try {
