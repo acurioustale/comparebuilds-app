@@ -14,7 +14,10 @@
     <!-- Resolve the theme before first paint to avoid a flash of the wrong one.
          #root is empty until React mounts, so there is no no-JS path to support:
          a stored override wins, otherwise follow the OS. Mirrors resolveTheme()
-         in src/lib/theme.js; kept inline and synchronous on purpose. -->
+         in src/lib/theme.js; kept inline and synchronous on purpose.
+         NOTE: this inline script is allowlisted in the CSP (public/.htaccess) by
+         its sha256 hash. If you edit it, recompute the hash there or production
+         will block it. -->
     <script>
       try {
         var stored = localStorage.getItem('comparebuilds-theme');
