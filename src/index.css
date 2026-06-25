@@ -13,15 +13,91 @@
 /* ─── Tailwind theme tokens ──────────────────────────────────────────────── */
 
 @theme {
-  --color-wow-bg:         #0d0d14;
-  --color-wow-panel:      #12121e;
-  --color-wow-gold:       #c8a84b;
-  --color-wow-gold-dark:  #a3801f;
-  --color-wow-gold-light: #e8c96b;
-  --color-wow-text:       #f0e6c8;
-  --color-wow-muted:      #b3a47e;
-  --color-wow-dim:        #3a2e1a;
+  /* Tailwind colour tokens are thin aliases over the runtime theme variables
+   * defined per data-theme below, so `bg-wow-panel`, `text-wow-text`, etc.
+   * re-resolve when the theme flips. The literal palette lives in the :root
+   * blocks, never here. */
+  --color-wow-bg:         var(--wow-bg);
+  --color-wow-panel:      var(--wow-panel);
+  --color-wow-gold:       var(--wow-gold);
+  --color-wow-gold-dark:  var(--wow-gold-dark);
+  --color-wow-gold-light: var(--wow-gold-light);
+  --color-wow-text:       var(--wow-text);
+  --color-wow-muted:      var(--wow-muted);
+  --color-wow-dim:        var(--wow-dim);
   --font-wow: 'FrizQuadrata', 'Palatino Linotype', serif;
+}
+
+/* ─── Theme palettes ─────────────────────────────────────────────────────────
+ * Dark is the default (and what JS forces via data-theme="dark"). The app never
+ * renders without JS — #root is empty until React mounts — so an inline script
+ * in index.html resolves (stored override ?? OS preference) and sets data-theme
+ * before first paint. Each palette is therefore defined exactly once (no
+ * prefers-color-scheme media duplication) and there is no theme flash on load.
+ *
+ * Tokenised colours feed both the Tailwind aliases above and raw CSS below;
+ * the --wow-* entries that aren't tokens are chrome surfaces drawn directly in
+ * CSS (panels, buttons, tooltips, scrollbars, the body glow). */
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --wow-bg:         #0d0d14;
+  --wow-panel:      #12121e;
+  --wow-gold:       #c8a84b;
+  --wow-gold-dark:  #a3801f;
+  --wow-gold-light: #e8c96b;
+  --wow-text:       #f0e6c8;
+  --wow-muted:      #b3a47e;
+  --wow-dim:        #3a2e1a;
+
+  --wow-border:          #8b6914;
+  --wow-body-bg:         #0d0d14;
+  --wow-body-glow:
+    radial-gradient(1100px 520px at 50% -8%, rgba(200,168,75,0.07), transparent 62%),
+    radial-gradient(900px 760px at 50% 118%, rgba(70,46,104,0.12), transparent 60%);
+  --wow-panel-bg:        rgba(10, 8, 4, 0.88);
+  --wow-panel-shadow:    0 0 20px rgba(0,0,0,0.8), inset 0 0 60px rgba(0,0,0,0.4);
+  --wow-subpanel-bg:     linear-gradient(180deg, rgba(22,18,32,0.55), rgba(8,6,14,0.55));
+  --wow-subpanel-shadow: inset 0 0 0 1px rgba(200,168,75,0.20), inset 0 0 34px rgba(0,0,0,0.5);
+  --wow-chrome-bg:       rgba(0, 0, 0, 0.75);
+  --wow-btn-bg:          #1a1508;
+  --wow-btn-active-bg:   #110e04;
+  --wow-tooltip-bg:      #0e0e1a;
+  --wow-tooltip-shadow:  0 0 0 1px rgba(200,168,75,0.15), 0 6px 24px rgba(0,0,0,0.9);
+  --wow-scroll-track:    #0a0a10;
+  --wow-scroll-thumb:    #5a4010;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --wow-bg:         #f3e7cb;
+  --wow-panel:      #fbf2dd;
+  --wow-gold:       #8a5a00;
+  --wow-gold-dark:  #6f4700;
+  --wow-gold-light: #ab6f0a;
+  --wow-text:       #2a1c0c;
+  --wow-muted:      #6a5733;
+  --wow-dim:        #c9ad74;
+
+  --wow-border:          #b78a2a;
+  --wow-body-bg:         #f3e7cb;
+  --wow-body-glow:
+    radial-gradient(1100px 520px at 50% -8%, rgba(160,120,30,0.10), transparent 62%),
+    radial-gradient(900px 760px at 50% 118%, rgba(120,90,160,0.10), transparent 60%);
+  --wow-panel-bg:        rgba(255, 250, 238, 0.92);
+  --wow-panel-shadow:    0 4px 18px rgba(94,64,20,0.16), inset 0 0 50px rgba(255,255,255,0.35);
+  --wow-subpanel-bg:     linear-gradient(180deg, rgba(255,250,238,0.70), rgba(244,232,206,0.70));
+  --wow-subpanel-shadow: inset 0 0 0 1px rgba(138,90,0,0.18), inset 0 0 34px rgba(120,90,30,0.08);
+  --wow-chrome-bg:       rgba(252, 244, 226, 0.85);
+  --wow-btn-bg:          #fbefd2;
+  --wow-btn-active-bg:   #efdcb2;
+  --wow-tooltip-bg:      #fdf6e6;
+  --wow-tooltip-shadow:  0 0 0 1px rgba(138,90,0,0.18), 0 6px 24px rgba(94,64,20,0.28);
+  --wow-scroll-track:    #e7d6b2;
+  --wow-scroll-thumb:    #bfa056;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
@@ -37,7 +113,7 @@ html {
 }
 
 body {
-  color: #f0e6c8;
+  color: var(--wow-text);
   font-family: 'FrizQuadrata', 'Palatino Linotype', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -46,13 +122,14 @@ body {
    * scrolls horizontally instead of becoming unreadable. */
   min-width: 320px;
 
-  background-color: #0d0d14;
+  background-color: var(--wow-body-bg);
   /* Layered radial glow for depth: warm gold from the top, cool arcane from the
-   * bottom, over the near-black base. Fixed so it doesn't scroll with content. */
-  background-image:
-    radial-gradient(1100px 520px at 50% -8%, rgba(200,168,75,0.07), transparent 62%),
-    radial-gradient(900px 760px at 50% 118%, rgba(70,46,104,0.12), transparent 60%);
+   * bottom, over the base. Fixed so it doesn't scroll with content. */
+  background-image: var(--wow-body-glow);
   background-attachment: fixed;
+  /* Ease the toggle; on load the inline script sets the theme pre-paint so this
+   * never fires a transition on first render. */
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* ─── WoW panel ──────────────────────────────────────────────────────────── */
@@ -63,33 +140,28 @@ body {
  * outline-offset: -3px places the outline 1px inside the border with a 1px gap.
  */
 .wow-panel {
-  background: rgba(10, 8, 4, 0.88);
+  background: var(--wow-panel-bg);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid #8b6914;
+  border: 1px solid var(--wow-border);
   outline: 1px solid rgba(200,168,75,0.45);
   outline-offset: -3px;
-  box-shadow:
-    0 0 20px rgba(0,0,0,0.8),
-    inset 0 0 60px rgba(0,0,0,0.4);
+  box-shadow: var(--wow-panel-shadow);
 }
 
 /* Sub-panel: frames an inner section (e.g. a single talent-tree grid) so the
  * nodes read as living inside a bordered panel rather than floating on the page. */
 .wow-subpanel {
-  background:
-    linear-gradient(180deg, rgba(22,18,32,0.55), rgba(8,6,14,0.55));
+  background: var(--wow-subpanel-bg);
   /* Frame drawn entirely with shadows (no border) so it adds zero layout width -
    * keeps the talent grid from overflowing its scaled container or shifting nodes. */
-  box-shadow:
-    inset 0 0 0 1px rgba(200,168,75,0.20),
-    inset 0 0 34px rgba(0,0,0,0.5);
+  box-shadow: var(--wow-subpanel-shadow);
   border-radius: 6px;
 }
 
 /* Header and footer chrome */
 .wow-chrome {
-  background: rgba(0, 0, 0, 0.75);
+  background: var(--wow-chrome-bg);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
@@ -101,10 +173,10 @@ body {
   transition: box-shadow 0.15s ease;
 }
 .wow-class-btn:not(:disabled):hover img {
-  box-shadow: 0 0 0 2px #c8a84b, 0 0 10px rgba(200,168,75,0.5);
+  box-shadow: 0 0 0 2px var(--wow-gold), 0 0 10px rgba(200,168,75,0.5);
 }
 .wow-class-btn.wow-active img {
-  box-shadow: 0 0 0 2px #c8a84b, 0 0 14px rgba(200,168,75,0.65);
+  box-shadow: 0 0 0 2px var(--wow-gold), 0 0 14px rgba(200,168,75,0.65);
 }
 
 /* ─── Talent node keyboard focus ─────────────────────────────────────────── */
@@ -113,16 +185,16 @@ body {
  * gold ring on keyboard focus only, so mouse users aren't distracted by it. */
 .tnode { outline: none; border-radius: 5px; }
 .tnode:focus-visible {
-  outline: 2px solid #e8c96b;
+  outline: 2px solid var(--wow-gold-light);
   outline-offset: 3px;
 }
 
 /* ─── WoW action button ──────────────────────────────────────────────────── */
 
 .wow-btn {
-  background: #1a1508;
-  border: 1px solid #8b6914;
-  color: #c8a84b;
+  background: var(--wow-btn-bg);
+  border: 1px solid var(--wow-border);
+  color: var(--wow-gold);
   font-family: 'FrizQuadrata', 'Palatino Linotype', serif;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -130,12 +202,12 @@ body {
   transition: border-color 0.15s, box-shadow 0.15s, color 0.15s;
 }
 .wow-btn:hover:not(:disabled) {
-  border-color: #c8a84b;
-  color: #e8c96b;
+  border-color: var(--wow-gold);
+  color: var(--wow-gold-light);
   box-shadow: 0 0 12px rgba(200,168,75,0.35), inset 0 0 8px rgba(200,168,75,0.06);
 }
 .wow-btn:active:not(:disabled) {
-  background: #110e04;
+  background: var(--wow-btn-active-bg);
   box-shadow: inset 0 1px 4px rgba(0,0,0,0.6);
 }
 .wow-btn:disabled {
@@ -146,31 +218,31 @@ body {
 /* ─── Tippy tooltip overrides ────────────────────────────────────────────── */
 
 .tippy-box {
-  background-color: #0e0e1a !important;
-  border: 1px solid #8b6914 !important;
-  box-shadow: 0 0 0 1px rgba(200,168,75,0.15), 0 6px 24px rgba(0,0,0,0.9) !important;
-  color: #f0e6c8 !important;
+  background-color: var(--wow-tooltip-bg) !important;
+  border: 1px solid var(--wow-border) !important;
+  box-shadow: var(--wow-tooltip-shadow) !important;
+  color: var(--wow-text) !important;
   font-family: 'FrizQuadrata', 'Palatino Linotype', serif !important;
 }
 .tippy-box .tippy-content {
   padding: 6px 10px;
 }
 .tippy-box[data-placement^='top'] > .tippy-arrow::before {
-  border-top-color: #8b6914 !important;
+  border-top-color: var(--wow-border) !important;
 }
 .tippy-box[data-placement^='bottom'] > .tippy-arrow::before {
-  border-bottom-color: #8b6914 !important;
+  border-bottom-color: var(--wow-border) !important;
 }
 .tippy-box[data-placement^='left'] > .tippy-arrow::before {
-  border-left-color: #8b6914 !important;
+  border-left-color: var(--wow-border) !important;
 }
 .tippy-box[data-placement^='right'] > .tippy-arrow::before {
-  border-right-color: #8b6914 !important;
+  border-right-color: var(--wow-border) !important;
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar       { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: #0a0a10; }
-::-webkit-scrollbar-thumb { background: #5a4010; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #8b6914; }
+::-webkit-scrollbar-track { background: var(--wow-scroll-track); }
+::-webkit-scrollbar-thumb { background: var(--wow-scroll-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--wow-border); }

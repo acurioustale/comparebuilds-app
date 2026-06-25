@@ -14,9 +14,83 @@ import { decodeBuildsHash } from './lib/shareLink'
 import { matchNodeIds } from './lib/talentSearch'
 import { SearchContext } from './components/SearchContext'
 import TalentSearch from './components/TalentSearch'
+import {
+  THEME_STORAGE_KEY,
+  THEME_COLORS,
+  normalizeStoredTheme,
+  resolveTheme,
+  nextTheme,
+} from './lib/theme'
 
 // Stable empty match set so the search memo keeps a constant reference when idle.
 const EMPTY_MATCH = new Set()
+
+// ─── Theme ──────────────────────────────────────────────────────────────────
+
+function prefersLight() {
+  return typeof window !== 'undefined' &&
+    !!window.matchMedia?.('(prefers-color-scheme: light)').matches
+}
+
+// localStorage can be absent (SSR/tests) or throw on access (Safari private
+// mode), so every touch is guarded — a failure just means "no stored override".
+function readStoredTheme() {
+  try { return window.localStorage.getItem(THEME_STORAGE_KEY) } catch { return null }
+}
+
+function writeStoredTheme(theme) {
+  try { window.localStorage.setItem(THEME_STORAGE_KEY, theme) } catch { /* ignore */ }
+}
+
+// Reflect the active theme on the document. The inline script in index.html has
+// already done this for first paint; this keeps it in sync on toggle/OS change.
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme
+  document.querySelector('meta[name="theme-color"]')
+    ?.setAttribute('content', THEME_COLORS[theme])
+}
+
+function useTheme() {
+  const [theme, setTheme] = useState(() => resolveTheme(readStoredTheme(), prefersLight()))
+
+  useEffect(() => { applyTheme(theme) }, [theme])
+
+  // Follow the OS while the user hasn't set an explicit override (the toggle
+  // persists one, making the choice sticky across reloads and OS changes).
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: light)')
+    const onChange = (e) => {
+      if (!normalizeStoredTheme(readStoredTheme())) setTheme(e.matches ? 'light' : 'dark')
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  const toggleTheme = () =>
+    setTheme((current) => {
+      const next = nextTheme(current)
+      writeStoredTheme(next)
+      return next
+    })
+
+  return { theme, toggleTheme }
+}
+
+function ThemeToggle({ theme, onToggle }) {
+  const isLight = theme === 'light'
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className="wow-btn rounded px-3 py-1.5 text-xs"
+      aria-pressed={isLight}
+      aria-label={`Switch to ${isLight ? 'dark' : 'light'} mode`}
+      title={`Switch to ${isLight ? 'dark' : 'light'} mode`}
+    >
+      {isLight ? '☾ Dark' : '☀ Light'}
+    </button>
+  )
+}
 
 // Wraps a tree/comparison panel so it scales to fit the viewport width, centered.
 // FitToWidth is the full-width measurer; the inner card hugs its content (w-max).
@@ -275,15 +349,19 @@ function useShareRehydration() {
 
 export default function App() {
   const { shareError, dismissShareError } = useShareRehydration()
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <div className="min-h-screen text-wow-text flex flex-col relative">
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header
-        className="wow-chrome py-6 px-4 text-center select-none"
+        className="wow-chrome relative py-6 px-4 text-center select-none"
         style={{ borderBottom: '1px solid transparent', borderImage: 'linear-gradient(to right, transparent 8%, rgba(200,168,75,0.55), transparent 92%) 1' }}
       >
+        <div className="absolute right-4 top-4">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        </div>
         <div className="flex items-center justify-center gap-3">
           <img
             src={`${import.meta.env.BASE_URL}favicon.svg`}
