@@ -12,6 +12,7 @@ import { createRequire } from 'node:module'
 import App from './App.jsx'
 import { useBuildsStore } from './store/buildsStore.js'
 import { collectClassNodes, generateBuildString } from './lib/buildString.js'
+import { encodeBuildsHash } from './lib/shareLink.js'
 
 const require = createRequire(import.meta.url)
 
@@ -104,5 +105,18 @@ describe('share rehydration', () => {
     // The useRef guard prevents StrictMode's double effect invocation from
     // fetching (and adding the builds) twice.
     expect(fetchMock).toHaveBeenCalledTimes(1)
+  })
+
+  test('loads builds from a client-side #b= instant link without any fetch', async () => {
+    const builds = genStrings('death_knight', 'blood', 2)
+    const fetchMock = vi.fn()
+    global.fetch = fetchMock
+    window.location.hash = '#b=' + encodeBuildsHash({ builds })
+
+    render(<App />)
+
+    expect(await screen.findByText(/Differences/)).toBeInTheDocument()
+    expect(fetchMock).not.toHaveBeenCalled()
+    expect(window.location.hash).toBe('')
   })
 })

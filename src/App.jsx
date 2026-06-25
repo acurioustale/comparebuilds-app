@@ -9,6 +9,8 @@ import { useBuildsStore, MAX_BUILDS } from './store/buildsStore'
 import { buildGrantedSeed, computeInvalidNodeIds } from './lib/treeLogic'
 import { byId, treeNaturalWidths, pairedNaturalWidths } from './components/treeLayout'
 import FitToWidth from './components/FitToWidth'
+import { resolveRoute } from './lib/route'
+import { decodeBuildsHash } from './lib/shareLink'
 
 // Wraps a tree/comparison panel so it scales to fit the viewport width, centered.
 // FitToWidth is the full-width measurer; the inner card hugs its content (w-max).
@@ -171,26 +173,43 @@ function useShareRehydration() {
     if (hasRehydrated.current) return
     hasRehydrated.current = true
 
-    const hash = window.location.hash.slice(1)
+    const route = resolveRoute()
 
-    // No share id in the URL: restore whatever was autosaved to localStorage.
-    // The persist middleware has already rehydrated the small slices into the
-    // store synchronously; here we rebuild the derived tree/parsed state from
-    // the restored buildStrings + specId.
-    if (!hash || !/^[A-Za-z0-9]{6}$/.test(hash)) {
+    // No share in the URL: restore whatever was autosaved to localStorage. The
+    // persist middleware has already rehydrated the small slices synchronously;
+    // here we rebuild the derived tree/parsed state from the restored builds.
+    if (route.kind === 'local') {
       rehydrateTreeData()
       return
     }
 
-    // A share id wins over any locally saved state: discard the restored local
-    // builds first so they can't trigger a spec-mismatch or linger alongside
-    // the shared build.
+    // A shared link wins over any locally saved state: discard the restored
+    // local builds first so they can't trigger a spec-mismatch or linger
+    // alongside the shared build.
     clearAllBuilds()
 
+    // Client-side instant link: the builds are encoded in the hash itself, so
+    // no network round-trip is needed.
+    if (route.kind === 'client-share') {
+      const decoded = decodeBuildsHash(route.token)
+      if (!decoded) {
+        setShareError('This share link is malformed.')
+        return
+      }
+      ;(async () => {
+        for (const buildString of decoded.builds) {
+          await addBuild(buildString)
+        }
+        history.replaceState(null, '', window.location.pathname)
+      })()
+      return
+    }
+
+    // Server short-link: fetch the stored builds by id.
     ;(async () => {
       try {
         const apiBase = import.meta.env.BASE_URL + 'api/share.php'
-        const res = await fetch(`${apiBase}?id=${encodeURIComponent(hash)}`)
+        const res = await fetch(`${apiBase}?id=${encodeURIComponent(route.id)}`)
         if (!res.ok) {
           const body = await res.json().catch(() => ({}))
           setShareError(body.error ?? 'Shared link not found or has expired.')
