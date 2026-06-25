@@ -1,8 +1,9 @@
-import { useMemo, useId, useRef } from 'react'
+import { useMemo, useId, useRef, useContext } from 'react'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import { zamimg } from '../lib/zamimg'
 import { activeHeroSubtree } from '../lib/spendRules'
+import { SearchContext } from './SearchContext'
 import { CELL, ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP, PAD, byId, panelBounds, panelEdges, sectionRowClass, dividerClass } from './treeLayout'
 
 // Box-shadow strings for diff highlight glows
@@ -159,6 +160,18 @@ function TalentNode({
     : locked ? '#1a1208' : '#2d2010'
   const nodeCursor  = hasHandlers ? ((locked && !isSelected) ? 'not-allowed' : 'pointer') : 'default'
 
+  // Search highlight: when a query is active, matches keep their opacity and gain
+  // a ring; everything else dims. Layers on top of the existing diff/invalid styling.
+  const { active: searchActive, matchIds } = useContext(SearchContext)
+  const searchHit    = searchActive && matchIds ? matchIds.has(node.id) : false
+  const searchDimmed = searchActive && matchIds ? !searchHit : false
+  const effOpacity = (base) => (searchDimmed ? Math.min(base, 0.12) : base)
+  const withSearchShadow = (shadow) => {
+    if (!searchHit) return shadow
+    const ring = '0 0 0 2px rgba(110,200,255,0.95), 0 0 12px rgba(110,200,255,0.55)'
+    return shadow ? `${shadow}, ${ring}` : ring
+  }
+
   // ── Choice node ─────────────────────────────────────────────────────────────
   if (node.type === 'choice') {
     const totalW = CHOICE_ICON * 2 + CHOICE_GAP
@@ -174,7 +187,7 @@ function TalentNode({
             display: 'flex',
             gap: CHOICE_GAP,
             cursor: nodeCursor,
-            boxShadow: nodeShadow(isSelected, highlight, invalid),
+            boxShadow: withSearchShadow(nodeShadow(isSelected, highlight, invalid)),
             borderRadius: 5,
             transition: 'opacity 0.2s',
           }}
@@ -202,7 +215,7 @@ function TalentNode({
                   borderRadius: 3,
                   overflow: 'hidden',
                   border: `1.5px solid ${chosen ? (invalid ? 'rgba(200,60,60,0.85)' : '#c8a84b') : nodeBorder}`,
-                  opacity: !isSelected ? nodeOpacity : unchosen ? 0.25 : 1,
+                  opacity: effOpacity(!isSelected ? nodeOpacity : unchosen ? 0.25 : 1),
                   flexShrink: 0,
                   transition: 'opacity 0.2s',
                   zIndex: 1,
@@ -269,8 +282,8 @@ function TalentNode({
               borderRadius: '50%',
               overflow: 'hidden',
               border: `2px solid ${nodeBorder}`,
-              opacity: nodeOpacity,
-              boxShadow: nodeShadow(isSelected, highlight, invalid),
+              opacity: effOpacity(nodeOpacity),
+              boxShadow: withSearchShadow(nodeShadow(isSelected, highlight, invalid)),
               transition: 'opacity 0.2s',
             }}
           >
@@ -352,8 +365,8 @@ function TalentNode({
             borderRadius: radius,
             overflow: 'hidden',
             border: `1.5px solid ${nodeBorder}`,
-            opacity: nodeOpacity,
-            boxShadow: nodeShadow(isSelected, highlight, invalid),
+            opacity: effOpacity(nodeOpacity),
+            boxShadow: withSearchShadow(nodeShadow(isSelected, highlight, invalid)),
             transition: 'opacity 0.2s',
           }}
         >

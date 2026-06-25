@@ -1,7 +1,8 @@
-import { useMemo } from 'react'
+import { useMemo, useContext } from 'react'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import { zamimg } from '../lib/zamimg'
+import { SearchContext } from './SearchContext'
 import { rarityTier, computeStats, computeLegendTiers } from '../lib/heatmap'
 import { CELL, ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP, PAD, byId, panelBounds, panelEdges, sectionRowClass, dividerClass } from './treeLayout'
 
@@ -63,6 +64,14 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
   const tier = rarityTier(count, totalBuilds)
   const rarity = RARITY[tier]
 
+  // Search highlight (see TalentTree): dim non-matches, ring matches.
+  const { active: searchActive, matchIds } = useContext(SearchContext)
+  const searchHit    = searchActive && matchIds ? matchIds.has(node.id) : false
+  const searchDimmed = searchActive && matchIds ? !searchHit : false
+  const effOpacity = (b) => (searchDimmed ? Math.min(b, 0.12) : b)
+  const ringShadow = (shadow) =>
+    searchHit ? `${shadow}, 0 0 0 2px rgba(110,200,255,0.95), 0 0 12px rgba(110,200,255,0.55)` : shadow
+
   // ── Choice node ───────────────────────────────────────────────────────────
   if (node.type === 'choice') {
     const totalW = CHOICE_ICON * 2 + CHOICE_GAP
@@ -98,7 +107,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
                 inset: -3,
                 borderRadius: 6,
                 border: `2px solid ${rarity.color}`,
-                boxShadow: `0 0 7px ${rarity.glow}`,
+                boxShadow: ringShadow(`0 0 7px ${rarity.glow}`),
                 pointerEvents: 'none',
               }}
             />
@@ -114,7 +123,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
                       borderRadius: 3,
                       overflow: 'hidden',
                       border: `1.5px solid ${rarity.color}`,
-                      opacity: count === 0 ? 0.12 : anyBuildChoseThis ? 1 : 0.15,
+                      opacity: effOpacity(count === 0 ? 0.12 : anyBuildChoseThis ? 1 : 0.15),
                       flexShrink: 0,
                     }}
                   >
@@ -204,8 +213,8 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
               borderRadius: '50%',
               overflow: 'hidden',
               border: `2px solid ${rarity.color}`,
-              boxShadow: `0 0 7px ${rarity.glow}`,
-              opacity: count === 0 ? 0.12 : 1,
+              boxShadow: ringShadow(`0 0 7px ${rarity.glow}`),
+              opacity: effOpacity(count === 0 ? 0.12 : 1),
             }}
           >
             <img
@@ -258,8 +267,8 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
             borderRadius: isRound ? '50%' : 4,
             overflow: 'hidden',
             border: `1.5px solid ${rarity.color}`,
-            boxShadow: `0 0 7px ${rarity.glow}`,
-            opacity: count === 0 ? 0.12 : 1,
+            boxShadow: ringShadow(`0 0 7px ${rarity.glow}`),
+            opacity: effOpacity(count === 0 ? 0.12 : 1),
           }}
         >
           <img

@@ -11,6 +11,12 @@ import { byId, treeNaturalWidths, pairedNaturalWidths } from './components/treeL
 import FitToWidth from './components/FitToWidth'
 import { resolveRoute } from './lib/route'
 import { decodeBuildsHash } from './lib/shareLink'
+import { matchNodeIds } from './lib/talentSearch'
+import { SearchContext } from './components/SearchContext'
+import TalentSearch from './components/TalentSearch'
+
+// Stable empty match set so the search memo keeps a constant reference when idle.
+const EMPTY_MATCH = new Set()
 
 // Wraps a tree/comparison panel so it scales to fit the viewport width, centered.
 // FitToWidth is the full-width measurer; the inner card hugs its content (w-max).
@@ -75,14 +81,31 @@ function MainView() {
   // two-build diff has its own (paired) geometry.
   const treeWidths   = useMemo(() => (treeData ? treeNaturalWidths(treeData) : null), [treeData])
   const pairedWidths = useMemo(() => (treeData ? pairedNaturalWidths(treeData) : null), [treeData])
+
+  // Search/filter state, shared with every tree node via SearchContext.
+  const [query, setQuery] = useState('')
+  const matchIds = useMemo(
+    () => (treeData ? matchNodeIds(query, treeData.nodes) : EMPTY_MATCH),
+    [query, treeData],
+  )
+  const search = useMemo(() => ({ active: query.trim().length > 0, matchIds }), [query, matchIds])
+
   if (!treeData) return null
+
+  // Wraps a view with the search box + provider so all four view types share it.
+  const withSearch = (content) => (
+    <SearchContext.Provider value={search}>
+      <TalentSearch value={query} onChange={setQuery} matchCount={matchIds.size} />
+      {content}
+    </SearchContext.Provider>
+  )
 
   // No builds yet: pure interactive mode
   if (buildStrings.length === 0) {
-    return (
+    return withSearch(
       <TreeCard>
         <InteractiveTalentTree treeData={treeData} classNodes={classNodes} />
-      </TreeCard>
+      </TreeCard>,
     )
   }
 
@@ -129,7 +152,7 @@ function MainView() {
 
   const canAddMore = buildStrings.length < MAX_BUILDS
 
-  return (
+  return withSearch(
     <>
       {/* Interactive tree shown while building another */}
       {addingBuild && (
@@ -151,7 +174,7 @@ function MainView() {
       )}
 
       {comparisonEl}
-    </>
+    </>,
   )
 }
 
