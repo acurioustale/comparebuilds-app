@@ -91,6 +91,19 @@ Rows older than 90 days are deleted on each `POST` request.
 - **No error leakage** — DB/runtime errors return a generic JSON message; details are never exposed.
 - All queries use prepared statements; IDs use a CSPRNG (`random_int`).
 
+## Local persistence
+
+Your work is autosaved to the browser's `localStorage` (key `comparebuilds-state`),
+so a page reload keeps any builds you've added and the in-progress interactive
+selection. This is separate from the share API: it stays on your device, hits no
+server, and isn't rate-limited. Only the small serialisable state is saved (the
+build strings, spec/class, and interactive selection); the decoded trees are
+rebuilt on load.
+
+A share id in the URL (`…/#xxxxxx`) takes precedence — opening a shared link loads
+that build instead of your saved local state. One caveat: a build string typed
+into a slot but not yet submitted isn't saved, since it's only transient input.
+
 ## Development
 
 ```bash
