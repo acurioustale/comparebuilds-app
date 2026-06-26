@@ -14,6 +14,7 @@
     "lint:css": "stylelint \"src/**/*.css\"",
     "lint:md": "markdownlint-cli2",
     "lint:svg": "svgo -i public/favicon.svg -o - | diff -q - public/favicon.svg",
+    "check:csp": "node tools/check-csp.mjs",
     "links": "lychee --config lychee.toml --root-dir public README.md CLAUDE.md index.html",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -127,6 +127,11 @@ npm run coverage
 step "Build"
 npm run build
 
+# Verify the CSP hash for the inline anti-flash theme script still matches the
+# built script's bytes — runs against dist/ so it checks exactly what ships.
+step "CSP guard"
+npm run check:csp
+
 # Validate the freshly built sitemap is well-formed XML — the surest guard against
 # a templating bug in prerenderSpecs (e.g. an unescaped character in a URL). Plain
 # --noout is well-formedness only (no network). xmllint comes from libxml2-utils:

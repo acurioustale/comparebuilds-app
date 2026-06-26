@@ -24,7 +24,9 @@
   # index.html; it is allowlisted by its sha256 hash rather than 'unsafe-inline'.
   # IMPORTANT: that hash is over the script's exact bytes — if you edit the inline
   # script in index.html, recompute it and update the value below, or the script
-  # is silently blocked (reintroducing the theme flash).
+  # is silently blocked (reintroducing the theme flash). tools/check-csp.mjs (the
+  # "CSP guard" gate step) recomputes the hash from the built dist/ and fails the
+  # build if this token has drifted, so the two can't fall out of sync unnoticed.
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-GBf0omRIaZT+mW0MTOPipq5S33bi82fvIP8OYMqBTMs='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
   Header always set X-Content-Type-Options "nosniff"

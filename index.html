@@ -33,7 +33,8 @@
          NOTE: this inline script is allowlisted in the CSP (public/.htaccess) by
          its sha256 hash (base64 of the sha256 of the exact, prettier-formatted
          script text). If you edit it, recompute the hash there or production
-         will block it. -->
+         will block it. The "CSP guard" gate step (tools/check-csp.mjs) recomputes
+         the hash from the built dist/ and fails if it no longer matches. -->
     <script>
       try {
         var t = localStorage.getItem("comparebuilds-theme");

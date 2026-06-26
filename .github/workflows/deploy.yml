@@ -78,6 +78,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Verify the CSP hash for the inline anti-flash theme script still matches
+      # the built script's bytes — runs against dist/ so it checks what ships.
+      - name: CSP guard
+        run: npm run check:csp
+
       # Well-formedness check on the generated sitemap — catches a templating bug
       # in prerenderSpecs before deploy. xmllint isn't on the runner image by
       # default, so install libxml2-utils first.

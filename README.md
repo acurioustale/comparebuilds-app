@@ -184,8 +184,10 @@ The PHP API is not available in the local dev server. Sharing links will 404 loc
 ### Quality gate
 
 `./validate.sh` runs the full CI gate locally, in the same order CI does — lint,
-formatting, the per-language linters, the PHP and shell checks, tests, and the
-build:
+formatting, the per-language linters, the PHP and shell checks, tests, the build,
+and a CSP guard (`npm run check:csp`) that recomputes the sha256 of the built
+inline anti-flash theme script and fails if its hash has drifted from the
+Content-Security-Policy in `.htaccess` that allowlists it:
 
 ```bash
 ./validate.sh          # everything CI enforces
