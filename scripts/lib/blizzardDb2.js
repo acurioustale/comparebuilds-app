@@ -54,6 +54,11 @@ const COND_TYPE_SPENT_GATE = "0";
 // ---------------------------------------------------------------------------
 
 export function parseCsv(text) {
+  // Strip a leading UTF-8 BOM (U+FEFF) so the first header name is "ID" and not
+  // a BOM-prefixed key — otherwise every .ID lookup misses and the row Maps
+  // collide under undefined, silently corrupting gates, apex chains and
+  // descriptions.
+  if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
   const rows = [];
   let row = [];
   let field = "";
@@ -225,23 +230,36 @@ export class BlizzardDb2 {
   }
 
   /**
-   * Per-rank unlock levels, aligned to `ranks`. Each CondType-5 condition says
-   * "up to GrantedRanks ranks at RequiredLevel", so map the cumulative rank total
-   * after each entry to its unlock level.
+   * Per-rank unlock levels, aligned one-to-one with `ranks`. Each CondType-5
+   * condition says "up to GrantedRanks ranks at RequiredLevel", so a rank at
+   * cumulative position N unlocks at the lowest RequiredLevel among the
+   * conditions that cover it (GrantedRanks >= N). Resolving by coverage rather
+   * than exact cumulative match keeps `levels` the same length as `ranks` even
+   * when an entry's maxRanks is > 1 or the grant thresholds aren't sequential
+   * (an exact-match lookup would silently drop those ranks' levels).
    */
   _apexLevels(nodeId, ranks) {
-    const byGranted = new Map();
+    const grants = [];
     for (const id of this._condsByNode.get(String(nodeId)) ?? []) {
       const c = this._condById.get(id);
       if (c?.CondType === COND_TYPE_LEVEL_GRANT)
-        byGranted.set(Number(c.GrantedRanks), Number(c.RequiredLevel));
+        grants.push({
+          ranks: Number(c.GrantedRanks),
+          level: Number(c.RequiredLevel),
+        });
     }
     const levels = [];
     let cumulative = 0;
     for (const r of ranks) {
       cumulative += r.maxRanks;
-      const lvl = byGranted.get(cumulative);
-      if (lvl != null) levels.push(lvl);
+      let level = null;
+      for (const g of grants) {
+        if (g.ranks >= cumulative && (level == null || g.level < level))
+          level = g.level;
+      }
+      // Carry the previous rank's level if no grant covers this one, so the
+      // array stays aligned to `ranks` rather than going short.
+      levels.push(level ?? levels[levels.length - 1] ?? null);
     }
     return levels;
   }
