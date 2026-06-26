@@ -9,11 +9,33 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = path.join(ROOT, "dist");
 const ORIGIN = "https://comparebuilds.app";
+
+// W3C date (YYYY-MM-DD) of the last commit that touched the given repo-relative
+// paths, or null when git history isn't available (a shallow CI clone, a source
+// tarball, or no git at all). A page's content only changes when its source data
+// changes, so this tracks real content age rather than build time — and a null
+// just omits <lastmod> rather than emitting a misleading one a crawler would
+// learn to distrust. The deploy job checks out full history (fetch-depth: 0); the
+// validate build runs shallow and simply produces a lastmod-less sitemap it never
+// ships.
+function lastModified(...relPaths) {
+  try {
+    const out = execFileSync(
+      "git",
+      ["log", "-1", "--format=%cs", "--", ...relPaths],
+      { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    ).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : null;
+  } catch {
+    return null;
+  }
+}
 
 // Read the class index via fs (rather than an import attribute) so the build
 // script parses under the same lint config as the rest of the repo.
@@ -95,10 +117,14 @@ if (!fs.existsSync(templatePath)) {
 }
 const template = fs.readFileSync(templatePath, "utf8");
 
-const urls = [`${ORIGIN}/`];
+// The home page lists every class/spec, so it's as fresh as the newest data file.
+const urls = [{ loc: `${ORIGIN}/`, lastmod: lastModified("src/data") }];
 let count = 0;
 for (const cls of classes) {
   if (!cls.implemented) continue;
+  // A spec page's content is derived entirely from its class data file, so that
+  // file's last change is the page's true last-modified date.
+  const lastmod = lastModified(`src/data/${cls.name}.json`);
   for (const spec of cls.specs) {
     const url = `${ORIGIN}/${seg(cls.name)}/${seg(spec.name)}/`;
     const title = `${spec.displayName} ${cls.displayName} Talent Build Calculator — Compare Builds`;
@@ -113,15 +139,21 @@ for (const cls of classes) {
     const dir = path.join(DIST, seg(cls.name), seg(spec.name));
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, "index.html"), page);
-    urls.push(url);
+    urls.push({ loc: url, lastmod });
     count++;
   }
 }
 
-// Sitemap + robots.
+// Sitemap + robots. Emit <lastmod> only when we have a real commit date.
 const sitemap =
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  urls.map((u) => `  <url><loc>${u}</loc></url>`).join("\n") +
+  urls
+    .map(({ loc, lastmod }) =>
+      lastmod
+        ? `  <url><loc>${loc}</loc><lastmod>${lastmod}</lastmod></url>`
+        : `  <url><loc>${loc}</loc></url>`,
+    )
+    .join("\n") +
   "\n</urlset>\n";
 fs.writeFileSync(path.join(DIST, "sitemap.xml"), sitemap);
 fs.writeFileSync(
