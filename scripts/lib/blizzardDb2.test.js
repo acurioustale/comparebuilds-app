@@ -17,6 +17,15 @@ describe("parseCsv", () => {
   it("tolerates a missing trailing newline and CRLF", () => {
     expect(parseCsv("ID,N\r\n1,x")).toEqual([{ ID: "1", N: "x" }]);
   });
+
+  it("strips a leading UTF-8 BOM so the first header is not corrupted", () => {
+    // A BOM (U+FEFF) left in place would key the first column under a
+    // BOM-prefixed name, so every .ID lookup would miss and the row Maps
+    // would collide under undefined.
+    expect(parseCsv("\uFEFFID,Name\n1,Foo")).toEqual([
+      { ID: "1", Name: "Foo" },
+    ]);
+  });
 });
 
 // A minimal in-memory trait dataset: one apex capstone (node 100), one ordinary
@@ -88,6 +97,61 @@ describe("BlizzardDb2.apexChain", () => {
   it("derives per-rank unlock levels from cumulative GrantedRanks", () => {
     // cumulative after each entry: 1, 3, 4 → levels 81, 84, 90
     expect(fixture().apexChain("100").levels).toEqual([81, 84, 90]);
+  });
+
+  it("keeps levels aligned to ranks when grant thresholds aren't sequential", () => {
+    // Three single-rank entries (cumulative 1, 2, 3) but grants only at
+    // GrantedRanks 1 and 3 — no grant lands exactly on cumulative 2. An
+    // exact-match lookup would drop that rank's level, leaving levels shorter
+    // than ranks; resolving by coverage (lowest grant with GrantedRanks >= N)
+    // keeps them one-to-one.
+    const db2 = new BlizzardDb2({ build: "test", cache: false });
+    db2.index({
+      nx: [
+        { TraitNodeID: "100", TraitNodeEntryID: "e1", _Index: "100" },
+        { TraitNodeID: "100", TraitNodeEntryID: "e2", _Index: "200" },
+        { TraitNodeID: "100", TraitNodeEntryID: "e3", _Index: "300" },
+      ],
+      entry: [
+        {
+          ID: "e1",
+          TraitDefinitionID: "d1",
+          MaxRanks: "1",
+          NodeEntryType: "13",
+        },
+        {
+          ID: "e2",
+          TraitDefinitionID: "d2",
+          MaxRanks: "1",
+          NodeEntryType: "13",
+        },
+        {
+          ID: "e3",
+          TraitDefinitionID: "d3",
+          MaxRanks: "1",
+          NodeEntryType: "13",
+        },
+      ],
+      def: [
+        { ID: "d1", SpellID: "1001" },
+        { ID: "d2", SpellID: "1002" },
+        { ID: "d3", SpellID: "1003" },
+      ],
+      cond: [
+        { ID: "L1", CondType: "5", GrantedRanks: "1", RequiredLevel: "80" },
+        { ID: "L2", CondType: "5", GrantedRanks: "3", RequiredLevel: "90" },
+      ],
+      ncond: [
+        { TraitNodeID: "100", TraitCondID: "L1" },
+        { TraitNodeID: "100", TraitCondID: "L2" },
+      ],
+      gxn: [],
+      gxc: [],
+      subtree: [],
+    });
+    const chain = db2.apexChain("100");
+    expect(chain.levels).toHaveLength(chain.ranks.length);
+    expect(chain.levels).toEqual([80, 90, 90]);
   });
 
   it("returns null for an ordinary (non-type-13) node", () => {

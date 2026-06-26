@@ -27,19 +27,34 @@ export function hasUpperPrereq(node, selected, nodeById) {
 }
 
 /**
+ * Points invested across `allNodes` within one tree section, excluding granted
+ * nodes (they don't consume the budget). When `heroSubtree` is given, only nodes
+ * in that subtree count; otherwise the whole `treeType` counts. Single shared
+ * accumulator behind both the section-budget check (sectionPoints) and the gate
+ * check (gatedPoints) so the two can't drift.
+ */
+export function spentPoints(allNodes, selected, treeType, heroSubtree = null) {
+  let total = 0;
+  for (const n of allNodes) {
+    if (n.alreadyGranted || n.treeType !== treeType) continue;
+    if (heroSubtree != null && n.heroSubtree !== heroSubtree) continue;
+    total += selected[n.id]?.pointsInvested ?? 0;
+  }
+  return total;
+}
+
+/**
  * Points spent in the same tree section as `node`, counting per-heroSubtree
  * for hero nodes. Excludes alreadyGranted nodes (they don't consume the budget).
  * Used for spentRequired gate checks.
  */
 export function gatedPoints(node, allNodes, selected) {
-  let total = 0;
-  for (const n of allNodes) {
-    if (n.alreadyGranted || n.treeType !== node.treeType) continue;
-    if (node.treeType === "hero" && n.heroSubtree !== node.heroSubtree)
-      continue;
-    total += selected[n.id]?.pointsInvested ?? 0;
-  }
-  return total;
+  return spentPoints(
+    allNodes,
+    selected,
+    node.treeType,
+    node.treeType === "hero" ? node.heroSubtree : null,
+  );
 }
 
 // ─── Exports used by both interactive and import contexts ─────────────────────

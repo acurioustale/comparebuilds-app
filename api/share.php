@@ -326,8 +326,21 @@ if ($method === 'POST') {
 
     $ipHash = client_ip_hash();
 
-    // ── Per-IP rate limit ────────────────────────────────────────────────────
+    // Serialize the rate-limit check and the insert per IP via an advisory lock
+    // so concurrent requests from one IP can't each read a below-limit count
+    // before any of them inserts (TOCTOU race that would let the per-IP cap be
+    // exceeded under a burst). MariaDB releases the lock automatically when this
+    // non-persistent connection closes at script end, which covers every
+    // fail()/exit path; the happy path also releases it explicitly once the row
+    // is written so it isn't held during response rendering.
+    $lockName = 'cb_share_' . substr($ipHash, 0, 48);
+
     try {
+        $lk = $pdo->prepare('SELECT GET_LOCK(?, 5)');
+        $lk->execute([$lockName]);
+        $lk->fetchColumn();
+
+        // ── Per-IP rate limit ────────────────────────────────────────────────
         $cutoff = date('Y-m-d H:i:s', time() - RATE_LIMIT_WINDOW);
         $rl = $pdo->prepare(
             'SELECT COUNT(*) AS c FROM comparebuilds_shares WHERE ip_hash = ? AND created_at > ?'
@@ -337,22 +350,18 @@ if ($method === 'POST') {
             header('Retry-After: ' . RATE_LIMIT_WINDOW);
             fail(429, 'Too many shares created — please try again later');
         }
-    } catch (Throwable $e) {
-        fail(500, 'Database error');
-    }
 
-    // ── Prune expired rows (best-effort) ─────────────────────────────────────
-    try {
-        $prune = $pdo->prepare('DELETE FROM comparebuilds_shares WHERE created_at < ?');
-        $prune->execute([date('Y-m-d H:i:s', time() - SHARE_TTL_DAYS * 86400)]);
-    } catch (Throwable $e) {
-        // Non-fatal — proceed even if cleanup fails.
-    }
+        // ── Prune expired rows (best-effort) ─────────────────────────────────
+        try {
+            $prune = $pdo->prepare('DELETE FROM comparebuilds_shares WHERE created_at < ?');
+            $prune->execute([date('Y-m-d H:i:s', time() - SHARE_TTL_DAYS * 86400)]);
+        } catch (Throwable $e) {
+            // Non-fatal — proceed even if cleanup fails.
+        }
 
-    // ── Generate a unique ID and insert ──────────────────────────────────────
-    $stored = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        // ── Generate a unique ID and insert ──────────────────────────────────
+        $stored = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-    try {
         $check = $pdo->prepare('SELECT 1 FROM comparebuilds_shares WHERE id = ?');
         $insert = $pdo->prepare('INSERT INTO comparebuilds_shares (id, data, ip_hash) VALUES (?, ?, ?)');
         $max = strlen(ID_ALPHABET) - 1;
@@ -370,6 +379,9 @@ if ($method === 'POST') {
                 break;
             }
         }
+
+        $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
+        $rel->execute([$lockName]);
     } catch (Throwable $e) {
         fail(500, 'Database error');
     }

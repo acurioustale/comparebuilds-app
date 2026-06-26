@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Tooltip from "./Tooltip";
 import TalentTree from "./TalentTree";
 import { generateBuildString } from "../lib/buildString";
@@ -90,6 +90,16 @@ export default function InteractiveTalentTree({
     })),
   );
   const [exportState, setExportState] = useState("idle");
+  // Holds the pending "reset after the status flashes" timer so it can be
+  // cleared if the component unmounts first (avoids a state update / store
+  // mutation after teardown).
+  const resetTimerRef = useRef(null);
+  useEffect(
+    () => () => {
+      if (resetTimerRef.current != null) clearTimeout(resetTimerRef.current);
+    },
+    [],
+  );
 
   const budget = treeData.pointBudget;
 
@@ -295,13 +305,19 @@ export default function InteractiveTalentTree({
       await navigator.clipboard.writeText(buildStr);
       await addBuild(buildStr);
       setExportState("done");
-    } catch {
-      setExportState("error");
-    } finally {
-      // Delay hiding the interactive tree so "Copied & added!" is briefly visible
-      setTimeout(() => {
+      // Delay hiding the interactive tree so "Copied & added!" is briefly visible.
+      resetTimerRef.current = setTimeout(() => {
+        resetTimerRef.current = null;
         setExportState("idle");
         finishAddingBuild();
+      }, 2000);
+    } catch {
+      // Keep the interactive build open on failure so the user can retry; just
+      // clear the transient "Failed" status after a moment.
+      setExportState("error");
+      resetTimerRef.current = setTimeout(() => {
+        resetTimerRef.current = null;
+        setExportState("idle");
       }, 2000);
     }
   }, [

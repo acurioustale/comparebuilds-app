@@ -95,15 +95,12 @@ const CARD_CHROME = 34; // card p-4 (16 + 16) plus the .wow-panel 1px border, bo
  * @returns {{ row: number, stacked: number }}
  */
 export function treeNaturalWidths(treeData) {
-  const { nodes, heroSubtrees } = treeData;
-  const classW = panelBounds(nodes.filter((n) => n.treeType === "class")).W;
-  const specW = panelBounds(nodes.filter((n) => n.treeType === "spec")).W;
-  const leftW = panelBounds(
-    nodes.filter((n) => n.heroSubtree === heroSubtrees.left.name),
-  ).W;
-  const rightW = panelBounds(
-    nodes.filter((n) => n.heroSubtree === heroSubtrees.right.name),
-  ).W;
+  const { classNodes, specNodes, leftNodes, rightNodes } =
+    splitSections(treeData);
+  const classW = panelBounds(classNodes).W;
+  const specW = panelBounds(specNodes).W;
+  const leftW = panelBounds(leftNodes).W;
+  const rightW = panelBounds(rightNodes).W;
 
   const row =
     Math.max(
@@ -126,16 +123,13 @@ export function treeNaturalWidths(treeData) {
  * @returns {{ row: number, stacked: number }}
  */
 export function pairedNaturalWidths(treeData) {
-  const { nodes, heroSubtrees } = treeData;
   const COLUMN_GAP = 32; // gap-8 between the two builds when paired
-  const classW = panelBounds(nodes.filter((n) => n.treeType === "class")).W;
-  const specW = panelBounds(nodes.filter((n) => n.treeType === "spec")).W;
-  const leftW = panelBounds(
-    nodes.filter((n) => n.heroSubtree === heroSubtrees.left.name),
-  ).W;
-  const rightW = panelBounds(
-    nodes.filter((n) => n.heroSubtree === heroSubtrees.right.name),
-  ).W;
+  const { classNodes, specNodes, leftNodes, rightNodes } =
+    splitSections(treeData);
+  const classW = panelBounds(classNodes).W;
+  const specW = panelBounds(specNodes).W;
+  const leftW = panelBounds(leftNodes).W;
+  const rightW = panelBounds(rightNodes).W;
   const heroBlock = leftW + SECTION_DIVIDER + rightW;
 
   const row =

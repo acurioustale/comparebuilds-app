@@ -5,18 +5,13 @@
 // budgets, hero-subtree exclusivity, gates, and prerequisites — can be unit-tested
 // without a DOM.
 
-import { hasUpperPrereq, gatedPoints } from "./treeLogic.js";
+import { hasUpperPrereq, gatedPoints, spentPoints } from "./treeLogic.js";
 
 /**
  * Total points spent in a tree section (class/spec/hero), excluding granted nodes.
  */
 export function sectionPoints(treeType, allNodes, selected) {
-  let total = 0;
-  for (const n of allNodes) {
-    if (n.alreadyGranted || n.treeType !== treeType) continue;
-    total += selected[n.id]?.pointsInvested ?? 0;
-  }
-  return total;
+  return spentPoints(allNodes, selected, treeType);
 }
 
 /**

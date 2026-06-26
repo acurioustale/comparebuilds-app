@@ -356,7 +356,7 @@ const createStore = (set, get) => ({
         parsedBuilds: parseAll(newStrings, classNodes),
         buildNames: newNames,
       });
-    } else {
+    } else if (isLoading) {
       // Tree data is mid-load — store the string now; the load callback will
       // call parseAll(get().buildStrings, …) when it finishes, picking this up
       set({
@@ -364,6 +364,22 @@ const createStore = (set, get) => ({
         parsedBuilds: newParsed,
         buildNames: newNames,
       });
+    } else {
+      // Not loading and tree data never landed — the first load must have
+      // failed. Store the string and (re)start the load so it gets parsed
+      // instead of being stranded as a permanent null placeholder.
+      set({
+        buildStrings: newStrings,
+        parsedBuilds: newParsed,
+        buildNames: newNames,
+      });
+      await loadTreeData(
+        set,
+        get,
+        match.cls.name,
+        match.spec.name,
+        header.specId,
+      );
     }
   },
 
