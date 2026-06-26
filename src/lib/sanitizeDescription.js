@@ -24,7 +24,8 @@
  * Strategy — escape by default. The input is split into tag-like tokens and the
  * text between them. Text is always HTML-escaped. A tag survives ONLY if it
  * matches one of a few strictly-shaped allowlist patterns (`<br>`, `<b>`,
- * `</b>`, `<i>`, `</i>`, and `<b style="color:…">`). Anything else — `<script>`,
+ * `</b>`, `<i>`, `</i>`, and `<b style="…">` carrying only a `color` and/or
+ * `font-weight` declaration). Anything else — `<script>`,
  * `<img onerror=…>`, event-handler attributes, `javascript:` URLs, unknown tags
  * — is escaped into inert text. Because escaping is the default and only known
  * safe token shapes pass through, there is no tag or attribute an attacker can
