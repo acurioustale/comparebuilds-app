@@ -1,20 +1,24 @@
 name: sources
 
 # Cross-source validation lives in its own workflow ON PURPOSE: the deploy
-# workflow's `validate` gate is what blocks a release, and this check fetches a
-# third party (Wowhead) live — a momentary outage or a Wowhead shape change must
-# never block deploy. It runs compareSources.js, which normalises Wowhead and
-# diffs it against the committed (Icy Veins) data: HARD divergences (build-string
-# wire layout, ranks, gates, prereqs) fail the job; SOFT differences (positions,
-# names, descriptions, per-spec membership) are reported only.
+# workflow's `validate` gate is what blocks a release, and this check fetches
+# upstreams (Wowhead, the Blizzard API, wago.tools DB2) live — a momentary outage
+# or an upstream shape change must never block deploy. It runs compareSources.js,
+# which normalises an alternate source and diffs it against the committed data:
+# HARD divergences (build-string wire layout, ranks, gates, prereqs) fail the job;
+# SOFT differences (positions, names, descriptions, per-spec membership) are
+# reported only.
 #
-# The weekly schedule catches the two sources drifting apart after a patch; the
-# PR trigger catches a data change that breaks parity. A red run here is a signal
-# to investigate the source mapping, not a blocked release.
+# The weekly schedule catches the sources drifting apart after a patch; the PR
+# trigger catches a data change that breaks parity. A red run here is a signal to
+# investigate the source mapping, not a blocked release. The Blizzard step needs
+# BLIZZARD_CLIENT_ID/SECRET repo secrets and is skipped on fork PRs (which don't
+# receive secrets); the Wowhead step needs no credentials.
 on:
   pull_request:
     paths:
       - "scripts/ingestWowhead.js"
+      - "scripts/ingestBlizzard.js"
       - "scripts/compareSources.js"
       - "scripts/lib/**"
       - "src/data/**"
@@ -41,3 +45,11 @@ jobs:
         # Descriptions are intentionally not fetched here — they are a soft field
         # (no build-string impact) and would add thousands of requests per run.
         run: node scripts/compareSources.js
+
+      - name: Compare Blizzard (API + DB2) against committed data
+        # Skipped on fork PRs, which don't receive secrets (the auth would fail).
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request' }}
+        env:
+          BLIZZARD_CLIENT_ID: ${{ secrets.BLIZZARD_CLIENT_ID }}
+          BLIZZARD_CLIENT_SECRET: ${{ secrets.BLIZZARD_CLIENT_SECRET }}
+        run: node scripts/compareSources.js --source=blizzard
