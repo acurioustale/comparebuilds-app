@@ -9,7 +9,22 @@
       name="description"
       content="Import, build, and compare World of Warcraft talent loadouts side by side. Diff two builds, heatmap up to five, and share them with a short link."
     />
-    <meta name="theme-color" content="#0d0d14" />
+    <link rel="canonical" href="https://comparebuilds.app/" />
+
+    <!-- Browser UI tint per colour scheme (matches the page background in
+         src/index.css). The toggle can't reach these — meta `media` only tracks
+         the OS preference — but that just affects browser chrome, not the page.
+         The prerendered spec pages inherit both unchanged. -->
+    <meta
+      name="theme-color"
+      content="#0d0d14"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#f3e7cb"
+      media="(prefers-color-scheme: light)"
+    />
 
     <!-- Apply an explicit theme override before first paint so a stored choice
          never flashes. "auto" (no stored override) needs nothing here: the CSS
