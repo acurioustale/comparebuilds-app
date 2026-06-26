@@ -67,10 +67,10 @@ function buildPage(template, { title, description, url, summary }) {
     /<title>[\s\S]*?<\/title>/,
     `<title>${escHtml(title)}</title>`,
   );
-  // Canonical right after the title.
+  // Point the template's canonical (homepage URL) at this spec's URL.
   html = html.replace(
-    /<\/title>/,
-    `</title>\n    <link rel="canonical" href="${escAttr(url)}" />`,
+    /(<link\b[^>]*\brel="canonical"[^>]*\bhref=")[^"]*(")/,
+    `$1${escAttr(url)}$2`,
   );
   html = setMeta(html, "name", "description", description);
   html = setMeta(html, "property", "og:title", title);
