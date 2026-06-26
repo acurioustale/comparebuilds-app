@@ -277,10 +277,10 @@ The data comes straight from Blizzard. `scripts/ingestBlizzard.js` reads
 Blizzard's official **Game Data API** for the tree structure, and the client's
 **DB2** tables (via [wago.tools](https://wago.tools),
 `scripts/lib/blizzardDb2.js`) for the things the web API doesn't expose cleanly:
-the spec **apex** capstone's true rank chain (it flattens that node to a single
-rank), the authoritative per-node points gate, and hero-subtree descriptions. It
-maps everything to the shared schema and hands off to the pipeline in
-`scripts/lib/ingestCore.js`.
+the spec **apex** capstone's true rank chain (distinct per-rank spells, ranks,
+and unlock levels), the authoritative per-node points gate, and hero-subtree
+descriptions. It maps everything to the shared schema and hands off to the
+pipeline in `scripts/lib/ingestCore.js`.
 
 Needs a free Battle.net API client — copy `.env.example` to `.env` and fill in
 `BLIZZARD_CLIENT_ID`/`BLIZZARD_CLIENT_SECRET` (build-time only; never deployed).
