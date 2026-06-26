@@ -51,14 +51,20 @@ export function isDivergent(count, total, choiceVotes = []) {
 }
 
 /**
- * For each node, computes how many builds include it and which choice each
- * build picked.
+ * For each node, computes how many builds include it, which choice each build
+ * picked, and which builds took it at all.
+ *
+ * `takenBy` is tracked separately from `choiceVotes` because a `null` vote is
+ * ambiguous on its own: a build that skipped the node and a build that took a
+ * non-choice node both record `null`. The tooltip needs to name the builds that
+ * took a node, so it relies on `takenBy`, not the votes.
  *
  * @param {object[]} builds   Array of parsed builds ({ nodes: Record<id, {pointsInvested, entryChosen}> })
  * @param {object[]} allNodes Full spec node list from treeData.nodes
- * @returns {Record<number, { count: number, choiceVotes: (number|null)[] }>}
+ * @returns {Record<number, { count: number, choiceVotes: (number|null)[], takenBy: boolean[] }>}
  *   count: how many builds selected this node (alreadyGranted nodes = totalBuilds)
  *   choiceVotes: per-build entryChosen (null if that build didn't pick this node)
+ *   takenBy: per-build flag for whether that build took the node (granted = all true)
  */
 export function computeStats(builds, allNodes) {
   const total = builds.length;
@@ -66,21 +72,30 @@ export function computeStats(builds, allNodes) {
 
   for (const node of allNodes) {
     if (node.alreadyGranted) {
-      stats[node.id] = { count: total, choiceVotes: builds.map(() => null) };
+      stats[node.id] = {
+        count: total,
+        choiceVotes: builds.map(() => null),
+        takenBy: builds.map(() => true),
+      };
       continue;
     }
 
     let count = 0;
-    const choiceVotes = builds.map((b) => {
+    const choiceVotes = [];
+    const takenBy = [];
+    for (const b of builds) {
       const sel = b.nodes[node.id];
       if (sel) {
         count++;
-        return sel.entryChosen ?? null;
+        choiceVotes.push(sel.entryChosen ?? null);
+        takenBy.push(true);
+      } else {
+        choiceVotes.push(null);
+        takenBy.push(false);
       }
-      return null;
-    });
+    }
 
-    stats[node.id] = { count, choiceVotes };
+    stats[node.id] = { count, choiceVotes, takenBy };
   }
 
   return stats;

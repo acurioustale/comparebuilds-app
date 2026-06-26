@@ -67,6 +67,7 @@ describe("computeStats", () => {
     const stats = computeStats(builds, NODES);
     assert.strictEqual(stats[3].count, 3);
     assert.deepStrictEqual(stats[3].choiceVotes, [null, null, null]);
+    assert.deepStrictEqual(stats[3].takenBy, [true, true, true]);
   });
 
   test("choiceVotes records per-build entryChosen, null when unselected", () => {
@@ -77,6 +78,19 @@ describe("computeStats", () => {
     ];
     const stats = computeStats(builds, NODES);
     assert.deepStrictEqual(stats[1].choiceVotes, [0, null, 1]);
+  });
+
+  test("takenBy flags which builds took the node, even for non-choice nodes", () => {
+    const builds = [
+      { nodes: { 1: sel(), 2: sel() } },
+      { nodes: { 1: sel() } },
+      { nodes: {} },
+    ];
+    const stats = computeStats(builds, NODES);
+    // node 1: builds 0 and 1 took it; node 2: only build 0. choiceVotes alone
+    // can't tell these apart (all null for non-choice), so takenBy is needed.
+    assert.deepStrictEqual(stats[1].takenBy, [true, true, false]);
+    assert.deepStrictEqual(stats[2].takenBy, [true, false, false]);
   });
 });
 

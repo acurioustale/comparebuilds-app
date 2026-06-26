@@ -23,10 +23,6 @@ import {
   dividerClass,
 } from "./treeLayout";
 
-// Dot indicators for choice nodes (one dot per build)
-const DOT = 5;
-const DOT_GAP = 1;
-
 // ─── Rarity scale ─────────────────────────────────────────────────────────────
 
 const RARITY = {
@@ -40,9 +36,6 @@ const RARITY = {
   uncommon: { color: "#1eff00", glow: "rgba(30,255,0,0.5)", label: "Uncommon" },
   poor: { color: "#9d9d9d", glow: "rgba(157,157,157,0.3)", label: "Poor" },
 };
-
-// Per-build dot/indicator colors (up to 5 builds)
-const BUILD_COLORS = ["#facc15", "#38bdf8", "#f472b6", "#4ade80", "#fb923c"];
 
 // ─── Legend ───────────────────────────────────────────────────────────────────
 
@@ -79,9 +72,13 @@ function RarityLegend({ n }) {
 
 // ─── Individual heatmap node ──────────────────────────────────────────────────
 
-function HeatmapNode({ node, px, py, stat, totalBuilds }) {
+function HeatmapNode({ node, px, py, stat, totalBuilds, labels }) {
   const count = stat?.count ?? 0;
   const choiceVotes = stat?.choiceVotes ?? [];
+  const takenBy = stat?.takenBy ?? [];
+  // Names of the builds that took this node, for the tooltip — the per-build
+  // identity the removed colour dots failed to convey (they had no legend).
+  const takenNames = labels.filter((_, i) => takenBy[i]);
   const tier = rarityTier(count, totalBuilds);
   const rarity = RARITY[tier];
 
@@ -103,12 +100,12 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
     const tipContent = (
       <div className="space-y-1.5 py-0.5" style={{ maxWidth: 240 }}>
         {node.choices.map((ch, i) => {
-          const votes = choiceVotes.filter((v) => v === i).length;
+          const names = labels.filter((_, bi) => choiceVotes[bi] === i);
           return (
             <div key={i}>
               <p className="font-semibold text-xs text-wow-gold">{ch.name}</p>
               <p className="text-xs text-wow-muted">
-                {votes} / {totalBuilds} builds
+                {names.length ? names.join(", ") : "No builds"}
               </p>
             </div>
           );
@@ -173,45 +170,6 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
             </div>
           </div>
         </Tooltip>
-
-        {/* Per-build choice dots — purely visual, no pointer events */}
-        {count > 0 && (
-          <div
-            style={{
-              position: "absolute",
-              top: CHOICE_ICON + 3,
-              left: 0,
-              width: totalW,
-              opacity: effOpacity(1),
-              pointerEvents: "none",
-            }}
-          >
-            {choiceVotes.map((vote, bi) => {
-              if (vote === null) return null;
-              const iconCenterX =
-                vote === 0
-                  ? CHOICE_ICON / 2
-                  : CHOICE_ICON + CHOICE_GAP + CHOICE_ICON / 2;
-              const sameOptionBefore = choiceVotes
-                .slice(0, bi)
-                .filter((v) => v === vote).length;
-              return (
-                <div
-                  key={bi}
-                  style={{
-                    position: "absolute",
-                    left: iconCenterX - DOT / 2,
-                    top: sameOptionBefore * (DOT + DOT_GAP),
-                    width: DOT,
-                    height: DOT,
-                    borderRadius: "50%",
-                    background: BUILD_COLORS[bi] ?? "#fff",
-                  }}
-                />
-              );
-            })}
-          </div>
-        )}
       </div>
     );
   }
@@ -227,7 +185,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
               {node.name}
             </p>
             <p className="text-xs text-wow-muted">
-              {count} / {totalBuilds} builds
+              {takenNames.length ? takenNames.join(", ") : "No builds"}
             </p>
           </div>
         }
@@ -285,7 +243,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
             </p>
           ) : (
             <p className="text-xs text-wow-muted mt-0.5">
-              {count} / {totalBuilds} builds
+              {takenNames.length ? takenNames.join(", ") : "No builds"}
             </p>
           )}
         </div>
@@ -331,7 +289,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds }) {
 
 // ─── Heatmap panel ────────────────────────────────────────────────────────────
 
-function HeatmapPanel({ nodes, nodeById, stats, totalBuilds }) {
+function HeatmapPanel({ nodes, nodeById, stats, totalBuilds, labels }) {
   const { minX, minY, W, H } = useMemo(() => panelBounds(nodes), [nodes]);
   const edges = useMemo(
     () => panelEdges(nodes, nodeById, minX, minY),
@@ -382,6 +340,7 @@ function HeatmapPanel({ nodes, nodeById, stats, totalBuilds }) {
           py={(node.posY - minY) * CELL + PAD}
           stat={stats[node.id]}
           totalBuilds={totalBuilds}
+          labels={labels}
         />
       ))}
     </div>
@@ -400,7 +359,12 @@ function PanelLabel({ children }) {
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 
-export default function HeatmapTree({ treeData, builds, layout = null }) {
+export default function HeatmapTree({
+  treeData,
+  builds,
+  labels = [],
+  layout = null,
+}) {
   const totalBuilds = builds.length;
 
   const nodeById = useMemo(() => byId(treeData.nodes), [treeData]);
@@ -415,7 +379,7 @@ export default function HeatmapTree({ treeData, builds, layout = null }) {
     [builds, treeData],
   );
 
-  const sharedPanel = { nodeById, stats, totalBuilds };
+  const sharedPanel = { nodeById, stats, totalBuilds, labels };
 
   return (
     <div>

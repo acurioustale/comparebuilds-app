@@ -285,6 +285,7 @@ function MainView() {
               <HeatmapTree
                 treeData={treeData}
                 builds={valid.map((v) => v.parsed)}
+                labels={valid.map((v) => v.label)}
                 layout={layout}
               />
             </div>
