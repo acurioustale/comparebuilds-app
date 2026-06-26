@@ -265,36 +265,49 @@ change, run `npm test`:
   UPDATE_SNAPSHOTS=1 npm test
   ```
 
-`scripts/ingestIcyVeins.js` (the primary Icy Veins importer) runs the same
-validation on every class and refreshes the snapshot automatically; it aborts
-without updating the snapshot if any class fails validation.
+Every importer runs the same validation on every class and refreshes the
+snapshot automatically; it aborts without updating the snapshot if any class
+fails validation.
 
-### A second source: Wowhead (fallback)
+### Sources: Blizzard (primary) + Icy Veins / Wowhead (fallbacks)
 
-`scripts/ingestWowhead.js` is a prepared alternate importer, so the data isn't
-hostage to a single upstream being offline or slow to update for a new patch.
-Both importers map their source to the same schema and hand off to the shared
-pipeline in `scripts/lib/ingestCore.js`. Because every source uses Blizzard's own
-trait-node IDs, build strings stay interchangeable across them, and the
-wire-layout snapshot is the proof: a source whose fingerprints match the
+The data is sourced from Blizzard directly, with two scrapers kept ready as
+fallbacks so it isn't hostage to a single upstream being offline or slow for a
+new patch. All importers map their source to the same schema and hand off to the
+shared pipeline in `scripts/lib/ingestCore.js`. Because every source uses
+Blizzard's own trait-node IDs, build strings stay interchangeable across them,
+and the wire-layout snapshot is the proof: a source whose fingerprints match the
 committed snapshot is build-string-compatible.
 
+- **`scripts/ingestBlizzard.js` (primary).** Reads Blizzard's official Game Data
+  API for the tree structure, and the client's DB2 tables (via
+  [wago.tools](https://wago.tools), `scripts/lib/blizzardDb2.js`) for the two
+  things the web API doesn't expose cleanly: the spec **apex** capstone's true
+  rank chain (it flattens that node to a single rank) and the authoritative
+  per-node points gate. Needs a free Battle.net API client — copy `.env.example`
+  to `.env` and fill in `BLIZZARD_CLIENT_ID`/`BLIZZARD_CLIENT_SECRET` (build-time
+  only; never deployed). See [develop.battle.net](https://develop.battle.net/access/clients).
+- **`scripts/ingestIcyVeins.js` / `scripts/ingestWowhead.js` (fallbacks).**
+  Prepared alternate importers; `--promote` switches the live writer.
+
 ```bash
-node scripts/ingestWowhead.js                 # verify against the snapshot + schema (writes nothing)
-node scripts/compareSources.js                # diff Wowhead vs the committed (Icy Veins) data
-node scripts/ingestWowhead.js --promote       # make Wowhead the live source (writes src/data/)
+node scripts/ingestBlizzard.js                # verify Blizzard vs the snapshot + schema (writes nothing)
+node scripts/ingestBlizzard.js --promote      # make Blizzard the live source (writes src/data/)
+node scripts/compareSources.js --source=blizzard   # diff Blizzard (API+DB2) vs the committed data
+node scripts/compareSources.js                # diff Wowhead vs the committed data (default source)
+node scripts/fetchIcons.js                    # download any newly-referenced icons (commit the result)
 ```
 
 `compareSources.js` separates **hard** divergences — the build-string wire
 layout, ranks, choice arity, gates, and prerequisites, which must agree — from
 **soft** ones (positions, names, descriptions, and the occasional per-spec
-membership difference where the two sites disagree about display). It runs in the
+membership difference where sources disagree about display). It runs in the
 non-gating `sources.yml` workflow, kept out of the release gate because it
-fetches a third party live. Descriptions are fetched per-spell from Wowhead's
-tooltip API, cached on disk, and sanitised; the extractor picks the right
-per-spec variant out of each tooltip, so they read cleanly and reflect current
-game data (which is often fresher than Icy Veins'). Description text doesn't
-affect build strings or any gate.
+fetches live upstreams. Descriptions reflect _current_ game data and so differ
+between sources; description text doesn't affect build strings or any gate.
+Because Blizzard's layout is the game's own grid, promoting it re-lays-out every
+tree (positions are soft) and may change icon filenames — re-run
+`scripts/fetchIcons.js` after a promote and commit the new icons.
 
 To add yet another source, write a sibling importer that emits the same schema
 and reuses `ingestCore.js`; the validator, snapshot, and `compareSources.js` will
