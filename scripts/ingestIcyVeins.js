@@ -4,10 +4,14 @@
  * Fetches talent tree data from Icy Veins' CDN and writes normalised JSON
  * to src/data/ (one file per class + classes.json index).
  *
- * This is the Icy Veins ingest. The script is named for its source so a future
- * importer for a different source (e.g. ingestWowhead.js, ingestBlizzard.js)
- * can live alongside it — each fetches its own format and emits the same schema
- * (enforced by src/lib/validateClassData.js), so src/data/ stays the contract.
+ * This is the Icy Veins ingest, and the primary, snapshot-owning source. The
+ * script is named for its source so a sibling importer for a different source
+ * (e.g. ingestWowhead.js) can live alongside it — each fetches its own format,
+ * maps it to the same schema (enforced by src/lib/validateClassData.js), and
+ * hands the result to the shared pipeline in scripts/lib/ingestCore.js, so
+ * src/data/ stays the contract. This file owns only the Icy-Veins-specific
+ * fetching and normalisation; validating, writing, and regenerating the
+ * wire-layout snapshot live in the core.
  *
  * Run:
  *   node scripts/ingestIcyVeins.js
@@ -22,32 +26,11 @@
  *   src/data/{class_slug}.json     — normalised tree per class (all specs)
  */
 
-import { writeFileSync, mkdirSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-import { validateClassData } from "../src/lib/validateClassData.js";
-import { wireLayout } from "../src/lib/wireLayout.js";
 import { sanitizeDescription } from "../src/lib/sanitizeDescription.js";
+import { POINT_BUDGET, writeNormalizedData } from "./lib/ingestCore.js";
 
 const BASE_URL = "https://static.icy-veins.com/json/midnight-talent-calculator";
 const VERSION = 46;
-
-// Base talent point budgets for the Midnight expansion (from the levelling system).
-// Levels 10-70 alternate class/spec → 31 class + 30 spec.
-// Levels 71+ cycle across all three trees; class reaches 34, spec base 30, last hero point at 89.
-// spec and hero are overridden by normaliseSpec at runtime (spec adds apex ranks; hero counts
-// non-alreadyGranted hero nodes per subtree). alreadyGranted nodes are bonus and not counted.
-const POINT_BUDGET = { class: 34, spec: 30, hero: 0 };
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT_DIR = join(__dirname, "..", "src", "data");
-const SNAPSHOT_PATH = join(
-  __dirname,
-  "..",
-  "src",
-  "lib",
-  "wireLayout.snapshot.json",
-);
 
 // ---------------------------------------------------------------------------
 // Fetch helpers
@@ -225,24 +208,10 @@ function normaliseSpec(specRaw, specInfo) {
 }
 
 // ---------------------------------------------------------------------------
-// File output
-// ---------------------------------------------------------------------------
-
-function writeJson(filename, data) {
-  const dest = join(OUT_DIR, filename);
-  writeFileSync(dest, JSON.stringify(data, null, 2), "utf8");
-}
-
-// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
 async function main() {
-  mkdirSync(OUT_DIR, { recursive: true });
-
-  let validationFailures = 0;
-  const builtClasses = {};
-
   console.log("Fetching class index…");
   const classInfoList = await fetchJson("classes_basic_info.json");
 
@@ -264,10 +233,8 @@ async function main() {
     })),
   }));
 
-  writeJson("classes.json", classIndex);
-  console.log("  → src/data/classes.json");
-
-  // Per-class files
+  // Normalise every implemented class into the shared schema, keyed by slug.
+  const classes = {};
   for (const cls of classInfoList) {
     if (!cls.implemented) {
       console.log(`  skipping ${cls.displayName} (not implemented)`);
@@ -289,7 +256,7 @@ async function main() {
       specs[specInfo.name] = normaliseSpec(specRaw, specInfo);
     }
 
-    const classData = {
+    classes[cls.name] = {
       classId: cls.id,
       className: cls.displayName,
       classSlug: cls.name,
@@ -302,43 +269,18 @@ async function main() {
       unusedNodeIds: classRaw.unusedNodeIds ?? [],
       specs,
     };
-
-    // Validate before writing so a source/schema drift fails the ingest loudly
-    // rather than shipping broken data the app can't read.
-    const problems = validateClassData(
-      classData,
-      classIndex.find((c) => c.id === cls.id),
-    );
-    if (problems.length > 0) {
-      console.error(`✗ validation failed (${problems.length})`);
-      for (const p of problems) console.error(`      - ${p}`);
-      validationFailures += problems.length;
-    }
-
-    writeJson(`${cls.name}.json`, classData);
-    builtClasses[cls.name] = classData;
-    console.log(`→ src/data/${cls.name}.json`);
+    console.log("done");
   }
 
-  if (validationFailures > 0) {
-    console.error(
-      `\n✗ ${validationFailures} validation problem(s) — data written for inspection, ` +
-        `but the wire-layout snapshot was NOT updated. Fix the source/normaliser and re-run.`,
-    );
-    process.exit(1);
-  }
-
-  // Refresh the wire-layout snapshot so the integrity test reflects this ingest.
-  // The diff makes any build-string-breaking change visible in review.
-  const snapshot = {};
-  for (const name of Object.keys(builtClasses))
-    snapshot[name] = wireLayout(builtClasses[name]);
-  writeFileSync(
-    SNAPSHOT_PATH,
-    JSON.stringify(snapshot, null, 2) + "\n",
-    "utf8",
-  );
-  console.log("→ src/lib/wireLayout.snapshot.json");
+  // Icy Veins is the primary, snapshot-owning source: validate, write src/data/,
+  // and regenerate the wire-layout snapshot. The shared core exits the ingest
+  // loudly on validation failure without updating the snapshot.
+  const { validationFailures } = writeNormalizedData({
+    classIndex,
+    classes,
+    updateSnapshot: true,
+  });
+  if (validationFailures > 0) process.exit(1);
 
   console.log("\nDone.");
 }
