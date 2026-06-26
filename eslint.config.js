@@ -37,7 +37,12 @@ export default [
 
   // Node-context tooling.
   {
-    files: ["vite.config.js", "eslint.config.js", "scripts/**/*.js"],
+    files: [
+      "vite.config.js",
+      "eslint.config.js",
+      "scripts/**/*.js",
+      "tools/**/*.mjs",
+    ],
     languageOptions: { globals: { ...globals.node } },
   },
 
