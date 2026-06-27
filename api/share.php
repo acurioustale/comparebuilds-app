@@ -125,7 +125,11 @@ function client_ip_hash(): string
     return hash('sha256', $salt . '|' . client_ip());
 }
 
-/** Whether a string is a well-formed share id (the 6-char id space). */
+/**
+ * Whether a string is a well-formed share id (the 6-char id space). The pattern
+ * is mirrored in src/lib/route.js and api/og.php; shareIdParity.test.js keeps the
+ * three copies in sync across the two languages.
+ */
 function valid_share_id(string $id): bool
 {
     return preg_match('/^[A-Za-z0-9]{6}$/', $id) === 1;
@@ -341,20 +345,28 @@ if ($method === 'POST') {
         $lk->fetchColumn();
 
         // ── Per-IP rate limit ────────────────────────────────────────────────
-        $cutoff = date('Y-m-d H:i:s', time() - RATE_LIMIT_WINDOW);
+        // Bound the window against the DB's own clock (NOW()) rather than a
+        // PHP-formatted timestamp, so a PHP/MySQL timezone mismatch or a DST
+        // transition can't shift the window and let an IP over- or under-shoot the
+        // cap. The window is a trusted integer constant, so it is safe to inline.
         $rl = $pdo->prepare(
-            'SELECT COUNT(*) AS c FROM comparebuilds_shares WHERE ip_hash = ? AND created_at > ?'
+            'SELECT COUNT(*) AS c FROM comparebuilds_shares '
+            . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . RATE_LIMIT_WINDOW . ' SECOND'
         );
-        $rl->execute([$ipHash, $cutoff]);
+        $rl->execute([$ipHash]);
         if ((int) $rl->fetch()['c'] >= RATE_LIMIT_MAX) {
             header('Retry-After: ' . RATE_LIMIT_WINDOW);
             fail(429, 'Too many shares created — please try again later');
         }
 
         // ── Prune expired rows (best-effort) ─────────────────────────────────
+        // Same DB-clock comparison as the rate limit; the TTL is a trusted constant.
         try {
-            $prune = $pdo->prepare('DELETE FROM comparebuilds_shares WHERE created_at < ?');
-            $prune->execute([date('Y-m-d H:i:s', time() - SHARE_TTL_DAYS * 86400)]);
+            $prune = $pdo->prepare(
+                'DELETE FROM comparebuilds_shares '
+                . 'WHERE created_at < NOW() - INTERVAL ' . (SHARE_TTL_DAYS * 86400) . ' SECOND'
+            );
+            $prune->execute();
         } catch (Throwable $e) {
             // Non-fatal — proceed even if cleanup fails.
         }
