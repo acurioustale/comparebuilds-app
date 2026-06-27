@@ -1,0 +1,61 @@
+name: semgrep
+
+# PHP static analysis (SAST) lives in its own workflow ON PURPOSE, mirroring
+# links.yml/sources.yml: the deploy workflow's `validate` gate is what blocks a
+# release. GitHub's CodeQL default setup scans the JS/TS app but has no PHP
+# support, so this fills that gap for the internet-facing endpoints (api/*.php).
+#
+# Like CodeQL, it does NOT fail on findings: results are uploaded to the Security
+# tab as code-scanning alerts (alongside CodeQL's), so a finding is a signal to
+# triage, never a blocked deploy. The job only goes red on a genuine tool/config
+# error. The PR trigger catches a regression in a PHP change; the weekly schedule
+# re-scans the committed code against updated registry rules.
+on:
+  pull_request:
+    paths:
+      - "api/**.php"
+      - ".github/workflows/semgrep.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1"
+
+permissions:
+  contents: read
+  security-events: write # upload SARIF to code scanning
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install Semgrep
+        # Pin setuptools < 81 alongside Semgrep: 81 removed the bundled
+        # pkg_resources module that Semgrep's OpenTelemetry dependency still
+        # imports, which otherwise crashes the CLI on startup. Semgrep itself is
+        # pinned for reproducibility; bump it deliberately.
+        run: pip install "setuptools<81" "semgrep==1.97.0"
+
+      - name: Scan PHP endpoints
+        # No --error on purpose: findings exit 0 so they do not fail the job — the
+        # SARIF upload below surfaces them in the Security tab, mirroring CodeQL.
+        # A bad config / tool error exits non-zero and turns the job red.
+        run: >
+          semgrep scan
+          --config p/php
+          --config p/security-audit
+          --metrics=off
+          --sarif --output semgrep.sarif
+          api/
+
+      - name: Upload SARIF to code scanning
+        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: semgrep.sarif
+          category: semgrep-php

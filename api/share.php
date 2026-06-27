@@ -402,7 +402,10 @@ if ($method === 'POST') {
         fail(500, 'Could not generate a unique share ID — please retry');
     }
 
-    echo json_encode(['id' => $id]);
+    // $id is a server-generated CSPRNG token ([A-Za-z0-9]{6}, see the loop above),
+    // not user input, and the response is application/json with X-Content-Type-
+    // Options: nosniff — so there is no XSS sink here.
+    echo json_encode(['id' => $id]); // nosemgrep: php.lang.security.injection.echoed-request.echoed-request
     exit;
 }
 
