@@ -50,11 +50,13 @@ const DB2_STUB = {
   spentRequired: () => 0,
   subtree: (id) => ({ name: `sub${id}`, description: `desc-${id}` }),
   appliesToSpec: () => true,
+  descriptionFor: async () => "",
 };
 const FNS = {
   iconOf: async () => "icon",
   descOf: () => "desc",
   spellDescOf: async () => "",
+  renderClientDesc: async () => "",
 };
 
 async function build() {

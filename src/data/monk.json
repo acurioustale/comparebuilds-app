@@ -4701,7 +4701,7 @@
               "spellId": 442719,
               "name": "Restore Balance",
               "icon": "ability_monk_chiexplosion",
-              "description": "",
+              "description": "Healing increased by 5% while Chi-Ji, the Red Crane or Yu&#39;lon, the Jade Serpent is active.",
               "maxRanks": 1
             },
             {
@@ -4772,7 +4772,7 @@
               "spellId": 442743,
               "name": "Temple Training",
               "icon": "ability_monk_provoke",
-              "description": "",
+              "description": "The healing of Enveloping Mist, Vivify, and Sheilun&#39;s Gift is increased by 6%.",
               "maxRanks": 1
             },
             {
@@ -4970,7 +4970,7 @@
           "maxRanks": 1,
           "name": "Strength of the Black Ox",
           "icon": "ability_monk_chargingoxwave",
-          "description": "",
+          "description": "After Xuen assists you, your next Enveloping Mist&#39;s cast time is reduced by 50% and causes Niuzao to grant an absorb shield to 5 nearby allies for 0.",
           "choices": null
         },
         {
@@ -7369,7 +7369,7 @@
               "spellId": 442743,
               "name": "Temple Training",
               "icon": "ability_monk_provoke",
-              "description": "",
+              "description": "Fists of Fury and Spinning Crane Kick deal 10% more damage.",
               "maxRanks": 1
             },
             {
@@ -7548,7 +7548,7 @@
           "maxRanks": 1,
           "name": "Strength of the Black Ox",
           "icon": "ability_monk_chargingoxwave",
-          "description": "",
+          "description": "After Xuen assists you, your next Blackout Kick refunds 2 stacks of Teachings of the Monastery and causes Niuzao to stomp at your target&#39;s location, dealing 0 damage to nearby enemies, reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -7609,7 +7609,7 @@
               "spellId": 442719,
               "name": "Restore Balance",
               "icon": "ability_monk_chiexplosion",
-              "description": "",
+              "description": "Damage increased by 5% while Xuen, the White Tiger is active.",
               "maxRanks": 1
             },
             {

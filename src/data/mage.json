@@ -4185,7 +4185,7 @@
               "spellId": 431067,
               "name": "Elemental Affinity",
               "icon": "inv_10_dungeonjewelry_dragon_trinket_5_red",
-              "description": "",
+              "description": "The cooldown of Frost spells with a base cooldown shorter than 4 minutes is reduced by 30%.",
               "maxRanks": 1
             },
             {
@@ -4362,7 +4362,7 @@
               "spellId": 431066,
               "name": "Imbued Warding",
               "icon": "inv_10_jewelcrafting_gem3primal_fire_cut_blue",
-              "description": "",
+              "description": "Blazing Barrier also casts an Ice Barrier at 25% effectiveness.",
               "maxRanks": 1
             },
             {
@@ -6452,7 +6452,7 @@
               "spellId": 431067,
               "name": "Elemental Affinity",
               "icon": "inv_10_dungeonjewelry_dragon_trinket_5_red",
-              "description": "",
+              "description": "The cooldown of Fire spells is reduced by 30%.",
               "maxRanks": 1
             },
             {
@@ -6645,7 +6645,7 @@
               "spellId": 431066,
               "name": "Imbued Warding",
               "icon": "inv_10_jewelcrafting_gem3primal_fire_cut_blue",
-              "description": "",
+              "description": "Ice Barrier also casts a Blazing Barrier at 25% effectiveness.",
               "maxRanks": 1
             },
             {

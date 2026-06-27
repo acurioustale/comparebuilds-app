@@ -189,6 +189,7 @@ async function normaliseNode(
   iconOf,
   descOf,
   spellDescOf,
+  clientDescOf,
   gateOf,
 ) {
   const type = TYPE_MAP[raw.node_type?.type] ?? "round";
@@ -198,11 +199,13 @@ async function normaliseNode(
   if (heroSubtree != null) base.heroSubtree = heroSubtree;
 
   // The tree endpoint sometimes ships a node/option with no inline tooltip text
-  // (e.g. monk Conduit's "Restore Balance"), so fall back to the spell's own
-  // description from the Spell API when the inline one is empty.
+  // (e.g. monk Conduit's "Restore Balance"), so fall back: first the spell's own
+  // description from the Spell API, then — for the spec-conditional ones the API
+  // also leaves blank — the rendered client DB2 template (clientDescOf).
   const descFor = async (spellId, inlineHtml) => {
     const inline = descOf(spellId, inlineHtml ?? "");
-    return inline || (spellId != null ? await spellDescOf(spellId) : inline);
+    if (inline || spellId == null) return inline;
+    return (await spellDescOf(spellId)) || (await clientDescOf(spellId));
   };
 
   if (isChoice) {
@@ -310,7 +313,10 @@ async function buildApexNode(raw, chain, iconOf, spellDescOf, gateOf) {
  * @returns {object} the normalised spec
  */
 export async function normaliseSpec(specInfo, tree, db2, fns) {
-  const { iconOf, descOf, spellDescOf } = fns;
+  const { iconOf, descOf, spellDescOf, renderClientDesc } = fns;
+  // Final description fallback, spec-bound: render the client DB2 tooltip
+  // template for the spec-conditional spells the web API returns blank.
+  const clientDescOf = (spellId) => renderClientDesc(spellId, specInfo.id);
   // The per-spec endpoint returns ALL of the class's hero trees; keep only the
   // two that actually apply to this spec (its playable_specializations include it).
   const heroTrees = (tree.hero_talent_trees ?? []).filter((ht) =>
@@ -370,6 +376,7 @@ export async function normaliseSpec(specInfo, tree, db2, fns) {
             iconOf,
             descOf,
             spellDescOf,
+            clientDescOf,
             gateOf,
           ),
     );
@@ -389,6 +396,7 @@ export async function normaliseSpec(specInfo, tree, db2, fns) {
           iconOf,
           descOf,
           spellDescOf,
+          clientDescOf,
           gateOf,
         ),
       );
@@ -579,13 +587,21 @@ export async function buildBlizzardClasses({
           await fetchSpellDescription(api, spellId).catch(() => ""),
         )
     : async () => "";
+  // Spec-conditional client DB2 templates, rendered for one spec (the web API
+  // returns these blank). Gated by the descriptions flag like the others so a
+  // verify run never fans out into per-spell DB2 fetches; bound to a spec in
+  // normaliseSpec.
+  const renderClientDesc = descriptions
+    ? async (spellId, specId) =>
+        sanitizeDescription((await db2.descriptionFor(spellId, specId)) ?? "")
+    : async () => "";
 
   if (!icons) log("Skipping icons (soft).");
   if (!descriptions) log("Skipping descriptions (soft).");
 
   const classes = {};
   for (const cls of implemented) {
-    const fns = { iconOf, descOf, spellDescOf };
+    const fns = { iconOf, descOf, spellDescOf, renderClientDesc };
     classes[cls.name] = await normaliseClass(cls, treeMap, api, db2, fns);
     log(`  normalised ${cls.displayName}`);
   }

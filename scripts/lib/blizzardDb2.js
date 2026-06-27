@@ -98,6 +98,84 @@ export function parseCsv(text) {
 }
 
 // ---------------------------------------------------------------------------
+// Spec-conditional tooltip rendering
+// ---------------------------------------------------------------------------
+//
+// A few talents have a Spell.Description_lang that branches on the player's
+// spec (`$?cN[…]`) and/or splices in effect values (`$sK`, `$<spellId>sK`). The
+// web Game Data API can't resolve those without a spec context, so it returns an
+// empty description — leaving the talent blank. We render them here at ingest.
+
+/**
+ * Selects the spec branch of a `$?cN[a]?cM[b][else]` template: the `[…]` whose
+ * `cN` matches this spec (N = ChrSpecialization OrderIndex + 1), else the
+ * trailing default. A template that doesn't start with `$?c` is returned as-is.
+ */
+function selectSpecBranch(tpl, orderIndex) {
+  if (!tpl.startsWith("$?c")) return tpl;
+  const want = orderIndex + 1;
+  const branches = [];
+  let i = 2; // past "$?"
+  while (i < tpl.length) {
+    if (tpl[i] === "?") i++; // separator between conditional branches
+    const m = /^c(\d+)\[/.exec(tpl.slice(i));
+    if (!m) break;
+    let j = i + m[0].length;
+    let depth = 1;
+    const start = j;
+    while (j < tpl.length && depth > 0) {
+      if (tpl[j] === "[") depth++;
+      else if (tpl[j] === "]") depth--;
+      if (depth > 0) j++;
+    }
+    branches.push({ n: Number(m[1]), text: tpl.slice(start, j) });
+    i = j + 1; // past the closing "]"
+  }
+  let elseText = "";
+  if (tpl[i] === "[") {
+    let j = i + 1;
+    let depth = 1;
+    const start = j;
+    while (j < tpl.length && depth > 0) {
+      if (tpl[j] === "[") depth++;
+      else if (tpl[j] === "]") depth--;
+      if (depth > 0) j++;
+    }
+    elseText = tpl.slice(start, j);
+  }
+  return branches.find((b) => b.n === want)?.text ?? elseText;
+}
+
+/**
+ * Renders a DB2 spell-description template for one spec. Handles two token
+ * kinds: the `$?cN[…]` spec branch and `$sK` / `$<spellId>sK` effect-value
+ * splices (the |K|th effect's base value, 1-based, of this spell or spell
+ * `<spellId>`). Any other tooltip syntax leaves a `$` behind, and we return ""
+ * rather than show a half-rendered tooltip. Pure: `effects` maps spellId → base
+ * values indexed by EffectIndex.
+ *
+ * @param {{template:string, orderIndex:number, thisSpellId:number, effects:Map<number, number[]>}} arg
+ * @returns {string}
+ */
+export function renderSpellDescription({
+  template,
+  orderIndex,
+  thisSpellId,
+  effects,
+}) {
+  if (!template) return "";
+  const filled = selectSpecBranch(template, orderIndex).replace(
+    /\$(\d*)s(\d+)/g,
+    (m, sid, k) => {
+      const v = effects.get(sid ? Number(sid) : thisSpellId)?.[Number(k) - 1];
+      return v == null ? m : String(Math.abs(v)).replace(/\.0+$/, "");
+    },
+  );
+  // Bail to blank if an unhandled token survived — never show partial text.
+  return filled.includes("$") ? "" : filled;
+}
+
+// ---------------------------------------------------------------------------
 // Client
 // ---------------------------------------------------------------------------
 
@@ -132,21 +210,49 @@ export class BlizzardDb2 {
     return parseCsv(text);
   }
 
+  // A single-column-filtered slice of a table. Used for the few huge tables we
+  // can't load whole (Spell, SpellEffect): we only need rows for a handful of
+  // spell ids, so fetch them on demand via wago's `filter[col]=val` query and
+  // cache each slice on disk.
+  async _filtered(name, col, val) {
+    const file = join(this.cacheDir, `${name}__${col}_${val}.csv`);
+    if (this.useCache && existsSync(file)) {
+      return parseCsv(readFileSync(file, "utf8"));
+    }
+    const url = `https://wago.tools/db2/${name}/csv?build=${this.build}&filter[${col}]=${val}`;
+    const res = await fetch(url, { signal: AbortSignal.timeout(60000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
+    const text = await res.text();
+    if (this.useCache) writeFileSync(file, text, "utf8");
+    return parseCsv(text);
+  }
+
   /** Fetch + index the trait tables. Idempotent. */
   async load() {
     if (this._loaded) return this;
-    const [nx, entry, def, cond, ncond, gxn, gxc, subtree, specSetMember] =
-      await Promise.all([
-        this._table("TraitNodeXTraitNodeEntry"),
-        this._table("TraitNodeEntry"),
-        this._table("TraitDefinition"),
-        this._table("TraitCond"),
-        this._table("TraitNodeXTraitCond"),
-        this._table("TraitNodeGroupXTraitNode"),
-        this._table("TraitNodeGroupXTraitCond"),
-        this._table("TraitSubTree"),
-        this._table("SpecSetMember"),
-      ]);
+    const [
+      nx,
+      entry,
+      def,
+      cond,
+      ncond,
+      gxn,
+      gxc,
+      subtree,
+      specSetMember,
+      chrSpecialization,
+    ] = await Promise.all([
+      this._table("TraitNodeXTraitNodeEntry"),
+      this._table("TraitNodeEntry"),
+      this._table("TraitDefinition"),
+      this._table("TraitCond"),
+      this._table("TraitNodeXTraitCond"),
+      this._table("TraitNodeGroupXTraitNode"),
+      this._table("TraitNodeGroupXTraitCond"),
+      this._table("TraitSubTree"),
+      this._table("SpecSetMember"),
+      this._table("ChrSpecialization"),
+    ]);
     this.index({
       nx,
       entry,
@@ -157,6 +263,7 @@ export class BlizzardDb2 {
       gxc,
       subtree,
       specSetMember,
+      chrSpecialization,
     });
     return this;
   }
@@ -166,11 +273,26 @@ export class BlizzardDb2 {
    * so the join logic is unit-testable without the network. Each arg is an array
    * of row objects (as parseCsv returns).
    */
-  index({ nx, entry, def, cond, ncond, gxn, gxc, subtree, specSetMember }) {
+  index({
+    nx,
+    entry,
+    def,
+    cond,
+    ncond,
+    gxn,
+    gxc,
+    subtree,
+    specSetMember,
+    chrSpecialization,
+  }) {
     this._entryById = new Map(entry.map((r) => [r.ID, r]));
     this._defById = new Map(def.map((r) => [r.ID, r]));
     this._condById = new Map(cond.map((r) => [r.ID, r]));
     this._subtreeById = new Map(subtree.map((r) => [r.ID, r]));
+    // spec id → ChrSpecialization OrderIndex (drives the `$?cN` branch pick).
+    this._specOrderIndex = new Map(
+      (chrSpecialization ?? []).map((r) => [r.ID, Number(r.OrderIndex)]),
+    );
 
     this._entriesByNode = new Map();
     for (const r of nx) {
@@ -261,6 +383,65 @@ export class BlizzardDb2 {
   appliesToSpec(nodeId, specId) {
     const specs = this._nodeSpecs.get(String(nodeId));
     return !specs || specs.size === 0 || specs.has(String(specId));
+  }
+
+  /** A spell's raw Description_lang template (on-demand, cached), or "". */
+  async _spellTemplate(spellId) {
+    this._tplCache ??= new Map();
+    if (!this._tplCache.has(spellId)) {
+      const rows = await this._filtered("Spell", "ID", spellId);
+      const row = rows.find((r) => r.ID === String(spellId));
+      this._tplCache.set(spellId, row?.Description_lang ?? "");
+    }
+    return this._tplCache.get(spellId);
+  }
+
+  /** A spell's effect base values indexed by EffectIndex (on-demand, cached). */
+  async _spellEffects(spellId) {
+    this._fxCache ??= new Map();
+    if (!this._fxCache.has(spellId)) {
+      const rows = await this._filtered("SpellEffect", "SpellID", spellId);
+      const arr = [];
+      for (const r of rows)
+        // wago's filter is a prefix match (SpellID 123904 also returns 1239040…),
+        // so keep only the exact spell's rows or a sibling's effect overwrites
+        // ours at the same EffectIndex.
+        if (r.SpellID === String(spellId))
+          arr[Number(r.EffectIndex)] = Number(r.EffectBasePointsF);
+      this._fxCache.set(spellId, arr);
+    }
+    return this._fxCache.get(spellId);
+  }
+
+  /**
+   * The rendered DB2 description for `spellId` as seen by `specId`, or "" when it
+   * can't be resolved. This is the spec-conditional text the web API leaves
+   * blank; we pull the template from Spell, splice effect values from
+   * SpellEffect (including any cross-spell `$<id>sK` references in the chosen
+   * branch), and render. Cross-spell effects and the per-spec branch are why the
+   * API can't do this itself.
+   * @param {number|string} spellId
+   * @param {number|string} specId  ChrSpecialization id
+   */
+  async descriptionFor(spellId, specId) {
+    const orderIndex = this._specOrderIndex.get(String(specId));
+    if (orderIndex == null) return "";
+    const template = await this._spellTemplate(spellId);
+    if (!template) return "";
+
+    // Only the chosen branch's effect references need fetching.
+    const branch = selectSpecBranch(template, orderIndex);
+    const ids = new Set([Number(spellId)]);
+    for (const m of branch.matchAll(/\$(\d+)s\d+/g)) ids.add(Number(m[1]));
+    const effects = new Map();
+    for (const id of ids) effects.set(id, await this._spellEffects(id));
+
+    return renderSpellDescription({
+      template,
+      orderIndex,
+      thisSpellId: Number(spellId),
+      effects,
+    });
   }
 
   /** Ordered TraitNodeEntry rows for a node, or []. */

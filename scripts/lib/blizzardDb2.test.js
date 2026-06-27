@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { parseCsv, BlizzardDb2 } from "./blizzardDb2.js";
+import {
+  parseCsv,
+  BlizzardDb2,
+  renderSpellDescription,
+} from "./blizzardDb2.js";
 
 describe("parseCsv", () => {
   it("parses simple rows into objects keyed by header", () => {
@@ -232,5 +236,82 @@ describe("BlizzardDb2.appliesToSpec", () => {
     const db2 = specFixture();
     expect(db2.appliesToSpec("30", "999")).toBe(true); // CondType-1 but no SpecSetID
     expect(db2.appliesToSpec("99", "999")).toBe(true); // node never mentioned
+  });
+});
+
+describe("renderSpellDescription", () => {
+  // effect base values indexed by EffectIndex: $s1 → [0], $s2 → [1], etc.
+  const effects = new Map([
+    [100, [6, 10]], // this spell
+    [200, [0, 0, 0, 0, 0, 0, 0, 5]], // cross-spell: $200s8 → index 7 = 5
+  ]);
+  // OrderIndex 1 → c2, OrderIndex 2 → c3 (Mistweaver/Windwalker shape).
+  const tpl =
+    "$?c2[Healing increased by $s1%.]?c3[Damage increased by $200s8%.][]";
+
+  it("picks the spec branch by order index and fills $sK", () => {
+    expect(
+      renderSpellDescription({
+        template: tpl,
+        orderIndex: 1,
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("Healing increased by 6%.");
+  });
+
+  it("resolves a cross-spell $<id>sK reference in the chosen branch", () => {
+    expect(
+      renderSpellDescription({
+        template: tpl,
+        orderIndex: 2,
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("Damage increased by 5%.");
+  });
+
+  it("falls to the trailing default branch when none matches", () => {
+    expect(
+      renderSpellDescription({
+        template: tpl,
+        orderIndex: 0,
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe(""); // the [] default is empty
+  });
+
+  it("passes a non-conditional template straight through", () => {
+    expect(
+      renderSpellDescription({
+        template: "Increases X by $s2%.",
+        orderIndex: 0,
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("Increases X by 10%.");
+  });
+
+  it("uses the absolute effect value", () => {
+    expect(
+      renderSpellDescription({
+        template: "Reduced by $s1%.",
+        orderIndex: 0,
+        thisSpellId: 1,
+        effects: new Map([[1, [-30]]]),
+      }),
+    ).toBe("Reduced by 30%.");
+  });
+
+  it("returns blank instead of a half-rendered tooltip on unsupported syntax", () => {
+    expect(
+      renderSpellDescription({
+        template: "Lasts $d sec, heals $s1%.",
+        orderIndex: 0,
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe(""); // $d is unhandled → bail
   });
 });
