@@ -495,7 +495,17 @@ export async function buildBlizzardClasses({
     ? async (spellId) => {
         if (spellId == null) return null;
         if (iconCache.has(spellId)) return iconCache.get(spellId);
-        const name = await fetchIconName(api, spellId).catch(() => null);
+        let name;
+        try {
+          name = await fetchIconName(api, spellId);
+        } catch {
+          // Transient fetch failure — return null but DON'T memoize it. A
+          // legitimate "no icon" result (fetchIconName returns null) is still
+          // cached below; only a thrown error is left uncached so a later node
+          // sharing this spellId, and the next run, can retry instead of
+          // committing String(spellId) as the icon on --promote.
+          return null;
+        }
         iconCache.set(spellId, name);
         return name;
       }
