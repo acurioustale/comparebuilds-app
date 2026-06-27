@@ -10,25 +10,18 @@ import {
   gatedPoints,
   spentPoints,
   cellKey,
+  activeHeroSubtree,
 } from "./treeLogic.js";
+
+// activeHeroSubtree lives in treeLogic (shared with the validity cascade); keep
+// re-exporting it here so the interactive component's import path is unchanged.
+export { activeHeroSubtree };
 
 /**
  * Total points spent in a tree section (class/spec/hero), excluding granted nodes.
  */
 export function sectionPoints(treeType, allNodes, selected) {
   return spentPoints(allNodes, selected, treeType);
-}
-
-/**
- * Name of the hero subtree the player has committed to (first selected, non-granted
- * hero node), or null if none yet.
- */
-export function activeHeroSubtree(allNodes, selected) {
-  for (const n of allNodes) {
-    if (n.treeType === "hero" && !n.alreadyGranted && selected[n.id])
-      return n.heroSubtree;
-  }
-  return null;
 }
 
 /**

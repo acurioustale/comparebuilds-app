@@ -23,8 +23,15 @@ const require = createRequire(import.meta.url);
 function selectAllLegal(allNodes) {
   const selected = {};
   const claimed = new Set();
+  // A build may invest in only one hero subtree, so commit to the one the
+  // validity cascade treats as active (first non-granted hero node in node
+  // order) and skip the other — otherwise hero-subtree exclusivity flags it.
+  const heroSub =
+    allNodes.find((n) => n.treeType === "hero" && !n.alreadyGranted)
+      ?.heroSubtree ?? null;
   for (const n of [...allNodes].sort((a, b) => a.id - b.id)) {
     if (n.alreadyGranted) continue;
+    if (n.treeType === "hero" && n.heroSubtree !== heroSub) continue;
     const cell = cellKey(n);
     if (claimed.has(cell)) continue;
     claimed.add(cell);
@@ -298,8 +305,11 @@ test("co-located cell: purchasing both variants flags the duplicate", () => {
   );
 });
 
-test("co-located cell: hero variants are kept per-subtree", () => {
-  // Same posX,posY but different hero subtrees are different panels → not a cell.
+test("hero-subtree exclusivity flags picks outside the committed subtree", () => {
+  // A build may invest in only one hero subtree. A selection spanning both —
+  // only reachable via a crafted/corrupt build string — must flag the nodes in
+  // the non-active subtree so the diff/heatmap/import views can't render an
+  // impossible dual-subtree build as legal.
   const left = {
     ...node(50, 0, { treeType: "hero" }),
     heroSubtree: "L",
@@ -311,9 +321,13 @@ test("co-located cell: hero variants are kept per-subtree", () => {
     posX: 1,
   };
   const nodes = [left, right];
+  // 50 (L) is first in node order → L is active, so 51 (R) is invalid.
   assertInvalid(
     computeInvalidNodeIds(nodes, { 50: sel(), 51: sel() }, byId(nodes)),
+    51,
   );
+  // A single subtree is legal — nothing flagged.
+  assertInvalid(computeInvalidNodeIds(nodes, { 50: sel() }, byId(nodes)));
 });
 
 test("co-located granted roots are exempt (never flagged)", () => {

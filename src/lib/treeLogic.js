@@ -72,6 +72,20 @@ export function cellKey(node) {
   return `${node.treeType}|${node.heroSubtree ?? ""}|${node.posX},${node.posY}`;
 }
 
+/**
+ * Name of the hero subtree the player has committed to — the first selected,
+ * non-granted hero node in node order — or null if none yet. The single source
+ * of "which subtree is active", shared by the spend rules and the validity
+ * cascade so the interactive and import views agree.
+ */
+export function activeHeroSubtree(allNodes, selected) {
+  for (const n of allNodes) {
+    if (n.treeType === "hero" && !n.alreadyGranted && selected[n.id])
+      return n.heroSubtree;
+  }
+  return null;
+}
+
 // ─── Exports used by both interactive and import contexts ─────────────────────
 
 /**
@@ -129,11 +143,27 @@ export function computeInvalidNodeIds(allNodes, selected, nodeById) {
   // sharing that cell is an illegal co-located duplicate (see cellKey).
   const claimedCells = new Set();
 
+  // Hero-subtree exclusivity: a build may invest in only one hero subtree. A
+  // crafted/corrupt build string (or an import path that bypasses canSpendPoint)
+  // could carry picks in both — flag everything outside the active subtree so the
+  // diff/heatmap/import views can't render an impossible dual-subtree build as
+  // legal, matching what canSpendPoint forbids interactively.
+  const activeHeroSub = activeHeroSubtree(allNodes, selected);
+
   for (const node of sorted) {
     let shouldFlag = false;
 
+    // Hero-subtree exclusivity: nodes outside the committed subtree are invalid.
+    if (
+      node.treeType === "hero" &&
+      activeHeroSub !== null &&
+      node.heroSubtree !== activeHeroSub
+    ) {
+      shouldFlag = true;
+    }
+
     // Gate: raw selected point total — does not exclude already-invalid nodes
-    if (gatedPoints(node, allNodes, selected) < node.spentRequired) {
+    if (!shouldFlag && gatedPoints(node, allNodes, selected) < node.spentRequired) {
       shouldFlag = true;
     }
 
