@@ -9,6 +9,7 @@ import {
   sectionPoints,
   activeHeroSubtree,
   canSpendPoint,
+  prunedExportSelection,
 } from "./spendRules.js";
 
 function node(id, treeType, posY, opts = {}) {
@@ -128,5 +129,54 @@ describe("canSpendPoint", () => {
     assert.strictEqual(canSpendPoint(B, all, { 40: pt() }, ids, BUDGET), false);
     // Empty cell → A is allowed.
     assert.strictEqual(canSpendPoint(A, all, {}, ids, BUDGET), true);
+  });
+});
+
+describe("prunedExportSelection", () => {
+  // Both hero subtrees have an auto-granted root (seeded by buildGrantedSeed).
+  const GRANTED_L = node(100, "hero", 0, {
+    heroSubtree: "Left",
+    alreadyGranted: true,
+  });
+  const GRANTED_R = node(101, "hero", 0, {
+    heroSubtree: "Right",
+    alreadyGranted: true,
+  });
+  const NODES = [ROOT, GRANTED, HERO_L, HERO_R, GRANTED_L, GRANTED_R];
+  const full = () => ({ pointsInvested: 1, entryChosen: null });
+  // A typical interactive selection: granted seed (class grant + both hero roots)
+  // plus a purchased Left hero node.
+  const selected = {
+    1: full(), // purchased class node
+    4: full(), // class grant (GRANTED)
+    100: full(), // Left hero root (granted)
+    101: full(), // Right hero root (granted)
+    10: full(), // purchased Left hero node
+  };
+
+  test("drops the inactive hero subtree's granted root, keeps the active one", () => {
+    const out = prunedExportSelection(NODES, selected, "Left");
+    assert.ok(out[100], "active-subtree granted root kept");
+    assert.strictEqual(out[101], undefined, "inactive granted root removed");
+  });
+
+  test("keeps class/spec grants and purchased nodes untouched", () => {
+    const out = prunedExportSelection(NODES, selected, "Left");
+    assert.ok(out[4], "class grant kept");
+    assert.ok(out[1], "purchased class node kept");
+    assert.ok(out[10], "purchased hero node kept");
+  });
+
+  test("with no active subtree, prunes every granted hero root", () => {
+    const out = prunedExportSelection(NODES, selected, null);
+    assert.strictEqual(out[100], undefined);
+    assert.strictEqual(out[101], undefined);
+    assert.ok(out[4], "non-hero grant still kept");
+  });
+
+  test("does not mutate the input selection", () => {
+    const snapshot = { ...selected };
+    prunedExportSelection(NODES, selected, "Left");
+    assert.deepStrictEqual(selected, snapshot);
   });
 });

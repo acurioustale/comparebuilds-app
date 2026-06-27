@@ -7,6 +7,7 @@ import {
   sectionPoints,
   canSpendPoint,
   activeHeroSubtree,
+  prunedExportSelection,
 } from "../lib/spendRules";
 import { byId } from "./treeLayout";
 import { useShallow } from "zustand/react/shallow";
@@ -291,7 +292,11 @@ export default function InteractiveTalentTree({
       // the in-game format marks it selected with entryChosen = the active subtree.
       // heroGateSelection owns the 0=left/1=right convention (shared with the
       // encoder) so the component and the wire format can't disagree.
-      const exportSelection = { ...selected };
+      const exportSelection = prunedExportSelection(
+        treeData.nodes,
+        selected,
+        activeSub,
+      );
       const gateSel = heroGateSelection(
         heroSpent,
         activeSub === treeData.heroSubtrees.right.name,

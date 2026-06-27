@@ -32,6 +32,33 @@ export function activeHeroSubtree(allNodes, selected) {
 }
 
 /**
+ * The selection to encode when exporting an interactive build: a copy of
+ * `selected` with the *inactive* hero subtree's auto-granted roots removed.
+ *
+ * buildGrantedSeed seeds the granted roots of BOTH hero subtrees so prerequisite
+ * checks evaluate correctly before a subtree is chosen. Once a subtree is active,
+ * the other subtree's granted root is not point-relevant and must not survive into
+ * the export: it is not in the encoder's `grantedIds`, so generateBuildString would
+ * otherwise treat it as a purchased node (isSelected=1/isPurchased=1) and emit a
+ * non-canonical string. Active-subtree and class/spec grants stay — the encoder
+ * writes those as granted via `grantedIds`. With no subtree active (activeSubtree
+ * null) every granted hero root is pruned, matching the game's export.
+ */
+export function prunedExportSelection(allNodes, selected, activeSubtree) {
+  const pruned = { ...selected };
+  for (const n of allNodes) {
+    if (
+      n.alreadyGranted &&
+      n.treeType === "hero" &&
+      n.heroSubtree !== activeSubtree
+    ) {
+      delete pruned[n.id];
+    }
+  }
+  return pruned;
+}
+
+/**
  * Whether a point may currently be spent on `node`, considering: granted status,
  * hero-subtree exclusivity, the section point budget, the node's gate threshold,
  * and its upper prerequisite.
