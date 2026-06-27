@@ -314,4 +314,35 @@ describe("renderSpellDescription", () => {
       }),
     ).toBe(""); // $d is unhandled → bail
   });
+
+  it("reads $sK by exact EffectIndex when the array is gapped (no neighbour bleed)", () => {
+    // _spellEffects indexes by raw EffectIndex, so a spell with effects at index
+    // 0 and 2 (index 1 absent) yields a sparse array with a hole at 1. $s1/$s3
+    // must read indices 0/2 exactly — a dense push() would misalign $s3 to a
+    // hole. Build the hole the same way _spellEffects would.
+    const sparse = [];
+    sparse[0] = 6;
+    sparse[2] = 9; // index 1 left as a hole
+    expect(
+      renderSpellDescription({
+        template: "Deals $s1 then $s3.",
+        orderIndex: 0,
+        thisSpellId: 100,
+        effects: new Map([[100, sparse]]),
+      }),
+    ).toBe("Deals 6 then 9.");
+  });
+
+  it("blanks (never a wrong value) when $sK targets a missing EffectIndex", () => {
+    const sparse = [];
+    sparse[0] = 6; // index 1 absent → $s2 has no value
+    expect(
+      renderSpellDescription({
+        template: "Heals $s2%.",
+        orderIndex: 0,
+        thisSpellId: 100,
+        effects: new Map([[100, sparse]]),
+      }),
+    ).toBe(""); // unfilled $s2 survives → bail, rather than show a stale number
+  });
 });
