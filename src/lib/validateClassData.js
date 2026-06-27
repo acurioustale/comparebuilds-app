@@ -239,6 +239,31 @@ export function validateClassData(data, indexEntry = null) {
     }
   }
 
+  // ── Serialisation-space disjointness ─────────────────────────────────────────
+  // unusedNodeIds are placeholders with NO talent data; collectClassNodes dedups
+  // the full id set first-wins, so an unusedNodeId that collides with a real node
+  // (a spec node or a heroGateNodeId) would silently replace that node's
+  // maxRanks/choices and corrupt the build-string wire layout — caught only by the
+  // separate snapshot test, not here. Enforce disjointness as part of the contract.
+  if (isArr(data.unusedNodeIds)) {
+    const realIds = new Set();
+    for (const slug of specSlugs) {
+      const spec = data.specs[slug];
+      if (spec && typeof spec === "object") {
+        if (isArr(spec.nodes)) {
+          for (const n of spec.nodes) if (isInt(n?.id)) realIds.add(n.id);
+        }
+        if (isInt(spec.heroGateNodeId)) realIds.add(spec.heroGateNodeId);
+      }
+    }
+    for (const id of data.unusedNodeIds) {
+      if (isInt(id) && realIds.has(id))
+        err(
+          `unusedNodeIds entry ${id} also appears as a real node id (would corrupt the wire layout)`,
+        );
+    }
+  }
+
   // ── Cross-check against the classes.json index entry ─────────────────────────
   if (indexEntry) {
     if (indexEntry.id !== data.classId) {

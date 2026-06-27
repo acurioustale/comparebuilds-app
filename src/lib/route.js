@@ -12,6 +12,9 @@
 
 import classesIndex from "../data/classes.json";
 
+// The 6-char share-id format. Mirrored in api/share.php (valid_share_id) and
+// api/og.php; shareIdParity.test.js pins all three together across the two
+// languages so the SPA route, the share page, and its OG image can't drift.
 const SHARE_ID_RE = /^[A-Za-z0-9]{6}$/;
 
 // slug ("death_knight") ↔ URL segment ("death-knight").

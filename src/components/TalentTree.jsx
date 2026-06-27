@@ -1,7 +1,8 @@
-import { useMemo, useId, useRef, useState } from "react";
+import { memo, useMemo, useId, useRef, useState } from "react";
 import Tooltip from "./Tooltip";
 import { iconUrl, onIconError } from "../lib/iconUrl";
 import { activeHeroSubtree } from "../lib/spendRules";
+import { spentPoints } from "../lib/treeLogic";
 import { prereqChain } from "../lib/prereqChain";
 import { useNodeEmphasis } from "./SearchContext";
 import {
@@ -130,7 +131,12 @@ function NodeTooltip({ node, entryChosen, pointsInvested = 0 }) {
 
 // ─── Individual talent node ───────────────────────────────────────────────────
 
-function TalentNode({
+// Memoised: a panel re-renders on every interactive spend, but a node's props
+// (its sel/highlight/invalid/handlers) are referentially stable unless that
+// specific node changed, so only the touched nodes actually re-render. Search and
+// changes-only emphasis come through context (useNodeEmphasis), which bypasses
+// memo, so those still update every node as before.
+const TalentNode = memo(function TalentNode({
   node,
   px,
   py,
@@ -599,7 +605,7 @@ function TalentNode({
       </div>
     </Tooltip>
   );
-}
+});
 
 // ─── Hero locked overlay ──────────────────────────────────────────────────────
 
@@ -703,21 +709,17 @@ export function TreePanel({
 
   const { minX, minY, W, H } = useMemo(() => panelBounds(nodes), [nodes]);
 
-  const spentPoints = useMemo(
-    () =>
-      nodes.reduce(
-        (sum, n) =>
-          n.alreadyGranted
-            ? sum
-            : sum + (selectedNodes[n.id]?.pointsInvested ?? 0),
-        0,
-      ),
+  // A panel always holds a single section's nodes, so the shared accumulator
+  // (treeType taken from the section) yields the panel's spent total — reused so
+  // the gate-lock math can't drift from the budget/gate logic in treeLogic.
+  const spent = useMemo(
+    () => spentPoints(nodes, selectedNodes, nodes[0]?.treeType),
     [nodes, selectedNodes],
   );
 
   const unmetGates = useMemo(
-    () => checkpoints.filter((g) => spentPoints < g.points),
-    [checkpoints, spentPoints],
+    () => checkpoints.filter((g) => spent < g.points),
+    [checkpoints, spent],
   );
 
   const lockedFromRow =

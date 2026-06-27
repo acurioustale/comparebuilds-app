@@ -25,6 +25,7 @@ import {
   generateBuildString,
   parseSpecId,
   collectClassNodes,
+  heroGateSelection,
 } from "./buildString.js";
 
 const require = createRequire(import.meta.url);
@@ -249,5 +250,58 @@ describe("parseBuildString clamps an over-max partial rank", () => {
       { id: 100, maxRanks: 5, choices: null },
     ]);
     assert.strictEqual(parsed.nodes[100].pointsInvested, 5);
+  });
+
+  test("an out-of-range choice index is clamped into a real option", () => {
+    const bits = [];
+    pushInt(bits, 2, 8); // version
+    pushInt(bits, 250, 16); // specId
+    for (let i = 0; i < 128; i++) bits.push(0); // hash
+    // One 2-option choice node (id 100): selected, purchased, not partially
+    // ranked, choice node with a corrupt entryChosen of 3 (only 0/1 are valid).
+    bits.push(1, 1, 0, 1);
+    pushInt(bits, 3, 2);
+
+    const parsed = parseBuildString(bitsToStr(bits), [
+      { id: 100, maxRanks: 1, choices: [{ maxRanks: 1 }, { maxRanks: 1 }] },
+    ]);
+    // Clamped to the last valid index so it can't index past choices[].
+    assert.strictEqual(parsed.nodes[100].entryChosen, 1);
+  });
+
+  test("a partially-ranked value of 0 drops the node entirely", () => {
+    const bits = [];
+    pushInt(bits, 2, 8); // version
+    pushInt(bits, 250, 16); // specId
+    for (let i = 0; i < 128; i++) bits.push(0); // hash
+    // One node (id 100, maxRanks 5): selected, purchased, partially-ranked with a
+    // nonsensical rank of 0, non-choice.
+    bits.push(1, 1, 1);
+    pushInt(bits, 0, 6);
+    bits.push(0);
+
+    const parsed = parseBuildString(bitsToStr(bits), [
+      { id: 100, maxRanks: 5, choices: null },
+    ]);
+    // A purchased-but-zero node is corrupt; it must not appear as selected.
+    assert.strictEqual(parsed.nodes[100], undefined);
+  });
+});
+
+describe("heroGateSelection", () => {
+  test("returns null when no hero points are invested", () => {
+    assert.strictEqual(heroGateSelection(0, false), null);
+    assert.strictEqual(heroGateSelection(0, true), null);
+  });
+
+  test("encodes the active subtree as entryChosen (0 = left, 1 = right)", () => {
+    assert.deepStrictEqual(heroGateSelection(3, false), {
+      pointsInvested: 1,
+      entryChosen: 0,
+    });
+    assert.deepStrictEqual(heroGateSelection(5, true), {
+      pointsInvested: 1,
+      entryChosen: 1,
+    });
   });
 });

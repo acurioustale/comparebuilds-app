@@ -21,10 +21,10 @@ function DiffRow({ node, selA, selB, type }) {
 
   // diff — rank or choice differs; show concise before/after
   if (node.type === "choice") {
-    const nameA =
-      node.choices[selA.entryChosen]?.name ?? `option ${selA.entryChosen + 1}`;
-    const nameB =
-      node.choices[selB.entryChosen]?.name ?? `option ${selB.entryChosen + 1}`;
+    // Reuse the shared label helper so the before/after rows can't drift from the
+    // a-only/b-only rows' option/rank formatting.
+    const nameA = selectionLabel(node, selA);
+    const nameB = selectionLabel(node, selB);
     return (
       <li className="text-xs">
         <span className="text-wow-text">A: {nameA}</span>

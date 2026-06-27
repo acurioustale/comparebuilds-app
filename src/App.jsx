@@ -255,6 +255,24 @@ function MainView() {
   // preference, so it stays in component state rather than the persisted store.
   const [changesOnly, setChangesOnly] = useState(false);
 
+  // Valid (parsed) builds with their display labels. Memoised so the arrays fed
+  // to the comparison views keep a stable identity across unrelated re-renders (a
+  // search keystroke, the changes-only toggle, a theme change) — otherwise every
+  // such render would bust HeatmapTree's computeStats / SideBySideDiff's diff
+  // memos with fresh array references and recompute over every node.
+  const valid = useMemo(
+    () =>
+      parsedBuilds
+        .map((p, i) => ({
+          parsed: p,
+          label: buildNames[i]?.trim() || `Build ${i + 1}`,
+        }))
+        .filter(({ parsed }) => parsed),
+    [parsedBuilds, buildNames],
+  );
+  const validParsed = useMemo(() => valid.map((v) => v.parsed), [valid]);
+  const validLabels = useMemo(() => valid.map((v) => v.label), [valid]);
+
   if (!treeData) return null;
 
   // The search field lives at the bottom of the active tree panel (WoW-style),
@@ -285,14 +303,6 @@ function MainView() {
     );
   }
 
-  // Builds exist: build the comparison element first
-  const valid = parsedBuilds
-    .map((p, i) => ({
-      parsed: p,
-      label: buildNames[i]?.trim() || `Build ${i + 1}`,
-    }))
-    .filter(({ parsed }) => parsed);
-
   // The search footer belongs to whichever tree box is active. While adding a
   // build it goes in the interactive panel (below); otherwise it sits in the
   // comparison/single panel. Either way there is exactly one search field.
@@ -307,8 +317,8 @@ function MainView() {
             <div className="p-4 wow-panel rounded w-max">
               <HeatmapTree
                 treeData={treeData}
-                builds={valid.map((v) => v.parsed)}
-                labels={valid.map((v) => v.label)}
+                builds={validParsed}
+                labels={validLabels}
                 layout={layout}
               />
               {comparisonFooter && (

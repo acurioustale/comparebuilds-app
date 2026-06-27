@@ -119,6 +119,8 @@ if (defined('OG_API_NO_MAIN')) {
 }
 
 // ── Validate id ────────────────────────────────────────────────────────────────
+// Same 6-char id space as api/share.php (valid_share_id) and src/lib/route.js;
+// shareIdParity.test.js pins the three copies together.
 $id = $_GET['id'] ?? '';
 if (!is_string($id) || !preg_match('/^[A-Za-z0-9]{6}$/', $id)) {
     bail(400);

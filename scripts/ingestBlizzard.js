@@ -145,6 +145,35 @@ const isEmptyNode = (n) => {
 };
 
 /**
+ * The wire-identity fields every normalised node shares — ordinary, choice, and
+ * the DB2-sourced apex alike: id, type, position, prereqs, gate, granted flag.
+ * Kept in one place so the apex builder and normaliseNode can't derive a hard
+ * wire field (e.g. posX spacing, spentRequired) two different ways.
+ * @param {object} raw          a *_talent_node from the API
+ * @param {'round'|'square'|'choice'|'apex'} type
+ * @param {'class'|'spec'|'hero'} treeType
+ * @param {(nodeId:number)=>number} gateOf  node id → points-spent gate
+ */
+function wireBase(raw, type, treeType, gateOf) {
+  return {
+    id: raw.id,
+    type,
+    treeType,
+    // Positions are SOFT (not in the wire-layout fingerprint). display_col is a
+    // step-1 grid, but the renderer spaces columns by one CELL (36px) and a choice
+    // node is wider than that — so double X to the step-2 spacing the renderer
+    // expects (matching the other sources). posY is fine at step 1; the absolute
+    // origin is normalised per panel by the layout code.
+    posX: raw.display_col * 2,
+    posY: raw.display_row,
+    connections: raw.locked_by ?? [],
+    // The points-spent gate (the gate cascade reads this per node; see treeLogic).
+    spentRequired: gateOf(raw.id),
+    alreadyGranted: isGranted(raw),
+  };
+}
+
+/**
  * Normalise one Blizzard talent node into our schema.
  * @param {object} raw          a *_talent_node from the API
  * @param {'class'|'spec'|'hero'} treeType
@@ -164,22 +193,7 @@ async function normaliseNode(
   const type = TYPE_MAP[raw.node_type?.type] ?? "round";
   const isChoice = type === "choice";
 
-  const base = {
-    id: raw.id,
-    type,
-    treeType,
-    // Positions are SOFT (not in the wire-layout fingerprint). display_col is a
-    // step-1 grid, but the renderer spaces columns by one CELL (36px) and a choice
-    // node is wider than that — so double X to the step-2 spacing the renderer
-    // expects (matching the other sources). posY is fine at step 1; the absolute
-    // origin is normalised per panel by the layout code.
-    posX: raw.display_col * 2,
-    posY: raw.display_row,
-    connections: raw.locked_by ?? [],
-    // The points-spent gate (the gate cascade reads this per node; see treeLogic).
-    spentRequired: gateOf(raw.id),
-    alreadyGranted: isGranted(raw),
-  };
+  const base = wireBase(raw, type, treeType, gateOf);
   if (heroSubtree != null) base.heroSubtree = heroSubtree;
 
   if (isChoice) {
@@ -268,14 +282,7 @@ async function buildApexNode(raw, chain, iconOf, spellDescOf, gateOf) {
     });
   }
   return {
-    id: raw.id,
-    type: "apex",
-    treeType: "spec",
-    posX: raw.display_col * 2, // step-2 X spacing (see normaliseNode)
-    posY: raw.display_row,
-    connections: raw.locked_by ?? [],
-    spentRequired: gateOf(raw.id),
-    alreadyGranted: isGranted(raw),
+    ...wireBase(raw, "apex", "spec", gateOf),
     maxRanks: chain.ranks.reduce((s, r) => s + r.maxRanks, 0),
     name: tt?.talent?.name ?? tt?.spell_tooltip?.spell?.name ?? String(raw.id),
     icon: (await iconOf(headSpell)) ?? String(headSpell ?? raw.id),

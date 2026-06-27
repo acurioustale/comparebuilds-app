@@ -478,6 +478,32 @@ describe("hero membership", () => {
     ));
 });
 
+// ── Serialisation-space disjointness ──────────────────────────────────────────
+
+describe("serialisation-space disjointness", () => {
+  test("unusedNodeId colliding with a real spec node id is rejected", () => {
+    const d = makeValidFixed();
+    d.unusedNodeIds = [1]; // id 1 is a real class node
+    assertHasError(validateClassData(d), "also appears as a real node id");
+  });
+
+  test("unusedNodeId colliding with heroGateNodeId is rejected", () => {
+    const d = makeValidFixed();
+    d.unusedNodeIds = [9]; // 9 is the spec's heroGateNodeId
+    assertHasError(validateClassData(d), "also appears as a real node id");
+  });
+
+  test("disjoint unusedNodeIds produce no collision error", () => {
+    const d = makeValidFixed();
+    d.unusedNodeIds = [1000, 1001];
+    const errs = validateClassData(d);
+    assert.ok(
+      !errs.some((e) => e.includes("also appears as a real node id")),
+      `unexpected collision error:\n${errs.join("\n")}`,
+    );
+  });
+});
+
 // ── Index cross-check ─────────────────────────────────────────────────────────
 
 describe("index cross-check", () => {

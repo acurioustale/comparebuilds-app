@@ -6,7 +6,7 @@ import {
   parseBuildString,
   collectClassNodes,
 } from "../lib/buildString";
-import { buildGrantedSeed } from "../lib/treeLogic";
+import { buildGrantedSeed, spentPoints } from "../lib/treeLogic";
 // NOTE: these limits are mirrored server-side in api/share.php (MAX_BUILDS,
 // MAX_BUILD_LEN). Keep the two in sync — the server rejects anything past them, so
 // validating here too just gives a clearer message before the share round-trip.
@@ -34,17 +34,27 @@ const CLASS_MODULES = import.meta.glob([
 function sanitizeHeroSubtrees(nodes, treeData) {
   if (!treeData) return nodes;
 
-  const subPoints = {};
+  // Which hero subtrees carry any (non-granted) selected points? Insertion order
+  // follows treeData.nodes, which keeps the tie-break below deterministic.
+  const subs = new Set();
   for (const n of treeData.nodes) {
-    if (n.treeType !== "hero" || n.alreadyGranted || !nodes[n.id]) continue;
-    subPoints[n.heroSubtree] =
-      (subPoints[n.heroSubtree] ?? 0) + (nodes[n.id].pointsInvested ?? 0);
+    if (n.treeType === "hero" && !n.alreadyGranted && nodes[n.id])
+      subs.add(n.heroSubtree);
+  }
+  if (subs.size <= 1) return nodes;
+
+  // Keep whichever subtree has the most invested points, counted through the
+  // shared accumulator so this can't drift from the spend/gate budget logic.
+  let keepSub = null;
+  let best = -1;
+  for (const sub of subs) {
+    const pts = spentPoints(treeData.nodes, nodes, "hero", sub);
+    if (pts > best) {
+      best = pts;
+      keepSub = sub;
+    }
   }
 
-  const subs = Object.keys(subPoints);
-  if (subs.length <= 1) return nodes;
-
-  const keepSub = subs.reduce((a, b) => (subPoints[a] >= subPoints[b] ? a : b));
   const result = { ...nodes };
   for (const n of treeData.nodes) {
     if (

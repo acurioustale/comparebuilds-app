@@ -236,9 +236,18 @@ export function parseBuildString(buildString, nodes) {
       entryChosen = reader.readBits(2);
     }
 
+    const node = nodeById.get(id);
+
+    // Clamp a corrupt/out-of-range choice index into a real option. The 2-bit
+    // field can encode 0-3 even on a 2-option node, so a hand-crafted string
+    // could otherwise index past choices[] and surface as "option 4" downstream
+    // (diff labels, heatmap votes). Mirrors the pointsInvested clamp below.
+    if (entryChosen !== null && node?.choices && node.choices.length > 0) {
+      entryChosen = Math.min(entryChosen, node.choices.length - 1);
+    }
+
     // Resolve the node's effective max rank (choice/apex options can differ from
     // node.maxRanks — e.g. an apex with maxRanks=2 or per-option choice ranks).
-    const node = nodeById.get(id);
     const effectiveMax =
       isChoiceNode && node?.choices && entryChosen !== null
         ? (node.choices[entryChosen]?.maxRanks ?? 1)
@@ -252,6 +261,11 @@ export function parseBuildString(buildString, nodes) {
       partialPoints !== null
         ? Math.min(partialPoints, effectiveMax)
         : effectiveMax;
+
+    // A purchased node always holds at least one point; a partially-ranked stream
+    // value of 0 is nonsensical (corrupt string), so drop it rather than emit a
+    // "selected" node with 0 points that would still light up and satisfy prereqs.
+    if (pointsInvested < 1) continue;
 
     result[id] = { pointsInvested, entryChosen };
   }
@@ -360,6 +374,23 @@ export function generateBuildString(
   }
 
   return writer.toString();
+}
+
+/**
+ * The hero-gate node's selection entry for an export, or null when no hero
+ * points are invested. The gate is the hero-tree CHOICE node that
+ * `collectClassNodes` models as a 2-option node where `entryChosen` 0 = left
+ * subtree, 1 = right subtree. This is the single owner of that 0=left/1=right
+ * convention, so the encoder and the UI can't disagree on which index means
+ * which subtree.
+ *
+ * @param {number} heroPointsSpent       points invested across the hero section
+ * @param {boolean} activeSubtreeIsRight whether the active subtree is the right one
+ * @returns {{ pointsInvested: number, entryChosen: number } | null}
+ */
+export function heroGateSelection(heroPointsSpent, activeSubtreeIsRight) {
+  if (!(heroPointsSpent > 0)) return null;
+  return { pointsInvested: 1, entryChosen: activeSubtreeIsRight ? 1 : 0 };
 }
 
 /**

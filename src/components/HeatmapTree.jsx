@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import Tooltip from "./Tooltip";
 import { iconUrl, onIconError } from "../lib/iconUrl";
 import { useNodeEmphasis } from "./SearchContext";
@@ -72,7 +72,18 @@ function RarityLegend({ n }) {
 
 // ─── Individual heatmap node ──────────────────────────────────────────────────
 
-function HeatmapNode({ node, px, py, stat, totalBuilds, labels }) {
+// Memoised: with stable stats/labels (memoised in MainView) a node only
+// re-renders when its own stat changes, not on every parent render. Search and
+// changes-only emphasis arrive through context (useNodeEmphasis), which bypasses
+// memo, so those still update every node.
+const HeatmapNode = memo(function HeatmapNode({
+  node,
+  px,
+  py,
+  stat,
+  totalBuilds,
+  labels,
+}) {
   const count = stat?.count ?? 0;
   const choiceVotes = stat?.choiceVotes ?? [];
   const takenBy = stat?.takenBy ?? [];
@@ -285,7 +296,7 @@ function HeatmapNode({ node, px, py, stat, totalBuilds, labels }) {
       </div>
     </Tooltip>
   );
-}
+});
 
 // ─── Heatmap panel ────────────────────────────────────────────────────────────
 

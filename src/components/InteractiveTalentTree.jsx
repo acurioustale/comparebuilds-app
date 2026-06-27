@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Tooltip from "./Tooltip";
 import TalentTree from "./TalentTree";
-import { generateBuildString } from "../lib/buildString";
+import { generateBuildString, heroGateSelection } from "../lib/buildString";
 import { computeInvalidNodeIds, buildGrantedSeed } from "../lib/treeLogic";
 import {
   sectionPoints,
@@ -112,6 +112,46 @@ export default function InteractiveTalentTree({
     [treeData.nodes, selected, nodeById],
   );
 
+  // ── Spend primitives ──────────────────────────────────────────────────────
+  // The spend rules live here once so the mouse (click/right-click) and touch
+  // (tap) handlers can't drift on gating, point shape, or refund behaviour.
+
+  // Spend the first point on an unselected node (gated by canSpendPoint).
+  const spendFirstPoint = useCallback(
+    (node, entryChosen) => {
+      if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
+        return;
+      setInteractiveNodes({
+        ...selected,
+        [node.id]: { pointsInvested: 1, entryChosen },
+      });
+    },
+    [selected, nodeById, treeData.nodes, budget, setInteractiveNodes],
+  );
+
+  // Add a rank to an already-selected node (gated by canSpendPoint).
+  const incrementRank = useCallback(
+    (node, sel) => {
+      if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
+        return;
+      setInteractiveNodes({
+        ...selected,
+        [node.id]: { ...sel, pointsInvested: sel.pointsInvested + 1 },
+      });
+    },
+    [selected, nodeById, treeData.nodes, budget, setInteractiveNodes],
+  );
+
+  // Remove a node from the selection entirely.
+  const removeNode = useCallback(
+    (nodeId) => {
+      const next = { ...selected };
+      delete next[nodeId];
+      setInteractiveNodes(next);
+    },
+    [selected, setInteractiveNodes],
+  );
+
   // ── Click handlers ──────────────────────────────────────────────────────────
 
   const handleClick = useCallback(
@@ -122,13 +162,7 @@ export default function InteractiveTalentTree({
       const sel = selected[nodeId];
 
       if (!sel) {
-        if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
-          return;
-        const entryChosen = node.type === "choice" ? (choiceIdx ?? 0) : null;
-        setInteractiveNodes({
-          ...selected,
-          [nodeId]: { pointsInvested: 1, entryChosen },
-        });
+        spendFirstPoint(node, node.type === "choice" ? (choiceIdx ?? 0) : null);
       } else if (node.type === "choice") {
         const numChoices = node.choices?.length ?? 1;
         const next =
@@ -142,15 +176,10 @@ export default function InteractiveTalentTree({
           });
         }
       } else if (sel.pointsInvested < node.maxRanks) {
-        if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
-          return;
-        setInteractiveNodes({
-          ...selected,
-          [nodeId]: { ...sel, pointsInvested: sel.pointsInvested + 1 },
-        });
+        incrementRank(node, sel);
       }
     },
-    [selected, nodeById, treeData.nodes, budget, setInteractiveNodes],
+    [selected, nodeById, setInteractiveNodes, spendFirstPoint, incrementRank],
   );
 
   const handleRightClick = useCallback(
@@ -160,22 +189,18 @@ export default function InteractiveTalentTree({
       const sel = selected[nodeId];
       if (!sel) return;
 
-      if (node.type === "choice") {
-        const next = { ...selected };
-        delete next[nodeId];
-        setInteractiveNodes(next);
-      } else if (sel.pointsInvested > 1) {
+      // Ranked non-choice nodes step down one rank; everything else (choice
+      // nodes, single-rank nodes) clears outright.
+      if (node.type !== "choice" && sel.pointsInvested > 1) {
         setInteractiveNodes({
           ...selected,
           [nodeId]: { ...sel, pointsInvested: sel.pointsInvested - 1 },
         });
       } else {
-        const next = { ...selected };
-        delete next[nodeId];
-        setInteractiveNodes(next);
+        removeNode(nodeId);
       }
     },
-    [selected, nodeById, setInteractiveNodes],
+    [selected, nodeById, setInteractiveNodes, removeNode],
   );
 
   // Touch tap: one gesture that cycles a node, folding spend and refund together
@@ -190,16 +215,9 @@ export default function InteractiveTalentTree({
 
       if (node.type === "choice") {
         if (!sel) {
-          if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
-            return;
-          setInteractiveNodes({
-            ...selected,
-            [nodeId]: { pointsInvested: 1, entryChosen: choiceIdx ?? 0 },
-          });
+          spendFirstPoint(node, choiceIdx ?? 0);
         } else if (sel.entryChosen === choiceIdx) {
-          const next = { ...selected };
-          delete next[nodeId];
-          setInteractiveNodes(next);
+          removeNode(nodeId);
         } else {
           setInteractiveNodes({
             ...selected,
@@ -210,26 +228,21 @@ export default function InteractiveTalentTree({
       }
 
       if (!sel) {
-        if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
-          return;
-        setInteractiveNodes({
-          ...selected,
-          [nodeId]: { pointsInvested: 1, entryChosen: null },
-        });
+        spendFirstPoint(node, null);
       } else if (sel.pointsInvested < node.maxRanks) {
-        if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
-          return;
-        setInteractiveNodes({
-          ...selected,
-          [nodeId]: { ...sel, pointsInvested: sel.pointsInvested + 1 },
-        });
+        incrementRank(node, sel);
       } else {
-        const next = { ...selected };
-        delete next[nodeId];
-        setInteractiveNodes(next);
+        removeNode(nodeId);
       }
     },
-    [selected, nodeById, treeData.nodes, budget, setInteractiveNodes],
+    [
+      selected,
+      nodeById,
+      setInteractiveNodes,
+      spendFirstPoint,
+      incrementRank,
+      removeNode,
+    ],
   );
 
   // ── Clear handlers ──────────────────────────────────────────────────────────
@@ -275,14 +288,16 @@ export default function InteractiveTalentTree({
     try {
       const activeSub = activeHeroSubtree(treeData.nodes, selected);
       // The hero gate node is the hero-tree choice: when hero talents are invested
-      // the in-game format marks it selected with entryChosen = the active subtree
-      // (0 = left, 1 = right). Include it so exports match the canonical encoding.
+      // the in-game format marks it selected with entryChosen = the active subtree.
+      // heroGateSelection owns the 0=left/1=right convention (shared with the
+      // encoder) so the component and the wire format can't disagree.
       const exportSelection = { ...selected };
-      if (heroSpent > 0 && treeData.heroGateNodeId != null) {
-        exportSelection[treeData.heroGateNodeId] = {
-          pointsInvested: 1,
-          entryChosen: activeSub === treeData.heroSubtrees.right.name ? 1 : 0,
-        };
+      const gateSel = heroGateSelection(
+        heroSpent,
+        activeSub === treeData.heroSubtrees.right.name,
+      );
+      if (gateSel && treeData.heroGateNodeId != null) {
+        exportSelection[treeData.heroGateNodeId] = gateSel;
       }
       // Auto-granted nodes encode as selected-but-not-purchased. Class/spec grants
       // always apply; hero grants only for the active subtree (the inactive one's
