@@ -384,10 +384,18 @@ export async function normaliseSpec(specInfo, tree, db2, fns) {
     if (n.treeType === "hero" && n.connections.length === 0)
       n.alreadyGranted = true;
 
-  // Hero budget = spendable (non-granted) nodes in a subtree.
+  // Hero budget = spendable (non-granted) talents in a subtree, counted by grid
+  // position. Most subtrees are one node per cell, but Conduit of the Celestials
+  // packs co-located, mutually-exclusive variant nodes (Xuen-path / Yu'lon-path)
+  // two-to-a-cell; a build can only ever take one of each pair, so dedup by
+  // (posX,posY) — otherwise the count over-reports (15 vs the real 13 a full
+  // hero tree spends; see the in-game fixtures in buildFixtures.test.js).
   const heroNodeCount = left
-    ? nodes.filter((n) => n.heroSubtree === left.name && !n.alreadyGranted)
-        .length
+    ? new Set(
+        nodes
+          .filter((n) => n.heroSubtree === left.name && !n.alreadyGranted)
+          .map((n) => `${n.posX},${n.posY}`),
+      ).size
     : 0;
   const apex = nodes.find((n) => n.type === "apex");
 

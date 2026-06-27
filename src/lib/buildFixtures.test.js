@@ -163,6 +163,15 @@ describe("real in-game build fixtures", () => {
         expect(pts.hero).toBeLessThanOrEqual(sd.pointBudget.hero);
       });
 
+      test("a complete build fills exactly the hero budget", () => {
+        // Every real loadout commits a full hero tree, so the hero points spent
+        // are the ground-truth size of that tree. Asserting equality (not just
+        // ≤) pins pointBudget.hero to reality and catches an inflated budget —
+        // e.g. Conduit of the Celestials' co-located variant nodes, which once
+        // double-counted to 15 while a real build spends 13.
+        expect(pts.hero).toBe(sd.pointBudget.hero);
+      });
+
       test("invests in exactly one hero subtree (the expected one)", () => {
         const active = Object.keys(heroBySubtree);
         expect(active).toEqual([fx.heroSubtree]);
