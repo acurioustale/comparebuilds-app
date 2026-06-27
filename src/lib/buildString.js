@@ -238,12 +238,21 @@ export function parseBuildString(buildString, nodes) {
 
     const node = nodeById.get(id);
 
-    // Clamp a corrupt/out-of-range choice index into a real option. The 2-bit
-    // field can encode 0-3 even on a 2-option node, so a hand-crafted string
-    // could otherwise index past choices[] and surface as "option 4" downstream
-    // (diff labels, heatmap votes). Mirrors the pointsInvested clamp below.
-    if (entryChosen !== null && node?.choices && node.choices.length > 0) {
-      entryChosen = Math.min(entryChosen, node.choices.length - 1);
+    // Normalise entryChosen against the node's real data so a hand-crafted or
+    // version-skewed stream can't smuggle a bogus index downstream. A choice node
+    // clamps an out-of-range pick into a real option (the 2-bit field encodes 0-3
+    // even on a 2-option node, which would otherwise index past choices[] and
+    // surface as "option 4" in diff labels / heatmap votes). A node the data
+    // treats as non-choice reports entryChosen = null regardless of the stream's
+    // isChoiceNode bit — honouring this function's documented contract
+    // ("entryChosen is null for non-choice nodes") so diff.js / heatmap.js, which
+    // compare entryChosen across every node type, can't read a stray index as a
+    // difference. Mirrors the pointsInvested clamp below.
+    if (entryChosen !== null) {
+      entryChosen =
+        node?.choices && node.choices.length > 0
+          ? Math.min(entryChosen, node.choices.length - 1)
+          : null;
     }
 
     // Resolve the node's effective max rank (choice/apex options can differ from

@@ -287,6 +287,27 @@ describe("parseBuildString clamps an over-max partial rank", () => {
     assert.strictEqual(parsed.nodes[100].entryChosen, 1);
   });
 
+  test("a choice bit on a non-choice node yields entryChosen null", () => {
+    const bits = [];
+    pushInt(bits, 2, 8); // version
+    pushInt(bits, 250, 16); // specId
+    for (let i = 0; i < 128; i++) bits.push(0); // hash
+    // One non-choice node (id 100, choices: null): selected, purchased, not
+    // partially ranked, but the stream nonetheless sets the isChoiceNode bit and
+    // a 2-bit index — what a hand-crafted string or a version skew could carry.
+    bits.push(1, 1, 0, 1);
+    pushInt(bits, 1, 2);
+
+    const parsed = parseBuildString(bitsToStr(bits), [
+      { id: 100, maxRanks: 1, choices: null },
+    ]);
+    // The node has no choices, so entryChosen must be null per the contract — not
+    // the stray index the bitstream carried, which diff/heatmap would otherwise
+    // read as a difference.
+    assert.strictEqual(parsed.nodes[100].pointsInvested, 1);
+    assert.strictEqual(parsed.nodes[100].entryChosen, null);
+  });
+
   test("a partially-ranked value of 0 drops the node entirely", () => {
     const bits = [];
     pushInt(bits, 2, 8); // version
