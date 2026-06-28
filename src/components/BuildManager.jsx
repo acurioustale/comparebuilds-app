@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useShallow } from "zustand/react/shallow";
 import Tooltip from "./Tooltip";
-import ExportMenu from "./ExportMenu";
 import {
   useBuildsStore,
   MAX_BUILDS,
@@ -12,6 +11,22 @@ import classesIndex from "../data/classes.json";
 import { iconUrl, onIconError } from "../lib/iconUrl";
 import { activeHeroSubtree, sectionPoints } from "../lib/spendRules";
 import { generateSimcProfileset } from "../lib/simcProfile";
+
+// Action-button label for a copy state. The share link has an async "Saving…"
+// busy state; the synchronous simc copy passes busy === null and never hits it.
+function actionLabel(status, idle, busy) {
+  if (status === "copying") return busy;
+  if (status === "copied") return "Copied!";
+  if (status === "error") return "Failed";
+  return idle;
+}
+
+// Inline label colour: green when done, red on failure, default otherwise.
+function actionColor(status) {
+  if (status === "copied") return "#4ade80";
+  if (status === "error") return "#f87171";
+  return undefined;
+}
 
 function ClassIcon({ name, size = 36 }) {
   // WoW class icons use the slug classicon_{name} with underscores removed.
@@ -618,12 +633,22 @@ export default function BuildManager() {
       {/* ── Action buttons ─────────────────────────── */}
       {allParsed && (
         <section className="flex justify-end items-center gap-2 pt-3 border-t border-wow-dim">
-          <ExportMenu
-            onShareServer={handleCopyLink}
-            onShareSimc={handleCopySimc}
-            serverStatus={copyState}
-            simcStatus={simcState}
-          />
+          <button
+            type="button"
+            onClick={handleCopySimc}
+            className="wow-btn px-4 py-2 text-xs rounded select-none"
+            style={{ color: actionColor(simcState) }}
+          >
+            {actionLabel(simcState, "Copy simc profileset", null)}
+          </button>
+          <button
+            type="button"
+            onClick={handleCopyLink}
+            className="wow-btn px-4 py-2 text-xs rounded select-none"
+            style={{ color: actionColor(copyState) }}
+          >
+            {actionLabel(copyState, "Share link", "Saving…")}
+          </button>
         </section>
       )}
     </div>

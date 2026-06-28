@@ -110,7 +110,7 @@ describe("BuildManager import flow", () => {
     expect(useBuildsStore.getState().editingIndex).toBe(0);
   });
 
-  test("export menu opens and displays share actions", async () => {
+  test("renders both share action buttons once builds are added", async () => {
     render(<BuildManager />);
     const [a, b] = genStrings("death_knight", "blood", 2);
     paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
@@ -118,36 +118,12 @@ describe("BuildManager import flow", () => {
     paste(screen.getByPlaceholderText("Paste build string…"), b);
     await screen.findByPlaceholderText(/Build 2 — Blood Death Knight/);
 
-    const exportBtn = await screen.findByRole("button", {
-      name: /Export \/ Share/i,
-    });
-    expect(exportBtn).toBeInTheDocument();
-    fireEvent.click(exportBtn);
-
-    const shareLinkBtn = await screen.findByText(/Share link/i);
-    const simcBtn = await screen.findByText(/Copy SimC profileset/i);
-    expect(shareLinkBtn).toBeInTheDocument();
-    expect(simcBtn).toBeInTheDocument();
-
-    fireEvent.click(shareLinkBtn);
-    await waitFor(() => {
-      expect(screen.getByText(/Export \/ Share/i)).toBeInTheDocument();
-    });
-  });
-
-  test("export menu closes on Escape", async () => {
-    render(<BuildManager />);
-    const [a, b] = genStrings("death_knight", "blood", 2);
-    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
-    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
-    paste(screen.getByPlaceholderText("Paste build string…"), b);
-    await screen.findByPlaceholderText(/Build 2 — Blood Death Knight/);
-
-    fireEvent.click(
-      await screen.findByRole("button", { name: /Export \/ Share/i }),
-    );
-    await screen.findByText(/Share link/i);
-    fireEvent.keyDown(document.body, { key: "Escape" });
-    await waitFor(() => expect(screen.queryByText(/Share link/i)).toBeNull());
+    // Both actions are surfaced directly as buttons — no popover to open.
+    expect(
+      await screen.findByRole("button", { name: /Copy simc profileset/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Share link/i }),
+    ).toBeInTheDocument();
   });
 });

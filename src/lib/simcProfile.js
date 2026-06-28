@@ -41,10 +41,10 @@ export function generateSimcProfileset(
       }
     }
 
-    // Strip quotes and backslashes to ensure clean SimC profile name
+    // Strip quotes and backslashes to ensure clean simc profile name
     const cleanName = name.replace(/["\\]/g, "");
     // SimulationCraft imports the in-game loadout string via `talents=`; there is
-    // no `talent_tree=` option, so the wrong keyword would make SimC ignore the
+    // no `talent_tree=` option, so the wrong keyword would make simc ignore the
     // profileset's talents entirely.
     lines.push(`profileset."${cleanName}"+=talents=${buildString}`);
   }
