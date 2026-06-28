@@ -500,9 +500,9 @@ const createStore = (set, get) => ({
   finishAddingBuild: () => set({ addingBuild: false, editingIndex: null }),
 
   /**
-   * Enter "edit build" mode for an existing build: seeds the interactive tree
-   * with the build's existing node selection (plus any granted seeds) and sets
-   * editingIndex.
+   * Enter "edit build" mode for an existing imported build: seeds the interactive
+   * tree with the build's existing node selection (plus any granted seeds) via
+   * setInteractiveNodes, and sets editingIndex.
    * @param {number} index
    */
   editBuild: (index) => {

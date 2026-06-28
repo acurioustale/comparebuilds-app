@@ -104,7 +104,7 @@ describe("BuildManager import flow", () => {
     const [s] = genStrings("death_knight", "blood", 1);
     paste(screen.getAllByPlaceholderText("Paste build string…")[0], s);
     await screen.findByPlaceholderText(/Blood Death Knight/);
-    const pencilBtn = screen.getByRole("button", { name: "Edit build" });
+    const pencilBtn = await screen.findByRole("button", { name: "Edit build" });
     fireEvent.click(pencilBtn);
     expect(useBuildsStore.getState().addingBuild).toBe(true);
     expect(useBuildsStore.getState().editingIndex).toBe(0);
