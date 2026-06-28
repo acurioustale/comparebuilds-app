@@ -30,6 +30,16 @@ export default defineConfig({
         branches: 86,
         functions: 89,
         lines: 92,
+        // treeLogic is the correctness core — the prereq/gate/co-located cascade
+        // shared by the interactive, diff, and heatmap views. Hold it at a hard
+        // 100% (per-file glob threshold) so any uncovered branch fails CI, not
+        // just drags the aggregate down. Keep its tests exhaustive.
+        "**/src/lib/treeLogic.js": {
+          statements: 100,
+          branches: 100,
+          functions: 100,
+          lines: 100,
+        },
       },
     },
   },

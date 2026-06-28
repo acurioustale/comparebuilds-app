@@ -9,7 +9,12 @@
 import { test } from "vitest";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
-import { computeInvalidNodeIds, cellKey, spentPoints } from "./treeLogic.js";
+import {
+  computeInvalidNodeIds,
+  cellKey,
+  spentPoints,
+  hasUpperPrereq,
+} from "./treeLogic.js";
 
 const require = createRequire(import.meta.url);
 
@@ -577,5 +582,45 @@ test("removing Aimed Shot invalidates all connection-dependent spec nodes, not c
   assert.ok(
     reachableSize >= 2,
     `expected at least 2 reachable nodes, got ${reachableSize}`,
+  );
+});
+
+// ─── hasUpperPrereq ──────────────────────────────────────────────────────────
+
+test("hasUpperPrereq: a root node (no upper parent) always passes", () => {
+  const root = node(1, 0);
+  assert.strictEqual(hasUpperPrereq(root, {}, byId([root])), true);
+});
+
+test("hasUpperPrereq: an alreadyGranted upper parent satisfies it (nothing selected)", () => {
+  // Granted parents are permanently satisfied — the prereq holds with an empty
+  // selection. (Only reached via canSpendPoint; the validity cascade has its own
+  // granted-parent check.)
+  const parent = node(1, 0, { alreadyGranted: true });
+  const child = node(2, 1, { connections: [1] });
+  assert.strictEqual(hasUpperPrereq(child, {}, byId([parent, child])), true);
+});
+
+test("hasUpperPrereq: a fully-selected upper parent satisfies it", () => {
+  const parent = node(1, 0);
+  const child = node(2, 1, { connections: [1] });
+  assert.strictEqual(
+    hasUpperPrereq(child, { 1: sel() }, byId([parent, child])),
+    true,
+  );
+});
+
+test("hasUpperPrereq: an unselected (and not granted) upper parent fails it", () => {
+  const parent = node(1, 0);
+  const child = node(2, 1, { connections: [1] });
+  assert.strictEqual(hasUpperPrereq(child, {}, byId([parent, child])), false);
+});
+
+test("hasUpperPrereq: a partially-ranked upper parent does not satisfy it", () => {
+  const parent = node(1, 0, { maxRanks: 2 });
+  const child = node(2, 1, { connections: [1] });
+  assert.strictEqual(
+    hasUpperPrereq(child, { 1: sel(1) }, byId([parent, child])),
+    false,
   );
 });
