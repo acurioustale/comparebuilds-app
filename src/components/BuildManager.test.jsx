@@ -134,4 +134,22 @@ describe("BuildManager import flow", () => {
       expect(screen.getByText(/Export \/ Share/i)).toBeInTheDocument();
     });
   });
+
+  test("export menu closes on Escape", async () => {
+    render(<BuildManager />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+    await screen.findByPlaceholderText(/Build 2 — Blood Death Knight/);
+
+    fireEvent.click(
+      await screen.findByRole("button", { name: /Export \/ Share/i }),
+    );
+    await screen.findByText(/Copy short link/i);
+    fireEvent.keyDown(document.body, { key: "Escape" });
+    await waitFor(() =>
+      expect(screen.queryByText(/Copy short link/i)).toBeNull(),
+    );
+  });
 });
