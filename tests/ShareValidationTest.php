@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -113,6 +115,33 @@ final class ShareValidationTest extends TestCase
         // TRUST_PROXY is undefined under test, so X-Forwarded-For must be ignored.
         $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.1';
+        $this->assertSame('203.0.113.7', client_ip());
+    }
+
+    // Runs in a separate process: TRUST_PROXY is a constant, so defining it here
+    // would otherwise leak into every other client_ip test in this process.
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
+    public function testClientIpUsesLastForwardedHopWhenProxyTrusted(): void
+    {
+        define('TRUST_PROXY', true);
+        $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
+        // An attacker prepends a forged hop; the trusted proxy appends the real
+        // client as the rightmost entry. Taking the last hop ignores the forgery,
+        // so the spoofed value can't mint a fresh rate-limit key per request.
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '1.2.3.4, 198.51.100.9';
+        $this->assertSame('198.51.100.9', client_ip());
+    }
+
+    // A trusted proxy that appends a non-IP (or the header is otherwise garbage)
+    // must fall back to REMOTE_ADDR rather than rate-limiting on junk.
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
+    public function testClientIpFallsBackWhenTrustedForwardedHopIsNotAnIp(): void
+    {
+        define('TRUST_PROXY', true);
+        $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.9, not-an-ip';
         $this->assertSame('203.0.113.7', client_ip());
     }
 

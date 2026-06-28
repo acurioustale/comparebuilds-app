@@ -128,17 +128,21 @@ function render_share_page(string $id, ?array $data): void
  *
  * Direct hosting: REMOTE_ADDR is the real client. Behind a reverse proxy or CDN
  * (Cloudflare, etc.) REMOTE_ADDR is the proxy, collapsing every visitor into one
- * rate-limit bucket — so the real client is the first hop in X-Forwarded-For.
- * That header is client-spoofable, so it is ONLY trusted when the operator opts
- * in by defining TRUST_PROXY truthy in config.php (i.e. you know a trusted proxy
- * always sets it). Defaults to REMOTE_ADDR.
+ * rate-limit bucket — so the real client is the LAST hop in X-Forwarded-For: the
+ * trusted proxy appends the IP it actually saw connect as the rightmost entry,
+ * while any earlier entries are client-supplied and spoofable. Taking the first
+ * entry instead would let an attacker forge a fresh rate-limit key per request.
+ * The header is ONLY trusted when the operator opts in by defining TRUST_PROXY
+ * truthy in config.php (i.e. you know a trusted proxy always appends it).
+ * Defaults to REMOTE_ADDR.
  */
 function client_ip(): string
 {
     if (defined('TRUST_PROXY') && TRUST_PROXY && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $first = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0]);
-        if (filter_var($first, FILTER_VALIDATE_IP) !== false) {
-            return $first;
+        $ips = array_map('trim', explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+        $realIp = end($ips);
+        if (filter_var($realIp, FILTER_VALIDATE_IP) !== false) {
+            return $realIp;
         }
     }
     return $_SERVER['REMOTE_ADDR'] ?? '';
