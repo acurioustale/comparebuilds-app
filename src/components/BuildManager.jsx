@@ -11,6 +11,7 @@ import { encodeBuildsHash } from "../lib/shareLink";
 import classesIndex from "../data/classes.json";
 import { iconUrl, onIconError } from "../lib/iconUrl";
 import { activeHeroSubtree, sectionPoints } from "../lib/spendRules";
+import { generateSimcProfileset } from "../lib/simcProfile";
 
 function ClassIcon({ name, size = 36 }) {
   // WoW class icons use the slug classicon_{name} with underscores removed.
@@ -386,14 +387,17 @@ export default function BuildManager() {
 
   const [copyState, setCopyState] = useState("idle"); // 'idle' | 'copying' | 'copied' | 'error'
   const [permalinkState, setPermalinkState] = useState("idle"); // 'idle' | 'copied' | 'error'
+  const [simcState, setSimcState] = useState("idle"); // 'idle' | 'copied' | 'error'
   // Reset timers, cleared on unmount so they can't fire setState on a removed
   // share-controls component (e.g. clearing all builds within the 2s window).
   const permalinkTimer = useRef(null);
   const copyTimer = useRef(null);
+  const simcTimer = useRef(null);
   useEffect(
     () => () => {
       clearTimeout(permalinkTimer.current);
       clearTimeout(copyTimer.current);
+      clearTimeout(simcTimer.current);
     },
     [],
   );
@@ -486,6 +490,34 @@ export default function BuildManager() {
     buildNames,
     classDisplayName,
     specDisplayName,
+  ]);
+
+  const handleCopySimc = useCallback(async () => {
+    if (simcState !== "idle") return;
+    try {
+      const profileset = generateSimcProfileset(
+        buildStrings,
+        buildNames,
+        classDisplayName,
+        specDisplayName,
+        treeData,
+        parsedBuilds,
+      );
+      await navigator.clipboard.writeText(profileset);
+      setSimcState("copied");
+    } catch {
+      setSimcState("error");
+    } finally {
+      simcTimer.current = setTimeout(() => setSimcState("idle"), 2000);
+    }
+  }, [
+    simcState,
+    buildStrings,
+    buildNames,
+    classDisplayName,
+    specDisplayName,
+    treeData,
+    parsedBuilds,
   ]);
 
   // Human-readable build label: "Build N — [Hero Spec] Spec Class"
@@ -621,8 +653,10 @@ export default function BuildManager() {
           <ExportMenu
             onShareServer={handleCopyLink}
             onShareClient={handleCopyPermalink}
+            onShareSimc={handleCopySimc}
             serverStatus={copyState}
             clientStatus={permalinkState}
+            simcStatus={simcState}
           />
         </section>
       )}
