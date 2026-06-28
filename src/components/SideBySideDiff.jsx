@@ -227,6 +227,7 @@ export default function SideBySideDiff({
   // Responsive coordination: 'row' | 'stacked' from the FitToWidth coordinator, so
   // reflow lines up with the zoom scale.
   layout = "row",
+  changesToggle = null,
 }) {
   const { highlights, aOnly, bOnly, differing } = useMemo(
     () => computeDiff(buildA.nodes, buildB.nodes, treeData.nodes),
@@ -319,6 +320,11 @@ export default function SideBySideDiff({
 
   return (
     <div>
+      {/* Changes-only toggle, right-aligned atop the build panels. */}
+      {changesToggle && (
+        <div className="flex justify-end mb-4">{changesToggle}</div>
+      )}
+
       <div className="flex flex-col gap-8 pb-2">
         <SectionPair
           {...pairProps}

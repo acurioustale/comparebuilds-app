@@ -325,6 +325,12 @@ function MainView() {
                 builds={validParsed}
                 labels={validLabels}
                 layout={layout}
+                changesToggle={
+                  <ChangesFilterToggle
+                    value={changesOnly}
+                    onChange={setChangesOnly}
+                  />
+                }
               />
               {comparisonFooter && (
                 <PanelFooter>{comparisonFooter}</PanelFooter>
@@ -347,6 +353,12 @@ function MainView() {
                 labelA={valid[0].label}
                 labelB={valid[1].label}
                 layout={layout}
+                changesToggle={
+                  <ChangesFilterToggle
+                    value={changesOnly}
+                    onChange={setChangesOnly}
+                  />
+                }
               />
               {comparisonFooter && (
                 <PanelFooter>{comparisonFooter}</PanelFooter>
@@ -399,13 +411,9 @@ function MainView() {
         </div>
       )}
 
-      {/* Changes-only toggle: only meaningful once there are builds to compare. */}
-      {valid.length >= 2 && (
-        <div className="mt-4 flex justify-center">
-          <ChangesFilterToggle value={changesOnly} onChange={setChangesOnly} />
-        </div>
-      )}
-
+      {/* The changes-only toggle now lives inside each comparison view (the diff
+          panel's top row and the heatmap's legend line), so there's no floating
+          control here anymore. */}
       <ChangesFilterContext.Provider value={changesOnly}>
         <SpotlightContext.Provider value={spotlightId}>
           {comparisonEl}

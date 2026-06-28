@@ -43,7 +43,7 @@ function RarityLegend({ n }) {
   const tiers = useMemo(() => computeLegendTiers(n), [n]);
 
   return (
-    <div className="flex flex-wrap gap-x-4 gap-y-1 mb-4">
+    <div className="flex flex-wrap gap-x-4 gap-y-1">
       {tiers.map(({ tier, rangeLabel }) => {
         const r = RARITY[tier];
         return (
@@ -375,6 +375,7 @@ export default function HeatmapTree({
   builds,
   labels = [],
   layout = null,
+  changesToggle = null,
 }) {
   const totalBuilds = builds.length;
 
@@ -394,7 +395,12 @@ export default function HeatmapTree({
 
   return (
     <div>
-      <RarityLegend n={totalBuilds} />
+      {/* Legend and the changes-only toggle share one line; the toggle is pushed
+          to the right edge of the panels. */}
+      <div className="flex items-center justify-between gap-4 mb-4">
+        <RarityLegend n={totalBuilds} />
+        {changesToggle && <div className="shrink-0">{changesToggle}</div>}
+      </div>
 
       <div className="overflow-x-auto pb-1">
         <div className="inline-flex flex-col gap-4 min-w-max">
