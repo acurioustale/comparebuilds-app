@@ -349,7 +349,7 @@ const createStore = (set, get) => ({
       set({
         error: isVersion
           ? `${err.message}. This build string is from a newer game format than this tool supports.`
-          : `Could not read the build string header — it may be truncated or corrupt: ${err.message}`,
+          : "Could not read the build string header — it may be truncated or corrupt.",
       });
       return;
     }
@@ -594,7 +594,7 @@ const createStore = (set, get) => ({
       set({
         error: isVersion
           ? `${err.message}. This build string is from a newer game format than this tool supports.`
-          : `Could not read the build string header — it may be truncated or corrupt: ${err.message}`,
+          : "Could not read the build string header — it may be truncated or corrupt.",
       });
       return;
     }
