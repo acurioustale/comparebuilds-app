@@ -112,7 +112,8 @@ function parseAll(strings, classNodes) {
   return strings.map((s) => {
     try {
       return parseBuildString(s, classNodes);
-    } catch {
+    } catch (err) {
+      console.error(`Failed to parse build string: ${err.message}`, err);
       return null;
     }
   });
@@ -182,6 +183,7 @@ async function loadTreeData(
     });
   } catch (err) {
     if (loadGen !== gen) return;
+    console.error(`Failed to load tree data: ${err.message}`, err);
     set({
       isLoading: false,
       error: `Failed to load tree data: ${err.message}`,
@@ -338,12 +340,16 @@ const createStore = (set, get) => ({
     } catch (err) {
       // Surface the specific reason for an unsupported version; otherwise treat it
       // as an unreadable header (bad base64, truncation, etc.).
+      console.error(
+        `Failed to parse spec ID from build string: ${err.message}`,
+        err,
+      );
       const isVersion =
         err instanceof RangeError && /version/i.test(err.message);
       set({
         error: isVersion
           ? `${err.message}. This build string is from a newer game format than this tool supports.`
-          : "Could not read the build string header — it may be truncated or corrupt.",
+          : `Could not read the build string header — it may be truncated or corrupt: ${err.message}`,
       });
       return;
     }
@@ -579,12 +585,16 @@ const createStore = (set, get) => ({
     try {
       header = parseSpecId(buildString);
     } catch (err) {
+      console.error(
+        `Failed to parse spec ID from build string: ${err.message}`,
+        err,
+      );
       const isVersion =
         err instanceof RangeError && /version/i.test(err.message);
       set({
         error: isVersion
           ? `${err.message}. This build string is from a newer game format than this tool supports.`
-          : "Could not read the build string header — it may be truncated or corrupt.",
+          : `Could not read the build string header — it may be truncated or corrupt: ${err.message}`,
       });
       return;
     }
@@ -730,7 +740,11 @@ export const useBuildsStore = create(
         setItem: (name, value) => {
           try {
             localStorage.setItem(name, value);
-          } catch {
+          } catch (err) {
+            console.error(
+              `[zustand persist middleware] Failed to save state to localStorage: ${err.message}`,
+              err,
+            );
             // Best-effort: a failed write must not break a state update.
           }
         },
