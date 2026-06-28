@@ -32,6 +32,10 @@ const CLASS_INFO = [
     13 => ['Evoker',       '#33937F'],
 ];
 
+const OG_RATE_LIMIT_MAX    = 60;    // max OG images generated per IP per window
+const OG_RATE_LIMIT_WINDOW = 3600;  // window length in seconds (1 hour)
+const OG_PRUNE_WINDOW      = 86400; // prune records older than 24 hours
+
 function bail(int $code): void
 {
     http_response_code($code);
@@ -134,7 +138,57 @@ if (!is_string($id) || !valid_share_id($id)) {
 
 try {
     $pdo = get_db_connection();
-    $data = get_share($pdo, $id);
+
+    // ── Concurrency throttling & rate limiting ──────────────────────────────
+    $ipHash = client_ip_hash();
+    $lockName = 'cb_og_' . substr($ipHash, 0, 48);
+    $lk = $pdo->prepare('SELECT GET_LOCK(?, 5)');
+    $lk->execute([$lockName]);
+    if ((int) $lk->fetchColumn() !== 1) {
+        header('Retry-After: 5');
+        bail(503);
+    }
+
+    try {
+        $pdo->exec("
+            CREATE TABLE IF NOT EXISTS comparebuilds_og_requests (
+                id         INT AUTO_INCREMENT PRIMARY KEY,
+                ip_hash    CHAR(64)  NOT NULL,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                INDEX idx_ip_created (ip_hash, created_at)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+        ");
+
+        $rl = $pdo->prepare(
+            'SELECT COUNT(*) AS c FROM comparebuilds_og_requests '
+            . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . OG_RATE_LIMIT_WINDOW . ' SECOND'
+        );
+        $rl->execute([$ipHash]);
+        if ((int) $rl->fetch()['c'] >= OG_RATE_LIMIT_MAX) {
+            $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
+            $rel->execute([$lockName]);
+            header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
+            bail(429);
+        }
+
+        try {
+            $prune = $pdo->prepare(
+                'DELETE FROM comparebuilds_og_requests '
+                . 'WHERE created_at < NOW() - INTERVAL ' . OG_PRUNE_WINDOW . ' SECOND'
+            );
+            $prune->execute();
+        } catch (Throwable $e) {
+            // Non-fatal — proceed even if cleanup fails.
+        }
+
+        $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
+        $logReq->execute([$ipHash]);
+
+        $data = get_share($pdo, $id);
+    } finally {
+        $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
+        $rel->execute([$lockName]);
+    }
 } catch (Throwable $e) {
     bail(500);
 }
