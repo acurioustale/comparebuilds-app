@@ -3,14 +3,38 @@ import assert from "node:assert/strict";
 import { matchNodeIds } from "./talentSearch.js";
 
 const NODES = [
-  { id: 1, name: "Death Strike", choices: null },
-  { id: 2, name: "Blood Boil", choices: null },
+  {
+    id: 1,
+    name: "Death Strike",
+    description: "Heals you for a percentage of damage taken.",
+    choices: null,
+  },
+  {
+    id: 2,
+    name: "Blood Boil",
+    description: "Deals shadow damage and infects targets with Blood Plague.",
+    choices: null,
+  },
   {
     id: 3,
     name: null,
-    choices: [{ name: "Anti-Magic Barrier" }, { name: "Death Pact" }],
+    choices: [
+      {
+        name: "Anti-Magic Barrier",
+        description: "Reduces cooldown of Anti-Magic Shell.",
+      },
+      {
+        name: "Death Pact",
+        description: "Sacrifice a minion to heal yourself.",
+      },
+    ],
   },
-  { id: 4, name: "Heart Strike", choices: null },
+  {
+    id: 4,
+    name: "Heart Strike",
+    description: "Instantly strike the target and 1 other nearby enemy.",
+    choices: null,
+  },
 ];
 
 describe("matchNodeIds", () => {
@@ -29,6 +53,12 @@ describe("matchNodeIds", () => {
   test("matches any choice option name", () => {
     assert.deepStrictEqual([...matchNodeIds("pact", NODES)], [3]);
     assert.deepStrictEqual([...matchNodeIds("anti-magic", NODES)], [3]);
+  });
+
+  test("matches descriptions and choice descriptions case-insensitively", () => {
+    assert.deepStrictEqual([...matchNodeIds("plague", NODES)], [2]);
+    assert.deepStrictEqual([...matchNodeIds("sacrifice", NODES)], [3]);
+    assert.deepStrictEqual([...matchNodeIds("heal", NODES)].sort(), [1, 3]);
   });
 
   test("no match yields an empty set", () => {
