@@ -73,8 +73,12 @@ fi
 if have shellcheck && have shfmt; then
 	step "Shell scripts (shellcheck + shfmt)"
 	require_version shfmt "$SHFMT_VERSION" "$(shfmt --version)"
-	shellcheck ./*.sh
-	shfmt -d ./*.sh
+	sh_files=()
+	while IFS= read -r -d '' file; do
+		sh_files+=("$file")
+	done < <(find . -maxdepth 1 -name "*.sh" -print0)
+	shellcheck "${sh_files[@]}"
+	shfmt -d "${sh_files[@]}"
 else
 	skip shellcheck/shfmt "shell checks"
 fi
