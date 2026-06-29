@@ -345,4 +345,16 @@ describe("renderSpellDescription", () => {
       }),
     ).toBe(""); // unfilled $s2 survives → bail, rather than show a stale number
   });
+
+  it("blanks (never 'NaN') when an effect value is NaN", () => {
+    expect(
+      renderSpellDescription({
+        template: "Deals $s1% damage.",
+        orderIndex: 0,
+        thisSpellId: 100,
+        // e.g. Number("") on a missing/non-numeric EffectBasePointsF column
+        effects: new Map([[100, [NaN]]]),
+      }),
+    ).toBe("");
+  });
 });

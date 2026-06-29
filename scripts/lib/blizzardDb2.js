@@ -168,7 +168,11 @@ export function renderSpellDescription({
     /\$(\d*)s(\d+)/g,
     (m, sid, k) => {
       const v = effects.get(sid ? Number(sid) : thisSpellId)?.[Number(k) - 1];
-      return v == null ? m : String(Math.abs(v)).replace(/\.0+$/, "");
+      // Number.isFinite (not `v == null`) so a NaN effect value — e.g. a
+      // missing/non-numeric EffectBasePointsF column — leaves the token
+      // unresolved and falls through to the blank-on-survivor guard below,
+      // rather than rendering the literal string "NaN".
+      return Number.isFinite(v) ? String(Math.abs(v)).replace(/\.0+$/, "") : m;
     },
   );
   // Bail to blank if an unhandled token survived — never show partial text.

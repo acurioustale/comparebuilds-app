@@ -27,6 +27,10 @@ const isNum = (v) => typeof v === "number" && Number.isFinite(v);
 const isStr = (v) => typeof v === "string" && v.length > 0;
 const isBool = (v) => typeof v === "boolean";
 const isArr = (v) => Array.isArray(v);
+// Node/choice icons are interpolated into a same-origin URL path by iconUrl.js
+// (`/talent-icons/${icon}.jpg`). Constrain them to the Blizzard slug charset so
+// a stray "/" or ".." in a hand-edited row can't escape the icons directory.
+const isIconName = (v) => isStr(v) && /^[a-z0-9_]+$/i.test(v);
 
 /**
  * Validates a single normalised class-data object.
@@ -183,14 +187,17 @@ export function validateClassData(data, indexEntry = null) {
 
       // Type-specific shape
       if (n.type === "choice") {
-        if (!isArr(n.choices) || n.choices.length < 2) {
-          nAt("choice node must have a choices array of length >= 2");
+        // entryChosen is encoded in a fixed 2-bit wire field (0–3), so a choice
+        // node can carry at most 4 options; more would silently mis-decode
+        // share links (buildString clamps the index to the last option).
+        if (!isArr(n.choices) || n.choices.length < 2 || n.choices.length > 4) {
+          nAt("choice node must have a choices array of length 2–4");
         } else {
           n.choices.forEach((ch, ci) => {
             if (!isStr(ch?.name))
               nAt(`choices[${ci}].name must be a non-empty string`);
-            if (!isStr(ch?.icon))
-              nAt(`choices[${ci}].icon must be a non-empty string`);
+            if (!isIconName(ch?.icon))
+              nAt(`choices[${ci}].icon must be an icon slug ([A-Za-z0-9_])`);
             if (!isInt(ch?.maxRanks) || ch.maxRanks < 1)
               nAt(`choices[${ci}].maxRanks must be a positive integer`);
           });
@@ -209,7 +216,11 @@ export function validateClassData(data, indexEntry = null) {
             nAt(`maxRanks ${n.maxRanks} != sum of rank maxRanks ${sum}`);
           }
         }
-        if (!isArr(n.levels)) nAt("apex node must have a levels array");
+        // The ingest can emit a null level when no grant covers a rank; the UI
+        // would then render a blank unlock level. Require integer entries so a
+        // null slips through here rather than shipping in src/data.
+        if (!isArr(n.levels) || !n.levels.every(isInt))
+          nAt("apex node must have a levels array of integers");
         // collectClassNodes reads `choices ?? null`, so a stray non-null choices
         // would re-encode this apex as a multi-bit choice node and shift the wire
         // layout — guard it exactly like the round/square branch below.
@@ -217,7 +228,8 @@ export function validateClassData(data, indexEntry = null) {
       } else {
         // round / square
         if (!isStr(n.name)) nAt("must have a name");
-        if (!isStr(n.icon)) nAt("must have an icon");
+        if (!isIconName(n.icon))
+          nAt("icon must be an icon slug ([A-Za-z0-9_])");
         if (n.choices != null) nAt("non-choice node must have choices = null");
       }
 

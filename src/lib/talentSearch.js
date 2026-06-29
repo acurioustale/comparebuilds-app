@@ -7,11 +7,12 @@
 // which callers treat as "search inactive".
 //
 // Descriptions are sanitised tooltip HTML, so they carry entities (e.g. `&#39;`
-// for an apostrophe) and the occasional tag. Each node's searchable text is
-// normalised — tags stripped, entities decoded, whitespace collapsed, lowercased
-// — so a query like "attacker's" matches the stored "attacker&#39;s". The query
-// is normalised the same way. The per-node text is memoised by node-list identity
-// so the regex work happens once per loaded spec, not on every keystroke.
+// or `&#x27;` for an apostrophe) and the occasional tag. Each node's searchable
+// text is normalised — tags stripped, entities decoded, whitespace collapsed,
+// lowercased — so a query like "attacker's" matches the stored "attacker&#39;s".
+// The query is normalised the same way. The per-node text is memoised by
+// node-list identity so the regex work happens once per loaded spec, not on
+// every keystroke.
 
 const NAMED_ENTITIES = {
   "&amp;": "&",
@@ -23,12 +24,24 @@ const NAMED_ENTITIES = {
   "&nbsp;": " ",
 };
 
+// Decode a numeric character reference, guarding against out-of-range values so
+// a malformed entity returns null (caller leaves the literal text) rather than
+// throwing from String.fromCodePoint.
+function fromCodePoint(n) {
+  return Number.isInteger(n) && n >= 0 && n <= 0x10ffff
+    ? String.fromCodePoint(n)
+    : null;
+}
+
 function decodeEntities(s) {
-  return s.replace(/&[a-z]+;|&#\d+;/gi, (m) => {
+  return s.replace(/&[a-z]+;|&#\d+;|&#x[0-9a-f]+;/gi, (m) => {
     const named = NAMED_ENTITIES[m.toLowerCase()];
     if (named !== undefined) return named;
-    const num = /^&#(\d+);$/.exec(m);
-    return num ? String.fromCharCode(Number(num[1])) : m;
+    const dec = /^&#(\d+);$/.exec(m);
+    if (dec) return fromCodePoint(Number(dec[1])) ?? m;
+    const hex = /^&#x([0-9a-f]+);$/i.exec(m);
+    if (hex) return fromCodePoint(parseInt(hex[1], 16)) ?? m;
+    return m;
   });
 }
 

@@ -68,7 +68,12 @@ export function prunedExportSelection(allNodes, selected, activeSubtree) {
   }
 
   // Co-located collapse: gather the purchased non-granted ids in each cell, keep
-  // the lowest, drop the others.
+  // the lowest, drop the others. Keeping the lowest id (rather than the highest
+  // point count) is deliberate — it matches what the game's own export keeps.
+  // This is moot for committed data: the ingest parks every co-located duplicate
+  // out of `nodes`, so each cell has a single id here and the loop below never
+  // finds two; the `realIds` filter above already dropped any parked-id bit a
+  // tool-built string set, so no co-located pair reaches this collapse.
   const idsByCell = new Map();
   for (const n of allNodes) {
     if (n.alreadyGranted || !pruned[n.id]) continue;

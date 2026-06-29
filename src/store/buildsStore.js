@@ -32,6 +32,13 @@ let loadGen = 0;
 // previous one keeps that read-modify-write atomic.
 let addBuildQueue = Promise.resolve();
 
+// Bumped by structural edits (removeBuild / clearAllBuilds) that reindex the
+// slot arrays. removeBuild and clearAllBuilds run synchronously, OUTSIDE
+// addBuildQueue, so a replaceBuild deferred behind the queue could otherwise
+// run after a reindex and overwrite the wrong slot. replaceBuild captures this
+// value when queued and bails if it changed while it waited.
+let slotGen = 0;
+
 async function loadTreeData(
   set,
   get,
@@ -83,10 +90,19 @@ async function loadTreeData(
   } catch (err) {
     if (loadGen !== gen) return;
     console.error(`Failed to load tree data: ${err.message}`, err);
-    set({
-      isLoading: false,
-      error: `Failed to load tree data: ${err.message}`,
-    });
+    const message = `Failed to load tree data: ${err.message}`;
+    // An interactive preload (no build strings) optimistically set specId
+    // before this load. On failure, don't leave specId pointing at a tree that
+    // never loaded — treeData/classNodes would still hold the previous spec, so
+    // the tree would render the old spec while an export stamped the new spec's
+    // header onto the old bit layout. Reset to a clean slate so the UI falls
+    // back to spec selection. Imports (≥1 build) keep their string and surface
+    // the error on the slot, as before.
+    if (get().buildStrings.length === 0) {
+      set({ ...EMPTY, error: message });
+    } else {
+      set({ isLoading: false, error: message });
+    }
   }
 }
 
@@ -352,6 +368,10 @@ const createStore = (set, get) => ({
     const { buildStrings, parsedBuilds, buildNames } = get();
     if (index < 0 || index >= buildStrings.length) return;
 
+    // Reindexing the slots invalidates any positional index captured by a
+    // replaceBuild still waiting in addBuildQueue.
+    slotGen++;
+
     const newStrings = buildStrings.filter((_, i) => i !== index);
     const newParsed = parsedBuilds.filter((_, i) => i !== index);
     const newNames = buildNames.filter((_, i) => i !== index);
@@ -374,6 +394,7 @@ const createStore = (set, get) => ({
    */
   clearAllBuilds: () => {
     loadGen++; // cancel any in-flight load
+    slotGen++; // invalidate any queued replaceBuild's captured index
     set({ ...EMPTY });
   },
 
@@ -432,10 +453,16 @@ const createStore = (set, get) => ({
     const { treeData, parsedBuilds } = get();
     if (!treeData || !parsedBuilds[index]) return;
     set({ addingBuild: true, editingIndex: index });
-    get().setInteractiveNodes({
-      ...buildGrantedSeed(treeData),
-      ...parsedBuilds[index].nodes,
-    });
+    // parsedBuilds[index].nodes carries the synthetic heroGateNodeId, which is
+    // not a real tree node. Seed only with ids the tree actually contains so a
+    // non-node id can't linger in the interactive selection (and persist to
+    // localStorage, where rehydrate would then silently strip it).
+    const known = new Set(treeData.nodes.map((n) => n.id));
+    const seed = { ...buildGrantedSeed(treeData) };
+    for (const [id, sel] of Object.entries(parsedBuilds[index].nodes)) {
+      if (known.has(Number(id))) seed[id] = sel;
+    }
+    get().setInteractiveNodes(seed);
   },
 
   /**
@@ -444,9 +471,14 @@ const createStore = (set, get) => ({
    * @param {string} buildString
    */
   replaceBuild: (index, buildString) => {
-    const run = addBuildQueue.then(() =>
-      get().replaceBuildInternal(index, buildString),
-    );
+    const gen = slotGen;
+    const run = addBuildQueue.then(() => {
+      // A structural edit (removeBuild / clearAllBuilds) reindexed the slots
+      // after this replace was queued, so the captured index is stale — skip
+      // rather than overwrite the wrong slot.
+      if (slotGen !== gen) return false;
+      return get().replaceBuildInternal(index, buildString);
+    });
     addBuildQueue = run.catch(() => {});
     return run;
   },

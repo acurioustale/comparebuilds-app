@@ -373,6 +373,14 @@ describe("node-level fields", () => {
       "non-choice node must have choices = null",
     ));
 
+  test("round node with a path-traversal icon", () =>
+    assertHasError(
+      breakNode((nodes) => {
+        nodes[0].icon = "../../../etc/passwd";
+      }),
+      "icon must be an icon slug ([A-Za-z0-9_])",
+    ));
+
   test("choice node without choices array", () =>
     assertHasError(
       breakNode((nodes) => {
@@ -381,7 +389,22 @@ describe("node-level fields", () => {
         nodes[0].icon = null;
         nodes[0].choices = null;
       }),
-      "choices array of length >= 2",
+      "choices array of length 2–4",
+    ));
+
+  test("choice node with more than 4 choices", () =>
+    assertHasError(
+      breakNode((nodes) => {
+        nodes[0].type = "choice";
+        nodes[0].name = null;
+        nodes[0].icon = null;
+        nodes[0].choices = Array.from({ length: 5 }, (_, i) => ({
+          name: `c${i}`,
+          icon: "x",
+          maxRanks: 1,
+        }));
+      }),
+      "choices array of length 2–4",
     ));
 
   test("choice option missing fields", () =>
@@ -439,6 +462,11 @@ describe("apex nodes", () => {
     assertHasError(withApex({ maxRanks: 5 }), "!= sum of rank maxRanks"));
   test("apex without levels", () =>
     assertHasError(withApex({ levels: null }), "must have a levels array"));
+  test("apex with a null level entry", () =>
+    assertHasError(
+      withApex({ levels: [70, null] }),
+      "apex node must have a levels array of integers",
+    ));
   test("apex with non-null choices", () =>
     assertHasError(
       withApex({ choices: [{ maxRanks: 1 }, { maxRanks: 1 }] }),

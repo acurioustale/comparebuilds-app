@@ -399,9 +399,13 @@ export default function BuildManager() {
             // Empty input slot — error is only shown on the primary empty slot
             // (the one at filledCount, i.e. the first empty one)
             const isPrimary = i === filledCount;
+            // Key by ordinal among the empty slots (not absolute index): the
+            // primary input is always ordinal 0, so adding/removing a build
+            // keeps its key stable. An index-based key would shift on remove,
+            // remounting the input and discarding any unsubmitted typed text.
             return (
               <EmptySlot
-                key={`empty-${i}`}
+                key={`empty-${i - filledCount}`}
                 index={i}
                 onAdd={addBuild}
                 errorMsg={isPrimary ? error : null}

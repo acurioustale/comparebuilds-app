@@ -372,6 +372,38 @@ describe("editBuild and replaceBuild", () => {
     assert.ok(Object.keys(get().interactiveNodes).length > 0);
   });
 
+  test("editBuild does not seed the synthetic hero-gate node id", async () => {
+    const data = require("../data/death_knight.json");
+    const classNodes = collectClassNodes(data);
+    const spec = data.specs.blood;
+    const gateId = spec.heroGateNodeId;
+    const heroNode = spec.nodes.find(
+      (n) => n.treeType === "hero" && !n.alreadyGranted,
+    );
+    // A build that selects a hero subtree carries the gate id in its parse
+    // output, but the gate is not a real tree node.
+    const sel = {
+      [gateId]: { pointsInvested: 1, entryChosen: 0 },
+      [heroNode.id]: { pointsInvested: heroNode.maxRanks, entryChosen: null },
+    };
+    const str = generateBuildString(sel, spec.specId, classNodes);
+    await get().addBuild(str);
+
+    assert.ok(
+      get().parsedBuilds[0].nodes[gateId],
+      "the parsed build carries the hero-gate id",
+    );
+    get().editBuild(0);
+    assert.ok(
+      !get().interactiveNodes[gateId],
+      "the gate id is filtered out of the interactive seed",
+    );
+    assert.ok(
+      get().interactiveNodes[heroNode.id],
+      "a real hero node is still seeded",
+    );
+  });
+
   test("replaceBuild swaps string, re-parses, keeps name, and rejects mismatches/duplicates", async () => {
     const [a, b, c] = genStrings("death_knight", "blood", 3);
     const [mage] = genStrings("mage", "fire", 1);
@@ -394,6 +426,26 @@ describe("editBuild and replaceBuild", () => {
     await get().replaceBuild(0, mage);
     assert.match(get().error ?? "", /Spec mismatch/);
     assert.strictEqual(get().buildStrings[0], c);
+  });
+
+  test("replaceBuild skips when a remove reindexes the slots first", async () => {
+    const [a, b, c] = genStrings("death_knight", "blood", 3);
+    await get().addBuild(a);
+    await get().addBuild(b);
+
+    // Queue a replace of slot 1, then synchronously remove slot 0 before the
+    // queued replace runs. The captured index 1 is now stale (it would land on
+    // the wrong build), so the replace must be skipped.
+    const pending = get().replaceBuild(1, c);
+    get().removeBuild(0);
+    const ok = await pending;
+
+    assert.strictEqual(ok, false, "stale replace resolves falsy");
+    assert.deepStrictEqual(
+      get().buildStrings,
+      [b],
+      "only build a was removed; b is untouched by the stale replace",
+    );
   });
 
   test("addBuild and replaceBuild resolve truthy on success, falsy on rejection", async () => {

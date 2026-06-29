@@ -181,10 +181,15 @@ try {
             // Non-fatal — proceed even if cleanup fails.
         }
 
-        $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
-        $logReq->execute([$ipHash]);
-
         $data = get_share($pdo, $id);
+
+        // Only log a request for a share that actually exists. Logging before the
+        // lookup let probes for non-existent ids burn the per-IP budget and grow
+        // the table; a 404 below releases the lock and bails without logging.
+        if ($data) {
+            $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
+            $logReq->execute([$ipHash]);
+        }
     } finally {
         $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
         $rel->execute([$lockName]);

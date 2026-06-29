@@ -72,6 +72,13 @@ describe("matchNodeIds", () => {
     assert.deepStrictEqual([...matchNodeIds("attacker's", nodes)], [7]);
   });
 
+  test("decodes hex numeric entities so apostrophes match", () => {
+    const nodes = [
+      { id: 9, name: "X", description: "reduces the attacker&#x27;s speed" },
+    ];
+    assert.deepStrictEqual([...matchNodeIds("attacker's", nodes)], [9]);
+  });
+
   test("strips HTML tags from descriptions", () => {
     const nodes = [
       { id: 8, name: "Y", description: "deals <b>Frost</b> damage" },

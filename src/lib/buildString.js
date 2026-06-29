@@ -137,6 +137,22 @@ export function collectClassNodes(classData) {
  *   nodes:   Record<number, { pointsInvested: number, entryChosen: number|null }>
  * }}
  */
+// Per-node-list sort + id→node map, memoised by array identity so repeated
+// parses against the same classNodes (parseAll, re-parse on add/replace) reuse
+// the work instead of rebuilding it each call.
+const nodeIndexCache = new WeakMap();
+function nodeIndex(nodes) {
+  let idx = nodeIndexCache.get(nodes);
+  if (!idx) {
+    idx = {
+      sorted: [...nodes].sort((a, b) => a.id - b.id),
+      nodeById: new Map(nodes.map((n) => [n.id, n])),
+    };
+    nodeIndexCache.set(nodes, idx);
+  }
+  return idx;
+}
+
 export function parseBuildString(buildString, nodes) {
   if (!buildString || typeof buildString !== "string") {
     throw new TypeError("buildString must be a non-empty string");
@@ -156,11 +172,12 @@ export function parseBuildString(buildString, nodes) {
   const specId = reader.readBits(16);
   reader.skipBits(128); // Blizzard internal hash — opaque, carries a real (non-zero) value in game exports but is not needed to decode the selection
 
-  // Sort ascending — must match the order used during serialisation
-  const sorted = [...nodes].sort((a, b) => a.id - b.id);
-
-  // Indexed for maxRanks / choices lookups
-  const nodeById = new Map(nodes.map((n) => [n.id, n]));
+  // Sorted-ascending list (must match the serialisation order) plus an id→node
+  // map for maxRanks / choices lookups. Both are derived purely from `nodes`, so
+  // memoise them by node-list identity: parseAll re-parses every build against
+  // the same classNodes array (and the store re-parses on each add/replace), so
+  // this builds the sort + Map once per loaded class instead of once per build.
+  const { sorted, nodeById } = nodeIndex(nodes);
 
   /** @type {Record<number, {pointsInvested:number, entryChosen:number|null}>} */
   const result = {};

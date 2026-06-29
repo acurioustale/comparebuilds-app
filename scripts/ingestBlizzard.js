@@ -665,11 +665,22 @@ export async function buildBlizzardClasses({
   const descOf = descriptions
     ? (_id, html) => sanitizeDescription(html)
     : () => "";
+  // spellIds whose description fetch threw (transient) and never succeeded.
+  // Surfaced after the run like iconFailures so the committed empty string is
+  // recognised as a fetch failure, not a real "no description" — without this,
+  // a transient failure ships permanent blank text on --promote and a re-run
+  // treats the empty string as already-correct data.
+  const descFailures = new Set();
   const spellDescOf = descriptions
-    ? async (spellId) =>
-        sanitizeDescription(
-          await fetchSpellDescription(api, spellId).catch(() => ""),
-        )
+    ? async (spellId) => {
+        if (spellId == null) return "";
+        try {
+          return sanitizeDescription(await fetchSpellDescription(api, spellId));
+        } catch {
+          descFailures.add(spellId);
+          return "";
+        }
+      }
     : async () => "";
   // Spec-conditional client DB2 templates, rendered for one spec (the web API
   // returns these blank). Gated by the descriptions flag like the others so a
@@ -696,6 +707,17 @@ export async function buildBlizzardClasses({
     console.warn(
       `  ⚠  ${iconFailures.size} icon name(s) failed to fetch (transient) and ` +
         `were written as numeric placeholders: ${[...iconFailures].join(", ")}. ` +
+        `Re-run to fill them.`,
+    );
+  }
+
+  if (descFailures.size > 0) {
+    // Descriptions are soft too, but a swallowed transient failure would commit
+    // a permanent empty description that a re-run can't tell from real "no
+    // description" data, so make it loud.
+    console.warn(
+      `  ⚠  ${descFailures.size} spell description(s) failed to fetch (transient) ` +
+        `and were written as empty: ${[...descFailures].join(", ")}. ` +
         `Re-run to fill them.`,
     );
   }

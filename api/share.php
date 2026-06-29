@@ -74,6 +74,34 @@ function site_origin(): string
 }
 
 /**
+ * Whether a state-changing request came from our own origin. Pure: takes the
+ * relevant request headers, returns bool — so it is unit-testable.
+ *
+ * The API sends no CORS headers, which blocks cross-origin *reads*, but a
+ * "simple" cross-origin POST (e.g. Content-Type: text/plain) is delivered
+ * without a preflight, so the write side effect would still run (CSRF). Reject
+ * any write that isn't same-origin. Prefer Sec-Fetch-Site (sent by modern
+ * browsers and not script-settable), fall back to Origin, then Referer. With no
+ * origin signal at all, fail closed: a real same-origin fetch always sends at
+ * least one of these.
+ */
+function is_same_origin_write(?string $secFetchSite, ?string $origin, ?string $referer): bool
+{
+    $site = site_origin();
+
+    if ($secFetchSite !== null && $secFetchSite !== '') {
+        return $secFetchSite === 'same-origin';
+    }
+    if ($origin !== null && $origin !== '') {
+        return $origin === $site;
+    }
+    if ($referer !== null && $referer !== '') {
+        return $referer === $site || str_starts_with($referer, $site . '/');
+    }
+    return false;
+}
+
+/**
  * Renders the HTML share page served at /s/<id>. Crawlers read the Open Graph
  * tags + generated image; humans are redirected to the SPA (#id) via a meta
  * refresh — no inline script, so it stays within the site's strict CSP.
@@ -195,7 +223,10 @@ function validate_share_input(mixed $body): array
         return ['error' => 'builds must contain ' . MIN_BUILDS . '–' . MAX_BUILDS . ' entries'];
     }
     foreach ($builds as $b) {
-        if (!is_string($b) || !preg_match(BUILD_PATTERN, $b)) {
+        // BUILD_PATTERN allows up to 2000 base64 data chars plus padding (2002
+        // total); cap the overall length too so the server agrees with the
+        // documented MAX_BUILD_LEN and the client's per-string limit.
+        if (!is_string($b) || strlen($b) > MAX_BUILD_LEN || !preg_match(BUILD_PATTERN, $b)) {
             return ['error' => 'Each build must be a base64 build string ≤ ' . MAX_BUILD_LEN . ' chars'];
         }
     }
@@ -549,6 +580,16 @@ if ($method === 'GET') {
 
 // ── POST ──────────────────────────────────────────────────────────────────────
 if ($method === 'POST') {
+    // Reject cross-origin writes: no CORS headers are sent, so reads are blocked,
+    // but a simple-request POST would otherwise create a share cross-origin.
+    if (!is_same_origin_write(
+        $_SERVER['HTTP_SEC_FETCH_SITE'] ?? null,
+        $_SERVER['HTTP_ORIGIN'] ?? null,
+        $_SERVER['HTTP_REFERER'] ?? null,
+    )) {
+        fail(403, 'Cross-origin requests are not allowed');
+    }
+
     $declaredLen = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
     if ($declaredLen > MAX_BODY_BYTES) {
         fail(413, 'Payload too large');

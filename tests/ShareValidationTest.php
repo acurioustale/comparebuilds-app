@@ -61,6 +61,11 @@ final class ShareValidationTest extends TestCase
     {
         $this->assertArrayHasKey('error', validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', '!!!']]));
         $this->assertArrayHasKey('error', validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', str_repeat('A', 2001)]]));
+        // 2000 data chars + 2 padding chars matches BUILD_PATTERN but exceeds the
+        // 2000-char total cap, so the length check must reject it.
+        $this->assertArrayHasKey('error', validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', str_repeat('A', 2000) . '==']]));
+        // Exactly at the cap is accepted.
+        $this->assertArrayNotHasKey('error', validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', str_repeat('A', 2000)]]));
     }
 
     public function testLabelsMustParallelBuilds(): void
@@ -242,5 +247,29 @@ final class ShareValidationTest extends TestCase
             $chars,
             'base62 output should use the full a-z range, not the GMP a-v subset'
         );
+    }
+
+    public function testSameOriginWriteAcceptsSameOriginSignals(): void
+    {
+        $site = site_origin();
+        // Sec-Fetch-Site is authoritative and not script-settable.
+        $this->assertTrue(is_same_origin_write('same-origin', null, null));
+        // Origin fallback matches the canonical site exactly.
+        $this->assertTrue(is_same_origin_write(null, $site, null));
+        // Referer fallback under our origin.
+        $this->assertTrue(is_same_origin_write(null, null, $site . '/s/abc123xy'));
+    }
+
+    public function testSameOriginWriteRejectsCrossOriginAndMissingSignals(): void
+    {
+        $site = site_origin();
+        // The CSRF case: a cross-site simple-request POST.
+        $this->assertFalse(is_same_origin_write('cross-site', null, null));
+        // A spoofed Origin from an attacker page.
+        $this->assertFalse(is_same_origin_write(null, 'https://evil.example', null));
+        // Referer on a look-alike host that merely starts with the site string.
+        $this->assertFalse(is_same_origin_write(null, null, $site . '.evil.example/x'));
+        // No origin signal at all → fail closed.
+        $this->assertFalse(is_same_origin_write(null, null, null));
     }
 }

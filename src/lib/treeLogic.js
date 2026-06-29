@@ -49,7 +49,13 @@ export function spentPoints(allNodes, selected, treeType, heroSubtree = null) {
     const pts = selected[n.id]?.pointsInvested ?? 0;
     if (pts === 0) continue;
     const cell = cellKey(n);
-    if (countedCells.has(cell)) continue; // co-located duplicate — count once
+    // Co-located duplicate — count the cell once. Which duplicate's points are
+    // kept is the iteration order (first wins), but that is moot: the ingest
+    // parks every co-located duplicate out of `nodes` (collapseColocatedDuplicates),
+    // so `allNodes` never holds two ids for one cell. A tool-built string can set
+    // a parked id's bit, but parked ids aren't in `allNodes` either, so their
+    // stray points are simply not counted here.
+    if (countedCells.has(cell)) continue;
     countedCells.add(cell);
     total += pts;
   }

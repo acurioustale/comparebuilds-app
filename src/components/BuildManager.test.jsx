@@ -110,6 +110,31 @@ describe("BuildManager import flow", () => {
     expect(useBuildsStore.getState().editingIndex).toBe(0);
   });
 
+  test("unsubmitted typed text in the empty slot survives removing a build", async () => {
+    render(<BuildManager />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+    await screen.findByPlaceholderText(/Build 2 — Blood Death Knight/);
+
+    // Type (but do not submit) a third build string into the empty slot.
+    fireEvent.change(screen.getByPlaceholderText("Paste build string…"), {
+      target: { value: "draft-build-string" },
+    });
+
+    // Remove the first build — this shifts every slot index down by one.
+    fireEvent.click(screen.getAllByTitle("Remove")[0]);
+    await waitFor(() =>
+      expect(useBuildsStore.getState().buildStrings.length).toBe(1),
+    );
+
+    // The empty input must keep the unsubmitted draft rather than remounting.
+    expect(screen.getByPlaceholderText("Paste build string…").value).toBe(
+      "draft-build-string",
+    );
+  });
+
   test("renders both share action buttons once builds are added", async () => {
     render(<BuildManager />);
     const [a, b] = genStrings("death_knight", "blood", 2);
