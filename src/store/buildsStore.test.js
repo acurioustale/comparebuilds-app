@@ -372,6 +372,38 @@ describe("editBuild and replaceBuild", () => {
     assert.ok(Object.keys(get().interactiveNodes).length > 0);
   });
 
+  test("editBuild does not seed the synthetic hero-gate node id", async () => {
+    const data = require("../data/death_knight.json");
+    const classNodes = collectClassNodes(data);
+    const spec = data.specs.blood;
+    const gateId = spec.heroGateNodeId;
+    const heroNode = spec.nodes.find(
+      (n) => n.treeType === "hero" && !n.alreadyGranted,
+    );
+    // A build that selects a hero subtree carries the gate id in its parse
+    // output, but the gate is not a real tree node.
+    const sel = {
+      [gateId]: { pointsInvested: 1, entryChosen: 0 },
+      [heroNode.id]: { pointsInvested: heroNode.maxRanks, entryChosen: null },
+    };
+    const str = generateBuildString(sel, spec.specId, classNodes);
+    await get().addBuild(str);
+
+    assert.ok(
+      get().parsedBuilds[0].nodes[gateId],
+      "the parsed build carries the hero-gate id",
+    );
+    get().editBuild(0);
+    assert.ok(
+      !get().interactiveNodes[gateId],
+      "the gate id is filtered out of the interactive seed",
+    );
+    assert.ok(
+      get().interactiveNodes[heroNode.id],
+      "a real hero node is still seeded",
+    );
+  });
+
   test("replaceBuild swaps string, re-parses, keeps name, and rejects mismatches/duplicates", async () => {
     const [a, b, c] = genStrings("death_knight", "blood", 3);
     const [mage] = genStrings("mage", "fire", 1);

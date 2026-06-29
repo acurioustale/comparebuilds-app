@@ -453,10 +453,16 @@ const createStore = (set, get) => ({
     const { treeData, parsedBuilds } = get();
     if (!treeData || !parsedBuilds[index]) return;
     set({ addingBuild: true, editingIndex: index });
-    get().setInteractiveNodes({
-      ...buildGrantedSeed(treeData),
-      ...parsedBuilds[index].nodes,
-    });
+    // parsedBuilds[index].nodes carries the synthetic heroGateNodeId, which is
+    // not a real tree node. Seed only with ids the tree actually contains so a
+    // non-node id can't linger in the interactive selection (and persist to
+    // localStorage, where rehydrate would then silently strip it).
+    const known = new Set(treeData.nodes.map((n) => n.id));
+    const seed = { ...buildGrantedSeed(treeData) };
+    for (const [id, sel] of Object.entries(parsedBuilds[index].nodes)) {
+      if (known.has(Number(id))) seed[id] = sel;
+    }
+    get().setInteractiveNodes(seed);
   },
 
   /**
