@@ -666,6 +666,20 @@ export const useBuildsStore = create(
       if (typeof localStorage === "undefined" || !localStorage) {
         throw new Error("localStorage unavailable");
       }
+      const testKey = "__comparebuilds_test__";
+      try {
+        localStorage.setItem(testKey, "test");
+      } catch (err) {
+        throw new Error("localStorage unavailable or quota exceeded", {
+          cause: err,
+        });
+      } finally {
+        try {
+          localStorage.removeItem(testKey);
+        } catch {
+          // Ignore cleanup errors if storage is completely unwriteable
+        }
+      }
       return {
         getItem: (name) => localStorage.getItem(name),
         setItem: (name, value) => {
