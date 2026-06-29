@@ -21,19 +21,21 @@ case "${1:-}" in
 	;;
 esac
 
-# Parse tool versions from .tool-versions (the single source of truth)
-ci_node_major="$(awk '/^nodejs/ {print $2}' .tool-versions)"
-SHFMT_VERSION="$(awk '/^shfmt/ {print $2}' .tool-versions)"
-PHPCSFIXER_VERSION="$(awk '/^php-cs-fixer/ {print $2}' .tool-versions)"
-PHPUNIT_VERSION="$(awk '/^phpunit/ {print $2}' .tool-versions)"
-ACTIONLINT_VERSION="$(awk '/^actionlint/ {print $2}' .tool-versions)"
+# Versions pinned in .tool-versions. Asserted here (only when the tool is
+# present) so a drifted local tool is caught before it surfaces as a mystery
+# failure in CI. .tool-versions is the single source of truth.
+tool_version() {
+	grep "^$1 " .tool-versions | awk '{print $2}'
+}
+ci_node_version="$(tool_version nodejs)"
+SHFMT_VERSION="$(tool_version shfmt)"
+PHPCSFIXER_VERSION="$(tool_version php-cs-fixer)"
+PHPUNIT_VERSION="$(tool_version phpunit)"
+ACTIONLINT_VERSION="$(tool_version actionlint)"
 
-# CI pins Node. Warn (don't block) on a mismatch: a different engine can pass
-# here yet behave differently in CI.
-local_node_major="$(node -v | sed 's/^v//; s/\..*//')"
-if [[ "$local_node_major" != "$ci_node_major" ]]; then
-	echo "warning: local Node is v$local_node_major, CI uses v$ci_node_major." >&2
-fi
+have() { command -v "$1" >/dev/null 2>&1; }
+skip() { echo "note: $1 not installed - skipping $2 (CI enforces it)." >&2; }
+step() { printf '\n\033[1m==> %s\033[0m\n' "$1"; }
 
 # Assert a present tool reports the pinned version; the needle is matched
 # literally so the surrounding "v"/extra output in --version lines doesn't
@@ -51,7 +53,13 @@ require_version() {
 	esac
 }
 
-step() { printf '\n\033[1m==> %s\033[0m\n' "$1"; }
+# CI pins Node. Warn (don't block) on a mismatch: a different engine can pass
+# here yet behave differently in CI.
+ci_node_major="${ci_node_version%%.*}"
+local_node_major="$(node -v | sed 's/^v//; s/\..*//')"
+if [[ "$local_node_major" != "$ci_node_major" ]]; then
+	echo "warning: local Node is v$local_node_major, CI uses v$ci_node_major." >&2
+fi
 
 if [[ "$do_clean" -eq 1 ]]; then
 	step "Install (npm ci)"
@@ -62,46 +70,46 @@ fi
 # Skipped with a notice when the tools aren't installed locally so validate.sh
 # stays runnable everywhere; CI always enforces them. When present, either tool's
 # findings fail the run via set -e.
-if command -v shellcheck >/dev/null && command -v shfmt >/dev/null; then
+if have shellcheck && have shfmt; then
 	step "Shell scripts (shellcheck + shfmt)"
 	require_version shfmt "$SHFMT_VERSION" "$(shfmt --version)"
 	shellcheck ./*.sh
 	shfmt -d ./*.sh
 else
-	echo "note: shellcheck/shfmt not installed - skipping shell checks (CI enforces them)." >&2
+	skip shellcheck/shfmt "shell checks"
 fi
 
 # PHP: syntax check the share API + OG renderer (and the config template). Guarded
 # like the shell checks; CI always runs it.
-if command -v php >/dev/null; then
+if have php; then
 	step "PHP syntax (php -l)"
 	while IFS= read -r f; do php -l "$f"; done < <(git ls-files '*.php' '*.php.example')
 else
-	echo "note: php not installed - skipping PHP checks (CI enforces them)." >&2
+	skip php "PHP checks"
 fi
 
-if command -v php-cs-fixer >/dev/null; then
+if have php-cs-fixer; then
 	step "PHP format (php-cs-fixer)"
 	require_version php-cs-fixer "$PHPCSFIXER_VERSION" "$(php-cs-fixer --version)"
 	php-cs-fixer fix --dry-run --config .php-cs-fixer.dist.php
 else
-	echo "note: php-cs-fixer not installed - skipping (CI enforces it)." >&2
+	skip php-cs-fixer "php-cs-fixer"
 fi
 
-if command -v phpunit >/dev/null; then
+if have phpunit; then
 	step "PHP tests (phpunit)"
 	require_version phpunit "$PHPUNIT_VERSION" "$(phpunit --version | head -1)"
 	phpunit
 else
-	echo "note: phpunit not installed - skipping (CI enforces it)." >&2
+	skip phpunit "phpunit"
 fi
 
-if command -v actionlint >/dev/null; then
+if have actionlint; then
 	step "Workflows (actionlint)"
 	require_version actionlint "$ACTIONLINT_VERSION" "$(actionlint --version | head -1)"
 	actionlint
 else
-	echo "note: actionlint not installed - skipping (CI enforces it)." >&2
+	skip actionlint "actionlint"
 fi
 
 step "Lint"
@@ -117,7 +125,20 @@ step "Markdown (markdownlint)"
 npm run lint:md
 
 step "SVG (svgo)"
-npm run lint:svg
+# Run svgo into a temp file so a svgo crash (bad fetch, config error) is
+# distinguished from a genuinely unoptimised SVG, instead of pipefail turning
+# both into the same misleading "not optimised" message.
+svgo_out="$(mktemp)"
+trap 'rm -f "$svgo_out"' EXIT
+f="public/favicon.svg"
+if ! npx svgo -i "$f" -o "$svgo_out" >/dev/null; then
+	echo "  svgo failed to process $f"
+	exit 1
+fi
+if ! diff -q "$svgo_out" "$f" >/dev/null; then
+	echo "  $f is not optimised; run: npx svgo $f"
+	exit 1
+fi
 
 step "Tests + coverage thresholds"
 npm run coverage
@@ -130,17 +151,20 @@ npm run build
 step "CSP guard"
 npm run check:csp
 
+step "OG image guard"
+npm run check:og
+
 # Validate the freshly built sitemap is well-formed XML — the surest guard against
 # a templating bug in prerenderSpecs (e.g. an unescaped character in a URL). Plain
 # --noout is well-formedness only (no network). xmllint comes from libxml2-utils:
 # bundled on macOS, but NOT on the CI runner image (the workflow apt-installs it
 # there). Guarded like the other non-npm CLIs above: skipped with a notice when
 # absent so validate.sh stays runnable everywhere; CI always enforces it.
-if command -v xmllint >/dev/null; then
+if have xmllint; then
 	step "Sitemap (xmllint)"
 	xmllint --noout dist/sitemap.xml
 else
-	echo "note: xmllint not installed - skipping sitemap check (CI enforces it)." >&2
+	skip xmllint "sitemap check"
 fi
 
 step "All CI checks passed."
