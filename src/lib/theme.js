@@ -4,6 +4,11 @@
  * inline anti-flash script in index.html), so this stays Node-testable under the
  * lib/ coverage gate.
  *
+ * ARCHITECTURAL PARITY: This core three-way theme cycle logic ("auto", "light",
+ * "dark") is shared in parity with acurioustale (js/theme.js). Both projects
+ * derive cycle order dynamically from the OS preference to eliminate dead first
+ * clicks, and keep DOM access strictly decoupled from the pure state transitions.
+ *
  * The model: a three-way mode — "auto" (follow the OS), "light", "dark" —
  * persisted under THEME_STORAGE_KEY. "auto" is the default when nothing valid is
  * stored. The *resolved* theme (what the DOM actually paints) is always light or
