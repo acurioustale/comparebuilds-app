@@ -80,6 +80,8 @@ Expected layout on the server:
     └── api/
         ├── share.php
         ├── og.php
+        ├── cron/
+        │   └── prune_shares.php
         └── fonts/
             └── DejaVuSans-Bold.ttf
 ```
@@ -119,7 +121,15 @@ CREATE TABLE IF NOT EXISTS comparebuilds_shares (
 `ip_hash` stores a salted SHA-256 of the creator's IP, used only for per-IP rate
 limiting (20 shares/hour by default).
 
-### 5. Point the domain
+### 5. Configure the pruning cron job
+
+In your hosting control panel or crontab (`crontab -e`), configure a daily overnight job to execute `api/cron/prune_shares.php`. This script safely purges share links older than 180 days (~6 months):
+
+```bash
+30 3 * * * /usr/bin/php $HOME/html/comparebuilds.app/api/cron/prune_shares.php >/dev/null 2>&1
+```
+
+### 6. Point the domain
 
 In your hosting control panel, point the `comparebuilds.app` domain to the web root folder you uploaded to. The SPA itself uses hash-based routing, so its own routes are all served by `index.html` with no rewrite. The shipped `.htaccess` does add one `mod_rewrite` rule — it maps the pretty share URLs (`/s/<id>`) to `api/share.php` so links unfurl with a preview — along with the site's security headers. It needs `mod_rewrite` and `mod_headers`; both rules are wrapped in `<IfModule>` guards, so the site still works (minus pretty share links / headers) on a host where they're unavailable.
 
@@ -134,7 +144,7 @@ In your hosting control panel, point the `comparebuilds.app` domain to the web r
 | `POST` | JSON body `{ classId, specId, builds: ["…","…"] }` — 2–5 build strings, each ≤ 2000 chars. Optional: `labels` (array parallel to `builds`, each ≤ 40 chars — the per-slot names), `className`/`specName` (≤ 64 chars, used by the OG image), and `layoutHash` (≤ 16-char hex structural fingerprint of the class wire layout). | `{ id }` — 8–16 char alphanumeric, content-addressed (see below)                                |
 | `GET`  | `?id=<id>`                                                                                                                                                                                                                                                                                                                     | Stored JSON payload (includes `labels`/`className`/`specName`/`layoutHash` when they were sent) |
 
-Rows older than 90 days are deleted on each `POST` request.
+Rows older than 180 days (~6 months) are pruned via a standalone daily cron script (`api/cron/prune_shares.php`), completely decoupling table cleanup from live API requests to guarantee zero latency penalty.
 
 Ids are **content-addressed**: the id is a base62 prefix (8 chars, lengthened to
 at most 16 on a collision) of the SHA-256 of the canonicalised payload, so sharing
