@@ -1,18 +1,13 @@
-import { memo, useRef, useContext } from "react";
+import { memo, useContext } from "react";
 import Tooltip from "./Tooltip";
 import { iconUrl, onIconError } from "../lib/iconUrl";
 import { useNodeEmphasis, SpotlightContext } from "./SearchContext";
 import { ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP } from "./treeLayout";
+import { useTapGesture } from "./useTapGesture";
 
 // Hover highlight for a node's prerequisite chain.
 const CHAIN_RING =
   "0 0 0 2px rgba(232,201,107,0.9), 0 0 10px rgba(232,201,107,0.45)";
-
-// Touch gesture thresholds (interactive tree). A press held ≥ TAP_HOLD_MS is a
-// tooltip peek (the Tooltip shows it) rather than a tap; a tap moved more than
-// TAP_MOVE_TOL px is a scroll, not a tap.
-const TAP_HOLD_MS = 350;
-const TAP_MOVE_TOL = 10;
 
 // Box-shadow strings for diff highlight glows
 const HL_SHADOW = {
@@ -162,55 +157,7 @@ export const TalentNode = memo(function TalentNode({
   // click=spend, right-click=refund, hover=tooltip. `tapFired` swallows the
   // synthetic click the browser emits after a tap so it doesn't double-fire with
   // the mouse onClick path; any movement past TAP_MOVE_TOL cancels the tap (scroll).
-  const tapStart = useRef(null);
-  const tapFired = useRef(false);
-  const makeTouchHandlers = (onTap) =>
-    onTap
-      ? {
-          onTouchStart: (e) => {
-            tapFired.current = false;
-            const t = e.touches[0];
-            tapStart.current = {
-              time: Date.now(),
-              x: t.clientX,
-              y: t.clientY,
-              moved: false,
-            };
-          },
-          onTouchMove: (e) => {
-            const s = tapStart.current;
-            if (!s) return;
-            const t = e.touches[0];
-            if (
-              Math.abs(t.clientX - s.x) > TAP_MOVE_TOL ||
-              Math.abs(t.clientY - s.y) > TAP_MOVE_TOL
-            ) {
-              s.moved = true;
-            }
-          },
-          onTouchEnd: () => {
-            const s = tapStart.current;
-            tapStart.current = null;
-            // A scroll (moved) or a hold (a tooltip peek, not a tap) does nothing.
-            if (!s || s.moved || Date.now() - s.time >= TAP_HOLD_MS) return;
-            tapFired.current = true;
-            onTap();
-          },
-          onTouchCancel: () => {
-            tapStart.current = null;
-          },
-        }
-      : null;
-  // Wraps a click handler so the synthetic post-tap click is ignored on touch.
-  const guardClick =
-    (fn) =>
-    (...args) => {
-      if (tapFired.current) {
-        tapFired.current = false;
-        return;
-      }
-      fn(...args);
-    };
+  const { makeTouchHandlers, guardClick } = useTapGesture();
 
   // Keyboard accessibility: only the interactive tree wires onNodeClick. Static
   // comparison/heatmap views stay non-focusable (their textual diff/legend is the
