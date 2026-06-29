@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 import { parseSpecId, collectClassNodes } from "../lib/buildString";
+import { getSafeStorage } from "../lib/safeStorage";
 import { buildGrantedSeed } from "../lib/treeLogic";
 import { wireLayout } from "../lib/wireLayout";
 import {
@@ -679,47 +680,7 @@ export const useBuildsStore = create(
     // When localStorage is unavailable (Vitest, strict webviews, or Safari private
     // mode), provide an in-memory fallback storage implementation so persistence
     // degrades gracefully without dropping writes or throwing errors during active interaction.
-    storage: createJSONStorage(() => {
-      const memStorage = new Map();
-      const fallbackStorage = {
-        getItem: (name) => memStorage.get(name) ?? null,
-        setItem: (name, value) => memStorage.set(name, value),
-        removeItem: (name) => memStorage.delete(name),
-      };
-
-      if (typeof localStorage === "undefined" || !localStorage) {
-        return fallbackStorage;
-      }
-      const testKey = "__comparebuilds_test__";
-      try {
-        localStorage.setItem(testKey, "test");
-        localStorage.removeItem(testKey);
-      } catch {
-        return fallbackStorage;
-      }
-      return {
-        getItem: (name) =>
-          memStorage.has(name)
-            ? memStorage.get(name)
-            : localStorage.getItem(name),
-        setItem: (name, value) => {
-          try {
-            localStorage.setItem(name, value);
-            memStorage.delete(name);
-          } catch (err) {
-            console.error(
-              `[zustand persist middleware] Failed to save state to localStorage: ${err.message}. Falling back to in-memory storage.`,
-              err,
-            );
-            memStorage.set(name, value);
-          }
-        },
-        removeItem: (name) => {
-          localStorage.removeItem(name);
-          memStorage.delete(name);
-        },
-      };
-    }),
+    storage: createJSONStorage(getSafeStorage),
     // Persist only the small, serialisable slices. treeData/classNodes/
     // parsedBuilds are derived and rebuilt on rehydration via rehydrateTreeData.
     partialize: (state) => ({
