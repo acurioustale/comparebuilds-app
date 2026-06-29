@@ -312,16 +312,73 @@ async function buildApexNode(raw, chain, iconOf, spellDescOf, gateOf) {
  * @param {object} fns        { iconOf, descOf, spellDescOf }
  * @returns {object} the normalised spec
  */
+export function extractHeroSubtrees(tree, specInfoId) {
+  const heroTrees = (tree.hero_talent_trees ?? []).filter((ht) =>
+    (ht.playable_specializations ?? []).some((s) => s.id === specInfoId),
+  );
+  // Left/right by subtree id ascending — this matches the in-game panel order
+  const [left, right] = [...heroTrees].sort((a, b) => a.id - b.id);
+  const heroIds = new Set(
+    heroTrees.flatMap((ht) => (ht.hero_talent_nodes ?? []).map((n) => n.id)),
+  );
+  return { heroTrees, left, right, heroIds };
+}
+
+export function filterSpecVariants(built, specInfoId, db2) {
+  // Spec-variant filter: some trees are shared by several specs and place, at one
+  // grid cell, a separate variant of a talent per spec.
+  const cellKey = (n) =>
+    `${n.treeType}|${n.heroSubtree ?? ""}|${n.posX},${n.posY}`;
+  const cellHasNativeVariant = new Set();
+  for (const n of built)
+    if (db2.appliesToSpec(n.id, specInfoId))
+      cellHasNativeVariant.add(cellKey(n));
+  const nodes = built.filter(
+    (n) =>
+      db2.appliesToSpec(n.id, specInfoId) ||
+      !cellHasNativeVariant.has(cellKey(n)),
+  );
+
+  // Drop connections to nodes not present in this spec
+  const includedIds = new Set(nodes.map((n) => n.id));
+  for (const n of nodes)
+    n.connections = (n.connections ?? []).filter((id) => includedIds.has(id));
+
+  // The hero-subtree root is auto-granted when the gate selects the subtree
+  for (const n of nodes)
+    if (n.treeType === "hero" && n.connections.length === 0)
+      n.alreadyGranted = true;
+
+  return nodes;
+}
+
+export function calculatePointBudgets(nodes, left, right, baseBudget) {
+  // Hero budget = spendable (non-granted) talents in a subtree, counted by grid position.
+  const heroCellCount = (sub) =>
+    sub
+      ? new Set(
+          nodes
+            .filter((n) => n.heroSubtree === sub.name && !n.alreadyGranted)
+            .map((n) => `${n.posX},${n.posY}`),
+        ).size
+      : 0;
+  const heroNodeCount = Math.max(heroCellCount(left), heroCellCount(right));
+  const apex = nodes.find((n) => n.type === "apex");
+
+  return {
+    ...baseBudget,
+    spec: baseBudget.spec + (apex ? apex.maxRanks : 0),
+    hero: heroNodeCount,
+  };
+}
+
 export async function normaliseSpec(specInfo, tree, db2, fns) {
   const { iconOf, descOf, spellDescOf, renderClientDesc } = fns;
   // Final description fallback, spec-bound: render the client DB2 tooltip
   // template for the spec-conditional spells the web API returns blank.
   const clientDescOf = (spellId) => renderClientDesc(spellId, specInfo.id);
-  // The per-spec endpoint returns ALL of the class's hero trees; keep only the
-  // two that actually apply to this spec (its playable_specializations include it).
-  const heroTrees = (tree.hero_talent_trees ?? []).filter((ht) =>
-    (ht.playable_specializations ?? []).some((s) => s.id === specInfo.id),
-  );
+
+  const { left, right, heroIds } = extractHeroSubtrees(tree, specInfo.id);
 
   // Lift the placeholder (spell-less) nodes out so they don't become talents.
   // The CHOICE one is this spec's hero gate (recorded here); the rest are reserved
@@ -337,18 +394,6 @@ export async function normaliseSpec(specInfo, tree, db2, fns) {
   }
   const placeholderIds = new Set(
     classAndSpec.filter(isEmptyNode).map((n) => n.id),
-  );
-
-  // Left/right by subtree id ascending — this matches the in-game panel order
-  // (verified against all 40 specs' original layout). The gate node's choice-entry
-  // order is NOT it (it's the reverse for most specs).
-  const [left, right] = [...heroTrees].sort((a, b) => a.id - b.id);
-
-  // The API embeds the hero nodes inside spec_talent_nodes too; source them only
-  // from the hero trees (so they carry treeType "hero" + heroSubtree) and skip
-  // those ids in the spec pass to avoid duplicates.
-  const heroIds = new Set(
-    heroTrees.flatMap((ht) => (ht.hero_talent_nodes ?? []).map((n) => n.id)),
   );
 
   // Per-node points gate, from DB2's authoritative group conditions (NOT inferred
@@ -403,62 +448,8 @@ export async function normaliseSpec(specInfo, tree, db2, fns) {
     }
   }
 
-  // Spec-variant filter: some trees are shared by several specs and place, at one
-  // grid cell, a separate variant of a talent per spec (monk Conduit shows
-  // Yu'lon's Knowledge to Mistweaver and Xuen's Bond to Windwalker at the same
-  // cell). Keep only the variant this spec sees: drop a node ONLY when it does not
-  // apply here AND a co-located sibling does. A node that is merely shared across
-  // specs (evoker's Chronowarden carries a partial spec-set but has no per-spec
-  // alternate at its cell) has no such sibling, so it stays — the cell never
-  // empties. Dropped variants survive in their own spec's data, so the class-wide
-  // wire layout (the union collectClassNodes builds) is unchanged.
-  const cellKey = (n) =>
-    `${n.treeType}|${n.heroSubtree ?? ""}|${n.posX},${n.posY}`;
-  const cellHasNativeVariant = new Set();
-  for (const n of built)
-    if (db2.appliesToSpec(n.id, specInfo.id))
-      cellHasNativeVariant.add(cellKey(n));
-  const nodes = built.filter(
-    (n) =>
-      db2.appliesToSpec(n.id, specInfo.id) ||
-      !cellHasNativeVariant.has(cellKey(n)),
-  );
-
-  // Drop connections to nodes not present in this spec (matches how the game
-  // routes a shared talent's prerequisite through the active spec).
-  const includedIds = new Set(nodes.map((n) => n.id));
-  for (const n of nodes)
-    n.connections = (n.connections ?? []).filter((id) => includedIds.has(id));
-
-  // The hero-subtree root is auto-granted when the gate selects the subtree, so a
-  // build never spends into it (and downstream nodes list it as a prereq). The
-  // root is the hero node with no in-tree prerequisite — and it can be a
-  // co-located pair (two node ids for one "Halo"-style root); grant all of them.
-  for (const n of nodes)
-    if (n.treeType === "hero" && n.connections.length === 0)
-      n.alreadyGranted = true;
-
-  // Hero budget = spendable (non-granted) talents in a subtree, counted by grid
-  // position. Most subtrees are one node per cell, but Conduit of the Celestials
-  // packs co-located, mutually-exclusive variant nodes (Xuen-path / Yu'lon-path)
-  // two-to-a-cell; a build can only ever take one of each pair, so dedup by
-  // (posX,posY) — otherwise the count over-reports (15 vs the real 13 a full
-  // hero tree spends; see the in-game fixtures in buildFixtures.test.js).
-  //
-  // The single budget caps BOTH subtrees, so take the larger of the two: every
-  // shipped spec has equal-size subtrees today, but counting only one would
-  // silently under-cap (and so block the last legitimate point in) the bigger
-  // subtree if a future patch ever made them asymmetric.
-  const heroCellCount = (sub) =>
-    sub
-      ? new Set(
-          nodes
-            .filter((n) => n.heroSubtree === sub.name && !n.alreadyGranted)
-            .map((n) => `${n.posX},${n.posY}`),
-        ).size
-      : 0;
-  const heroNodeCount = Math.max(heroCellCount(left), heroCellCount(right));
-  const apex = nodes.find((n) => n.type === "apex");
+  const nodes = filterSpecVariants(built, specInfo.id, db2);
+  const pointBudget = calculatePointBudgets(nodes, left, right, POINT_BUDGET);
 
   // icon stays the subtree name (the renderer shows subtree headers as text, not
   // an icon file); description comes from DB2's TraitSubTree.
@@ -481,11 +472,7 @@ export async function normaliseSpec(specInfo, tree, db2, fns) {
     color: specInfo.color,
     icon: specInfo.icon,
     description: specInfo.description,
-    pointBudget: {
-      ...POINT_BUDGET,
-      spec: POINT_BUDGET.spec + (apex ? apex.maxRanks : 0),
-      hero: heroNodeCount,
-    },
+    pointBudget,
     checkpoints: checkpointsFromNodes(nodes),
     heroGateNodeId,
     heroSubtrees: { left: subtreeMeta(left), right: subtreeMeta(right) },
