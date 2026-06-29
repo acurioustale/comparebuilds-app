@@ -146,13 +146,14 @@ const nodeIndexCache = new WeakMap();
  * @returns {{ sorted: Array<{ id: number, maxRanks?: number, choices?: Array<{maxRanks:number}>|null }>, nodeById: Map<number, any> }}
  */
 function nodeIndex(nodes) {
-  let idx = nodeIndexCache.get(nodes);
+  const cacheKey = nodes[0] ?? nodes;
+  let idx = nodeIndexCache.get(cacheKey);
   if (!idx) {
     idx = {
       sorted: [...nodes].sort((a, b) => a.id - b.id),
       nodeById: new Map(nodes.map((n) => [n.id, n])),
     };
-    nodeIndexCache.set(nodes, idx);
+    nodeIndexCache.set(cacheKey, idx);
   }
   return idx;
 }

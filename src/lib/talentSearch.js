@@ -74,7 +74,8 @@ const indexCache = new WeakMap();
  * @returns {Map<number, string>} Map of node id → normalised searchable text
  */
 function searchIndex(nodes) {
-  const cached = indexCache.get(nodes);
+  const cacheKey = nodes[0] ?? nodes;
+  const cached = indexCache.get(cacheKey);
   if (cached) return cached;
   const index = new Map();
   for (const n of nodes) {
@@ -87,7 +88,7 @@ function searchIndex(nodes) {
     }
     index.set(n.id, parts.map(normalise).join(" "));
   }
-  indexCache.set(nodes, index);
+  indexCache.set(cacheKey, index);
   return index;
 }
 
