@@ -32,6 +32,13 @@ let loadGen = 0;
 // previous one keeps that read-modify-write atomic.
 let addBuildQueue = Promise.resolve();
 
+// Bumped by structural edits (removeBuild / clearAllBuilds) that reindex the
+// slot arrays. removeBuild and clearAllBuilds run synchronously, OUTSIDE
+// addBuildQueue, so a replaceBuild deferred behind the queue could otherwise
+// run after a reindex and overwrite the wrong slot. replaceBuild captures this
+// value when queued and bails if it changed while it waited.
+let slotGen = 0;
+
 async function loadTreeData(
   set,
   get,
@@ -361,6 +368,10 @@ const createStore = (set, get) => ({
     const { buildStrings, parsedBuilds, buildNames } = get();
     if (index < 0 || index >= buildStrings.length) return;
 
+    // Reindexing the slots invalidates any positional index captured by a
+    // replaceBuild still waiting in addBuildQueue.
+    slotGen++;
+
     const newStrings = buildStrings.filter((_, i) => i !== index);
     const newParsed = parsedBuilds.filter((_, i) => i !== index);
     const newNames = buildNames.filter((_, i) => i !== index);
@@ -383,6 +394,7 @@ const createStore = (set, get) => ({
    */
   clearAllBuilds: () => {
     loadGen++; // cancel any in-flight load
+    slotGen++; // invalidate any queued replaceBuild's captured index
     set({ ...EMPTY });
   },
 
@@ -453,9 +465,14 @@ const createStore = (set, get) => ({
    * @param {string} buildString
    */
   replaceBuild: (index, buildString) => {
-    const run = addBuildQueue.then(() =>
-      get().replaceBuildInternal(index, buildString),
-    );
+    const gen = slotGen;
+    const run = addBuildQueue.then(() => {
+      // A structural edit (removeBuild / clearAllBuilds) reindexed the slots
+      // after this replace was queued, so the captured index is stale — skip
+      // rather than overwrite the wrong slot.
+      if (slotGen !== gen) return false;
+      return get().replaceBuildInternal(index, buildString);
+    });
     addBuildQueue = run.catch(() => {});
     return run;
   },

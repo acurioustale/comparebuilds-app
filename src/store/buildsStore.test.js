@@ -396,6 +396,26 @@ describe("editBuild and replaceBuild", () => {
     assert.strictEqual(get().buildStrings[0], c);
   });
 
+  test("replaceBuild skips when a remove reindexes the slots first", async () => {
+    const [a, b, c] = genStrings("death_knight", "blood", 3);
+    await get().addBuild(a);
+    await get().addBuild(b);
+
+    // Queue a replace of slot 1, then synchronously remove slot 0 before the
+    // queued replace runs. The captured index 1 is now stale (it would land on
+    // the wrong build), so the replace must be skipped.
+    const pending = get().replaceBuild(1, c);
+    get().removeBuild(0);
+    const ok = await pending;
+
+    assert.strictEqual(ok, false, "stale replace resolves falsy");
+    assert.deepStrictEqual(
+      get().buildStrings,
+      [b],
+      "only build a was removed; b is untouched by the stale replace",
+    );
+  });
+
   test("addBuild and replaceBuild resolve truthy on success, falsy on rejection", async () => {
     const [a, b, c] = genStrings("death_knight", "blood", 3);
 
