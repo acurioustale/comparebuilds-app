@@ -136,6 +136,44 @@ if (!is_string($id) || !valid_share_id($id)) {
     bail(400);
 }
 
+// Pick an output encoder the host's GD actually supports. Some shared builds ship
+// GD without PNG, so fall back through the other formats. Order is by how widely
+// link-preview crawlers accept them: PNG/JPEG/GIF unfurl everywhere (Facebook,
+// LinkedIn, Slack, …); WebP is a last resort (spottier support). The card is flat
+// colour + text, so GIF's 256-colour palette looks effectively identical.
+if (function_exists('imagepng')) {
+    $mime = 'image/png';
+    $ext  = 'png';
+    $emit = static fn ($im, ?string $path = null) => $path !== null ? imagepng($im, $path) : imagepng($im);
+} elseif (function_exists('imagejpeg')) {
+    $mime = 'image/jpeg';
+    $ext  = 'jpg';
+    $emit = static fn ($im, ?string $path = null) => $path !== null ? imagejpeg($im, $path, 90) : imagejpeg($im, null, 90);
+} elseif (function_exists('imagegif')) {
+    $mime = 'image/gif';
+    $ext  = 'gif';
+    $emit = static fn ($im, ?string $path = null) => $path !== null ? imagegif($im, $path) : imagegif($im);
+} elseif (function_exists('imagewebp')) {
+    $mime = 'image/webp';
+    $ext  = 'webp';
+    $emit = static fn ($im, ?string $path = null) => $path !== null ? imagewebp($im, $path) : imagewebp($im);
+} else {
+    bail(500);
+}
+
+// ── Check cache ─────────────────────────────────────────────────────────────────
+// Serve cached OpenGraph image if it was already generated, bypassing database
+// queries, rate-limiting locks, and heavy GD compression.
+$cacheDir = __DIR__ . '/../../cache_og';
+$cacheFile = $cacheDir . '/' . $id . '.' . $ext;
+if (is_file($cacheFile)) {
+    header("Content-Type: $mime");
+    header('Cache-Control: public, max-age=86400');
+    header('X-Content-Type-Options: nosniff');
+    readfile($cacheFile);
+    exit;
+}
+
 try {
     $pdo = get_db_connection();
 
@@ -150,35 +188,34 @@ try {
     }
 
     try {
-        $pdo->exec("
-            CREATE TABLE IF NOT EXISTS comparebuilds_og_requests (
-                id         INT AUTO_INCREMENT PRIMARY KEY,
-                ip_hash    CHAR(64)  NOT NULL,
-                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                INDEX idx_ip_created (ip_hash, created_at)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-        ");
-
-        $rl = $pdo->prepare(
-            'SELECT COUNT(*) AS c FROM comparebuilds_og_requests '
-            . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . OG_RATE_LIMIT_WINDOW . ' SECOND'
-        );
-        $rl->execute([$ipHash]);
-        if ((int) $rl->fetch()['c'] >= OG_RATE_LIMIT_MAX) {
+        $count = 0;
+        try {
+            $rl = $pdo->prepare(
+                'SELECT COUNT(*) AS c FROM comparebuilds_og_requests '
+                . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . OG_RATE_LIMIT_WINDOW . ' SECOND'
+            );
+            $rl->execute([$ipHash]);
+            $count = (int) $rl->fetch()['c'];
+        } catch (PDOException $e) {
+            // Table might not exist yet if no share has ever been created.
+        }
+        if ($count >= OG_RATE_LIMIT_MAX) {
             $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
             $rel->execute([$lockName]);
             header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
             bail(429);
         }
 
-        try {
-            $prune = $pdo->prepare(
-                'DELETE FROM comparebuilds_og_requests '
-                . 'WHERE created_at < NOW() - INTERVAL ' . OG_PRUNE_WINDOW . ' SECOND'
-            );
-            $prune->execute();
-        } catch (Throwable $e) {
-            // Non-fatal — proceed even if cleanup fails.
+        if (random_int(1, 100) === 1) {
+            try {
+                $prune = $pdo->prepare(
+                    'DELETE FROM comparebuilds_og_requests '
+                    . 'WHERE created_at < NOW() - INTERVAL ' . OG_PRUNE_WINDOW . ' SECOND'
+                );
+                $prune->execute();
+            } catch (Throwable $e) {
+                // Non-fatal — proceed even if cleanup fails.
+            }
         }
 
         $data = get_share($pdo, $id);
@@ -187,8 +224,15 @@ try {
         // lookup let probes for non-existent ids burn the per-IP budget and grow
         // the table; a 404 below releases the lock and bails without logging.
         if ($data) {
-            $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
-            $logReq->execute([$ipHash]);
+            try {
+                $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
+                $logReq->execute([$ipHash]);
+            } catch (PDOException $e) {
+                // Table might not exist; ensure schema and retry once.
+                ensure_share_schema($pdo);
+                $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
+                $logReq->execute([$ipHash]);
+            }
         }
     } finally {
         $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
@@ -211,27 +255,6 @@ $color     = CLASS_INFO[$classId][1] ?? '#c8a84b';
 
 // ── Render ──────────────────────────────────────────────────────────────────────
 if (!function_exists('imagecreatetruecolor')) {
-    bail(500);
-}
-
-// Pick an output encoder the host's GD actually supports. Some shared builds ship
-// GD without PNG, so fall back through the other formats. Order is by how widely
-// link-preview crawlers accept them: PNG/JPEG/GIF unfurl everywhere (Facebook,
-// LinkedIn, Slack, …); WebP is a last resort (spottier support). The card is flat
-// colour + text, so GIF's 256-colour palette looks effectively identical.
-if (function_exists('imagepng')) {
-    $mime = 'image/png';
-    $emit = static fn ($im) => imagepng($im);
-} elseif (function_exists('imagejpeg')) {
-    $mime = 'image/jpeg';
-    $emit = static fn ($im) => imagejpeg($im, null, 90);
-} elseif (function_exists('imagegif')) {
-    $mime = 'image/gif';
-    $emit = static fn ($im) => imagegif($im);
-} elseif (function_exists('imagewebp')) {
-    $mime = 'image/webp';
-    $emit = static fn ($im) => imagewebp($im);
-} else {
     bail(500);
 }
 
@@ -271,4 +294,12 @@ try {
 header("Content-Type: $mime");
 header('Cache-Control: public, max-age=86400');
 header('X-Content-Type-Options: nosniff');
+
+if (!is_dir($cacheDir)) {
+    @mkdir($cacheDir, 0755, true);
+}
+if (is_dir($cacheDir)) {
+    @$emit($img, $cacheFile);
+}
 $emit($img);
+imagedestroy($img);

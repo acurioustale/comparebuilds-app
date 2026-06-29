@@ -20,10 +20,11 @@ define('DB_PASS', 'your_db_password');
 define('SHARE_IP_SALT', 'change-me-to-a-long-random-string');
 
 // Optional: set to true ONLY if this API sits behind a reverse proxy/CDN
-// (Cloudflare, etc.) that you trust to set X-Forwarded-For. When true, the
-// per-IP rate limit keys on the first hop of that header instead of REMOTE_ADDR
-// (which would otherwise be the proxy, lumping all visitors into one bucket).
-// Leave it undefined/false on direct hosting — the header is client-spoofable.
+// (Cloudflare, etc.) that you trust to set X-Forwarded-For, CF-Connecting-IP,
+// or X-Real-IP. When true, the per-IP rate limit keys on CF-Connecting-IP,
+// X-Real-IP, or the last hop of X-Forwarded-For instead of REMOTE_ADDR (which
+// would otherwise be the proxy, lumping all visitors into one bucket).
+// Leave it undefined/false on direct hosting — the headers are client-spoofable.
 // define('TRUST_PROXY', true);
 
 // Optional: canonical site origin used in the /s/<id> share page's Open Graph

@@ -386,6 +386,14 @@ function ensure_share_schema(PDO $pdo): void
             INDEX idx_ip_created (ip_hash, created_at)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     ");
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS comparebuilds_og_requests (
+            id         INT AUTO_INCREMENT PRIMARY KEY,
+            ip_hash    CHAR(64)  NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_ip_created (ip_hash, created_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ");
 }
 
 /** True if a PDOException is a MySQL duplicate-key (ER_DUP_ENTRY) violation. */
