@@ -209,7 +209,11 @@ export function validateClassData(data, indexEntry = null) {
             nAt(`maxRanks ${n.maxRanks} != sum of rank maxRanks ${sum}`);
           }
         }
-        if (!isArr(n.levels)) nAt("apex node must have a levels array");
+        // The ingest can emit a null level when no grant covers a rank; the UI
+        // would then render a blank unlock level. Require integer entries so a
+        // null slips through here rather than shipping in src/data.
+        if (!isArr(n.levels) || !n.levels.every(isInt))
+          nAt("apex node must have a levels array of integers");
         // collectClassNodes reads `choices ?? null`, so a stray non-null choices
         // would re-encode this apex as a multi-bit choice node and shift the wire
         // layout — guard it exactly like the round/square branch below.

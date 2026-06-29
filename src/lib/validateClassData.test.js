@@ -439,6 +439,11 @@ describe("apex nodes", () => {
     assertHasError(withApex({ maxRanks: 5 }), "!= sum of rank maxRanks"));
   test("apex without levels", () =>
     assertHasError(withApex({ levels: null }), "must have a levels array"));
+  test("apex with a null level entry", () =>
+    assertHasError(
+      withApex({ levels: [70, null] }),
+      "apex node must have a levels array of integers",
+    ));
   test("apex with non-null choices", () =>
     assertHasError(
       withApex({ choices: [{ maxRanks: 1 }, { maxRanks: 1 }] }),
