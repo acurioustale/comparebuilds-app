@@ -46,5 +46,6 @@ rsync -avz --delete "$@" \
 
 if [[ "$*" != *"--dry-run"* ]]; then
 	echo "Running schema migration..."
+	# shellcheck disable=SC2029
 	ssh "${REMOTE}" "php ${TARGET}api/cron/ensure_schema.php" || true
 fi
