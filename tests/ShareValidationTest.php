@@ -138,6 +138,28 @@ final class ShareValidationTest extends TestCase
         $this->assertSame('198.51.100.9', client_ip());
     }
 
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
+    public function testClientIpUsesCfConnectingIpWhenProxyTrusted(): void
+    {
+        define('TRUST_PROXY', true);
+        $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
+        $_SERVER['HTTP_CF_CONNECTING_IP'] = '198.51.100.10';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '1.2.3.4, 198.51.100.9';
+        $this->assertSame('198.51.100.10', client_ip());
+    }
+
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
+    public function testClientIpUsesXRealIpWhenProxyTrusted(): void
+    {
+        define('TRUST_PROXY', true);
+        $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
+        $_SERVER['HTTP_X_REAL_IP'] = '198.51.100.11';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '1.2.3.4, 198.51.100.9';
+        $this->assertSame('198.51.100.11', client_ip());
+    }
+
     // A trusted proxy that appends a non-IP (or the header is otherwise garbage)
     // must fall back to REMOTE_ADDR rather than rate-limiting on junk.
     #[RunInSeparateProcess]
