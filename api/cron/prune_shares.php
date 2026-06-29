@@ -22,11 +22,19 @@ try {
         ],
     );
 
-    // Prune shares older than 180 days (~6 months)
-    $stmt = $pdo->prepare('DELETE FROM comparebuilds_shares WHERE created_at < NOW() - INTERVAL 180 DAY');
+    // Prune shares older than 180 days (~6 months) in batches to prevent lock contention
+    $stmt = $pdo->prepare('DELETE FROM comparebuilds_shares WHERE created_at < NOW() - INTERVAL 180 DAY LIMIT 1000');
     try {
-        $stmt->execute();
-        echo 'Pruned ' . $stmt->rowCount() . " expired shares successfully.\n";
+        $totalPruned = 0;
+        do {
+            $stmt->execute();
+            $count = $stmt->rowCount();
+            $totalPruned += $count;
+            if ($count > 0) {
+                usleep(50000); // 50ms pause to allow concurrent queries and replication to breathe
+            }
+        } while ($count === 1000);
+        echo 'Pruned ' . $totalPruned . " expired shares successfully.\n";
     } catch (PDOException $e) {
         if (($e->errorInfo[0] ?? '') === '42S02' || ($e->errorInfo[1] ?? 0) === 1146) {
             echo "Table comparebuilds_shares does not exist yet (no shares created). Exiting cleanly.\n";
