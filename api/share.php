@@ -223,7 +223,10 @@ function validate_share_input(mixed $body): array
         return ['error' => 'builds must contain ' . MIN_BUILDS . '–' . MAX_BUILDS . ' entries'];
     }
     foreach ($builds as $b) {
-        if (!is_string($b) || !preg_match(BUILD_PATTERN, $b)) {
+        // BUILD_PATTERN allows up to 2000 base64 data chars plus padding (2002
+        // total); cap the overall length too so the server agrees with the
+        // documented MAX_BUILD_LEN and the client's per-string limit.
+        if (!is_string($b) || strlen($b) > MAX_BUILD_LEN || !preg_match(BUILD_PATTERN, $b)) {
             return ['error' => 'Each build must be a base64 build string ≤ ' . MAX_BUILD_LEN . ' chars'];
         }
     }

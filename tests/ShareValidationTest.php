@@ -61,6 +61,11 @@ final class ShareValidationTest extends TestCase
     {
         $this->assertArrayHasKey('error', validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', '!!!']]));
         $this->assertArrayHasKey('error', validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', str_repeat('A', 2001)]]));
+        // 2000 data chars + 2 padding chars matches BUILD_PATTERN but exceeds the
+        // 2000-char total cap, so the length check must reject it.
+        $this->assertArrayHasKey('error', validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', str_repeat('A', 2000) . '==']]));
+        // Exactly at the cap is accepted.
+        $this->assertArrayNotHasKey('error', validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', str_repeat('A', 2000)]]));
     }
 
     public function testLabelsMustParallelBuilds(): void
