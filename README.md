@@ -13,7 +13,7 @@ the build) and only then its `deploy` job, which `needs: validate`; a push that
 fails the gate never ships. It can also be triggered manually from the Actions
 tab, with an optional dry-run — manual runs validate first too. The deploy job
 builds the site and runs `deploy.sh`. `deploy.sh` stages the built `dist/` together with the PHP API
-(`api/share.php`, `api/og.php`, `api/fonts/`) into one tree and mirrors it with a
+(`api/share.php`, `api/og.php`, `api/fonts/`, `api/cron/`) into one tree and mirrors it with a
 single `rsync -avz --delete` to the web root:
 
 ```text
@@ -23,6 +23,8 @@ web4186@http2.core-networks.de:html/comparebuilds.app/
 Staging the two sources into one tree is what makes `--delete` safe: `dist/` has
 no `api/`, so deleting against `dist/` alone would wipe the live API folder.
 `config.php` (below) lives one level above the web root and is never touched.
+After a successful rsync, `deploy.sh` runs `api/cron/ensure_schema.php` over SSH
+to apply any pending schema migrations.
 
 CI authenticates with a dedicated SSH deploy key, stored as the repository
 secrets `DEPLOY_SSH_KEY` and `DEPLOY_KNOWN_HOSTS`. The key is harmless if leaked:
@@ -81,7 +83,8 @@ Expected layout on the server:
         ├── share.php
         ├── og.php
         ├── cron/
-        │   └── prune_shares.php
+        │   ├── prune_shares.php
+        │   └── ensure_schema.php
         └── fonts/
             └── DejaVuSans-Bold.ttf
 ```
@@ -96,6 +99,31 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'your_database_name');
 define('DB_USER', 'your_db_user');
 define('DB_PASS', 'your_db_password');
+
+// Optional: Redis for high-performance rate limiting and concurrency locking.
+// If defined and the Redis extension is available, share.php and og.php will
+// use Redis, gracefully falling back to MySQL GET_LOCK and database rate
+// limiting if Redis is unavailable.
+// define('REDIS_HOST', '127.0.0.1');
+// define('REDIS_PORT', 6379);
+
+// Recommended: a random secret used to salt the hashed client IPs stored for
+// rate limiting. Generate once, e.g. `openssl rand -hex 32`.
+define('SHARE_IP_SALT', 'change-me-to-a-long-random-string');
+
+// Optional: set to true ONLY if behind a reverse proxy/CDN. When true,
+// per-IP rate limiting keys on X-Forwarded-For instead of REMOTE_ADDR.
+// define('TRUST_PROXY', true);
+// define('TRUSTED_PROXIES', ['10.0.0.0/8', '172.16.0.0/12']);
+// define('TRUST_CLOUDFLARE', true);
+// define('TRUST_X_REAL_IP', true);
+
+// Optional: canonical site origin for OG tags. Defaults to https://comparebuilds.app.
+// define('SITE_ORIGIN', 'https://comparebuilds.app');
+
+// Optional: absolute path to a bold .ttf for the OG image text. og.php probes
+// the usual DejaVu/Liberation locations; set this only if your host differs.
+// define('OG_FONT_PATH', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf');
 ```
 
 This location keeps the credentials inaccessible to the public even if PHP processing were to fail.
@@ -202,9 +230,11 @@ The PHP API is not available in the local dev server. Sharing links will 404 loc
 
 `./validate.sh` runs the full CI gate locally, in the same order CI does — lint,
 formatting, the per-language linters, the PHP and shell checks, tests, the build,
-and a CSP guard (`npm run check:csp`) that recomputes the sha256 of the built
+a CSP guard (`npm run check:csp`) that recomputes the sha256 of the built
 inline anti-flash theme script and fails if its hash has drifted from the
-Content-Security-Policy in `.htaccess` that allowlists it:
+Content-Security-Policy in `.htaccess` that allowlists it, an OG image guard
+(`npm run check:og`) that verifies `public/og-image.png` is 1200×630, and a
+sitemap well-formedness check (`xmllint --noout dist/sitemap.xml`):
 
 ```bash
 ./validate.sh          # everything CI enforces
@@ -218,7 +248,7 @@ skips any that are missing with a notice, and CI pins them — but to run the wh
 gate, install them too:
 
 ```bash
-brew install shellcheck shfmt php-cs-fixer phpunit actionlint lychee
+brew install shellcheck shfmt php-cs-fixer phpunit actionlint lychee xmllint
 ```
 
 Link checking (lychee) runs in its own GitHub workflow, separate from the
@@ -268,8 +298,15 @@ React components.
 
 The PHP share API has its own PHPUnit suite in `tests/`, covering the
 public-input validation surface (id format, build-string limits, label/name
-caps, and the client-IP handling). Run it with `phpunit`, or let `./validate.sh`
+caps, client-IP handling), concurrency (`ShareConcurrencyTest.php`), and the OG
+image renderer (`OgRenderTest.php`). Run it with `phpunit`, or let `./validate.sh`
 run everything — JavaScript, PHP, the linters, and the build — at once.
+
+Cross-stack parity tests keep the JS and PHP mirrors in sync: `limitsParity.test.js`
+pins `MAX_BUILDS`/`MAX_BUILD_LEN`/`MAX_BUILD_NAME_LEN` in `buildsStore.js` against
+`api/share.php`, and `shareIdParity.test.js` pins the share-id regex in `route.js`
+against both `share.php` and `og.php`. A change to one side that forgets the other
+fails the gate.
 
 ### Editing or repopulating the data
 
