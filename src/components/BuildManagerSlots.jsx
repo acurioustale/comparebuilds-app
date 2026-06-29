@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, memo } from "react";
 import Tooltip from "./Tooltip";
 import { MAX_BUILD_NAME_LEN } from "../store/buildsStore";
 
@@ -28,7 +28,7 @@ function SlotStatus({ parsed, loading }) {
   );
 }
 
-export function FilledSlot({
+export const FilledSlot = memo(function FilledSlot({
   index,
   name,
   label,
@@ -54,6 +54,13 @@ export function FilledSlot({
     }
   }, [value]);
 
+  const handleRemove = useCallback(() => onRemove(index), [onRemove, index]);
+  const handleRename = useCallback(
+    (e) => onRename(index, e.target.value),
+    [onRename, index],
+  );
+  const handleEdit = useCallback(() => onEdit(index), [onEdit, index]);
+
   return (
     <div className="flex items-center gap-2 min-w-0">
       <SlotNumber n={index + 1} />
@@ -61,7 +68,7 @@ export function FilledSlot({
       {/* Editable slot name. Empty shows the computed default as a placeholder. */}
       <input
         value={name}
-        onChange={(e) => onRename(e.target.value)}
+        onChange={handleRename}
         placeholder={label}
         maxLength={MAX_BUILD_NAME_LEN}
         aria-label={`Name for build ${index + 1}`}
@@ -97,7 +104,7 @@ export function FilledSlot({
       {parsed && (
         <Tooltip content="Edit build" placement="bottom" delay={300}>
           <button
-            onClick={onEdit}
+            onClick={handleEdit}
             aria-label={`Edit build ${index + 1}`}
             className="shrink-0 w-6 h-6 flex items-center justify-center text-wow-dim hover:text-wow-gold transition-colors text-sm leading-none rounded"
           >
@@ -107,7 +114,7 @@ export function FilledSlot({
       )}
 
       <button
-        onClick={onRemove}
+        onClick={handleRemove}
         title="Remove"
         className="shrink-0 w-6 h-6 flex items-center justify-center text-wow-dim hover:text-red-400 transition-colors text-base leading-none rounded"
       >
@@ -117,11 +124,11 @@ export function FilledSlot({
       <SlotStatus parsed={parsed} loading={loading} />
     </div>
   );
-}
+});
 
 // ─── Empty slot (input) ───────────────────────────────────────────────────────
 
-export function EmptySlot({ index, onAdd, errorMsg }) {
+export const EmptySlot = memo(function EmptySlot({ index, onAdd, errorMsg }) {
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
 
@@ -136,16 +143,19 @@ export function EmptySlot({ index, onAdd, errorMsg }) {
   );
 
   // Auto-submit on paste so users don't need to press Enter
-  const handlePaste = (e) => {
-    const pasted = e.clipboardData?.getData("text/plain") ?? "";
-    if (pasted.trim()) {
-      e.preventDefault();
-      submit(pasted.trim());
-    }
-  };
+  const handlePaste = useCallback(
+    (e) => {
+      const pasted = e.clipboardData?.getData("text/plain") ?? "";
+      if (pasted.trim()) {
+        e.preventDefault();
+        submit(pasted.trim());
+      }
+    },
+    [submit],
+  );
 
   // Clipboard button: read directly from OS clipboard
-  const handleClipboard = async () => {
+  const handleClipboard = useCallback(async () => {
     try {
       const text = await navigator.clipboard.readText();
       if (text.trim()) submit(text.trim());
@@ -153,7 +163,13 @@ export function EmptySlot({ index, onAdd, errorMsg }) {
       // Permissions denied or not supported; user can paste manually
       inputRef.current?.focus();
     }
-  };
+  }, [submit]);
+
+  const handleChange = useCallback((e) => setValue(e.target.value), []);
+  const handleKeyDown = useCallback(
+    (e) => e.key === "Enter" && submit(),
+    [submit],
+  );
 
   return (
     <div className="space-y-1">
@@ -163,8 +179,8 @@ export function EmptySlot({ index, onAdd, errorMsg }) {
         <input
           ref={inputRef}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && submit()}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
           onPaste={handlePaste}
           placeholder="Paste build string…"
           className="flex-1 font-mono text-xs rounded px-2 py-1.5 text-wow-text placeholder-wow-dim outline-none transition-colors"
@@ -202,7 +218,7 @@ export function EmptySlot({ index, onAdd, errorMsg }) {
       )}
     </div>
   );
-}
+});
 
 // Shared slot number label
 function SlotNumber({ n, muted = false }) {

@@ -1,4 +1,12 @@
-import { useState, useEffect, useMemo, useRef, useDeferredValue } from "react";
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useDeferredValue,
+  useCallback,
+  memo,
+} from "react";
 import { useShallow } from "zustand/react/shallow";
 import BuildManager from "./components/BuildManager";
 import HeatmapTree from "./components/HeatmapTree";
@@ -100,12 +108,15 @@ function useTheme() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  const cycleTheme = () =>
-    setMode((current) => {
-      const next = nextMode(current, systemLight);
-      writeStoredMode(next);
-      return next;
-    });
+  const cycleTheme = useCallback(
+    () =>
+      setMode((current) => {
+        const next = nextMode(current, systemLight);
+        writeStoredMode(next);
+        return next;
+      }),
+    [systemLight],
+  );
 
   return { mode, theme, next: nextMode(mode, systemLight), cycleTheme };
 }
@@ -118,7 +129,7 @@ function useTheme() {
 // the two sites read identically.
 const MODE_GLYPH = { auto: "◐", light: "☼", dark: "☾" };
 
-function ThemeToggle({ mode, next, onCycle }) {
+const ThemeToggle = memo(function ThemeToggle({ mode, next, onCycle }) {
   const label = `Theme: ${mode} — switch to ${next}`;
   return (
     <button
@@ -131,17 +142,21 @@ function ThemeToggle({ mode, next, onCycle }) {
       {MODE_GLYPH[mode]}
     </button>
   );
-}
+});
 
 // Comparison-only toggle: dim every node the builds agree on, leaving just the
 // differences. One control for both views — in the diff "differences" means a
 // node differs between the two builds; in the heatmap it means a contested node
 // (picked by some builds but not all).
-function ChangesFilterToggle({ value, onChange }) {
+const ChangesFilterToggle = memo(function ChangesFilterToggle({
+  value,
+  onChange,
+}) {
+  const handleClick = useCallback(() => onChange(!value), [onChange, value]);
   return (
     <button
       type="button"
-      onClick={() => onChange(!value)}
+      onClick={handleClick}
       aria-pressed={value}
       className={`wow-btn text-xs px-3 py-1.5 rounded select-none transition-colors ${
         value ? "ring-1 ring-wow-gold text-wow-gold" : "text-wow-muted"
@@ -151,7 +166,7 @@ function ChangesFilterToggle({ value, onChange }) {
       Differences only
     </button>
   );
-}
+});
 
 // Search footer, divided from the tree by a hairline, rendered at the bottom
 // inside a tree panel (WoW-style — the search lives in the talent frame, not above it).
@@ -533,7 +548,8 @@ function useShareRehydration() {
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { shareError, dismissShareError: () => setShareError(null) };
+  const dismissShareError = useCallback(() => setShareError(null), []);
+  return { shareError, dismissShareError };
 }
 
 // ─── Main app ─────────────────────────────────────────────────────────────────

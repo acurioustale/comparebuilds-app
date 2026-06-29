@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, memo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import Tooltip from "./Tooltip";
 import { useBuildsStore, MAX_BUILDS } from "../store/buildsStore";
@@ -66,7 +66,12 @@ function SpecIcon({ icon, size = 24 }) {
 
 // ─── Class grid ───────────────────────────────────────────────────────────────
 
-function ClassGrid({ classes, activeClassId, locked, onSelect }) {
+const ClassGrid = memo(function ClassGrid({
+  classes,
+  activeClassId,
+  locked,
+  onSelect,
+}) {
   return (
     <div className="flex flex-wrap gap-1.5">
       {classes
@@ -107,11 +112,11 @@ function ClassGrid({ classes, activeClassId, locked, onSelect }) {
         })}
     </div>
   );
-}
+});
 
 // ─── Spec row ─────────────────────────────────────────────────────────────────
 
-function SpecRow({ specs, activeSpecId, onSelect }) {
+const SpecRow = memo(function SpecRow({ specs, activeSpecId, onSelect }) {
   return (
     <div className="flex flex-wrap gap-1.5 mt-2">
       {specs.map((spec) => {
@@ -142,7 +147,7 @@ function SpecRow({ specs, activeSpecId, onSelect }) {
       })}
     </div>
   );
-}
+});
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
@@ -295,12 +300,15 @@ export default function BuildManager() {
     return `Build ${n} — ${prefix}${specDisplayName} ${classDisplayName}`;
   };
 
-  const handleClassSelect = (id) => {
-    if (classLocked) return;
-    setLocalClassId(id);
-    // Reset spec + interactive tree when class changes in interactive mode
-    if (buildStrings.length === 0) clearAllBuilds();
-  };
+  const handleClassSelect = useCallback(
+    (id) => {
+      if (classLocked) return;
+      setLocalClassId(id);
+      // Reset spec + interactive tree when class changes in interactive mode
+      if (buildStrings.length === 0) clearAllBuilds();
+    },
+    [classLocked, buildStrings.length, clearAllBuilds],
+  );
 
   const handleSpecSelect = useCallback(
     (id) => {
@@ -389,9 +397,9 @@ export default function BuildManager() {
                   // gating this to the last slot flashes a false "Failed to
                   // parse" ✕ on the earlier pending ones).
                   loading={isLoading && parsedBuilds[i] === null}
-                  onRemove={() => removeBuild(i)}
-                  onRename={(v) => setBuildName(i, v)}
-                  onEdit={() => editBuild(i)}
+                  onRemove={removeBuild}
+                  onRename={setBuildName}
+                  onEdit={editBuild}
                 />
               );
             }
