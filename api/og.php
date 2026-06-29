@@ -183,7 +183,7 @@ try {
     // ── Concurrency throttling & rate limiting ──────────────────────────────
     $ipHash = client_ip_hash();
     $lockName = 'cb_og_' . substr($ipHash, 0, 48);
-    $lk = $pdo->prepare('SELECT GET_LOCK(?, 5)');
+    $lk = $pdo->prepare('SELECT GET_LOCK(?, 1)');
     $lk->execute([$lockName]);
     if ((int) $lk->fetchColumn() !== 1) {
         header('Retry-After: 5');
