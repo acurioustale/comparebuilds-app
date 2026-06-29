@@ -9,13 +9,15 @@
 const BLANK =
   "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 
+const getBaseUrl = () => import.meta.env?.BASE_URL?.replace(/\/$/, "") ?? "";
+
 /**
  * @param {string} icon Icon slug name
  * @returns {string} Same-origin icon URL path
  */
 export const iconUrl = (icon) =>
   typeof icon === "string" && icon
-    ? `/talent-icons/${icon.toLowerCase()}.jpg`
+    ? `${getBaseUrl()}/talent-icons/${icon.toLowerCase()}.jpg`
     : BLANK;
 
 /**
