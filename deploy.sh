@@ -35,7 +35,7 @@ trap 'rm -rf "$stage"' EXIT
 
 cp -a dist/. "$stage/"
 mkdir -p "$stage/api"
-cp -a api/share.php api/og.php api/fonts "$stage/api/"
+cp -a api/share.php api/og.php api/fonts api/cron "$stage/api/"
 
 rsync -avz --delete "$@" \
 	--exclude '.git' \

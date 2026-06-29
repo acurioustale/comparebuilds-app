@@ -31,7 +31,6 @@ const MAX_LABEL_LEN     = 40;    // per-slot name cap; mirrors MAX_BUILD_NAME_LE
 const MAX_NAME_LEN      = 64;    // class/spec display-name cap (used by the OG image)
 const RATE_LIMIT_MAX    = 20;    // max shares one IP may create per window
 const RATE_LIMIT_WINDOW = 3600;  // window length in seconds (1 hour)
-const SHARE_TTL_DAYS    = 90;    // rows older than this are pruned
 const ID_LEN            = 8;
 const MAX_ID_LEN        = 16;   // max chars after collision extension
 // Content-address id alphabet (base62). Self-consistent across the GMP and
@@ -443,19 +442,6 @@ function store_share(PDO $pdo, array $payload, string $ipHash): string
         $rl->execute([$ipHash]);
         if ((int) $rl->fetch()['c'] >= RATE_LIMIT_MAX) {
             throw new ShareException(429, 'Too many shares created — please try again later', RATE_LIMIT_WINDOW);
-        }
-
-        // ── Prune expired rows (best-effort) ─────────────────────────────────
-        if (random_int(1, 100) === 1) {
-            try {
-                $prune = $pdo->prepare(
-                    'DELETE FROM comparebuilds_shares '
-                    . 'WHERE created_at < NOW() - INTERVAL ' . (SHARE_TTL_DAYS * 86400) . ' SECOND'
-                );
-                $prune->execute();
-            } catch (Throwable $e) {
-                // Non-fatal — proceed even if cleanup fails.
-            }
         }
 
         // ── Content-addressing & deduplication ───────────────────────────────
