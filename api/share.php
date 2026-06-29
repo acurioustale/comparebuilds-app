@@ -474,11 +474,12 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     // so a burst from one IP can't each read a below-limit count before any of
     // them inserts (a TOCTOU race that would let the per-IP cap be exceeded).
     $lockName = 'cb_share_' . substr($ipHash, 0, 48);
+    $lockToken = bin2hex(random_bytes(16));
     $usedRedisLock = false;
 
     if ($redis !== null) {
         try {
-            if (!$redis->set($lockName, '1', ['nx', 'ex' => 5])) {
+            if (!$redis->set($lockName, $lockToken, ['nx', 'ex' => 5])) {
                 throw new ShareException(503, 'Server busy — please try again', 5);
             }
             $usedRedisLock = true;
@@ -586,7 +587,8 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     } finally {
         if ($usedRedisLock && $redis !== null) {
             try {
-                $redis->del($lockName);
+                $lua = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
+                $redis->eval($lua, [$lockName, $lockToken], 1);
             } catch (Throwable $e) {
             }
         } else {

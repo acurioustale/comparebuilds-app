@@ -184,12 +184,13 @@ try {
     // ── Concurrency throttling & rate limiting ──────────────────────────────
     $ipHash = client_ip_hash();
     $lockName = 'cb_og_' . substr($ipHash, 0, 48);
+    $lockToken = bin2hex(random_bytes(16));
     $usedRedisLock = false;
 
     if ($redis !== null) {
         $redisBusy = false;
         try {
-            if (!$redis->set($lockName, '1', ['nx', 'ex' => 5])) {
+            if (!$redis->set($lockName, $lockToken, ['nx', 'ex' => 5])) {
                 $redisBusy = true;
             } else {
                 $usedRedisLock = true;
@@ -234,7 +235,8 @@ try {
         if ($rateLimited) {
             if ($usedRedisLock && $redis !== null) {
                 try {
-                    $redis->del($lockName);
+                    $lua = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
+                    $redis->eval($lua, [$lockName, $lockToken], 1);
                 } catch (Throwable $e) {
                 }
             } else {
@@ -286,7 +288,8 @@ try {
     } finally {
         if ($usedRedisLock && $redis !== null) {
             try {
-                $redis->del($lockName);
+                $lua = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
+                $redis->eval($lua, [$lockName, $lockToken], 1);
             } catch (Throwable $e) {
             }
         } else {
