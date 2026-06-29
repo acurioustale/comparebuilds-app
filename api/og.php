@@ -233,7 +233,10 @@ try {
 
         if ($rateLimited) {
             if ($usedRedisLock && $redis !== null) {
-                try { $redis->del($lockName); } catch (Throwable $e) {}
+                try {
+                    $redis->del($lockName);
+                } catch (Throwable $e) {
+                }
             } else {
                 $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
                 $rel->execute([$lockName]);
@@ -282,7 +285,10 @@ try {
         }
     } finally {
         if ($usedRedisLock && $redis !== null) {
-            try { $redis->del($lockName); } catch (Throwable $e) {}
+            try {
+                $redis->del($lockName);
+            } catch (Throwable $e) {
+            }
         } else {
             $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
             $rel->execute([$lockName]);

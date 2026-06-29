@@ -85,26 +85,31 @@ final class ShareConcurrencyTest extends TestCase
         $baseId = base62_encode_sha256($stored);
         $candidate = substr($baseId, 0, 8);
 
-        $redis = new class {
+        $redis = new class () {
             public bool $locked = false;
             public bool $unlocked = false;
             public int $count = 0;
 
-            public function set($key, $val, $opts) {
+            public function set($key, $val, $opts)
+            {
                 $this->locked = true;
                 return true;
             }
-            public function get($key) {
+            public function get($key)
+            {
                 return false;
             }
-            public function incr($key) {
+            public function incr($key)
+            {
                 $this->count++;
                 return 1;
             }
-            public function expire($key, $ttl) {
+            public function expire($key, $ttl)
+            {
                 return true;
             }
-            public function del($key) {
+            public function del($key)
+            {
                 $this->unlocked = true;
                 return true;
             }
@@ -141,8 +146,9 @@ final class ShareConcurrencyTest extends TestCase
         $baseId = base62_encode_sha256($stored);
         $candidate = substr($baseId, 0, 8);
 
-        $redis = new class {
-            public function set($key, $val, $opts) {
+        $redis = new class () {
+            public function set($key, $val, $opts)
+            {
                 throw new RuntimeException('Redis connection dropped');
             }
         };

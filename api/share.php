@@ -587,7 +587,8 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
         if ($usedRedisLock && $redis !== null) {
             try {
                 $redis->del($lockName);
-            } catch (Throwable $e) {}
+            } catch (Throwable $e) {
+            }
         } else {
             $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
             $rel->execute([$lockName]);

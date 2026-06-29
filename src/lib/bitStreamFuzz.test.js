@@ -71,7 +71,11 @@ describe("BitStream & BuildString Fuzzing / Property-Based Tests", () => {
       fc.assert(
         fc.property(
           fc.integer({ min: 0, max: 65535 }), // specId (16 bits)
-          fc.uniqueArray(classNodeArb, { selector: (n) => n.id, minLength: 1, maxLength: 50 }),
+          fc.uniqueArray(classNodeArb, {
+            selector: (n) => n.id,
+            minLength: 1,
+            maxLength: 50,
+          }),
           fc.array(fc.boolean()), // whether each node is selected
           (specId, classNodes, selections) => {
             const selectedNodes = {};
@@ -90,7 +94,11 @@ describe("BitStream & BuildString Fuzzing / Property-Based Tests", () => {
               }
             });
 
-            const buildStr = generateBuildString(selectedNodes, specId, classNodes);
+            const buildStr = generateBuildString(
+              selectedNodes,
+              specId,
+              classNodes,
+            );
             const parsed = parseBuildString(buildStr, classNodes);
 
             expect(parsed.version).toBe(SERIALIZATION_VERSION);
@@ -109,7 +117,11 @@ describe("BitStream & BuildString Fuzzing / Property-Based Tests", () => {
       fc.assert(
         fc.property(
           fc.string(),
-          fc.uniqueArray(classNodeArb, { selector: (n) => n.id, minLength: 1, maxLength: 20 }),
+          fc.uniqueArray(classNodeArb, {
+            selector: (n) => n.id,
+            minLength: 1,
+            maxLength: 20,
+          }),
           (randomStr, classNodes) => {
             try {
               parseBuildString(randomStr, classNodes);
