@@ -259,8 +259,8 @@ function validate_share_input(mixed $body): array
     }
 
     $layoutHash = $body['layoutHash'] ?? null;
-    if ($layoutHash !== null && (!is_string($layoutHash) || mb_strlen($layoutHash) > 16)) {
-        return ['error' => 'layoutHash, when present, must be a string ≤ 16 chars'];
+    if ($layoutHash !== null && (!is_string($layoutHash) || !preg_match('/^[a-fA-F0-9]{1,16}$/', $layoutHash))) {
+        return ['error' => 'layoutHash, when present, must be a hex string 1–16 chars'];
     }
 
     $payload = ['classId' => $classId, 'specId' => $specId, 'builds' => $builds];
