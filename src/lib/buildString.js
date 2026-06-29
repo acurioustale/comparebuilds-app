@@ -51,7 +51,7 @@
  *   different 64-character table.
  */
 
-import { BitReader, BitWriter } from "./bitStream";
+import { BitReader, BitWriter } from "./bitStream.js";
 
 // ─── Serialisation version ─────────────────────────────────────────────────────
 // The 8-bit version that opens every string. The bit layout documented above is

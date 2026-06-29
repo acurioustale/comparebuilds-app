@@ -1,4 +1,4 @@
-import { activeHeroSubtree } from "./spendRules";
+import { activeHeroSubtree } from "./spendRules.js";
 
 /**
  * Generates a SimulationCraft profileset block for the active comparison slots.
