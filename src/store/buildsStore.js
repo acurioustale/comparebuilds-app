@@ -83,10 +83,19 @@ async function loadTreeData(
   } catch (err) {
     if (loadGen !== gen) return;
     console.error(`Failed to load tree data: ${err.message}`, err);
-    set({
-      isLoading: false,
-      error: `Failed to load tree data: ${err.message}`,
-    });
+    const message = `Failed to load tree data: ${err.message}`;
+    // An interactive preload (no build strings) optimistically set specId
+    // before this load. On failure, don't leave specId pointing at a tree that
+    // never loaded — treeData/classNodes would still hold the previous spec, so
+    // the tree would render the old spec while an export stamped the new spec's
+    // header onto the old bit layout. Reset to a clean slate so the UI falls
+    // back to spec selection. Imports (≥1 build) keep their string and surface
+    // the error on the slot, as before.
+    if (get().buildStrings.length === 0) {
+      set({ ...EMPTY, error: message });
+    } else {
+      set({ isLoading: false, error: message });
+    }
   }
 }
 
