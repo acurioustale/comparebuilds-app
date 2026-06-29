@@ -87,9 +87,9 @@ function sanitizeTag(tag) {
   if (/^<i\s*>$/i.test(t)) return "<i>";
   if (/^<\/i\s*>$/i.test(t)) return "</i>";
 
-  const styled = t.match(/^<b\s+style="([^"]*)">$/i);
+  const styled = t.match(/^<b\s+style\s*=\s*(["'])([^"']*)\1>$/i);
   if (styled) {
-    const safe = sanitizeStyle(styled[1]);
+    const safe = sanitizeStyle(styled[2]);
     return safe ? `<b style="${safe}">` : "<b>";
   }
 
