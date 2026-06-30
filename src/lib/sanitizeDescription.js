@@ -11,7 +11,7 @@
  * therefore the security boundary: the app renders it without trusting upstream.
  */
 
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 
 /**
  * Sanitise an HTML-rendered description into trusted markup.
@@ -36,8 +36,8 @@ export function sanitizeDescription(input) {
   }
 
   // Set up purify hook to restrict styles to only color and font-weight
-  purify.addHook('uponSanitizeAttribute', function (node, data) {
-    if (data.attrName === 'style') {
+  purify.addHook("uponSanitizeAttribute", function (node, data) {
+    if (data.attrName === "style") {
       const style = data.attrValue;
       const decls = [];
       for (const part of style.split(";")) {
@@ -46,11 +46,15 @@ export function sanitizeDescription(input) {
         const prop = part.slice(0, idx).trim().toLowerCase();
         const value = part.slice(idx + 1).trim();
         if (prop !== "color" && prop !== "font-weight") continue;
-        if (prop === "font-weight" && !/^(bold|normal|[1-9]00)$/i.test(value)) continue;
+        if (prop === "font-weight" && !/^(bold|normal|[1-9]00)$/i.test(value))
+          continue;
         if (
           prop === "color" &&
-          !/^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%]+\))$/.test(value)
-        ) continue;
+          !/^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%]+\))$/.test(
+            value,
+          )
+        )
+          continue;
         decls.push(`${prop}:${value}`);
       }
       if (decls.length > 0) {
@@ -62,12 +66,13 @@ export function sanitizeDescription(input) {
   });
 
   // We only allow <br>, <b>, and <i> tags.
-  const result = purify.sanitize(input, {
-    ALLOWED_TAGS: ['b', 'i', 'br', '#text'],
-    ALLOWED_ATTR: ['style']
-  }).replace(/<br>/gi, '<br />'); // canonicalize br
-  
+  const result = purify
+    .sanitize(input, {
+      ALLOWED_TAGS: ["b", "i", "br", "#text"],
+      ALLOWED_ATTR: ["style"],
+    })
+    .replace(/<br>/gi, "<br />"); // canonicalize br
+
   purify.removeAllHooks(); // Clean up hook
   return result;
 }
-

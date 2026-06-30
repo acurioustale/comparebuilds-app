@@ -39,20 +39,20 @@ describe("allowed markup is preserved", () => {
       'Deal damage.<br /><b style="color:white;">Empowered:</b> deals more.';
     const out = sanitizeDescription(real);
     // DOMPurify + our hook strips or keeps trailing ; based on browser implementation, so we just check it contains the color
-    assert.ok(out.includes('color:white'), "should contain color style");
-    assert.ok(out.startsWith('Deal damage.<br />'), "should have br");
+    assert.ok(out.includes("color:white"), "should contain color style");
+    assert.ok(out.startsWith("Deal damage.<br />"), "should have br");
   });
 
   test("color style is kept, value preserved", () => {
     const outHex = sanitizeDescription('<b style="color:#ffcc00;">x</b>');
-    assert.ok(outHex.includes('color:#ffcc00'), "hex color preserved");
+    assert.ok(outHex.includes("color:#ffcc00"), "hex color preserved");
     const outRgb = sanitizeDescription('<b style="color:rgb(255,0,0)">x</b>');
-    assert.ok(outRgb.includes('color:rgb(255,0,0)'), "rgb color preserved");
+    assert.ok(outRgb.includes("color:rgb(255,0,0)"), "rgb color preserved");
   });
 
   test("font-weight style is kept", () => {
     const out = sanitizeDescription('<b style="font-weight:700;">x</b>');
-    assert.ok(out.includes('font-weight:700'), "font-weight preserved");
+    assert.ok(out.includes("font-weight:700"), "font-weight preserved");
   });
 });
 
@@ -103,8 +103,8 @@ describe("dangerous markup is neutralised", () => {
       '<b style="color:red;background:url(x)">y</b>',
     );
     // Our hook leaves only color:red
-    assert.ok(out.includes('color:red'), "color remains");
-    assert.ok(!out.includes('background'), "background removed");
+    assert.ok(out.includes("color:red"), "color remains");
+    assert.ok(!out.includes("background"), "background removed");
   });
 
   test("unknown tags are escaped", () => {
@@ -113,11 +113,10 @@ describe("dangerous markup is neutralised", () => {
       "", // DOMPurify strips unknown tags
     );
   });
-  
+
   test("DOMPurify fuzz test: malformed tags are stripped", () => {
     const out = sanitizeDescription("<b/onmouseover=alert(1)>x</b>");
     assert.ok(!/onmouseover/i.test(out), "handler is not live");
     assert.strictEqual(out, "<b>x</b>");
   });
 });
-
