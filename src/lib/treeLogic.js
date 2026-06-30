@@ -229,17 +229,10 @@ export function buildGrantedSeed(treeData) {
 export function computeInvalidNodeIds(allNodes, selected, nodeById) {
   const invalid = new Set();
 
-  // Topological order: posY ascending guarantees parents processed before
-  // children. The posX then id tiebreakers just make the walk deterministic.
-  const sorted = allNodes
-    .filter((n) => selected[n.id] && !n.alreadyGranted)
-    .sort((a, b) =>
-      a.posY !== b.posY
-        ? a.posY - b.posY
-        : a.posX !== b.posX
-          ? a.posX - b.posX
-          : a.id - b.id,
-    );
+  // allNodes (treeData.nodes) is pre-sorted topologically at ingest
+  const sorted = allNodes.filter(
+    (n) => selected[n.id] && !n.alreadyGranted,
+  );
 
   // Hero-subtree exclusivity: a build may invest in only one hero subtree. A
   // crafted/corrupt build string (or an import path that bypasses canSpendPoint)

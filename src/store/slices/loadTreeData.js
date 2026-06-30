@@ -46,6 +46,16 @@ export async function loadTreeData(
       );
     }
 
+    if (Array.isArray(treeData.nodes)) {
+      treeData.nodes.sort((a, b) =>
+        a.posY !== b.posY
+          ? a.posY - b.posY
+          : a.posX !== b.posX
+            ? a.posX - b.posX
+            : a.id - b.id,
+      );
+    }
+
     const currentStrings = get().buildStrings;
     // Class-level wire-layout fingerprint: the same hash the snapshot pins, and
     // the detect-only patch stamp embedded in share links. Class-level (not
