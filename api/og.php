@@ -223,7 +223,7 @@ try {
                     $rateLimited = true;
                 } else {
                     $count = $redis->incr($rlKey);
-                    if ($count === 1) {
+                    if ($count === 1 || (int) $redis->ttl($rlKey) < 0) {
                         $redis->expire($rlKey, OG_RATE_LIMIT_WINDOW);
                     }
                 }
