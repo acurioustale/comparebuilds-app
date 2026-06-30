@@ -191,9 +191,34 @@ if (is_file($cacheFile)) {
     exit;
 }
 
+// Number of concurrent OG image renders allowed across all IPs at any one time.
+// This caps total GD/CPU resource use regardless of how many distinct IPs are
+// requesting simultaneously. Adjust via config.php (OG_CONCURRENCY_SLOTS) if needed.
+const OG_CONCURRENCY_SLOTS = 4;
+
 try {
     $pdo = get_db_connection();
     $redis = get_redis_connection();
+
+    // ── Global concurrency guard ─────────────────────────────────────────────
+    // GD true-color image generation is CPU-intensive. Without this, a flood of
+    // requests from many different IPs (each below their per-IP rate limit) could
+    // exhaust all PHP-FPM workers. We try to acquire one of OG_CONCURRENCY_SLOTS
+    // advisory locks (cb_og_global_0 … cb_og_global_N); if none is free we return
+    // 503 immediately rather than queuing. The slot is released in the finally block.
+    $globalLockName = null;
+    $globalLockToken = bin2hex(random_bytes(16));
+    for ($slot = 0; $slot < OG_CONCURRENCY_SLOTS; $slot++) {
+        $candidate = 'cb_og_global_' . $slot;
+        if (RateLimiter::acquireLock($pdo, $redis, $candidate, $globalLockToken)) {
+            $globalLockName = $candidate;
+            break;
+        }
+    }
+    if ($globalLockName === null) {
+        header('Retry-After: 5');
+        bail(503);
+    }
 
     // ── Concurrency throttling & rate limiting ──────────────────────────────
     $ipHash = client_ip_hash();
@@ -201,6 +226,7 @@ try {
     $lockToken = bin2hex(random_bytes(16));
 
     if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken)) {
+        RateLimiter::releaseLock($pdo, $redis, $globalLockName, $globalLockToken);
         header('Retry-After: 5');
         bail(503);
     }
@@ -265,6 +291,7 @@ try {
         $data = get_share($pdo, $id);
     } finally {
         RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
+        RateLimiter::releaseLock($pdo, $redis, $globalLockName, $globalLockToken);
     }
 } catch (Throwable $e) {
     bail(500);
