@@ -127,7 +127,7 @@ function render_share_page(string $id, ?array $data): void
 
     header('Content-Type: text/html; charset=utf-8');
     header("Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';");
-    header('Cache-Control: public, max-age=86400');
+    header('Cache-Control: public, max-age=31536000, immutable');
     echo "<!doctype html>\n<html lang=\"en\">\n<head>\n"
        . "<meta charset=\"utf-8\">\n"
        . "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
@@ -689,7 +689,7 @@ if ($method === 'GET') {
         render_share_page($id, json_decode($data, true) ?: null);
     }
 
-    header('Cache-Control: public, max-age=86400');
+    header('Cache-Control: public, max-age=31536000, immutable');
 
     // Validated-on-write JSON blob, returned verbatim as application/json with
     // X-Content-Type-Options: nosniff — the browser won't render it as HTML, so

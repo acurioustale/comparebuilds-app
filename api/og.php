@@ -170,7 +170,7 @@ $cacheDir = __DIR__ . '/../../cache_og';
 $cacheFile = $cacheDir . '/' . basename($id) . '.' . $ext;
 if (is_file($cacheFile)) {
     header("Content-Type: $mime");
-    header('Cache-Control: public, max-age=86400');
+    header('Cache-Control: public, max-age=31536000, immutable');
     header('X-Content-Type-Options: nosniff');
     // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
     readfile($cacheFile);
@@ -356,7 +356,7 @@ try {
 }
 
 header("Content-Type: $mime");
-header('Cache-Control: public, max-age=86400');
+header('Cache-Control: public, max-age=31536000, immutable');
 header('X-Content-Type-Options: nosniff');
 
 if (!is_dir($cacheDir)) {
