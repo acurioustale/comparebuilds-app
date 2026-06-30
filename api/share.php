@@ -719,8 +719,8 @@ if ($method === 'GET') {
 
 // ── POST ──────────────────────────────────────────────────────────────────────
 if ($method === 'POST') {
-    // Strictly require application/json. This prevents simple-request CSRF from 
-    // forms or fetch(mode: 'no-cors') because browsers mandate a preflight for 
+    // Strictly require application/json. This prevents simple-request CSRF from
+    // forms or fetch(mode: 'no-cors') because browsers mandate a preflight for
     // cross-origin application/json.
     if (empty($_SERVER['CONTENT_TYPE']) || strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== 0) {
         fail(415, 'Unsupported Media Type: expected application/json');
