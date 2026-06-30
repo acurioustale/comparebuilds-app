@@ -21,8 +21,8 @@ function fallbackCopyTextToClipboard(text) {
   let successful = false;
   try {
     successful = document.execCommand('copy');
-  } catch (err) {
-    successful = false;
+  } catch {
+    // ignore
   }
 
   document.body.removeChild(textArea);

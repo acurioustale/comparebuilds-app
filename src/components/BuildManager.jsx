@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, memo } from "react";
+import { useState, useCallback, memo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import Tooltip from "./Tooltip";
 import { useBuildsStore, MAX_BUILDS } from "../store/buildsStore";
