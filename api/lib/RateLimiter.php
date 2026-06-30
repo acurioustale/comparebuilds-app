@@ -80,17 +80,14 @@ class RateLimiter
         }
 
         try {
-            $current = $redis->get($rlKey);
-            if ($current !== false && (int) $current >= $limit) {
-                if ($penalty) {
-                    $redis->expire($rlKey, $window * 2);
-                }
-                return (int) $current;
-            }
-
             $count = $redis->incr($rlKey);
             if ($count === 1 || (int) $redis->ttl($rlKey) < 0) {
                 $redis->expire($rlKey, $window);
+            }
+            if ($count > $limit) {
+                if ($penalty) {
+                    $redis->expire($rlKey, $window * 2);
+                }
             }
             return (int) $count;
         } catch (Throwable $e) {

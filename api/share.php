@@ -482,6 +482,15 @@ function ensure_share_schema(PDO $pdo): void
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     ");
     $pdo->exec("
+        CREATE TABLE IF NOT EXISTS comparebuilds_share_requests (
+            id         INT AUTO_INCREMENT PRIMARY KEY,
+            ip_hash    CHAR(64)  NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_ip_created (ip_hash, created_at),
+            INDEX idx_created (created_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ");
+    $pdo->exec("
         CREATE TABLE IF NOT EXISTS comparebuilds_og_requests (
             id         INT AUTO_INCREMENT PRIMARY KEY,
             ip_hash    CHAR(64)  NOT NULL,
@@ -532,13 +541,30 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
             // Bound the window against the DB clock (NOW()), not a PHP timestamp, so a
             // timezone/DST skew can't shift it. The window is a trusted constant.
             $rl = $pdo->prepare(
-                'SELECT COUNT(*) AS c FROM comparebuilds_shares '
+                'SELECT COUNT(*) AS c FROM comparebuilds_share_requests '
                 . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . RATE_LIMIT_WINDOW . ' SECOND'
             );
             $rl->execute([$ipHash]);
             $currentCount = (int) $rl->fetch()['c'];
             if ($currentCount >= RATE_LIMIT_MAX) {
                 $rateLimited = true;
+            }
+
+            if (random_int(1, 100) === 1) {
+                try {
+                    $prune = $pdo->prepare(
+                        'DELETE FROM comparebuilds_share_requests '
+                        . 'WHERE created_at < NOW() - INTERVAL 86400 SECOND'
+                    );
+                    $prune->execute();
+                } catch (Throwable $e) {
+                }
+            }
+
+            try {
+                $logReq = $pdo->prepare('INSERT INTO comparebuilds_share_requests (ip_hash) VALUES (?)');
+                $logReq->execute([$ipHash]);
+            } catch (PDOException $e) {
             }
         }
 
