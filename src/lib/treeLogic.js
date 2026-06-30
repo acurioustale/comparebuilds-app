@@ -230,9 +230,7 @@ export function computeInvalidNodeIds(allNodes, selected, nodeById) {
   const invalid = new Set();
 
   // allNodes (treeData.nodes) is pre-sorted topologically at ingest
-  const sorted = allNodes.filter(
-    (n) => selected[n.id] && !n.alreadyGranted,
-  );
+  const sorted = allNodes.filter((n) => selected[n.id] && !n.alreadyGranted);
 
   // Hero-subtree exclusivity: a build may invest in only one hero subtree. A
   // crafted/corrupt build string (or an import path that bypasses canSpendPoint)
