@@ -243,6 +243,9 @@ try {
                 $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
                 $rel->execute([$lockName]);
             }
+            if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                error_log('Rate limit hit for IP Hash ' . $ipHash . ' | X-Forwarded-For: ' . $_SERVER['HTTP_X_FORWARDED_FOR']);
+            }
             header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
             bail(429);
         }
@@ -262,6 +265,9 @@ try {
             if ($count >= OG_RATE_LIMIT_MAX) {
                 $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
                 $rel->execute([$lockName]);
+                if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                    error_log('Rate limit hit for IP Hash ' . $ipHash . ' | X-Forwarded-For: ' . $_SERVER['HTTP_X_FORWARDED_FOR']);
+                }
                 header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
                 bail(429);
             }
