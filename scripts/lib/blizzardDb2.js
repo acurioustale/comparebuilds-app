@@ -479,6 +479,9 @@ export class BlizzardDb2 {
    * than exact cumulative match keeps `levels` the same length as `ranks` even
    * when an entry's maxRanks is > 1 or the grant thresholds aren't sequential
    * (an exact-match lookup would silently drop those ranks' levels).
+   *
+   * Throws a contextual Error if a rank has no covering grant and no prior rank
+   * to carry from — fabricating a level would ship silently-wrong unlock data.
    */
   _apexLevels(nodeId, ranks) {
     const grants = [];
@@ -492,16 +495,29 @@ export class BlizzardDb2 {
     }
     const levels = [];
     let cumulative = 0;
-    for (const r of ranks) {
+    for (let i = 0; i < ranks.length; i++) {
+      const r = ranks[i];
       cumulative += r.maxRanks;
       let level = null;
       for (const g of grants) {
         if (g.ranks >= cumulative && (level == null || g.level < level))
           level = g.level;
       }
-      // Carry the previous rank's level if no grant covers this one, so the
-      // array stays aligned to `ranks` rather than going short.
-      levels.push(level ?? levels[levels.length - 1] ?? null);
+      // Carry the previous rank's level if no grant covers this one (a >1-maxRanks
+      // entry can land between grant thresholds). But the FIRST rank has no prior
+      // level to carry, and fabricating one would ship a wrong unlock level that
+      // validateClassData can't catch — it only sees the array is short an integer,
+      // not which apex/rank lacked a grant. Fail loud here with the identifiers
+      // that pin down the gap instead.
+      const resolved = level ?? levels[levels.length - 1];
+      if (resolved == null) {
+        throw new Error(
+          `apex node ${nodeId} rank ${i} (spell ${r.spellId}) has no covering ` +
+            `CondType-${COND_TYPE_LEVEL_GRANT} level grant ` +
+            `(cumulative ranks ${cumulative})`,
+        );
+      }
+      levels.push(resolved);
     }
     return levels;
   }

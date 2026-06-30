@@ -158,6 +158,51 @@ describe("BlizzardDb2.apexChain", () => {
     expect(chain.levels).toEqual([80, 90, 90]);
   });
 
+  it("throws a contextual error when a rank has no covering level grant", () => {
+    // Apex whose first entry is two ranks (cumulative 2 after rank 0) but the
+    // only grant covers GrantedRanks 1 — so rank 0 is uncovered and has no prior
+    // rank to carry from. Fabricating a level would ship silently-wrong unlock
+    // data, so the ingest must fail loud with the node, rank index and spell id
+    // that pin down the gap (otherwise validateClassData rejects the whole class
+    // with a generic "levels array of integers" error giving no clue which rank).
+    const db2 = new BlizzardDb2({ build: "test", cache: false });
+    db2.index({
+      nx: [
+        { TraitNodeID: "100", TraitNodeEntryID: "e1", _Index: "100" },
+        { TraitNodeID: "100", TraitNodeEntryID: "e2", _Index: "200" },
+      ],
+      entry: [
+        {
+          ID: "e1",
+          TraitDefinitionID: "d1",
+          MaxRanks: "2",
+          NodeEntryType: "13",
+        },
+        {
+          ID: "e2",
+          TraitDefinitionID: "d2",
+          MaxRanks: "1",
+          NodeEntryType: "13",
+        },
+      ],
+      def: [
+        { ID: "d1", SpellID: "1001" },
+        { ID: "d2", SpellID: "1002" },
+      ],
+      // grant covers only GrantedRanks 1 — leaves cumulative-2 (rank 0) uncovered
+      cond: [
+        { ID: "L1", CondType: "5", GrantedRanks: "1", RequiredLevel: "90" },
+      ],
+      ncond: [{ TraitNodeID: "100", TraitCondID: "L1" }],
+      gxn: [],
+      gxc: [],
+      subtree: [],
+    });
+    expect(() => db2.apexChain("100")).toThrow(
+      /apex node 100 rank 0 \(spell 1001\).*CondType-5/,
+    );
+  });
+
   it("returns null for an ordinary (non-type-13) node", () => {
     expect(fixture().apexChain("200")).toBeNull();
   });
