@@ -130,6 +130,7 @@ final class ShareValidationTest extends TestCase
     public function testClientIpUsesLastForwardedHopWhenProxyTrusted(): void
     {
         define('TRUST_PROXY', true);
+        define('TRUSTED_PROXIES', ['203.0.113.7']);
         $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
         // An attacker prepends a forged hop; the trusted proxy appends the real
         // client as the rightmost entry. Taking the last hop ignores the forgery,
@@ -144,6 +145,7 @@ final class ShareValidationTest extends TestCase
     {
         define('TRUST_PROXY', true);
         define('TRUST_CLOUDFLARE', true);
+        define('TRUSTED_PROXIES', ['203.0.113.7']);
         $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
         $_SERVER['HTTP_CF_CONNECTING_IP'] = '198.51.100.10';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '1.2.3.4, 198.51.100.9';
@@ -156,6 +158,7 @@ final class ShareValidationTest extends TestCase
     {
         define('TRUST_PROXY', true);
         define('TRUST_X_REAL_IP', true);
+        define('TRUSTED_PROXIES', ['203.0.113.7']);
         $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
         $_SERVER['HTTP_X_REAL_IP'] = '198.51.100.11';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '1.2.3.4, 198.51.100.9';
@@ -169,6 +172,7 @@ final class ShareValidationTest extends TestCase
     public function testClientIpFallsBackWhenTrustedForwardedHopIsNotAnIp(): void
     {
         define('TRUST_PROXY', true);
+        define('TRUSTED_PROXIES', ['203.0.113.7']);
         $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.9, not-an-ip';
         $this->assertSame('203.0.113.7', client_ip());
