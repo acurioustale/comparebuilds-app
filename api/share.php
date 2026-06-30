@@ -186,7 +186,7 @@ function is_ip_in_cidr(string $ip, string $cidr): bool
 function is_trusted_proxy(string $ip): bool
 {
     if (!defined('TRUSTED_PROXIES') || !is_array(TRUSTED_PROXIES)) {
-        return true;
+        return false;
     }
     foreach (TRUSTED_PROXIES as $proxy) {
         if (is_ip_in_cidr($ip, $proxy)) {
