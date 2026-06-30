@@ -358,8 +358,25 @@ if (!is_dir($cacheDir)) {
     @mkdir($cacheDir, 0755, true);
 }
 if (is_dir($cacheDir)) {
+    // Write atomically: encode into a unique temp file in the same directory,
+    // then rename() into place. rename is atomic on one filesystem, so a reader
+    // (and crawlers caching for a day) only ever sees a fully written file —
+    // never a truncated image from an interrupted encode, a full disk, or two
+    // IPs racing to generate the same uncached id. Best-effort: any failure
+    // unlinks the temp file, leaves no partial file at the real path, and never
+    // breaks image serving (the error suppression is preserved for that reason).
     // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
-    @$emit($img, $cacheFile);
+    $tmpFile = @tempnam($cacheDir, 'og_');
+    if ($tmpFile !== false) {
+        // tempnam ignores the extension, but the read path only ever serves
+        // $cacheFile, so the temp file's own name is irrelevant.
+        // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
+        if (@$emit($img, $tmpFile) && @rename($tmpFile, $cacheFile)) {
+            @chmod($cacheFile, 0644);
+        } else {
+            @unlink($tmpFile);
+        }
+    }
 }
 $emit($img);
 imagedestroy($img);
