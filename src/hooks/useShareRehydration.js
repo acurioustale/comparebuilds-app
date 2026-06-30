@@ -82,7 +82,7 @@ export function useShareRehydration() {
         );
       }
     })();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [addBuild, clearAllBuilds, rehydrateTreeData, setBuildNames, preloadSpec, setSharedLayoutHash]);
 
   const dismissShareError = useCallback(() => setShareError(null), []);
   return { shareError, dismissShareError };
