@@ -264,6 +264,7 @@ export default function BuildManager() {
 
   const handleCopySimc = useCallback(async () => {
     if (simcState !== "idle") return;
+    setSimcState("copying");
     try {
       const profileset = generateSimcProfileset(
         buildStrings,
