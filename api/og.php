@@ -197,7 +197,7 @@ try {
         $currentCountRedis = RateLimiter::checkRedis($redis, 'cb_rl_og_' . $ipHash, OG_RATE_LIMIT_MAX, OG_RATE_LIMIT_WINDOW, false);
 
         if ($currentCountRedis !== null) {
-            if ($currentCountRedis >= OG_RATE_LIMIT_MAX) {
+            if ($currentCountRedis - 1 >= OG_RATE_LIMIT_MAX) {
                 $rateLimited = true;
             }
         }
