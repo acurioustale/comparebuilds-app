@@ -442,7 +442,7 @@ function ensure_share_schema(PDO $pdo): void
 {
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS comparebuilds_shares (
-            id         VARCHAR(32) NOT NULL PRIMARY KEY,
+            id         VARCHAR(32) COLLATE utf8mb4_bin NOT NULL PRIMARY KEY,
             data       MEDIUMTEXT  NOT NULL,
             ip_hash    CHAR(64)    NULL,
             created_at TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
