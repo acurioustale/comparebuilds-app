@@ -174,13 +174,29 @@ function is_ip_in_cidr(string $ip, string $cidr): bool
     if (str_contains($cidr, '/')) {
         list($subnet, $bits) = explode('/', $cidr, 2);
         $bits = (int) $bits;
-        $ipCalc = ip2long($ip);
-        $subnetCalc = ip2long($subnet);
-        if ($ipCalc === false || $subnetCalc === false) {
+
+        $ipBinary = inet_pton($ip);
+        $subnetBinary = inet_pton($subnet);
+        if ($ipBinary === false || $subnetBinary === false) {
             return false;
         }
-        $mask = -1 << (32 - $bits);
-        return ($ipCalc & $mask) === ($subnetCalc & $mask);
+
+        $ipLen = strlen($ipBinary);
+        $subnetLen = strlen($subnetBinary);
+        if ($ipLen !== $subnetLen) {
+            return false;
+        }
+
+        // Compare byte by byte
+        for ($i = 0; $i < $ipLen; $i++) {
+            if ($bits <= 0) break;
+            $mask = $bits >= 8 ? 0xFF : (0xFF << (8 - $bits)) & 0xFF;
+            if ((ord($ipBinary[$i]) & $mask) !== (ord($subnetBinary[$i]) & $mask)) {
+                return false;
+            }
+            $bits -= 8;
+        }
+        return true;
     }
     return $ip === $cidr;
 }
