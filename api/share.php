@@ -384,12 +384,34 @@ function base62_encode_sha256(string $input): string
     return base62_from_hex(hash('sha256', $input));
 }
 
-/** Dispatches to the GMP or pure-PHP base62 encoder for a hex string. */
+/** Dispatches to the GMP, BCMath, or pure-PHP base62 encoder for a hex string. */
 function base62_from_hex(string $hex): string
 {
-    return function_exists('gmp_init')
-        ? base62_from_hex_gmp($hex)
-        : base62_from_hex_php($hex);
+    if (function_exists('gmp_init')) {
+        return base62_from_hex_gmp($hex);
+    }
+    if (function_exists('bcdiv')) {
+        return base62_from_hex_bcmath($hex);
+    }
+    return base62_from_hex_php($hex);
+}
+
+/** BCMath-backed base62 of a hex string. */
+function base62_from_hex_bcmath(string $hex): string
+{
+    $dec = '0';
+    $len = strlen($hex);
+    for ($i = 0; $i < $len; $i++) {
+        $dec = bcadd(bcmul($dec, '16'), (string) hexdec($hex[$i]));
+    }
+
+    $base62 = '';
+    while (bccomp($dec, '0') > 0) {
+        $rem = bcmod($dec, '62');
+        $dec = bcdiv($dec, '62', 0);
+        $base62 = BASE62_ALPHABET[(int) $rem] . $base62;
+    }
+    return str_pad($base62, ID_LEN, '0', STR_PAD_LEFT);
 }
 
 /** GMP-backed base62 of a hex string (left-padded to a minimum of ID_LEN). */

@@ -274,6 +274,24 @@ final class ShareValidationTest extends TestCase
         }
     }
 
+    public function testBase62FallbackBcmathMatchesGmp(): void
+    {
+        if (!function_exists('gmp_init')) {
+            $this->markTestSkipped('GMP not available to compare against');
+        }
+        if (!function_exists('bcdiv')) {
+            $this->markTestSkipped('BCMath not available to compare against');
+        }
+        foreach (['test', '', 'a', 'hello world', 'probe-0', 'probe-42', '{"classId":1}'] as $in) {
+            $hex = hash('sha256', $in);
+            $this->assertSame(
+                base62_from_hex_gmp($hex),
+                base62_from_hex_bcmath($hex),
+                "GMP and BCMath base62 diverge for input: $in"
+            );
+        }
+    }
+
     public function testBase62FallbackTerminatesAndIsAlphanumeric(): void
     {
         // Directly exercises the pure-PHP fallback (the GMP path is what runs in
