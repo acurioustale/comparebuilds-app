@@ -185,64 +185,25 @@ try {
     $ipHash = client_ip_hash();
     $lockName = 'cb_og_' . substr($ipHash, 0, 48);
     $lockToken = bin2hex(random_bytes(16));
-    $usedRedisLock = false;
 
-    if ($redis !== null) {
-        $redisBusy = false;
-        try {
-            if (!$redis->set($lockName, $lockToken, ['nx', 'ex' => 5])) {
-                $redisBusy = true;
-            } else {
-                $usedRedisLock = true;
-            }
-        } catch (Throwable $e) {
-            $redis = null;
-        }
-        if ($redisBusy) {
-            header('Retry-After: 5');
-            bail(503);
-        }
-    }
-
-    if (!$usedRedisLock) {
-        $lk = $pdo->prepare('SELECT GET_LOCK(?, 1)');
-        $lk->execute([$lockName]);
-        if ((int) $lk->fetchColumn() !== 1) {
-            header('Retry-After: 5');
-            bail(503);
-        }
+    if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken)) {
+        header('Retry-After: 5');
+        bail(503);
     }
 
     try {
         $rateLimited = false;
-        if ($redis !== null) {
-            try {
-                $rlKey = 'cb_rl_og_' . $ipHash;
-                $current = $redis->get($rlKey);
-                if ($current !== false && (int) $current >= OG_RATE_LIMIT_MAX) {
-                    $rateLimited = true;
-                } else {
-                    $count = $redis->incr($rlKey);
-                    if ($count === 1 || (int) $redis->ttl($rlKey) < 0) {
-                        $redis->expire($rlKey, OG_RATE_LIMIT_WINDOW);
-                    }
-                }
-            } catch (Throwable $e) {
-                $redis = null;
+
+        $currentCountRedis = RateLimiter::checkRedis($redis, 'cb_rl_og_' . $ipHash, OG_RATE_LIMIT_MAX, OG_RATE_LIMIT_WINDOW, false);
+
+        if ($currentCountRedis !== null) {
+            if ($currentCountRedis >= OG_RATE_LIMIT_MAX) {
+                $rateLimited = true;
             }
         }
 
         if ($rateLimited) {
-            if ($usedRedisLock && $redis !== null) {
-                try {
-                    $lua = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
-                    $redis->eval($lua, [$lockName, $lockToken], 1);
-                } catch (Throwable $e) {
-                }
-            } else {
-                $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
-                $rel->execute([$lockName]);
-            }
+            RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
             if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
                 $xff = preg_replace('/[\r\n]+/', ' ', $_SERVER['HTTP_X_FORWARDED_FOR']);
                 error_log('Rate limit hit for IP Hash ' . $ipHash . ' | X-Forwarded-For: ' . $xff);
@@ -264,8 +225,7 @@ try {
                 // Table might not exist yet if no share has ever been created.
             }
             if ($count >= OG_RATE_LIMIT_MAX) {
-                $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
-                $rel->execute([$lockName]);
+                RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
                 if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
                     $xff = preg_replace('/[\r\n]+/', ' ', $_SERVER['HTTP_X_FORWARDED_FOR']);
                     error_log('Rate limit hit for IP Hash ' . $ipHash . ' | X-Forwarded-For: ' . $xff);
@@ -299,16 +259,7 @@ try {
 
         $data = get_share($pdo, $id);
     } finally {
-        if ($usedRedisLock && $redis !== null) {
-            try {
-                $lua = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
-                $redis->eval($lua, [$lockName, $lockToken], 1);
-            } catch (Throwable $e) {
-            }
-        } else {
-            $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
-            $rel->execute([$lockName]);
-        }
+        RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
     }
 } catch (Throwable $e) {
     bail(500);

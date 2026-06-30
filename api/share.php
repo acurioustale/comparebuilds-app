@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/lib/RateLimiter.php';
+
 // ─── Runtime hardening ─────────────────────────────────────────────────────────
 // Never leak PHP errors/stack traces to clients; log them server-side instead.
 ini_set('display_errors', '0');
@@ -480,58 +482,24 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     // them inserts (a TOCTOU race that would let the per-IP cap be exceeded).
     $lockName = 'cb_share_' . substr($ipHash, 0, 48);
     $lockToken = bin2hex(random_bytes(16));
-    $usedRedisLock = false;
 
-    if ($redis !== null) {
-        try {
-            if (!$redis->set($lockName, $lockToken, ['nx', 'ex' => 5])) {
-                throw new ShareException(503, 'Server busy — please try again', 5);
-            }
-            $usedRedisLock = true;
-        } catch (ShareException $e) {
-            throw $e;
-        } catch (Throwable $e) {
-            // Redis connection dropped/failed during set — fall back to MySQL lock.
-            $redis = null;
-        }
-    }
-
-    if (!$usedRedisLock) {
-        $lk = $pdo->prepare('SELECT GET_LOCK(?, 1)');
-        $lk->execute([$lockName]);
-        if ((int) $lk->fetchColumn() !== 1) {
-            throw new ShareException(503, 'Server busy — please try again', 5);
-        }
+    if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken)) {
+        throw new ShareException(503, 'Server busy — please try again', 5);
     }
 
     $id = null;
     try {
         // ── Per-IP rate limit ────────────────────────────────────────────────
         $rateLimited = false;
-        $currentCount = 0;
-        if ($redis !== null) {
-            try {
-                $rlKey = 'cb_rl_share_' . $ipHash;
-                $current = $redis->get($rlKey);
-                if ($current !== false && (int) $current >= RATE_LIMIT_MAX) {
-                    $currentCount = (int) $current;
-                    $rateLimited = true;
-                    // Penalty escalation: double the window for repeat offenders
-                    $redis->expire($rlKey, RATE_LIMIT_WINDOW * 2);
-                } else {
-                    $count = $redis->incr($rlKey);
-                    $currentCount = (int) $count;
-                    if ($count === 1) {
-                        $redis->expire($rlKey, RATE_LIMIT_WINDOW);
-                    }
-                }
-            } catch (Throwable $e) {
-                // Fall back to MySQL rate limit check
-                $redis = null;
-            }
-        }
 
-        if ($redis === null) {
+        $currentCountRedis = RateLimiter::checkRedis($redis, 'cb_rl_share_' . $ipHash, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW, true);
+
+        if ($currentCountRedis !== null) {
+            $currentCount = $currentCountRedis;
+            if ($currentCount >= RATE_LIMIT_MAX) {
+                $rateLimited = true;
+            }
+        } else {
             // Bound the window against the DB clock (NOW()), not a PHP timestamp, so a
             // timezone/DST skew can't shift it. The window is a trusted constant.
             $rl = $pdo->prepare(
@@ -607,16 +575,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
             }
         }
     } finally {
-        if ($usedRedisLock && $redis !== null) {
-            try {
-                $lua = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
-                $redis->eval($lua, [$lockName, $lockToken], 1);
-            } catch (Throwable $e) {
-            }
-        } else {
-            $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
-            $rel->execute([$lockName]);
-        }
+        RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
     }
 
     if ($id === null) {
