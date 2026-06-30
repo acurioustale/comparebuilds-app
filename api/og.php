@@ -169,9 +169,23 @@ $cacheDir = __DIR__ . '/../cache_og';
 // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
 $cacheFile = $cacheDir . '/' . basename($id) . '.' . $ext;
 if (is_file($cacheFile)) {
+    $mtime = filemtime($cacheFile);
+    $etag = '"' . md5($id . $mtime) . '"';
+
     header("Content-Type: $mime");
     header('Cache-Control: public, max-age=31536000, immutable');
     header('X-Content-Type-Options: nosniff');
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $mtime) . ' GMT');
+    header('ETag: ' . $etag);
+
+    if (
+        (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) === $etag) ||
+        (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && @strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $mtime)
+    ) {
+        http_response_code(304);
+        exit;
+    }
+
     // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
     readfile($cacheFile);
     exit;
