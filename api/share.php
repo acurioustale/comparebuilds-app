@@ -201,10 +201,14 @@ function client_ip(): string
     $remoteAddr = $_SERVER['REMOTE_ADDR'] ?? '';
     if (defined('TRUST_PROXY') && TRUST_PROXY && is_trusted_proxy($remoteAddr)) {
         if (defined('TRUST_CLOUDFLARE') && TRUST_CLOUDFLARE && !empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-            return $_SERVER['HTTP_CF_CONNECTING_IP'];
+            if (filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) !== false) {
+                return $_SERVER['HTTP_CF_CONNECTING_IP'];
+            }
         }
         if (defined('TRUST_X_REAL_IP') && TRUST_X_REAL_IP && !empty($_SERVER['HTTP_X_REAL_IP'])) {
-            return $_SERVER['HTTP_X_REAL_IP'];
+            if (filter_var($_SERVER['HTTP_X_REAL_IP'], FILTER_VALIDATE_IP) !== false) {
+                return $_SERVER['HTTP_X_REAL_IP'];
+            }
         }
         if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ips = array_map('trim', explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
