@@ -30,6 +30,16 @@ describe("parseCsv", () => {
       { ID: "1", Name: "Foo" },
     ]);
   });
+
+  it("throws on a ragged row rather than mapping missing fields to undefined", () => {
+    // A short row would leave trailing fields undefined, which Number() turns
+    // into NaN downstream \u2014 silently corrupting an apex spellId/maxRanks or a
+    // gate threshold. Fail loud at the source, naming the offending row index
+    // and the expected vs actual field counts.
+    expect(() => parseCsv("ID,Name,SpellID\n1,Foo\n")).toThrow(
+      /data row 0 has 2 fields, expected 3/,
+    );
+  });
 });
 
 // A minimal in-memory trait dataset: one apex capstone (node 100), one ordinary

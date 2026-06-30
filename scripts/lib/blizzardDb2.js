@@ -94,7 +94,16 @@ export function parseCsv(text) {
     rows.push(row);
   }
   const header = rows.shift() ?? [];
-  return rows.map((r) => Object.fromEntries(header.map((h, i) => [h, r[i]])));
+  return rows.map((r, rowIndex) => {
+    // A ragged (short or long) row would otherwise map trailing fields to
+    // undefined, which Number() turns into NaN downstream — silently corrupting
+    // an apex spellId/maxRanks or a gate threshold. Fail loud at the source.
+    if (r.length !== header.length)
+      throw new Error(
+        `parseCsv: data row ${rowIndex} has ${r.length} fields, expected ${header.length} (header: ${header.join(",")})`,
+      );
+    return Object.fromEntries(header.map((h, i) => [h, r[i]]));
+  });
 }
 
 // ---------------------------------------------------------------------------
