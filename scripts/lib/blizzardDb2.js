@@ -31,10 +31,10 @@
  * Node-only (fs + global fetch). No external dependencies.
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { pruneSiblingDirs } from "./blizzardApi.js";
+import { pruneSiblingDirs, writeFileAtomic } from "./blizzardApi.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CACHE_ROOT = join(__dirname, "..", ".cache", "blizzard-db2");
@@ -210,7 +210,7 @@ export class BlizzardDb2 {
     const res = await fetch(url, { signal: AbortSignal.timeout(60000) });
     if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
     const text = await res.text();
-    if (this.useCache) writeFileSync(file, text, "utf8");
+    if (this.useCache) writeFileAtomic(file, text);
     return parseCsv(text);
   }
 
@@ -227,7 +227,7 @@ export class BlizzardDb2 {
     const res = await fetch(url, { signal: AbortSignal.timeout(60000) });
     if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
     const text = await res.text();
-    if (this.useCache) writeFileSync(file, text, "utf8");
+    if (this.useCache) writeFileAtomic(file, text);
     return parseCsv(text);
   }
 

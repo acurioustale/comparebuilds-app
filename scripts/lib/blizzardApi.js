@@ -28,12 +28,14 @@ import {
   existsSync,
   mkdirSync,
   writeFileSync,
+  renameSync,
+  unlinkSync,
   readdirSync,
   rmSync,
 } from "fs";
 import { join, dirname, resolve } from "path";
 import { fileURLToPath } from "url";
-import { createHash } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "..", "..");
@@ -45,6 +47,29 @@ export function pruneSiblingDirs(parent, keep) {
   for (const name of readdirSync(parent))
     if (name !== keep)
       rmSync(join(parent, name), { recursive: true, force: true });
+}
+
+/**
+ * Write `data` to `path` atomically: write to a unique temp file in the SAME
+ * directory (so the rename stays on one filesystem) then rename it into place.
+ * A rename is atomic, so an interrupted write (Ctrl-C, OOM, disk full) can never
+ * leave a truncated file at `path` for the next run to choke on — the worst case
+ * is a leftover temp file, which we unlink on failure. Used for the build-time
+ * disk caches (GET JSON, DB2 CSV).
+ */
+export function writeFileAtomic(path, data) {
+  const tmp = `${path}.${randomBytes(6).toString("hex")}.tmp`;
+  try {
+    writeFileSync(tmp, data, "utf8");
+    renameSync(tmp, path);
+  } catch (err) {
+    try {
+      unlinkSync(tmp);
+    } catch {
+      // temp file may not exist if writeFileSync itself failed — ignore
+    }
+    throw err;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -169,7 +194,7 @@ export class BlizzardApi {
     }
     const json = await this._fetchJson(url);
     if (this.useCache && cacheFile) {
-      writeFileSync(cacheFile, JSON.stringify(json), "utf8");
+      writeFileAtomic(cacheFile, JSON.stringify(json));
     }
     return json;
   }
