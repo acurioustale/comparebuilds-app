@@ -188,8 +188,6 @@ export default function BuildManager() {
     })),
   );
 
-
-
   // Local class selection used before any builds are loaded
   const [localClassId, setLocalClassId] = useState(null);
 
@@ -212,17 +210,18 @@ export default function BuildManager() {
     activeClass?.specs.find((s) => s.id === specId)?.displayName ?? "";
   const classDisplayName = activeClass?.displayName ?? "";
 
-  const { copyState, simcState, handleCopyLink, handleCopySimc } = useShareActions({
-    classId,
-    specId,
-    buildStrings,
-    buildNames,
-    classDisplayName,
-    specDisplayName,
-    treeData,
-    parsedBuilds,
-    layoutHash,
-  });
+  const { copyState, simcState, handleCopyLink, handleCopySimc } =
+    useShareActions({
+      classId,
+      specId,
+      buildStrings,
+      buildNames,
+      classDisplayName,
+      specDisplayName,
+      treeData,
+      parsedBuilds,
+      layoutHash,
+    });
 
   // Human-readable build label: "Build N — [Hero Spec] Spec Class"
   const buildLabel = (n, parsedBuild) =>

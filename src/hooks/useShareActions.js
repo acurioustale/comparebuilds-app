@@ -8,7 +8,7 @@ import { generateSimcProfileset } from "../lib/simcProfile";
 function fallbackCopyTextToClipboard(text) {
   const textArea = document.createElement("textarea");
   textArea.value = text;
-  
+
   // Avoid scrolling to bottom
   textArea.style.top = "0";
   textArea.style.left = "0";
@@ -20,7 +20,7 @@ function fallbackCopyTextToClipboard(text) {
 
   let successful = false;
   try {
-    successful = document.execCommand('copy');
+    successful = document.execCommand("copy");
   } catch {
     // ignore
   }
@@ -51,12 +51,12 @@ export function useShareActions({
 }) {
   const [copyState, setCopyState] = useState("idle"); // 'idle' | 'copying' | 'copied' | 'error'
   const [simcState, setSimcState] = useState("idle"); // 'idle' | 'copied' | 'error'
-  
+
   // Reset timers, cleared on unmount so they can't fire setState on a removed
   // share-controls component (e.g. clearing all builds within the 2s window).
   const copyTimer = useRef(null);
   const simcTimer = useRef(null);
-  
+
   useEffect(
     () => () => {
       clearTimeout(copyTimer.current);
