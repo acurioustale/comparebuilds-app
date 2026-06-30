@@ -221,6 +221,17 @@ export function validateClassData(data, indexEntry = null) {
         // null slips through here rather than shipping in src/data.
         if (!isArr(n.levels) || !n.levels.every(isInt))
           nAt("apex node must have a levels array of integers");
+        // TalentNode reads `levels[i]` by rank index to render each rank's
+        // "Level N" unlock label, so a levels array misaligned with ranks would
+        // silently drop (or ignore) trailing labels — keep them in lockstep.
+        else if (
+          isArr(n.ranks) &&
+          n.ranks.length > 0 &&
+          n.levels.length !== n.ranks.length
+        )
+          nAt(
+            `apex node levels length ${n.levels.length} must match ranks length ${n.ranks.length}`,
+          );
         // collectClassNodes reads `choices ?? null`, so a stray non-null choices
         // would re-encode this apex as a multi-bit choice node and shift the wire
         // layout — guard it exactly like the round/square branch below.

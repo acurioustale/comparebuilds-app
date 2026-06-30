@@ -467,6 +467,16 @@ describe("apex nodes", () => {
       withApex({ levels: [70, null] }),
       "apex node must have a levels array of integers",
     ));
+  test("apex levels shorter than ranks", () =>
+    assertHasError(
+      withApex({ levels: [70] }),
+      "apex node levels length 1 must match ranks length 2",
+    ));
+  test("apex levels longer than ranks", () =>
+    assertHasError(
+      withApex({ levels: [70, 80, 90] }),
+      "apex node levels length 3 must match ranks length 2",
+    ));
   test("apex with non-null choices", () =>
     assertHasError(
       withApex({ choices: [{ maxRanks: 1 }, { maxRanks: 1 }] }),
