@@ -8,6 +8,12 @@
 # SPA at /#<id>). Requires mod_rewrite; harmless if the module is absent.
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Share URLs
   RewriteRule ^s/([A-Za-z0-9]{8,16})$ api/share.php?page=1&id=$1 [L,QSA]
 </IfModule>
 
@@ -36,16 +42,21 @@
   Header always set X-Frame-Options "DENY"
   Header always set Referrer-Policy "no-referrer"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always unset Server
 
   # Long-cache static images. The self-hosted icons under /talent-icons are keyed
   # by a stable game slug (fetchIcons.js only ever adds files, never mutates one),
   # so they're safe to cache aggressively — this replaces the icon-cache service
   # worker that used to do this client-side. (The path is /talent-icons rather
   # than /icons because Apache reserves /icons for its autoindex graphics.)
-  <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ttf|woff2?)$">
     Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
-  <FilesMatch "\.(html|css|js)$">
+  # Vite bundles have content hashes, so they can be cached long-term
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
@@ -65,3 +76,12 @@
 <FilesMatch "(^\.|\.example$|^config\.php$)">
   Require all denied
 </FilesMatch>
+
+# ─── Compression ───────────────────────────────────────────────────────────────
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css application/json application/javascript text/javascript application/manifest+json image/svg+xml
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/json application/javascript text/javascript application/manifest+json image/svg+xml
+</IfModule>
