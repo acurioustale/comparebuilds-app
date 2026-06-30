@@ -94,6 +94,7 @@ function is_same_origin_write(?string $secFetchSite, ?string $origin, ?string $r
     if ($secFetchSite !== null && $secFetchSite !== '') {
         return $secFetchSite === 'same-origin';
     }
+    // Return early if Origin is present; do not fall back to Referer
     if ($origin !== null && $origin !== '') {
         return $origin === $site;
     }
