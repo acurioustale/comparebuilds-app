@@ -164,7 +164,7 @@ if (function_exists('imagepng')) {
 // ── Check cache ─────────────────────────────────────────────────────────────────
 // Serve cached OpenGraph image if it was already generated, bypassing database
 // queries, rate-limiting locks, and heavy GD compression.
-$cacheDir = __DIR__ . '/../../cache_og';
+$cacheDir = __DIR__ . '/../cache_og';
 // Use basename() to explicitly clear static analysis taint tracking (valid_share_id already enforces alnum).
 // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
 $cacheFile = $cacheDir . '/' . basename($id) . '.' . $ext;
