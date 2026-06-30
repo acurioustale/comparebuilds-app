@@ -252,6 +252,25 @@ describe("preloadSpec", () => {
       "selection survives re-selecting the same spec",
     );
   });
+
+  test("first import of a different spec is accepted after a preload", async () => {
+    // preloadSpec sets an optimistic specId (DK Blood) with no committed
+    // builds. Importing a build for a *different* spec must not be rejected as
+    // a mismatch — with an empty build list the first import (re)targets the
+    // spec. (This also covers the preload race: addBuild can run while the
+    // preload's tree-data load is still in flight.)
+    await get().preloadSpec(DK_BLOOD);
+    assert.strictEqual(get().specId, DK_BLOOD);
+
+    const [mage] = genStrings("mage", "fire", 1);
+    const ok = await get().addBuild(mage);
+
+    assert.ok(ok, "import should be accepted, not rejected as a mismatch");
+    assert.strictEqual(get().error, null);
+    assert.strictEqual(get().buildStrings.length, 1);
+    assert.strictEqual(get().specId, MAGE_FIRE);
+    assert.deepStrictEqual(get().buildStrings, [mage]);
+  });
 });
 
 // ── Build names ───────────────────────────────────────────────────────────────

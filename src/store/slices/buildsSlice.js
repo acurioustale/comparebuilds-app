@@ -115,7 +115,15 @@ export const createBuildsSlice = (set, get) => ({
     }
 
     // ── Reject spec mismatches ────────────────────────────────────────────────
-    if (currentSpecId !== null && header.specId !== currentSpecId) {
+    // Only an already-committed build constrains the spec. With no builds yet,
+    // a fresh import is allowed to (re)target the spec via the first-build flow
+    // — so an interactive preloadSpec's optimistic specId can't reject it as a
+    // mismatch during the tree-data load that follows the preload.
+    if (
+      buildStrings.length > 0 &&
+      currentSpecId !== null &&
+      header.specId !== currentSpecId
+    ) {
       const existingMatch = findClassForSpec(currentSpecId);
       const existingLabel = existingMatch
         ? `${existingMatch.cls.displayName} — ${existingMatch.spec.displayName}`
