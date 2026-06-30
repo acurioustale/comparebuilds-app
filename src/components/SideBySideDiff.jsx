@@ -243,8 +243,14 @@ export default function SideBySideDiff({
   const leftName = treeData.heroSubtrees.left.name;
   const rightName = treeData.heroSubtrees.right.name;
 
-  const activeA = activeHeroSubtree(treeData.nodes, buildA.nodes);
-  const activeB = activeHeroSubtree(treeData.nodes, buildB.nodes);
+  const activeA = useMemo(
+    () => activeHeroSubtree(treeData.nodes, buildA.nodes),
+    [treeData, buildA],
+  );
+  const activeB = useMemo(
+    () => activeHeroSubtree(treeData.nodes, buildB.nodes),
+    [treeData, buildB],
+  );
 
   // Flag nodes that violate their own prereqs/gates within each build. Imported
   // (and especially shared) builds are only validated for shape, not budget or
