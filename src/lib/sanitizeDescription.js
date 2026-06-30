@@ -65,8 +65,15 @@ function sanitizeStyle(style) {
     const prop = part.slice(0, idx).trim().toLowerCase();
     const value = part.slice(idx + 1).trim();
     if (prop !== "color" && prop !== "font-weight") continue;
-    if (prop === "font-weight" && !/^(bold|normal|[1-9]00)$/i.test(value)) continue;
-    if (prop === "color" && !/^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%]+\))$/.test(value)) continue;
+    if (prop === "font-weight" && !/^(bold|normal|[1-9]00)$/i.test(value))
+      continue;
+    if (
+      prop === "color" &&
+      !/^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%]+\))$/.test(
+        value,
+      )
+    )
+      continue;
     decls.push(`${prop}:${value}`);
   }
   return decls.join(";");
