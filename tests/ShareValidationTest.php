@@ -330,7 +330,7 @@ final class ShareValidationTest extends TestCase
         $this->assertFalse(is_same_origin_write(null, 'https://evil.example', null));
         // Referer on a look-alike host that merely starts with the site string.
         $this->assertFalse(is_same_origin_write(null, null, $site . '.evil.example/x'));
-        // No origin signal at all → accommodate aggressive privacy extensions.
-        $this->assertTrue(is_same_origin_write(null, null, null));
+        // No origin signal at all → fail closed to enforce strict same-origin policy.
+        $this->assertFalse(is_same_origin_write(null, null, null));
     }
 }
