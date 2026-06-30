@@ -9,98 +9,9 @@
  * REGARDLESS of source, every HTML-rendered description is run through this
  * sanitiser at ingest time (scripts/ingestBlizzard.js). The committed JSON is
  * therefore the security boundary: the app renders it without trusting upstream.
- *
- * SCOPE — this covers exactly the fields that are rendered as HTML:
- *   - node.description, choice[].description, apex rank[].description, and heroSubtrees.{left,right}.description.
- * Those are the only `dangerouslySetInnerHTML` sinks in the app, and the only
- * fields the ingest sanitises. Other description fields in the data
- * (spec.description and the spec descriptions in classes.json) are SHORT PLAIN-TEXT
- * blurbs and are NOT sanitised — they are safe only because nothing renders them as
- * HTML. If you ever surface one of them, render it as text (`{value}`, which React
- * escapes) — do NOT pass it to dangerouslySetInnerHTML, or run it through this
- * sanitiser first.
- *
- * Strategy — escape by default. The input is split into tag-like tokens and the
- * text between them. Text is always HTML-escaped. A tag survives ONLY if it
- * matches one of a few strictly-shaped allowlist patterns (`<br>`, `<b>`,
- * `</b>`, `<i>`, `</i>`, and `<b style="…">` carrying only a `color` and/or
- * `font-weight` declaration). Anything else — `<script>`,
- * `<img onerror=…>`, event-handler attributes, `javascript:` URLs, unknown tags
- * — is escaped into inert text. Because escaping is the default and only known
- * safe token shapes pass through, there is no tag or attribute an attacker can
- * smuggle past it.
- *
- * The real game markup we have observed is limited to `<br />`, `<b>` and
- * `<b style="color:white;">`; this allowlist covers it, with `<i>` for headroom.
  */
 
-const ESCAPE = {
-  "&": "&amp;",
-  "<": "&lt;",
-  ">": "&gt;",
-  '"': "&quot;",
-  "'": "&#39;",
-};
-
-/**
- * @param {string} text Raw text string
- * @returns {string} Escaped HTML string
- */
-function escapeHtml(text) {
-  return text.replace(/[&<>"']/g, (c) => ESCAPE[c]);
-}
-
-// Only `color` and `font-weight` declarations survive, and only with a value
-// drawn from a safe character set (named colours, #hex, rgb()/hsl(), numbers,
-// keywords). url(), expression() and javascript: can never pass.
-/**
- * @param {string} style CSS style string
- * @returns {string} Sanitised CSS style string
- */
-function sanitizeStyle(style) {
-  const decls = [];
-  for (const part of style.split(";")) {
-    const idx = part.indexOf(":");
-    if (idx === -1) continue;
-    const prop = part.slice(0, idx).trim().toLowerCase();
-    const value = part.slice(idx + 1).trim();
-    if (prop !== "color" && prop !== "font-weight") continue;
-    if (prop === "font-weight" && !/^(bold|normal|[1-9]00)$/i.test(value))
-      continue;
-    if (
-      prop === "color" &&
-      !/^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%]+\))$/.test(
-        value,
-      )
-    )
-      continue;
-    decls.push(`${prop}:${value}`);
-  }
-  return decls.join(";");
-}
-
-// Returns a canonical safe tag if `tag` matches the allowlist exactly, otherwise
-// the tag escaped into inert text.
-/**
- * @param {string} tag Raw HTML tag string
- * @returns {string} Sanitised HTML tag or escaped text
- */
-function sanitizeTag(tag) {
-  const t = tag.trim();
-  if (/^<br\s*\/?>$/i.test(t)) return "<br />";
-  if (/^<b\s*>$/i.test(t)) return "<b>";
-  if (/^<\/b\s*>$/i.test(t)) return "</b>";
-  if (/^<i\s*>$/i.test(t)) return "<i>";
-  if (/^<\/i\s*>$/i.test(t)) return "</i>";
-
-  const styled = t.match(/^<b\s+style\s*=\s*(["'])([^"']*)\1>$/i);
-  if (styled) {
-    const safe = sanitizeStyle(styled[2]);
-    return safe ? `<b style="${safe}">` : "<b>";
-  }
-
-  return escapeHtml(tag);
-}
+import DOMPurify from 'dompurify';
 
 /**
  * Sanitise an HTML-rendered description into trusted markup.
@@ -112,15 +23,50 @@ function sanitizeTag(tag) {
 export function sanitizeDescription(input) {
   if (typeof input !== "string") return input;
 
-  let out = "";
-  let last = 0;
-  const tagLike = /<[^>]*>/g;
-  let m;
-  while ((m = tagLike.exec(input)) !== null) {
-    out += escapeHtml(input.slice(last, m.index));
-    out += sanitizeTag(m[0]);
-    last = tagLike.lastIndex;
+  let purify;
+  if (typeof window === "undefined") {
+    // In a Node environment (like ingestBlizzard.js or tests), we need jsdom.
+    const { JSDOM } = require("jsdom");
+    const window = new JSDOM("").window;
+    purify = DOMPurify(window);
+  } else {
+    // Browser environment
+    purify = DOMPurify;
   }
-  out += escapeHtml(input.slice(last));
-  return out;
+
+  // Set up purify hook to restrict styles to only color and font-weight
+  purify.addHook('uponSanitizeAttribute', function (node, data) {
+    if (data.attrName === 'style') {
+      const style = data.attrValue;
+      const decls = [];
+      for (const part of style.split(";")) {
+        const idx = part.indexOf(":");
+        if (idx === -1) continue;
+        const prop = part.slice(0, idx).trim().toLowerCase();
+        const value = part.slice(idx + 1).trim();
+        if (prop !== "color" && prop !== "font-weight") continue;
+        if (prop === "font-weight" && !/^(bold|normal|[1-9]00)$/i.test(value)) continue;
+        if (
+          prop === "color" &&
+          !/^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%]+\))$/.test(value)
+        ) continue;
+        decls.push(`${prop}:${value}`);
+      }
+      if (decls.length > 0) {
+        data.attrValue = decls.join(";");
+      } else {
+        data.keepAttr = false;
+      }
+    }
+  });
+
+  // We only allow <br>, <b>, and <i> tags.
+  const result = purify.sanitize(input, {
+    ALLOWED_TAGS: ['b', 'i', 'br', '#text'],
+    ALLOWED_ATTR: ['style']
+  }).replace(/<br>/gi, '<br />'); // canonicalize br
+  
+  purify.removeAllHooks(); // Clean up hook
+  return result;
 }
+
