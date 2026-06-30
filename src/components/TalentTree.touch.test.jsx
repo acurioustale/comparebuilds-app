@@ -9,7 +9,13 @@
  */
 
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  cleanup,
+  act,
+} from "@testing-library/react";
 import TalentTree from "./TalentTree.jsx";
 
 const mkNode = (over) => ({
@@ -116,7 +122,9 @@ describe("TalentTree touch gestures", () => {
     const { onNodeTap } = renderTree();
     const el = round();
     startAt(el);
-    vi.advanceTimersByTime(400); // ≥ TAP_HOLD_MS — the tooltip peeks instead
+    act(() => {
+      vi.advanceTimersByTime(400); // ≥ TAP_HOLD_MS — the tooltip peeks instead
+    });
     end(el);
     expect(onNodeTap).not.toHaveBeenCalled();
   });

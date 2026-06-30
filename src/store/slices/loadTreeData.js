@@ -1,7 +1,7 @@
 import { collectClassNodes } from "../../lib/buildString";
 import { buildGrantedSeed } from "../../lib/treeLogic";
 import { wireLayout } from "../../lib/wireLayout";
-import { importClassData, parseAll } from "../storeHelpers";
+import * as storeHelpers from "../storeHelpers";
 import { EMPTY } from "./constants";
 
 /**
@@ -25,7 +25,7 @@ export async function loadTreeData(
   set({ isLoading: true, error: null, loadGen: gen });
 
   try {
-    const classData = await importClassData(classSlug);
+    const classData = await storeHelpers.importClassData(classSlug);
 
     // Bail if the store was reset or re-targeted while we were awaiting
     if (get().loadGen !== gen) return;
@@ -51,7 +51,7 @@ export async function loadTreeData(
       layoutHash,
       isLoading: false,
       // Re-parse every string that may have arrived while we were loading
-      parsedBuilds: parseAll(currentStrings, classNodes),
+      parsedBuilds: storeHelpers.parseAll(currentStrings, classNodes),
       // In interactive mode (no imported builds), seed pre-granted nodes so
       // prerequisite checks evaluate against the full effective selection set.
       // Skipped on rehydration (preserveInteractive), where the persisted
