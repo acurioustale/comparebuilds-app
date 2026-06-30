@@ -53,6 +53,40 @@ function parseArgs(argv) {
 const sortedIds = (arr) =>
   [...new Set((arr ?? []).map(Number))].sort((a, b) => a - b);
 
+/**
+ * Diff an apex capstone's DB2-sourced rank chain (committed cn vs fresh fn).
+ * The summed-maxRanks check elsewhere can't catch a re-split (same total), a
+ * changed rank SpellID, or a shifted unlock level — diff the chain itself.
+ * Returns a list of hard-divergence messages (empty when the chains agree).
+ * A present-vs-absent chain on either side is itself a divergence.
+ */
+function diffApexChain(cn, fn) {
+  const msgs = [];
+  const cRanks = cn.ranks ?? [];
+  const fRanks = fn.ranks ?? [];
+  if (cRanks.length !== fRanks.length) {
+    msgs.push(`apex rank count ${cRanks.length}→${fRanks.length}`);
+  } else {
+    cRanks.forEach((cr, i) => {
+      const fr = fRanks[i];
+      if (cr.spellId !== fr.spellId)
+        msgs.push(`apex rank[${i}] spellId ${cr.spellId}→${fr.spellId}`);
+      if (cr.maxRanks !== fr.maxRanks)
+        msgs.push(`apex rank[${i}] maxRanks ${cr.maxRanks}→${fr.maxRanks}`);
+    });
+  }
+  const cLevels = cn.levels ?? [];
+  const fLevels = fn.levels ?? [];
+  if (cLevels.length !== fLevels.length) {
+    msgs.push(`apex level count ${cLevels.length}→${fLevels.length}`);
+  } else {
+    cLevels.forEach((cl, i) => {
+      if (cl !== fLevels[i]) msgs.push(`apex level[${i}] ${cl}→${fLevels[i]}`);
+    });
+  }
+  return msgs;
+}
+
 /** Diff one class's freshly-ingested data against its committed data. */
 function diffClass(slug, fresh, committed, opts) {
   const hard = [];
@@ -117,6 +151,12 @@ function diffClass(slug, fresh, committed, opts) {
         sortedIds(conns).filter((c) => cNodes.has(c) && fNodes.has(c));
       if (common(cn.connections).join() !== common(fn.connections).join())
         at("hard", `node ${id} connections differ`);
+      // Apex capstone rank chain (DB2-sourced) — a re-split with the same total,
+      // a changed rank SpellID, or a shifted unlock level all slip past the
+      // summed maxRanks check above, so diff the chain itself.
+      if (cn.type === "apex" || fn.type === "apex")
+        for (const msg of diffApexChain(cn, fn))
+          at("hard", `node ${id} ${msg}`);
       if (cn.posX !== fn.posX || cn.posY !== fn.posY) pos++;
       if (cn.name !== fn.name) name++;
       if (opts.descriptions && cn.description !== fn.description) desc++;
