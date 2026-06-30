@@ -13,6 +13,8 @@
 
 import DOMPurify from "dompurify";
 
+let purifyInstance = null;
+
 /**
  * Sanitise an HTML-rendered description into trusted markup.
  *
@@ -23,20 +25,21 @@ import DOMPurify from "dompurify";
 export function sanitizeDescription(input) {
   if (typeof input !== "string") return input;
 
-  let purify;
-  if (typeof window === "undefined") {
-    // In a Node environment (like ingestBlizzard.js or tests), we need jsdom.
-    // eslint-disable-next-line no-undef
-    const { JSDOM } = require("jsdom");
-    const window = new JSDOM("").window;
-    purify = DOMPurify(window);
-  } else {
-    // Browser environment
-    purify = DOMPurify;
+  if (!purifyInstance) {
+    if (typeof window === "undefined") {
+      // In a Node environment (like ingestBlizzard.js or tests), we need jsdom.
+      // eslint-disable-next-line no-undef
+      const { JSDOM } = require("jsdom");
+      const window = new JSDOM("").window;
+      purifyInstance = DOMPurify(window);
+    } else {
+      // Browser environment
+      purifyInstance = DOMPurify;
+    }
   }
 
   // Set up purify hook to restrict styles to only color and font-weight
-  purify.addHook("uponSanitizeAttribute", function (node, data) {
+  purifyInstance.addHook("uponSanitizeAttribute", function (node, data) {
     if (data.attrName === "style") {
       const style = data.attrValue;
       const decls = [];
@@ -66,13 +69,13 @@ export function sanitizeDescription(input) {
   });
 
   // We only allow <br>, <b>, and <i> tags.
-  const result = purify
+  const result = purifyInstance
     .sanitize(input, {
       ALLOWED_TAGS: ["b", "i", "br", "#text"],
       ALLOWED_ATTR: ["style"],
     })
     .replace(/<br>/gi, "<br />"); // canonicalize br
 
-  purify.removeAllHooks(); // Clean up hook
+  purifyInstance.removeAllHooks(); // Clean up hook
   return result;
 }
