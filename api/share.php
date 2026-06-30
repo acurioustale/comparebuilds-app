@@ -455,7 +455,8 @@ function ensure_share_schema(PDO $pdo): void
             id         INT AUTO_INCREMENT PRIMARY KEY,
             ip_hash    CHAR(64)  NOT NULL,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            INDEX idx_ip_created (ip_hash, created_at)
+            INDEX idx_ip_created (ip_hash, created_at),
+            INDEX idx_created (created_at)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     ");
 }
