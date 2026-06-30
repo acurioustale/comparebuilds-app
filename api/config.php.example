@@ -17,6 +17,10 @@ define('DB_PASS', 'your_db_password');
 // Optional: Redis configuration for high-performance rate limiting and concurrency locking.
 // If defined and the Redis extension is available, share.php and og.php will use Redis,
 // gracefully falling back to MySQL GET_LOCK and database rate limiting if Redis is unavailable.
+//
+// NOTE: The MySQL GET_LOCK() fallback operates on a per-connection basis and is NOT reliable 
+// in multi-node/distributed database environments (e.g., Galera, Aurora). For high-availability 
+// deployments, a Redis instance is strongly recommended to prevent lock race conditions.
 // define('REDIS_HOST', '127.0.0.1');
 // define('REDIS_PORT', 6379);
 
