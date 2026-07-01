@@ -685,3 +685,54 @@ test("zero-point selected node alone in its section fails its gate", () => {
   assert.strictEqual(gatedPoints(lone, nodes, selected), 0);
   assertInvalid(computeInvalidNodeIds(nodes, selected, byId(nodes)), 80);
 });
+
+// ─── cellKey uniqueness across sections ───────────────────────────────────────
+// sectionSpentTotals (and spentPoints) de-duplicate co-located picks with a
+// SINGLE countedCells set that spans every section. That is only correct because
+// cellKey encodes treeType + heroSubtree, so no two sections ever produce the same
+// key — a cell in the class panel and a cell at the same grid position in the spec
+// or a hero panel stay distinct. These tests pin that invariant so a future
+// refactor of cellKey can't silently collapse cells across panels and under-count
+// a section's spent points (e.g. 35/34 class).
+
+test("cellKey distinguishes identical grid positions in different sections", () => {
+  const at = (treeType, heroSubtree = null) => ({
+    treeType,
+    heroSubtree,
+    posX: 0,
+    posY: 0,
+  });
+  const keys = [
+    cellKey(at("class")),
+    cellKey(at("spec")),
+    cellKey(at("hero", "left")),
+    cellKey(at("hero", "right")),
+  ];
+  assert.strictEqual(
+    new Set(keys).size,
+    keys.length,
+    "same posX/posY across sections must yield distinct cellKeys",
+  );
+});
+
+test("cellKey never collides across sections in any class's data", () => {
+  const classIndex = require("../data/classes.json");
+  for (const cls of classIndex.filter((c) => c.implemented)) {
+    const data = require(`../data/${cls.name}.json`);
+    for (const [slug, spec] of Object.entries(data.specs)) {
+      const sectionByKey = new Map();
+      for (const n of spec.nodes) {
+        const section = `${n.treeType}|${n.heroSubtree ?? ""}`;
+        const key = cellKey(n);
+        const prev = sectionByKey.get(key);
+        if (prev === undefined) sectionByKey.set(key, section);
+        else
+          assert.strictEqual(
+            prev,
+            section,
+            `${slug}: cellKey "${key}" shared across sections ${prev} and ${section}`,
+          );
+      }
+    }
+  }
+});
