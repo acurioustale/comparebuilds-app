@@ -166,7 +166,14 @@ if (function_exists('imagepng')) {
 // ── Check cache ─────────────────────────────────────────────────────────────────
 // Serve cached OpenGraph image if it was already generated, bypassing database
 // queries, rate-limiting locks, and heavy GD compression.
-$cacheDir = __DIR__ . '/../cache_og';
+//
+// The cache lives one level ABOVE the web root (alongside config.php, `../../`
+// from this api/ file), NOT inside it. Two reasons: deploy.sh mirrors the web
+// root with `rsync --delete` and never stages cache_og, so an in-root cache
+// would be wiped on every deploy; and prune_shares.php resolves the same
+// `../../../cache_og` from api/cron/, so an in-root path here (`../cache_og`)
+// meant the daily prune cleaned a directory this file never wrote to.
+$cacheDir = __DIR__ . '/../../cache_og';
 // Use basename() to explicitly clear static analysis taint tracking (valid_share_id already enforces alnum).
 // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
 $cacheFile = $cacheDir . '/' . basename($id) . '.' . $ext;
