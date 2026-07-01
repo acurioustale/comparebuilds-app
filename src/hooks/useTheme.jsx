@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   THEME_STORAGE_KEY,
-  THEME_COLORS,
   resolveMode,
   resolveTheme,
   nextMode,
@@ -31,13 +30,40 @@ function writeStoredMode(mode) {
   }
 }
 
-function applyTheme(mode, resolvedTheme) {
+// Cache the two <meta name="theme-color"> tags on first lookup. They must be
+// selected by their authored `prefers-color-scheme` media at load: applyTheme
+// mutates that media on every pass, so re-querying by media after the first
+// flip would fail. The pre-paint inline script only touches data-theme, so the
+// tags still carry their light/dark media when this first runs.
+let metaCache;
+function themeColorMetas() {
+  if (metaCache) return metaCache;
+  metaCache = {
+    light: document.querySelector('meta[name="theme-color"][media*="light"]'),
+    dark: document.querySelector('meta[name="theme-color"][media*="dark"]'),
+  };
+  return metaCache;
+}
+
+// Force the browser-chrome tint to follow the toggle by flipping each meta's
+// `media` — never rewriting its authored `content`. In "auto" the metas track
+// the OS via their prefers-color-scheme queries; an explicit mode makes exactly
+// one meta win ("all") and the other lose ("not all"). Mirrors acurioustale's
+// setScheme so the chrome follows the forced theme under any OS preference.
+function applyTheme(mode) {
   const root = document.documentElement;
   if (mode === "auto") delete root.dataset.theme;
   else root.dataset.theme = mode;
-  document
-    .querySelector('meta[name="theme-color"]')
-    ?.setAttribute("content", THEME_COLORS[resolvedTheme]);
+
+  const { light, dark } = themeColorMetas();
+  if (!light || !dark) return;
+  if (mode === "auto") {
+    light.setAttribute("media", "(prefers-color-scheme: light)");
+    dark.setAttribute("media", "(prefers-color-scheme: dark)");
+  } else {
+    light.setAttribute("media", mode === "light" ? "all" : "not all");
+    dark.setAttribute("media", mode === "dark" ? "all" : "not all");
+  }
 }
 
 export function useTheme() {
@@ -47,8 +73,8 @@ export function useTheme() {
   const theme = resolveTheme(mode, systemLight);
 
   useEffect(() => {
-    applyTheme(mode, theme);
-  }, [mode, theme]);
+    applyTheme(mode);
+  }, [mode]);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: light)");

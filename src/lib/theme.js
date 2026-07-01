@@ -23,9 +23,6 @@ export const MODES = ["auto", "light", "dark"];
 
 export const THEME_STORAGE_KEY = "comparebuilds-theme";
 
-// Drives the <meta name="theme-color"> chrome colour per resolved theme.
-export const THEME_COLORS = { dark: "#0d0d14", light: "#f3e7cb" };
-
 // A persisted value is honoured only if it's one of the three modes; anything
 // else (null, stale, tampered) means "no stored mode".
 /**

@@ -3,7 +3,6 @@ import {
   THEMES,
   MODES,
   THEME_STORAGE_KEY,
-  THEME_COLORS,
   normalizeStoredMode,
   resolveMode,
   resolveTheme,
@@ -107,9 +106,8 @@ describe("nextMode", () => {
 });
 
 describe("constants", () => {
-  test("expose the resolved themes and a colour for each", () => {
+  test("expose the resolved themes", () => {
     expect(THEMES).toEqual(["dark", "light"]);
-    for (const t of THEMES) expect(THEME_COLORS[t]).toMatch(/^#[0-9a-f]{6}$/i);
   });
 
   test("expose the three cycle modes", () => {

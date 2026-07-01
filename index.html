@@ -12,9 +12,12 @@
     <link rel="canonical" href="https://comparebuilds.app/" />
 
     <!-- Browser UI tint per colour scheme (matches the page background in
-         src/index.css). The toggle can't reach these — meta `media` only tracks
-         the OS preference — but that just affects browser chrome, not the page.
-         The prerendered spec pages inherit both unchanged. -->
+         src/index.css; bound by src/lib/themeColorParity.test.js). Both metas
+         default to tracking the OS via their prefers-color-scheme media. The
+         toggle (src/hooks/useTheme.jsx) flips these `media` attributes so a
+         forced light/dark theme's tint wins over the OS ("all" vs "not all"),
+         keeping the browser chrome in step with the page. The prerendered spec
+         pages inherit both unchanged. -->
     <meta
       name="theme-color"
       content="#0d0d14"
