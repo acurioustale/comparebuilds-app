@@ -543,6 +543,36 @@ function ensure_share_schema(PDO $pdo): void
             INDEX idx_ip_created (ip_hash, created_at)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     ");
+    // Supersession-gated retention (see prune_shares.php): a share is deleted
+    // only once its talent layout is superseded AND it has gone unused for the
+    // retention window. `last_accessed` drives the "unused" clock (touched on
+    // read, debounced — see the GET handler); `layout_hash` mirrors the payload's
+    // layout fingerprint into a column so the prune query can join against
+    // comparebuilds_layout_history without JSON-parsing every row. Added via
+    // ADD COLUMN IF NOT EXISTS (MariaDB) so existing deployments migrate in place.
+    $pdo->exec("
+        ALTER TABLE comparebuilds_shares
+            ADD COLUMN IF NOT EXISTS last_accessed TIMESTAMP  NULL DEFAULT NULL,
+            ADD COLUMN IF NOT EXISTS layout_hash   VARCHAR(16) NULL DEFAULT NULL
+    ");
+    // Seed last_accessed for pre-migration rows so they aren't treated as "never
+    // accessed" (which would make them prunable one window after this migration
+    // regardless of real use). created_at is the best proxy we have.
+    $pdo->exec('UPDATE comparebuilds_shares SET last_accessed = created_at WHERE last_accessed IS NULL');
+    $pdo->exec('ALTER TABLE comparebuilds_shares ADD INDEX IF NOT EXISTS idx_layout_accessed (layout_hash, last_accessed)');
+    // Registry of every layout fingerprint we've served: rows with superseded_at
+    // NULL are the layouts live as of the last deploy, the rest carry the moment
+    // they stopped being current. Populated by reconcile_layout_history() from the
+    // deployed manifest. Grows at game-patch cadence, so it stays tiny.
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS comparebuilds_layout_history (
+            layout_hash   VARCHAR(16) COLLATE utf8mb4_bin NOT NULL PRIMARY KEY,
+            class_key     VARCHAR(64) NULL,
+            first_seen    TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            superseded_at TIMESTAMP   NULL DEFAULT NULL,
+            INDEX idx_superseded (superseded_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ");
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS comparebuilds_share_requests (
             id         INT AUTO_INCREMENT PRIMARY KEY,
@@ -570,6 +600,68 @@ function is_duplicate_key_error(PDOException $e): bool
 }
 
 /**
+ * Reads the deployed current-layouts manifest and returns its class_key => hash
+ * map, or null if the file is absent or unusable. Pure (filesystem-only) so the
+ * migration entry point can consume it and unit tests can exercise it against a
+ * temp file. Only well-formed hex hashes survive; anything else is skipped so a
+ * malformed entry can't corrupt the history table.
+ *
+ * @return array<string, string>|null
+ */
+function load_current_layouts(string $path): ?array
+{
+    if (!is_file($path)) {
+        return null;
+    }
+    $raw = @file_get_contents($path);
+    if ($raw === false) {
+        return null;
+    }
+    $decoded = json_decode($raw, true);
+    if (!is_array($decoded) || !isset($decoded['hashes']) || !is_array($decoded['hashes'])) {
+        return null;
+    }
+    $out = [];
+    foreach ($decoded['hashes'] as $classKey => $hash) {
+        if (is_string($hash) && preg_match('/^[a-fA-F0-9]{1,16}$/', $hash)) {
+            $out[(string) $classKey] = $hash;
+        }
+    }
+    return $out;
+}
+
+/**
+ * Reconciles comparebuilds_layout_history against the set of currently-valid
+ * layout hashes: every current hash is (re)marked live (superseded_at NULL), and
+ * any previously-live hash absent from the current set is stamped superseded now.
+ * A rolled-back hash reappearing in the set is revived (superseded_at reset to
+ * NULL). Refuses to act on an empty set, so a broken/empty manifest can never
+ * mark every layout stale and trigger a mass prune.
+ *
+ * @param array<string, string> $current class_key => hash
+ */
+function reconcile_layout_history(PDO $pdo, array $current): void
+{
+    $insert = $pdo->prepare(
+        'INSERT INTO comparebuilds_layout_history (layout_hash, class_key) VALUES (?, ?) '
+        . 'ON DUPLICATE KEY UPDATE superseded_at = NULL, class_key = VALUES(class_key)'
+    );
+    $liveHashes = [];
+    foreach ($current as $classKey => $hash) {
+        $insert->execute([$hash, $classKey]);
+        $liveHashes[] = $hash;
+    }
+    if ($liveHashes === []) {
+        return; // never blindly supersede everything from an empty manifest
+    }
+    $placeholders = implode(',', array_fill(0, count($liveHashes), '?'));
+    $pdo->prepare(
+        'UPDATE comparebuilds_layout_history SET superseded_at = NOW() '
+        . 'WHERE superseded_at IS NULL AND layout_hash NOT IN (' . $placeholders . ')'
+    )->execute($liveHashes);
+}
+
+/**
  * Stores a share payload and returns its content-addressed id. Identical content
  * deduplicates to the same id — idempotently, even against a concurrent write of
  * the same build from another IP. Enforces the per-IP rate limit and prunes
@@ -582,6 +674,11 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     // them inserts (a TOCTOU race that would let the per-IP cap be exceeded).
     $lockName = 'cb_share_' . substr($ipHash, 0, 48);
     $lockToken = bin2hex(random_bytes(16));
+
+    // Denormalised copy of the payload's layout fingerprint (validated on write)
+    // into its own column, so the retention prune can join against layout history
+    // without JSON-parsing every row. NULL for pre-feature clients that omit it.
+    $layoutHash = $payload['layoutHash'] ?? null;
 
     if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken)) {
         throw new ShareException(503, 'Server busy — please try again', 5);
@@ -673,7 +770,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
         $baseId = base62_encode_sha256($stored);
 
         $check  = $pdo->prepare('SELECT data FROM comparebuilds_shares WHERE id = ?');
-        $insert = $pdo->prepare('INSERT INTO comparebuilds_shares (id, data, ip_hash) VALUES (?, ?, ?)');
+        $insert = $pdo->prepare('INSERT INTO comparebuilds_shares (id, data, ip_hash, layout_hash, last_accessed) VALUES (?, ?, ?, ?, NOW())');
 
         // Use the 8-char prefix of the hash; on a collision with *different*
         // content, lengthen the prefix (10, 12, … up to MAX_ID_LEN) and retry.
@@ -695,7 +792,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
             // the same content from a *different* IP (same content → same id), so
             // treat a duplicate-key violation as a dedup hit rather than a 500.
             try {
-                $insert->execute([$candidate, $stored, $ipHash]);
+                $insert->execute([$candidate, $stored, $ipHash, $layoutHash]);
                 $id = $candidate;
                 break;
             } catch (PDOException $e) {
@@ -733,6 +830,29 @@ function get_share(PDO $pdo, string $id): ?string
     $stmt->execute([$id]);
     $row = $stmt->fetch();
     return $row ? $row['data'] : null;
+}
+
+/**
+ * Records that a share was accessed, resetting its retention clock. Debounced to
+ * at most one write per day per share (the WHERE guard), so a hot link can't turn
+ * a read endpoint into a write storm; day precision is ample for a 180-day
+ * window. Best-effort: retention is a background concern, so a failed touch is
+ * swallowed rather than allowed to break serving the share. Note the GET response
+ * is cached `immutable` for a year, so repeat opens from one client never reach
+ * here — "accessed" means "fetched by someone with a cold cache", which is a fine
+ * proxy for liveness at this window.
+ */
+function touch_share_access(PDO $pdo, string $id): void
+{
+    try {
+        $stmt = $pdo->prepare(
+            'UPDATE comparebuilds_shares SET last_accessed = NOW() '
+            . 'WHERE id = ? AND (last_accessed IS NULL OR last_accessed < NOW() - INTERVAL 1 DAY)'
+        );
+        $stmt->execute([$id]);
+    } catch (Throwable $e) {
+        // Non-fatal: never let a retention-bookkeeping write block a read.
+    }
 }
 
 // When this file is included for unit testing (with SHARE_API_NO_MAIN defined),
@@ -785,6 +905,11 @@ if ($method === 'GET') {
         }
         fail(404, 'Share not found or has expired');
     }
+
+    // A successful fetch (SPA data load or crawler unfurl) is a liveness signal:
+    // reset the retention clock so an actively-used link outlives a superseded
+    // layout. Debounced and best-effort inside the helper.
+    touch_share_access($pdo, $id);
 
     if ($pageMode) {
         render_share_page($id, json_decode($data, true) ?: null);
