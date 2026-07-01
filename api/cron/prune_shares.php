@@ -69,6 +69,29 @@ try {
     // Each prune is independent: a transient error on one table must not skip the
     // others. The request-log tables feed the rate-limit COUNT queries in
     // share.php/og.php, so leaving them unpruned bloats those queries.
+    //
+    // Safety valve, symmetric to reconcile_layout_history()'s empty-manifest
+    // guard: the shares prune below treats "no live layout matches this hash" as
+    // superseded, so if the layout-history table has *zero* live layouts (e.g.
+    // ensure_schema never reconciled a manifest, or the table was truncated) it
+    // would consider every layout stale and delete every idle share — including
+    // ones on the current layout. Skipping is the safe direction (shares only
+    // accumulate, recoverably); over-deleting is not. A missing table counts as
+    // zero live layouts. Any error here is logged and also skips, never deletes.
+    $liveLayouts = null;
+    try {
+        $liveLayouts = (int) $pdo->query(
+            'SELECT COUNT(*) FROM comparebuilds_layout_history WHERE superseded_at IS NULL'
+        )->fetchColumn();
+    } catch (PDOException $e) {
+        if (($e->errorInfo[0] ?? '') === '42S02' || ($e->errorInfo[1] ?? 0) === 1146) {
+            $liveLayouts = 0; // table not created yet — treat as no known-live layouts
+        } else {
+            error_log('Share pruning cron: live-layout count failed: ' . $e->getMessage());
+            $failed = true;
+        }
+    }
+
     // Supersession-gated retention. A share is deleted only when ALL hold:
     //   1. unused for the retention window (last_accessed old enough), AND
     //   2. its layout is NOT currently live — i.e. no comparebuilds_layout_history
@@ -80,7 +103,14 @@ try {
     //      treats them as superseded at the epoch — prunable purely on the unused
     //      clock. The correlated subqueries read comparebuilds_layout_history (a
     //      different table), which is permitted while deleting from _shares.
-    if (!prune_batched(
+    if ($liveLayouts === 0) {
+        error_log(
+            'Share pruning cron: layout-history has zero live layouts — skipping '
+            . 'the shares prune to avoid deleting current builds. Check that '
+            . 'ensure_schema.php reconciled api/current_layouts.json.'
+        );
+        echo "No live layouts known — skipping shares prune (safety valve).\n";
+    } elseif ($liveLayouts !== null && !prune_batched(
         $pdo,
         'DELETE FROM comparebuilds_shares'
         . ' WHERE last_accessed < NOW() - INTERVAL 180 DAY'
