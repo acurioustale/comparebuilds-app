@@ -274,22 +274,42 @@ export function validateClassData(data, indexEntry = null) {
   }
 
   // ── Serialisation-space disjointness ─────────────────────────────────────────
-  // unusedNodeIds are placeholders with NO talent data; collectClassNodes dedups
-  // the full id set first-wins, so an unusedNodeId that collides with a real node
-  // (a spec node or a heroGateNodeId) would silently replace that node's
-  // maxRanks/choices and corrupt the build-string wire layout — caught only by the
-  // separate snapshot test, not here. Enforce disjointness as part of the contract.
-  if (isArr(data.unusedNodeIds)) {
-    const realIds = new Set();
-    for (const slug of specSlugs) {
-      const spec = data.specs[slug];
-      if (spec && typeof spec === "object") {
-        if (isArr(spec.nodes)) {
-          for (const n of spec.nodes) if (isInt(n?.id)) realIds.add(n.id);
-        }
-        if (isInt(spec.heroGateNodeId)) realIds.add(spec.heroGateNodeId);
+  // collectClassNodes dedups the class-wide id set first-wins, so two entries
+  // sharing an id silently collapse into one — corrupting the build-string wire
+  // layout (caught only by the separate snapshot test, not here). Enforce
+  // disjointness as part of the contract for both ways a collision can arise.
+  const realNodeIds = new Set();
+  const gates = [];
+  for (const slug of specSlugs) {
+    const spec = data.specs[slug];
+    if (spec && typeof spec === "object") {
+      if (isArr(spec.nodes)) {
+        for (const n of spec.nodes) if (isInt(n?.id)) realNodeIds.add(n.id);
       }
+      if (isInt(spec.heroGateNodeId))
+        gates.push({ slug, id: spec.heroGateNodeId });
     }
+  }
+
+  // A heroGateNodeId is not in any nodes array; collectClassNodes models it as a
+  // synthetic 2-option choice node only when the id is otherwise unseen. If it
+  // collides with a real spec node the gate's choice modelling is dropped (or the
+  // real node's data is), shifting every later node's bit position — so every
+  // existing share link for the class would misparse. Keep the gate ids disjoint
+  // from the real node ids.
+  for (const { slug, id } of gates) {
+    if (realNodeIds.has(id))
+      err(
+        `spec "${slug}": heroGateNodeId ${id} also appears as a real node id (would corrupt the wire layout)`,
+      );
+  }
+
+  // unusedNodeIds are placeholders with NO talent data; one that collides with a
+  // real node or a hero gate would silently replace that entry's maxRanks/choices
+  // and corrupt the wire layout the same way.
+  if (isArr(data.unusedNodeIds)) {
+    const realIds = new Set(realNodeIds);
+    for (const { id } of gates) realIds.add(id);
     for (const id of data.unusedNodeIds) {
       if (isInt(id) && realIds.has(id))
         err(

@@ -560,6 +560,40 @@ describe("serialisation-space disjointness", () => {
       `unexpected collision error:\n${errs.join("\n")}`,
     );
   });
+
+  test("heroGateNodeId colliding with a real spec node id is rejected", () => {
+    const d = makeValidFixed();
+    d.specs.only.heroGateNodeId = 1; // id 1 is a real class node
+    assertHasError(
+      validateClassData(d),
+      "heroGateNodeId 1 also appears as a real node id",
+    );
+  });
+
+  test("heroGateNodeId colliding with a real node in ANOTHER spec is rejected", () => {
+    const d = makeValidFixed();
+    // Second spec whose real node id equals the first spec's hero gate (9). The
+    // collision is class-wide, so the validator must span specs.
+    d.specs.second = structuredClone(d.specs.only);
+    d.specs.second.specSlug = "second";
+    d.specs.second.specId = 101;
+    d.specs.second.heroGateNodeId = null;
+    d.specs.second.nodes[0].id = 9; // collides with specs.only.heroGateNodeId
+    assertHasError(
+      validateClassData(d),
+      'spec "only": heroGateNodeId 9 also appears as a real node id',
+    );
+  });
+
+  test("gate id not present in any nodes array produces no collision error", () => {
+    const d = makeValidFixed();
+    d.specs.only.heroGateNodeId = 9999; // disjoint from all node ids
+    const errs = validateClassData(d);
+    assert.ok(
+      !errs.some((e) => e.includes("also appears as a real node id")),
+      `unexpected collision error:\n${errs.join("\n")}`,
+    );
+  });
 });
 
 // ── Index cross-check ─────────────────────────────────────────────────────────
