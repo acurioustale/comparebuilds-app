@@ -57,7 +57,8 @@ export function getSafeStorage() {
       try {
         ls.removeItem(name);
       } catch {
-        // eslint-disable-next-line no-empty
+        // Best-effort: if the real store rejects the removal, the in-memory
+        // mirror below is still cleared, so the key is gone either way.
       }
       memStorage.delete(name);
     },
