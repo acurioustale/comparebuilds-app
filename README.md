@@ -365,9 +365,11 @@ change, run `npm test`:
   UPDATE_SNAPSHOTS=1 npm test
   ```
 
-The ingest runs the same validation on every class and refreshes the snapshot
-automatically; it aborts without updating the snapshot if any class fails
-validation.
+The ingest runs the same validation on every class. Passing `--promote
+--update-snapshot` regenerates the snapshot too — merging the promoted classes'
+fingerprints into the existing file — and aborts without updating it if any class
+fails validation. `--promote` alone writes `src/data/` and leaves the snapshot
+untouched.
 
 ### Source: Blizzard (Game Data API + client DB2)
 
