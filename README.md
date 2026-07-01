@@ -175,6 +175,33 @@ In your hosting control panel or crontab (`crontab -e`), configure a daily overn
 
 In your hosting control panel, point the `comparebuilds.app` domain to the web root folder you uploaded to. The SPA itself uses hash-based routing, so its own routes are all served by `index.html` with no rewrite. The shipped `.htaccess` does add one `mod_rewrite` rule — it maps the pretty share URLs (`/s/<id>`) to `api/share.php` so links unfurl with a preview — along with the site's security headers. It needs `mod_rewrite` and `mod_headers`; both rules are wrapped in `<IfModule>` guards, so the site still works (minus pretty share links / headers) on a host where they're unavailable.
 
+### 7. Set up the CI deploy key (optional — only for automated deploys)
+
+Hand deploys (`./deploy.sh`) use your own SSH access and need none of this. To let GitHub Actions deploy on push to `main`, give it a dedicated, jailed key:
+
+1. Generate a key pair with no passphrase (so CI can use it non-interactively):
+
+   ```bash
+   ssh-keygen -t ed25519 -N '' -C comparebuilds-deploy -f comparebuilds-deploy
+   ```
+
+2. Install the jail script on the host and make it executable:
+
+   ```bash
+   scp ops/rsync-jail-comparebuilds.sh web4186@http2.core-networks.de:bin/
+   ssh web4186@http2.core-networks.de 'chmod +x ~/bin/rsync-jail-comparebuilds.sh'
+   ```
+
+3. Add the **public** key to the host's `~/.ssh/authorized_keys`, pinned to the jail as a forced command with `restrict` (which disables pty, port/agent/X11 forwarding, and user-rc):
+
+   ```text
+   command="/home/www/web4186/bin/rsync-jail-comparebuilds.sh",restrict ssh-ed25519 <public key> comparebuilds-deploy
+   ```
+
+   The jail (see [`ops/rsync-jail-comparebuilds.sh`](ops/rsync-jail-comparebuilds.sh)) allow-lists exactly the SSH commands `deploy.sh` issues — the rsync push and the `ensure_schema.php` migration — so add a matching entry there for any new one, or the deploy fails with `rsync-jail: only rsync push allowed`. Each site on a shared account gets its own key and jail.
+
+4. Store the **private** key as the repo secret `DEPLOY_SSH_KEY`, and the host's SSH host key (`ssh-keyscan http2.core-networks.de`) as `DEPLOY_KNOWN_HOSTS`.
+
 ---
 
 ## Share link API
