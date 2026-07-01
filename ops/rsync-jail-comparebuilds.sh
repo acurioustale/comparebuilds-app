@@ -3,9 +3,10 @@
 # deploy key.
 #
 # Installed on the deploy host at ~/bin/rsync-jail-comparebuilds.sh and pinned to
-# the deploy key in that account's ~/.ssh/authorized_keys:
+# the comparebuilds-deploy key in that account's ~/.ssh/authorized_keys (the
+# `restrict` option disables pty, port/agent/X11 forwarding, and user-rc):
 #
-#   command="~/bin/rsync-jail-comparebuilds.sh",no-pty,no-agent-forwarding,no-port-forwarding,no-X11-forwarding ssh-... <deploy key>
+#   command="/home/www/web4186/bin/rsync-jail-comparebuilds.sh",restrict ssh-ed25519 <public key> comparebuilds-deploy
 #
 # This file is the REVIEWED SOURCE; the copy on the server is what runs. The
 # jailed key can only rsync into the web root — it cannot write ~/bin — so the
