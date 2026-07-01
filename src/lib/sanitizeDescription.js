@@ -11,6 +11,8 @@
  * therefore the security boundary: the app renders it without trusting upstream.
  */
 
+import { createRequire } from "node:module";
+
 import DOMPurify from "dompurify";
 
 let purifyInstance = null;
@@ -71,7 +73,13 @@ export function sanitizeDescription(input) {
     // instance is built over a jsdom window; in the browser over the real one.
     let win;
     if (typeof window === "undefined") {
-      // eslint-disable-next-line no-undef
+      // Node (ingest, tests): jsdom supplies the DOM. A bare `require` is not
+      // defined in an ESM module (this project is "type": "module") — it threw
+      // ReferenceError under plain `node`, and only worked because Vitest injects
+      // a require shim — so derive one from the module URL. jsdom is a
+      // devDependency reached only on this Node path; the browser bundle never
+      // imports this file, so at runtime it always takes the `window` branch.
+      const require = createRequire(import.meta.url);
       const { JSDOM } = require("jsdom");
       win = new JSDOM("").window;
     } else {
