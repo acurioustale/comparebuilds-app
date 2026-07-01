@@ -68,14 +68,21 @@ export function useShareRehydration() {
           return;
         }
         if (data.layoutHash) setSharedLayoutHash(data.layoutHash);
+        const results = [];
         for (const buildString of data.builds) {
-          await addBuild(buildString);
+          results.push(await addBuild(buildString));
         }
         applyAlignedNames(
           data.builds,
           Array.isArray(data.labels) ? data.labels : [],
         );
-        history.replaceState(null, "", window.location.pathname);
+        // Only strip the share id from the URL once every build committed
+        // (addBuild resolves false on failure). If any build was rejected, keep
+        // the hash so a reload re-fetches the share and retries instead of
+        // stranding the user on a partially-loaded comparison with no link.
+        if (results.every(Boolean)) {
+          history.replaceState(null, "", window.location.pathname);
+        }
       } catch {
         setShareError(
           "Failed to load shared builds. Check your connection and try again.",
