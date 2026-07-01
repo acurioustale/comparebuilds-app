@@ -233,9 +233,11 @@ try {
         bail(503);
     }
 
+    // Resolved only on the non-throttled path; the rate-limited path bails before
+    // ever reading it.
+    $data = null;
+    $rateLimited = false;
     try {
-        $rateLimited = false;
-
         // NOTE: the Redis and MySQL rate limiters are independent counters, not a
         // write-through cache. When Redis answers (checkRedis returns non-null) the
         // request is counted ONLY in Redis and is NOT written to
@@ -251,19 +253,7 @@ try {
             if ($currentCountRedis - 1 >= OG_RATE_LIMIT_MAX) {
                 $rateLimited = true;
             }
-        }
-
-        if ($rateLimited) {
-            RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
-            if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                $xff = preg_replace('/[\r\n]+/', ' ', $_SERVER['HTTP_X_FORWARDED_FOR']);
-                error_log('Rate limit hit for IP Hash ' . $ipHash . ' | X-Forwarded-For: ' . $xff);
-            }
-            header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
-            bail(429);
-        }
-
-        if ($redis === null) {
+        } elseif ($redis === null) {
             $count = 0;
             try {
                 $rl = $pdo->prepare(
@@ -279,20 +269,11 @@ try {
                 error_log('Failed to read OG rate-limit count: ' . $e->getMessage());
             }
             if ($count >= OG_RATE_LIMIT_MAX) {
-                RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
-                if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                    $xff = preg_replace('/[\r\n]+/', ' ', $_SERVER['HTTP_X_FORWARDED_FOR']);
-                    error_log('Rate limit hit for IP Hash ' . $ipHash . ' | X-Forwarded-For: ' . $xff);
-                }
-                header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
-                bail(429);
-            }
-
-
-            // Count every valid-id request, whether or not the share exists, so a
-            // flood of nonexistent ids is still bounded — matching the Redis path,
-            // which increments its counter before the share lookup.
-            if ($count <= OG_RATE_LIMIT_MAX * 2) {
+                $rateLimited = true;
+            } elseif ($count <= OG_RATE_LIMIT_MAX * 2) {
+                // Count every valid-id request, whether or not the share exists, so a
+                // flood of nonexistent ids is still bounded — matching the Redis path,
+                // which increments its counter before the share lookup.
                 try {
                     $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
                     $logReq->execute([$ipHash]);
@@ -305,10 +286,31 @@ try {
             }
         }
 
-        $data = get_share($pdo, $id);
+        // Skip the (relatively costly) share lookup when throttled.
+        if (!$rateLimited) {
+            $data = get_share($pdo, $id);
+        }
     } finally {
+        // Release BOTH the per-IP lock and the global concurrency slot on every
+        // exit from the try, including the throttled path. Previously each
+        // rate-limited branch called bail() (which exits, skipping finally) after
+        // releasing only the per-IP lock, stranding the global slot — held via
+        // GET_LOCK on a persistent connection — for the worker's lifetime, so the
+        // pool shrank slot by slot until every OG request 503'd.
         RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
         RateLimiter::releaseLock($pdo, $redis, $globalLockName, $globalLockToken);
+    }
+
+    // Emit the 429 only after the finally has freed both locks — exiting inside the
+    // try would skip it. store_share() in share.php throws (never exits) from
+    // inside its lock-holding try for exactly this reason.
+    if ($rateLimited) {
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $xff = preg_replace('/[\r\n]+/', ' ', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            error_log('Rate limit hit for IP Hash ' . $ipHash . ' | X-Forwarded-For: ' . $xff);
+        }
+        header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
+        bail(429);
     }
 } catch (Throwable $e) {
     bail(500);
