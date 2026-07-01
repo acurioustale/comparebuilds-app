@@ -573,23 +573,47 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     try {
         // ── Per-IP rate limit ────────────────────────────────────────────────
         $rateLimited = false;
+        $rlKey = 'cb_rl_share_' . $ipHash;
+        // X-RateLimit-Reset: epoch seconds at which the caller regains capacity.
+        // Refined from live limiter state below; this flat "now + full window" is
+        // only the conservative fallback for when neither backend can be queried.
+        $resetAt = time() + RATE_LIMIT_WINDOW;
 
-        $currentCountRedis = RateLimiter::checkRedis($redis, 'cb_rl_share_' . $ipHash, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW, true);
+        $currentCountRedis = RateLimiter::checkRedis($redis, $rlKey, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW, true);
 
         if ($currentCountRedis !== null) {
             $currentCount = $currentCountRedis - 1;
             if ($currentCount >= RATE_LIMIT_MAX) {
                 $rateLimited = true;
             }
+            // Redis is a fixed window (INCR + EXPIRE): the key's remaining TTL is
+            // exactly when the counter clears. Guarded so a transient Redis error
+            // on this header nicety can't fail the share write.
+            try {
+                $ttl = (int) $redis->ttl($rlKey);
+                if ($ttl > 0) {
+                    $resetAt = time() + $ttl;
+                }
+            } catch (Throwable $e) {
+                // Keep the conservative fallback.
+            }
         } else {
             // Bound the window against the DB clock (NOW()), not a PHP timestamp, so a
             // timezone/DST skew can't shift it. The window is a trusted constant.
+            // MIN(created_at) is the oldest request still inside the window; it ages
+            // out at oldest + window, which is when a caller at the cap regains a
+            // slot — the true sliding-window reset the old flat value over-reported.
             $rl = $pdo->prepare(
-                'SELECT COUNT(*) AS c FROM comparebuilds_share_requests '
+                'SELECT COUNT(*) AS c, UNIX_TIMESTAMP(MIN(created_at)) AS oldest FROM comparebuilds_share_requests '
                 . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . RATE_LIMIT_WINDOW . ' SECOND'
             );
             $rl->execute([$ipHash]);
-            $currentCount = (int) $rl->fetch()['c'];
+            $row = $rl->fetch();
+            $currentCount = (int) $row['c'];
+            $oldest = $row['oldest'] ?? null;
+            if ($oldest !== null) {
+                $resetAt = (int) $oldest + RATE_LIMIT_WINDOW;
+            }
             if ($currentCount >= RATE_LIMIT_MAX) {
                 $rateLimited = true;
             }
@@ -612,7 +636,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
             $remaining = max(0, RATE_LIMIT_MAX - $currentCount);
             header('X-RateLimit-Limit: ' . RATE_LIMIT_MAX);
             header('X-RateLimit-Remaining: ' . $remaining);
-            header('X-RateLimit-Reset: ' . (time() + RATE_LIMIT_WINDOW));
+            header('X-RateLimit-Reset: ' . $resetAt);
         }
 
         if ($rateLimited) {

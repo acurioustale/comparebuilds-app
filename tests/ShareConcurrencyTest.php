@@ -42,7 +42,7 @@ final class ShareConcurrencyTest extends TestCase
         $lockStmt->method('fetchColumn')->willReturn(1);
 
         $rlStmt = $this->createMock(PDOStatement::class);
-        $rlStmt->method('fetch')->willReturn(['c' => 0]);
+        $rlStmt->method('fetch')->willReturn(['c' => 0, 'oldest' => null]);
 
         $checkStmt = $this->createMock(PDOStatement::class);
         // First check returns false (not found); second check (after insert race) returns the stored data
@@ -162,7 +162,7 @@ final class ShareConcurrencyTest extends TestCase
         $lockStmt->method('fetchColumn')->willReturn(1);
 
         $rlStmt = $this->createMock(PDOStatement::class);
-        $rlStmt->method('fetch')->willReturn(['c' => 0]);
+        $rlStmt->method('fetch')->willReturn(['c' => 0, 'oldest' => null]);
 
         $checkStmt = $this->createMock(PDOStatement::class);
         $checkStmt->method('fetch')->willReturn(false);
