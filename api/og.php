@@ -234,6 +234,15 @@ try {
     try {
         $rateLimited = false;
 
+        // NOTE: the Redis and MySQL rate limiters are independent counters, not a
+        // write-through cache. When Redis answers (checkRedis returns non-null) the
+        // request is counted ONLY in Redis and is NOT written to
+        // comparebuilds_og_requests below — that INSERT lives in the `$redis === null`
+        // fallback branch. So if Redis is restarted or the key is evicted early, the
+        // window resets to zero (the MySQL table holds no Redis-path history to fall
+        // back on). This is an accepted trade-off: the OG endpoint is cache-fronted
+        // and idempotent, so a rare window reset only permits a brief burst of image
+        // regenerations, never a data-integrity problem.
         $currentCountRedis = RateLimiter::checkRedis($redis, 'cb_rl_og_' . $ipHash, OG_RATE_LIMIT_MAX, OG_RATE_LIMIT_WINDOW, false);
 
         if ($currentCountRedis !== null) {
