@@ -5,8 +5,11 @@
 # The served tree comes from two places, so we stage them into one directory
 # and mirror that with a single --delete pass:
 #   - dist/                              the built static site (run `npm run build` first)
-#   - api/{share.php,og.php,lib,fonts,cron}  the PHP share API + OG renderer + its
-#                                        shared classes (lib/) and cron scripts
+#   - api/{share.php,og.php,lib,fonts,cron,current_layouts.json}  the PHP share
+#                                        API + OG renderer + its shared classes
+#                                        (lib/), cron scripts, and the build-
+#                                        generated current-layouts manifest that
+#                                        ensure_schema.php reconciles into the DB
 #
 # Staging keeps --delete from wiping the live api/ folder (which is not part of
 # dist/). config.php (the DB credentials) lives one level ABOVE the web root and
@@ -36,7 +39,7 @@ trap 'rm -rf "$stage"' EXIT
 
 cp -a dist/. "$stage/"
 mkdir -p "$stage/api"
-cp -a api/share.php api/og.php api/lib api/fonts api/cron "$stage/api/"
+cp -a api/share.php api/og.php api/lib api/fonts api/cron api/current_layouts.json "$stage/api/"
 
 rsync_args=()
 is_dry_run=0

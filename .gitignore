@@ -43,6 +43,10 @@ pnpm-debug.log*
 # api/config.php.example is tracked).
 api/config.php
 
+# Build-generated (npm run build → scripts/generateLayoutManifest.js); staged
+# into the deploy by deploy.sh and reconciled server-side by ensure_schema.php.
+api/current_layouts.json
+
 # ─── OS files ────────────────────────────────────────────────────────────────────
 .DS_Store
 ._*
