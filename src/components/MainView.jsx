@@ -336,6 +336,7 @@ export default function MainView() {
             <DiffSummaryTable
               treeData={treeData}
               valid={valid}
+              spotlightId={spotlightId}
               setSpotlightId={setSpotlightId}
             />
           )}

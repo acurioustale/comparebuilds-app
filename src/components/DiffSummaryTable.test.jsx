@@ -89,4 +89,53 @@ describe("DiffSummaryTable", () => {
     fireEvent.mouseEnter(screen.getByText("Node A").closest("tr"));
     expect(setSpotlightId).toHaveBeenCalledWith(1);
   });
+
+  // Regression: a hovered row sets the spotlight; onMouseLeave clears it. But if
+  // the builds change so the hovered row drops out of the table, onMouseLeave
+  // never fires and the spotlight would stay pinned, dimming the whole tree.
+  test("clears a stale spotlight when the spotlighted row leaves the table", () => {
+    const setSpotlightId = vi.fn();
+    const differing = [
+      {
+        parsed: { nodes: { 1: { pointsInvested: 2, entryChosen: null } } },
+        label: "A",
+      },
+      {
+        parsed: { nodes: { 1: { pointsInvested: 1, entryChosen: null } } },
+        label: "B",
+      },
+    ];
+    const { rerender } = render(
+      <DiffSummaryTable
+        treeData={treeData}
+        valid={differing}
+        spotlightId={1}
+        setSpotlightId={setSpotlightId}
+      />,
+    );
+    // Node 1 differs and is the spotlighted row — nothing to clear.
+    expect(setSpotlightId).not.toHaveBeenCalled();
+
+    // Both builds now take node 1 identically, so its row drops out while the
+    // spotlight is still pinned to it. The effect must clear the stale spotlight.
+    const agree = [
+      {
+        parsed: { nodes: { 1: { pointsInvested: 2, entryChosen: null } } },
+        label: "A",
+      },
+      {
+        parsed: { nodes: { 1: { pointsInvested: 2, entryChosen: null } } },
+        label: "B",
+      },
+    ];
+    rerender(
+      <DiffSummaryTable
+        treeData={treeData}
+        valid={agree}
+        spotlightId={1}
+        setSpotlightId={setSpotlightId}
+      />,
+    );
+    expect(setSpotlightId).toHaveBeenCalledWith(null);
+  });
 });

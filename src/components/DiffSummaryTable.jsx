@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { computeDiff } from "../lib/diff";
 import { computeStats, isContested, isDivergent } from "../lib/heatmap";
 
@@ -42,10 +42,16 @@ function cellValue(node, sel) {
  * @param {object} props
  * @param {object} props.treeData Spec tree data object
  * @param {Array<{ parsed: object, label: string }>} props.valid Array of valid builds
+ * @param {number|null} [props.spotlightId] Currently spotlighted node id
  * @param {function} props.setSpotlightId Spotlight setter callback
  * @returns {import("react").JSX.Element|null}
  */
-export default function DiffSummaryTable({ treeData, valid, setSpotlightId }) {
+export default function DiffSummaryTable({
+  treeData,
+  valid,
+  spotlightId = null,
+  setSpotlightId,
+}) {
   const isDiffMode = valid?.length === 2;
 
   const rows = useMemo(() => {
@@ -98,6 +104,17 @@ export default function DiffSummaryTable({ treeData, valid, setSpotlightId }) {
     );
     return out;
   }, [treeData, valid]);
+
+  // Row hover sets the spotlight and onMouseLeave clears it — but if the builds
+  // change while a row is hovered so that row drops out of `rows` (its difference
+  // resolved, or it was removed), onMouseLeave never fires and the spotlight
+  // would stay pinned to a node no longer in the table, dimming the whole tree.
+  // Clear it whenever the spotlighted id isn't a current row.
+  useEffect(() => {
+    if (spotlightId != null && !rows.some((r) => r.id === spotlightId)) {
+      setSpotlightId?.(null);
+    }
+  }, [rows, spotlightId, setSpotlightId]);
 
   if (rows.length === 0) return null;
 
