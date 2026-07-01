@@ -23,24 +23,38 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SNAPSHOT = path.join(ROOT, "src/lib/wireLayout.snapshot.json");
 const OUT = path.join(ROOT, "api/current_layouts.json");
 
-const snapshot = JSON.parse(fs.readFileSync(SNAPSHOT, "utf8"));
-
-const hashes = {};
-for (const [classKey, entry] of Object.entries(snapshot)) {
-  if (!entry || typeof entry.hash !== "string") {
-    throw new Error(`wireLayout snapshot entry "${classKey}" is missing a hash`);
+/**
+ * Extracts the class_key → layout-hash map from a wire-layout snapshot. Throws if
+ * any entry lacks a hash or the snapshot is empty, so a broken snapshot fails the
+ * build loudly rather than shipping an empty (mass-supersession) manifest.
+ * @param {Record<string, { hash?: unknown }>} snapshot
+ * @returns {Record<string, string>}
+ */
+export function deriveHashes(snapshot) {
+  const hashes = {};
+  for (const [classKey, entry] of Object.entries(snapshot)) {
+    if (!entry || typeof entry.hash !== "string") {
+      throw new Error(
+        `wireLayout snapshot entry "${classKey}" is missing a hash`,
+      );
+    }
+    hashes[classKey] = entry.hash;
   }
-  hashes[classKey] = entry.hash;
+  if (Object.keys(hashes).length === 0) {
+    throw new Error(
+      "wireLayout snapshot yielded no layout hashes — refusing to write an empty manifest",
+    );
+  }
+  return hashes;
 }
 
-if (Object.keys(hashes).length === 0) {
-  throw new Error("wireLayout snapshot yielded no layout hashes — refusing to write an empty manifest");
+// Only write the file when run as a script, not when imported by a test.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const snapshot = JSON.parse(fs.readFileSync(SNAPSHOT, "utf8"));
+  const hashes = deriveHashes(snapshot);
+  const manifest = { generatedAt: new Date().toISOString(), hashes };
+  fs.writeFileSync(OUT, JSON.stringify(manifest, null, 2) + "\n");
+  console.log(
+    `Wrote ${path.relative(ROOT, OUT)} with ${Object.keys(hashes).length} layout hashes.`,
+  );
 }
-
-const manifest = {
-  generatedAt: new Date().toISOString(),
-  hashes,
-};
-
-fs.writeFileSync(OUT, JSON.stringify(manifest, null, 2) + "\n");
-console.log(`Wrote ${path.relative(ROOT, OUT)} with ${Object.keys(hashes).length} layout hashes.`);

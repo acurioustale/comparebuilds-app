@@ -642,6 +642,9 @@ function load_current_layouts(string $path): ?array
  */
 function reconcile_layout_history(PDO $pdo, array $current): void
 {
+    if ($current === []) {
+        return; // never blindly supersede everything from an empty manifest
+    }
     $insert = $pdo->prepare(
         'INSERT INTO comparebuilds_layout_history (layout_hash, class_key) VALUES (?, ?) '
         . 'ON DUPLICATE KEY UPDATE superseded_at = NULL, class_key = VALUES(class_key)'
@@ -650,9 +653,6 @@ function reconcile_layout_history(PDO $pdo, array $current): void
     foreach ($current as $classKey => $hash) {
         $insert->execute([$hash, $classKey]);
         $liveHashes[] = $hash;
-    }
-    if ($liveHashes === []) {
-        return; // never blindly supersede everything from an empty manifest
     }
     $placeholders = implode(',', array_fill(0, count($liveHashes), '?'));
     $pdo->prepare(
