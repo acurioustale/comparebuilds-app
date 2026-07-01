@@ -11,15 +11,18 @@ class RateLimiter
      * @param object|null &$redis The Redis connection. May be set to null if it fails.
      * @param string $lockName The name of the lock.
      * @param string $lockToken The random token for the lock to ensure safe release.
+     * @param int $ttl Redis lock expiry in seconds. Must exceed the critical
+     *   section's worst-case duration so the lock cannot auto-expire while still
+     *   held (the MySQL GET_LOCK path is connection-scoped and ignores this).
      * @return bool True if acquired, false if busy.
      */
-    public static function acquireLock(PDO $pdo, ?object &$redis, string $lockName, string $lockToken): bool
+    public static function acquireLock(PDO $pdo, ?object &$redis, string $lockName, string $lockToken, int $ttl = 5): bool
     {
         $usedRedisLock = false;
 
         if ($redis !== null) {
             try {
-                if (!$redis->set($lockName, $lockToken, ['nx', 'ex' => 5])) {
+                if (!$redis->set($lockName, $lockToken, ['nx', 'ex' => $ttl])) {
                     return false;
                 }
                 $usedRedisLock = true;
