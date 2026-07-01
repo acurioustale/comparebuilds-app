@@ -17,6 +17,43 @@ require_once __DIR__ . '/../../../config.php';
 // needs; 24h leaves ample margin over the 1h rate windows.
 const REQUEST_LOG_PRUNE_WINDOW = 86400; // seconds (24 hours)
 
+/**
+ * Deletes matching rows in batches, pausing between batches so concurrent
+ * queries and replication can breathe. A missing table (the log tables only
+ * exist once share.php has created them) counts as "nothing to prune". Any
+ * other error is logged and reported by returning false, never rethrown, so one
+ * table's transient failure (a lock-wait timeout or deadlock) can't abort the
+ * remaining independent prune steps.
+ *
+ * @return bool True on success (or a cleanly-skipped missing table), false on error.
+ */
+function prune_batched(PDO $pdo, string $sql, string $label): bool
+{
+    try {
+        $stmt = $pdo->prepare($sql);
+        $total = 0;
+        do {
+            $stmt->execute();
+            $count = $stmt->rowCount();
+            $total += $count;
+            if ($count > 0) {
+                usleep(50000); // 50ms pause to let concurrent queries and replication breathe
+            }
+        } while ($count === 1000);
+        echo 'Pruned ' . $total . ' expired ' . $label . " successfully.\n";
+        return true;
+    } catch (PDOException $e) {
+        if (($e->errorInfo[0] ?? '') === '42S02' || ($e->errorInfo[1] ?? 0) === 1146) {
+            echo 'Table for ' . $label . " does not exist yet - skipping.\n";
+            return true;
+        }
+        error_log('Share pruning cron: failed to prune ' . $label . ': ' . $e->getMessage());
+        return false;
+    }
+}
+
+$failed = false;
+
 try {
     $pdo = new PDO(
         'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
@@ -29,64 +66,40 @@ try {
         ],
     );
 
-    // Prune shares older than 180 days (~6 months) in batches to prevent lock contention
-    $stmt = $pdo->prepare('DELETE FROM comparebuilds_shares WHERE created_at < NOW() - INTERVAL 180 DAY ORDER BY created_at ASC LIMIT 1000');
-    try {
-        $totalPruned = 0;
-        do {
-            $stmt->execute();
-            $count = $stmt->rowCount();
-            $totalPruned += $count;
-            if ($count > 0) {
-                usleep(50000); // 50ms pause to allow concurrent queries and replication to breathe
-            }
-        } while ($count === 1000);
-        echo 'Pruned ' . $totalPruned . " expired shares successfully.\n";
-    } catch (PDOException $e) {
-        if (($e->errorInfo[0] ?? '') === '42S02' || ($e->errorInfo[1] ?? 0) === 1146) {
-            echo "Table comparebuilds_shares does not exist yet (no shares created). Exiting cleanly.\n";
-        } else {
-            throw $e;
-        }
+    // Each prune is independent: a transient error on one table must not skip the
+    // others. The request-log tables feed the rate-limit COUNT queries in
+    // share.php/og.php, so leaving them unpruned bloats those queries.
+    if (!prune_batched(
+        $pdo,
+        'DELETE FROM comparebuilds_shares WHERE created_at < NOW() - INTERVAL 180 DAY ORDER BY created_at ASC LIMIT 1000',
+        'shares'
+    )) {
+        $failed = true;
     }
-
-    try {
-        $stmt = $pdo->prepare('DELETE FROM comparebuilds_share_requests WHERE created_at < NOW() - INTERVAL ' . REQUEST_LOG_PRUNE_WINDOW . ' SECOND LIMIT 1000');
-        $totalPruned = 0;
-        do {
-            $stmt->execute();
-            $count = $stmt->rowCount();
-            $totalPruned += $count;
-            if ($count > 0) {
-                usleep(50000);
-            }
-        } while ($count === 1000);
-        echo 'Pruned ' . $totalPruned . " expired share requests successfully.\n";
-    } catch (PDOException $e) {
-        if (($e->errorInfo[0] ?? '') !== '42S02' && ($e->errorInfo[1] ?? 0) !== 1146) {
-            throw $e;
-        }
+    if (!prune_batched(
+        $pdo,
+        'DELETE FROM comparebuilds_share_requests WHERE created_at < NOW() - INTERVAL ' . REQUEST_LOG_PRUNE_WINDOW . ' SECOND LIMIT 1000',
+        'share requests'
+    )) {
+        $failed = true;
     }
-
-    try {
-        $stmt = $pdo->prepare('DELETE FROM comparebuilds_og_requests WHERE created_at < NOW() - INTERVAL ' . REQUEST_LOG_PRUNE_WINDOW . ' SECOND LIMIT 1000');
-        $totalPruned = 0;
-        do {
-            $stmt->execute();
-            $count = $stmt->rowCount();
-            $totalPruned += $count;
-            if ($count > 0) {
-                usleep(50000);
-            }
-        } while ($count === 1000);
-        echo 'Pruned ' . $totalPruned . " expired OG requests successfully.\n";
-    } catch (PDOException $e) {
-        if (($e->errorInfo[0] ?? '') !== '42S02' && ($e->errorInfo[1] ?? 0) !== 1146) {
-            throw $e;
-        }
+    if (!prune_batched(
+        $pdo,
+        'DELETE FROM comparebuilds_og_requests WHERE created_at < NOW() - INTERVAL ' . REQUEST_LOG_PRUNE_WINDOW . ' SECOND LIMIT 1000',
+        'OG requests'
+    )) {
+        $failed = true;
     }
+} catch (Throwable $e) {
+    // A connection failure (or anything else around the DB prunes) aborts them,
+    // but the filesystem cache_og cleanup below can still run independently.
+    error_log('Share pruning cron: database step failed: ' . $e->getMessage());
+    $failed = true;
+}
 
-    // Prune cache_og image files older than 180 days
+// Prune cache_og image files older than 180 days. Filesystem-only, so it runs
+// even when the database was unreachable above.
+try {
     $cacheDir = __DIR__ . '/../../../cache_og';
     if (is_dir($cacheDir)) {
         $expireTime = time() - (180 * 86400);
@@ -101,6 +114,8 @@ try {
         echo 'Pruned ' . $imgCount . " expired OG cached images successfully.\n";
     }
 } catch (Throwable $e) {
-    error_log('Share pruning cron failed: ' . $e->getMessage());
-    exit(1);
+    error_log('Share pruning cron: cache_og cleanup failed: ' . $e->getMessage());
+    $failed = true;
 }
+
+exit($failed ? 1 : 0);
