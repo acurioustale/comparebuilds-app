@@ -153,6 +153,32 @@ describe("share rehydration", () => {
     expect(window.location.hash).toBe("");
   });
 
+  test("dedupes duplicate builds in a share, labels the survivor from the first occurrence, and strips the hash", async () => {
+    const [a] = genStrings("death_knight", "blood", 1);
+    const fetchMock = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({
+        classId: 6,
+        specId: 250,
+        builds: [a, a],
+        labels: ["First", "Second"],
+      }),
+    }));
+    global.fetch = fetchMock;
+    window.location.hash = "#dupdupdu";
+
+    render(<App />);
+
+    // The survivor is labelled from the first occurrence ("First"), not the
+    // duplicate's "Second" — proving the dedupe and the first-wins label map.
+    await screen.findByDisplayValue("First");
+    const state = useBuildsStore.getState();
+    expect(state.buildStrings).toEqual([a]);
+    // The hash is stripped despite the second (duplicate) entry being rejected,
+    // so a reload can't re-fetch the same share and loop forever.
+    expect(window.location.hash).toBe("");
+  });
+
   test("a bad hash is ignored (no fetch)", async () => {
     const fetchMock = mockShareFetch([]);
     window.location.hash = "#tooShortAndWeird!!";

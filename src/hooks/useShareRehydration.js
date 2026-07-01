@@ -68,19 +68,34 @@ export function useShareRehydration() {
           return;
         }
         if (data.layoutHash) setSharedLayoutHash(data.layoutHash);
-        const results = [];
-        for (const buildString of data.builds) {
-          results.push(await addBuild(buildString));
+        // Drop duplicate build strings, keeping the first occurrence's label.
+        // The store rejects identical strings, but the share API doesn't dedupe,
+        // so a crafted or legacy share could carry repeats. Loading them verbatim
+        // would leave the duplicate permanently rejected (feeding the loop guarded
+        // against below) and — because a Map keyed by build string keeps the last
+        // value — mislabel the surviving slot with the duplicate's label.
+        const rawLabels = Array.isArray(data.labels) ? data.labels : [];
+        const builds = [];
+        const labels = [];
+        const seen = new Set();
+        data.builds.forEach((b, i) => {
+          if (seen.has(b)) return;
+          seen.add(b);
+          builds.push(b);
+          labels.push(rawLabels[i]);
+        });
+        for (const buildString of builds) {
+          await addBuild(buildString);
         }
-        applyAlignedNames(
-          data.builds,
-          Array.isArray(data.labels) ? data.labels : [],
-        );
-        // Only strip the share id from the URL once every build committed
-        // (addBuild resolves false on failure). If any build was rejected, keep
-        // the hash so a reload re-fetches the share and retries instead of
-        // stranding the user on a partially-loaded comparison with no link.
-        if (results.every(Boolean)) {
+        applyAlignedNames(builds, labels);
+        // Strip the share id from the URL once at least one build has rendered.
+        // addBuild fails *deterministically* — a duplicate, spec mismatch, corrupt
+        // header, or over-cap slot never succeeds on retry — so keying the strip
+        // off "every build committed" would loop forever: each reload re-fetches
+        // the same share and re-fails, never stripping the hash. A transient
+        // tree-data load failure instead leaves every slot unparsed, so keep the
+        // hash only then, letting a reload retry the load.
+        if (useBuildsStore.getState().parsedBuilds.some(Boolean)) {
           history.replaceState(null, "", window.location.pathname);
         }
       } catch {
