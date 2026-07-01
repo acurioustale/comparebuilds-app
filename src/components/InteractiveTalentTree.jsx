@@ -207,8 +207,9 @@ export default function InteractiveTalentTree({
 
   // Touch tap: one gesture that cycles a node, folding spend and refund together
   // (the mouse keeps them on left/right click). For ranked nodes: +1 rank, then
-  // wrap from max back to cleared. For choice nodes: tapping an option selects or
-  // switches to it; tapping the already-chosen option clears the node.
+  // wrap back to cleared once the next point can't be spent. For choice nodes:
+  // tapping an option selects or switches to it; tapping the already-chosen
+  // option clears the node.
   const handleTap = useCallback(
     (nodeId, choiceIdx = null) => {
       const node = nodeById[nodeId];
@@ -231,15 +232,25 @@ export default function InteractiveTalentTree({
 
       if (!sel) {
         spendFirstPoint(node, null);
-      } else if (sel.pointsInvested < node.maxRanks) {
+      } else if (
+        sel.pointsInvested < node.maxRanks &&
+        canSpendPoint(node, treeData.nodes, selected, nodeById, budget)
+      ) {
         incrementRank(node, sel);
       } else {
+        // At max ranks, OR the next rank is refused (section budget exhausted,
+        // gate not met, prereq lost): wrap the tap back to cleared. Without the
+        // canSpendPoint guard, a partially-ranked node whose next point is
+        // blocked took the incrementRank branch — which silently no-ops — so the
+        // clear branch was never reached and touch users had no way to refund it.
         removeNode(nodeId);
       }
     },
     [
       selected,
       nodeById,
+      treeData.nodes,
+      budget,
       setInteractiveNodes,
       spendFirstPoint,
       incrementRank,
