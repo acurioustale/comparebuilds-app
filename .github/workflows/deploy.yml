@@ -100,11 +100,25 @@ jobs:
       - name: Lint Markdown
         run: npm run lint:md
 
+      # svgo keeps every tracked SVG optimised; the check fails if any would
+      # change. Discover them with git ls-files (like the shell-lint step) so a
+      # newly added SVG is checked too. Write to a temp file rather than piping,
+      # so a svgo crash (bad fetch, config error) is distinguished from a
+      # genuinely unoptimised SVG instead of pipefail turning both into the same
+      # misleading message. Mirrors validate.sh.
       - name: Check SVG (svgo)
         run: |
-          for f in public/favicon.svg; do
-            npx svgo -i "$f" -o - | diff -q - "$f" \
-              || { echo "$f is not optimised"; exit 1; }
+          out="$RUNNER_TEMP/svgo-out.svg"
+          mapfile -t svg_files < <(git ls-files '*.svg')
+          for f in "${svg_files[@]}"; do
+            if ! npx svgo -i "$f" -o "$out" >/dev/null; then
+              echo "svgo failed to process $f"
+              exit 1
+            fi
+            if ! diff -q "$out" "$f" >/dev/null; then
+              echo "$f is not optimised; run: npx svgo $f"
+              exit 1
+            fi
           done
 
       - name: Run tests with coverage thresholds
