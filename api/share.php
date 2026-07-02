@@ -41,6 +41,10 @@ const BASE62_ALPHABET   = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
 // Build strings are base64 (RFC 4648 alphabet, optional padding).
 const BUILD_PATTERN     = '/^[A-Za-z0-9+\/]{1,2000}={0,2}$/';
 const SHARE_ID_PATTERN  = '/^[A-Za-z0-9]{8,16}$/';
+// Wire-layout fingerprint: a lowercase-or-upper hex string, up to the 16 chars
+// wireLayout() emits (sha256 truncated). Validated on every share create and when
+// reading current_layouts.json, so it lives in one named constant.
+const LAYOUT_HASH_PATTERN = '/^[a-fA-F0-9]{1,16}$/';
 
 /**
  * A share-creation failure the client should see verbatim (rate limit, server
@@ -355,7 +359,7 @@ function validate_share_input(mixed $body): array
     }
 
     $layoutHash = $body['layoutHash'] ?? null;
-    if ($layoutHash !== null && (!is_string($layoutHash) || !preg_match('/^[a-fA-F0-9]{1,16}$/', $layoutHash))) {
+    if ($layoutHash !== null && (!is_string($layoutHash) || !preg_match(LAYOUT_HASH_PATTERN, $layoutHash))) {
         return ['error' => 'layoutHash, when present, must be a hex string 1–16 chars'];
     }
 
@@ -623,7 +627,7 @@ function load_current_layouts(string $path): ?array
     }
     $out = [];
     foreach ($decoded['hashes'] as $classKey => $hash) {
-        if (is_string($hash) && preg_match('/^[a-fA-F0-9]{1,16}$/', $hash)) {
+        if (is_string($hash) && preg_match(LAYOUT_HASH_PATTERN, $hash)) {
             $out[(string) $classKey] = $hash;
         }
     }
