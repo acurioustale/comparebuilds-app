@@ -273,8 +273,10 @@ The PHP API is not available in the local dev server. Sharing links will 404 loc
 `./validate.sh` runs the full CI gate locally, in the same order CI does — lint,
 formatting, the per-language linters, the PHP and shell checks, tests, the build,
 a CSP guard (`npm run check:csp`) that recomputes the sha256 of the built
-inline anti-flash theme script and fails if its hash has drifted from the
-Content-Security-Policy in `.htaccess` that allowlists it, an OG image guard
+inline anti-flash theme script and fails if its hash has drifted from either
+Content-Security-Policy that allowlists it — the `<meta>` baseline injected into
+the built HTML and the `.htaccess` header superset — or if the two policies
+disagree on any other directive, an OG image guard
 (`npm run check:og`) that verifies `public/og-image.png` is 1200×630, and a
 sitemap well-formedness check (`xmllint --noout dist/sitemap.xml`):
 

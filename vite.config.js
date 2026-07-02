@@ -3,9 +3,54 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
+// Baseline Content-Security-Policy delivered as a <meta> tag in the built HTML.
+// It is the locally-testable (vite preview) and defence-in-depth twin of the
+// production superset in public/.htaccess: identical on every directive a <meta>
+// CSP can express, so the header only adds frame-ancestors and
+// upgrade-insecure-requests on top. tools/check-csp.mjs asserts the two stay in
+// lock-step against the built dist/, so a directive loosened or a script hash
+// drifted in only one place fails the build.
+//
+// IMPORTANT: this is injected at BUILD time only (apply: "build"). The Vite dev
+// server injects its own inline HMR/React-refresh scripts that a strict
+// script-src would block, so a <meta> CSP must never reach dev — hence it lives
+// here, not in the source index.html.
+//
+// The 'sha256-…' allowlists the inline anti-flash theme script in index.html. It
+// is the SAME hash carried by the .htaccess header; if you edit that inline
+// script, recompute it (check-csp prints the expected token) and update it in
+// BOTH this string and public/.htaccess, or the two policies drift and the guard
+// fails.
+const META_CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'sha256-xh7M2t3oCHA26cHM02ChDRcJob4ZPTl0JQfjj9EbBJo='",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data:",
+  "font-src 'self'",
+  "connect-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
+
+function cspMetaPlugin() {
+  return {
+    name: "inject-csp-meta",
+    apply: "build",
+    transformIndexHtml(html) {
+      // Insert the meta as the first thing in <head> via a literal string splice
+      // (not the tag-descriptor API) so the policy's single quotes reach the
+      // markup verbatim, never HTML-entity-escaped. prerenderSpecs.js clones the
+      // built index.html for the spec pages, so they inherit it unchanged.
+      const meta = `<meta http-equiv="Content-Security-Policy" content="${META_CSP}" />`;
+      return html.replace(/<head>/i, `<head>\n    ${meta}`);
+    },
+  };
+}
+
 export default defineConfig({
   base: "/",
-  plugins: [react(), tailwindcss()],
+  plugins: [cspMetaPlugin(), react(), tailwindcss()],
   test: {
     // Pure-logic suites run in Node; component suites opt into jsdom per-file via
     // a `// @vitest-environment jsdom` pragma at the top of the file.
