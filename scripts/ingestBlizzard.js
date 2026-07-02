@@ -217,9 +217,15 @@ async function normaliseNode(
       const spellId = tt.spell_tooltip?.spell?.id;
       choices.push({
         spellId,
+        // Fall back to the node id, not a bare `String(spellId)` — a choice
+        // option with no talent name, no spell name, and no spell id would
+        // otherwise ship the literal string "undefined" (which passes the
+        // non-empty-string validator). Mirrors the non-choice path below.
         name:
-          tt.talent?.name ?? tt.spell_tooltip?.spell?.name ?? String(spellId),
-        icon: (await iconOf(spellId)) ?? String(spellId),
+          tt.talent?.name ??
+          tt.spell_tooltip?.spell?.name ??
+          String(spellId ?? raw.id),
+        icon: (await iconOf(spellId)) ?? String(spellId ?? raw.id),
         description: await descFor(spellId, tt.spell_tooltip?.description),
         maxRanks: 1,
       });
