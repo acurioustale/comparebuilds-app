@@ -10,6 +10,23 @@ export const APEX_ICON = 34; // apex (capstone) node size
 export const CHOICE_GAP = 4; // gap between a choice node's two options
 export const PAD = 24; // panel padding around the node grid
 
+/**
+ * Geometry for a single-icon node shape (apex / round / square) — the size, corner
+ * radius and border width the shape is drawn with. Choice nodes are two CHOICE_ICON
+ * sub-icons and don't use this. Shared by TalentNode and HeatmapTree so a shape's
+ * dimensions can't drift between the interactive/import trees and the heatmap.
+ * @param {object} node Spec node object
+ * @returns {{ size: number, radius: number|string, borderWidth: number }}
+ */
+export function iconGeometry(node) {
+  const isApex = node.type === "apex";
+  return {
+    size: isApex ? APEX_ICON : ICON,
+    radius: isApex || node.type === "round" ? "50%" : 4,
+    borderWidth: isApex ? 2 : 1.5,
+  };
+}
+
 // ─── Responsive stacking classes ──────────────────────────────────────────────
 //
 // Tailwind classes for a section's row container and its inter-panel divider,

@@ -1,8 +1,8 @@
 import { memo, useContext } from "react";
 import Tooltip from "./Tooltip";
-import { iconUrl, onIconError } from "../lib/iconUrl";
+import NodeIcon from "./NodeIcon";
 import { useNodeEmphasis, SpotlightContext } from "./SearchContext";
-import { ICON, CHOICE_ICON, APEX_ICON, CHOICE_GAP } from "./treeLayout";
+import { CHOICE_ICON, CHOICE_GAP, iconGeometry } from "./treeLayout";
 import { useTapGesture } from "./useTapGesture";
 
 // Hover highlight for a node's prerequisite chain.
@@ -160,17 +160,7 @@ function ChoiceOption({
         zIndex: 1,
       }}
     >
-      <img
-        src={iconUrl(ch.icon)}
-        onError={onIconError}
-        width={CHOICE_ICON}
-        height={CHOICE_ICON}
-        alt=""
-        draggable={false}
-        loading="lazy"
-        decoding="async"
-        style={{ display: "block" }}
-      />
+      <NodeIcon icon={ch.icon} size={CHOICE_ICON} />
     </div>
   );
 }
@@ -378,12 +368,10 @@ export const TalentNode = memo(function TalentNode({
 
   // ── Apex / round / square node ───────────────────────────────────────────────
   // One icon-shell serves all three single-icon shapes; they differ only in icon
-  // size, corner radius, and border width. (Choice nodes, handled above, are the
-  // only shape with two sub-icons.)
-  const isApex = node.type === "apex";
-  const S = isApex ? APEX_ICON : ICON;
-  const radius = isApex || node.type === "round" ? "50%" : 4;
-  const borderWidth = isApex ? 2 : 1.5;
+  // size, corner radius, and border width, which iconGeometry centralises so the
+  // heatmap can't draw them differently. (Choice nodes, handled above, are the only
+  // shape with two sub-icons.)
+  const { size: S, radius, borderWidth } = iconGeometry(node);
   const showRank = isSelected && node.maxRanks > 1;
 
   return (
@@ -428,17 +416,7 @@ export const TalentNode = memo(function TalentNode({
             transition: "opacity 0.2s",
           }}
         >
-          <img
-            src={iconUrl(node.icon)}
-            onError={onIconError}
-            width={S}
-            height={S}
-            alt=""
-            draggable={false}
-            loading="lazy"
-            decoding="async"
-            style={{ display: "block" }}
-          />
+          <NodeIcon icon={node.icon} size={S} />
           {invalid && (
             <div
               style={{
