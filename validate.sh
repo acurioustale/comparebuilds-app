@@ -23,10 +23,10 @@ esac
 
 # Versions pinned in .tool-versions. Asserted here (only when the tool is
 # present) so a drifted local tool is caught before it surfaces as a mystery
-# failure in CI. .tool-versions is the single source of truth.
-tool_version() {
-	grep "^$1 " .tool-versions | awk '{print $2}'
-}
+# failure in CI. .tool-versions is the single source of truth; read each pin
+# through one helper that matches the whole tool name (so "php" can't match
+# "php-cs-fixer") rather than a prefix regex.
+tool_version() { awk -v tool="$1" '$1 == tool {print $2}' .tool-versions; }
 ci_node_version="$(tool_version nodejs)"
 SHFMT_VERSION="$(tool_version shfmt)"
 PHPCSFIXER_VERSION="$(tool_version php-cs-fixer)"
