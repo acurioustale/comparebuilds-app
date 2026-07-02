@@ -225,6 +225,10 @@ export default function SideBySideDiff({
   buildB,
   labelA = "Build A",
   labelB = "Build B",
+  // Precomputed computeDiff result from MainView so the diff isn't recomputed
+  // here and in the DiffSummaryTable that mounts alongside. Falls back to
+  // computing locally when used standalone (e.g. in tests).
+  diff = null,
   // Responsive coordination: 'row' | 'stacked' from the FitToWidth coordinator, so
   // reflow lines up with the zoom scale.
   layout = "row",
@@ -232,8 +236,8 @@ export default function SideBySideDiff({
   onSwap = null,
 }) {
   const { highlights, aOnly, bOnly, differing } = useMemo(
-    () => computeDiff(buildA.nodes, buildB.nodes, treeData.nodes),
-    [buildA, buildB, treeData],
+    () => diff ?? computeDiff(buildA.nodes, buildB.nodes, treeData.nodes),
+    [diff, buildA, buildB, treeData],
   );
 
   const nodeById = useMemo(() => byId(treeData.nodes), [treeData]);

@@ -16,6 +16,8 @@ import TalentSearch from "./TalentSearch";
 import DiffSummaryTable from "./DiffSummaryTable";
 import { useBuildsStore, MAX_BUILDS } from "../store/buildsStore";
 import { buildGrantedSeed, computeInvalidNodeIds } from "../lib/treeLogic";
+import { computeDiff } from "../lib/diff";
+import { computeStats } from "../lib/heatmap";
 import { byId, treeNaturalWidths, pairedNaturalWidths } from "./treeLayout";
 import { matchNodeIds } from "../lib/talentSearch";
 import {
@@ -100,6 +102,7 @@ function ThreePlusBuildsView({
   treeData,
   validParsed,
   validLabels,
+  stats,
   widths,
   footer,
   changesOnly,
@@ -114,6 +117,7 @@ function ThreePlusBuildsView({
               treeData={treeData}
               builds={validParsed}
               labels={validLabels}
+              stats={stats}
               layout={layout}
               changesToggle={
                 <ChangesFilterToggle
@@ -136,6 +140,7 @@ function PairedBuildView({
   buildB,
   labelA,
   labelB,
+  diff,
   widths,
   footer,
   changesOnly,
@@ -153,6 +158,7 @@ function PairedBuildView({
               buildB={buildB}
               labelA={labelA}
               labelB={labelB}
+              diff={diff}
               layout={layout}
               onSwap={onSwap}
               changesToggle={
@@ -233,6 +239,29 @@ export default function MainView() {
   const validParsed = useMemo(() => valid.map((v) => v.parsed), [valid]);
   const validLabels = useMemo(() => valid.map((v) => v.label), [valid]);
 
+  // The comparison view (paired diff or heatmap) and the DiffSummaryTable mount
+  // together for every 2+-build comparison and both read the same diff/adoption
+  // data. Compute it once here so neither child recomputes: the 2-build diff and
+  // the 3+-build adoption stats are each an O(nodes × builds) pass.
+  const pairDiff = useMemo(
+    () =>
+      treeData && valid.length === 2
+        ? computeDiff(
+            valid[0].parsed.nodes,
+            valid[1].parsed.nodes,
+            treeData.nodes,
+          )
+        : null,
+    [treeData, valid],
+  );
+  const heatmapStats = useMemo(
+    () =>
+      treeData && valid.length >= 3
+        ? computeStats(validParsed, treeData.nodes)
+        : null,
+    [treeData, valid.length, validParsed],
+  );
+
   const summaryShown = valid.length >= 2;
   useEffect(() => {
     if (!summaryShown) setSpotlightId(null);
@@ -273,6 +302,7 @@ export default function MainView() {
         treeData={treeData}
         validParsed={validParsed}
         validLabels={validLabels}
+        stats={heatmapStats}
         widths={treeWidths}
         footer={comparisonFooter}
         changesOnly={changesOnly}
@@ -287,6 +317,7 @@ export default function MainView() {
         buildB={valid[1].parsed}
         labelA={valid[0].label}
         labelB={valid[1].label}
+        diff={pairDiff}
         widths={pairedWidths}
         footer={comparisonFooter}
         changesOnly={changesOnly}
@@ -342,6 +373,8 @@ export default function MainView() {
             <DiffSummaryTable
               treeData={treeData}
               valid={valid}
+              diff={pairDiff}
+              stats={heatmapStats}
               spotlightId={spotlightId}
               setSpotlightId={setSpotlightId}
             />

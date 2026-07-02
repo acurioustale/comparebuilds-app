@@ -382,6 +382,10 @@ export default function HeatmapTree({
   treeData,
   builds,
   labels = [],
+  // Precomputed computeStats result from MainView so the adoption stats aren't
+  // recomputed here and in the DiffSummaryTable that mounts alongside. Falls
+  // back to computing locally when used standalone (e.g. in tests).
+  stats: statsProp = null,
   layout = null,
   changesToggle = null,
 }) {
@@ -395,8 +399,8 @@ export default function HeatmapTree({
   );
 
   const stats = useMemo(
-    () => computeStats(builds, treeData.nodes),
-    [builds, treeData],
+    () => statsProp ?? computeStats(builds, treeData.nodes),
+    [statsProp, builds, treeData],
   );
 
   const sharedPanel = { nodeById, stats, totalBuilds, labels };
