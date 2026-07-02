@@ -37,20 +37,20 @@ have() { command -v "$1" >/dev/null 2>&1; }
 skip() { echo "note: $1 not installed - skipping $2 (CI enforces it)." >&2; }
 step() { printf '\n\033[1m==> %s\033[0m\n' "$1"; }
 
-# Assert a present tool reports the pinned version; the needle is matched
-# literally so the surrounding "v"/extra output in --version lines doesn't
-# matter. Only called inside the command -v guards below, so an absent tool
-# still skips gracefully rather than failing the version check.
+# Assert a tool reports the pinned version. Pull the dotted version token out of
+# the --version line (so a leading "v" or trailing extra output doesn't matter)
+# and require it to equal the pin exactly. A substring test would wrongly accept
+# a superstring - e.g. shfmt 3.13.10 contains the pinned 3.13.1. Only called
+# inside the command -v guards below, so an absent tool still skips gracefully
+# rather than failing the version check.
 require_version() {
-	local name="$1" want="$2" got="$3"
-	case "$got" in
-	*"$want"*) ;;
-	*)
+	local name="$1" want="$2" got="$3" found=""
+	[[ "$got" =~ ([0-9]+(\.[0-9]+)+) ]] && found="${BASH_REMATCH[1]}"
+	if [[ "$found" != "$want" ]]; then
 		echo "  $name version mismatch: want $want, got: $got" >&2
-		echo "  install the pinned version (see deploy.yml) so local matches CI" >&2
+		echo "  install the pinned version (see .tool-versions) so local matches CI" >&2
 		exit 1
-		;;
-	esac
+	fi
 }
 
 # CI pins Node. Warn (don't block) on a mismatch: a different engine can pass
