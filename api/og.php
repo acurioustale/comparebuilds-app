@@ -285,7 +285,11 @@ try {
     // back on). This is an accepted trade-off: the OG endpoint is cache-fronted
     // and idempotent, so a rare window reset only permits a brief burst of image
     // regenerations, never a data-integrity problem.
-    $currentCountRedis = RateLimiter::checkRedis($redis, 'cb_rl_og_' . $ipHash, OG_RATE_LIMIT_MAX, OG_RATE_LIMIT_WINDOW, false);
+    // penalty=true doubles the window once the limit is exceeded, matching
+    // share.php's Redis limiter and the DB fallback's slide-forward penalty
+    // below (see #274) so a sustained OG flood is penalised the same on every
+    // deployment rather than regaining a full window as soon as it rolls over.
+    $currentCountRedis = RateLimiter::checkRedis($redis, 'cb_rl_og_' . $ipHash, OG_RATE_LIMIT_MAX, OG_RATE_LIMIT_WINDOW, true);
 
     if ($currentCountRedis !== null) {
         if ($currentCountRedis - 1 >= OG_RATE_LIMIT_MAX) {
