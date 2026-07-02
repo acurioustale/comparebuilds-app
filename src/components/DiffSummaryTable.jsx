@@ -1,5 +1,10 @@
 import { Fragment, useEffect, useMemo } from "react";
-import { computeDiff, differenceLabel, groupBySection } from "../lib/diff";
+import {
+  computeDiff,
+  differenceLabel,
+  groupBySection,
+  chosenOptionName,
+} from "../lib/diff";
 import { computeStats, isContested, isDivergent } from "../lib/heatmap";
 
 // Display name for a node: its own name, or a choice node's options joined.
@@ -25,7 +30,7 @@ function nodeName(node) {
 function cellValue(node, sel) {
   if (!sel) return "—";
   if (node.type === "choice") {
-    return node.choices?.[sel.entryChosen]?.name ?? "Selected";
+    return chosenOptionName(node, sel.entryChosen) ?? "Selected";
   }
   return `${sel.pointsInvested}/${node.maxRanks}`;
 }

@@ -9,6 +9,7 @@ import {
   differenceLabel,
   groupBySection,
   selectionLabel,
+  chosenOptionName,
 } from "./diff.js";
 
 // Small synthetic spec: one class node, a multi-rank spec node, a choice node,
@@ -80,6 +81,17 @@ const byId = Object.fromEntries(NODES.map((n) => [n.id, n]));
 const pt = (pointsInvested, entryChosen = null) => ({
   pointsInvested,
   entryChosen,
+});
+
+describe("chosenOptionName", () => {
+  test("resolves a picked choice option's name", () =>
+    assert.strictEqual(chosenOptionName(byId[3], 1), "Y"));
+  test("returns null for an unknown pick (null entryChosen)", () =>
+    assert.strictEqual(chosenOptionName(byId[3], null), null));
+  test("returns null for an out-of-range option index", () =>
+    assert.strictEqual(chosenOptionName(byId[3], 5), null));
+  test("returns null for a node with no choices array", () =>
+    assert.strictEqual(chosenOptionName(byId[1], 0), null));
 });
 
 describe("selectionLabel", () => {
