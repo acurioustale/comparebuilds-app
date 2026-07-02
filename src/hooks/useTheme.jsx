@@ -79,8 +79,40 @@ export function useTheme() {
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: light)");
     const onChange = (e) => setSystemLight(e.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    // Safari <=13's MediaQueryList predates addEventListener; fall back to the
+    // deprecated addListener there so an unguarded call can't throw and abort
+    // the effect. Parity with acurioustale's toggle, which guards the same API.
+    if (mq.addEventListener) {
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    }
+    mq.addListener(onChange);
+    return () => mq.removeListener(onChange);
+  }, []);
+
+  // Mirror theme changes made in other tabs, and re-read on back/forward-cache
+  // restore. A `storage` event fires in every *other* tab when one writes the
+  // key (e.key is null when the whole store is cleared); reflecting it via
+  // setMode keeps open tabs in sync. The originating tab already persisted the
+  // value, so we only mirror it here — no write back, no cross-tab loop. A
+  // bfcache-restored page never saw the storage events fired while it was frozen,
+  // so its mode can lag another tab's change (and the next toggle would then
+  // cycle from a stale mode); pageshow with e.persisted re-reads and re-applies.
+  // Parity with acurioustale's storage + pageshow handlers.
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.key !== null && e.key !== THEME_STORAGE_KEY) return;
+      setMode(resolveMode(e.newValue));
+    };
+    const onPageshow = (e) => {
+      if (e.persisted) setMode(resolveMode(readStoredMode()));
+    };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("pageshow", onPageshow);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("pageshow", onPageshow);
+    };
   }, []);
 
   const cycleTheme = useCallback(
