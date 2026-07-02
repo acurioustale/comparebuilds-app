@@ -145,7 +145,11 @@ export default function Tooltip({
         }
       : null;
 
-  const userProps = { ref, ...children.props };
+  // Spread the child's own props first, then the composed ref, so the merged
+  // reference ref wins. React 19 keeps a child's ref in props.ref, so ordering
+  // ref last is what stops a ref'd child from clobbering refs.setReference and
+  // leaving the tooltip with no element to position against.
+  const userProps = { ...children.props, ref };
   if (holdProps) {
     for (const key of Object.keys(holdProps)) {
       userProps[key] = compose(children.props[key], holdProps[key]);
