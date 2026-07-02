@@ -189,6 +189,56 @@ describe("normaliseSpec", () => {
     const spec = await normaliseSpec(specInfo, tree, DB2_STUB, FNS);
     expect(spec.pointBudget.hero).toBe(2); // max(left 1, right 2), not the left's 1
   });
+
+  // A choice option with no talent name, no spell name, and no spell id must not
+  // ship the literal string "undefined" as its name/icon (which would pass the
+  // non-empty-string validator and render a talent literally called "undefined").
+  it("falls back to the node id, not 'undefined', for a choice option with no spell", async () => {
+    const choiceNode = {
+      id: 30,
+      node_type: { type: "CHOICE" },
+      ranks: [
+        {
+          rank: 1,
+          choice_of_tooltips: [
+            {
+              talent: { name: "Opt A" },
+              spell_tooltip: { spell: { id: 555 }, description: "d" },
+            },
+            // Degenerate option: no talent name, no spell name, no spell id.
+            { spell_tooltip: { description: "d" } },
+          ],
+        },
+      ],
+      display_row: 1,
+      display_col: 3,
+      locked_by: [],
+    };
+    const tree = {
+      class_talent_nodes: [node(1, "PASSIVE", { row: 1, col: 1 }), choiceNode],
+      spec_talent_nodes: [],
+      hero_talent_trees: [],
+    };
+    const specInfo = {
+      id: 100,
+      name: "testspec",
+      displayName: "Test Spec",
+      color: "#fff",
+      icon: "i",
+      description: "d",
+    };
+    // iconOf returns null for the id-less option so the icon fallback is exercised.
+    const fns = {
+      ...FNS,
+      iconOf: async (id) => (id == null ? null : "icon"),
+    };
+    const spec = await normaliseSpec(specInfo, tree, DB2_STUB, fns);
+    const choice = spec.nodes.find((n) => n.id === 30);
+    expect(choice.choices).toHaveLength(2);
+    expect(choice.choices[0].name).toBe("Opt A");
+    expect(choice.choices[1].name).toBe("30"); // node id, not "undefined"
+    expect(choice.choices[1].icon).toBe("30");
+  });
 });
 
 describe("collapseColocatedDuplicates", () => {
