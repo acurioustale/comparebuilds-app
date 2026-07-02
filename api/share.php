@@ -22,7 +22,7 @@ if (!defined('SHARE_API_NO_MAIN')) {
 }
 
 // ─── Limits / config ───────────────────────────────────────────────────────────
-// MAX_BUILDS / MAX_BUILD_LEN are mirrored client-side in src/store/buildsStore.js.
+// MAX_BUILDS / MAX_BUILD_LEN are mirrored client-side in src/store/slices/constants.js.
 // This file is the authority (the client only validates early for nicer errors);
 // keep the two in sync if either limit changes.
 const MAX_BODY_BYTES    = 16384; // raw POST body cap (5 builds * 2000 + overhead)

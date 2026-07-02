@@ -13,7 +13,7 @@ the build) and only then its `deploy` job, which `needs: validate`; a push that
 fails the gate never ships. It can also be triggered manually from the Actions
 tab, with an optional dry-run — manual runs validate first too. The deploy job
 builds the site and runs `deploy.sh`. `deploy.sh` stages the built `dist/` together with the PHP API
-(`api/share.php`, `api/og.php`, `api/lib/`, `api/fonts/`, `api/cron/`) into one tree and mirrors it with a
+(`api/share.php`, `api/og.php`, `api/lib/`, `api/fonts/`, `api/cron/`, `api/current_layouts.json`) into one tree and mirrors it with a
 single `rsync -avz --delete` to the web root:
 
 ```text
@@ -24,7 +24,11 @@ Staging the two sources into one tree is what makes `--delete` safe: `dist/` has
 no `api/`, so deleting against `dist/` alone would wipe the live API folder. For
 the same reason the staged list must include every runtime dependency of the API:
 `api/lib/` holds `RateLimiter.php`, which `share.php` requires, so leaving it out
-makes `--delete` remove it from the server and fatal every share/OG request.
+makes `--delete` remove it from the server and fatal every share/OG request; and
+`api/current_layouts.json` is the manifest `ensure_schema.php` reconciles into the
+layout-history table, so dropping it lets `--delete` remove it and silently breaks
+supersession-gated pruning (the cron can no longer tell current layouts from
+superseded ones).
 `config.php` (below) lives one level above the web root and is never touched.
 After a successful rsync, `deploy.sh` runs `api/cron/ensure_schema.php` over SSH
 to apply any pending schema migrations.
@@ -74,7 +78,7 @@ real content, and opening one boots the calculator on that spec.
 
 ### 2. Upload files to the server
 
-Upload the **contents** of `dist/` to the web root folder (the folder that comparebuilds.app points to). Upload `api/share.php`, `api/og.php`, and the `api/lib/`, `api/cron/`, and `api/fonts/` folders into an `api/` subfolder inside that same web root. `api/lib/` holds `RateLimiter.php`, which `share.php` requires — omitting it makes both `share.php` and `og.php` fatal.
+Upload the **contents** of `dist/` to the web root folder (the folder that comparebuilds.app points to). Upload `api/share.php`, `api/og.php`, `api/current_layouts.json`, and the `api/lib/`, `api/cron/`, and `api/fonts/` folders into an `api/` subfolder inside that same web root. `api/lib/` holds `RateLimiter.php`, which `share.php` requires — omitting it makes both `share.php` and `og.php` fatal. `api/current_layouts.json` is the manifest `ensure_schema.php` reconciles after deploy; omitting it breaks supersession-gated pruning.
 
 `og.php` renders the Open Graph preview image for shared links and needs PHP's **GD** extension with FreeType (for text). It ships its own bold TTF in `api/fonts/`, so no system fonts are required; set `OG_FONT_PATH` in `config.php` only to override it. It emits whichever image format the host's GD supports (PNG → JPEG → GIF → WebP), so it works even on GD builds without PNG. Make sure the `api/fonts/` folder is uploaded alongside `og.php`. Pretty share URLs (`/s/<id>`) rely on `mod_rewrite` (configured in the shipped `.htaccess`).
 
@@ -344,7 +348,8 @@ React components.
 
 The PHP share API has its own PHPUnit suite in `tests/`, covering the
 public-input validation surface (id format, build-string limits, label/name
-caps, client-IP handling), concurrency (`ShareConcurrencyTest.php`), and the OG
+caps, client-IP handling), concurrency (`ShareConcurrencyTest.php`), the
+supersession-retention helpers (`LayoutRetentionTest.php`), and the OG
 image renderer (`OgRenderTest.php`). Run it with `phpunit`, or let `./validate.sh`
 run everything — JavaScript, PHP, the linters, and the build — at once.
 
