@@ -33,11 +33,14 @@
          never flashes. "auto" (no stored override) needs nothing here: the CSS
          `color-scheme: light dark` + light-dark() palette follows the OS on its
          own, with no JS. Mirrors src/index.css and the toggle on acurioustale.de.
-         NOTE: this inline script is allowlisted in the CSP (public/.htaccess) by
-         its sha256 hash (base64 of the sha256 of the exact, prettier-formatted
-         script text). If you edit it, recompute the hash there or production
-         will block it. The "CSP guard" gate step (tools/check-csp.mjs) recomputes
-         the hash from the built dist/ and fails if it no longer matches. -->
+         NOTE: this inline script is allowlisted in the CSP by its sha256 hash
+         (base64 of the sha256 of the exact, prettier-formatted script text), and
+         the policy ships twice — the `.htaccess` header (public/.htaccess) and a
+         `<meta>` baseline injected at build by the cspMetaPlugin in
+         vite.config.js. If you edit this script, recompute the hash and update it
+         in BOTH places or production will block it. The "CSP guard" gate step
+         (tools/check-csp.mjs) recomputes the hash from the built dist/ and fails
+         if either policy no longer matches (or if the two disagree). -->
     <script>
       (function () {
         try {
