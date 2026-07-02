@@ -308,10 +308,14 @@ try {
         }
         if ($count >= OG_RATE_LIMIT_MAX) {
             $rateLimited = true;
-        } elseif ($count <= OG_RATE_LIMIT_MAX * 2) {
+        }
+
+        if ($count <= OG_RATE_LIMIT_MAX * 2) {
             // Count every valid-id request, whether or not the share exists, so a
             // flood of nonexistent ids is still bounded — matching the Redis path,
-            // which increments its counter before the share lookup.
+            // which increments its counter before the share lookup. Logging
+            // continues past the cap (up to 2x) so the window keeps reflecting an
+            // ongoing flood rather than freezing at the limit.
             try {
                 $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
                 $logReq->execute([$ipHash]);
@@ -320,6 +324,24 @@ try {
                 // rate limit; surface the failure so schema drift or a failed
                 // migration is visible instead of silently relaxing the cap.
                 error_log('Failed to log OG request: ' . $e->getMessage());
+            }
+        } else {
+            // Already at the per-IP row cap (2x the limit) and still hammering.
+            // Inserting another row would grow the table unbounded, but dropping
+            // the request outright lets the sliding window drain: as the oldest
+            // rows age out the count falls back under the cap and the abuser
+            // regains capacity while still hammering. Instead slide this IP's
+            // oldest logged request forward to now — the row count stays bounded
+            // while the recovery horizon is pushed out for as long as the abuse
+            // continues, mirroring share.php's over-limit penalty (see #270).
+            try {
+                $slide = $pdo->prepare(
+                    'UPDATE comparebuilds_og_requests SET created_at = NOW() '
+                    . 'WHERE ip_hash = ? ORDER BY created_at ASC LIMIT 1'
+                );
+                $slide->execute([$ipHash]);
+            } catch (PDOException $e) {
+                error_log('Failed to slide OG request window: ' . $e->getMessage());
             }
         }
     }
