@@ -16,4 +16,11 @@ describe("bitStream safe shift handling", () => {
     const writer = new BitWriter();
     expect(() => writer.writeBits(0, 128)).not.toThrow();
   });
+
+  test("BitWriter.writeBits throws RangeError for a negative value", () => {
+    const writer = new BitWriter();
+    // Left unguarded this would emit two's-complement low bits (1,1) = 3
+    // rather than failing, silently corrupting the stream.
+    expect(() => writer.writeBits(-1, 2)).toThrow(RangeError);
+  });
 });

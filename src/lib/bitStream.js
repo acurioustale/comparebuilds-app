@@ -93,11 +93,20 @@ export class BitWriter {
   // bits; the only wide write is the 128-bit hash, which is always 0.
   /**
    * Writes `count` bits of `value` to the stream.
-   * @param {number} value Integer value to write
+   * @param {number} value Non-negative integer value to write
    * @param {number} count Number of bits to write
    * @returns {void}
    */
   writeBits(value, count) {
+    // Every wire field is unsigned. A negative value would be written as its
+    // two's-complement low bits — e.g. writeBits(-1, 2) emits (1,1), silently
+    // encoding 3 — so a caller that computed a negative (an out-of-range index,
+    // a bad subtraction) corrupts the stream instead of failing. Reject it here.
+    if (value < 0) {
+      throw new RangeError(
+        `Cannot write a negative value (${value}); all bitstream fields are unsigned`,
+      );
+    }
     if (count > 31 && value !== 0) {
       throw new RangeError(
         `Cannot safely write non-zero values for count > 31 (requested ${count})`,
