@@ -4,6 +4,22 @@
 // be unit-tested without rendering a component.
 
 /**
+ * Resolves the name of the option a build picked on a choice node, or null when
+ * the pick is unknown (a corrupt/partial parse can leave entryChosen null on a
+ * taken choice node) or out of range. Every label site funnels the "which option,
+ * and does it exist" rule through here so they can't diverge on how they treat an
+ * unknown pick — the parse/label mismatch the summary table would otherwise risk.
+ *
+ * @param {object} node Spec node definition from treeData.nodes
+ * @param {number|null} entryChosen The build's chosen option index
+ * @returns {string|null} The chosen option's name, or null
+ */
+export function chosenOptionName(node, entryChosen) {
+  if (entryChosen == null) return null;
+  return node.choices?.[entryChosen]?.name ?? null;
+}
+
+/**
  * Returns a human-readable label for what a build selected on a given node.
  * Used in the diff summary panel.
  *
@@ -125,8 +141,8 @@ export function computeDiff(nodesA, nodesB, allNodes) {
  */
 export function differenceLabel(node, selA, selB) {
   if (node.type === "choice" && selA && selB) {
-    const nameA = node.choices?.[selA.entryChosen]?.name;
-    const nameB = node.choices?.[selB.entryChosen]?.name;
+    const nameA = chosenOptionName(node, selA.entryChosen);
+    const nameB = chosenOptionName(node, selB.entryChosen);
     if (nameA && nameB && nameA !== nameB) return `${nameA} → ${nameB}`;
     return null;
   }
