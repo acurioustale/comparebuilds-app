@@ -26,10 +26,25 @@ export function buildExportString(treeData, selected, specId, classNodes) {
     selected,
     activeSub,
   );
-  const gateSel = heroGateSelection(
-    heroSpent,
-    activeSub != null && activeSub === treeData.heroSubtrees?.right?.name,
-  );
+  // Resolve the active subtree to the left/right hero-gate slot by name. A live
+  // subtree must match one of the two known names; anything else means the
+  // node's heroSubtree has drifted from heroSubtrees.left/right (a data or
+  // ingest regression). Fail loudly instead of silently encoding the gate as
+  // left and exporting a string that decodes to the wrong hero subtree. The
+  // interactive caller catches this and disables export rather than crashing.
+  const { left, right } = treeData.heroSubtrees ?? {};
+  let activeSubtreeIsRight = false;
+  if (activeSub != null) {
+    if (activeSub === right?.name) {
+      activeSubtreeIsRight = true;
+    } else if (activeSub !== left?.name) {
+      throw new Error(
+        `Active hero subtree "${activeSub}" matches neither ` +
+          `heroSubtrees.left ("${left?.name}") nor .right ("${right?.name}").`,
+      );
+    }
+  }
+  const gateSel = heroGateSelection(heroSpent, activeSubtreeIsRight);
   if (gateSel && treeData.heroGateNodeId != null) {
     exportSelection[treeData.heroGateNodeId] = gateSel;
   }

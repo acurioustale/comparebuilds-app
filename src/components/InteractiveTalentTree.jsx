@@ -292,10 +292,17 @@ export default function InteractiveTalentTree({
 
   // ── Export ──────────────────────────────────────────────────────────────────
 
-  const currentBuildString = useMemo(
-    () => buildExportString(treeData, selected, specId, classNodes),
-    [treeData, selected, specId, classNodes],
-  );
+  const currentBuildString = useMemo(() => {
+    try {
+      return buildExportString(treeData, selected, specId, classNodes);
+    } catch (err) {
+      // A data inconsistency (e.g. an active hero subtree that matches neither
+      // gate slot) throws rather than exporting a wrong string. Degrade to a
+      // disabled export instead of crashing the render.
+      console.error(`Failed to build export string: ${err.message}`, err);
+      return "";
+    }
+  }, [treeData, selected, specId, classNodes]);
 
   const hasUserSelection = classSpent > 0 || specSpent > 0 || heroSpent > 0;
 
