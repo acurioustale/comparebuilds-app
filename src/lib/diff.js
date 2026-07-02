@@ -111,11 +111,12 @@ export function computeDiff(nodesA, nodesB, allNodes) {
  *
  *   - a choice node both builds took, but picked different options
  *     ("Option X → Option Y")
- *   - a capstone (apex node) present in one build and absent in the other
- *     ("dropped" / "gained", A → B)
+ *   - a choice node or a capstone (apex node) present in one build and absent
+ *     in the other ("dropped" / "gained", A → B) — both are recognisable picks
+ *     where which option was taken matters, so they're labelled alike.
  *
- * Everything else (rank-only changes, non-apex nodes only one build took)
- * returns null rather than mislabelling.
+ * Everything else (rank-only changes, ordinary non-apex/non-choice nodes only
+ * one build took) returns null rather than mislabelling.
  *
  * @param {object} node Spec node definition
  * @param {{ pointsInvested: number, entryChosen: number|null }|null} selA
@@ -129,7 +130,9 @@ export function differenceLabel(node, selA, selB) {
     if (nameA && nameB && nameA !== nameB) return `${nameA} → ${nameB}`;
     return null;
   }
-  if (node.type === "apex") {
+  // A choice or apex node present in exactly one build: label it gained/dropped
+  // for parity — a one-sided choice is as much a recognisable pick as a capstone.
+  if (node.type === "apex" || node.type === "choice") {
     if (selA && !selB) return "dropped";
     if (!selA && selB) return "gained";
   }

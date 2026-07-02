@@ -258,9 +258,12 @@ describe("differenceLabel", () => {
     assert.strictEqual(differenceLabel(byId[3], pt(1, 0), pt(1, 0)), null);
   });
 
-  test("choice node only one build took → null (not a flip)", () => {
-    assert.strictEqual(differenceLabel(byId[3], pt(1, 0), null), null);
-    assert.strictEqual(differenceLabel(byId[3], null, pt(1, 1)), null);
+  test("choice node present in A, absent in B → 'dropped'", () => {
+    assert.strictEqual(differenceLabel(byId[3], pt(1, 0), null), "dropped");
+  });
+
+  test("choice node absent in A, present in B → 'gained'", () => {
+    assert.strictEqual(differenceLabel(byId[3], null, pt(1, 1)), "gained");
   });
 
   test("apex node present in A, absent in B → 'dropped'", () => {
