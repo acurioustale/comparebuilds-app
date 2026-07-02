@@ -594,6 +594,63 @@ describe("serialisation-space disjointness", () => {
       `unexpected collision error:\n${errs.join("\n")}`,
     );
   });
+
+  test("same node id with a different maxRanks across specs is rejected", () => {
+    const d = makeValidFixed();
+    d.specs.second = structuredClone(d.specs.only);
+    d.specs.second.specSlug = "second";
+    d.specs.second.specId = 101;
+    d.specs.second.heroGateNodeId = null;
+    // id 1 exists in both specs; disagree only on maxRanks (a wire-relevant field
+    // collectClassNodes reads) — the shared class-wide list can't hold both.
+    d.specs.second.nodes[0].maxRanks = 3;
+    assertHasError(
+      validateClassData(d),
+      "node id 1 has an inconsistent shape across specs",
+    );
+  });
+
+  test("same node id with a different choice-option list across specs is rejected", () => {
+    const d = makeValidFixed();
+    // Make id 1 a 2-option choice node in the first spec.
+    const asChoice = (opts) => ({
+      type: "choice",
+      choices: opts,
+    });
+    Object.assign(
+      d.specs.only.nodes[0],
+      asChoice([
+        { name: "A", icon: "a", maxRanks: 1 },
+        { name: "B", icon: "b", maxRanks: 1 },
+      ]),
+    );
+    d.specs.second = structuredClone(d.specs.only);
+    d.specs.second.specSlug = "second";
+    d.specs.second.specId = 101;
+    d.specs.second.heroGateNodeId = null;
+    // Same id, same arity, but a re-pointed option (different name at index 1) —
+    // the positional entryChosen index would decode to a different talent.
+    d.specs.second.nodes[0].choices[1].name = "C";
+    assertHasError(
+      validateClassData(d),
+      "node id 1 has an inconsistent shape across specs",
+    );
+  });
+
+  test("same node id with an identical shape across specs is accepted", () => {
+    const d = makeValidFixed();
+    d.specs.second = structuredClone(d.specs.only);
+    d.specs.second.specSlug = "second";
+    d.specs.second.specId = 101;
+    d.specs.second.heroGateNodeId = null;
+    // Shared ids with matching shape (hero/class nodes repeated per spec) are
+    // normal and must not trip the cross-spec check.
+    const errs = validateClassData(d);
+    assert.ok(
+      !errs.some((e) => e.includes("inconsistent shape across specs")),
+      `unexpected cross-spec error:\n${errs.join("\n")}`,
+    );
+  });
 });
 
 // ── Index cross-check ─────────────────────────────────────────────────────────

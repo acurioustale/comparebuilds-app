@@ -279,12 +279,43 @@ export function validateClassData(data, indexEntry = null) {
   // layout (caught only by the separate snapshot test, not here). Enforce
   // disjointness as part of the contract for both ways a collision can arise.
   const realNodeIds = new Set();
+  // Wire-relevant fingerprint of a node: the fields collectClassNodes reads to
+  // size its bit fields and decode ranks/choices. A node id shared across specs
+  // (hero- and class-tree nodes appear under every spec) MUST fingerprint
+  // identically everywhere — see the cross-spec check below.
+  const nodeSig = (n) => {
+    const ranks = isInt(n?.maxRanks) ? n.maxRanks : "?";
+    if (isArr(n?.choices))
+      return `r${ranks}|c:${n.choices
+        .map((ch) => `${ch?.name ?? "?"}#${ch?.maxRanks ?? "?"}`)
+        .join(",")}`;
+    return `r${ranks}|c:-`;
+  };
+  const nodeSigById = new Map(); // id -> { slug, sig } from the first spec seen
   const gates = [];
   for (const slug of specSlugs) {
     const spec = data.specs[slug];
     if (spec && typeof spec === "object") {
       if (isArr(spec.nodes)) {
-        for (const n of spec.nodes) if (isInt(n?.id)) realNodeIds.add(n.id);
+        for (const n of spec.nodes) {
+          if (!isInt(n?.id)) continue;
+          realNodeIds.add(n.id);
+          // collectClassNodes dedups the class-wide node list first-wins, so if
+          // the same id carries a different maxRanks or choice-option list in
+          // another spec, every build string for the losing spec silently decodes
+          // ranks/choices against the winning spec's shape. Node count and order
+          // are unchanged, so the wire-layout snapshot can't catch it — enforce
+          // shape consistency here as part of the contract.
+          const sig = nodeSig(n);
+          const prev = nodeSigById.get(n.id);
+          if (prev == null) nodeSigById.set(n.id, { slug, sig });
+          else if (prev.sig !== sig)
+            err(
+              `node id ${n.id} has an inconsistent shape across specs ` +
+                `("${prev.slug}": ${prev.sig} vs "${slug}": ${sig}) — ` +
+                `would corrupt the wire layout`,
+            );
+        }
       }
       if (isInt(spec.heroGateNodeId))
         gates.push({ slug, id: spec.heroGateNodeId });
