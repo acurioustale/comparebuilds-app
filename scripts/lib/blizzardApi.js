@@ -9,11 +9,12 @@
  * endpoint for a bearer token (valid ~24h), then send it on every Game Data
  * request along with the required `static-{region}` namespace.
  *
- * Credentials (see .env.example) are resolved, in precedence order, from:
- *   1. a file named by BLIZZARD_CREDENTIALS_FILE (may live ANYWHERE — e.g. above
+ * Credentials (see .env.example) are resolved, in precedence order (highest
+ * first — a real environment variable always wins over a file), from:
+ *   1. the process environment (CI sets BLIZZARD_CLIENT_ID/SECRET as secrets),
+ *   2. a file named by BLIZZARD_CREDENTIALS_FILE (may live ANYWHERE — e.g. above
  *      the repo, the config.php analog for keeping secrets off the tree),
- *   2. a gitignored `.env` in the repo root,
- *   3. the process environment (CI sets BLIZZARD_CLIENT_ID/SECRET as secrets).
+ *   3. a gitignored `.env` in the repo root.
  * Nothing here is ever committed or deployed: scripts/ is build-time only.
  *
  * GET responses are cached on disk (scripts/.cache/blizzard/, gitignored) so
