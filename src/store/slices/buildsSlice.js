@@ -209,7 +209,7 @@ export const createBuildsSlice = (set, get) => ({
    * @returns {void}
    */
   removeBuild: (index) => {
-    const { buildStrings, parsedBuilds, buildNames } = get();
+    const { buildStrings, parsedBuilds, buildNames, editingIndex } = get();
     if (index < 0 || index >= buildStrings.length) return;
 
     // Reindexing the slots invalidates any positional index captured by a
@@ -225,10 +225,22 @@ export const createBuildsSlice = (set, get) => ({
       // Invalidate any in-flight load so its commit is a no-op
       set({ ...EMPTY, loadGen: get().loadGen + 1 });
     } else {
+      // Keep editingIndex pointing at the build it referenced, same as
+      // swapBuilds. Removing the edited slot exits edit mode (its selections no
+      // longer have a home); removing a lower slot shifts the edited build down
+      // by one. Without this the export path (useBuildExport) would replaceBuild
+      // a stale index — overwriting the wrong slot or silently dropping the edit.
+      const editShift =
+        editingIndex == null || editingIndex < index
+          ? { editingIndex }
+          : editingIndex === index
+            ? { editingIndex: null, addingBuild: false }
+            : { editingIndex: editingIndex - 1 };
       set({
         buildStrings: newStrings,
         parsedBuilds: newParsed,
         buildNames: newNames,
+        ...editShift,
       });
     }
   },

@@ -211,6 +211,49 @@ describe("removeBuild and reset", () => {
     assert.strictEqual(st.specId, null);
     assert.strictEqual(st.treeData, null);
   });
+
+  test("removeBuild shifts editingIndex down when a lower slot is removed", async () => {
+    const [a, b, c] = genStrings("death_knight", "blood", 3);
+    await get().addBuild(a);
+    await get().addBuild(b);
+    await get().addBuild(c);
+    get().editBuild(1);
+    assert.strictEqual(get().editingIndex, 1);
+
+    get().removeBuild(0);
+    assert.deepStrictEqual(get().buildStrings, [b, c]);
+    assert.strictEqual(
+      get().editingIndex,
+      0,
+      "editingIndex follows the build it was pointing at",
+    );
+  });
+
+  test("removeBuild exits edit mode when the edited slot is removed", async () => {
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    await get().addBuild(a);
+    await get().addBuild(b);
+    get().editBuild(1);
+    assert.strictEqual(get().editingIndex, 1);
+    assert.strictEqual(get().addingBuild, true);
+
+    get().removeBuild(1);
+    assert.strictEqual(get().editingIndex, null);
+    assert.strictEqual(get().addingBuild, false);
+  });
+
+  test("removeBuild leaves editingIndex untouched when a higher slot is removed", async () => {
+    const [a, b, c] = genStrings("death_knight", "blood", 3);
+    await get().addBuild(a);
+    await get().addBuild(b);
+    await get().addBuild(c);
+    get().editBuild(0);
+    assert.strictEqual(get().editingIndex, 0);
+
+    get().removeBuild(2);
+    assert.deepStrictEqual(get().buildStrings, [a, b]);
+    assert.strictEqual(get().editingIndex, 0);
+  });
 });
 
 // ── swapBuilds ───────────────────────────────────────────────────────────────
