@@ -1,5 +1,8 @@
 import { defaultBuildLabel } from "./buildLabel.js";
 
+// Strip quotes and backslashes to ensure a clean simc profile name.
+const strip = (s) => s.replace(/["\\]/g, "");
+
 /**
  * Generates a SimulationCraft profileset block for the active comparison slots.
  *
@@ -40,9 +43,6 @@ export function generateSimcProfileset(
     // SimulationCraft. A missing/undefined entry (parsedBuilds omitted) is not a
     // failure signal, so only an explicit null is skipped.
     if (parsedBuilds?.[i] === null) continue;
-
-    // Strip quotes and backslashes to ensure a clean simc profile name.
-    const strip = (s) => s.replace(/["\\]/g, "");
 
     // Fall back to the default label when the custom name is empty OR collapses
     // to empty after stripping (e.g. a name of `"` or `\`). Without the second
