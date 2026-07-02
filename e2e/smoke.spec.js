@@ -76,3 +76,35 @@ test("pasting a valid build string renders its tree", async ({ page }) => {
   });
   await expect(page.locator(".wow-subpanel").first()).toBeVisible();
 });
+
+test("FitToWidth scales the tree down to fit a narrow viewport", async ({
+  page,
+}) => {
+  // FitToWidth fits a fixed-width tree to the viewport by a uniform CSS transform
+  // (scale, don't reflow). The transform lives on the div wrapping .wow-panel and
+  // only appears once the layout engine has measured a real clientWidth — which
+  // jsdom, with no layout, never produces. A phone-width viewport is far narrower
+  // than any tree's natural width, so the scale is guaranteed below 1×.
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto("/");
+
+  const input = page.getByPlaceholder("Paste build string…").first();
+  await input.fill(GUARDIAN_DRUID);
+  await input.press("Enter");
+  await expect(page.locator(".wow-subpanel").first()).toBeVisible({
+    timeout: 15_000,
+  });
+
+  // The two-tier FitToWidth always sets transform-origin on its content div; the
+  // scale transform is applied on top when it shrinks the tree to fit.
+  const content = page.locator("[style*='transform-origin']").first();
+  const scale = await content.evaluate((el) => {
+    const t = getComputedStyle(el).transform;
+    if (t === "none") return 1; // identity — no scaling applied
+    const m = t.match(/matrix\(([^)]+)\)/);
+    return m ? parseFloat(m[1].split(",")[0]) : 1;
+  });
+
+  expect(scale).toBeGreaterThan(0); // a real scale matrix, not a degenerate 0
+  expect(scale).toBeLessThan(1); // scaled down to fit, not left at natural size
+});
