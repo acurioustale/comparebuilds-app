@@ -38,23 +38,32 @@ export async function loadTreeData(
     if (get().loadGen !== gen) return;
 
     const classNodes = collectClassNodes(classData);
-    const treeData = classData.specs[specSlug];
+    const rawTreeData = classData.specs[specSlug];
 
-    if (!treeData) {
+    if (!rawTreeData) {
       throw new Error(
         `Spec "${specSlug}" not found in class data for "${classSlug}"`,
       );
     }
 
-    if (Array.isArray(treeData.nodes)) {
-      treeData.nodes.sort((a, b) =>
-        a.posY !== b.posY
-          ? a.posY - b.posY
-          : a.posX !== b.posX
-            ? a.posX - b.posX
-            : a.id - b.id,
-      );
-    }
+    // Render order is posY, then posX, then id. Sort a COPY of the nodes array
+    // rather than in place: `classData` is the cached ES-module object from the
+    // dynamic import, so sorting `rawTreeData.nodes` in place would permanently
+    // reorder the shared module for every other consumer of the same class JSON.
+    // (Order-independent anyway for the wire layout — collectClassNodes/wireLayout
+    // do their own ascending-id sort — so this only fixes the shared mutation.)
+    const treeData = Array.isArray(rawTreeData.nodes)
+      ? {
+          ...rawTreeData,
+          nodes: [...rawTreeData.nodes].sort((a, b) =>
+            a.posY !== b.posY
+              ? a.posY - b.posY
+              : a.posX !== b.posX
+                ? a.posX - b.posX
+                : a.id - b.id,
+          ),
+        }
+      : rawTreeData;
 
     const currentStrings = get().buildStrings;
     // Class-level wire-layout fingerprint: the same hash the snapshot pins, and
