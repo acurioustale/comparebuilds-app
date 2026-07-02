@@ -32,6 +32,15 @@ export function generateSimcProfileset(
 
   for (let i = 0; i < buildStrings.length; i++) {
     const buildString = buildStrings[i];
+
+    // Skip slots the app itself couldn't parse. parsedBuilds is kept parallel to
+    // buildStrings with an explicit null for a failed (or not-yet-loaded) parse;
+    // a committed string can have a valid header but an unparseable body, and
+    // emitting its raw `talents=` line would poison the whole profileset in
+    // SimulationCraft. A missing/undefined entry (parsedBuilds omitted) is not a
+    // failure signal, so only an explicit null is skipped.
+    if (parsedBuilds?.[i] === null) continue;
+
     let name = buildNames?.[i]?.trim();
 
     if (!name) {
