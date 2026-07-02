@@ -98,11 +98,16 @@ try {
     //      row with superseded_at IS NULL matches its layout_hash (a live layout is
     //      never pruned, no matter how old); AND
     //   3. the layout has been superseded for at least the window too, so the whole
-    //      unused period falls *after* supersession. Legacy rows (layout_hash NULL,
-    //      or a hash with no history row) have no supersession date, so COALESCE
-    //      treats them as superseded at the epoch — prunable purely on the unused
-    //      clock. The correlated subqueries read comparebuilds_layout_history (a
-    //      different table), which is permitted while deleting from _shares.
+    //      unused period falls *after* supersession. Two non-live cases differ:
+    //      a share with NO layout_hash (legacy, pre-tracking) has no supersession
+    //      date and ages out on the unused clock alone; a share WITH a layout_hash
+    //      but NO history row is treated as unknown and KEPT — never epoch-pruned.
+    //      That is the per-hash mirror of the zero-live-layouts valve: a manifest
+    //      that omits a still-current layout leaves its hash without a live history
+    //      row, and epoch-superseding it (the old COALESCE default) would delete
+    //      that live layout's idle shares. Over-retaining is the safe direction.
+    //      The correlated subqueries read comparebuilds_layout_history (a different
+    //      table), which is permitted while deleting from _shares.
     if ($liveLayouts === 0) {
         error_log(
             'Share pruning cron: layout-history has zero live layouts — skipping '
@@ -118,11 +123,14 @@ try {
         . '     SELECT 1 FROM comparebuilds_layout_history h'
         . '     WHERE h.layout_hash = comparebuilds_shares.layout_hash AND h.superseded_at IS NULL'
         . '   )'
-        . '   AND COALESCE('
-        . '     (SELECT h2.superseded_at FROM comparebuilds_layout_history h2'
-        . '      WHERE h2.layout_hash = comparebuilds_shares.layout_hash),'
-        . "     TIMESTAMP('1970-01-01')"
-        . '   ) < NOW() - INTERVAL 180 DAY'
+        . '   AND ('
+        . '     comparebuilds_shares.layout_hash IS NULL'
+        . '     OR EXISTS ('
+        . '       SELECT 1 FROM comparebuilds_layout_history h2'
+        . '       WHERE h2.layout_hash = comparebuilds_shares.layout_hash'
+        . '         AND h2.superseded_at < NOW() - INTERVAL 180 DAY'
+        . '     )'
+        . '   )'
         . ' LIMIT 1000',
         'shares'
     )) {
