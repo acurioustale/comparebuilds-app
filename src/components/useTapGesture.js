@@ -5,10 +5,16 @@ import { useRef } from "react";
 // TAP_MOVE_TOL px is a scroll, not a tap.
 const TAP_HOLD_MS = 350;
 const TAP_MOVE_TOL = 10;
+// A tap emits a synthetic click shortly after touchend; guardClick swallows it
+// within this window. Past it, the flag is treated as stale so a later genuine
+// mouse click (e.g. on a hybrid device, after a synthetic click was suppressed
+// by a re-render) is never consumed.
+const SYNTHETIC_CLICK_MS = 700;
 
 export function useTapGesture() {
   const tapStart = useRef(null);
   const tapFired = useRef(false);
+  const tapFiredAt = useRef(0);
 
   const makeTouchHandlers = (onTap) =>
     onTap
@@ -40,6 +46,7 @@ export function useTapGesture() {
             // A scroll (moved) or a hold (a tooltip peek, not a tap) does nothing.
             if (!s || s.moved || Date.now() - s.time >= TAP_HOLD_MS) return;
             tapFired.current = true;
+            tapFiredAt.current = Date.now();
             onTap();
           },
           onTouchCancel: () => {
@@ -49,12 +56,15 @@ export function useTapGesture() {
       : null;
 
   // Wraps a click handler so the synthetic post-tap click is ignored on touch.
+  // The flag is only honoured inside the synthetic-click window; a stale flag
+  // (its synthetic click never arrived, e.g. the node re-rendered on the tap)
+  // expires so it can't swallow an unrelated later click.
   const guardClick =
     (fn) =>
     (...args) => {
       if (tapFired.current) {
         tapFired.current = false;
-        return;
+        if (Date.now() - tapFiredAt.current < SYNTHETIC_CLICK_MS) return;
       }
       fn(...args);
     };
