@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Deploy comparebuilds.app to the web host via rsync over ssh.
-# Usage: ./deploy.sh [--dry-run]   (extra args pass through to rsync)
+# Usage: ./deploy.sh [--dry-run]   (--dry-run is the only accepted argument)
 #
 # The served tree comes from two places, so we stage them into one directory
 # and mirror that with a single --delete pass:
