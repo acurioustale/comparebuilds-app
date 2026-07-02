@@ -28,22 +28,29 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # Read each pin with an exact first-field match and `exit` after the first
+      # hit, so a malformed or hostile .tool-versions can neither prefix-match the
+      # wrong tool nor emit extra GITHUB_OUTPUT lines. The values reach later
+      # steps only through env vars (never interpolated into a run: script), so a
+      # value can't be parsed as shell.
       - name: Read tool versions
         id: versions
         run: |
           {
-            echo "php=$(awk '/^php / {print $2}' .tool-versions)"
-            echo "shfmt=$(awk '/^shfmt / {print $2}' .tool-versions)"
-            echo "phpcsfixer=$(awk '/^php-cs-fixer / {print $2}' .tool-versions)"
-            echo "phpunit=$(awk '/^phpunit / {print $2}' .tool-versions)"
-            echo "actionlint=$(awk '/^actionlint / {print $2}' .tool-versions)"
+            echo "php=$(awk '$1 == "php" { print $2; exit }' .tool-versions)"
+            echo "shfmt=$(awk '$1 == "shfmt" { print $2; exit }' .tool-versions)"
+            echo "phpcsfixer=$(awk '$1 == "php-cs-fixer" { print $2; exit }' .tool-versions)"
+            echo "phpunit=$(awk '$1 == "phpunit" { print $2; exit }' .tool-versions)"
+            echo "actionlint=$(awk '$1 == "actionlint" { print $2; exit }' .tool-versions)"
           } >> "$GITHUB_OUTPUT"
 
       - name: Shell scripts (shellcheck + shfmt)
+        env:
+          SHFMT_VERSION: ${{ steps.versions.outputs.shfmt }}
         run: |
           mapfile -t sh_files < <(git ls-files '*.sh')
           shellcheck "${sh_files[@]}"
-          curl -sSfL https://github.com/mvdan/sh/releases/download/v${{ steps.versions.outputs.shfmt }}/shfmt_v${{ steps.versions.outputs.shfmt }}_linux_amd64 -o /tmp/shfmt
+          curl -sSfL "https://github.com/mvdan/sh/releases/download/v${SHFMT_VERSION}/shfmt_v${SHFMT_VERSION}_linux_amd64" -o /tmp/shfmt
           chmod +x /tmp/shfmt
           /tmp/shfmt -d "${sh_files[@]}"
 
@@ -55,16 +62,21 @@ jobs:
           php-version: ${{ steps.versions.outputs.php }}
 
       - name: PHP (syntax, format, tests)
+        env:
+          PHPCSFIXER_VERSION: ${{ steps.versions.outputs.phpcsfixer }}
+          PHPUNIT_VERSION: ${{ steps.versions.outputs.phpunit }}
         run: |
           for f in $(git ls-files '*.php' '*.php.example'); do php -l "$f"; done
-          curl -sSfL https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v${{ steps.versions.outputs.phpcsfixer }}/php-cs-fixer.phar -o /tmp/php-cs-fixer
+          curl -sSfL "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v${PHPCSFIXER_VERSION}/php-cs-fixer.phar" -o /tmp/php-cs-fixer
           php /tmp/php-cs-fixer fix --dry-run --config .php-cs-fixer.dist.php
-          curl -sSfL https://phar.phpunit.de/phpunit-${{ steps.versions.outputs.phpunit }}.phar -o /tmp/phpunit
+          curl -sSfL "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar" -o /tmp/phpunit
           php /tmp/phpunit
 
       - name: Workflows (actionlint)
+        env:
+          ACTIONLINT_VERSION: ${{ steps.versions.outputs.actionlint }}
         run: |
-          curl -sSfL https://github.com/rhysd/actionlint/releases/download/v${{ steps.versions.outputs.actionlint }}/actionlint_${{ steps.versions.outputs.actionlint }}_linux_amd64.tar.gz | tar xz actionlint
+          curl -sSfL "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" | tar xz actionlint
           ./actionlint
 
       - name: Set up Node
