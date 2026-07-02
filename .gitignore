@@ -11,6 +11,11 @@ dist-ssr/
 # ─── Tests / coverage ────────────────────────────────────────────────────────
 coverage/
 *.lcov
+# Playwright browser smoke tests (artifacts, not the specs in e2e/)
+/test-results/
+/playwright-report/
+/blob-report/
+/.playwright/
 
 # ─── Ingest ────────────────────────────────────────────────────────────────────
 # Rejected ingest output written for inspection on a validation failure.

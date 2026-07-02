@@ -1,0 +1,69 @@
+name: e2e
+
+# Browser smoke tests (Playwright) for the layout- and theming-dependent
+# behaviour the jsdom component suites can't reach: the light-dark() theme
+# repaint and the lazy class-data import + tree-render pipeline. Kept out of the
+# required `validate` gate and, like link checking (links.yml) and the Blizzard
+# drift check (sources.yml), non-blocking for deploys — it downloads a browser
+# and shouldn't fail a release on a flake. Deploys gate on `validate` (see
+# deploy.yml), not on this.
+#
+# Only runs when something the smoke tests actually exercise changes (the app
+# source, its entry HTML, the specs, the Playwright/Vite config or the deps).
+# Docs-only changes skip the browser download; workflow_dispatch stays available
+# to run it by hand regardless.
+on:
+  pull_request:
+    paths:
+      - index.html
+      - src/**
+      - public/**
+      - e2e/**
+      - playwright.config.js
+      - vite.config.js
+      - package.json
+      - package-lock.json
+      - .tool-versions
+      - .github/workflows/e2e.yml
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - src/**
+      - public/**
+      - e2e/**
+      - playwright.config.js
+      - vite.config.js
+      - package.json
+      - package-lock.json
+      - .tool-versions
+      - .github/workflows/e2e.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".tool-versions"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Only chromium, matching the single project in playwright.config.js;
+      # --with-deps pulls the system libraries the browser needs on the runner.
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      # playwright.config.js starts the Vite dev server itself and waits for it.
+      - name: Run browser smoke tests
+        run: npx playwright test

@@ -59,10 +59,19 @@ export default [
     files: [
       "vite.config.js",
       "eslint.config.js",
+      "playwright.config.js",
       "scripts/**/*.js",
       "tools/**/*.mjs",
     ],
     languageOptions: { globals: { ...globals.node } },
+  },
+
+  // Playwright E2E specs. `test`/`expect` are imported, but the callbacks passed
+  // to page.evaluate() run in the browser and reference DOM globals, so lint them
+  // with the browser environment.
+  {
+    files: ["e2e/**/*.{js,jsx}"],
+    languageOptions: { globals: { ...globals.browser } },
   },
 
   // Test suites: Node environment plus Vitest globals (vite.config sets globals: true).
