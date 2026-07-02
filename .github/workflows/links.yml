@@ -6,6 +6,16 @@ name: links
 # catches link rot; the PR trigger catches links broken by a change.
 on:
   pull_request:
+    # Only the files lychee actually scans (plus its config and this workflow),
+    # so unrelated PRs don't hit external hosts. The weekly schedule still catches
+    # link rot in everything on a cadence.
+    paths:
+      - index.html
+      - README.md
+      - CLAUDE.md
+      - SECURITY.md
+      - lychee.toml
+      - .github/workflows/links.yml
   workflow_dispatch:
   schedule:
     - cron: "0 6 * * 1"
