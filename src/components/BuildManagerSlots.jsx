@@ -49,6 +49,10 @@ export const FilledSlot = memo(function FilledSlot({
     try {
       await navigator.clipboard.writeText(value);
       setFlash(true);
+      // Clear any pending reset first: without this a rapid second copy would
+      // leave the first timer running, so it fires ~1s early and drops the
+      // "Copied!" confirmation before the intended 1.5s.
+      clearTimeout(flashTimer.current);
       flashTimer.current = setTimeout(() => setFlash(false), 1500);
     } catch {
       // clipboard unavailable — silently ignore
