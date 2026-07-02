@@ -170,8 +170,8 @@ describe("DiffSummaryTable", () => {
         setSpotlightId={noop}
       />,
     );
-    expect(screen.getByText("Node A")).toBeInTheDocument();
-    expect(screen.queryByText(/^\(.*\)$/)).not.toBeInTheDocument();
+    const row = screen.getByText("Node A").closest("tr");
+    expect(row.textContent).not.toMatch(/\(.*\)/);
   });
 
   test("hovering a row spotlights the node", () => {
