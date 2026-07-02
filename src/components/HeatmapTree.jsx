@@ -1,6 +1,6 @@
 import { memo, useMemo } from "react";
 import Tooltip from "./Tooltip";
-import { iconUrl, onIconError } from "../lib/iconUrl";
+import NodeIcon from "./NodeIcon";
 import { useNodeEmphasis } from "./SearchContext";
 import {
   rarityTier,
@@ -10,9 +10,7 @@ import {
 } from "../lib/heatmap";
 import {
   CELL,
-  ICON,
   CHOICE_ICON,
-  APEX_ICON,
   CHOICE_GAP,
   PAD,
   byId,
@@ -21,6 +19,7 @@ import {
   splitSections,
   sectionRowClass,
   dividerClass,
+  iconGeometry,
 } from "./treeLayout";
 
 // ─── Rarity scale ─────────────────────────────────────────────────────────────
@@ -166,17 +165,7 @@ const HeatmapNode = memo(function HeatmapNode({
                       flexShrink: 0,
                     }}
                   >
-                    <img
-                      src={iconUrl(ch.icon)}
-                      onError={onIconError}
-                      width={CHOICE_ICON}
-                      height={CHOICE_ICON}
-                      alt=""
-                      draggable={false}
-                      loading="lazy"
-                      decoding="async"
-                      style={{ display: "block" }}
-                    />
+                    <NodeIcon icon={ch.icon} size={CHOICE_ICON} />
                   </div>
                 );
               })}
@@ -187,66 +176,12 @@ const HeatmapNode = memo(function HeatmapNode({
     );
   }
 
-  // ── Apex node ─────────────────────────────────────────────────────────────
-  if (node.type === "apex") {
-    const S = APEX_ICON;
-    return (
-      <Tooltip
-        renderContent={() => {
-          const names = takenNames();
-          return (
-            <div className="py-0.5" style={{ maxWidth: 280 }}>
-              <p className="font-semibold text-xs text-wow-gold mb-1">
-                {node.name}
-              </p>
-              <p className="text-xs text-wow-muted">
-                {names.length ? names.join(", ") : "No builds"}
-              </p>
-            </div>
-          );
-        }}
-        placement="top"
-        delay={300}
-      >
-        <div
-          style={{
-            position: "absolute",
-            left: px - S / 2,
-            top: py - S / 2,
-            cursor: "default",
-          }}
-        >
-          <div
-            style={{
-              width: S,
-              height: S,
-              borderRadius: "50%",
-              overflow: "hidden",
-              border: `2px solid ${rarity.color}`,
-              boxShadow: ringShadow(`0 0 7px ${rarity.glow}`),
-              opacity: effOpacity(count === 0 ? 0.12 : 1),
-            }}
-          >
-            <img
-              src={iconUrl(node.icon)}
-              onError={onIconError}
-              width={S}
-              height={S}
-              alt=""
-              draggable={false}
-              loading="lazy"
-              decoding="async"
-              style={{ display: "block" }}
-            />
-          </div>
-        </div>
-      </Tooltip>
-    );
-  }
-
-  // ── Round / square node ───────────────────────────────────────────────────
-  const S = ICON;
-  const isRound = node.type === "round";
+  // ── Apex / round / square node ────────────────────────────────────────────
+  // One icon-shell serves all three single-icon shapes, sized/shaped by the same
+  // iconGeometry the interactive/import trees use so the heatmap can't draw them
+  // differently. (Apex nodes are never alreadyGranted, so the shared tooltip's
+  // passive branch only ever fires for the granted round/square passives.)
+  const { size: S, radius, borderWidth } = iconGeometry(node);
 
   return (
     <Tooltip
@@ -282,24 +217,14 @@ const HeatmapNode = memo(function HeatmapNode({
           style={{
             width: S,
             height: S,
-            borderRadius: isRound ? "50%" : 4,
+            borderRadius: radius,
             overflow: "hidden",
-            border: `1.5px solid ${rarity.color}`,
+            border: `${borderWidth}px solid ${rarity.color}`,
             boxShadow: ringShadow(`0 0 7px ${rarity.glow}`),
             opacity: effOpacity(count === 0 ? 0.12 : 1),
           }}
         >
-          <img
-            src={iconUrl(node.icon)}
-            onError={onIconError}
-            width={S}
-            height={S}
-            alt=""
-            draggable={false}
-            loading="lazy"
-            decoding="async"
-            style={{ display: "block" }}
-          />
+          <NodeIcon icon={node.icon} size={S} />
         </div>
       </div>
     </Tooltip>
