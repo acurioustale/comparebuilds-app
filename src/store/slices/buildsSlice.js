@@ -234,6 +234,50 @@ export const createBuildsSlice = (set, get) => ({
   },
 
   /**
+   * Swaps the builds at two slot indices (string, parsed result, and name
+   * travel together). Used by the 2-build diff's baseline-swap control to
+   * flip which build renders as A vs B — a pure slot-order change, so the
+   * diff/comparison logic downstream is untouched.
+   *
+   * @param {number} indexA
+   * @param {number} indexB
+   * @returns {void}
+   */
+  swapBuilds: (indexA, indexB) => {
+    const { buildStrings, parsedBuilds, buildNames, editingIndex } = get();
+    if (
+      indexA === indexB ||
+      indexA < 0 ||
+      indexB < 0 ||
+      indexA >= buildStrings.length ||
+      indexB >= buildStrings.length
+    )
+      return;
+
+    // Reindexing invalidates any positional index captured by a replaceBuild
+    // still waiting in addBuildQueue, same as removeBuild.
+    set({ slotGen: get().slotGen + 1 });
+
+    const swapAt = (arr) => {
+      const next = [...arr];
+      [next[indexA], next[indexB]] = [next[indexB], next[indexA]];
+      return next;
+    };
+
+    set({
+      buildStrings: swapAt(buildStrings),
+      parsedBuilds: swapAt(parsedBuilds),
+      buildNames: swapAt(buildNames),
+      editingIndex:
+        editingIndex === indexA
+          ? indexB
+          : editingIndex === indexB
+            ? indexA
+            : editingIndex,
+    });
+  },
+
+  /**
    * Removes all builds and resets every piece of state to its initial value.
    * @returns {void}
    */

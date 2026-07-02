@@ -213,6 +213,68 @@ describe("removeBuild and reset", () => {
   });
 });
 
+// ── swapBuilds ───────────────────────────────────────────────────────────────
+
+describe("swapBuilds", () => {
+  test("swaps strings, parsed results, and names together", async () => {
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    await get().addBuild(a);
+    await get().addBuild(b);
+    get().setBuildName(0, "First");
+    get().setBuildName(1, "Second");
+    const [parsedA, parsedB] = get().parsedBuilds;
+
+    get().swapBuilds(0, 1);
+
+    assert.deepStrictEqual(get().buildStrings, [b, a]);
+    assert.deepStrictEqual(get().parsedBuilds, [parsedB, parsedA]);
+    assert.deepStrictEqual(get().buildNames, ["Second", "First"]);
+  });
+
+  test("is a no-op for equal or out-of-range indices", async () => {
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    await get().addBuild(a);
+    await get().addBuild(b);
+
+    get().swapBuilds(0, 0);
+    assert.deepStrictEqual(get().buildStrings, [a, b]);
+
+    get().swapBuilds(0, 5);
+    assert.deepStrictEqual(get().buildStrings, [a, b]);
+
+    get().swapBuilds(-1, 1);
+    assert.deepStrictEqual(get().buildStrings, [a, b]);
+  });
+
+  test("remaps editingIndex when a swapped slot is being edited", async () => {
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    await get().addBuild(a);
+    await get().addBuild(b);
+    get().editBuild(0);
+    assert.strictEqual(get().editingIndex, 0);
+
+    get().swapBuilds(0, 1);
+    assert.strictEqual(
+      get().editingIndex,
+      1,
+      "editingIndex follows the build it was pointing at",
+    );
+  });
+
+  test("stale replaceBuild is skipped after a swap reindexes the slots", async () => {
+    const [a, b, c] = genStrings("death_knight", "blood", 3);
+    await get().addBuild(a);
+    await get().addBuild(b);
+
+    const pending = get().replaceBuild(1, c);
+    get().swapBuilds(0, 1);
+    const ok = await pending;
+
+    assert.strictEqual(ok, false, "stale replace resolves falsy");
+    assert.deepStrictEqual(get().buildStrings, [b, a]);
+  });
+});
+
 // ── preloadSpec ───────────────────────────────────────────────────────────────
 
 describe("preloadSpec", () => {
