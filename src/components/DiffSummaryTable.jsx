@@ -42,6 +42,8 @@ function cellValue(node, sel) {
  * @param {object} props
  * @param {object} props.treeData Spec tree data object
  * @param {Array<{ parsed: object, label: string }>} props.valid Array of valid builds
+ * @param {object|null} [props.diff] Precomputed computeDiff result (2-build mode)
+ * @param {object|null} [props.stats] Precomputed computeStats result (3+-build mode)
  * @param {number|null} [props.spotlightId] Currently spotlighted node id
  * @param {function} props.setSpotlightId Spotlight setter callback
  * @returns {import("react").JSX.Element|null}
@@ -49,6 +51,11 @@ function cellValue(node, sel) {
 export default function DiffSummaryTable({
   treeData,
   valid,
+  // Precomputed comparison data from MainView so this table doesn't recompute
+  // what the comparison view mounted alongside it already computed. Falls back
+  // to computing locally when used standalone (e.g. in tests).
+  diff = null,
+  stats: statsProp = null,
   spotlightId = null,
   setSpotlightId,
 }) {
@@ -59,11 +66,8 @@ export default function DiffSummaryTable({
 
     if (valid.length === 2) {
       const [a, b] = valid;
-      const { aOnly, bOnly, differing } = computeDiff(
-        a.parsed.nodes,
-        b.parsed.nodes,
-        treeData.nodes,
-      );
+      const { aOnly, bOnly, differing } =
+        diff ?? computeDiff(a.parsed.nodes, b.parsed.nodes, treeData.nodes);
       // computeDiff already sorts each group by section then position.
       return [...aOnly, ...bOnly, ...differing].map(
         ({ id, node, selA, selB }) => ({
@@ -77,10 +81,12 @@ export default function DiffSummaryTable({
     }
 
     const total = valid.length;
-    const stats = computeStats(
-      valid.map((v) => v.parsed),
-      treeData.nodes,
-    );
+    const stats =
+      statsProp ??
+      computeStats(
+        valid.map((v) => v.parsed),
+        treeData.nodes,
+      );
     const out = [];
     for (const node of treeData.nodes) {
       if (node.alreadyGranted) continue;
@@ -104,7 +110,7 @@ export default function DiffSummaryTable({
         Math.min(x.count, x.total - x.count),
     );
     return out;
-  }, [treeData, valid]);
+  }, [treeData, valid, diff, statsProp]);
 
   // Group rows by tree section (Class/Spec/Hero) so the table reads as "what
   // differs where" rather than a flat list — sections with no differences are
