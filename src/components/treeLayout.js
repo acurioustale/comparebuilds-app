@@ -18,17 +18,21 @@ export const PAD = 24; // panel padding around the node grid
 // when a coordinator (FitToWidth) drives it from the zoom scale.
 
 /**
- * Section container: panels side by side ('row') or stacked. `justify` centres a row.
+ * Section container: the section's panels side by side ('row') or stacked, always
+ * horizontally centred. Centring matters when one section row is narrower than
+ * another: the class+spec row and the hero row size independently, and the column
+ * that holds them is only as wide as the widest one, so a narrower row must centre
+ * rather than sit left-aligned with a gap on the right (which read as an off-centre
+ * tree). The stacked/narrow paths already centre via `items-center`.
  * @param {string|null} layout
- * @param {boolean} [justify=false]
  * @returns {string} Tailwind class string
  */
-export function sectionRowClass(layout, justify = false) {
+export function sectionRowClass(layout) {
   if (layout == null) {
-    return `flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start ${justify ? "2xl:justify-center " : ""}2xl:gap-0`;
+    return "flex flex-col items-center gap-5 2xl:flex-row 2xl:items-start 2xl:justify-center 2xl:gap-0";
   }
   if (layout === "row") {
-    return `flex flex-row items-start gap-0${justify ? " justify-center" : ""}`;
+    return "flex flex-row items-start gap-0 justify-center";
   }
   return "flex flex-col items-center gap-5";
 }

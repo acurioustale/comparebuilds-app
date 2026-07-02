@@ -410,7 +410,10 @@ export default function HeatmapTree({
         {changesToggle && <div className="shrink-0">{changesToggle}</div>}
       </div>
 
-      <div className="overflow-x-auto pb-1">
+      <div
+        className="overflow-x-auto pb-1"
+        style={{ display: "flex", justifyContent: "safe center" }}
+      >
         <div className="inline-flex flex-col gap-4 min-w-max">
           {/* ── Class + Spec panels (stack when narrow, side by side when wide) ── */}
           <div className={sectionRowClass(layout)}>
@@ -441,7 +444,7 @@ export default function HeatmapTree({
               <div className="flex-1 h-px bg-wow-dim" />
             </div>
 
-            <div className={sectionRowClass(layout, true)}>
+            <div className={sectionRowClass(layout)}>
               <HeatmapPanel nodes={leftNodes} {...sharedPanel} />
               <div className={dividerClass(layout)} />
               <HeatmapPanel nodes={rightNodes} {...sharedPanel} />

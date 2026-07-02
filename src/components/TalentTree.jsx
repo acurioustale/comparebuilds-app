@@ -350,7 +350,10 @@ export default function TalentTree({
     activeHero !== null && activeHero !== treeData.heroSubtrees.right.name;
 
   return (
-    <div className="overflow-x-auto pb-1">
+    <div
+      className="overflow-x-auto pb-1"
+      style={{ display: "flex", justifyContent: "safe center" }}
+    >
       <div
         style={{
           display: "inline-flex",
@@ -450,7 +453,7 @@ export default function TalentTree({
             </div>
           </div>
 
-          <div className={sectionRowClass(layout, true)}>
+          <div className={sectionRowClass(layout)}>
             <TreePanel
               nodes={leftNodes}
               selectedNodes={selectedNodes}
