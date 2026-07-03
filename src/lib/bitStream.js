@@ -98,10 +98,18 @@ export class BitWriter {
    * @returns {void}
    */
   writeBits(value, count) {
-    // Every wire field is unsigned. A negative value would be written as its
-    // two's-complement low bits — e.g. writeBits(-1, 2) emits (1,1), silently
-    // encoding 3 — so a caller that computed a negative (an out-of-range index,
-    // a bad subtraction) corrupts the stream instead of failing. Reject it here.
+    // Every wire field is an unsigned integer. A non-integer (NaN, a float, a
+    // bad computation) would be coerced by the shift below into arbitrary bits,
+    // silently corrupting the stream — reject it up front.
+    if (!Number.isInteger(value)) {
+      throw new RangeError(
+        `Cannot write a non-integer value (${value}); all bitstream fields are unsigned integers`,
+      );
+    }
+    // A negative value would be written as its two's-complement low bits — e.g.
+    // writeBits(-1, 2) emits (1,1), silently encoding 3 — so a caller that
+    // computed a negative (an out-of-range index, a bad subtraction) corrupts
+    // the stream instead of failing. Reject it here.
     if (value < 0) {
       throw new RangeError(
         `Cannot write a negative value (${value}); all bitstream fields are unsigned`,
@@ -110,6 +118,16 @@ export class BitWriter {
     if (count > 31 && value !== 0) {
       throw new RangeError(
         `Cannot safely write non-zero values for count > 31 (requested ${count})`,
+      );
+    }
+    // A value wider than `count` bits would be silently truncated to its low
+    // `count` bits (the shift below only reads i < count) — e.g. a specId >=
+    // 65536 written in 16 bits would decode as a different, possibly nonexistent
+    // spec. Reject the overflow so a caller fails loudly instead. (count > 31 is
+    // already constrained to value 0 above, so this only needs to cover <= 31.)
+    if (count <= 31 && value > 2 ** count - 1) {
+      throw new RangeError(
+        `Value ${value} does not fit in ${count} bits (max ${2 ** count - 1})`,
       );
     }
     for (let i = 0; i < count; i++) this.#bits.push((value >> i) & 1);

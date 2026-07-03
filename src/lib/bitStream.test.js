@@ -23,4 +23,20 @@ describe("bitStream safe shift handling", () => {
     // rather than failing, silently corrupting the stream.
     expect(() => writer.writeBits(-1, 2)).toThrow(RangeError);
   });
+
+  test("BitWriter.writeBits throws RangeError for a value wider than count bits", () => {
+    const writer = new BitWriter();
+    // A specId >= 65536 in a 16-bit field would otherwise be truncated to its
+    // low 16 bits (70000 & 0xffff = 4464) and decode as a different spec.
+    expect(() => writer.writeBits(70000, 16)).toThrow(RangeError);
+    // The exact boundary: 2^count - 1 fits, 2^count does not.
+    expect(() => writer.writeBits(65535, 16)).not.toThrow();
+    expect(() => writer.writeBits(65536, 16)).toThrow(RangeError);
+  });
+
+  test("BitWriter.writeBits throws RangeError for a non-integer value", () => {
+    const writer = new BitWriter();
+    expect(() => writer.writeBits(2.5, 8)).toThrow(RangeError);
+    expect(() => writer.writeBits(NaN, 8)).toThrow(RangeError);
+  });
 });
