@@ -725,4 +725,45 @@ describe("loadTreeData error handling", () => {
 
     spy.mockRestore();
   });
+
+  test("a build queued behind an in-flight add is not resurrected by clearAllBuilds", async () => {
+    // Reproduce the resurrection race: the first build's add is mid tree-load
+    // (awaiting the import) with a second add queued behind it, then the user
+    // clears everything. clearAllBuilds bumps slotGen; the queued add must see
+    // the mismatch and skip rather than run against the emptied store, take the
+    // isFirst path, and re-append a build the user explicitly cleared.
+    const [a, b] = genStrings("death_knight", "blood", 2);
+
+    let resolveImport;
+    const deferred = new Promise((resolve) => {
+      resolveImport = resolve;
+    });
+    const spy = vi
+      .spyOn(storeHelpers, "importClassData")
+      .mockReturnValueOnce(deferred);
+
+    // First add starts, sets buildStrings synchronously, and awaits the import.
+    const pendingA = get().addBuild(a);
+    // Second add is chained onto the queue behind the first.
+    const pendingB = get().addBuild(b);
+
+    // User clears everything while the first import is still in flight.
+    get().clearAllBuilds();
+
+    // Let the first load resolve — it is a no-op now (loadGen was bumped).
+    resolveImport(require("../data/death_knight.json"));
+    const [okA, okB] = await Promise.all([pendingA, pendingB]);
+
+    assert.strictEqual(okB, false, "the queued add resolves falsy after clear");
+    assert.strictEqual(
+      get().buildStrings.length,
+      0,
+      "no build survives the clear",
+    );
+    // okA may be either — its own commit was wiped by the clear; what matters is
+    // that the store ends empty and B did not resurrect a slot.
+    void okA;
+
+    spy.mockRestore();
+  });
 });
