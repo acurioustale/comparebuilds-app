@@ -429,9 +429,14 @@ if ($limit !== false && $limit !== '' && $limit !== '-1') {
         $val *= 1024;
     }
 
-    // We want at least 8MB of headroom for the GD buffer and overhead.
+    // We want at least 8MB of headroom for the GD buffer and overhead. Measure
+    // usage with real_usage=true: memory_limit is enforced against the memory
+    // actually allocated from the system (including reserved-but-unused arena
+    // blocks), which memory_get_usage() without the flag under-reports. Using the
+    // real figure keeps the estimate conservative so the guard trips before
+    // imagecreatetruecolor() would hit the hard limit and fatal.
     $required = 8 * 1024 * 1024;
-    if ($val > 0 && ($val - memory_get_usage()) < $required) {
+    if ($val > 0 && ($val - memory_get_usage(true)) < $required) {
         error_log('Insufficient memory to render OG image (limit: ' . $limit . ')');
         bail(500);
     }
