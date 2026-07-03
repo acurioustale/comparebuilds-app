@@ -38,13 +38,17 @@ describe("isDivergent", () => {
   test("split adoption diverges", () =>
     assert.strictEqual(isDivergent(2, 3, [0, 0, null]), true));
   test("nobody takes it: agreement", () =>
-    assert.strictEqual(isDivergent(0, 3, [null, null, null]), false));
-  test("all take a ranked/passive node the same way: agreement", () =>
-    assert.strictEqual(isDivergent(3, 3, [null, null, null]), false));
+    assert.strictEqual(isDivergent(0, 3, [null, null, null], true), false));
+  test("all take a ranked/passive node (not a choice node): agreement", () =>
+    assert.strictEqual(isDivergent(3, 3, [null, null, null], false), false));
   test("all take a choice node with the same pick: agreement", () =>
-    assert.strictEqual(isDivergent(3, 3, [1, 1, 1]), false));
+    assert.strictEqual(isDivergent(3, 3, [1, 1, 1], true), false));
   test("all take a choice node but picks diverge: change", () =>
-    assert.strictEqual(isDivergent(3, 3, [0, 1, 0]), true));
+    assert.strictEqual(isDivergent(3, 3, [0, 1, 0], true), true));
+  test("all take a choice node but one pick is unknown (null): change", () =>
+    // A partial/ambiguous parse leaves one taker's pick null; it must not be
+    // assumed to match the others and dimmed as agreement.
+    assert.strictEqual(isDivergent(3, 3, [0, null, 0], true), true));
 });
 
 describe("computeStats", () => {

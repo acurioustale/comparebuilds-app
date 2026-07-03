@@ -39,16 +39,30 @@ export function isContested(count, total) {
  * ranked node reads as agreement even if the invested points differ — consistent
  * with the heatmap being an adoption view rather than a rank view.
  *
+ * A `null` vote among the builds that took a choice node is an *unknown* pick (a
+ * partial/ambiguous parse), not a match: it can't be assumed to agree with the
+ * others, so it counts as a divergence rather than being filtered away. Only
+ * choice nodes carry a meaningful pick — a non-choice node every build takes
+ * always records `null` votes and is genuine agreement.
+ *
  * @param {number} count               builds that selected the node
  * @param {number} total               total builds compared
- * @param {(number|null)[]} choiceVotes per-build entryChosen (null = not picked)
+ * @param {(number|null)[]} choiceVotes per-build entryChosen (null = not picked / unknown)
+ * @param {boolean} isChoiceNode       whether the node is a choice node
  * @returns {boolean} True if the node is divergent
  */
-export function isDivergent(count, total, choiceVotes = []) {
+export function isDivergent(
+  count,
+  total,
+  choiceVotes = [],
+  isChoiceNode = false,
+) {
   if (isContested(count, total)) return true;
   if (count === total) {
-    const picks = choiceVotes.filter((v) => v != null);
-    return picks.some((v) => v !== picks[0]);
+    if (!isChoiceNode) return false;
+    // Every build took the node; divergent unless they all agree on one known
+    // pick. A null (unknown) vote can't be assumed to match, so it diverges.
+    return choiceVotes.some((v) => v == null || v !== choiceVotes[0]);
   }
   return false;
 }
