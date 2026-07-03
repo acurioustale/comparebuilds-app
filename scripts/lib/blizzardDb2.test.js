@@ -258,6 +258,32 @@ describe("BlizzardDb2.apexChain", () => {
     );
   });
 
+  it("throws when a level grant has a blank RequiredLevel (would coerce to NaN)", () => {
+    // A NaN level silently drops the grant from both the inversion check and the
+    // coverage loop, shipping a wrong/absent unlock level — fail loud instead.
+    const db2 = new BlizzardDb2({ build: "test", cache: false });
+    db2.index({
+      nx: [{ TraitNodeID: "100", TraitNodeEntryID: "e1", _Index: "100" }],
+      entry: [
+        {
+          ID: "e1",
+          TraitDefinitionID: "d1",
+          MaxRanks: "1",
+          NodeEntryType: "13",
+        },
+      ],
+      def: [{ ID: "d1", SpellID: "1001" }],
+      cond: [{ ID: "L1", CondType: "5", GrantedRanks: "1", RequiredLevel: "" }],
+      ncond: [{ TraitNodeID: "100", TraitCondID: "L1" }],
+      gxn: [],
+      gxc: [],
+      subtree: [],
+    });
+    expect(() => db2.apexChain("100")).toThrow(
+      /apex node 100 CondType-5 condition L1 has invalid/,
+    );
+  });
+
   it("returns null for an ordinary (non-type-13) node", () => {
     expect(fixture().apexChain("200")).toBeNull();
   });
