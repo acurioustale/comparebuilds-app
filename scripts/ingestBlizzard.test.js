@@ -3,6 +3,7 @@ import {
   normaliseSpec,
   checkpointsFromNodes,
   collapseColocatedDuplicates,
+  filterSpecVariants,
   idsUnusedAcrossSpecs,
   parseArgs,
 } from "./ingestBlizzard.js";
@@ -254,6 +255,40 @@ describe("normaliseSpec", () => {
     expect(choice.choices[0].name).toBe("Opt A");
     expect(choice.choices[1].name).toBe("30"); // node id, not "undefined"
     expect(choice.choices[1].icon).toBe("30");
+  });
+});
+
+describe("filterSpecVariants", () => {
+  const heroNode = (id, posX, posY, connections = []) => ({
+    id,
+    treeType: "hero",
+    heroSubtree: "S",
+    posX,
+    posY,
+    connections,
+    alreadyGranted: false,
+  });
+
+  it("does not grant a hero node whose only prereq is filtered out of the spec", () => {
+    // Node 99 is out-of-spec and shares a cell with the in-spec node 8, so the
+    // variant filter drops it. Node 7's sole prereq is 99, so after the
+    // connection prune 7 has zero connections — but it is NOT a root and must
+    // stay ungranted; only the true root (5, no prereqs) is auto-granted.
+    const db2 = { appliesToSpec: (id) => id !== 99 };
+    const built = [
+      heroNode(5, 0, 0), // true root
+      heroNode(7, 2, 2, [99]), // sole prereq is out-of-spec
+      heroNode(99, 4, 4), // out-of-spec, dropped
+      heroNode(8, 4, 4), // in-spec native variant of the same cell
+    ];
+
+    const out = filterSpecVariants(built, 100, db2);
+
+    expect(out.find((n) => n.id === 99)).toBeUndefined();
+    expect(out.find((n) => n.id === 5).alreadyGranted).toBe(true);
+    const n7 = out.find((n) => n.id === 7);
+    expect(n7.alreadyGranted).toBe(false);
+    expect(n7.connections).toEqual([]);
   });
 });
 
