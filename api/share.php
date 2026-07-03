@@ -668,6 +668,40 @@ function reconcile_layout_history(PDO $pdo, array $current): void
 }
 
 /**
+ * Records a request that could not take the per-IP lock against the rate limiter,
+ * so a sustained lock-contention flood is still accounted for instead of 503-ing
+ * before any counting (which would let it bypass the limit entirely). Best-effort:
+ * a failure here must never mask the 503 the caller is about to throw.
+ */
+function record_throttled_attempt(PDO $pdo, ?object $redis, string $rlKey, string $ipHash): void
+{
+    // Redis path: the INCR is atomic and needs no lock, so it both counts the
+    // attempt and applies the over-limit penalty on its own.
+    if (RateLimiter::checkRedis($redis, $rlKey, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW, true) !== null) {
+        return;
+    }
+
+    // DB path: mirror the in-lock accounting (count the window, insert while
+    // under the 2x row cap so the table stays bounded). Without the advisory
+    // lock this read+insert can race a concurrent writer, but that only shifts
+    // the count by a small concurrency margin — it still records the flood so
+    // the next lock-winning request sees it over the cap and 429s.
+    try {
+        $rl = $pdo->prepare(
+            'SELECT COUNT(*) FROM comparebuilds_share_requests '
+            . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . RATE_LIMIT_WINDOW . ' SECOND'
+        );
+        $rl->execute([$ipHash]);
+        if ((int) $rl->fetchColumn() <= RATE_LIMIT_MAX * 2) {
+            $ins = $pdo->prepare('INSERT INTO comparebuilds_share_requests (ip_hash) VALUES (?)');
+            $ins->execute([$ipHash]);
+        }
+    } catch (PDOException $e) {
+        error_log('Failed to record throttled share attempt: ' . $e->getMessage());
+    }
+}
+
+/**
  * Stores a share payload and returns its content-addressed id. Identical content
  * deduplicates to the same id — idempotently, even against a concurrent write of
  * the same build from another IP. Enforces the per-IP rate limit and prunes
@@ -680,6 +714,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     // them inserts (a TOCTOU race that would let the per-IP cap be exceeded).
     $lockName = 'cb_share_' . substr($ipHash, 0, 48);
     $lockToken = bin2hex(random_bytes(16));
+    $rlKey = 'cb_rl_share_' . $ipHash;
 
     // Denormalised copy of the payload's layout fingerprint (validated on write)
     // into its own column, so the retention prune can join against layout history
@@ -687,6 +722,9 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     $layoutHash = $payload['layoutHash'] ?? null;
 
     if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken)) {
+        // Count the attempt before bailing so lock contention can't be used to
+        // slip past the limiter uncounted.
+        record_throttled_attempt($pdo, $redis, $rlKey, $ipHash);
         throw new ShareException(503, 'Server busy — please try again', 5);
     }
 
@@ -694,7 +732,6 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     try {
         // ── Per-IP rate limit ────────────────────────────────────────────────
         $rateLimited = false;
-        $rlKey = 'cb_rl_share_' . $ipHash;
         // X-RateLimit-Reset: epoch seconds at which the caller regains capacity.
         // Refined from live limiter state below; this flat "now + full window" is
         // only the conservative fallback for when neither backend can be queried.

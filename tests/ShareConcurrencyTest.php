@@ -8,19 +8,38 @@ final class ShareConcurrencyTest extends TestCase
 {
     public function testStoreShareThrowsServerBusyWhenGetLockFails(): void
     {
-        $stmt = $this->createMock(PDOStatement::class);
-        $stmt->expects($this->once())
-             ->method('execute')
-             ->willReturn(true);
-        $stmt->expects($this->once())
-             ->method('fetchColumn')
-             ->willReturn(0); // GET_LOCK failed / timed out
+        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt->method('execute')->willReturn(true);
+        $lockStmt->method('fetchColumn')->willReturn(0); // GET_LOCK failed / timed out
+
+        // A lock-timeout must still record the attempt against the limiter, so a
+        // sustained lock-contention flood can't slip past the rate limit
+        // uncounted. Under the row cap here, so the attempt is logged.
+        $rlStmt = $this->createMock(PDOStatement::class);
+        $rlStmt->method('fetchColumn')->willReturn(5);
+
+        $logged = false;
+        $insertStmt = $this->createMock(PDOStatement::class);
+        $insertStmt->expects($this->once())
+                   ->method('execute')
+                   ->willReturnCallback(function () use (&$logged) {
+                       $logged = true;
+                       return true;
+                   });
 
         $pdo = $this->createMock(PDO::class);
-        $pdo->expects($this->once())
-            ->method('prepare')
-            ->with('SELECT GET_LOCK(?, 1)')
-            ->willReturn($stmt);
+        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $insertStmt) {
+            if (str_starts_with($query, 'SELECT GET_LOCK')) {
+                return $lockStmt;
+            }
+            if (str_starts_with($query, 'SELECT COUNT(*)')) {
+                return $rlStmt;
+            }
+            if (str_starts_with($query, 'INSERT INTO comparebuilds_share_requests')) {
+                return $insertStmt;
+            }
+            throw new RuntimeException("Unexpected query: $query");
+        });
 
         try {
             store_share($pdo, ['classId' => 1, 'specId' => 1, 'builds' => ['AA', 'BB']], 'dummy-ip-hash');
@@ -28,6 +47,41 @@ final class ShareConcurrencyTest extends TestCase
         } catch (ShareException $e) {
             $this->assertSame(503, $e->httpStatus);
             $this->assertSame('Server busy — please try again', $e->getMessage());
+        }
+        $this->assertTrue($logged, 'a lock-timeout attempt must still be counted');
+    }
+
+    public function testThrottledAttemptIsNotLoggedPastRowCap(): void
+    {
+        // On a lock-timeout with the IP already past the 2x row cap, the attempt
+        // is counted implicitly by the existing rows; inserting another would
+        // grow the table unbounded, so no new row is written.
+        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt->method('execute')->willReturn(true);
+        $lockStmt->method('fetchColumn')->willReturn(0);
+
+        $rlStmt = $this->createMock(PDOStatement::class);
+        $rlStmt->method('fetchColumn')->willReturn(999);
+
+        $pdo = $this->createMock(PDO::class);
+        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt) {
+            if (str_starts_with($query, 'SELECT GET_LOCK')) {
+                return $lockStmt;
+            }
+            if (str_starts_with($query, 'SELECT COUNT(*)')) {
+                return $rlStmt;
+            }
+            if (str_starts_with($query, 'INSERT INTO comparebuilds_share_requests')) {
+                throw new RuntimeException('must not log a new request row past the cap');
+            }
+            throw new RuntimeException("Unexpected query: $query");
+        });
+
+        try {
+            store_share($pdo, ['classId' => 1, 'specId' => 1, 'builds' => ['AA', 'BB']], 'dummy-ip-hash');
+            $this->fail('Expected ShareException was not thrown');
+        } catch (ShareException $e) {
+            $this->assertSame(503, $e->httpStatus);
         }
     }
 
