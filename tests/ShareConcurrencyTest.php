@@ -51,11 +51,12 @@ final class ShareConcurrencyTest extends TestCase
         $this->assertTrue($logged, 'a lock-timeout attempt must still be counted');
     }
 
-    public function testThrottledAttemptIsNotLoggedPastRowCap(): void
+    public function testThrottledAttemptSlidesInsteadOfLoggingPastRowCap(): void
     {
-        // On a lock-timeout with the IP already past the 2x row cap, the attempt
-        // is counted implicitly by the existing rows; inserting another would
-        // grow the table unbounded, so no new row is written.
+        // On a lock-timeout with the IP already past the 2x row cap, inserting
+        // another row would grow the table unbounded, so no new row is written —
+        // instead the oldest logged request is slid forward to now, mirroring the
+        // in-lock over-cap penalty so a contention flood can't drain the window.
         $lockStmt = $this->createMock(PDOStatement::class);
         $lockStmt->method('execute')->willReturn(true);
         $lockStmt->method('fetchColumn')->willReturn(0);
@@ -63,13 +64,19 @@ final class ShareConcurrencyTest extends TestCase
         $rlStmt = $this->createMock(PDOStatement::class);
         $rlStmt->method('fetchColumn')->willReturn(999);
 
+        $slideStmt = $this->createMock(PDOStatement::class);
+        $slideStmt->expects($this->once())->method('execute')->willReturn(true);
+
         $pdo = $this->createMock(PDO::class);
-        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt) {
+        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $slideStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
             }
             if (str_starts_with($query, 'SELECT COUNT(*)')) {
                 return $rlStmt;
+            }
+            if (str_starts_with($query, 'UPDATE comparebuilds_share_requests SET created_at')) {
+                return $slideStmt;
             }
             if (str_starts_with($query, 'INSERT INTO comparebuilds_share_requests')) {
                 throw new RuntimeException('must not log a new request row past the cap');

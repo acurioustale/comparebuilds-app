@@ -692,11 +692,16 @@ function record_throttled_attempt(PDO $pdo, ?object $redis, string $rlKey, strin
         return;
     }
 
-    // DB path: mirror the in-lock accounting (count the window, insert while
-    // under the 2x row cap so the table stays bounded). Without the advisory
-    // lock this read+insert can race a concurrent writer, but that only shifts
-    // the count by a small concurrency margin — it still records the flood so
-    // the next lock-winning request sees it over the cap and 429s.
+    // DB path: mirror the in-lock accounting EXACTLY (count the window; insert
+    // while under the 2x row cap, otherwise slide the oldest logged request
+    // forward instead of inserting). Without the advisory lock this read+write
+    // can race a concurrent writer, but that only overshoots the cap by the
+    // worker-pool concurrency margin for one burst — which then ages out within
+    // the window — so the table stays bounded rather than growing while a
+    // contention flood continues. Dropping the attempt outright (the previous
+    // behaviour past the cap) instead let the sliding window drain and handed the
+    // abuser capacity back; the slide penalty pushes the recovery horizon out for
+    // as long as the abuse lasts, matching the Redis path and the in-lock path.
     try {
         $rl = $pdo->prepare(
             'SELECT COUNT(*) FROM comparebuilds_share_requests '
@@ -706,6 +711,12 @@ function record_throttled_attempt(PDO $pdo, ?object $redis, string $rlKey, strin
         if ((int) $rl->fetchColumn() <= RATE_LIMIT_MAX * 2) {
             $ins = $pdo->prepare('INSERT INTO comparebuilds_share_requests (ip_hash) VALUES (?)');
             $ins->execute([$ipHash]);
+        } else {
+            $slide = $pdo->prepare(
+                'UPDATE comparebuilds_share_requests SET created_at = NOW() '
+                . 'WHERE ip_hash = ? ORDER BY created_at ASC LIMIT 1'
+            );
+            $slide->execute([$ipHash]);
         }
     } catch (PDOException $e) {
         error_log('Failed to record throttled share attempt: ' . $e->getMessage());
