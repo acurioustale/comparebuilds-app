@@ -1,5 +1,5 @@
 import classesIndex from "../data/classes.json";
-import { parseBuildString } from "../lib/buildString";
+import { parseBuildString, parseSpecId } from "../lib/buildString";
 import { activeHeroSubtree } from "../lib/treeLogic";
 
 // Vite creates a lazy chunk per matched file. The glob must be a string literal.
@@ -69,6 +69,61 @@ export function findClassForSpec(specId) {
     if (spec) return { cls, spec };
   }
   return null;
+}
+
+/**
+ * Human-readable "<class> — <spec>" label for a spec id, falling back to
+ * "spec <id>" when the id isn't in the local index.
+ * @param {number} specId
+ * @returns {string}
+ */
+function specLabel(specId) {
+  const match = findClassForSpec(specId);
+  return match
+    ? `${match.cls.displayName} — ${match.spec.displayName}`
+    : `spec ${specId}`;
+}
+
+/**
+ * Parses just the 24-bit spec-identifying header of a build string. Shared by
+ * the add and replace paths so their version-vs-corrupt error wording can't
+ * drift apart.
+ * @param {string} buildString
+ * @returns {{ header: { specId: number }, error?: undefined } | { header?: undefined, error: string }}
+ */
+export function readBuildHeader(buildString) {
+  try {
+    return { header: parseSpecId(buildString) };
+  } catch (err) {
+    // Surface the specific reason for an unsupported version; otherwise treat it
+    // as an unreadable header (bad base64, truncation, etc.).
+    console.error(
+      `Failed to parse spec ID from build string: ${err.message}`,
+      err,
+    );
+    const isVersion = err instanceof RangeError && /version/i.test(err.message);
+    return {
+      error: isVersion
+        ? `${err.message}. This build string is from a newer game format than this tool supports.`
+        : "Could not read the build string header — it may be truncated or corrupt.",
+    };
+  }
+}
+
+/**
+ * The spec-mismatch error message shown when an incoming build targets a
+ * different spec than the already-loaded builds. Shared by add and replace so
+ * the wording can't drift. Returns null when the specs match (no error).
+ * @param {number} currentSpecId
+ * @param {number} incomingSpecId
+ * @returns {string | null}
+ */
+export function specMismatchError(currentSpecId, incomingSpecId) {
+  if (incomingSpecId === currentSpecId) return null;
+  return (
+    `Spec mismatch: loaded builds are ${specLabel(currentSpecId)}, ` +
+    `but this string is for ${specLabel(incomingSpecId)}.`
+  );
 }
 
 /**

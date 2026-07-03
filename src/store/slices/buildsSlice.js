@@ -1,5 +1,9 @@
-import { parseSpecId } from "../../lib/buildString";
-import { findClassForSpec, parseAll } from "../storeHelpers";
+import {
+  findClassForSpec,
+  parseAll,
+  readBuildHeader,
+  specMismatchError,
+} from "../storeHelpers";
 import {
   MAX_BUILDS,
   MAX_BUILD_LEN,
@@ -94,23 +98,9 @@ export const createBuildsSlice = (set, get) => ({
     }
 
     // ── Parse just the 24-bit header to identify the spec ────────────────────
-    let header;
-    try {
-      header = parseSpecId(buildString);
-    } catch (err) {
-      // Surface the specific reason for an unsupported version; otherwise treat it
-      // as an unreadable header (bad base64, truncation, etc.).
-      console.error(
-        `Failed to parse spec ID from build string: ${err.message}`,
-        err,
-      );
-      const isVersion =
-        err instanceof RangeError && /version/i.test(err.message);
-      set({
-        error: isVersion
-          ? `${err.message}. This build string is from a newer game format than this tool supports.`
-          : "Could not read the build string header — it may be truncated or corrupt.",
-      });
+    const { header, error: headerError } = readBuildHeader(buildString);
+    if (headerError) {
+      set({ error: headerError });
       return false;
     }
 
@@ -134,16 +124,7 @@ export const createBuildsSlice = (set, get) => ({
       currentSpecId !== null &&
       header.specId !== currentSpecId
     ) {
-      const existingMatch = findClassForSpec(currentSpecId);
-      const existingLabel = existingMatch
-        ? `${existingMatch.cls.displayName} — ${existingMatch.spec.displayName}`
-        : `spec ${currentSpecId}`;
-      const incomingLabel = `${match.cls.displayName} — ${match.spec.displayName}`;
-      set({
-        error:
-          `Spec mismatch: loaded builds are ${existingLabel}, ` +
-          `but this string is for ${incomingLabel}.`,
-      });
+      set({ error: specMismatchError(currentSpecId, header.specId) });
       return false;
     }
 
@@ -362,38 +343,14 @@ export const createBuildsSlice = (set, get) => ({
       return false;
     }
 
-    let header;
-    try {
-      header = parseSpecId(buildString);
-    } catch (err) {
-      console.error(
-        `Failed to parse spec ID from build string: ${err.message}`,
-        err,
-      );
-      const isVersion =
-        err instanceof RangeError && /version/i.test(err.message);
-      set({
-        error: isVersion
-          ? `${err.message}. This build string is from a newer game format than this tool supports.`
-          : "Could not read the build string header — it may be truncated or corrupt.",
-      });
+    const { header, error: headerError } = readBuildHeader(buildString);
+    if (headerError) {
+      set({ error: headerError });
       return false;
     }
 
     if (currentSpecId !== null && header.specId !== currentSpecId) {
-      const match = findClassForSpec(header.specId);
-      const existingMatch = findClassForSpec(currentSpecId);
-      const existingLabel = existingMatch
-        ? `${existingMatch.cls.displayName} — ${existingMatch.spec.displayName}`
-        : `spec ${currentSpecId}`;
-      const incomingLabel = match
-        ? `${match.cls.displayName} — ${match.spec.displayName}`
-        : `spec ${header.specId}`;
-      set({
-        error:
-          `Spec mismatch: loaded builds are ${existingLabel}, ` +
-          `but this string is for ${incomingLabel}.`,
-      });
+      set({ error: specMismatchError(currentSpecId, header.specId) });
       return false;
     }
 
