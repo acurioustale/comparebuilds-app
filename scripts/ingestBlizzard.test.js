@@ -3,6 +3,7 @@ import {
   normaliseSpec,
   checkpointsFromNodes,
   collapseColocatedDuplicates,
+  idsUnusedAcrossSpecs,
 } from "./ingestBlizzard.js";
 
 describe("checkpointsFromNodes", () => {
@@ -298,5 +299,27 @@ describe("collapseColocatedDuplicates", () => {
     };
     expect(collapseColocatedDuplicates(spec)).toEqual([]);
     expect(spec.nodes.map((n) => n.id)).toEqual([10, 11]);
+  });
+});
+
+describe("idsUnusedAcrossSpecs", () => {
+  it("keeps a dropped id that is a real node in no spec", () => {
+    const specs = {
+      A: { nodes: [{ id: 1 }, { id: 2 }] },
+      B: { nodes: [{ id: 1 }, { id: 3 }] },
+    };
+    // 200 was dropped everywhere; it survives as a real node in neither spec.
+    expect(idsUnusedAcrossSpecs(new Set([200]), specs)).toEqual([200]);
+  });
+
+  it("excludes a dropped id that survives as a real node in another spec", () => {
+    // Spec A collapsed the co-located pair (100, 200) → dropped 200. Spec B kept
+    // only 200 (no partner to collapse), so 200 is still a real node there. It
+    // must NOT be promoted to unusedNodeIds, or the disjointness check aborts.
+    const specs = {
+      A: { nodes: [{ id: 100 }] },
+      B: { nodes: [{ id: 200 }] },
+    };
+    expect(idsUnusedAcrossSpecs(new Set([200]), specs)).toEqual([]);
   });
 });

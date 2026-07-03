@@ -538,6 +538,24 @@ export function collapseColocatedDuplicates(spec) {
   return [...dropIds];
 }
 
+/**
+ * Filters a set of ids dropped as co-located duplicates down to those that are a
+ * real node in NO spec, so only genuinely-unused ids are promoted into a class's
+ * unusedNodeIds. An id dropped from one spec but still present in another is a
+ * live node there and must be excluded — otherwise it would land in both
+ * unusedNodeIds and a spec's real node list, which validateClassData rejects.
+ *
+ * @param {Iterable<number>} droppedIds ids removed by collapseColocatedDuplicates
+ * @param {Record<string, {nodes: {id:number}[]}>} specs normalised specs (post-collapse)
+ * @returns {number[]} the subset of droppedIds that is a real node in no spec
+ */
+export function idsUnusedAcrossSpecs(droppedIds, specs) {
+  const realNodeIds = new Set();
+  for (const spec of Object.values(specs))
+    for (const n of spec.nodes) realNodeIds.add(n.id);
+  return [...droppedIds].filter((id) => !realNodeIds.has(id));
+}
+
 async function normaliseClass(cls, treeMap, api, db2, fns) {
   const specs = {};
   for (const specInfo of cls.specs) {
@@ -572,15 +590,21 @@ async function normaliseClass(cls, treeMap, api, db2, fns) {
 
   // Collapse same-talent co-located duplicates in each spec, and keep the dropped
   // ids in the class-wide wire layout via unusedNodeIds so build-string bit
-  // positions (and existing share links) don't move. A dropped id must leave
-  // EVERY spec, or validateClassData's serialisation-space disjointness check
-  // would reject it as both a real node and an unused placeholder.
+  // positions (and existing share links) don't move.
   const droppedDuplicates = new Set();
   for (const spec of Object.values(specs))
     for (const id of collapseColocatedDuplicates(spec))
       droppedDuplicates.add(id);
-  if (droppedDuplicates.size > 0) {
-    unusedNodeIds = [...new Set([...unusedNodeIds, ...droppedDuplicates])].sort(
+  // Specs collapse independently, so an id dropped from one spec can still be a
+  // real node in another (filterSpecVariants may leave the pair in spec A but
+  // keep only the higher id in spec B, where it has no partner to collapse
+  // against). Such an id is NOT an unused placeholder — it is a live node
+  // elsewhere — so it must not enter unusedNodeIds, or validateClassData's
+  // serialisation-space disjointness check would reject it as both a real node
+  // and an unused placeholder and abort the promote.
+  const trulyUnused = idsUnusedAcrossSpecs(droppedDuplicates, specs);
+  if (trulyUnused.length > 0) {
+    unusedNodeIds = [...new Set([...unusedNodeIds, ...trulyUnused])].sort(
       (a, b) => a - b,
     );
   }
