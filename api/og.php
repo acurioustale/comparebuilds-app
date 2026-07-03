@@ -140,6 +140,38 @@ function sanitize_render_text(string $s): string
     return $clean === null ? '' : $clean;
 }
 
+/**
+ * Keep an actively-served cache file from being garbage-collected while it's
+ * still in use. prune_shares.php deletes cache_og images whose mtime is older
+ * than 180 days as a proxy for "no longer accessed" — but the cache-serve path
+ * streams the file (fpassthru) without ever updating its mtime, so a card that
+ * unfurls every day still had its mtime frozen at first render and was evicted
+ * at 180 days, forcing a needless regeneration of a live card. Refresh the mtime
+ * on a cache hit so the prune's premise (mtime == last access) actually holds.
+ *
+ * Debounced to at most once per day (only touch when the file is already a day
+ * stale): touch() advances the mtime-derived ETag/Last-Modified, and under the
+ * immutable/1-year cache headers a crawler never revalidates within that window
+ * anyway, so a daily step keeps the file far inside the 180-day horizon while
+ * making the write and any revalidation churn negligible. Best-effort and
+ * post-response — a failed touch merely leaves the file eligible for GC and
+ * never affects the image already sent.
+ *
+ * @param int $mtime The file's current mtime, already read on the cache-hit path.
+ */
+function og_refresh_cache_mtime(string $cacheFile, int $mtime): void
+{
+    // is_file() before touch(): touch() CREATES the file if it's missing, so a
+    // concurrent prune that unlinked it between the cache-hit read and here would
+    // otherwise be resurrected as an empty 0-byte image and then served as a cache
+    // hit forever. The check narrows that to the same microscopic prune race the
+    // serve path already tolerates (the "file vanished under us" fall-through).
+    if ($mtime < time() - 86400 && is_file($cacheFile)) {
+        // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
+        @touch($cacheFile);
+    }
+}
+
 // When this file is included for unit testing (with OG_API_NO_MAIN defined), stop
 // here: everything above is pure (font discovery, hex parsing, text sanitising)
 // and testable; everything below reads the request, opens a DB connection, and
@@ -266,6 +298,7 @@ if ($mtime !== false) {
                 fastcgi_finish_request();
             }
             og_touch_access(null, $id);
+            og_refresh_cache_mtime($cacheFile, $mtime);
             exit;
         }
 
@@ -278,6 +311,7 @@ if ($mtime !== false) {
             fastcgi_finish_request();
         }
         og_touch_access(null, $id);
+        og_refresh_cache_mtime($cacheFile, $mtime);
         exit;
     }
     // The file vanished under us (prune race) — fall through and regenerate.

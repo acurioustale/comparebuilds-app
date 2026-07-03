@@ -72,4 +72,60 @@ final class OgRenderTest extends TestCase
         // path falls back to the trusted class name instead of a lone override.
         $this->assertSame('', sanitize_render_text("\u{202E}\u{200B}\u{0007}"));
     }
+
+    public function testRefreshCacheMtimeTouchesAStaleFile(): void
+    {
+        $file = tempnam(sys_get_temp_dir(), 'ogtest_');
+        $this->assertNotFalse($file);
+        try {
+            $old = time() - (200 * 86400); // well past the 180-day prune horizon
+            touch($file, $old);
+            clearstatcache(true, $file);
+
+            og_refresh_cache_mtime($file, $old);
+            clearstatcache(true, $file);
+
+            // A still-served file that had gone stale is refreshed to ~now, so the
+            // daily prune no longer sees it as 180+ days idle and evicts it.
+            $this->assertGreaterThan(time() - 5, filemtime($file));
+        } finally {
+            @unlink($file);
+        }
+    }
+
+    public function testRefreshCacheMtimeLeavesARecentFileAlone(): void
+    {
+        $file = tempnam(sys_get_temp_dir(), 'ogtest_');
+        $this->assertNotFalse($file);
+        try {
+            $recent = time() - 100; // inside the 1-day debounce window
+            touch($file, $recent);
+            clearstatcache(true, $file);
+
+            og_refresh_cache_mtime($file, $recent);
+            clearstatcache(true, $file);
+
+            // Debounced: a file touched within the last day is not re-touched, so
+            // the mtime-derived ETag/Last-Modified doesn't churn on every cache hit.
+            $this->assertSame($recent, filemtime($file));
+        } finally {
+            @unlink($file);
+        }
+    }
+
+    public function testRefreshCacheMtimeNeverRecreatesADeletedFile(): void
+    {
+        $file = tempnam(sys_get_temp_dir(), 'ogtest_');
+        $this->assertNotFalse($file);
+        unlink($file); // simulate a concurrent prune unlinking it
+        clearstatcache(true, $file);
+
+        // touch() would CREATE the file; the is_file() guard must stop it from
+        // resurrecting it as an empty 0-byte image that would then be served as a
+        // cache hit forever.
+        og_refresh_cache_mtime($file, time() - (200 * 86400));
+        clearstatcache(true, $file);
+
+        $this->assertFileDoesNotExist($file);
+    }
 }
