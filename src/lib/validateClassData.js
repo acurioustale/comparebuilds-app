@@ -224,10 +224,12 @@ export function validateClassData(data, indexEntry = null) {
           }
         }
         // The ingest can emit a null level when no grant covers a rank; the UI
-        // would then render a blank unlock level. Require integer entries so a
-        // null slips through here rather than shipping in src/data.
-        if (!isArr(n.levels) || !n.levels.every(isInt))
-          nAt("apex node must have a levels array of integers");
+        // would then render a blank unlock level. Require positive-integer
+        // entries so a null — or a zero/negative that would render a nonsensical
+        // "Level 0" / "Level -N" unlock label — is caught here rather than
+        // shipping in src/data. Character unlock levels are always >= 1.
+        if (!isArr(n.levels) || !n.levels.every((lvl) => isInt(lvl) && lvl > 0))
+          nAt("apex node must have a levels array of positive integers");
         // TalentNode reads `levels[i]` by rank index to render each rank's
         // "Level N" unlock label, so a levels array misaligned with ranks would
         // silently drop (or ignore) trailing labels — keep them in lockstep.

@@ -480,7 +480,17 @@ describe("apex nodes", () => {
   test("apex with a null level entry", () =>
     assertHasError(
       withApex({ levels: [70, null] }),
-      "apex node must have a levels array of integers",
+      "apex node must have a levels array of positive integers",
+    ));
+  test("apex with a zero level entry", () =>
+    assertHasError(
+      withApex({ levels: [70, 0] }),
+      "apex node must have a levels array of positive integers",
+    ));
+  test("apex with a negative level entry", () =>
+    assertHasError(
+      withApex({ levels: [70, -5] }),
+      "apex node must have a levels array of positive integers",
     ));
   test("apex levels shorter than ranks", () =>
     assertHasError(
