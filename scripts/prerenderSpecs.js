@@ -102,17 +102,18 @@ function buildPage(template, { title, description, url, summary }) {
   html = setMeta(html, "name", "twitter:title", title);
   html = setMeta(html, "name", "twitter:description", description);
   // Static SEO content inside #root; React replaces it on mount for JS visitors.
-  // The template ships an empty <main></main> placeholder inside #root; swap the
-  // whole inner content for the summary. Matched by regex against the actual built
-  // markup (whitespace/attribute order vary), and via replaceOnce so a missing
-  // #root fails the build instead of silently shipping a summary-less page — which
-  // is exactly what the previous literal '<div id="root"></div>' replace did, as
-  // that empty form never existed in the template.
+  // The template ships an empty <main></main> placeholder inside #root; swap that
+  // placeholder for the summary (itself a <main>). Match the <main> rather than
+  // the #root </div>: keying off </div> with a non-greedy match stops at the
+  // FIRST </div>, so any future nested <div> inside #root (valid HTML) would
+  // truncate the page — whereas a nested <main> is invalid HTML the Nu checker
+  // already rejects. Via replaceOnce so a template that drops the placeholder
+  // fails the build instead of silently shipping a summary-less page.
   html = replaceOnce(
     html,
-    /(<div\b[^>]*\bid="root"[^>]*>)[\s\S]*?<\/div>/,
-    (_match, openTag) => `${openTag}${summary}</div>`,
-    '<div id="root">',
+    /(<div\b[^>]*\bid="root"[^>]*>\s*)<main\b[^>]*>[\s\S]*?<\/main>/,
+    (_match, openPart) => `${openPart}${summary}`,
+    '<div id="root"> <main> placeholder',
   );
   return html;
 }
