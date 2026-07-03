@@ -192,6 +192,21 @@ test("removing middle node: child invalid, root still valid", () => {
   assertInvalid(computeInvalidNodeIds(CHAIN, selected, byId(CHAIN)), 3);
 });
 
+test("cascade holds when the node list is not pre-sorted (child before parent)", () => {
+  // computeInvalidNodeIds sorts internally, so a caller passing nodes in a
+  // non-topological order (here fully reversed: C, B, A — child before parent)
+  // must still cascade. With the root A removed, both B and its grandchild C are
+  // invalid; a single pass over the reversed list without the internal sort would
+  // evaluate C before B was known-invalid and wrongly pass it.
+  const reversed = [...CHAIN].reverse();
+  const selected = { 2: sel(), 3: sel() };
+  assertInvalid(
+    computeInvalidNodeIds(reversed, selected, byId(reversed)),
+    2,
+    3,
+  );
+});
+
 test("all selected → nothing invalid", () => {
   const selected = { 1: sel(), 2: sel(), 3: sel(), 4: sel() };
   assertInvalid(computeInvalidNodeIds(DIAMOND, selected, byId(DIAMOND)));
