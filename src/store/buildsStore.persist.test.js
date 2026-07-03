@@ -226,4 +226,57 @@ describe("persistence", () => {
     assert.strictEqual(st.buildStrings.length, 0, "unloadable builds cleared");
     assert.strictEqual(st.treeData, null);
   });
+
+  test("keeps persisted builds when a transient tree-load failure leaves the tree unloaded", async () => {
+    // A build for a spec that DOES resolve, but whose class-data dynamic import
+    // fails transiently (offline, or a stale chunk 404 right after a deploy).
+    // The entered builds must survive in localStorage so a later reload with
+    // connectivity can retry — unlike the permanent unresolved-spec case above,
+    // which clears. Regression test for the rehydrate data-loss bug.
+    const strings = dkStrings(2);
+    for (const s of strings) await useBuildsStore.getState().addBuild(s);
+
+    // Reload with importClassData mocked to reject, simulating the failed load.
+    vi.resetModules();
+    vi.doMock("./storeHelpers.js", async () => {
+      const actual = await vi.importActual("./storeHelpers.js");
+      return {
+        ...actual,
+        importClassData: () => Promise.reject(new Error("chunk load failed")),
+      };
+    });
+    try {
+      const mod = await import("./buildsStore.js");
+      const fresh = mod.useBuildsStore;
+      // Persisted slices are restored synchronously before recovery runs.
+      assert.deepStrictEqual(fresh.getState().buildStrings, strings);
+
+      await fresh.getState().rehydrateTreeData();
+
+      const st = fresh.getState();
+      assert.strictEqual(st.treeData, null, "load failed, no tree rebuilt");
+      assert.deepStrictEqual(
+        st.buildStrings,
+        strings,
+        "entered builds NOT wiped by a transient failure",
+      );
+      assert.strictEqual(
+        st.specId,
+        DK_BLOOD,
+        "spec retained for a later retry",
+      );
+      assert.strictEqual(
+        st.parsedBuilds.length,
+        strings.length,
+        "parsed slots kept parallel to builds",
+      );
+      assert.ok(
+        st.parsedBuilds.every((p) => p === null),
+        "parsed slots null pending retry",
+      );
+    } finally {
+      vi.doUnmock("./storeHelpers.js");
+      vi.resetModules();
+    }
+  });
 });

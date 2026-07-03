@@ -104,10 +104,25 @@ export const createInteractiveSlice = (set, get) => ({
       preserveInteractive: true,
     });
 
-    // If the load failed, the restored build strings can never render — discard
-    // the stale persisted state rather than leaving a tree-less dead end.
+    // If the load failed, treeData is null. Because findClassForSpec matched
+    // above, the spec still exists in the data — this is a TRANSIENT failure
+    // (offline, or a stale chunk 404 right after a deploy replaced the hashed
+    // chunk this tab expects), not a permanently-unresolvable spec (that is the
+    // !match branch above, which correctly clears). Resetting to EMPTY here would
+    // overwrite the persisted buildStrings in localStorage and lose the user's
+    // entered builds for good. Instead keep them with parallel null parsed slots
+    // — the same recoverable state an in-session failed import leaves — and let
+    // loadTreeData's error surface, so a later reload with connectivity retries
+    // the load. With no restored builds there is nothing to preserve;
+    // loadTreeData already reset to EMPTY on that (startedWithNoBuilds) path.
     if (!get().treeData) {
-      set({ ...EMPTY, loadGen: get().loadGen + 1 });
+      const { buildStrings } = get();
+      if (buildStrings.length > 0) {
+        set({
+          parsedBuilds: buildStrings.map(() => null),
+          loadGen: get().loadGen + 1,
+        });
+      }
       return;
     }
 
