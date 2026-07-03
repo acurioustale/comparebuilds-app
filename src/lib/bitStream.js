@@ -76,11 +76,22 @@ export class BitReader {
   }
 
   /**
-   * Advance position by `count` bits (validates bounds lazily on next readBit).
+   * Advance position by `count` bits. Validates eagerly that the bits exist: the
+   * only caller skips the fixed 128-bit Blizzard hash, which every real export
+   * carries in full, so a string too short to hold it is truncated inside the
+   * header and must fail loudly here. Deferring to the next read would not catch
+   * it — the parser's next operation is atEnd(), which treats a past-end position
+   * as a legitimately trimmed tail and would decode the truncated string as an
+   * empty build instead of rejecting it.
    * @param {number} count Number of bits to skip
    * @returns {void}
    */
   skipBits(count) {
+    if (this.#pos + count > this.#str.length * 6) {
+      throw new RangeError(
+        `Build string exhausted: cannot skip ${count} bits at bit ${this.#pos}`,
+      );
+    }
     this.#pos += count;
   }
 }
