@@ -3,6 +3,14 @@
 // Pure comparison of two parsed builds. Extracted from SideBySideDiff so it can
 // be unit-tested without rendering a component.
 
+// The three tree sections in display order — the single source of truth for
+// both the diff sort (sortEntries below) and the summary-table grouping
+// (groupBySection), so the two can't order sections differently. SECTION_RANK
+// is derived from the array; an unrecognised section sorts last.
+const SECTION_ORDER = ["class", "spec", "hero"];
+const SECTION_LABELS = { class: "Class", spec: "Spec", hero: "Hero" };
+const SECTION_RANK = Object.fromEntries(SECTION_ORDER.map((s, i) => [s, i]));
+
 /**
  * Resolves the name of the option a build picked on a choice node, or null when
  * the pick is unknown (a corrupt/partial parse can leave entryChosen null on a
@@ -112,11 +120,10 @@ export function computeDiff(nodesA, nodesB, allNodes) {
   }
 
   // Sort each group by tree section (class → spec → hero), then posY, then posX
-  const sectionOrder = { class: 0, spec: 1, hero: 2 };
   const sortEntries = (arr) =>
     arr.sort((a, b) => {
-      const sa = sectionOrder[a.node.treeType] ?? 3;
-      const sb = sectionOrder[b.node.treeType] ?? 3;
+      const sa = SECTION_RANK[a.node.treeType] ?? SECTION_ORDER.length;
+      const sb = SECTION_RANK[b.node.treeType] ?? SECTION_ORDER.length;
       if (sa !== sb) return sa - sb;
       if (a.node.posY !== b.node.posY) return a.node.posY - b.node.posY;
       return a.node.posX - b.node.posX;
@@ -169,9 +176,6 @@ export function differenceLabel(node, selA, selB) {
   }
   return null;
 }
-
-const SECTION_LABELS = { class: "Class", spec: "Spec", hero: "Hero" };
-const SECTION_ORDER = ["class", "spec", "hero"];
 
 /**
  * Buckets a flat list of entries by their node's tree section (class/spec/
