@@ -1,8 +1,8 @@
 import { generateBuildString, heroGateSelection } from "./buildString.js";
 import {
   activeHeroSubtree,
+  heroSubtreePoints,
   prunedExportSelection,
-  sectionPoints,
 } from "./spendRules.js";
 
 /**
@@ -25,14 +25,13 @@ export function buildExportString(treeData, selected, specId, classNodes) {
     selected,
     activeSub,
   );
-  // Count hero points from the pruned selection, which has the inactive subtree
-  // removed — so this reflects only the ACTIVE subtree's spend, the sole basis
-  // for whether a hero gate belongs in the export. Counting the raw selection
-  // (both subtrees) instead is behaviour-equivalent today, since activeHeroSubtree
-  // pins the active subtree to the first hero pick and it therefore always holds
-  // >= 1 point whenever any hero point is spent; deriving the count from the same
-  // pruned selection the gate is attached to removes that coupling.
-  const heroSpent = sectionPoints("hero", treeData.nodes, exportSelection);
+  // Points in the ACTIVE hero subtree — the sole basis for whether a hero gate
+  // belongs in the export. Read from `selected`'s spend memo, already warmed by
+  // the activeHeroSubtree() call above, rather than re-tallying the freshly built
+  // exportSelection (whose identity always misses the memo and forces another
+  // full node walk). Scoping to the active subtree keeps the count robust to a
+  // corrupt dual-subtree selection, matching what the pruned selection would sum.
+  const heroSpent = heroSubtreePoints(treeData.nodes, selected, activeSub);
   // Resolve the active subtree to the left/right hero-gate slot by name. A live
   // subtree must match one of the two known names; anything else means the
   // node's heroSubtree has drifted from heroSubtrees.left/right (a data or
