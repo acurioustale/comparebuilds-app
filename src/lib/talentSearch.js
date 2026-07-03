@@ -10,9 +10,10 @@
 // or `&#x27;` for an apostrophe) and the occasional tag. Each node's searchable
 // text is normalised — tags stripped, entities decoded, whitespace collapsed,
 // lowercased — so a query like "attacker's" matches the stored "attacker&#39;s".
-// The query is normalised the same way. The per-node text is memoised by
-// node-list identity so the regex work happens once per loaded spec, not on
-// every keystroke.
+// The query is normalised the same way EXCEPT tag-stripping: it is plain user
+// text, so an angle bracket the user typed (e.g. "<5 yds") must survive to match
+// the decoded tooltip text. The per-node text is memoised by node-list identity
+// so the regex work happens once per loaded spec, not on every keystroke.
 
 const NAMED_ENTITIES = {
   "&amp;": "&",
@@ -53,17 +54,28 @@ function decodeEntities(s) {
   });
 }
 
-// Strip tags, decode entities, collapse whitespace, lowercase.
+// Decode entities, collapse whitespace, lowercase. Shared by the query and the
+// index so both land in the same comparable form.
 /**
  * @param {string} text Raw text string
  * @returns {string} Normalised string
  */
+function normaliseText(text) {
+  if (typeof text !== "string") return "";
+  return decodeEntities(text).replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+// Index text is HTML, so strip tags first (markup isn't searchable content).
+// This must NOT run on the query — the query is plain user text, and stripping
+// `<...>` from it would drop any angle-bracketed span the user typed (e.g.
+// "<5 yds"), so it could never match the decoded "<5 yds" stored in a tooltip.
+/**
+ * @param {string} text Raw HTML text string
+ * @returns {string} Normalised string
+ */
 function normalise(text) {
   if (typeof text !== "string") return "";
-  return decodeEntities(text.replace(/<[^>]*>/g, " "))
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
+  return normaliseText(text.replace(/<[^>]*>/g, " "));
 }
 
 // node id → normalised searchable text, memoised by node-list identity.
@@ -98,7 +110,9 @@ function searchIndex(nodes) {
  * @returns {Set<number>} Set of matching node IDs
  */
 export function matchNodeIds(query, nodes) {
-  const q = normalise(query);
+  // The query is plain text — normalise WITHOUT tag-stripping so an angle
+  // bracket the user typed survives to match the decoded index text.
+  const q = normaliseText(query);
   const ids = new Set();
   if (q.length === 0 || !Array.isArray(nodes)) return ids;
 

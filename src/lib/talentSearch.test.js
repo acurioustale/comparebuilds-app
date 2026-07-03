@@ -86,6 +86,15 @@ describe("matchNodeIds", () => {
     assert.ok(matchNodeIds("frost damage", nodes).has(8));
   });
 
+  test("a query with an angle bracket matches literal decoded text", () => {
+    // The description stores a literal '<' as the entity &lt;; the query keeps
+    // the bracket the user typed (it must not be tag-stripped) so it matches.
+    const nodes = [
+      { id: 11, name: "Z", description: "hits enemies within &lt;5 yds" },
+    ];
+    assert.ok(matchNodeIds("<5 yds", nodes).has(11));
+  });
+
   test("matches apex per-rank descriptions", () => {
     const nodes = [
       { id: 9, name: "Apex", ranks: [{ description: "summons a phoenix" }] },
