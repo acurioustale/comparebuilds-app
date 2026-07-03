@@ -157,6 +157,34 @@ require_once __DIR__ . '/../../config.php';
 define('SHARE_API_NO_MAIN', true);
 require_once __DIR__ . '/share.php';
 
+/**
+ * Refresh the share's retention clock after the image response has been flushed.
+ *
+ * og.php serves a card for a live share on both the cache-hit and cache-miss
+ * paths, but previously touched only the rate-limit table — never last_accessed.
+ * So a share reached solely through link-unfurl image requests (its /s/<id> HTML
+ * page never re-fetched and never opened in the SPA) aged out of
+ * comparebuilds_shares and was pruned by prune_shares.php while still actively
+ * embedded. Touch it here so an unfurled card counts as liveness, matching
+ * render_share_page() and the ?touch beacon in share.php.
+ *
+ * Called AFTER fastcgi_finish_request() so the DB round-trip never adds latency
+ * to the image the crawler is waiting on; the write itself is debounced to
+ * <=1/day and best-effort inside touch_share_access(). On the cache-hit path
+ * $pdo is null (the fast cache serve otherwise opens no connection), so open a
+ * fresh one — cheap and post-response, and skipped entirely on failure since the
+ * image has already been sent.
+ */
+function og_touch_access(?PDO $pdo, string $id): void
+{
+    try {
+        $pdo = $pdo ?? get_db_connection();
+        touch_share_access($pdo, $id);
+    } catch (Throwable $e) {
+        // Retention bookkeeping is a background concern; never surface a failure.
+    }
+}
+
 $id = $_GET['id'] ?? '';
 if (!is_string($id) || !valid_share_id($id)) {
     bail(400);
@@ -231,11 +259,25 @@ if ($mtime !== false) {
 
         if ($notModified) {
             http_response_code(304);
+            // A conditional revalidation is itself a liveness signal (a crawler
+            // is still displaying the card), so refresh the retention clock —
+            // flushed first so the empty 304 isn't held up by the DB write.
+            if (function_exists('fastcgi_finish_request')) {
+                fastcgi_finish_request();
+            }
+            og_touch_access(null, $id);
             exit;
         }
 
         fpassthru($fh);
         fclose($fh);
+        // The cache-serve path opens no DB connection, so last_accessed would
+        // never be refreshed for a card served only from this cache. Flush the
+        // image, then touch (debounced, best-effort) so a live unfurl isn't pruned.
+        if (function_exists('fastcgi_finish_request')) {
+            fastcgi_finish_request();
+        }
+        og_touch_access(null, $id);
         exit;
     }
     // The file vanished under us (prune race) — fall through and regenerate.
@@ -536,3 +578,9 @@ if (is_dir($cacheDir)) {
     }
 }
 imagedestroy($img);
+
+// Serving this card is liveness for the share — refresh its retention clock so a
+// link that is only ever unfurled (never opened in the SPA) isn't pruned. $pdo is
+// already open from the render above and the response is already flushed, so this
+// is a cheap post-response, debounced, best-effort write.
+og_touch_access($pdo, $id);
