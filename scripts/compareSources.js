@@ -13,9 +13,10 @@
  * separating:
  *   - HARD divergences — build-string / correctness fields that MUST agree: the
  *     per-class wire-layout fingerprint, and for nodes present in both: maxRanks,
- *     choice arity, gate threshold (spentRequired), and prerequisite connections
- *     (restricted to shared nodes); plus per spec the hero gate node id. Any of
- *     these failing exits non-zero.
+ *     choice arity, gate threshold (spentRequired), prerequisite connections
+ *     (restricted to shared nodes), and the fields that drive the interactive
+ *     calculator's validity — auto-grant status, tree section, and hero subtree;
+ *     plus per spec the hero gate node id. Any of these failing exits non-zero.
  *   - SOFT divergences — fields that don't affect build strings: per-spec
  *     membership, positions, names, descriptions, budgets, checkpoints. Reported,
  *     never fail the run.
@@ -174,6 +175,24 @@ function diffClass(slug, fresh, committed, opts) {
         for (const msg of diffChoices(cn, fn)) at("hard", `node ${id} ${msg}`);
       if (cn.spentRequired !== fn.spentRequired)
         at("hard", `node ${id} gate ${cn.spentRequired}→${fn.spentRequired}`);
+      // Auto-grant, tree section, and hero subtree don't shift build-string bit
+      // positions, so the wire-layout hash above misses them — but they drive the
+      // interactive calculator's point budgets, gate cascade, and hero-subtree
+      // exclusivity, so a drift here silently mis-computes validity with no other
+      // signal. Hard, like the gate/prereq checks. Normalise undefined vs
+      // false/null so a class node (no heroSubtree key) never false-positives.
+      if ((cn.alreadyGranted ?? false) !== (fn.alreadyGranted ?? false))
+        at(
+          "hard",
+          `node ${id} alreadyGranted ${cn.alreadyGranted}→${fn.alreadyGranted}`,
+        );
+      if (cn.treeType !== fn.treeType)
+        at("hard", `node ${id} treeType ${cn.treeType}→${fn.treeType}`);
+      if ((cn.heroSubtree ?? null) !== (fn.heroSubtree ?? null))
+        at(
+          "hard",
+          `node ${id} heroSubtree ${cn.heroSubtree}→${fn.heroSubtree}`,
+        );
       // Compare only edges to nodes present in BOTH specs, so a membership
       // difference doesn't masquerade as miswiring — a genuine prerequisite
       // change between shared nodes still trips here.
