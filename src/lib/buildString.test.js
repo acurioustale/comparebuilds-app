@@ -26,7 +26,9 @@ import {
   parseSpecId,
   collectClassNodes,
   heroGateSelection,
+  SERIALIZATION_VERSION,
 } from "./buildString.js";
+import { BitWriter } from "./bitStream.js";
 
 const require = createRequire(import.meta.url);
 const classIndex = require("../data/classes.json");
@@ -153,6 +155,52 @@ for (const cls of classIndex.filter((c) => c.implemented)) {
     });
   }
 }
+
+// ── Trailing-zero trimming ────────────────────────────────────────────────────
+// A trailing run of unselected nodes serialises as all-zero records; a producer
+// may drop those trailing zero characters. The parser must treat the missing
+// node tail as unselected rather than throwing "Build string exhausted". (The
+// 152-bit header — version + specId + the zero hash — is always kept; a string
+// truncated inside the header or a selected node's fields stays a hard error.)
+describe("parseBuildString tolerates a trimmed trailing-zero node tail", () => {
+  const HEADER_BITS = 8 + 16 + 128; // version + specId + Blizzard hash
+  const HEADER_CHARS = Math.ceil(HEADER_BITS / 6);
+  const cls = classIndex.find((c) => c.implemented);
+  const data = require(`../data/${cls.name}.json`);
+  const classNodes = collectClassNodes(data);
+  const slug = Object.keys(data.specs)[0];
+  const spec = data.specs[slug];
+
+  test("an empty selection with its all-zero node section dropped still decodes", () => {
+    const full = generateBuildString({}, spec.specId, classNodes);
+    // Keep only the header; every node record (all zero for an empty build) is
+    // trimmed away — exactly the tail a minimal producer would omit.
+    const trimmed = full.slice(0, HEADER_CHARS);
+    assert.ok(trimmed.length < full.length, "expected a trimmable node tail");
+    const parsed = parseBuildString(trimmed, classNodes);
+    assert.strictEqual(parsed.specId, spec.specId);
+    assert.strictEqual(Object.keys(parsed.nodes).length, 0);
+  });
+
+  test("a string truncated inside a selected node's record still throws", () => {
+    // Header, then a node opened as selected + purchased + partially-ranked but
+    // cut off before its 6-bit rank value. This is real corruption (a selected
+    // record lost its own bits), not a trimmed all-zero tail, so it must throw
+    // rather than be silently accepted — the guard only applies at the record
+    // boundary (the isSelected bit), never mid-record.
+    const w = new BitWriter();
+    w.writeBits(SERIALIZATION_VERSION, 8);
+    w.writeBits(spec.specId, 16);
+    w.writeBits(0, 128);
+    w.writeBit(1); // isSelected
+    w.writeBit(1); // isPurchased
+    w.writeBit(1); // isPartiallyRanked — obliges a 6-bit rank read that isn't there
+    assert.throws(
+      () => parseBuildString(w.toString(), classNodes),
+      /exhausted/,
+    );
+  });
+});
 
 // ── Encode clamps an out-of-range choice index (regression, finding #12) ──────
 // A corrupt or hand-built selection can carry an entryChosen past a node's real

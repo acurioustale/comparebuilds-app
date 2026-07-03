@@ -39,4 +39,15 @@ describe("bitStream safe shift handling", () => {
     expect(() => writer.writeBits(2.5, 8)).toThrow(RangeError);
     expect(() => writer.writeBits(NaN, 8)).toThrow(RangeError);
   });
+
+  test("BitReader.atEnd reports exhaustion at the string boundary", () => {
+    const reader = new BitReader("A"); // one 6-bit character
+    for (let i = 0; i < 6; i++) {
+      expect(reader.atEnd()).toBe(false);
+      reader.readBit();
+    }
+    expect(reader.atEnd()).toBe(true);
+    // The next read past the end still throws — atEnd is a probe, not a mute.
+    expect(() => reader.readBit()).toThrow(RangeError);
+  });
 });
