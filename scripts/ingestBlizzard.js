@@ -72,7 +72,7 @@ const TYPE_MAP = { PASSIVE: "round", ACTIVE: "square", CHOICE: "choice" };
 // CLI
 // ---------------------------------------------------------------------------
 
-function parseArgs(argv) {
+export function parseArgs(argv) {
   const args = {
     promote: false,
     updateSnapshot: false,
@@ -93,6 +93,14 @@ function parseArgs(argv) {
       args.classSlug = a.slice("--class=".length);
     else throw new Error(`unknown argument: ${a}`);
   }
+  // The snapshot is only rewritten on the promote path (writeNormalizedData).
+  // Passing --update-snapshot without --promote takes the verify branch and
+  // writes nothing, so the operator's requested snapshot bump silently never
+  // lands — fail loudly instead.
+  if (args.updateSnapshot && !args.promote)
+    throw new Error(
+      "--update-snapshot requires --promote (the snapshot is only rewritten while promoting)",
+    );
   if (args.descriptions === null) args.descriptions = args.promote;
   if (args.icons === null) args.icons = args.promote;
   return args;
