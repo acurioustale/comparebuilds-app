@@ -678,6 +678,32 @@ test("isFullySelected: a choice node with no choices array uses node.maxRanks", 
   );
 });
 
+test("isFullySelected: option ceiling keys off choices, not node.type (parser parity)", () => {
+  // A node the data types as "apex" but that still carries a choices array with a
+  // resolved pick must resolve to the CHOSEN option's max, exactly as
+  // buildString's decode does — otherwise the gate would demand node.maxRanks (a
+  // larger sum) and reject a pick the decoder treated as complete.
+  const node = {
+    id: 1,
+    posX: 1,
+    posY: 0,
+    type: "apex",
+    maxRanks: 3,
+    choices: [
+      { name: "X", maxRanks: 1 },
+      { name: "Y", maxRanks: 2 },
+    ],
+  };
+  assert.strictEqual(
+    isFullySelected(node, { pointsInvested: 1, entryChosen: 0 }),
+    true,
+  );
+  assert.strictEqual(
+    isFullySelected(node, { pointsInvested: 1, entryChosen: 1 }),
+    false,
+  );
+});
+
 // ─── hasUpperPrereq ──────────────────────────────────────────────────────────
 
 test("hasUpperPrereq: a choice-node parent is satisfied by fully ranking the chosen option", () => {
