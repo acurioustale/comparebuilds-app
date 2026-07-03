@@ -142,7 +142,17 @@ function render_share_page(string $id, ?array $data): void
 
     header('Content-Type: text/html; charset=utf-8');
     header("Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';");
-    header('Cache-Control: public, max-age=31536000, immutable');
+    if ($data !== null) {
+        // A resolved share is safe to cache forever: its id is a content hash of
+        // the build data, so the same id always renders the same card.
+        header('Cache-Control: public, max-age=31536000, immutable');
+    } else {
+        // Missing/expired share or a 400/500 fallback card. Must NOT be cached
+        // long: ids are content-addressed, so a build minting this exact id can
+        // be created later — a cached "not found" unfurl would then keep being
+        // served for a share that now exists.
+        header('Cache-Control: no-store');
+    }
     echo "<!doctype html>\n<html lang=\"en\">\n<head>\n"
        . "<meta charset=\"utf-8\">\n"
        . "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
