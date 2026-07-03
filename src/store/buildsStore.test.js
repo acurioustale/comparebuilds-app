@@ -658,6 +658,35 @@ describe("loadTreeData error handling", () => {
     spy.mockRestore();
   });
 
+  test("replaceBuild recovers a slot stranded by a failed initial load", async () => {
+    // The first import's tree-data load fails, leaving the slot committed but
+    // unparsed (classNodes null, not loading, specId set). Replacing that slot
+    // must re-kick the load so it parses, rather than storing the new string
+    // against a never-loaded tree and stranding it as a permanent null.
+    const [a, b] = genStrings("death_knight", "blood", 2);
+
+    const failSpy = vi
+      .spyOn(storeHelpers, "importClassData")
+      .mockRejectedValueOnce(new Error("mock network failure"));
+    await get().addBuild(a);
+    failSpy.mockRestore();
+
+    let st = get();
+    assert.strictEqual(st.classNodes, null);
+    assert.strictEqual(st.parsedBuilds[0], null);
+    assert.strictEqual(st.isLoading, false);
+
+    // Now the import succeeds; replacing the slot should reload and parse it.
+    const ok = await get().replaceBuild(0, b);
+    assert.ok(ok, "replace should succeed once the load recovers");
+
+    st = get();
+    assert.strictEqual(st.buildStrings[0], b);
+    assert.ok(st.classNodes, "tree data should have loaded");
+    assert.ok(st.parsedBuilds[0], "replaced slot should be parsed, not null");
+    assert.strictEqual(st.error, null);
+  });
+
   test("resets state to EMPTY when preloadSpec fails to load tree data", async () => {
     const spy = vi
       .spyOn(storeHelpers, "importClassData")
