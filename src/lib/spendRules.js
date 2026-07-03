@@ -67,6 +67,24 @@ export function sectionPoints(treeType, allNodes, selected) {
 }
 
 /**
+ * Points spent in a single hero subtree (per-cell, excluding granted nodes), or
+ * 0 when the subtree name is null or has no spend. Reads the same memoised spend
+ * tally as sectionPoints, so a caller that already resolved the active subtree
+ * (warming `selected`'s memo) gets that subtree's total without a second walk —
+ * and the count is scoped to the one subtree, so a corrupt dual-subtree
+ * selection can't inflate it the way a whole-section hero total would.
+ *
+ * @param {object[]} allNodes Full spec node list from treeData.nodes
+ * @param {Record<number, { pointsInvested: number, entryChosen: number|null }>} selected Current selection state
+ * @param {string|null} subtree Hero subtree name
+ * @returns {number} Points spent in that subtree
+ */
+export function heroSubtreePoints(allNodes, selected, subtree) {
+  if (subtree == null) return 0;
+  return getSpendMemo(allNodes, selected).heroSubPts.get(subtree) ?? 0;
+}
+
+/**
  * The selection to encode when exporting an interactive build: a copy of
  * `selected` with the *inactive* hero subtree removed entirely (its auto-granted
  * roots and any purchased picks a corrupt/dual-subtree import may have left in it).

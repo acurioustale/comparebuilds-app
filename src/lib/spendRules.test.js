@@ -7,6 +7,7 @@ import { describe, test } from "vitest";
 import assert from "node:assert/strict";
 import {
   sectionPoints,
+  heroSubtreePoints,
   activeHeroSubtree,
   canSpendPoint,
   prunedExportSelection,
@@ -49,6 +50,19 @@ describe("sectionPoints", () => {
   });
   test("returns 0 for an empty section", () => {
     assert.strictEqual(sectionPoints("hero", ALL, {}), 0);
+  });
+});
+
+describe("heroSubtreePoints", () => {
+  test("sums only the named subtree, ignoring the other", () => {
+    // Corrupt dual-subtree selection: Left has 1, Right has 1.
+    const selected = { 10: pt(), 11: pt() };
+    assert.strictEqual(heroSubtreePoints(ALL, selected, "Left"), 1);
+    assert.strictEqual(heroSubtreePoints(ALL, selected, "Right"), 1);
+  });
+  test("returns 0 for a null subtree or one with no spend", () => {
+    assert.strictEqual(heroSubtreePoints(ALL, { 10: pt() }, null), 0);
+    assert.strictEqual(heroSubtreePoints(ALL, { 1: pt() }, "Left"), 0);
   });
 });
 
