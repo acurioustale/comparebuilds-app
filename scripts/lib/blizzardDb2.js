@@ -524,7 +524,9 @@ export class BlizzardDb2 {
    * (an exact-match lookup would silently drop those ranks' levels).
    *
    * Throws a contextual Error if a rank has no covering grant and no prior rank
-   * to carry from — fabricating a level would ship silently-wrong unlock data.
+   * to carry from, or if the grant set is inverted (a higher-rank grant at a
+   * lower level than a lower-rank one) — either case would ship silently-wrong
+   * unlock data.
    */
   _apexLevels(nodeId, ranks) {
     const grants = [];
@@ -535,6 +537,22 @@ export class BlizzardDb2 {
           ranks: Number(c.GrantedRanks),
           level: Number(c.RequiredLevel),
         });
+    }
+    // An apex rank chain unlocks at non-decreasing levels, so a grant covering
+    // MORE ranks must not require a LOWER level than one covering fewer. An
+    // inversion is malformed data (or a misread of the condition semantics); the
+    // "lowest covering grant" resolution below would silently pull a rank's level
+    // from the higher-rank grant and ship a wrong "unlocks at level X" that
+    // validateClassData can't catch. Fail loud with the offending grants instead.
+    const byRanks = [...grants].sort((a, b) => a.ranks - b.ranks);
+    for (let j = 1; j < byRanks.length; j++) {
+      if (byRanks[j].level < byRanks[j - 1].level) {
+        throw new Error(
+          `apex node ${nodeId} has inconsistent CondType-${COND_TYPE_LEVEL_GRANT} ` +
+            `level grants: ${byRanks[j].ranks} ranks require level ${byRanks[j].level}, ` +
+            `below ${byRanks[j - 1].ranks} ranks at level ${byRanks[j - 1].level}`,
+        );
+      }
     }
     const levels = [];
     let cumulative = 0;

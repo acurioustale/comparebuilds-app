@@ -213,6 +213,51 @@ describe("BlizzardDb2.apexChain", () => {
     );
   });
 
+  it("throws when the level grants are inverted (higher ranks, lower level)", () => {
+    // A grant covering 2 ranks at level 80 sits below a grant covering 1 rank at
+    // level 90 — an impossible unlock chain. Resolving by "lowest covering grant"
+    // would silently give rank 0 level 80; fail loud on the inconsistency instead.
+    const db2 = new BlizzardDb2({ build: "test", cache: false });
+    db2.index({
+      nx: [
+        { TraitNodeID: "100", TraitNodeEntryID: "e1", _Index: "100" },
+        { TraitNodeID: "100", TraitNodeEntryID: "e2", _Index: "200" },
+      ],
+      entry: [
+        {
+          ID: "e1",
+          TraitDefinitionID: "d1",
+          MaxRanks: "1",
+          NodeEntryType: "13",
+        },
+        {
+          ID: "e2",
+          TraitDefinitionID: "d2",
+          MaxRanks: "1",
+          NodeEntryType: "13",
+        },
+      ],
+      def: [
+        { ID: "d1", SpellID: "1001" },
+        { ID: "d2", SpellID: "1002" },
+      ],
+      cond: [
+        { ID: "L1", CondType: "5", GrantedRanks: "1", RequiredLevel: "90" },
+        { ID: "L2", CondType: "5", GrantedRanks: "2", RequiredLevel: "80" },
+      ],
+      ncond: [
+        { TraitNodeID: "100", TraitCondID: "L1" },
+        { TraitNodeID: "100", TraitCondID: "L2" },
+      ],
+      gxn: [],
+      gxc: [],
+      subtree: [],
+    });
+    expect(() => db2.apexChain("100")).toThrow(
+      /apex node 100 has inconsistent CondType-5 level grants/,
+    );
+  });
+
   it("returns null for an ordinary (non-type-13) node", () => {
     expect(fixture().apexChain("200")).toBeNull();
   });
