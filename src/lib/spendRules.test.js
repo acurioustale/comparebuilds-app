@@ -133,6 +133,25 @@ describe("canSpendPoint", () => {
     assert.strictEqual(canSpendPoint(HERO_R, ALL, {}, byId, BUDGET), true);
   });
 
+  test("hero budget scopes to the active subtree, not the whole section", () => {
+    // Corrupt dual-subtree selection: Left (active) has 1 point, Right has 1.
+    // With a per-subtree hero budget of 2, the whole-section total (2) already
+    // equals the budget, but the active subtree still has room — spending
+    // another Left node must be allowed, not blocked by the inactive subtree's
+    // parked point.
+    const HERO_L2 = node(12, "hero", 1, {
+      heroSubtree: "Left",
+      connections: [10],
+    });
+    const all = [HERO_L, HERO_R, HERO_L2];
+    const ids = Object.fromEntries(all.map((n) => [n.id, n]));
+    const dual = { 10: pt(), 11: pt() }; // Left active, Right parked
+    assert.strictEqual(
+      canSpendPoint(HERO_L2, all, dual, ids, { ...BUDGET, hero: 2 }),
+      true,
+    );
+  });
+
   test("co-located node is blocked when its cell is already taken", () => {
     // Two non-granted class nodes sharing one grid cell (same posX,posY).
     const A = node(40, "class", 0, { posX: 5 });

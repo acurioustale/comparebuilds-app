@@ -188,12 +188,17 @@ export function canSpendPoint(node, allNodes, selected, nodeById, budget) {
   if (occupyingId !== undefined && occupyingId !== node.id) {
     return false;
   }
-  if ((memo.sectionPts[node.treeType] ?? 0) >= budget[node.treeType])
-    return false;
-  const gatedPts =
+  // Points already spent in this node's budget scope: for a hero node that's the
+  // node's OWN subtree, not the whole hero section — the hero budget is
+  // per-subtree (calculatePointBudgets sizes it from a single subtree), so a
+  // corrupt dual-subtree selection must not let points parked in the inactive
+  // subtree count against the active one. For class/spec it's the whole section.
+  // The section-budget cap and the gate threshold read this same scoped tally.
+  const scopePts =
     node.treeType === "hero"
       ? (memo.heroSubPts.get(node.heroSubtree) ?? 0)
       : (memo.sectionPts[node.treeType] ?? 0);
-  if (gatedPts < node.spentRequired) return false;
+  if (scopePts >= budget[node.treeType]) return false;
+  if (scopePts < node.spentRequired) return false;
   return hasUpperPrereq(node, selected, nodeById);
 }
