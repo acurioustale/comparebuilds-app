@@ -16,6 +16,28 @@ export function upperParents(node, nodeById) {
 }
 
 /**
+ * True when a selection has fully ranked a node — every point its pick can hold
+ * is spent, so it satisfies anything gated on it. For a choice node the ceiling
+ * is the CHOSEN option's max rank, which can differ from the node-level maxRanks
+ * (the same way buildString's decode resolves `effectiveMax`): a fully-picked
+ * option satisfies a dependent even when node.maxRanks is a larger sum. Every
+ * other node type uses node.maxRanks. An unknown choice pick (entryChosen null)
+ * falls back to node.maxRanks, matching the pre-choice behaviour.
+ *
+ * @param {object} node Parent node definition
+ * @param {{ pointsInvested: number, entryChosen: number|null }|undefined} sel Selection entry for the node
+ * @returns {boolean} True if the node is fully ranked
+ */
+export function isFullySelected(node, sel) {
+  if (!sel) return false;
+  const max =
+    node.type === "choice" && node.choices && sel.entryChosen != null
+      ? (node.choices[sel.entryChosen]?.maxRanks ?? 1)
+      : node.maxRanks;
+  return sel.pointsInvested >= max;
+}
+
+/**
  * Returns true if at least one directly connected upper parent (posY < node.posY)
  * is fully selected. alreadyGranted parents are treated as permanently satisfied.
  * Nodes with no upper connections (root nodes) always pass.
@@ -30,8 +52,7 @@ export function hasUpperPrereq(node, selected, nodeById) {
   if (upper.length === 0) return true;
   return upper.some((c) => {
     if (c.alreadyGranted) return true;
-    const s = selected[c.id];
-    return s && s.pointsInvested >= c.maxRanks;
+    return isFullySelected(c, selected[c.id]);
   });
 }
 
@@ -282,8 +303,7 @@ export function computeInvalidNodeIds(allNodes, selected, nodeById) {
         const anyValidParent = upper.some((c) => {
           if (c.alreadyGranted) return true; // always satisfied
           if (invalid.has(c.id)) return false; // invalid parent doesn't count
-          const s = selected[c.id];
-          return s && s.pointsInvested >= c.maxRanks;
+          return isFullySelected(c, selected[c.id]);
         });
         if (!anyValidParent) shouldFlag = true;
       }
