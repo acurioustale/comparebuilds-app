@@ -538,11 +538,29 @@ export class BlizzardDb2 {
     const grants = [];
     for (const id of this._condsByNode.get(String(nodeId)) ?? []) {
       const c = this._condById.get(id);
-      if (c?.CondType === COND_TYPE_LEVEL_GRANT)
-        grants.push({
-          ranks: Number(c.GrantedRanks),
-          level: Number(c.RequiredLevel),
-        });
+      if (c?.CondType === COND_TYPE_LEVEL_GRANT) {
+        // Guard both fields as positive integers. A blank/non-numeric value
+        // coerces to NaN, and every NaN comparison is false — so the inversion
+        // check and the coverage loop below would both silently skip the grant,
+        // shipping a wrong or absent unlock level that validateClassData can't
+        // catch. Fail loud with the ids that pin down the bad condition, matching
+        // the SpellID/MaxRanks discipline in apexChain above.
+        const ranks = Number(c.GrantedRanks);
+        const level = Number(c.RequiredLevel);
+        if (
+          !Number.isInteger(ranks) ||
+          ranks < 1 ||
+          !Number.isInteger(level) ||
+          level < 1
+        ) {
+          throw new Error(
+            `apex node ${nodeId} CondType-${COND_TYPE_LEVEL_GRANT} condition ${id} ` +
+              `has invalid GrantedRanks ("${c.GrantedRanks}") / ` +
+              `RequiredLevel ("${c.RequiredLevel}")`,
+          );
+        }
+        grants.push({ ranks, level });
+      }
     }
     // An apex rank chain unlocks at non-decreasing levels, so a grant covering
     // MORE ranks must not require a LOWER level than one covering fewer. An
