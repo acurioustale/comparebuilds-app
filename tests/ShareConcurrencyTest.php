@@ -106,8 +106,11 @@ final class ShareConcurrencyTest extends TestCase
         $rlStmt->method('fetch')->willReturn(['c' => 0, 'oldest' => null]);
 
         $checkStmt = $this->createMock(PDOStatement::class);
-        // First check returns false (not found); second check (after insert race) returns the stored data
-        $checkStmt->method('fetch')->willReturnOnConsecutiveCalls(false, ['data' => $stored]);
+        // The dedup fast-path (find_existing_share_id) fetches first and must miss
+        // (false) so the request proceeds to the claim loop; then the claim loop's
+        // own check misses (false → attempt insert), the insert raises the
+        // duplicate-key race, and the re-check finds the stored data (dedup hit).
+        $checkStmt->method('fetch')->willReturnOnConsecutiveCalls(false, false, ['data' => $stored]);
 
         $e = new PDOException('Duplicate entry');
         $e->errorInfo = ['23000', 1062, 'Duplicate entry'];
@@ -131,6 +134,47 @@ final class ShareConcurrencyTest extends TestCase
             }
             if (str_starts_with($query, 'SELECT RELEASE_LOCK')) {
                 return $lockStmt;
+            }
+            throw new RuntimeException("Unexpected query: $query");
+        });
+
+        $id = store_share($pdo, $payload, 'dummy-ip-hash');
+        $this->assertSame($candidate, $id);
+    }
+
+    public function testDedupHitSkipsRateLimitAndReturnsExistingId(): void
+    {
+        // Re-POSTing content that is already stored creates no new row, so it must
+        // not consume a per-IP rate-limit slot: the fast-path returns the existing
+        // id under the lock, before the limiter is ever consulted. The mock makes
+        // any rate-limit query fatal, so touching the limiter fails the test.
+        $payload = ['classId' => 1, 'specId' => 1, 'builds' => ['AA', 'BB']];
+        $stored = canonicalize_payload($payload);
+        $baseId = base62_encode_sha256($stored);
+        $candidate = substr($baseId, 0, 8);
+
+        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt->method('fetchColumn')->willReturn(1); // GET_LOCK / RELEASE_LOCK
+
+        // Already stored at the base (8-char) prefix → dedup fast-path hit.
+        $checkStmt = $this->createMock(PDOStatement::class);
+        $checkStmt->method('fetch')->willReturn(['data' => $stored]);
+
+        $pdo = $this->createMock(PDO::class);
+        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $checkStmt) {
+            if (str_starts_with($query, 'SELECT GET_LOCK') || str_starts_with($query, 'SELECT RELEASE_LOCK')) {
+                return $lockStmt;
+            }
+            if (str_starts_with($query, 'SELECT data FROM')) {
+                return $checkStmt;
+            }
+            if (str_starts_with($query, 'SELECT COUNT(*)')
+                || str_starts_with($query, 'INSERT INTO comparebuilds_share_requests')
+                || str_starts_with($query, 'UPDATE comparebuilds_share_requests')) {
+                throw new RuntimeException("rate limiter must not be touched on a dedup hit: $query");
+            }
+            if (str_starts_with($query, 'INSERT INTO comparebuilds_shares')) {
+                throw new RuntimeException('a dedup hit must not insert a new share row');
             }
             throw new RuntimeException("Unexpected query: $query");
         });
@@ -265,6 +309,12 @@ final class ShareConcurrencyTest extends TestCase
         $rlStmt = $this->createMock(PDOStatement::class);
         $rlStmt->method('fetch')->willReturn(['c' => 50, 'oldest' => time() - 10]);
 
+        // The dedup fast-path runs first: this content is NOT already stored, so
+        // it misses and the request falls through to the rate limiter, which is
+        // where the over-cap slide + 429 under test happens.
+        $checkStmt = $this->createMock(PDOStatement::class);
+        $checkStmt->method('fetch')->willReturn(false);
+
         $slid = false;
         $slideStmt = $this->createMock(PDOStatement::class);
         $slideStmt->expects($this->once())
@@ -275,12 +325,15 @@ final class ShareConcurrencyTest extends TestCase
                   });
 
         $pdo = $this->createMock(PDO::class);
-        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $slideStmt) {
+        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $checkStmt, $slideStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
             }
             if (str_starts_with($query, 'SELECT COUNT(*)')) {
                 return $rlStmt;
+            }
+            if (str_starts_with($query, 'SELECT data FROM')) {
+                return $checkStmt;
             }
             if (str_starts_with($query, 'UPDATE comparebuilds_share_requests')) {
                 return $slideStmt;

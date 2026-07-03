@@ -758,6 +758,35 @@ function record_throttled_attempt(PDO $pdo, ?object $redis, string $rlKey, strin
 }
 
 /**
+ * Read-only lookup of the id under which $stored is already saved, or null if it
+ * isn't stored yet. Mirrors the ascending prefix ladder of store_share's claim
+ * loop (ID_LEN, +2, … up to MAX_ID_LEN) but writes nothing: at each prefix an
+ * existing row whose data equals $stored is the dedup hit; a row with *different*
+ * content is a hash-prefix collision, so lengthen and keep looking; and the first
+ * prefix with NO row proves the content was never claimed at this length — a
+ * longer id only exists when a collision forced a row at every shorter prefix, so
+ * an empty prefix means it isn't stored at any length either. Kept in lockstep
+ * with the claim loop so the dedup fast-path can never disagree with it on identity.
+ */
+function find_existing_share_id(PDO $pdo, string $baseId, string $stored): ?string
+{
+    $check = $pdo->prepare('SELECT data FROM comparebuilds_shares WHERE id = ?');
+    $maxLen = min(strlen($baseId), MAX_ID_LEN);
+    for ($len = ID_LEN; $len <= $maxLen; $len += 2) {
+        $candidate = substr($baseId, 0, $len);
+        $check->execute([$candidate]);
+        $row = $check->fetch();
+        if (!$row) {
+            return null;
+        }
+        if ($row['data'] === $stored) {
+            return $candidate;
+        }
+    }
+    return null;
+}
+
+/**
  * Stores a share payload and returns its content-addressed id. Identical content
  * deduplicates to the same id — idempotently, even against a concurrent write of
  * the same build from another IP. Enforces the per-IP rate limit and prunes
@@ -786,6 +815,32 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
 
     $id = null;
     try {
+        // Content-addressing is deterministic and pure (a hash of the canonical
+        // bytes), so compute it up front — cheap, and needed both for the
+        // idempotent fast-path here and the claim loop below.
+        $stored = canonicalize_payload($payload);
+        $baseId = base62_encode_sha256($stored);
+
+        // ── Idempotent dedup fast-path ───────────────────────────────────────
+        // Re-POSTing content we already store creates no new row — it's a read,
+        // not a creation (the same content always maps to the same id). Return
+        // that id WITHOUT counting the request against the per-IP creation limit
+        // and without a 429, so a benign retry or double-submit of an
+        // already-shared build is never throttled. Only genuinely new content —
+        // which actually grows the table — reaches the rate limiter below (and on
+        // the Redis path, this early return means its INCR is never issued, so a
+        // dedup hit is uncounted there too without any compensating decrement).
+        //
+        // Runs under the same per-IP lock as the claim loop, so nothing from this
+        // IP interleaves. A *different* IP that inserts this exact content between
+        // this check and the claim loop is still handled there (its duplicate-key
+        // path dedups), so that rare race merely counts one slot it didn't create
+        // — never a miss in the benign-retry direction this guards.
+        $existingId = find_existing_share_id($pdo, $baseId, $stored);
+        if ($existingId !== null) {
+            return $existingId;
+        }
+
         // ── Per-IP rate limit ────────────────────────────────────────────────
         $rateLimited = false;
         // X-RateLimit-Reset: epoch seconds at which the caller regains capacity.
@@ -880,13 +935,13 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
             throw new ShareException(429, 'Too many shares created — please try again later', RATE_LIMIT_WINDOW);
         }
 
-        // ── Content-addressing & deduplication ───────────────────────────────
-        // The stored blob IS the canonical form, so the bytes we hash for the id,
-        // the bytes we compare on collision, and the bytes we persist are one and
-        // the same string — identical content always dedupes to the same id.
-        $stored = canonicalize_payload($payload);
-        $baseId = base62_encode_sha256($stored);
-
+        // ── Content-addressing & claim ───────────────────────────────────────
+        // $stored/$baseId were computed above for the dedup fast-path. The stored
+        // blob IS the canonical form, so the bytes we hashed for the id, compare
+        // on collision, and persist are one and the same string. Reaching here
+        // means the fast-path found no existing copy, so walk the prefix ladder to
+        // claim an id, still handling a concurrent same-content insert from
+        // another IP via the duplicate-key dedup below.
         $check  = $pdo->prepare('SELECT data FROM comparebuilds_shares WHERE id = ?');
         $insert = $pdo->prepare('INSERT INTO comparebuilds_shares (id, data, ip_hash, layout_hash, last_accessed) VALUES (?, ?, ?, ?, NOW())');
 
