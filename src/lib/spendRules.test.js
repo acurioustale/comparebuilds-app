@@ -167,6 +167,28 @@ describe("prunedExportSelection", () => {
     assert.ok(out[10], "purchased hero node kept");
   });
 
+  test("drops purchased picks in the inactive subtree (dual-subtree import)", () => {
+    // A corrupt/tool-built import (or an editBuild seed) can carry purchased
+    // picks in BOTH hero subtrees. Only the active subtree may survive; a
+    // surviving inactive pick would encode points in two hero subtrees at once —
+    // an impossible build.
+    const dual = {
+      1: full(),
+      100: full(), // Left granted root
+      101: full(), // Right granted root
+      10: full(), // purchased Left hero node (active)
+      11: full(), // purchased Right hero node (inactive) — must be dropped
+    };
+    const out = prunedExportSelection(NODES, dual, "Left");
+    assert.ok(out[10], "active-subtree purchased pick kept");
+    assert.strictEqual(
+      out[11],
+      undefined,
+      "inactive-subtree purchased pick removed",
+    );
+    assert.strictEqual(out[101], undefined, "inactive granted root removed");
+  });
+
   test("with no active subtree, prunes every granted hero root", () => {
     const out = prunedExportSelection(NODES, selected, null);
     assert.strictEqual(out[100], undefined);
