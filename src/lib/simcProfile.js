@@ -1,7 +1,12 @@
 import { defaultBuildLabel } from "./buildLabel.js";
 
-// Strip quotes and backslashes to ensure a clean simc profile name.
-const strip = (s) => s.replace(/["\\]/g, "");
+// Strip control characters, quotes, and backslashes to ensure a clean,
+// single-line simc profile name. A label can carry a newline or other control
+// char (the share API only length-checks labels, so a crafted share link can
+// store one); leaving it in would split `profileset."NAME"` across physical
+// lines and make SimulationCraft fail to parse the block.
+// eslint-disable-next-line no-control-regex
+const strip = (s) => s.replace(/[\u0000-\u001f\u007f"\\]/g, "");
 
 /**
  * Generates a SimulationCraft profileset block for the active comparison slots.
