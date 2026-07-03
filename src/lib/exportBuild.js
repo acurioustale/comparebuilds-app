@@ -19,13 +19,20 @@ import {
 export function buildExportString(treeData, selected, specId, classNodes) {
   if (!treeData || !specId || !classNodes) return "";
   const activeSub = activeHeroSubtree(treeData.nodes, selected);
-  const heroSpent = sectionPoints("hero", treeData.nodes, selected);
 
   const exportSelection = prunedExportSelection(
     treeData.nodes,
     selected,
     activeSub,
   );
+  // Count hero points from the pruned selection, which has the inactive subtree
+  // removed — so this reflects only the ACTIVE subtree's spend, the sole basis
+  // for whether a hero gate belongs in the export. Counting the raw selection
+  // (both subtrees) instead is behaviour-equivalent today, since activeHeroSubtree
+  // pins the active subtree to the first hero pick and it therefore always holds
+  // >= 1 point whenever any hero point is spent; deriving the count from the same
+  // pruned selection the gate is attached to removes that coupling.
+  const heroSpent = sectionPoints("hero", treeData.nodes, exportSelection);
   // Resolve the active subtree to the left/right hero-gate slot by name. A live
   // subtree must match one of the two known names; anything else means the
   // node's heroSubtree has drifted from heroSubtrees.left/right (a data or
