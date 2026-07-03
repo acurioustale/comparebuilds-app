@@ -35,6 +35,68 @@ describe("shareLink createServerShare", () => {
     });
   });
 
+  test("throws when a 200 response has no id", async () => {
+    // A misconfigured proxy/CDN success page, or an API contract drift, can
+    // return 200 with a body missing the id. It must fail loudly, not resolve
+    // as a successful share that builds a "/s/undefined" link.
+    globalThis.fetch = async () => ({
+      ok: true,
+      json: async () => ({}),
+    });
+
+    await assert.rejects(
+      () =>
+        createServerShare({
+          classId: 1,
+          specId: 1,
+          builds: ["CoPAAAA"],
+          className: "Mage",
+          specName: "Frost",
+        }),
+      /unexpected response/,
+    );
+  });
+
+  test("throws when a 200 response id is not a non-empty string", async () => {
+    globalThis.fetch = async () => ({
+      ok: true,
+      json: async () => ({ id: 12345 }),
+    });
+
+    await assert.rejects(
+      () =>
+        createServerShare({
+          classId: 1,
+          specId: 1,
+          builds: ["CoPAAAA"],
+          className: "Mage",
+          specName: "Frost",
+        }),
+      /unexpected response/,
+    );
+  });
+
+  test("throws when a 200 response body is not valid JSON", async () => {
+    globalThis.fetch = async () => ({
+      ok: true,
+      json: async () => {
+        throw new SyntaxError("Unexpected token < in JSON");
+      },
+    });
+
+    await assert.rejects(
+      () =>
+        createServerShare({
+          classId: 1,
+          specId: 1,
+          builds: ["CoPAAAA"],
+          className: "Mage",
+          specName: "Frost",
+        }),
+      /unexpected response/,
+    );
+  });
+
   test("throws on HTTP error", async () => {
     globalThis.fetch = async () => ({
       ok: false,
