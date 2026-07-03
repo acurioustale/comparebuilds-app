@@ -661,6 +661,43 @@ describe("serialisation-space disjointness", () => {
       `unexpected cross-spec error:\n${errs.join("\n")}`,
     );
   });
+
+  test("same apex id with a different rank chain across specs is rejected", () => {
+    const d = makeValidFixed();
+    const apex = {
+      id: 60,
+      type: "apex",
+      treeType: "spec",
+      posX: 1,
+      posY: 2,
+      connections: [],
+      spentRequired: 0,
+      alreadyGranted: false,
+      maxRanks: 3,
+      name: "Apex",
+      icon: null,
+      description: null,
+      choices: null,
+      levels: [70, 80],
+      ranks: [
+        { spellId: 111, maxRanks: 1 },
+        { spellId: 222, maxRanks: 2 },
+      ],
+    };
+    d.specs.only.nodes.push(structuredClone(apex));
+    d.specs.second = structuredClone(d.specs.only);
+    d.specs.second.specSlug = "second";
+    d.specs.second.specId = 101;
+    d.specs.second.heroGateNodeId = null;
+    // Same id, same total maxRanks, but a divergent rank chain (re-pointed
+    // spell) — collectClassNodes would resolve the losing spec to the winner's
+    // spells and levels, so the shape check must catch it.
+    d.specs.second.nodes.at(-1).ranks[1].spellId = 999;
+    assertHasError(
+      validateClassData(d),
+      "node id 60 has an inconsistent shape across specs",
+    );
+  });
 });
 
 // ── Index cross-check ─────────────────────────────────────────────────────────

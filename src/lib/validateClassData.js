@@ -291,6 +291,16 @@ export function validateClassData(data, indexEntry = null) {
       return `r${ranks}|c:${n.choices
         .map((ch) => `${ch?.name ?? "?"}#${ch?.maxRanks ?? "?"}`)
         .join(",")}`;
+    // Apex nodes carry a per-rank spell/unlock-level chain that collectClassNodes
+    // resolves first-wins, exactly like maxRanks/choices. A shared id whose chain
+    // differs across specs would silently render the winning spec's spells and
+    // levels for the losing spec, so fingerprint the chain too.
+    if (isArr(n?.ranks))
+      return (
+        `r${ranks}|a:${n.ranks
+          .map((rk) => `${rk?.spellId ?? "?"}#${rk?.maxRanks ?? "?"}`)
+          .join(",")}` + `|l:${isArr(n?.levels) ? n.levels.join(",") : "-"}`
+      );
     return `r${ranks}|c:-`;
   };
   const nodeSigById = new Map(); // id -> { slug, sig } from the first spec seen
