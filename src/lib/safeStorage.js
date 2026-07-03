@@ -10,6 +10,12 @@
  * mode), provide an in-memory fallback storage implementation so persistence
  * degrades gracefully without dropping writes or throwing errors during active interaction.
  */
+// Tombstone marker stored in the in-memory mirror to record "this key was
+// removed" when the real store's removeItem() threw and may still hold a stale
+// value. Persisted values are always strings, so a Symbol can never collide with
+// a real value.
+const REMOVED = Symbol("removed");
+
 export function getSafeStorage() {
   const memStorage = new Map();
   const fallbackStorage = {
@@ -42,8 +48,17 @@ export function getSafeStorage() {
     return fallbackStorage;
   }
   return {
-    getItem: (name) =>
-      memStorage.has(name) ? memStorage.get(name) : ls.getItem(name),
+    getItem: (name) => {
+      // The mirror shadows the real store: it holds a value the real store
+      // rejected (a fresh write kept in memory) or a REMOVED tombstone (a
+      // removal the real store rejected). Either way the mirror wins, so a
+      // stale value the real store still holds can't leak through.
+      if (memStorage.has(name)) {
+        const cached = memStorage.get(name);
+        return cached === REMOVED ? null : cached;
+      }
+      return ls.getItem(name);
+    },
     setItem: (name, value) => {
       try {
         ls.setItem(name, value);
@@ -56,11 +71,15 @@ export function getSafeStorage() {
     removeItem: (name) => {
       try {
         ls.removeItem(name);
+        memStorage.delete(name);
       } catch {
-        // Best-effort: if the real store rejects the removal, the in-memory
-        // mirror below is still cleared, so the key is gone either way.
+        // The real store rejected the removal and may still hold a stale value
+        // (e.g. an older value left behind when a prior setItem hit quota and
+        // the fresh write went to the mirror). Record a tombstone instead of
+        // clearing the mirror, so getItem reports the key as gone rather than
+        // resurrecting the stale real-store value.
+        memStorage.set(name, REMOVED);
       }
-      memStorage.delete(name);
     },
   };
 }
