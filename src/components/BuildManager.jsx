@@ -35,11 +35,15 @@ function pointSummary(parsed, treeData) {
   return `Class: ${cls}/${budget.class} · Spec: ${spec}/${budget.spec} · Hero: ${hero}/${budget.hero}`;
 }
 
-function ClassIcon({ name, size = 36 }) {
+export function ClassIcon({ name, size = 36 }) {
   // WoW class icons use the slug classicon_{name} with underscores removed.
+  // classes.json is not schema-validated, so coerce defensively: a malformed
+  // row (missing or non-string name) must degrade to the broken-icon fallback
+  // via onIconError, never throw and unmount the whole class/build panel.
+  const slug = "classicon_" + String(name ?? "").replaceAll("_", "");
   return (
     <img
-      src={iconUrl("classicon_" + name.replaceAll("_", ""))}
+      src={iconUrl(slug)}
       onError={onIconError}
       width={size}
       height={size}

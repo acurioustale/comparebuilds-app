@@ -14,7 +14,7 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { createRequire } from "node:module";
-import BuildManager from "./BuildManager.jsx";
+import BuildManager, { ClassIcon } from "./BuildManager.jsx";
 import { useBuildsStore } from "../store/buildsStore.js";
 import { collectClassNodes, generateBuildString } from "../lib/buildString.js";
 
@@ -184,5 +184,17 @@ describe("cold-start CTA", () => {
     expect(
       screen.queryByRole("button", { name: /start from scratch/i }),
     ).toBeNull();
+  });
+});
+
+describe("ClassIcon", () => {
+  // classes.json is not schema-validated; a malformed row (missing/non-string
+  // name) must not throw and unmount the whole panel — it degrades to a broken
+  // icon that onIconError swaps for a fallback.
+  test("renders without throwing when the name is missing", () => {
+    expect(() => render(<ClassIcon name={undefined} />)).not.toThrow();
+    const img = document.querySelector("img");
+    expect(img).not.toBeNull();
+    expect(img.getAttribute("src")).toContain("classicon_");
   });
 });
