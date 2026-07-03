@@ -4,7 +4,22 @@ import {
   checkpointsFromNodes,
   collapseColocatedDuplicates,
   idsUnusedAcrossSpecs,
+  parseArgs,
 } from "./ingestBlizzard.js";
+
+describe("parseArgs", () => {
+  it("rejects --update-snapshot without --promote (a silent no-op otherwise)", () => {
+    expect(() => parseArgs(["--update-snapshot"])).toThrow(
+      /--update-snapshot requires --promote/,
+    );
+  });
+
+  it("accepts --update-snapshot alongside --promote", () => {
+    const args = parseArgs(["--promote", "--update-snapshot"]);
+    expect(args.promote).toBe(true);
+    expect(args.updateSnapshot).toBe(true);
+  });
+});
 
 describe("checkpointsFromNodes", () => {
   it("places one checkpoint per distinct gate at its first (lowest) row, per section, ascending", () => {
