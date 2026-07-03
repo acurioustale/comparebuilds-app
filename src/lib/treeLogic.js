@@ -230,9 +230,15 @@ export function buildGrantedSeed(treeData) {
  * Returns a Set of node IDs that are currently selected but violate their own
  * prerequisites or gate thresholds given the current selection state.
  *
- * Uses a topological sort (posY ascending, then posX) so that every parent is
- * evaluated before its children. A single pass is sufficient — no fixpoint
- * iteration needed — and deep cascades are always complete.
+ * Evaluates nodes in a topological order (posY ascending, then posX, then id) so
+ * that every parent is processed before its children — an upper parent always has
+ * a strictly smaller posY (see upperParents), so posY-ascending is a valid
+ * topological order. A single pass is then sufficient — no fixpoint iteration
+ * needed — and deep cascades are always complete. The sort is done here rather
+ * than assumed of the input so correctness can't hinge on a caller ordering the
+ * node list a particular way; the store already sorts treeData.nodes by the same
+ * key, so this is a no-op on the live data and only guards against a future or
+ * test caller passing an unsorted list.
  *
  * Gate check counts the selected section total (one node per co-located cell;
  * see gatedPoints) but EXCLUDES the node's own points — those can't unlock the
@@ -255,8 +261,19 @@ export function buildGrantedSeed(treeData) {
 export function computeInvalidNodeIds(allNodes, selected, nodeById) {
   const invalid = new Set();
 
-  // allNodes (treeData.nodes) is pre-sorted topologically at ingest
-  const sorted = allNodes.filter((n) => selected[n.id] && !n.alreadyGranted);
+  // Selected, non-granted nodes in topological order (parents before children).
+  // upperParents only ever links to a strictly-smaller-posY node, so ordering by
+  // posY ascending — then posX, then id for a stable tie-break — guarantees each
+  // node's prerequisites are already resolved when the single pass reaches it.
+  const sorted = allNodes
+    .filter((n) => selected[n.id] && !n.alreadyGranted)
+    .sort((a, b) =>
+      a.posY !== b.posY
+        ? a.posY - b.posY
+        : a.posX !== b.posX
+          ? a.posX - b.posX
+          : a.id - b.id,
+    );
 
   // Hero-subtree exclusivity: a build may invest in only one hero subtree. A
   // crafted/corrupt build string (or an import path that bypasses canSpendPoint)
