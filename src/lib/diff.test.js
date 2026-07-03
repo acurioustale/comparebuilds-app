@@ -182,6 +182,37 @@ describe("computeDiff", () => {
     assert.strictEqual(aOnly.length + bOnly.length + differing.length, 0);
   });
 
+  test("choice node both builds took with unknown picks is flagged as diff", () => {
+    // Both builds took the choice node but a corrupt/partial parse left
+    // entryChosen null on both. An unknown pick can't be assumed to match, so
+    // this diverges — matching heatmap.isDivergent, which flags an all-unknown
+    // choice every build takes rather than dimming it as agreement.
+    const { highlights, differing } = computeDiff(
+      { 3: pt(1, null) },
+      { 3: pt(1, null) },
+      NODES,
+    );
+    assert.strictEqual(highlights[3], "diff");
+    assert.deepStrictEqual(
+      differing.map((e) => e.id),
+      [3],
+    );
+  });
+
+  test("non-choice nodes both builds took at equal rank are not diffed", () => {
+    // Guards the scope of the unknown-pick rule: a round node always records a
+    // null pick, which is genuine agreement — it must not be treated as an
+    // unknown-choice divergence.
+    const { highlights, differing } = computeDiff(
+      { 1: pt(1), 2: pt(3) },
+      { 1: pt(1), 2: pt(3) },
+      NODES,
+    );
+    assert.strictEqual(highlights[1], undefined);
+    assert.strictEqual(highlights[2], undefined);
+    assert.strictEqual(differing.length, 0);
+  });
+
   test("alreadyGranted nodes are never diffed", () => {
     const { highlights, aOnly } = computeDiff({ 5: pt(1) }, {}, NODES);
     assert.strictEqual(highlights[5], undefined);
