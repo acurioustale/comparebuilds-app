@@ -367,6 +367,14 @@ function validate_share_input(mixed $body): array
     if ($layoutHash !== null && (!is_string($layoutHash) || !preg_match(LAYOUT_HASH_PATTERN, $layoutHash))) {
         return ['error' => 'layoutHash, when present, must be a hex string 1–16 chars'];
     }
+    // Canonicalise to lowercase: the layout_hash columns and the
+    // comparebuilds_layout_history join are utf8mb4_bin (case-sensitive), and
+    // both the client and the manifest emit lowercase. An uppercase hash would
+    // never match its live-layout row, so the share would be mis-classified as
+    // superseded and pruned while its layout is still current.
+    if ($layoutHash !== null) {
+        $layoutHash = strtolower($layoutHash);
+    }
 
     $payload = ['classId' => $classId, 'specId' => $specId, 'builds' => $builds];
     if ($labels !== null) {
