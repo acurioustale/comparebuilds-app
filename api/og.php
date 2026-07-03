@@ -348,16 +348,22 @@ try {
     // whatever was actually acquired and no-oping for names still null (e.g. an
     // early throw from client_ip_hash() before the per-IP lock is taken — the
     // gap that previously stranded the global slot on the persistent connection).
+    // Track which backend acquired each lock (Redis vs MySQL) so the shutdown
+    // release targets the same one. Redis can die between the two acquisitions,
+    // so the per-IP and global locks may end up on different backends — keep a
+    // flag per lock rather than reading the live (possibly-nulled) $redis.
     $globalLockName = null;
     $globalLockToken = bin2hex(random_bytes(16));
+    $globalLockViaRedis = false;
     $lockName = null;
     $lockToken = bin2hex(random_bytes(16));
-    register_shutdown_function(static function () use ($pdo, &$redis, &$globalLockName, $globalLockToken, &$lockName, $lockToken) {
+    $lockViaRedis = false;
+    register_shutdown_function(static function () use ($pdo, &$redis, &$globalLockName, $globalLockToken, &$globalLockViaRedis, &$lockName, $lockToken, &$lockViaRedis) {
         if ($lockName !== null) {
-            RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
+            RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken, $lockViaRedis);
         }
         if ($globalLockName !== null) {
-            RateLimiter::releaseLock($pdo, $redis, $globalLockName, $globalLockToken);
+            RateLimiter::releaseLock($pdo, $redis, $globalLockName, $globalLockToken, $globalLockViaRedis);
         }
     });
 
@@ -371,7 +377,7 @@ try {
 
     // Only record $lockName once the lock is actually held, so the shutdown handler
     // never tries to release a per-IP lock this request didn't acquire.
-    if (!RateLimiter::acquireLock($pdo, $redis, $ipLockName, $lockToken, OG_LOCK_TTL)) {
+    if (!RateLimiter::acquireLock($pdo, $redis, $ipLockName, $lockToken, OG_LOCK_TTL, $lockViaRedis)) {
         header('Retry-After: 5');
         bail(503);
     }
@@ -481,7 +487,7 @@ try {
     // never spent on a caller that will just be rate-limited away.
     for ($slot = 0; $slot < OG_CONCURRENCY_SLOTS; $slot++) {
         $candidate = 'cb_og_global_' . $slot;
-        if (RateLimiter::acquireLock($pdo, $redis, $candidate, $globalLockToken, OG_LOCK_TTL)) {
+        if (RateLimiter::acquireLock($pdo, $redis, $candidate, $globalLockToken, OG_LOCK_TTL, $globalLockViaRedis)) {
             $globalLockName = $candidate;
             break;
         }

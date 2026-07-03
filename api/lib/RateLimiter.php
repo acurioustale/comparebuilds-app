@@ -14,10 +14,15 @@ class RateLimiter
      * @param int $ttl Redis lock expiry in seconds. Must exceed the critical
      *   section's worst-case duration so the lock cannot auto-expire while still
      *   held (the MySQL GET_LOCK path is connection-scoped and ignores this).
+     * @param bool|null &$usedRedis Set to true when the lock was taken on Redis,
+     *   false when taken via MySQL GET_LOCK. The caller must remember this and
+     *   pass it back to releaseLock so the release targets the SAME backend even
+     *   if $redis is later nulled by a mid-request failure.
      * @return bool True if acquired, false if busy.
      */
-    public static function acquireLock(PDO $pdo, ?object &$redis, string $lockName, string $lockToken, int $ttl = 5): bool
+    public static function acquireLock(PDO $pdo, ?object &$redis, string $lockName, string $lockToken, int $ttl = 5, ?bool &$usedRedis = null): bool
     {
+        $usedRedis = false;
         $usedRedisLock = false;
 
         if ($redis !== null) {
@@ -39,6 +44,7 @@ class RateLimiter
             }
         }
 
+        $usedRedis = $usedRedisLock;
         return true;
     }
 
@@ -49,17 +55,32 @@ class RateLimiter
      * @param object|null $redis The Redis connection.
      * @param string $lockName The name of the lock.
      * @param string $lockToken The random token for the lock.
+     * @param bool|null $viaRedis The backend that acquired the lock, as reported
+     *   by acquireLock's &$usedRedis out-param. Release MUST target the same
+     *   backend: inferring it from the live $redis handle is unsafe because a
+     *   mid-request Redis failure nulls the shared handle, which would divert a
+     *   Redis-acquired lock's release to a MySQL RELEASE_LOCK (a no-op on a lock
+     *   MySQL never held) and strand the real Redis lock until its TTL — 503-ing
+     *   that IP meanwhile. When null, the backend is inferred from $redis for
+     *   best effort (legacy callers).
      */
-    public static function releaseLock(PDO $pdo, ?object $redis, string $lockName, string $lockToken): void
+    public static function releaseLock(PDO $pdo, ?object $redis, string $lockName, string $lockToken, ?bool $viaRedis = null): void
     {
-        if ($redis !== null) {
-            try {
-                $lua = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
-                $redis->eval($lua, [$lockName, $lockToken], 1);
-                return;
-            } catch (Throwable $e) {
-                // Fallback to MySQL release
+        $viaRedis ??= ($redis !== null);
+
+        if ($viaRedis) {
+            // Acquired on Redis. Only Redis can release it; if the handle is gone
+            // the lock lapses at its TTL — never issue a MySQL RELEASE_LOCK for a
+            // lock MySQL never held.
+            if ($redis !== null) {
+                try {
+                    $lua = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
+                    $redis->eval($lua, [$lockName, $lockToken], 1);
+                } catch (Throwable $e) {
+                    // Redis vanished during release; the lock lapses at its TTL.
+                }
             }
+            return;
         }
 
         $rel = $pdo->prepare('SELECT RELEASE_LOCK(?)');
