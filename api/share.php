@@ -660,10 +660,19 @@ function load_current_layouts(string $path): ?array
 /**
  * Reconciles comparebuilds_layout_history against the set of currently-valid
  * layout hashes: every current hash is (re)marked live (superseded_at NULL), and
- * any previously-live hash absent from the current set is stamped superseded now.
- * A rolled-back hash reappearing in the set is revived (superseded_at reset to
- * NULL). Refuses to act on an empty set, so a broken/empty manifest can never
- * mark every layout stale and trigger a mass prune.
+ * any previously-live hash whose class still appears in the manifest but under a
+ * different hash is stamped superseded now. A rolled-back hash reappearing in the
+ * set is revived (superseded_at reset to NULL). Refuses to act on an empty set,
+ * so a broken/empty manifest can never mark every layout stale and trigger a mass
+ * prune.
+ *
+ * Supersession is scoped to classes the manifest actually carries: a hash is
+ * stamped superseded only when we hold a *replacement* current hash for its
+ * class (its class_key is present in the manifest). A partial/broken manifest
+ * that drops a class entirely therefore leaves that class's live hash alone
+ * instead of superseding a layout still current in-game — the per-class mirror
+ * of the empty-manifest guard above. Legacy rows with a NULL class_key (none are
+ * written by this function) match no class_key and are likewise left untouched.
  *
  * @param array<string, string> $current class_key => hash
  */
@@ -677,15 +686,20 @@ function reconcile_layout_history(PDO $pdo, array $current): void
         . 'ON DUPLICATE KEY UPDATE superseded_at = NULL, class_key = VALUES(class_key)'
     );
     $liveHashes = [];
+    $liveClassKeys = [];
     foreach ($current as $classKey => $hash) {
-        $insert->execute([$hash, $classKey]);
+        $insert->execute([$hash, (string) $classKey]);
         $liveHashes[] = $hash;
+        $liveClassKeys[] = (string) $classKey;
     }
-    $placeholders = implode(',', array_fill(0, count($liveHashes), '?'));
+    $hashPlaceholders = implode(',', array_fill(0, count($liveHashes), '?'));
+    $keyPlaceholders  = implode(',', array_fill(0, count($liveClassKeys), '?'));
     $pdo->prepare(
         'UPDATE comparebuilds_layout_history SET superseded_at = NOW() '
-        . 'WHERE superseded_at IS NULL AND layout_hash NOT IN (' . $placeholders . ')'
-    )->execute($liveHashes);
+        . 'WHERE superseded_at IS NULL '
+        . 'AND layout_hash NOT IN (' . $hashPlaceholders . ') '
+        . 'AND class_key IN (' . $keyPlaceholders . ')'
+    )->execute(array_merge($liveHashes, $liveClassKeys));
 }
 
 /**

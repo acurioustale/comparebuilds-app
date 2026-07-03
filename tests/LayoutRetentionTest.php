@@ -127,10 +127,11 @@ final class LayoutRetentionTest extends TestCase
             });
 
         $supersedeStmt = $this->createMock(PDOStatement::class);
-        // The supersede sweep binds exactly the current hashes, excluding them.
+        // The supersede sweep binds the current hashes (excluding them) followed
+        // by the class keys it is allowed to supersede within.
         $supersedeStmt->expects($this->once())
             ->method('execute')
-            ->with(['aaaa1111', 'bbbb2222'])
+            ->with(['aaaa1111', 'bbbb2222', 'death_knight', 'mage'])
             ->willReturn(true);
 
         $pdo = $this->createMock(PDO::class);
@@ -143,6 +144,43 @@ final class LayoutRetentionTest extends TestCase
                 }
                 $this->assertStringContainsString('SET superseded_at = NOW()', $sql);
                 $this->assertStringContainsString('NOT IN (?,?)', $sql);
+                // Supersession is scoped to the classes the manifest carries.
+                $this->assertStringContainsString('class_key IN (?,?)', $sql);
+                return $supersedeStmt;
+            });
+
+        reconcile_layout_history($pdo, $current);
+    }
+
+    public function testReconcileScopesSupersessionToManifestClasses(): void
+    {
+        // A partial manifest that carries only one class must supersede old hashes
+        // only within that class — a class dropped from the manifest keeps its live
+        // hash rather than being superseded (its layout may still be current).
+        $current = ['mage' => 'bbbb2222'];
+
+        $insertStmt = $this->createMock(PDOStatement::class);
+        $insertStmt->expects($this->once())
+            ->method('execute')
+            ->with(['bbbb2222', 'mage'])
+            ->willReturn(true);
+
+        $supersedeStmt = $this->createMock(PDOStatement::class);
+        // Only 'mage' is eligible to be superseded within; death_knight, absent
+        // from the manifest, is never touched.
+        $supersedeStmt->expects($this->once())
+            ->method('execute')
+            ->with(['bbbb2222', 'mage'])
+            ->willReturn(true);
+
+        $pdo = $this->createMock(PDO::class);
+        $pdo->expects($this->exactly(2))
+            ->method('prepare')
+            ->willReturnCallback(function (string $sql) use ($insertStmt, $supersedeStmt) {
+                if (str_contains($sql, 'INSERT INTO comparebuilds_layout_history')) {
+                    return $insertStmt;
+                }
+                $this->assertStringContainsString('class_key IN (?)', $sql);
                 return $supersedeStmt;
             });
 
