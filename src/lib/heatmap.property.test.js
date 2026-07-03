@@ -52,13 +52,18 @@ describe("heatmap adoption logic — property-based", () => {
       fc.property(
         countTotal,
         fc.array(fc.option(fc.integer({ min: 0, max: 3 }), { nil: null })),
-        ([count, total], choiceVotes) => {
-          const div = isDivergent(count, total, choiceVotes);
+        fc.boolean(),
+        ([count, total], choiceVotes, isChoiceNode) => {
+          const div = isDivergent(count, total, choiceVotes, isChoiceNode);
           if (isContested(count, total)) expect(div).toBe(true);
           if (count === 0) expect(div).toBe(false);
           if (count === total) {
-            const picks = choiceVotes.filter((v) => v != null);
-            expect(div).toBe(picks.some((v) => v !== picks[0]));
+            // A non-choice node all builds take is agreement; a choice node all
+            // take diverges if any pick differs OR is unknown (null).
+            expect(div).toBe(
+              isChoiceNode &&
+                choiceVotes.some((v) => v == null || v !== choiceVotes[0]),
+            );
           }
         },
       ),

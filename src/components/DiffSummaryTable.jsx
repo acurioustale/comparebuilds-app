@@ -96,7 +96,11 @@ export default function DiffSummaryTable({
     for (const node of treeData.nodes) {
       if (node.alreadyGranted) continue;
       const s = stats[node.id];
-      if (!s || !isDivergent(s.count, total, s.choiceVotes)) continue;
+      if (
+        !s ||
+        !isDivergent(s.count, total, s.choiceVotes, node.type === "choice")
+      )
+        continue;
       out.push({
         id: node.id,
         node,
