@@ -105,4 +105,17 @@ describe("matchNodeIds", () => {
   test("tolerates a missing/!array node list", () => {
     assert.strictEqual(matchNodeIds("x", null).size, 0);
   });
+
+  test("distinct node lists sharing a first node are indexed independently", () => {
+    // The index is memoised by node-list identity. Two lists that share the
+    // same first node object must not collide on one cached index — keying on
+    // nodes[0] would make the second list reuse the first's stale results.
+    const shared = { id: 1, name: "Shared Root", description: "" };
+    const listA = [shared, { id: 2, name: "Alpha", description: "" }];
+    const listB = [shared, { id: 3, name: "Beta", description: "" }];
+    assert.deepStrictEqual([...matchNodeIds("alpha", listA)], [2]);
+    assert.deepStrictEqual([...matchNodeIds("beta", listB)], [3]);
+    // listB must not answer for Alpha out of listA's cache.
+    assert.strictEqual(matchNodeIds("alpha", listB).size, 0);
+  });
 });

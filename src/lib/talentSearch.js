@@ -86,8 +86,11 @@ const indexCache = new WeakMap();
  * @returns {Map<number, string>} Map of node id → normalised searchable text
  */
 function searchIndex(nodes) {
-  const cacheKey = nodes[0] ?? nodes;
-  const cached = indexCache.get(cacheKey);
+  // Key on the node-list array itself, not nodes[0]: two distinct lists that
+  // happen to share a first node object must not collide on one index, and a
+  // replaced list must get a fresh one. The array is a valid WeakMap key and is
+  // stable across keystrokes (callers pass the same treeData.nodes reference).
+  const cached = indexCache.get(nodes);
   if (cached) return cached;
   const index = new Map();
   for (const n of nodes) {
@@ -100,7 +103,7 @@ function searchIndex(nodes) {
     }
     index.set(n.id, parts.map(normalise).join(" "));
   }
-  indexCache.set(cacheKey, index);
+  indexCache.set(nodes, index);
   return index;
 }
 
