@@ -103,10 +103,24 @@ export function useShareRehydration() {
           builds.push(b);
           labels.push(rawLabels[i]);
         });
+        let landed = 0;
         for (const buildString of builds) {
-          await addBuild(buildString);
+          if (await addBuild(buildString)) landed++;
         }
         applyAlignedNames(builds, labels);
+        // Warn when the link carried more builds than we could load (a spec
+        // mismatch, an over-cap slot, or a corrupt string among otherwise-valid
+        // builds). The hash is stripped just below, so the dropped builds are
+        // gone for good — surfacing fewer builds than the link encoded without a
+        // word would be silent data loss. Only meaningful once something landed;
+        // a total failure is handled by the retain-the-hash path below.
+        if (landed > 0 && landed < builds.length) {
+          const dropped = builds.length - landed;
+          setShareError(
+            `${dropped} of ${builds.length} builds in this link couldn't be ` +
+              `loaded and were left out (they may not match the others' spec).`,
+          );
+        }
         // Strip the share id from the URL once at least one build has rendered.
         // addBuild fails *deterministically* — a duplicate, spec mismatch, corrupt
         // header, or over-cap slot never succeeds on retry — so keying the strip
