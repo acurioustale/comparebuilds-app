@@ -200,6 +200,21 @@ final class ShareValidationTest extends TestCase
         $this->assertSame('198.51.100.9', client_ip());
     }
 
+    // When every hop in the chain is itself a trusted proxy, the leftmost entry
+    // is still client-supplied and spoofable. It must NOT be returned; fall back
+    // to REMOTE_ADDR (the real TCP peer) so a caller inside the trusted range
+    // can't rotate the leftmost value to mint a fresh rate-limit key per request.
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
+    public function testClientIpFallsBackToRemoteAddrWhenEntireChainIsTrusted(): void
+    {
+        define('TRUST_PROXY', true);
+        define('TRUSTED_PROXIES', ['10.0.0.0/8']);
+        $_SERVER['REMOTE_ADDR'] = '10.0.5.5'; // trusted proxy peer
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '10.9.9.9, 10.1.1.1';
+        $this->assertSame('10.0.5.5', client_ip());
+    }
+
     public function testClientIpHashIsDeterministicAndIpDependent(): void
     {
         $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
