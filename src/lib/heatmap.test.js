@@ -49,6 +49,14 @@ describe("isDivergent", () => {
     // A partial/ambiguous parse leaves one taker's pick null; it must not be
     // assumed to match the others and dimmed as agreement.
     assert.strictEqual(isDivergent(3, 3, [0, null, 0], true), true));
+  test("a granted choice node is agreement, matching computeDiff", () =>
+    // computeStats records all-null votes for a granted node; without the
+    // granted guard the all-null branch would (wrongly) call it divergent while
+    // the 2-build diff skips it as agreement.
+    assert.strictEqual(
+      isDivergent(3, 3, [null, null, null], true, true),
+      false,
+    ));
 });
 
 describe("computeStats", () => {

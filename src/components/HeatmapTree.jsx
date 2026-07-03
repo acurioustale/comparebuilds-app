@@ -100,7 +100,13 @@ const HeatmapNode = memo(function HeatmapNode({
   // identically-taken nodes are agreement and dim.
   const { effOpacity, searchRing } = useNodeEmphasis(
     node.id,
-    isDivergent(count, totalBuilds, choiceVotes, node.type === "choice"),
+    isDivergent(
+      count,
+      totalBuilds,
+      choiceVotes,
+      node.type === "choice",
+      node.alreadyGranted,
+    ),
   );
   const ringShadow = (shadow) =>
     searchRing ? `${shadow}, ${searchRing}` : shadow;

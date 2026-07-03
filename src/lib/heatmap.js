@@ -45,10 +45,17 @@ export function isContested(count, total) {
  * choice nodes carry a meaningful pick — a non-choice node every build takes
  * always records `null` votes and is genuine agreement.
  *
+ * An `alreadyGranted` node is present identically in every build, so it is
+ * always agreement — never a change. This mirrors computeDiff, which skips
+ * granted nodes outright; without it a granted *choice* node (count === total,
+ * all-`null` votes) would fall into the all-null divergence branch below and the
+ * two comparison views would disagree on the same node.
+ *
  * @param {number} count               builds that selected the node
  * @param {number} total               total builds compared
  * @param {(number|null)[]} choiceVotes per-build entryChosen (null = not picked / unknown)
  * @param {boolean} isChoiceNode       whether the node is a choice node
+ * @param {boolean} alreadyGranted     whether the node is auto-granted to every build
  * @returns {boolean} True if the node is divergent
  */
 export function isDivergent(
@@ -56,7 +63,9 @@ export function isDivergent(
   total,
   choiceVotes = [],
   isChoiceNode = false,
+  alreadyGranted = false,
 ) {
+  if (alreadyGranted) return false;
   if (isContested(count, total)) return true;
   if (count === total) {
     if (!isChoiceNode) return false;
