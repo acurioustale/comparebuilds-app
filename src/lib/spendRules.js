@@ -68,7 +68,8 @@ export function sectionPoints(treeType, allNodes, selected) {
 
 /**
  * The selection to encode when exporting an interactive build: a copy of
- * `selected` with the *inactive* hero subtree's auto-granted roots removed.
+ * `selected` with the *inactive* hero subtree removed entirely (its auto-granted
+ * roots and any purchased picks a corrupt/dual-subtree import may have left in it).
  *
  * buildGrantedSeed seeds the granted roots of BOTH hero subtrees so prerequisite
  * checks evaluate correctly before a subtree is chosen. Once a subtree is active,
@@ -104,12 +105,17 @@ export function prunedExportSelection(allNodes, selected, activeSubtree) {
   for (const [id, sel] of Object.entries(selected)) {
     if (realIds.has(Number(id))) pruned[id] = sel;
   }
+  // Remove the ENTIRE inactive hero subtree from the export, not just its granted
+  // roots. A granted root isn't in the encoder's grantedIds, so it would wrongly
+  // encode as purchased; and a corrupt or tool-built import (or a build seeded
+  // into the editor via editBuild without exclusivity filtering) can carry
+  // purchased picks in the inactive subtree, which would otherwise encode points
+  // in two hero subtrees at once — an impossible build. Dropping every
+  // inactive-subtree hero node self-heals both cases. With no subtree active
+  // (activeSubtree null) no non-granted hero node is selected, so this prunes
+  // exactly the granted hero roots, matching the game's export.
   for (const n of allNodes) {
-    if (
-      n.alreadyGranted &&
-      n.treeType === "hero" &&
-      n.heroSubtree !== activeSubtree
-    ) {
+    if (n.treeType === "hero" && n.heroSubtree !== activeSubtree) {
       delete pruned[n.id];
     }
   }
