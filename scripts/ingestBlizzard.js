@@ -352,15 +352,26 @@ export function filterSpecVariants(built, specInfoId, db2) {
       !cellHasNativeVariant.has(cellKey(n)),
   );
 
+  // A hero-subtree root has no prerequisites at all; the game auto-grants it
+  // when the gate selects that subtree. Identify roots by their ORIGINAL
+  // (pre-filter) connections — a non-root hero node whose only prereq is a node
+  // the spec-variant filter drops below would otherwise fall to zero connections
+  // and be mistaken for a root and wrongly granted.
+  const heroRootIds = new Set(
+    nodes
+      .filter(
+        (n) => n.treeType === "hero" && (n.connections ?? []).length === 0,
+      )
+      .map((n) => n.id),
+  );
+
   // Drop connections to nodes not present in this spec
   const includedIds = new Set(nodes.map((n) => n.id));
   for (const n of nodes)
     n.connections = (n.connections ?? []).filter((id) => includedIds.has(id));
 
-  // The hero-subtree root is auto-granted when the gate selects the subtree
-  for (const n of nodes)
-    if (n.treeType === "hero" && n.connections.length === 0)
-      n.alreadyGranted = true;
+  // Auto-grant the hero-subtree roots (see above)
+  for (const n of nodes) if (heroRootIds.has(n.id)) n.alreadyGranted = true;
 
   return nodes;
 }
