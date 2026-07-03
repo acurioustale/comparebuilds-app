@@ -187,7 +187,11 @@ export const TalentNode = memo(function TalentNode({
   onNodeContextMenu = null,
   onNodeTap = null,
 }) {
-  const isSelected = sel !== undefined || alreadyGranted;
+  // `!= null` (not `!== undefined`): the store uses null as a "not-yet-parsed"
+  // sentinel, and the lines below already read sel via `sel?.` — treating an
+  // explicit null sel as selected would render a phantom gold/opacity-1 node with
+  // 0 points.
+  const isSelected = sel != null || alreadyGranted;
   const pointsInvested =
     sel?.pointsInvested ?? (alreadyGranted ? node.maxRanks : 0);
   const entryChosen = sel?.entryChosen ?? null;
