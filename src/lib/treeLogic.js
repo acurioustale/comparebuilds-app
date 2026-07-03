@@ -27,17 +27,25 @@ export function upperParents(node, nodeById) {
  * can't drift on an apex-with-choices or a summed choice node. Every other case
  * — no choices array, or an unknown pick (entryChosen null) — uses node.maxRanks.
  *
+ * A pick whose entryChosen indexes past the node's real options is corrupt: the
+ * chosen option does not exist, so it can't be "fully ranked" and never satisfies
+ * a dependent's prerequisite. The parser clamps entryChosen into range, so this
+ * only guards a corrupt interactive or persisted selection that bypassed it —
+ * without the guard the missing option's rank ceiling defaults to 1 and a single
+ * stray point would launder the bogus pick into a satisfied prerequisite.
+ *
  * @param {object} node Parent node definition
  * @param {{ pointsInvested: number, entryChosen: number|null }|undefined} sel Selection entry for the node
  * @returns {boolean} True if the node is fully ranked
  */
 export function isFullySelected(node, sel) {
   if (!sel) return false;
-  const max =
-    node.choices && sel.entryChosen != null
-      ? (node.choices[sel.entryChosen]?.maxRanks ?? 1)
-      : node.maxRanks;
-  return sel.pointsInvested >= max;
+  if (node.choices && sel.entryChosen != null) {
+    const option = node.choices[sel.entryChosen];
+    if (!option) return false; // out-of-range pick — unresolvable, never full
+    return sel.pointsInvested >= (option.maxRanks ?? 1);
+  }
+  return sel.pointsInvested >= node.maxRanks;
 }
 
 /**
