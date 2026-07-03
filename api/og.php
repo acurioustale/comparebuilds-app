@@ -248,19 +248,11 @@ try {
         }
     });
 
-    for ($slot = 0; $slot < OG_CONCURRENCY_SLOTS; $slot++) {
-        $candidate = 'cb_og_global_' . $slot;
-        if (RateLimiter::acquireLock($pdo, $redis, $candidate, $globalLockToken, OG_LOCK_TTL)) {
-            $globalLockName = $candidate;
-            break;
-        }
-    }
-    if ($globalLockName === null) {
-        header('Retry-After: 5');
-        bail(503);
-    }
-
     // ── Concurrency throttling & rate limiting ──────────────────────────────
+    // Evaluate the per-IP rate limit BEFORE competing for a scarce global render
+    // slot (acquired further below), so a throttled or abusive IP is rejected
+    // without ever occupying one of the OG_CONCURRENCY_SLOTS and starving other
+    // callers' previews.
     $ipHash = client_ip_hash();
     $ipLockName = 'cb_og_' . substr($ipHash, 0, 48);
 
@@ -350,12 +342,10 @@ try {
         }
     }
 
-    // Skip the (relatively costly) share lookup when throttled.
-    if (!$rateLimited) {
-        $data = get_share($pdo, $id);
-    }
-
-    // The shutdown handler frees both locks on exit, so bail() here is safe.
+    // Reject a throttled caller now, before it competes for one of the scarce
+    // global render slots below — an abusive IP must not be able to occupy a slot
+    // (and starve other previews) only to be turned away. The shutdown handler
+    // frees the per-IP lock on exit, so bail() here is safe.
     if ($rateLimited) {
         if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $xff = preg_replace('/[\r\n]+/', ' ', $_SERVER['HTTP_X_FORWARDED_FOR']);
@@ -364,6 +354,28 @@ try {
         header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
         bail(429);
     }
+
+    // ── Global concurrency guard ─────────────────────────────────────────────
+    // GD true-color image generation is CPU-intensive. Without this, a flood of
+    // requests from many different IPs (each below their per-IP rate limit) could
+    // exhaust all PHP-FPM workers. Acquire one of OG_CONCURRENCY_SLOTS advisory
+    // locks (cb_og_global_0 … cb_og_global_N); if none is free, 503 immediately
+    // rather than queuing. Only non-throttled requests reach here, so a slot is
+    // never spent on a caller that will just be rate-limited away.
+    for ($slot = 0; $slot < OG_CONCURRENCY_SLOTS; $slot++) {
+        $candidate = 'cb_og_global_' . $slot;
+        if (RateLimiter::acquireLock($pdo, $redis, $candidate, $globalLockToken, OG_LOCK_TTL)) {
+            $globalLockName = $candidate;
+            break;
+        }
+    }
+    if ($globalLockName === null) {
+        header('Retry-After: 5');
+        bail(503);
+    }
+
+    // Holding a render slot now: do the (relatively costly) share lookup.
+    $data = get_share($pdo, $id);
 } catch (Throwable $e) {
     bail(500);
 }
