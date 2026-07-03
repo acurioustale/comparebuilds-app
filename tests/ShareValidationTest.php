@@ -245,6 +245,19 @@ final class ShareValidationTest extends TestCase
         $this->assertSame('abcdef12', $r['payload']['layoutHash']);
     }
 
+    public function testCanonicalisesLayoutHashToLowercase(): void
+    {
+        // The layout_hash join is case-sensitive (utf8mb4_bin); an uppercase hash
+        // must be lowered so it still matches its live-layout row.
+        $r = validate_share_input([
+            'classId' => 1,
+            'specId' => 1,
+            'builds' => ['AA', 'BB'],
+            'layoutHash' => 'ABCDEF12',
+        ]);
+        $this->assertSame('abcdef12', $r['payload']['layoutHash']);
+    }
+
     public function testRejectsOverlongLayoutHash(): void
     {
         $r = validate_share_input([
