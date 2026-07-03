@@ -215,6 +215,16 @@ export function validateClassData(data, indexEntry = null) {
         if (!isArr(n.ranks) || n.ranks.length === 0) {
           nAt("apex node must have a non-empty ranks array");
         } else {
+          // Each rank must invest at least one point. TalentNode advances a
+          // cumulative threshold by `rank.maxRanks` to render per-rank progress,
+          // so a zero-rank would collapse two ranks onto one threshold. The
+          // sum-vs-maxRanks check below doesn't catch this on its own — ranks of
+          // [0, N] still sum correctly — so guard each rank exactly like the
+          // choice-option branch above.
+          n.ranks.forEach((r, ri) => {
+            if (!isInt(r?.maxRanks) || r.maxRanks < 1)
+              nAt(`ranks[${ri}].maxRanks must be a positive integer`);
+          });
           const sum = n.ranks.reduce(
             (s, r) => s + (isInt(r?.maxRanks) ? r.maxRanks : 0),
             0,
