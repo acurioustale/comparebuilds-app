@@ -40,5 +40,14 @@ export async function createServerShare({
     const err = await res.json().catch(() => ({}));
     throw new Error(err.error ?? `HTTP ${res.status}`);
   }
-  return res.json();
+  // A 200 doesn't guarantee the expected body: a misconfigured proxy/CDN can
+  // return a success page, or the API contract could drift. Require a non-empty
+  // string id so a malformed-but-200 response fails loudly here instead of
+  // resolving as success and surfacing downstream as a dead "/s/undefined" link
+  // the caller copies to the clipboard.
+  const data = await res.json().catch(() => null);
+  if (!data || typeof data.id !== "string" || data.id.length === 0) {
+    throw new Error("Share API returned an unexpected response.");
+  }
+  return data;
 }
