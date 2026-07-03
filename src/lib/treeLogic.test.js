@@ -685,6 +685,26 @@ test("isFullySelected: an unknown choice pick falls back to node.maxRanks", () =
   );
 });
 
+test("isFullySelected: an out-of-range choice pick is never full (corrupt)", () => {
+  // entryChosen indexes past the real options (the 2-bit wire field encodes 0-3
+  // even on a 2-option node; the parser clamps this, so only a corrupt interactive
+  // or persisted selection reaches here). The chosen option does not exist, so the
+  // pick cannot count as fully ranked and must not satisfy a dependent's prereq —
+  // rather than defaulting its rank ceiling to 1 and passing on a single point.
+  const choice = {
+    id: 1,
+    posX: 1,
+    posY: 0,
+    type: "choice",
+    maxRanks: 1,
+    choices: [{ name: "X" }, { name: "Y" }],
+  };
+  assert.strictEqual(
+    isFullySelected(choice, { pointsInvested: 1, entryChosen: 5 }),
+    false,
+  );
+});
+
 test("isFullySelected: a choice node with no choices array uses node.maxRanks", () => {
   const choice = { id: 1, posX: 1, posY: 0, type: "choice", maxRanks: 1 };
   assert.strictEqual(
