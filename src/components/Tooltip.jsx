@@ -1,4 +1,10 @@
-import { useRef, useState, useEffect, cloneElement } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  cloneElement,
+  isValidElement,
+} from "react";
 import {
   useFloating,
   autoUpdate,
@@ -55,7 +61,8 @@ function compose(a, b) {
  * @param {string} [props.placement="top"] Tooltip placement
  * @param {number} [props.delay=0] Hover delay in ms
  * @param {string} [props.touch="tap"] Touch interaction mode ('tap'|'hold')
- * @param {import("react").ReactElement} props.children Target element
+ * @param {import("react").ReactNode} props.children Target element (a non-element
+ *   child is wrapped in a span so it can still anchor the tooltip)
  * @returns {import("react").JSX.Element}
  */
 export default function Tooltip({
@@ -104,9 +111,16 @@ export default function Tooltip({
     role,
   ]);
 
+  // Floating UI attaches its reference ref and interaction props to a single
+  // element. Every call site passes one, but coerce defensively: a bare string,
+  // number, array, or nullish child has no `.props` to read or clone and would
+  // throw below — wrap it in a span so it still gets a tooltip rather than
+  // crashing the surrounding subtree. A valid element passes through untouched.
+  const child = isValidElement(children) ? children : <span>{children}</span>;
+
   // React 19 keeps a child's ref in props.ref; reading children.ref directly is
   // the deprecated access this migration exists to remove.
-  const ref = useMergeRefs([refs.setReference, children.props.ref]);
+  const ref = useMergeRefs([refs.setReference, child.props.ref]);
 
   // Long-press peek for the interactive tree. A tap (released before HOLD_MS) or
   // a drag (moved past MOVE_TOL) cancels it, leaving the tap free to spend.
@@ -149,16 +163,16 @@ export default function Tooltip({
   // reference ref wins. React 19 keeps a child's ref in props.ref, so ordering
   // ref last is what stops a ref'd child from clobbering refs.setReference and
   // leaving the tooltip with no element to position against.
-  const userProps = { ...children.props, ref };
+  const userProps = { ...child.props, ref };
   if (holdProps) {
     for (const key of Object.keys(holdProps)) {
-      userProps[key] = compose(children.props[key], holdProps[key]);
+      userProps[key] = compose(child.props[key], holdProps[key]);
     }
   }
 
   return (
     <>
-      {cloneElement(children, getReferenceProps(userProps))}
+      {cloneElement(child, getReferenceProps(userProps))}
       {open && (
         <FloatingPortal>
           <div
