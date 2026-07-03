@@ -806,7 +806,11 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     // without JSON-parsing every row. NULL for pre-feature clients that omit it.
     $layoutHash = $payload['layoutHash'] ?? null;
 
-    if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken)) {
+    // Remember which backend took the lock so the release in finally targets the
+    // same one even if a mid-request Redis failure nulls $redis (which would
+    // otherwise divert a Redis-held lock's release to MySQL and strand it).
+    $lockViaRedis = false;
+    if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken, 5, $lockViaRedis)) {
         // Count the attempt before bailing so lock contention can't be used to
         // slip past the limiter uncounted.
         record_throttled_attempt($pdo, $redis, $rlKey, $ipHash);
@@ -982,7 +986,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
             }
         }
     } finally {
-        RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken);
+        RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken, $lockViaRedis);
     }
 
     if ($id === null) {
