@@ -74,6 +74,14 @@ final class ShareValidationTest extends TestCase
         $this->assertArrayHasKey('error', $r);
     }
 
+    public function testRejectsAssociativeLabelsMap(): void
+    {
+        // A sparse/associative map has the right count but the wrong keys, so it
+        // would desync from the builds it labels once indexed by slot position.
+        $r = validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', 'BB'], 'labels' => [0 => 'x', 7 => 'y']]);
+        $this->assertArrayHasKey('error', $r);
+    }
+
     public function testRejectsOverlongLabel(): void
     {
         $r = validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', 'BB'], 'labels' => ['ok', str_repeat('x', 41)]]);
