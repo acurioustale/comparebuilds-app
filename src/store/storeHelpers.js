@@ -33,25 +33,25 @@ const CLASS_MODULES = import.meta.glob([
 export function sanitizeHeroSubtrees(nodes, treeData) {
   if (!treeData) return nodes;
 
-  // Which hero subtrees carry any (non-granted) selected points?
+  // Collect the selected (non-granted) hero nodes and the distinct subtrees they
+  // touch in a single pass. Only these nodes can ever be pruned below — deleting
+  // an id that isn't a selection is a no-op — so the removal step iterates this
+  // short list instead of re-walking the whole node array.
+  const selectedHeroNodes = [];
   const subs = new Set();
   for (const n of treeData.nodes) {
-    if (n.treeType === "hero" && !n.alreadyGranted && nodes[n.id])
+    if (n.treeType === "hero" && !n.alreadyGranted && nodes[n.id]) {
+      selectedHeroNodes.push(n);
       subs.add(n.heroSubtree);
+    }
   }
   if (subs.size <= 1) return nodes;
 
   const keepSub = activeHeroSubtree(treeData.nodes, nodes);
 
   const result = { ...nodes };
-  for (const n of treeData.nodes) {
-    if (
-      n.treeType === "hero" &&
-      !n.alreadyGranted &&
-      n.heroSubtree !== keepSub
-    ) {
-      delete result[n.id];
-    }
+  for (const n of selectedHeroNodes) {
+    if (n.heroSubtree !== keepSub) delete result[n.id];
   }
   return result;
 }
