@@ -127,8 +127,16 @@ describe("selectionLabel", () => {
       choices: [{ name: "X" }, { name: "Y" }],
     };
     assert.strictEqual(selectionLabel(named, pt(1, null)), "Capstone");
-    // The fixture's unnamed choice node yields its (null) name, never "option 1".
-    assert.strictEqual(selectionLabel(byId[3], pt(1, null)), null);
+    // A plain choice node carries name:null, so name the slot by its options
+    // rather than returning a blank cell — never "option 1".
+    assert.strictEqual(selectionLabel(byId[3], pt(1, null)), "X / Y");
+  });
+
+  test("choice node with unknown pick and no usable option names → null", () => {
+    // Fully degenerate corrupt data: name:null and no named options. Nothing
+    // legible to show, so fall through to null rather than inventing a label.
+    const bare = { type: "choice", name: null, choices: [{}, {}] };
+    assert.strictEqual(selectionLabel(bare, pt(1, null)), null);
   });
 });
 
