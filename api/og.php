@@ -117,9 +117,33 @@ function draw_text($img, ?string $font, float $size, int $x, int $yBaseline, $co
     imagedestroy($tmp);
 }
 
+/**
+ * Strip Unicode control and format codepoints (\p{C}: Cc control, Cf format,
+ * Cn unassigned, Co private-use, Cs surrogate) from text drawn into the card.
+ *
+ * className/specName come from the share payload, which the API only length-checks
+ * (validate_share_input in share.php) — no charset restriction. A share creator can
+ * embed a right-to-left override (U+202E), zero-width joiners, or control bytes
+ * that render misleading, reversed, or garbled text in a preview image that
+ * unfurls under the site's own domain in Discord/Slack. Removing the format and
+ * control classes neutralises those vectors while leaving ordinary letters, marks,
+ * and punctuation (including non-Latin scripts) intact.
+ *
+ * @param string $s Raw text from the share payload
+ * @return string Text safe to rasterise
+ */
+function sanitize_render_text(string $s): string
+{
+    // /u treats the subject as UTF-8; on malformed UTF-8 preg_replace returns null,
+    // so fall back to empty rather than handing null to the renderer.
+    $clean = preg_replace('/\p{C}/u', '', $s);
+    return $clean === null ? '' : $clean;
+}
+
 // When this file is included for unit testing (with OG_API_NO_MAIN defined), stop
-// here: everything above is pure (font discovery, hex parsing) and testable;
-// everything below reads the request, opens a DB connection, and emits an image.
+// here: everything above is pure (font discovery, hex parsing, text sanitising)
+// and testable; everything below reads the request, opens a DB connection, and
+// emits an image.
 if (defined('OG_API_NO_MAIN')) {
     return;
 }
@@ -403,9 +427,12 @@ if (!$data) {
 $data      = json_decode($data, true) ?: [];
 $classId   = (int) ($data['classId'] ?? 0);
 $builds    = is_array($data['builds'] ?? null) ? $data['builds'] : [];
-$className  = is_string($data['className'] ?? null) && $data['className'] !== ''
-    ? $data['className'] : (CLASS_INFO[$classId][0] ?? 'World of Warcraft');
-$specName  = is_string($data['specName'] ?? null) ? $data['specName'] : '';
+// Sanitise BEFORE the empty-fallback so a name that was only format/control chars
+// collapses to empty and falls back to the trusted class name rather than drawing
+// a blank or a lone bidi override.
+$rawClass   = is_string($data['className'] ?? null) ? sanitize_render_text($data['className']) : '';
+$className  = $rawClass !== '' ? $rawClass : (CLASS_INFO[$classId][0] ?? 'World of Warcraft');
+$specName   = is_string($data['specName'] ?? null) ? sanitize_render_text($data['specName']) : '';
 $color     = CLASS_INFO[$classId][1] ?? '#c8a84b';
 
 // ── Render ──────────────────────────────────────────────────────────────────────
