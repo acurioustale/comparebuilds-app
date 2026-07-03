@@ -117,10 +117,19 @@ export default function InteractiveTalentTree({
   // ── Spend primitives ──────────────────────────────────────────────────────
   // The spend rules live here once so the mouse (click/right-click) and touch
   // (tap) handlers can't drift on gating, point shape, or refund behaviour.
+  //
+  // These handlers read the current selection from the store via getState()
+  // rather than closing over `selected`. Closing over it would give every
+  // handler a fresh identity on each point spend (a new `selected` object),
+  // which changes the onNodeClick/onNodeContextMenu/onNodeTap props of every
+  // TalentNode and defeats their React.memo — re-rendering the whole tree on
+  // each spend. Reading from the store keeps the identities stable so only the
+  // touched node re-renders.
 
   // Spend the first point on an unselected node (gated by canSpendPoint).
   const spendFirstPoint = useCallback(
     (node, entryChosen) => {
+      const selected = useBuildsStore.getState().interactiveNodes;
       if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
         return;
       setInteractiveNodes({
@@ -128,12 +137,13 @@ export default function InteractiveTalentTree({
         [node.id]: { pointsInvested: 1, entryChosen },
       });
     },
-    [selected, nodeById, treeData.nodes, budget, setInteractiveNodes],
+    [nodeById, treeData.nodes, budget, setInteractiveNodes],
   );
 
   // Add a rank to an already-selected node (gated by canSpendPoint).
   const incrementRank = useCallback(
     (node, sel) => {
+      const selected = useBuildsStore.getState().interactiveNodes;
       if (!canSpendPoint(node, treeData.nodes, selected, nodeById, budget))
         return;
       setInteractiveNodes({
@@ -141,17 +151,18 @@ export default function InteractiveTalentTree({
         [node.id]: { ...sel, pointsInvested: sel.pointsInvested + 1 },
       });
     },
-    [selected, nodeById, treeData.nodes, budget, setInteractiveNodes],
+    [nodeById, treeData.nodes, budget, setInteractiveNodes],
   );
 
   // Remove a node from the selection entirely.
   const removeNode = useCallback(
     (nodeId) => {
+      const selected = useBuildsStore.getState().interactiveNodes;
       const next = { ...selected };
       delete next[nodeId];
       setInteractiveNodes(next);
     },
-    [selected, setInteractiveNodes],
+    [setInteractiveNodes],
   );
 
   // ── Click handlers ──────────────────────────────────────────────────────────
@@ -161,6 +172,7 @@ export default function InteractiveTalentTree({
       const node = nodeById[nodeId];
       if (!node || node.alreadyGranted) return;
 
+      const selected = useBuildsStore.getState().interactiveNodes;
       const sel = selected[nodeId];
 
       if (!sel) {
@@ -181,13 +193,14 @@ export default function InteractiveTalentTree({
         incrementRank(node, sel);
       }
     },
-    [selected, nodeById, setInteractiveNodes, spendFirstPoint, incrementRank],
+    [nodeById, setInteractiveNodes, spendFirstPoint, incrementRank],
   );
 
   const handleRightClick = useCallback(
     (nodeId) => {
       const node = nodeById[nodeId];
       if (!node || node.alreadyGranted) return;
+      const selected = useBuildsStore.getState().interactiveNodes;
       const sel = selected[nodeId];
       if (!sel) return;
 
@@ -202,7 +215,7 @@ export default function InteractiveTalentTree({
         removeNode(nodeId);
       }
     },
-    [selected, nodeById, setInteractiveNodes, removeNode],
+    [nodeById, setInteractiveNodes, removeNode],
   );
 
   // Touch tap: one gesture that cycles a node, folding spend and refund together
@@ -214,6 +227,7 @@ export default function InteractiveTalentTree({
     (nodeId, choiceIdx = null) => {
       const node = nodeById[nodeId];
       if (!node || node.alreadyGranted) return;
+      const selected = useBuildsStore.getState().interactiveNodes;
       const sel = selected[nodeId];
 
       if (node.type === "choice") {
@@ -247,7 +261,6 @@ export default function InteractiveTalentTree({
       }
     },
     [
-      selected,
       nodeById,
       treeData.nodes,
       budget,
@@ -262,13 +275,14 @@ export default function InteractiveTalentTree({
 
   const handleClearSection = useCallback(
     (treeType) => {
+      const selected = useBuildsStore.getState().interactiveNodes;
       const next = { ...selected };
       for (const n of treeData.nodes) {
         if (n.treeType === treeType && !n.alreadyGranted) delete next[n.id];
       }
       setInteractiveNodes(next);
     },
-    [selected, treeData.nodes, setInteractiveNodes],
+    [treeData.nodes, setInteractiveNodes],
   );
 
   const handleClearAll = useCallback(() => {
