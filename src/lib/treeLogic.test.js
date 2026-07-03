@@ -14,6 +14,7 @@ import {
   cellKey,
   spentPoints,
   gatedPoints,
+  isFullySelected,
   hasUpperPrereq,
 } from "./treeLogic.js";
 
@@ -595,7 +596,118 @@ test("removing Aimed Shot invalidates all connection-dependent spec nodes, not c
   );
 });
 
+// ─── isFullySelected ─────────────────────────────────────────────────────────
+
+test("isFullySelected: no selection entry is never full", () => {
+  assert.strictEqual(isFullySelected(node(1, 0), undefined), false);
+});
+
+test("isFullySelected: non-choice node compares against node.maxRanks", () => {
+  const n = node(1, 0, { maxRanks: 2 });
+  assert.strictEqual(isFullySelected(n, sel(2)), true);
+  assert.strictEqual(isFullySelected(n, sel(1)), false);
+});
+
+test("isFullySelected: choice node uses the CHOSEN option's max, not node.maxRanks", () => {
+  // node.maxRanks (3) is deliberately larger than either option's max, mirroring
+  // a node-level sum. A fully-picked single-rank option must satisfy a dependent
+  // even though pointsInvested (1) is far below node.maxRanks.
+  const choice = {
+    id: 1,
+    posX: 1,
+    posY: 0,
+    type: "choice",
+    maxRanks: 3,
+    choices: [
+      { name: "X", maxRanks: 1 },
+      { name: "Y", maxRanks: 2 },
+    ],
+  };
+  // Option 0 (max 1) fully ranked at 1 point → full.
+  assert.strictEqual(
+    isFullySelected(choice, { pointsInvested: 1, entryChosen: 0 }),
+    true,
+  );
+  // Option 1 (max 2) at 1 point → not yet full.
+  assert.strictEqual(
+    isFullySelected(choice, { pointsInvested: 1, entryChosen: 1 }),
+    false,
+  );
+  // Option 1 (max 2) fully ranked at 2 points → full (still below node.maxRanks).
+  assert.strictEqual(
+    isFullySelected(choice, { pointsInvested: 2, entryChosen: 1 }),
+    true,
+  );
+});
+
+test("isFullySelected: choice option without an explicit maxRanks defaults to 1", () => {
+  const choice = {
+    id: 1,
+    posX: 1,
+    posY: 0,
+    type: "choice",
+    maxRanks: 1,
+    choices: [{ name: "X" }, { name: "Y" }],
+  };
+  assert.strictEqual(
+    isFullySelected(choice, { pointsInvested: 1, entryChosen: 0 }),
+    true,
+  );
+});
+
+test("isFullySelected: an unknown choice pick falls back to node.maxRanks", () => {
+  const choice = {
+    id: 1,
+    posX: 1,
+    posY: 0,
+    type: "choice",
+    maxRanks: 1,
+    choices: [{ name: "X", maxRanks: 1 }],
+  };
+  assert.strictEqual(
+    isFullySelected(choice, { pointsInvested: 1, entryChosen: null }),
+    true,
+  );
+});
+
+test("isFullySelected: a choice node with no choices array uses node.maxRanks", () => {
+  const choice = { id: 1, posX: 1, posY: 0, type: "choice", maxRanks: 1 };
+  assert.strictEqual(
+    isFullySelected(choice, { pointsInvested: 1, entryChosen: 0 }),
+    true,
+  );
+});
+
 // ─── hasUpperPrereq ──────────────────────────────────────────────────────────
+
+test("hasUpperPrereq: a choice-node parent is satisfied by fully ranking the chosen option", () => {
+  // A choice-node prerequisite whose node.maxRanks (2) exceeds the chosen
+  // option's max (1). Picking that option fully (1 point) must unlock the child;
+  // the old node.maxRanks check required 2 points a single option can never hold.
+  const parent = {
+    id: 1,
+    posX: 1,
+    posY: 0,
+    type: "choice",
+    maxRanks: 2,
+    treeType: "class",
+    alreadyGranted: false,
+    connections: [],
+    choices: [
+      { name: "X", maxRanks: 1 },
+      { name: "Y", maxRanks: 1 },
+    ],
+  };
+  const child = node(2, 1, { connections: [1] });
+  assert.strictEqual(
+    hasUpperPrereq(
+      child,
+      { 1: { pointsInvested: 1, entryChosen: 0 } },
+      byId([parent, child]),
+    ),
+    true,
+  );
+});
 
 test("hasUpperPrereq: a root node (no upper parent) always passes", () => {
   const root = node(1, 0);
