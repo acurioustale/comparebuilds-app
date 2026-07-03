@@ -475,6 +475,17 @@ describe("apex nodes", () => {
     assertHasError(withApex({ ranks: [] }), "non-empty ranks array"));
   test("apex maxRanks != sum of rank maxRanks", () =>
     assertHasError(withApex({ maxRanks: 5 }), "!= sum of rank maxRanks"));
+  test("apex with a zero-rank maxRanks is caught even when the sum matches", () =>
+    // [0, 3] still sums to node.maxRanks 3, so only the per-rank guard flags it.
+    assertHasError(
+      withApex({ maxRanks: 3, ranks: [{ maxRanks: 0 }, { maxRanks: 3 }] }),
+      "ranks[0].maxRanks must be a positive integer",
+    ));
+  test("apex with a non-integer rank maxRanks", () =>
+    assertHasError(
+      withApex({ ranks: [{ maxRanks: 1 }, { maxRanks: null }] }),
+      "ranks[1].maxRanks must be a positive integer",
+    ));
   test("apex ranks-sum check composes with a non-integer maxRanks", () => {
     // ranks sum to 3; a malformed maxRanks must not suppress the sum mismatch.
     const errs = withApex({ maxRanks: null });
