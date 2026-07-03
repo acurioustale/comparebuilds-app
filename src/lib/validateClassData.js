@@ -219,7 +219,12 @@ export function validateClassData(data, indexEntry = null) {
             (s, r) => s + (isInt(r?.maxRanks) ? r.maxRanks : 0),
             0,
           );
-          if (isInt(n.maxRanks) && sum !== n.maxRanks) {
+          // Compare even when maxRanks is non-integer (already flagged above): a
+          // node can carry both a malformed maxRanks and a mismatched ranks total,
+          // and gating this on isInt would report only the first and let the
+          // second ship. A non-integer maxRanks never equals the integer sum, so
+          // the mismatch is surfaced alongside the type error.
+          if (sum !== n.maxRanks) {
             nAt(`maxRanks ${n.maxRanks} != sum of rank maxRanks ${sum}`);
           }
         }
