@@ -334,9 +334,12 @@ function validate_share_input(mixed $body): array
     }
 
     // Optional per-slot labels: must parallel builds, each a short string.
+    // Require a positional list (not a JSON object): an associative/sparse map
+    // like {"0":"x","7":"y"} would pass a bare count check yet desync from the
+    // builds it's meant to label once consumers index it by slot position.
     $labels = $body['labels'] ?? null;
     if ($labels !== null) {
-        if (!is_array($labels) || count($labels) !== count($builds)) {
+        if (!is_array($labels) || !array_is_list($labels) || count($labels) !== count($builds)) {
             return ['error' => 'labels, when present, must be an array parallel to builds'];
         }
         foreach ($labels as $l) {
