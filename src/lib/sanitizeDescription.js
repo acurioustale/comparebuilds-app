@@ -17,6 +17,42 @@ import DOMPurify from "dompurify";
 
 let purifyInstance = null;
 
+// Allowlisted CSS named colors. A bare `[a-zA-Z]+` alternative would let any
+// identifier ("expression", "attr", …) through as a "color"; restrict to real
+// keywords instead. No named color appears in the committed data today, so this
+// is deliberately a small, common set — extend it if a tooltip ever needs more.
+const NAMED_COLORS = new Set([
+  "black",
+  "silver",
+  "gray",
+  "grey",
+  "white",
+  "maroon",
+  "red",
+  "purple",
+  "fuchsia",
+  "green",
+  "lime",
+  "olive",
+  "yellow",
+  "navy",
+  "blue",
+  "teal",
+  "aqua",
+  "cyan",
+  "magenta",
+  "orange",
+  "gold",
+  "brown",
+  "pink",
+  "transparent",
+  "currentcolor",
+]);
+
+// Functional / hex color forms accepted alongside the named-color allowlist.
+const COLOR_VALUE_RE =
+  /^(#[0-9a-fA-F]{3,8}|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%]+\))$/;
+
 /**
  * `uponSanitizeAttribute` hook: restrict inline `style` to a safe color /
  * font-weight allowlist, dropping the attribute entirely when nothing survives.
@@ -40,9 +76,8 @@ function restrictStyleAttribute(node, data) {
       continue;
     if (
       prop === "color" &&
-      !/^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%]+\))$/.test(
-        value,
-      )
+      !COLOR_VALUE_RE.test(value) &&
+      !NAMED_COLORS.has(value.toLowerCase())
     )
       continue;
     decls.push(`${prop}:${value}`);

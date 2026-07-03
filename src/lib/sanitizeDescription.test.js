@@ -54,6 +54,18 @@ describe("allowed markup is preserved", () => {
     const out = sanitizeDescription('<b style="font-weight:700;">x</b>');
     assert.ok(out.includes("font-weight:700"), "font-weight preserved");
   });
+
+  test("an allowlisted named color is kept", () => {
+    const out = sanitizeDescription('<b style="color:red;">x</b>');
+    assert.ok(out.includes("color:red"), "named color preserved");
+  });
+
+  test("a non-color bare word is dropped, not emitted as a color", () => {
+    // Any [a-zA-Z]+ used to pass as a "named color"; now only real keywords do.
+    const out = sanitizeDescription('<b style="color:expression;">x</b>');
+    assert.ok(!out.includes("color:expression"), "garbage color dropped");
+    assert.ok(!out.includes("style="), "empty style attribute dropped");
+  });
 });
 
 describe("text is escaped", () => {
