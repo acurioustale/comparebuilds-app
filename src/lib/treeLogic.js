@@ -17,12 +17,15 @@ export function upperParents(node, nodeById) {
 
 /**
  * True when a selection has fully ranked a node — every point its pick can hold
- * is spent, so it satisfies anything gated on it. For a choice node the ceiling
- * is the CHOSEN option's max rank, which can differ from the node-level maxRanks
- * (the same way buildString's decode resolves `effectiveMax`): a fully-picked
- * option satisfies a dependent even when node.maxRanks is a larger sum. Every
- * other node type uses node.maxRanks. An unknown choice pick (entryChosen null)
- * falls back to node.maxRanks, matching the pre-choice behaviour.
+ * is spent, so it satisfies anything gated on it. When the pick chose an option
+ * (entryChosen set) on a node carrying a `choices` array, the ceiling is that
+ * CHOSEN option's max rank, which can differ from the node-level maxRanks: a
+ * fully-picked option satisfies a dependent even when node.maxRanks is a larger
+ * sum. This mirrors buildString's decode of `effectiveMax` EXACTLY — both key
+ * off `node.choices` plus a resolved pick, not off `node.type`, so the parser
+ * (which sets entryChosen non-null only when node.choices exists) and this gate
+ * can't drift on an apex-with-choices or a summed choice node. Every other case
+ * — no choices array, or an unknown pick (entryChosen null) — uses node.maxRanks.
  *
  * @param {object} node Parent node definition
  * @param {{ pointsInvested: number, entryChosen: number|null }|undefined} sel Selection entry for the node
@@ -31,7 +34,7 @@ export function upperParents(node, nodeById) {
 export function isFullySelected(node, sel) {
   if (!sel) return false;
   const max =
-    node.type === "choice" && node.choices && sel.entryChosen != null
+    node.choices && sel.entryChosen != null
       ? (node.choices[sel.entryChosen]?.maxRanks ?? 1)
       : node.maxRanks;
   return sel.pointsInvested >= max;
