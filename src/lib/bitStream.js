@@ -26,6 +26,17 @@ export class BitReader {
   }
 
   /**
+   * Whether the next `readBit()` would run past the end of the stream. Lets a
+   * caller treat an exhausted tail as implicit zero bits (e.g. a build string
+   * whose trailing all-zero — unselected — node records were trimmed) instead of
+   * forcing every producer to pad to the full node count.
+   * @returns {boolean} True when no more bits remain
+   */
+  atEnd() {
+    return ((this.#pos / 6) | 0) >= this.#str.length;
+  }
+
+  /**
    * Reads a single bit from the stream.
    * @returns {number} 0 or 1
    */

@@ -188,6 +188,13 @@ export function parseBuildString(buildString, nodes) {
   const result = {};
 
   for (const { id } of sorted) {
+    // A trailing run of unselected nodes serialises as all-zero records, which a
+    // producer may trim off the end of the string. Once the stream is exhausted
+    // at a record boundary, every remaining node is unselected — stop rather than
+    // throw. Mid-record reads below stay strict, so a genuinely truncated string
+    // (cut inside a selected node's fields) still fails loudly.
+    if (reader.atEnd()) break;
+
     const isSelected = reader.readBit();
     if (!isSelected) continue;
 
