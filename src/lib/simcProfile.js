@@ -8,6 +8,15 @@ import { defaultBuildLabel } from "./buildLabel.js";
 // eslint-disable-next-line no-control-regex
 const strip = (s) => s.replace(/[\u0000-\u001f\u007f"\\]/g, "");
 
+// The build string is emitted verbatim on the `talents=` line. It is a base64
+// talent loadout, but the share API only length-checks it, and the decoder stops
+// once it has read every node — so a crafted share can append arbitrary bytes
+// (e.g. "\nsim_option=...") past the consumed region and still parse cleanly. A
+// trailing newline would split the line and inject a top-level SimulationCraft
+// directive. Keep only the base64 alphabet (the loadout's own charset, padding
+// included) so the value stays a single clean token no matter what was appended.
+const stripBuild = (s) => s.replace(/[^A-Za-z0-9+/=]/g, "");
+
 /**
  * Generates a SimulationCraft profileset block for the active comparison slots.
  *
@@ -76,7 +85,9 @@ export function generateSimcProfileset(
     // SimulationCraft imports the in-game loadout string via `talents=`; there is
     // no `talent_tree=` option, so the wrong keyword would make simc ignore the
     // profileset's talents entirely.
-    lines.push(`profileset."${uniqueName}"+=talents=${buildString}`);
+    lines.push(
+      `profileset."${uniqueName}"+=talents=${stripBuild(buildString)}`,
+    );
   }
 
   return lines.join("\n");
