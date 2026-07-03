@@ -92,7 +92,18 @@ export function computeDiff(nodesA, nodesB, allNodes) {
       bOnly.push({ id, node, selA: null, selB });
     } else if (selA && selB) {
       const rankDiff = selA.pointsInvested !== selB.pointsInvested;
-      const choiceDiff = selA.entryChosen !== selB.entryChosen;
+      // Choice picks agree only when both are known (non-null) and equal. An
+      // unknown pick (entryChosen null from a corrupt/partial parse) can't be
+      // assumed to match, so it diverges — the same rule heatmap.isDivergent
+      // applies, so the 2-build diff and the 3+-build heatmap classify an
+      // unknown choice pick identically for the changes-only filter. Scoped to
+      // choice nodes: every other node type always records a null pick, which is
+      // genuine agreement, not a divergence.
+      const choiceDiff =
+        node.type === "choice" &&
+        (selA.entryChosen == null ||
+          selB.entryChosen == null ||
+          selA.entryChosen !== selB.entryChosen);
       if (rankDiff || choiceDiff) {
         highlights[id] = "diff";
         differing.push({ id, node, selA, selB });
