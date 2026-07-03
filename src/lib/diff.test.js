@@ -270,6 +270,26 @@ describe("differenceLabel", () => {
     assert.strictEqual(differenceLabel(byId[3], pt(1, 0), pt(1, 0)), null);
   });
 
+  test("choice node, one pick known and one unknown (null) → 'X → ?'", () => {
+    // A corrupt/partial parse can leave one build's entryChosen null on a taken
+    // choice node; the difference must still be labelled, not dropped.
+    assert.strictEqual(
+      differenceLabel(byId[3], pt(1, 0), pt(1, null)),
+      "X → ?",
+    );
+    assert.strictEqual(
+      differenceLabel(byId[3], pt(1, null), pt(1, 1)),
+      "? → Y",
+    );
+  });
+
+  test("choice node both picks unknown (null) → null", () => {
+    assert.strictEqual(
+      differenceLabel(byId[3], pt(1, null), pt(1, null)),
+      null,
+    );
+  });
+
   test("choice node present in A, absent in B → 'dropped'", () => {
     assert.strictEqual(differenceLabel(byId[3], pt(1, 0), null), "dropped");
   });
