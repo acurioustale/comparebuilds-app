@@ -126,9 +126,19 @@ export function validateClassData(data, indexEntry = null) {
     // heroSubtrees
     const hs = spec.heroSubtrees;
     const subtreeNames = new Set();
+    // True once heroSubtrees is present as an object we could read the intended
+    // subtree names from — even if one or both of those names then failed the
+    // string check. The per-node membership check below keys off this rather than
+    // subtreeNames.size, so a spec that declares heroSubtrees but whose names are
+    // BOTH invalid still has its hero nodes' heroSubtree references validated
+    // instead of silently passing (which masked a second real error). This also
+    // makes the both-invalid case consistent with the one-invalid case, which
+    // already reports mismatches because subtreeNames is then non-empty.
+    let heroSubtreesDeclared = false;
     if (hs == null || typeof hs !== "object") {
       at("heroSubtrees must be an object");
     } else {
+      heroSubtreesDeclared = true;
       for (const side of ["left", "right"]) {
         const sub = hs[side];
         if (sub == null || typeof sub !== "object") {
@@ -280,7 +290,7 @@ export function validateClassData(data, indexEntry = null) {
           nAt("hero node must have a heroSubtree name");
         } else {
           usedSubtreeNames.add(n.heroSubtree);
-          if (subtreeNames.size > 0 && !subtreeNames.has(n.heroSubtree)) {
+          if (heroSubtreesDeclared && !subtreeNames.has(n.heroSubtree)) {
             nAt(
               `heroSubtree "${n.heroSubtree}" does not match either heroSubtrees entry`,
             );
