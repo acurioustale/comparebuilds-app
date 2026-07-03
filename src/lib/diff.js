@@ -141,10 +141,14 @@ export function computeDiff(nodesA, nodesB, allNodes) {
  */
 export function differenceLabel(node, selA, selB) {
   if (node.type === "choice" && selA && selB) {
-    const nameA = chosenOptionName(node, selA.entryChosen);
-    const nameB = chosenOptionName(node, selB.entryChosen);
-    if (nameA && nameB && nameA !== nameB) return `${nameA} → ${nameB}`;
-    return null;
+    // Both builds took the node; they differ iff they picked different options.
+    // An unknown pick (entryChosen null from a corrupt/partial parse) still
+    // differs from a known one — render it as "?" rather than dropping the label
+    // and silently under-reporting the difference.
+    if (selA.entryChosen === selB.entryChosen) return null;
+    const nameA = chosenOptionName(node, selA.entryChosen) ?? "?";
+    const nameB = chosenOptionName(node, selB.entryChosen) ?? "?";
+    return `${nameA} → ${nameB}`;
   }
   // A choice or apex node present in exactly one build: label it gained/dropped
   // for parity — a one-sided choice is as much a recognisable pick as a capstone.
