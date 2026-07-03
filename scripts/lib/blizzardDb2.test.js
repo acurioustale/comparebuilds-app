@@ -518,4 +518,47 @@ describe("renderSpellDescription", () => {
       }),
     ).toBe("");
   });
+
+  it("matches a spec inside an OR'd compound condition", () => {
+    // "$?c1|c3[...]" should render for spec 1 OR spec 3 (orderIndex 0 or 2).
+    const tpl = "$?c1|c3[Shared text.][Default.]";
+    expect(
+      renderSpellDescription({
+        template: tpl,
+        orderIndex: 0, // c1
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("Shared text.");
+    expect(
+      renderSpellDescription({
+        template: tpl,
+        orderIndex: 2, // c3
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("Shared text.");
+    expect(
+      renderSpellDescription({
+        template: tpl,
+        orderIndex: 1, // c2 — not in the OR group
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("Default.");
+  });
+
+  it("blanks (never a wrong branch) for an unevaluable AND condition", () => {
+    // "c1&s12345" mixes a spec test with an is-spell-known test we can't
+    // evaluate at ingest. It must not be treated as a plain "c1" match; the
+    // parser bails to blank rather than render a branch it can't justify.
+    expect(
+      renderSpellDescription({
+        template: "$?c1&s12345[Conditional.][Default.]",
+        orderIndex: 0, // c1, but the &s12345 makes the whole condition unevaluable
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("");
+  });
 });

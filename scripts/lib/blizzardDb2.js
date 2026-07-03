@@ -117,8 +117,12 @@ export function parseCsv(text) {
 
 /**
  * Selects the spec branch of a `$?cN[a]?cM[b][else]` template: the `[…]` whose
- * `cN` matches this spec (N = ChrSpecialization OrderIndex + 1), else the
- * trailing default. A template that doesn't start with `$?c` is returned as-is.
+ * condition matches this spec (N = ChrSpecialization OrderIndex + 1), else the
+ * trailing default. A condition may OR several specs together (`c1|c3[…]`).
+ * Conditions we can't evaluate — an `&` AND, or a non-spec token such as
+ * `s<spellId>` (is-spell-known) — don't match and fall through to the default,
+ * rather than being mis-parsed as a broken single condition. A template that
+ * doesn't start with `$?c` is returned as-is.
  */
 function selectSpecBranch(tpl, orderIndex) {
   if (!tpl.startsWith("$?c")) return tpl;
@@ -127,8 +131,10 @@ function selectSpecBranch(tpl, orderIndex) {
   let i = 2; // past "$?"
   while (i < tpl.length) {
     if (tpl[i] === "?") i++; // separator between conditional branches
-    const m = /^c(\d+)\[/.exec(tpl.slice(i));
+    // One or more spec conditions OR'd together: "c1[" or "c1|c3[".
+    const m = /^(c\d+(?:\|c\d+)*)\[/.exec(tpl.slice(i));
     if (!m) break;
+    const specs = m[1].split("|").map((c) => Number(c.slice(1)));
     let j = i + m[0].length;
     let depth = 1;
     const start = j;
@@ -137,7 +143,7 @@ function selectSpecBranch(tpl, orderIndex) {
       else if (tpl[j] === "]") depth--;
       if (depth > 0) j++;
     }
-    branches.push({ n: Number(m[1]), text: tpl.slice(start, j) });
+    branches.push({ specs, text: tpl.slice(start, j) });
     i = j + 1; // past the closing "]"
   }
   let elseText = "";
@@ -152,7 +158,7 @@ function selectSpecBranch(tpl, orderIndex) {
     }
     elseText = tpl.slice(start, j);
   }
-  return branches.find((b) => b.n === want)?.text ?? elseText;
+  return branches.find((b) => b.specs.includes(want))?.text ?? elseText;
 }
 
 /**
