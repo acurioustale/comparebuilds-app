@@ -266,11 +266,13 @@ function client_ip(): string
                     if (!is_trusted_proxy($ip)) {
                         return $ip;
                     }
-                    $realIp = $ip; // keep as fallback if all are trusted
                 }
-                if (isset($realIp)) {
-                    return $realIp;
-                }
+                // Every hop parsed as a trusted proxy (or the chain was junk):
+                // there is no client-supplied hop we can believe. The leftmost
+                // entry is fully client-spoofable, so returning it would let a
+                // caller inside the trusted range mint a fresh rate-limit key
+                // per request. Fall through to REMOTE_ADDR - the authentic TCP
+                // peer - instead.
             }
         }
     }
