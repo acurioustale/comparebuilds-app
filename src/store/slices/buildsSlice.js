@@ -32,12 +32,22 @@ export const createBuildsSlice = (set, get) => ({
    * empty-list / isFirst path; returns a promise that resolves when this call
    * (and only this call) has finished committing.
    *
+   * Captures slotGen at call time and skips if a structural edit (clearAllBuilds
+   * / removeBuild) reindexed the slots while this add waited in the queue — same
+   * guard as replaceBuild. Without it, a clear or remove that races an in-flight
+   * add would let the queued add run against the emptied store, take the isFirst
+   * path, and resurrect a build the user explicitly cleared.
+   *
    * @param {string} buildString
    * @returns {Promise<boolean>} Resolves true on success, false on failure
    */
   addBuild: (buildString) => {
+    const gen = get().slotGen;
     const queue = get().addBuildQueue;
-    const run = queue.then(() => get().addBuildInternal(buildString));
+    const run = queue.then(() => {
+      if (get().slotGen !== gen) return false;
+      return get().addBuildInternal(buildString);
+    });
     // Keep the queue alive even if this call rejects, so later calls still run.
     set({ addBuildQueue: run.catch(() => {}) });
     return run;
