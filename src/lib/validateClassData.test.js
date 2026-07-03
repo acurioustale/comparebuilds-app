@@ -582,6 +582,20 @@ describe("hero membership", () => {
       }),
       "is declared but no node belongs to it",
     ));
+
+  test("membership still checked when both subtree names are invalid", () =>
+    // Both names invalid → subtreeNames ends up empty, but heroSubtrees is still
+    // declared, so each hero node's reference must still be flagged rather than
+    // silently passing (which used to mask the mismatch behind the empty set).
+    assertHasError(
+      errorsFor((d) => {
+        const f = makeValidFixed();
+        d.specs = f.specs;
+        delete d.specs.only.heroSubtrees.left.name;
+        delete d.specs.only.heroSubtrees.right.name;
+      }),
+      "does not match either heroSubtrees entry",
+    ));
 });
 
 // ── Serialisation-space disjointness ──────────────────────────────────────────
