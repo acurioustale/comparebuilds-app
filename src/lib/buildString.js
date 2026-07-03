@@ -175,7 +175,11 @@ export function parseBuildString(buildString, nodes) {
     );
   }
   const specId = reader.readBits(16);
-  reader.skipBits(128); // Blizzard internal hash — opaque, carries a real (non-zero) value in game exports but is not needed to decode the selection
+  // Blizzard internal hash — opaque, carries a real (non-zero) value in game
+  // exports but is not needed to decode the selection. skipBits throws if the
+  // string is too short to hold all 128 bits, so a header truncated inside the
+  // hash fails loudly instead of decoding as an empty build.
+  reader.skipBits(128);
 
   // Sorted-ascending list (must match the serialisation order) plus an id→node
   // map for maxRanks / choices lookups. Both are derived purely from `nodes`, so

@@ -50,4 +50,15 @@ describe("bitStream safe shift handling", () => {
     // The next read past the end still throws — atEnd is a probe, not a mute.
     expect(() => reader.readBit()).toThrow(RangeError);
   });
+
+  test("BitReader.skipBits throws when the skip runs past the end", () => {
+    const reader = new BitReader("AA"); // two chars = 12 bits available
+    expect(() => reader.skipBits(13)).toThrow(RangeError);
+  });
+
+  test("BitReader.skipBits advances within bounds without throwing", () => {
+    const reader = new BitReader("AA"); // 12 bits
+    reader.skipBits(12); // exactly to the end is allowed
+    expect(reader.atEnd()).toBe(true);
+  });
 });

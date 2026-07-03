@@ -200,6 +200,29 @@ describe("parseBuildString tolerates a trimmed trailing-zero node tail", () => {
       /exhausted/,
     );
   });
+
+  test("a header truncated inside the Blizzard hash throws, not decodes as empty", () => {
+    // version + specId present, but the 128-bit hash is cut short. Every real
+    // export carries the full hash, so this is corruption. Without an eager bounds
+    // check the hash-skip would run past the end and the first node-loop atEnd()
+    // would treat it as a trimmed tail, silently yielding an empty build.
+    //
+    // Detection is at base64-char (6-bit) granularity: toString() pads the final
+    // char with zeros, so a hash cut within the last few bits is padded back to a
+    // full-length header and is indistinguishable from a valid one. That is not a
+    // reachable input — base64 cannot carry a partial char — so the cases below
+    // drop whole chars, which is how truncation actually manifests.
+    const full = generateBuildString({}, spec.specId, classNodes);
+    const headerChars = Math.ceil((8 + 16 + 128) / 6); // 26
+    for (const chars of [4, 12, headerChars - 1]) {
+      const truncated = full.slice(0, chars);
+      assert.throws(
+        () => parseBuildString(truncated, classNodes),
+        /exhausted/,
+        `expected throw for a header truncated to ${chars} chars`,
+      );
+    }
+  });
 });
 
 // ── Encode clamps an out-of-range choice index (regression, finding #12) ──────
