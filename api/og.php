@@ -185,23 +185,36 @@ $mtime = is_file($cacheFile) ? filemtime($cacheFile) : false;
 if ($mtime !== false) {
     $etag = '"' . md5($id . $mtime) . '"';
 
-    header("Content-Type: $mime");
-    header('Cache-Control: public, max-age=31536000, immutable');
-    header('X-Content-Type-Options: nosniff');
-    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $mtime) . ' GMT');
-    header('ETag: ' . $etag);
-
-    if (
+    $notModified =
         (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) === $etag) ||
-        (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && @strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $mtime)
-    ) {
-        http_response_code(304);
+        (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && @strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $mtime);
+
+    // Open the cached file BEFORE emitting any 200 headers. If a concurrent
+    // prune unlinked it between the filemtime() check above and here, fopen()
+    // returns false and we fall through to regenerate, rather than sending
+    // caching headers followed by an empty/truncated body. Once the handle is
+    // open the read is race-proof: on POSIX an unlinked-but-open file stays
+    // fully readable through the descriptor. A 304 carries no body, so skip the
+    // open on that path.
+    // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
+    $fh = $notModified ? null : @fopen($cacheFile, 'rb');
+    if ($notModified || $fh !== false) {
+        header("Content-Type: $mime");
+        header('Cache-Control: public, max-age=31536000, immutable');
+        header('X-Content-Type-Options: nosniff');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $mtime) . ' GMT');
+        header('ETag: ' . $etag);
+
+        if ($notModified) {
+            http_response_code(304);
+            exit;
+        }
+
+        fpassthru($fh);
+        fclose($fh);
         exit;
     }
-
-    // nosemgrep: php.lang.security.injection.tainted-filename.tainted-filename
-    readfile($cacheFile);
-    exit;
+    // The file vanished under us (prune race) — fall through and regenerate.
 }
 
 // Number of concurrent OG image renders allowed across all IPs at any one time.
