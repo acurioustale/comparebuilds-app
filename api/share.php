@@ -210,6 +210,16 @@ function is_ip_in_cidr(string $ip, string $cidr): bool
             return false;
         }
 
+        // Reject a malformed prefix length rather than silently matching. A
+        // negative prefix (a typo like "/-1") would break out of the loop below
+        // on the first byte and return true for EVERY address — turning one
+        // botched TRUSTED_PROXIES entry into "trust all", which lets spoofed
+        // forwarded-for headers mint a fresh rate-limit key per request. An
+        // over-length prefix is nonsense too. Valid range is 0..bits-in-address.
+        if ($bits < 0 || $bits > $ipLen * 8) {
+            return false;
+        }
+
         // Compare byte by byte
         for ($i = 0; $i < $ipLen; $i++) {
             if ($bits <= 0) {

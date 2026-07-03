@@ -223,6 +223,26 @@ final class ShareValidationTest extends TestCase
         $this->assertSame('10.0.5.5', client_ip());
     }
 
+    public function testIsIpInCidrMatchesWithinRange(): void
+    {
+        $this->assertTrue(is_ip_in_cidr('10.1.2.3', '10.0.0.0/8'));
+        $this->assertFalse(is_ip_in_cidr('11.1.2.3', '10.0.0.0/8'));
+        $this->assertTrue(is_ip_in_cidr('192.168.1.1', '192.168.1.1')); // bare IP, exact
+    }
+
+    public function testIsIpInCidrRejectsMalformedPrefixLength(): void
+    {
+        // A negative prefix must NOT collapse to "match everything" (which would
+        // turn a typo'd trust-list entry into a blanket trust-all), and an
+        // over-length prefix is nonsense — both are rejected.
+        $this->assertFalse(is_ip_in_cidr('203.0.113.7', '10.0.0.0/-1'));
+        $this->assertFalse(is_ip_in_cidr('8.8.8.8', '10.0.0.0/-1'));
+        $this->assertFalse(is_ip_in_cidr('10.0.0.1', '10.0.0.0/33')); // IPv4 max is /32
+        // A well-formed /32 still works and only matches the exact host.
+        $this->assertTrue(is_ip_in_cidr('10.0.0.1', '10.0.0.1/32'));
+        $this->assertFalse(is_ip_in_cidr('10.0.0.2', '10.0.0.1/32'));
+    }
+
     public function testClientIpHashIsDeterministicAndIpDependent(): void
     {
         $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
