@@ -8,14 +8,25 @@ if (php_sapi_name() !== 'cli') {
     exit('CLI only');
 }
 
-require_once __DIR__ . '/../../../config.php';
-
 // Retention for the per-IP request-log tables (share + OG). Single source of
 // truth for their prune window, replacing the magic 86400s literals below. Must
 // stay >= the rate-limit windows in share.php (RATE_LIMIT_WINDOW) and og.php
 // (OG_RATE_LIMIT_WINDOW) so a sliding-window count never loses rows it still
 // needs; 24h leaves ample margin over the 1h rate windows.
 const REQUEST_LOG_PRUNE_WINDOW = 86400; // seconds (24 hours)
+
+// Defense-in-depth cap on how many share rows a single run may delete. The shares
+// prune treats "no live layout matches this hash" as superseded, so a bug that
+// wrongly marks a *current* layout superseded (a mis-generated manifest, a botched
+// migration, a manual DB edit) could otherwise mass-delete live builds in one run.
+// Steady-state expiry is a trickle — only shares crossing BOTH 180-day thresholds
+// on a given day — so this ceiling sits far above normal volume: hitting it means
+// something is wrong. On reaching it the prune stops early and logs loudly; the
+// remaining rows simply retry on the next daily run (shares only accumulate,
+// recoverably), buying an operator time to notice before more are removed. The
+// request-log prunes are uncapped: they legitimately delete large volumes and
+// carry no data-loss risk.
+const MAX_SHARE_PRUNE_PER_RUN = 5000;
 
 /**
  * Deletes matching rows in batches, pausing between batches so concurrent
@@ -25,9 +36,11 @@ const REQUEST_LOG_PRUNE_WINDOW = 86400; // seconds (24 hours)
  * table's transient failure (a lock-wait timeout or deadlock) can't abort the
  * remaining independent prune steps.
  *
+ * @param int|null $maxTotal Stop after deleting at least this many rows and log
+ *   loudly (a per-run safety cap); null leaves the prune uncapped.
  * @return bool True on success (or a cleanly-skipped missing table), false on error.
  */
-function prune_batched(PDO $pdo, string $sql, string $label): bool
+function prune_batched(PDO $pdo, string $sql, string $label, ?int $maxTotal = null): bool
 {
     try {
         $stmt = $pdo->prepare($sql);
@@ -38,6 +51,17 @@ function prune_batched(PDO $pdo, string $sql, string $label): bool
             $total += $count;
             if ($count > 0) {
                 usleep(50000); // 50ms pause to let concurrent queries and replication breathe
+            }
+            if ($maxTotal !== null && $total >= $maxTotal) {
+                error_log(
+                    'Share pruning cron: ' . $label . ' hit the per-run safety cap of '
+                    . $maxTotal . ' rows and stopped early. This is far above normal '
+                    . 'steady-state volume — verify layout supersession is correct '
+                    . '(a mis-superseded current layout would delete live builds) before '
+                    . 'it drains further. Remaining rows retry next run.'
+                );
+                echo 'Pruned ' . $total . ' expired ' . $label . " (per-run safety cap reached).\n";
+                return true;
             }
         } while ($count === 1000);
         echo 'Pruned ' . $total . ' expired ' . $label . " successfully.\n";
@@ -51,6 +75,15 @@ function prune_batched(PDO $pdo, string $sql, string $label): bool
         return false;
     }
 }
+
+// When included for unit testing (with PRUNE_SHARES_NO_MAIN defined), stop here:
+// everything above is pure (the batched-delete helper) and testable; everything
+// below needs config.php and a live database connection.
+if (defined('PRUNE_SHARES_NO_MAIN')) {
+    return;
+}
+
+require_once __DIR__ . '/../../../config.php';
 
 $failed = false;
 
@@ -132,7 +165,8 @@ try {
         . '     )'
         . '   )'
         . ' LIMIT 1000',
-        'shares'
+        'shares',
+        MAX_SHARE_PRUNE_PER_RUN
     )) {
         $failed = true;
     }
