@@ -44,8 +44,18 @@ export function useShareRehydration() {
     }
 
     if (route.kind === "spec-page") {
-      if (useBuildsStore.getState().specId == null) preloadSpec(route.specId);
-      else rehydrateTreeData();
+      // A prerendered spec landing page must show the spec its URL names. Only
+      // restore the persisted session instead when there's real work to keep —
+      // imported builds, or an in-progress interactive selection already on that
+      // same spec. When the persisted interactive spec differs from the URL (and
+      // there are no imported builds to preserve), the URL wins, otherwise a
+      // returning visitor's stale spec would shadow the landing page they opened.
+      const { buildStrings, specId } = useBuildsStore.getState();
+      if (buildStrings.length === 0 && specId !== route.specId) {
+        preloadSpec(route.specId);
+      } else {
+        rehydrateTreeData();
+      }
       return;
     }
 
