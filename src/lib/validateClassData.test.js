@@ -457,7 +457,10 @@ describe("apex nodes", () => {
       description: null,
       choices: null,
       levels: [70, 80],
-      ranks: [{ maxRanks: 1 }, { maxRanks: 2 }],
+      ranks: [
+        { maxRanks: 1, spellId: 1001 },
+        { maxRanks: 2, spellId: 1002 },
+      ],
       ...apexProps,
     });
     return validateClassData(d);
@@ -478,13 +481,31 @@ describe("apex nodes", () => {
   test("apex with a zero-rank maxRanks is caught even when the sum matches", () =>
     // [0, 3] still sums to node.maxRanks 3, so only the per-rank guard flags it.
     assertHasError(
-      withApex({ maxRanks: 3, ranks: [{ maxRanks: 0 }, { maxRanks: 3 }] }),
+      withApex({
+        maxRanks: 3,
+        ranks: [
+          { maxRanks: 0, spellId: 1001 },
+          { maxRanks: 3, spellId: 1002 },
+        ],
+      }),
       "ranks[0].maxRanks must be a positive integer",
     ));
   test("apex with a non-integer rank maxRanks", () =>
     assertHasError(
-      withApex({ ranks: [{ maxRanks: 1 }, { maxRanks: null }] }),
+      withApex({
+        ranks: [
+          { maxRanks: 1, spellId: 1001 },
+          { maxRanks: null, spellId: 1002 },
+        ],
+      }),
       "ranks[1].maxRanks must be a positive integer",
+    ));
+  test("apex with a missing rank spellId", () =>
+    assertHasError(
+      withApex({
+        ranks: [{ maxRanks: 1, spellId: 1001 }, { maxRanks: 2 }],
+      }),
+      "ranks[1].spellId must be a positive integer",
     ));
   test("apex ranks-sum check composes with a non-integer maxRanks", () => {
     // ranks sum to 3; a malformed maxRanks must not suppress the sum mismatch.

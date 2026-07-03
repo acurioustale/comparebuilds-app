@@ -224,6 +224,12 @@ export function validateClassData(data, indexEntry = null) {
           n.ranks.forEach((r, ri) => {
             if (!isInt(r?.maxRanks) || r.maxRanks < 1)
               nAt(`ranks[${ri}].maxRanks must be a positive integer`);
+            // spellId is the rank's distinct spell. The cross-spec consistency
+            // check (nodeSig below) fingerprints the apex chain by spellId, so a
+            // missing one collapses the signature to "?" and lets a genuine
+            // cross-spec divergence pass. Require it at the schema root.
+            if (!isInt(r?.spellId) || r.spellId < 1)
+              nAt(`ranks[${ri}].spellId must be a positive integer`);
           });
           const sum = n.ranks.reduce(
             (s, r) => s + (isInt(r?.maxRanks) ? r.maxRanks : 0),
