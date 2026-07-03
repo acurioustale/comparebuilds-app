@@ -41,7 +41,14 @@ export function selectionLabel(node, sel) {
     // A selected choice node always carries an entryChosen; guard the unknown
     // case (corrupt/partial data) by naming the node rather than faking
     // "option 1" (null + 1), which would mislabel it as the first option.
-    if (sel.entryChosen == null) return node.name;
+    // Regular choice nodes carry name:null (their identity is their two options,
+    // e.g. an apex-with-choices keeps a name but a plain choice does not), so fall
+    // back to the option names joined rather than returning a blank cell.
+    if (sel.entryChosen == null) {
+      if (node.name) return node.name;
+      const opts = node.choices?.map((c) => c?.name).filter(Boolean);
+      return opts && opts.length ? opts.join(" / ") : null;
+    }
     const ch = node.choices[sel.entryChosen];
     const name = ch?.name ?? `option ${sel.entryChosen + 1}`;
     // If a chosen option is itself multi-rank, show the rank against THAT
