@@ -310,10 +310,14 @@ try {
             $rl->execute([$ipHash]);
             $count = (int) $rl->fetch()['c'];
         } catch (PDOException $e) {
-            // A missing table reads as a zero count, silently disabling the
-            // OG rate limit. Surface the failure so schema drift or a failed
-            // migration is visible instead of quietly lifting the cap.
-            error_log('Failed to read OG rate-limit count: ' . $e->getMessage());
+            // Fail CLOSED: a failed count (missing table, schema drift, a
+            // transient DB error) must not silently disable the per-IP cap and
+            // let one IP drive unlimited GD renders. Reject this request rather
+            // than reading the failure as a zero count. The endpoint is
+            // cache-fronted, so turning a render away on a DB hiccup only costs a
+            // crawler retry; leaving the cap off is a CPU-exhaustion vector.
+            error_log('Failed to read OG rate-limit count, failing closed: ' . $e->getMessage());
+            $rateLimited = true;
         }
         if ($count >= OG_RATE_LIMIT_MAX) {
             $rateLimited = true;
