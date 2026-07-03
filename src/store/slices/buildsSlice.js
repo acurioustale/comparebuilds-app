@@ -358,14 +358,41 @@ export const createBuildsSlice = (set, get) => ({
     newStrings[index] = buildString;
 
     if (classNodes && !isLoading) {
+      // Tree data already available — re-parse the whole slot list immediately.
       set({
         buildStrings: newStrings,
         parsedBuilds: parseAll(newStrings, classNodes),
       });
-    } else {
+    } else if (isLoading) {
+      // Tree data is mid-load — store the string now; the in-flight load's
+      // completion re-parses get().buildStrings, picking this replacement up.
       set({
         buildStrings: newStrings,
       });
+    } else {
+      // Not loading and tree data never landed — the first load must have
+      // failed. Store the string and (re)start the load so the replaced slot
+      // gets parsed instead of being stranded as a permanent null placeholder.
+      // Mirrors addBuildInternal's failed-load recovery branch.
+      const match = findClassForSpec(header.specId);
+      if (!match) {
+        set({
+          error:
+            `Spec ID ${header.specId} was not found in the local class index. ` +
+            `Try re-running the ingest script for the latest data.`,
+        });
+        return false;
+      }
+      set({
+        buildStrings: newStrings,
+      });
+      await loadTreeData(
+        set,
+        get,
+        match.cls.name,
+        match.spec.name,
+        header.specId,
+      );
     }
 
     // Mirror addBuildInternal's contract: truthy on success, falsy on failure.
