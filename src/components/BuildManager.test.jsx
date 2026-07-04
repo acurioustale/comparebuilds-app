@@ -151,6 +151,37 @@ describe("BuildManager import flow", () => {
       screen.getByRole("button", { name: /Share link/i }),
     ).toBeInTheDocument();
   });
+
+  test("simc button shows a busy label, never a blank one, while copying", async () => {
+    // Hold the clipboard write open so the transient "copying" state stays
+    // rendered — the button must show "Copying…" rather than an empty label.
+    let resolveWrite;
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: () => new Promise((r) => (resolveWrite = r)),
+      },
+    });
+
+    render(<BuildManager />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+    await screen.findByPlaceholderText(/Build B — Blood Death Knight/);
+
+    const simc = await screen.findByRole("button", {
+      name: /Copy simc profileset/i,
+    });
+    fireEvent.click(simc);
+
+    // Mid-copy the label must be the busy text, not blank.
+    const busy = await screen.findByRole("button", { name: /Copying…/i });
+    expect(busy.textContent.trim()).not.toBe("");
+
+    resolveWrite();
+    await screen.findByRole("button", { name: /Copied!/i });
+  });
 });
 
 describe("cold-start CTA", () => {

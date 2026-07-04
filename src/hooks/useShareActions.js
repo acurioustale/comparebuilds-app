@@ -50,7 +50,7 @@ export function useShareActions({
   layoutHash,
 }) {
   const [copyState, setCopyState] = useState("idle"); // 'idle' | 'copying' | 'copied' | 'error'
-  const [simcState, setSimcState] = useState("idle"); // 'idle' | 'copied' | 'error'
+  const [simcState, setSimcState] = useState("idle"); // 'idle' | 'copying' | 'copied' | 'error'
 
   // Reset timers, cleared on unmount so they can't fire setState on a removed
   // share-controls component (e.g. clearing all builds within the 2s window).
