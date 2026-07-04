@@ -51,6 +51,21 @@ const escAttr = (s) =>
     .replace(/"/g, "&quot;");
 const escHtml = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+// Entity-escape a value bound for XML text (the sitemap <loc>). Slugs are ASCII
+// path segments today, but seg() only swaps underscores for hyphens — it does
+// not sanitise — so escape at the emission point rather than trusting the slug
+// to stay XML-safe. A future slug carrying '&' or '<' would otherwise emit a
+// malformed sitemap. Escapes the five characters named by the sitemaps.org
+// protocol; only '&' and '<' are strictly required in element content, but the
+// full set matches the spec and stays correct if the value ever moves to an
+// attribute.
+const escXml = (s) =>
+  String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 
 // Replace exactly one match of `re`, throwing if the pattern isn't found. The
 // template's <title>/<link>/<meta> tags are matched by attribute-order-sensitive
@@ -182,8 +197,8 @@ const sitemap =
   urls
     .map(({ loc, lastmod }) =>
       lastmod
-        ? `  <url><loc>${loc}</loc><lastmod>${lastmod}</lastmod></url>`
-        : `  <url><loc>${loc}</loc></url>`,
+        ? `  <url><loc>${escXml(loc)}</loc><lastmod>${lastmod}</lastmod></url>`
+        : `  <url><loc>${escXml(loc)}</loc></url>`,
     )
     .join("\n") +
   "\n</urlset>\n";
