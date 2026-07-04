@@ -94,4 +94,32 @@ describe("useTheme bfcache restore", () => {
     firePageshow(false);
     expect(result.current.mode).toBe("auto");
   });
+
+  test("re-reads the OS preference on a persisted pageshow", () => {
+    // The matchMedia change listener is silent while the page is frozen, so an
+    // OS light/dark switch during the freeze is invisible until restore. Model a
+    // mutable OS preference: dark at mount, flipped to light while frozen.
+    let osLight = false;
+    const original = window.matchMedia;
+    window.matchMedia = (query) => ({
+      matches: query.includes("light") ? osLight : !osLight,
+      media: query,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      addListener: () => {},
+      removeListener: () => {},
+    });
+    try {
+      const { result } = renderHook(() => useTheme());
+      // auto + OS dark → dark theme.
+      expect(result.current.theme).toBe("dark");
+
+      // OS switches to light while the page is bfcache-frozen (no change event).
+      osLight = true;
+      firePageshow(true);
+      expect(result.current.theme).toBe("light");
+    } finally {
+      window.matchMedia = original;
+    }
+  });
 });

@@ -98,6 +98,9 @@ export function useTheme() {
   // bfcache-restored page never saw the storage events fired while it was frozen,
   // so its mode can lag another tab's change (and the next toggle would then
   // cycle from a stale mode); pageshow with e.persisted re-reads and re-applies.
+  // The same freeze also silences the matchMedia change listener, so an OS
+  // light/dark switch made while frozen never reached systemLight — re-read it
+  // too, or "auto" would keep painting the pre-freeze OS preference on restore.
   // Parity with acurioustale's storage + pageshow handlers.
   useEffect(() => {
     const onStorage = (e) => {
@@ -105,7 +108,9 @@ export function useTheme() {
       setMode(resolveMode(e.newValue));
     };
     const onPageshow = (e) => {
-      if (e.persisted) setMode(resolveMode(readStoredMode()));
+      if (!e.persisted) return;
+      setMode(resolveMode(readStoredMode()));
+      setSystemLight(prefersLight());
     };
     window.addEventListener("storage", onStorage);
     window.addEventListener("pageshow", onPageshow);
