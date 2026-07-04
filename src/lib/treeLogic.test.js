@@ -281,6 +281,32 @@ test("a node's own point cannot satisfy its own gate", () => {
   assertInvalid(computeInvalidNodeIds(GATE, selected, byId(GATE)), 12);
 });
 
+test("a prereq-invalid node's points still count toward a sibling's gate (no over-cascade)", () => {
+  // X(20) feeds P(21); Rt(22) feeds the gated G(23, spentRequired 3). X is NOT
+  // selected, so P is prereq-invalid — but P still holds its 3 points. This is the
+  // interactive edit flow: the user removed X, orphaning P, but P's points remain
+  // physically allocated. Those points keep G's section total at P(3)+Rt(1)+G(1)=5,
+  // so G stays valid: only the directly-broken node P is flagged, not an unrelated
+  // gated node. Counting prereq-invalid points is deliberate here — excluding them
+  // would retroactively invalidate G on an unrelated removal (an over-cascade).
+  //
+  // The known trade-off: a *crafted import string* can carry the same shape where
+  // P was never reachable, and there G is likewise not gate-flagged even though the
+  // build is unbuildable. That is contained — the donor node P is always itself
+  // flagged, so the build never renders as fully valid — and computeInvalidNodeIds
+  // cannot tell "legitimately placed then orphaned" from "never reachable", so the
+  // edit-flow behavior wins. See the note in computeInvalidNodeIds.
+  const nodes = [
+    node(20, 0, { connections: [21] }), // X — feeds P, left UNSELECTED
+    node(21, 1, { maxRanks: 3, connections: [20] }), // P — prereq-invalid, 3 pts
+    node(22, 0, { connections: [23] }), // Rt — valid root feeding G
+    node(23, 1, { spentRequired: 3, connections: [22] }), // G — gated at 3
+  ];
+  const selected = { 21: sel(3), 22: sel(), 23: sel() };
+  // Only P(21) is flagged (its prereq X is gone); G(23) stays valid.
+  assertInvalid(computeInvalidNodeIds(nodes, selected, byId(nodes)), 21);
+});
+
 test("alreadyGranted parent is always satisfied — child never invalid", () => {
   const root = node(20, 0, { alreadyGranted: true, connections: [21] });
   const child = node(21, 1, { connections: [20] });
