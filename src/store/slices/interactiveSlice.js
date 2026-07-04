@@ -53,9 +53,14 @@ export const createInteractiveSlice = (set, get) => ({
 
   /**
    * Called after a successful interactive export to hide the interactive tree.
+   * Clears interactiveNodes back to the empty state (matching EMPTY) so the
+   * just-committed selection isn't left behind — it is persisted (partialize),
+   * and a rehydrate before the next startAddingBuild/editBuild reseed would
+   * otherwise restore that stale selection into the calculator.
    * @returns {void}
    */
-  finishAddingBuild: () => set({ addingBuild: false, editingIndex: null }),
+  finishAddingBuild: () =>
+    set({ addingBuild: false, editingIndex: null, interactiveNodes: {} }),
 
   /**
    * Opens the build at `index` in the interactive calculator, seeded with its selections.

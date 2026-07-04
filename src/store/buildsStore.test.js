@@ -522,6 +522,26 @@ describe("editBuild and replaceBuild", () => {
     assert.ok(Object.keys(get().interactiveNodes).length > 0);
   });
 
+  test("finishAddingBuild clears the interactive selection so it can't persist", async () => {
+    const [a] = genStrings("death_knight", "blood", 1);
+    await get().addBuild(a);
+    get().editBuild(0);
+    assert.ok(
+      Object.keys(get().interactiveNodes).length > 0,
+      "editBuild seeds a non-empty selection",
+    );
+
+    get().finishAddingBuild();
+
+    assert.strictEqual(get().addingBuild, false);
+    assert.strictEqual(get().editingIndex, null);
+    assert.deepStrictEqual(
+      get().interactiveNodes,
+      {},
+      "the committed selection must not linger (it is persisted via partialize)",
+    );
+  });
+
   test("editBuild does not seed the synthetic hero-gate node id", async () => {
     const data = require("../data/death_knight.json");
     const classNodes = collectClassNodes(data);
