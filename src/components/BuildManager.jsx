@@ -9,8 +9,9 @@ import { defaultBuildLabel } from "../lib/buildLabel";
 import { FilledSlot, EmptySlot } from "./BuildManagerSlots";
 import { useShareActions } from "../hooks/useShareActions";
 
-// Action-button label for a copy state. The share link has an async "Saving…"
-// busy state; the synchronous simc copy passes busy === null and never hits it.
+// Action-button label for a copy state. Both actions await the clipboard write,
+// so both pass a real busy label ("Saving…" / "Copying…") — the "copying" state
+// is briefly reachable across that await and must never render a blank label.
 function actionLabel(status, idle, busy) {
   if (status === "copying") return busy;
   if (status === "copied") return "Copied!";
@@ -402,7 +403,7 @@ export default function BuildManager() {
             className="wow-btn px-4 py-2 text-xs rounded select-none"
             style={{ color: actionColor(simcState) }}
           >
-            {actionLabel(simcState, "Copy simc profileset", null)}
+            {actionLabel(simcState, "Copy simc profileset", "Copying…")}
           </button>
           <button
             type="button"
