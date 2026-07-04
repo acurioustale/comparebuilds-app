@@ -408,6 +408,7 @@ try {
         }
     } elseif ($redis === null) {
         $count = 0;
+        $countRead = false;
         try {
             $rl = $pdo->prepare(
                 'SELECT COUNT(*) AS c FROM comparebuilds_og_requests '
@@ -415,6 +416,7 @@ try {
             );
             $rl->execute([$ipHash]);
             $count = (int) $rl->fetch()['c'];
+            $countRead = true;
         } catch (PDOException $e) {
             // Fail CLOSED: a failed count (missing table, schema drift, a
             // transient DB error) must not silently disable the per-IP cap and
@@ -429,7 +431,12 @@ try {
             $rateLimited = true;
         }
 
-        if ($count <= OG_RATE_LIMIT_MAX * 2) {
+        // Only touch the log table when the count read succeeded. On the
+        // fail-closed path $count is a stand-in zero, so the `<= 2x` guard would
+        // otherwise fire an INSERT on the connection that just errored — noise at
+        // best, and if the read failure was transient the write could land and
+        // count a request we are about to reject, double-counting a 429'd caller.
+        if ($countRead && $count <= OG_RATE_LIMIT_MAX * 2) {
             // Count every valid-id request, whether or not the share exists, so a
             // flood of nonexistent ids is still bounded — matching the Redis path,
             // which increments its counter before the share lookup. Logging
@@ -444,7 +451,7 @@ try {
                 // migration is visible instead of silently relaxing the cap.
                 error_log('Failed to log OG request: ' . $e->getMessage());
             }
-        } else {
+        } elseif ($countRead) {
             // Already at the per-IP row cap (2x the limit) and still hammering.
             // Inserting another row would grow the table unbounded, but dropping
             // the request outright lets the sliding window drain: as the oldest
