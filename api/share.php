@@ -106,13 +106,10 @@ function is_same_origin_write(?string $secFetchSite, ?string $origin, ?string $r
         return $referer === $site || str_starts_with($referer, $site . '/');
     }
 
-    // If all tracking headers are completely absent, fail closed
-    // to enforce a strict same-origin policy, preventing potential
-    // bypasses by malicious actors trying to craft requests without tracking headers.
-    if (empty($secFetchSite) && empty($origin) && empty($referer)) {
-        return false;
-    }
-
+    // No usable origin signal (every header null or empty) — fail closed to
+    // enforce strict same-origin, blocking a crafted request that omits all
+    // tracking headers. This is the only path that reaches here, since each
+    // guard above returns as soon as its header is a non-empty string.
     return false;
 }
 
