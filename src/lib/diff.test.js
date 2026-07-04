@@ -322,10 +322,14 @@ describe("differenceLabel", () => {
     );
   });
 
-  test("choice node both picks unknown (null) → null", () => {
+  test("choice node both picks unknown (null) → '? → ?'", () => {
+    // Two unknown picks are NOT assumed equal — computeDiff flags this pair as
+    // differing (see "both builds took with unknown picks is flagged as diff"),
+    // so differenceLabel must label it rather than returning null and leaving the
+    // flagged summary row with no trade-off text.
     assert.strictEqual(
       differenceLabel(byId[3], pt(1, null), pt(1, null)),
-      null,
+      "? → ?",
     );
   });
 

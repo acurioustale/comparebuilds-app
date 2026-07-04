@@ -166,11 +166,18 @@ export function computeDiff(nodesA, nodesB, allNodes) {
  */
 export function differenceLabel(node, selA, selB) {
   if (node.type === "choice" && selA && selB) {
-    // Both builds took the node; they differ iff they picked different options.
-    // An unknown pick (entryChosen null from a corrupt/partial parse) still
-    // differs from a known one — render it as "?" rather than dropping the label
-    // and silently under-reporting the difference.
-    if (selA.entryChosen === selB.entryChosen) return null;
+    // Both builds took the node; they agree only when both picks are KNOWN and
+    // equal. An unknown pick (entryChosen null from a corrupt/partial parse)
+    // can't be assumed to match — including two unknowns, which `null === null`
+    // would otherwise read as agreement. computeDiff flags that both-unknown pair
+    // as differing (mirroring heatmap.isDivergent), so labelling it "? → ?" keeps
+    // the summary row from appearing in the diff with no trade-off text.
+    if (
+      selA.entryChosen != null &&
+      selB.entryChosen != null &&
+      selA.entryChosen === selB.entryChosen
+    )
+      return null;
     const nameA = chosenOptionName(node, selA.entryChosen) ?? "?";
     const nameB = chosenOptionName(node, selB.entryChosen) ?? "?";
     return `${nameA} → ${nameB}`;
