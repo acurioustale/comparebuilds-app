@@ -365,6 +365,25 @@ export default function MainView() {
         footer={comparisonFooter}
       />
     );
+  } else if (!addingBuild) {
+    // Build strings were entered but none of them parsed (valid.length === 0),
+    // so no tree/diff/heatmap branch applies. Without this the main area would be
+    // blank apart from the add button. Explain the failure; the build-manager
+    // slots above already flag each unparseable one with a red ✕. Suppressed
+    // while addingBuild, where the interactive tree occupies the space instead.
+    comparisonEl = (
+      <div className="mt-6 flex justify-center">
+        <div className="p-4 wow-panel rounded max-w-md text-center">
+          <p className="text-wow-gold-dark text-xs uppercase tracking-widest mb-2">
+            Nothing to compare
+          </p>
+          <p className="text-wow-muted text-sm">
+            None of the build strings could be decoded — check the flagged slots
+            above and paste the loadout string WoW copies from the talent UI.
+          </p>
+        </div>
+      </div>
+    );
   }
 
   const canAddMore = buildStrings.length < MAX_BUILDS;

@@ -100,6 +100,18 @@ describe("comparison view", () => {
       await screen.findByText(/Differences/, { selector: "p" }),
     ).toBeInTheDocument();
   });
+
+  test("shows an empty-state notice when a pasted build can't be decoded", async () => {
+    // Silence the expected parse-failure log the store emits for the bad string.
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    render(<App />);
+    // A valid 24-bit header (the spec resolves, so the tree loads) but a
+    // truncated body that fails the full parse — the build is added yet its
+    // parsed slot stays null, leaving no tree/diff/heatmap to show.
+    const bad = genStrings("death_knight", "blood", 1)[0].slice(0, 8);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], bad);
+    expect(await screen.findByText(/Nothing to compare/i)).toBeInTheDocument();
+  });
 });
 
 describe("spotlight cleanup", () => {
