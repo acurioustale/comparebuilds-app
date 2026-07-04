@@ -312,9 +312,19 @@ export function computeInvalidNodeIds(allNodes, selected, nodeById) {
     // gates incrementally, so the section total when the first point lands here
     // excludes it. Subtract this node's own points before the check; otherwise a
     // self-tipping build (others just under the gate, this node's own point pushing
-    // the raw total over) would validate here yet be impossible to build. Prereq-
-    // invalid nodes' points still count toward the sum — gate violations stem from
-    // actual point removals, not from cascaded invalidity.
+    // the raw total over) would validate here yet be impossible to build.
+    //
+    // Prereq-invalid nodes' points still count toward the sum. This is deliberate
+    // and tuned for the interactive edit flow: when a user removes a node, its
+    // dependents become prereq-invalid but their points remain physically spent, so
+    // an unrelated gated node in the same section must NOT be flagged too —
+    // excluding those points would cascade one removal into a second, surprising
+    // invalidation. The trade-off is on the import path: a crafted string can carry
+    // points on a never-reachable node, and counting them can leave a sibling gate
+    // un-flagged on an unbuildable build. That is contained — the donor node is
+    // itself always flagged, so the build never reads as fully valid — and this
+    // function cannot distinguish "placed then orphaned" from "never reachable", so
+    // the edit-flow behavior wins. (Regression test in treeLogic.test.js.)
     if (!shouldFlag) {
       const sectionTotal = sectionTotals.get(gateSectionKey(node)) ?? 0;
       const othersInSection = sectionTotal - selected[node.id].pointsInvested;
