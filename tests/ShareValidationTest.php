@@ -406,5 +406,11 @@ final class ShareValidationTest extends TestCase
         $this->assertFalse(is_same_origin_write(null, null, $site . '.evil.example/x'));
         // No origin signal at all → fail closed to enforce strict same-origin policy.
         $this->assertFalse(is_same_origin_write(null, null, null));
+        // A header value of the literal string '0' is a present, non-same-origin
+        // signal and must be rejected. Pins the strict '!== \'\'' idiom: an
+        // empty()-based check would treat '0' as absent and could misroute it.
+        $this->assertFalse(is_same_origin_write('0', null, null));
+        $this->assertFalse(is_same_origin_write(null, '0', null));
+        $this->assertFalse(is_same_origin_write(null, null, '0'));
     }
 }
