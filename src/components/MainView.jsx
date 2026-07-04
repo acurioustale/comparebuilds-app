@@ -18,6 +18,8 @@ import { useBuildsStore, MAX_BUILDS } from "../store/buildsStore";
 import { buildGrantedSeed, computeInvalidNodeIds } from "../lib/treeLogic";
 import { computeDiff } from "../lib/diff";
 import { computeStats } from "../lib/heatmap";
+import { defaultBuildLabel } from "../lib/buildLabel";
+import classesIndex from "../data/classes.json";
 import { byId, treeNaturalWidths, pairedNaturalWidths } from "./treeLayout";
 import { matchNodeIds } from "../lib/talentSearch";
 import {
@@ -183,6 +185,7 @@ export default function MainView() {
     buildStrings,
     buildNames,
     classNodes,
+    specId,
     addingBuild,
     startAddingBuild,
     editingIndex,
@@ -194,12 +197,24 @@ export default function MainView() {
       buildStrings: s.buildStrings,
       buildNames: s.buildNames,
       classNodes: s.classNodes,
+      specId: s.specId,
       addingBuild: s.addingBuild,
       startAddingBuild: s.startAddingBuild,
       editingIndex: s.editingIndex,
       swapBuilds: s.swapBuilds,
     })),
   );
+
+  // Class/spec display names for the default build labels, derived from specId
+  // the same way BuildManager does, so the labels in the comparison views match
+  // the build-manager slots and the SimC export exactly (all via defaultBuildLabel).
+  const activeClass = useMemo(
+    () => classesIndex.find((c) => c.specs.some((s) => s.id === specId)),
+    [specId],
+  );
+  const classDisplayName = activeClass?.displayName ?? "";
+  const specDisplayName =
+    activeClass?.specs.find((s) => s.id === specId)?.displayName ?? "";
 
   const treeWidths = useMemo(
     () => (treeData ? treeNaturalWidths(treeData) : null),
@@ -231,10 +246,26 @@ export default function MainView() {
         .map((p, i) => ({
           index: i,
           parsed: p,
-          label: buildNames[i]?.trim() || `Build ${i + 1}`,
+          label:
+            buildNames[i]?.trim() ||
+            defaultBuildLabel({
+              index: i + 1,
+              total: buildStrings.length,
+              className: classDisplayName,
+              specName: specDisplayName,
+              treeData,
+              parsedBuild: p,
+            }),
         }))
         .filter(({ parsed }) => parsed),
-    [parsedBuilds, buildNames],
+    [
+      parsedBuilds,
+      buildNames,
+      buildStrings.length,
+      classDisplayName,
+      specDisplayName,
+      treeData,
+    ],
   );
   const validParsed = useMemo(() => valid.map((v) => v.parsed), [valid]);
   const validLabels = useMemo(() => valid.map((v) => v.label), [valid]);
