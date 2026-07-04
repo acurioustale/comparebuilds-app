@@ -289,6 +289,21 @@ describe("swapBuilds", () => {
     assert.deepStrictEqual(get().buildStrings, [a, b]);
   });
 
+  test("bumps loadGen so an in-flight load is cancelled, like removeBuild/clearAllBuilds", async () => {
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    await get().addBuild(a);
+    await get().addBuild(b);
+    const before = get().loadGen;
+
+    get().swapBuilds(0, 1);
+
+    assert.strictEqual(
+      get().loadGen,
+      before + 1,
+      "swapBuilds bumps loadGen to cancel any in-flight loadTreeData",
+    );
+  });
+
   test("remaps editingIndex when a swapped slot is being edited", async () => {
     const [a, b] = genStrings("death_knight", "blood", 2);
     await get().addBuild(a);
