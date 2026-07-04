@@ -350,6 +350,17 @@ describe("collapseColocatedDuplicates", () => {
     expect(collapseColocatedDuplicates(spec)).toEqual([]);
     expect(spec.nodes.map((n) => n.id)).toEqual([10, 11]);
   });
+
+  it("never collapses co-located choice nodes (name: null must not share a key)", () => {
+    // Choice nodes carry name: null. Two distinct choice nodes at one cell must
+    // NOT merge under the shared null key — that would drop a real wire node and
+    // shift every later bit position. Each choice node is already a single id.
+    const spec = {
+      nodes: [mk(40, null, 6, 0), mk(41, null, 6, 0)],
+    };
+    expect(collapseColocatedDuplicates(spec)).toEqual([]);
+    expect(spec.nodes.map((n) => n.id)).toEqual([40, 41]);
+  });
 });
 
 describe("idsUnusedAcrossSpecs", () => {

@@ -523,7 +523,10 @@ export async function normaliseSpec(specInfo, tree, db2, fns) {
  * one slot yet carry different spells; the cell already proves they are one slot,
  * and the same-name check guards against ever merging two genuinely different
  * talents that Blizzard might someday place at one cell (today none exist; a real
- * either/or pick is modelled as a CHOICE node, a single id).
+ * either/or pick is modelled as a CHOICE node, a single id). Choice nodes carry
+ * name: null, so they are excluded from grouping outright — a null key would
+ * collapse two distinct choice nodes together, and a choice node is a single id
+ * that is never a co-located duplicate to begin with.
  *
  * Mutates spec.nodes; returns the dropped ids so the caller can hold their wire
  * positions in class-level unusedNodeIds — their build-string bit positions must
@@ -537,6 +540,13 @@ export function collapseColocatedDuplicates(spec) {
   const byCell = new Map();
   for (const n of spec.nodes) {
     if (n.alreadyGranted) continue;
+    // A choice node carries name: null (its either/or lives in `choices`, not a
+    // single name). Name is the collapse key, so two distinct choice nodes in
+    // one cell would both hash to the shared null key and be wrongly merged —
+    // dropping a real wire node and shifting every later bit position. A choice
+    // node is already a single id, so it is never a co-located duplicate: skip
+    // null-name nodes entirely rather than letting them collide.
+    if (n.name == null) continue;
     const byName = byCell.get(cellKey(n)) ?? new Map();
     byName.set(n.name, [...(byName.get(n.name) ?? []), n.id]);
     byCell.set(cellKey(n), byName);
