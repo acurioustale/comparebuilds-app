@@ -258,8 +258,12 @@ export const createBuildsSlice = (set, get) => ({
       return;
 
     // Reindexing invalidates any positional index captured by a replaceBuild
-    // still waiting in addBuildQueue, same as removeBuild.
-    set({ slotGen: get().slotGen + 1 });
+    // still waiting in addBuildQueue, same as removeBuild. Bump loadGen too so a
+    // swap cancels any in-flight loadTreeData, matching removeBuild/clearAllBuilds:
+    // today the swap control isn't reachable mid-load, but keeping the structural
+    // mutations' cancel-the-load contract uniform removes the latent trap where a
+    // load committing against a captured pre-swap snapshot would desync the arrays.
+    set({ loadGen: get().loadGen + 1, slotGen: get().slotGen + 1 });
 
     const swapAt = (arr) => {
       const next = [...arr];
