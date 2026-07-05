@@ -111,7 +111,7 @@ Formatting and linting are tool-enforced (Prettier, shfmt, php-cs-fixer, styleli
 
 ## Memory
 
-Facts not cheaply greppable and not covered above. (`GEMINI.md` symlinks to this file — one memory serves both agents.)
+Facts not cheaply greppable and not covered above. (`GEMINI.md` and `AGENTS.md` symlink to this file — one memory serves Claude Code, Gemini CLI, and AGENTS.md-standard tools like opencode.)
 
 - **Toolchain is pinned in `.tool-versions`**: nodejs 22, php 8.4, plus shfmt/php-cs-fixer/phpunit/actionlint versions. CI reads it via `setup-node`'s `node-version-file`; match it when reproducing CI locally. `npm` (package-lock.json) — CI installs with `npm ci`.
 - **Browser e2e: `npm run test:e2e`** (Playwright; tests in `e2e/`, config `playwright.config.js`). Smoke tests for the layout/theming behaviour jsdom can't reach — the `light-dark()` theme repaint and the lazy class-data import + tree-render pipeline. Non-gating (`e2e.yml`, path-filtered, `workflow_dispatch`), like `links.yml`/`sources.yml`/`semgrep.yml`; deploys gate on `validate` only, never on e2e.
