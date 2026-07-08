@@ -375,35 +375,45 @@ export class BlizzardDb2 {
 
   /**
    * The points-spent gate for a node (its section's "spend N to unlock" threshold),
-   * read from the conditions on the node's groups. 0 if ungated. This is the
-   * authoritative gate — it does not always match the node's visual row.
+   * read from the conditions on the node directly or on its groups. 0 if ungated.
+   * This is the authoritative gate — it does not always match the node's visual row.
    */
   spentRequired(nodeId) {
+    const key = String(nodeId);
+    // A spend gate (CondType 0), like a spec condition (see addSpecCond), can hang
+    // off the node directly or off one of its groups — resolve both paths. Reading
+    // only the group path would miss a node-direct gate and silently treat the node
+    // as ungated, letting treeLogic spend a point below the true threshold.
+    const condIds = [
+      ...(this._condsByNode.get(key) ?? []),
+      ...(this._groupsByNode.get(key) ?? []).flatMap(
+        (g) => this._condsByGroup.get(g) ?? [],
+      ),
+    ];
     let req = 0;
-    for (const g of this._groupsByNode.get(String(nodeId)) ?? [])
-      for (const condId of this._condsByGroup.get(g) ?? []) {
-        const c = this._condById.get(condId);
-        if (c?.CondType !== COND_TYPE_SPENT_GATE) continue;
-        // A spend-gate condition must carry a numeric threshold. Coercing a
-        // blank/non-numeric value to 0 (the old `Number(x) || 0`) would silently
-        // turn a real gate into an ungated node — treeLogic would then let a
-        // point be spent below the true threshold. Fail loud with the ids that
-        // pin down the bad row instead.
-        const raw = c.SpentAmountRequired;
-        const amt = Number(raw);
-        if (
-          raw == null ||
-          String(raw).trim() === "" ||
-          !Number.isInteger(amt) ||
-          amt < 0
-        ) {
-          throw new Error(
-            `spent-gate condition ${condId} on node ${nodeId} has a ` +
-              `non-numeric SpentAmountRequired ("${raw}")`,
-          );
-        }
-        if (amt > req) req = amt;
+    for (const condId of condIds) {
+      const c = this._condById.get(condId);
+      if (c?.CondType !== COND_TYPE_SPENT_GATE) continue;
+      // A spend-gate condition must carry a numeric threshold. Coercing a
+      // blank/non-numeric value to 0 (the old `Number(x) || 0`) would silently
+      // turn a real gate into an ungated node — treeLogic would then let a
+      // point be spent below the true threshold. Fail loud with the ids that
+      // pin down the bad row instead.
+      const raw = c.SpentAmountRequired;
+      const amt = Number(raw);
+      if (
+        raw == null ||
+        String(raw).trim() === "" ||
+        !Number.isInteger(amt) ||
+        amt < 0
+      ) {
+        throw new Error(
+          `spent-gate condition ${condId} on node ${nodeId} has a ` +
+            `non-numeric SpentAmountRequired ("${raw}")`,
+        );
       }
+      if (amt > req) req = amt;
+    }
     return req;
   }
 
