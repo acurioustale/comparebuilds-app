@@ -45,4 +45,33 @@ describe("useTapGesture", () => {
     result.current.guardClick(click)();
     expect(click).toHaveBeenCalledTimes(1);
   });
+
+  const evt = (firesTouchEvents) => ({
+    nativeEvent: { sourceCapabilities: { firesTouchEvents } },
+  });
+
+  it("swallows a touch-fired click within the window (Chromium capability)", () => {
+    const { result } = renderHook(() => useTapGesture());
+    const handlers = result.current.makeTouchHandlers(vi.fn());
+    handlers.onTouchStart(touch(0, 0));
+    handlers.onTouchEnd();
+
+    const click = vi.fn();
+    result.current.guardClick(click)(evt(true));
+    expect(click).not.toHaveBeenCalled();
+  });
+
+  it("does not swallow a genuine mouse click within the window on a hybrid device", () => {
+    // The tap's own synthetic click was dropped (re-render), so the flag is
+    // still set and we're within SYNTHETIC_CLICK_MS. A real mouse click reports
+    // firesTouchEvents=false and must reach the handler, not be lost.
+    const { result } = renderHook(() => useTapGesture());
+    const handlers = result.current.makeTouchHandlers(vi.fn());
+    handlers.onTouchStart(touch(0, 0));
+    handlers.onTouchEnd();
+
+    const click = vi.fn();
+    result.current.guardClick(click)(evt(false));
+    expect(click).toHaveBeenCalledTimes(1);
+  });
 });

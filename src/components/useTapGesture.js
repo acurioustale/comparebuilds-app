@@ -56,15 +56,26 @@ export function useTapGesture() {
       : null;
 
   // Wraps a click handler so the synthetic post-tap click is ignored on touch.
-  // The flag is only honoured inside the synthetic-click window; a stale flag
-  // (its synthetic click never arrived, e.g. the node re-rendered on the tap)
-  // expires so it can't swallow an unrelated later click.
+  // When the click carries InputDeviceCapabilities (Chromium), that tells us
+  // definitively whether it was fired by touch (the synthetic post-tap click, to
+  // swallow) or by a real mouse (to let through) — so on a hybrid device a
+  // genuine mouse click landing within the window of a tap whose synthetic click
+  // was dropped by a re-render is not lost. Where the capability is unavailable
+  // (e.g. Firefox, or a synthetic call with no event) fall back to the time
+  // window; a stale flag still expires past it so it can't swallow a later click.
   const guardClick =
     (fn) =>
     (...args) => {
       if (tapFired.current) {
         tapFired.current = false;
-        if (Date.now() - tapFiredAt.current < SYNTHETIC_CLICK_MS) return;
+        const firesTouch =
+          args[0]?.nativeEvent?.sourceCapabilities?.firesTouchEvents;
+        if (firesTouch === true) return; // the synthetic touch click — swallow it
+        if (firesTouch === false) {
+          // A real mouse click — never the synthetic one, so let it through.
+        } else if (Date.now() - tapFiredAt.current < SYNTHETIC_CLICK_MS) {
+          return;
+        }
       }
       fn(...args);
     };
