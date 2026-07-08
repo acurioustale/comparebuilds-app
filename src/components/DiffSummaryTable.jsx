@@ -96,9 +96,19 @@ export default function DiffSummaryTable({
     for (const node of treeData.nodes) {
       if (node.alreadyGranted) continue;
       const s = stats[node.id];
+      // Pass alreadyGranted (matching HeatmapNode's call) so this shares
+      // isDivergent's own granted-node guard rather than relying solely on the
+      // `continue` above — if that guard is ever refactored away, the two
+      // comparison views still can't disagree on a granted node.
       if (
         !s ||
-        !isDivergent(s.count, total, s.choiceVotes, node.type === "choice")
+        !isDivergent(
+          s.count,
+          total,
+          s.choiceVotes,
+          node.type === "choice",
+          node.alreadyGranted,
+        )
       )
         continue;
       out.push({
