@@ -531,13 +531,14 @@ export class BlizzardDb2 {
   }
 
   /**
-   * Per-rank unlock levels, aligned one-to-one with `ranks`. Each CondType-5
+   * Per-entry unlock levels, aligned one-to-one with `ranks`. Each CondType-5
    * condition says "up to GrantedRanks ranks at RequiredLevel", so a rank at
    * cumulative position N unlocks at the lowest RequiredLevel among the
-   * conditions that cover it (GrantedRanks >= N). Resolving by coverage rather
-   * than exact cumulative match keeps `levels` the same length as `ranks` even
-   * when an entry's maxRanks is > 1 or the grant thresholds aren't sequential
-   * (an exact-match lookup would silently drop those ranks' levels).
+   * conditions that cover it (GrantedRanks >= N). An entry unlocks at its FIRST
+   * rank, so it is keyed off that rank's position, not its top rank. Resolving by
+   * coverage rather than exact cumulative match keeps `levels` the same length as
+   * `ranks` even when an entry's maxRanks is > 1 or the grant thresholds aren't
+   * sequential (an exact-match lookup would silently drop those ranks' levels).
    *
    * Throws a contextual Error if a rank has no covering grant and no prior rank
    * to carry from, or if the grant set is inverted (a higher-rank grant at a
@@ -592,10 +593,17 @@ export class BlizzardDb2 {
     let cumulative = 0;
     for (let i = 0; i < ranks.length; i++) {
       const r = ranks[i];
+      // An entry becomes purchasable at its FIRST rank, which sits at cumulative
+      // position (previous cumulative + 1). Resolve the unlock level against that
+      // position, not the entry's top rank (cumulative + maxRanks): for a
+      // >1-maxRanks entry the top rank would pick a grant one or more steps too
+      // high, shipping a level at which the entry can be maxed rather than one at
+      // which it unlocks. Identical for the common all-maxRanks-1 chain.
+      const firstRankPos = cumulative + 1;
       cumulative += r.maxRanks;
       let level = null;
       for (const g of grants) {
-        if (g.ranks >= cumulative && (level == null || g.level < level))
+        if (g.ranks >= firstRankPos && (level == null || g.level < level))
           level = g.level;
       }
       // Carry the previous rank's level if no grant covers this one (a >1-maxRanks
@@ -609,7 +617,7 @@ export class BlizzardDb2 {
         throw new Error(
           `apex node ${nodeId} rank ${i} (spell ${r.spellId}) has no covering ` +
             `CondType-${COND_TYPE_LEVEL_GRANT} level grant ` +
-            `(cumulative ranks ${cumulative})`,
+            `(first rank at cumulative position ${firstRankPos})`,
         );
       }
       levels.push(resolved);

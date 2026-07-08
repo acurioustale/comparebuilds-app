@@ -168,13 +168,12 @@ describe("BlizzardDb2.apexChain", () => {
     expect(chain.levels).toEqual([80, 90, 90]);
   });
 
-  it("throws a contextual error when a rank has no covering level grant", () => {
-    // Apex whose first entry is two ranks (cumulative 2 after rank 0) but the
-    // only grant covers GrantedRanks 1 — so rank 0 is uncovered and has no prior
-    // rank to carry from. Fabricating a level would ship silently-wrong unlock
-    // data, so the ingest must fail loud with the node, rank index and spell id
-    // that pin down the gap (otherwise validateClassData rejects the whole class
-    // with a generic "levels array of integers" error giving no clue which rank).
+  it("unlocks a multi-rank entry at its first rank's level, not its top rank's", () => {
+    // A 2-rank first entry with grants at ranks 1 (level 80) and 2 (level 85):
+    // the entry becomes purchasable at its FIRST rank (80), not its last (85).
+    // Keying off the top rank (cumulative) would ship 85 — the level at which
+    // the entry can be maxed, one grant-step too high. e2's first rank is
+    // cumulative position 3 (after e1's two ranks) → level 90.
     const db2 = new BlizzardDb2({ build: "test", cache: false });
     db2.index({
       nx: [
@@ -199,11 +198,44 @@ describe("BlizzardDb2.apexChain", () => {
         { ID: "d1", SpellID: "1001" },
         { ID: "d2", SpellID: "1002" },
       ],
-      // grant covers only GrantedRanks 1 — leaves cumulative-2 (rank 0) uncovered
       cond: [
-        { ID: "L1", CondType: "5", GrantedRanks: "1", RequiredLevel: "90" },
+        { ID: "L1", CondType: "5", GrantedRanks: "1", RequiredLevel: "80" },
+        { ID: "L2", CondType: "5", GrantedRanks: "2", RequiredLevel: "85" },
+        { ID: "L3", CondType: "5", GrantedRanks: "3", RequiredLevel: "90" },
       ],
-      ncond: [{ TraitNodeID: "100", TraitCondID: "L1" }],
+      ncond: [
+        { TraitNodeID: "100", TraitCondID: "L1" },
+        { TraitNodeID: "100", TraitCondID: "L2" },
+        { TraitNodeID: "100", TraitCondID: "L3" },
+      ],
+      gxn: [],
+      gxc: [],
+      subtree: [],
+    });
+    expect(db2.apexChain("100").levels).toEqual([80, 90]);
+  });
+
+  it("throws a contextual error when a rank has no covering level grant", () => {
+    // An apex with NO CondType-5 level grants at all: its first entry (rank 0)
+    // has no covering grant and no prior rank to carry from. Fabricating a level
+    // would ship silently-wrong unlock data, so the ingest must fail loud with
+    // the node, rank index and spell id that pin down the gap (otherwise
+    // validateClassData rejects the whole class with a generic "levels array of
+    // integers" error giving no clue which rank).
+    const db2 = new BlizzardDb2({ build: "test", cache: false });
+    db2.index({
+      nx: [{ TraitNodeID: "100", TraitNodeEntryID: "e1", _Index: "100" }],
+      entry: [
+        {
+          ID: "e1",
+          TraitDefinitionID: "d1",
+          MaxRanks: "1",
+          NodeEntryType: "13",
+        },
+      ],
+      def: [{ ID: "d1", SpellID: "1001" }],
+      cond: [], // no CondType-5 grant — rank 0 is uncovered
+      ncond: [],
       gxn: [],
       gxc: [],
       subtree: [],
