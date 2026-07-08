@@ -61,4 +61,19 @@ describe("bitStream safe shift handling", () => {
     reader.skipBits(12); // exactly to the end is allowed
     expect(reader.atEnd()).toBe(true);
   });
+
+  test("BitReader strips surrounding and interior whitespace before parsing", () => {
+    // A base64 build string can pick up whitespace in transit (a trailing
+    // newline from a share payload, a stray space from a paste). Each variant
+    // must parse identically to the clean "A" — one 6-bit character with no
+    // stray char to throw on — guarding the untrimmed share-rehydration path.
+    for (const s of ["A\n", " A", "A ", "\tA\n", "A\r\n"]) {
+      const reader = new BitReader(s);
+      for (let i = 0; i < 6; i++) {
+        expect(reader.atEnd()).toBe(false);
+        expect(() => reader.readBit()).not.toThrow();
+      }
+      expect(reader.atEnd()).toBe(true);
+    }
+  });
 });

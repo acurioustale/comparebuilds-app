@@ -20,9 +20,18 @@ export class BitReader {
   /** @type {string} */ #str;
   /** @type {number} */ #pos = 0;
 
-  /** @param {string} buildString  Base64 string, padding stripped internally. */
+  /**
+   * @param {string} buildString  Base64 string; whitespace and padding stripped
+   *   internally.
+   */
   constructor(buildString) {
-    this.#str = buildString.replace(PADDING_RE, "");
+    // Base64 build strings never contain whitespace, but a value can pick one up
+    // in transit — a trailing newline from a share-API payload, or a stray space
+    // from a copy-paste — on paths that don't trim before parsing (share
+    // rehydration hands addBuild the raw payload). A stray char would otherwise
+    // throw in readBit() and the whole build would be shown as invalid. Strip all
+    // whitespace so a structurally valid string still parses; padding after.
+    this.#str = buildString.replace(/\s+/g, "").replace(PADDING_RE, "");
   }
 
   /**
