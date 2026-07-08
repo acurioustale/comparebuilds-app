@@ -116,7 +116,7 @@ function diffChoices(cn, fn) {
 }
 
 /** Diff one class's freshly-ingested data against its committed data. */
-function diffClass(slug, fresh, committed, opts) {
+export function diffClass(slug, fresh, committed, opts) {
   const hard = [];
   const soft = [];
 
@@ -221,6 +221,15 @@ function diffClass(slug, fresh, committed, opts) {
       at("soft", "pointBudget differs");
   }
 
+  // A spec present only in the fresh ingest — one a game patch added — is never
+  // reached by the committed-keyed loop above (its removal counterpart is the
+  // `!fSpec` branch inside it). Report it hard: its heroGate, gates and wiring
+  // are unvalidated, and while the class-wide wire-hash flags the node-id change
+  // it doesn't say which spec drifted.
+  for (const specSlug of Object.keys(fresh.specs))
+    if (!committed.specs[specSlug])
+      hard.push(`${specSlug}: new spec in fresh ingest (not in committed)`);
+
   return { hard, soft };
 }
 
@@ -268,7 +277,11 @@ async function main() {
   process.exit(hardTotal === 0 ? 0 : 1);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Only run when invoked directly (not when imported by a test), mirroring the
+// entry guard in generateLayoutManifest.js.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
