@@ -91,8 +91,13 @@ export const createBuildsSlice = (set, get) => ({
     }
 
     // Reject exact duplicates — comparing a build against itself is pointless,
-    // and identical strings would collide as React keys in the slot list.
-    if (buildStrings.includes(buildString)) {
+    // and identical strings would collide as React keys in the slot list. Only
+    // once the tree has loaded (or is loading), though: in the stranded state
+    // (a prior first-build load failed, so classNodes is null and nothing is
+    // loading) the committed slot is an unparsed placeholder whose Edit button
+    // is hidden, so re-pasting the same string is the user's natural retry.
+    // Let it fall through to the reload branch below rather than dead-end here.
+    if ((classNodes || isLoading) && buildStrings.includes(buildString)) {
       set({ error: "That build has already been added." });
       return false;
     }
@@ -171,11 +176,14 @@ export const createBuildsSlice = (set, get) => ({
     } else {
       // Not loading and tree data never landed — the first load must have
       // failed. Store the string and (re)start the load so it gets parsed
-      // instead of being stranded as a permanent null placeholder.
+      // instead of being stranded as a permanent null placeholder. A retry of
+      // an already-stranded slot (same string) reloads in place rather than
+      // appending a second copy.
+      const isRetry = buildStrings.includes(buildString);
       set({
-        buildStrings: newStrings,
-        parsedBuilds: newParsed,
-        buildNames: newNames,
+        buildStrings: isRetry ? buildStrings : newStrings,
+        parsedBuilds: isRetry ? get().parsedBuilds : newParsed,
+        buildNames: isRetry ? get().buildNames : newNames,
       });
       await loadTreeData(
         set,

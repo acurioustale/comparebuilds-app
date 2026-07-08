@@ -722,6 +722,35 @@ describe("loadTreeData error handling", () => {
     assert.strictEqual(st.error, null);
   });
 
+  test("re-adding the same string retries a failed first-build load instead of rejecting it as a duplicate", async () => {
+    // A stranded first-build slot renders unparsed (red ✕) with its Edit button
+    // hidden, so re-pasting the identical string is the user's natural retry.
+    // It must reload the slot in place, not dead-end on the duplicate guard.
+    const [s] = genStrings("death_knight", "blood", 1);
+
+    const failSpy = vi
+      .spyOn(storeHelpers, "importClassData")
+      .mockRejectedValueOnce(new Error("mock network failure"));
+    const first = await get().addBuild(s);
+    failSpy.mockRestore();
+
+    assert.strictEqual(first, false, "the initial add reports failure");
+    let st = get();
+    assert.strictEqual(st.classNodes, null);
+    assert.strictEqual(st.buildStrings.length, 1);
+    assert.strictEqual(st.parsedBuilds[0], null);
+
+    // Re-paste the identical string; the real import now succeeds.
+    const second = await get().addBuild(s);
+    assert.ok(second, "the retry succeeds once the load recovers");
+
+    st = get();
+    assert.strictEqual(st.buildStrings.length, 1, "no duplicate slot appended");
+    assert.ok(st.classNodes, "tree data loaded on retry");
+    assert.ok(st.parsedBuilds[0], "slot parsed, not null");
+    assert.strictEqual(st.error, null);
+  });
+
   test("resets state to EMPTY when preloadSpec fails to load tree data", async () => {
     const spy = vi
       .spyOn(storeHelpers, "importClassData")
