@@ -279,4 +279,47 @@ describe("persistence", () => {
       vi.resetModules();
     }
   });
+
+  test("reconciles a skewed names length even when the tree-load fails transiently", async () => {
+    // A too-short buildNames array AND a transient load failure together: the
+    // name reconcile must still run, otherwise the skew persists and slots read
+    // undefined names until a later successful reload.
+    const strings = dkStrings(2);
+    for (const s of strings) await useBuildsStore.getState().addBuild(s);
+    useBuildsStore.getState().setBuildName(0, "Raid ST");
+
+    const persisted = JSON.parse(localStorage.getItem(STORAGE_KEY)).state;
+    persisted.buildNames = ["Raid ST"]; // shorter than buildStrings
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ version: 1, state: persisted }),
+    );
+
+    vi.resetModules();
+    vi.doMock("./storeHelpers.js", async () => {
+      const actual = await vi.importActual("./storeHelpers.js");
+      return {
+        ...actual,
+        importClassData: () => Promise.reject(new Error("chunk load failed")),
+      };
+    });
+    try {
+      const mod = await import("./buildsStore.js");
+      const fresh = mod.useBuildsStore;
+
+      await fresh.getState().rehydrateTreeData();
+
+      const st = fresh.getState();
+      assert.strictEqual(st.treeData, null, "load failed, no tree rebuilt");
+      assert.strictEqual(
+        st.buildNames.length,
+        st.buildStrings.length,
+        "names reconciled to build count despite the failed load",
+      );
+      assert.deepStrictEqual(st.buildNames, ["Raid ST", ""]);
+    } finally {
+      vi.doUnmock("./storeHelpers.js");
+      vi.resetModules();
+    }
+  });
 });

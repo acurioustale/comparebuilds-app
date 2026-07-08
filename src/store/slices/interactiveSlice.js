@@ -109,6 +109,20 @@ export const createInteractiveSlice = (set, get) => ({
       preserveInteractive: true,
     });
 
+    // Keep names parallel to builds even if an older/partial persisted payload
+    // had a mismatched length. Reconcile here — before the transient-failure
+    // early return below, which would otherwise leave a skewed payload's names
+    // desynced until a later successful reload — since it depends only on the
+    // two array lengths, not on whether the load succeeded.
+    const restored = get();
+    if (restored.buildNames.length !== restored.buildStrings.length) {
+      set({
+        buildNames: restored.buildStrings.map(
+          (_, i) => restored.buildNames[i] ?? "",
+        ),
+      });
+    }
+
     // If the load failed, treeData is null. Because findClassForSpec matched
     // above, the spec still exists in the data — this is a TRANSIENT failure
     // (offline, or a stale chunk 404 right after a deploy replaced the hashed
@@ -129,13 +143,6 @@ export const createInteractiveSlice = (set, get) => ({
         });
       }
       return;
-    }
-
-    // Keep names parallel to builds even if an older/partial persisted payload
-    // had a mismatched length.
-    const { buildStrings, buildNames } = get();
-    if (buildNames.length !== buildStrings.length) {
-      set({ buildNames: buildStrings.map((_, i) => buildNames[i] ?? "") });
     }
 
     // Drop any restored interactive selections for nodes that no longer exist in
