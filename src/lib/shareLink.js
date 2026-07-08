@@ -2,6 +2,8 @@
 //
 // Creates persistent, content-addressed share links (/s/<id>) backed by the server.
 
+import { SHARE_ID_RE } from "./route.js";
+
 /**
  * POSTs build data to the share API and returns the generated short-link ID.
  * @param {{ classId: number, specId: number, builds: string[], labels?: string[], className: string, specName: string, layoutHash?: string|null }} payload Share payload
@@ -41,12 +43,12 @@ export async function createServerShare({
     throw new Error(err.error ?? `HTTP ${res.status}`);
   }
   // A 200 doesn't guarantee the expected body: a misconfigured proxy/CDN can
-  // return a success page, or the API contract could drift. Require a non-empty
-  // string id so a malformed-but-200 response fails loudly here instead of
-  // resolving as success and surfacing downstream as a dead "/s/undefined" link
-  // the caller copies to the clipboard.
+  // return a success page, or the API contract could drift. Require an id that
+  // matches the share-id contract (8–16 alnum) so a malformed-but-200 response
+  // fails loudly here instead of resolving as success and surfacing downstream
+  // as a dead "/s/<garbage>" link the caller copies to the clipboard.
   const data = await res.json().catch(() => null);
-  if (!data || typeof data.id !== "string" || data.id.length === 0) {
+  if (!data || typeof data.id !== "string" || !SHARE_ID_RE.test(data.id)) {
     throw new Error("Share API returned an unexpected response.");
   }
   return data;

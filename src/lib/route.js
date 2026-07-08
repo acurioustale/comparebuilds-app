@@ -14,7 +14,9 @@ import classesIndex from "../data/classes.json";
 // The 8–16 char share-id format. Mirrored in api/share.php (valid_share_id) and
 // api/og.php; shareIdParity.test.js pins all three together across the two
 // languages so the SPA route, the share page, and its OG image can't drift.
-const SHARE_ID_RE = /^[A-Za-z0-9]{8,16}$/;
+// Exported so shareLink.js validates the API's returned id against the same
+// contract rather than a duplicated pattern.
+export const SHARE_ID_RE = /^[A-Za-z0-9]{8,16}$/;
 const TRIM_SLASHES_RE = /^\/+|\/+$/g;
 const LEADING_HASH_RE = /^#/;
 
