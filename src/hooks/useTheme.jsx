@@ -35,14 +35,24 @@ function writeStoredMode(mode) {
 // mutates that media on every pass, so re-querying by media after the first
 // flip would fail. The pre-paint inline script only touches data-theme, so the
 // tags still carry their light/dark media when this first runs.
+//
+// Only memoize once BOTH tags are found and still connected. Caching a partial
+// or empty result (queried before the metas are in the DOM) would make applyTheme
+// early-return for the rest of the session; caching detached nodes (an HMR remount
+// into a fresh document) would keep pointing at the old page. Re-querying in those
+// cases is safe because applyTheme only flips media after a successful lookup, so
+// the live cached nodes stay connected and the media-based selector is never
+// re-run against already-flipped tags.
 let metaCache;
-function themeColorMetas() {
-  if (metaCache) return metaCache;
-  metaCache = {
+export function themeColorMetas() {
+  if (metaCache?.light?.isConnected && metaCache?.dark?.isConnected)
+    return metaCache;
+  const found = {
     light: document.querySelector('meta[name="theme-color"][media*="light"]'),
     dark: document.querySelector('meta[name="theme-color"][media*="dark"]'),
   };
-  return metaCache;
+  if (found.light && found.dark) metaCache = found;
+  return found;
 }
 
 // Force the browser-chrome tint to follow the toggle by flipping each meta's
