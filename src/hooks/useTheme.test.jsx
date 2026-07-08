@@ -7,7 +7,7 @@
  * so there is no cross-tab loop. Parity with acurioustale's theme-toggle handlers.
  */
 
-import { describe, test, expect, beforeEach } from "vitest";
+import { describe, test, expect, beforeEach, vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useTheme } from "./useTheme.jsx";
 import { THEME_STORAGE_KEY } from "../lib/theme.js";
@@ -121,5 +121,56 @@ describe("useTheme bfcache restore", () => {
     } finally {
       window.matchMedia = original;
     }
+  });
+});
+
+describe("useTheme theme-color meta cache", () => {
+  const addMeta = (media) => {
+    const m = document.createElement("meta");
+    m.setAttribute("name", "theme-color");
+    m.setAttribute("media", media);
+    document.head.append(m);
+    return m;
+  };
+
+  test("does not permanently cache an empty lookup when the metas arrive late", async () => {
+    // Fresh module so metaCache starts undefined, independent of other suites.
+    vi.resetModules();
+    document.head
+      .querySelectorAll('meta[name="theme-color"]')
+      .forEach((m) => m.remove());
+    const { themeColorMetas } = await import("./useTheme.jsx");
+
+    // Metas absent on first lookup — must NOT poison the cache.
+    expect(themeColorMetas()).toEqual({ light: null, dark: null });
+
+    // They appear later (e.g. injected after the hook first ran); the next
+    // lookup must find them rather than returning the cached nulls.
+    const light = addMeta("(prefers-color-scheme: light)");
+    const dark = addMeta("(prefers-color-scheme: dark)");
+    const res = themeColorMetas();
+    expect(res.light).toBe(light);
+    expect(res.dark).toBe(dark);
+  });
+
+  test("re-queries when cached metas become detached (HMR remount)", async () => {
+    vi.resetModules();
+    document.head
+      .querySelectorAll('meta[name="theme-color"]')
+      .forEach((m) => m.remove());
+    const { themeColorMetas } = await import("./useTheme.jsx");
+
+    const light1 = addMeta("(prefers-color-scheme: light)");
+    const dark1 = addMeta("(prefers-color-scheme: dark)");
+    expect(themeColorMetas().light).toBe(light1);
+
+    // The old tags are torn out and replaced (a remount into a fresh document).
+    light1.remove();
+    dark1.remove();
+    const light2 = addMeta("(prefers-color-scheme: light)");
+    const dark2 = addMeta("(prefers-color-scheme: dark)");
+    const res = themeColorMetas();
+    expect(res.light).toBe(light2);
+    expect(res.dark).toBe(dark2);
   });
 });
