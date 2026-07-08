@@ -42,6 +42,17 @@ const APEX = {
   posY: 9,
   name: "Capstone",
 };
+const GRANTED_CHOICE = {
+  id: 5,
+  type: "choice",
+  treeType: "spec",
+  maxRanks: 1,
+  posX: 0,
+  posY: 2,
+  name: null,
+  alreadyGranted: true,
+  choices: [{ name: "GOpt1" }, { name: "GOpt2" }],
+};
 const treeData = { nodes: [NODE_A, CHOICE] };
 
 const noop = () => {};
@@ -86,6 +97,26 @@ describe("DiffSummaryTable", () => {
       />,
     );
     expect(screen.getByText(/picks differ \(3\/3\)/)).toBeInTheDocument();
+  });
+
+  // An alreadyGranted choice node is identical in every build, so it is never a
+  // "difference" — even though its votes look divergent, mirroring the heatmap's
+  // isDivergent granted guard. Guards against the two views drifting on it.
+  test("excludes an alreadyGranted choice node even when picks look divergent", () => {
+    const treeDataGranted = { nodes: [GRANTED_CHOICE] };
+    const valid = [
+      { parsed: { nodes: { 5: { entryChosen: 0 } } }, label: "A" },
+      { parsed: { nodes: { 5: { entryChosen: 1 } } }, label: "B" },
+      { parsed: { nodes: { 5: { entryChosen: 0 } } }, label: "C" },
+    ];
+    render(
+      <DiffSummaryTable
+        treeData={treeDataGranted}
+        valid={valid}
+        setSpotlightId={noop}
+      />,
+    );
+    expect(screen.queryByText(/picks differ/)).not.toBeInTheDocument();
   });
 
   test("groups differing rows under section headers, class before spec", () => {
