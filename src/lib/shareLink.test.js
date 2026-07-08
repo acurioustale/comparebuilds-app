@@ -76,6 +76,36 @@ describe("shareLink createServerShare", () => {
     );
   });
 
+  test("throws when a 200 response id is a string but not a valid share id", async () => {
+    // A proxy/CDN could return 200 with an id-shaped string that isn't an 8–16
+    // char alnum share id (too short, or containing a slash/HTML). Building a
+    // "/s/<garbage>" link from it would surface a dead link the caller copies.
+    for (const badId of [
+      "",
+      "short",
+      "has/slash",
+      "way_too_long_1234567890",
+      "<b>x</b>",
+    ]) {
+      globalThis.fetch = async () => ({
+        ok: true,
+        json: async () => ({ id: badId }),
+      });
+      await assert.rejects(
+        () =>
+          createServerShare({
+            classId: 1,
+            specId: 1,
+            builds: ["CoPAAAA"],
+            className: "Mage",
+            specName: "Frost",
+          }),
+        /unexpected response/,
+        `id "${badId}" should be rejected`,
+      );
+    }
+  });
+
   test("throws when a 200 response body is not valid JSON", async () => {
     globalThis.fetch = async () => ({
       ok: true,
