@@ -346,6 +346,21 @@ describe("BlizzardDb2.spentRequired", () => {
     expect(fixture().spentRequired("100")).toBe(0);
   });
 
+  it("reads a gate attached directly to the node, not only via a group", () => {
+    const db2 = new BlizzardDb2({ build: "test", cache: false });
+    db2.index({
+      nx: [],
+      entry: [],
+      def: [],
+      subtree: [],
+      cond: [{ ID: "direct", CondType: "0", SpentAmountRequired: "6" }],
+      ncond: [{ TraitNodeID: "500", TraitCondID: "direct" }],
+      gxn: [],
+      gxc: [],
+    });
+    expect(db2.spentRequired("500")).toBe(6);
+  });
+
   it("throws on a non-numeric spend-gate amount instead of treating it as ungated", () => {
     const db2 = new BlizzardDb2({ build: "test", cache: false });
     db2.index({
