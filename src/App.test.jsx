@@ -206,6 +206,62 @@ describe("share rehydration", () => {
     expect(window.location.hash).toBe("");
   });
 
+  // Regression: clearAllBuilds() used to run before the share fetch, so an
+  // expired/pruned link (or a network failure) wiped the persisted local
+  // session — persist overwrote localStorage with the emptied store — while
+  // loading nothing. The clear now happens only after the payload validates,
+  // and a failed load restores the previous session's derived state.
+  test("a failed share fetch preserves the existing session", async () => {
+    const builds = genStrings("death_knight", "blood", 2);
+    render(<App />);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], builds[0]);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), builds[1]);
+    await screen.findByText(/Differences/, { selector: "p" });
+    cleanup();
+
+    // Reopen the app on someone's dead share link, previous session in store.
+    global.fetch = vi.fn(async () => ({
+      ok: false,
+      json: async () => ({}),
+    }));
+    window.location.hash = "#deadbeef";
+    render(<App />);
+
+    // The share error surfaces, and the previous comparison is still there —
+    // both in the store and re-rendered via the restored tree data.
+    await screen.findByText(/not found or has expired/i);
+    expect(useBuildsStore.getState().buildStrings).toEqual(builds);
+    expect(
+      await screen.findByText(/Differences/, { selector: "p" }),
+    ).toBeInTheDocument();
+    window.location.hash = "";
+  });
+
+  test("an invalid share payload preserves the existing session", async () => {
+    const builds = genStrings("death_knight", "blood", 2);
+    render(<App />);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], builds[0]);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), builds[1]);
+    await screen.findByText(/Differences/, { selector: "p" });
+    cleanup();
+
+    global.fetch = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ builds: [] }),
+    }));
+    window.location.hash = "#deadbeef";
+    render(<App />);
+
+    await screen.findByText(/Invalid share data/i);
+    expect(useBuildsStore.getState().buildStrings).toEqual(builds);
+    expect(
+      await screen.findByText(/Differences/, { selector: "p" }),
+    ).toBeInTheDocument();
+    window.location.hash = "";
+  });
+
   test("a bad hash is ignored (no fetch)", async () => {
     const fetchMock = mockShareFetch([]);
     window.location.hash = "#tooShortAndWeird!!";
