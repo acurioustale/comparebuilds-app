@@ -293,10 +293,19 @@ export default function MainView() {
     [treeData, valid.length, validParsed],
   );
 
+  // Comparison-only view state must not outlive the comparison. Both live in
+  // MainView but their controls only render in the 2+/3+ views: a spotlight
+  // survives the DiffSummaryTable unmounting mid-hover, and a left-on
+  // "Differences only" toggle would dim the single-build view's entire tree
+  // (no highlights → every node reads as unchanged) with no button to turn it
+  // off until another build is added.
   const summaryShown = valid.length >= 2;
   useEffect(() => {
-    if (!summaryShown) setSpotlightId(null);
-  }, [summaryShown, setSpotlightId]);
+    if (!summaryShown) {
+      setSpotlightId(null);
+      setChangesOnly(false);
+    }
+  }, [summaryShown, setSpotlightId, setChangesOnly]);
 
   if (!treeData) return null;
 

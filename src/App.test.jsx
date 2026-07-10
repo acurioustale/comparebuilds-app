@@ -7,7 +7,13 @@
 
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 import { StrictMode } from "react";
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  cleanup,
+  waitFor,
+} from "@testing-library/react";
 import { createRequire } from "node:module";
 import App from "./App.jsx";
 import { useBuildsStore } from "./store/buildsStore.js";
@@ -146,6 +152,37 @@ describe("spotlight cleanup", () => {
     // The diff summary is gone and the lingering spotlight is cleared.
     expect(screen.queryByText(/Differences/, { selector: "p" })).toBeNull();
     expect(dimmedCount(container)).toBe(0);
+  });
+});
+
+describe("changes-only cleanup", () => {
+  // Regression: the "Differences only" toggle state never reset, and its
+  // ChangesFilterContext provider also wraps the single-build view. Removing a
+  // build with the toggle on left the single view rendering with
+  // changesOnly=true — no highlights exist there, so every node dimmed to
+  // 0.12 — and the toggle button only renders in the 2+/3+ comparison views,
+  // leaving no way to turn it off.
+  const dimmedCount = (root) =>
+    Array.from(root.querySelectorAll('[style*="opacity: 0.12"]')).length;
+
+  test("clears the filter when a build is removed below the comparison threshold", async () => {
+    const { container } = render(<App />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+    await screen.findByText(/Differences/, { selector: "p" });
+
+    // Turn the filter on — nodes the builds agree on dim to 0.12.
+    fireEvent.click(screen.getByRole("button", { name: /differences only/i }));
+    expect(dimmedCount(container)).toBeGreaterThan(0);
+
+    // Drop to one valid build WITHOUT toggling the filter off first.
+    fireEvent.click(screen.getAllByTitle("Remove")[0]);
+
+    // The single-build view renders undimmed: the stale filter was reset.
+    expect(screen.queryByText(/Differences/, { selector: "p" })).toBeNull();
+    await waitFor(() => expect(dimmedCount(container)).toBe(0));
   });
 });
 
