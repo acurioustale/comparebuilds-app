@@ -321,11 +321,12 @@ if ($mtime !== false) {
 // This caps total GD/CPU resource use regardless of how many distinct IPs are
 // requesting simultaneously. Adjust via config.php (OG_CONCURRENCY_SLOTS) if needed.
 const OG_CONCURRENCY_SLOTS = 4;
-// TTL (seconds) for the advisory locks below on the Redis path. Both the global
-// slot and the per-IP lock are held across the GD render at the bottom of this
-// file, so this must exceed the worst-case render time — a Redis lock auto-expires
-// after its TTL, and too short a value would let a second request seize a slot
-// that is still mid-render (the MySQL GET_LOCK path is connection-scoped instead).
+// TTL (seconds) for the advisory locks below on the Redis path. The global slot
+// is held across the GD render at the bottom of this file, so this must exceed
+// the worst-case render time — a Redis lock auto-expires after its TTL, and too
+// short a value would let a second request seize a slot that is still mid-render
+// (the MySQL GET_LOCK path is connection-scoped instead). The per-IP lock spans
+// only the rate-limit accounting and shares the TTL as a generous upper bound.
 const OG_LOCK_TTL = 30;
 
 try {
@@ -339,15 +340,19 @@ try {
     // advisory locks (cb_og_global_0 … cb_og_global_N); if none is free we return
     // 503 immediately rather than queuing.
     //
-    // Both this slot and the per-IP lock are held all the way through the render
-    // at the bottom of the file — that render is the expensive work the slot
-    // exists to bound, so releasing before it (as the old finally did) left it
-    // unbounded. bail() calls exit(), which skips finally, so the only release
-    // that runs on every path (503/429/404/500, a GD fatal, or normal completion)
-    // is this shutdown handler. It reads the lock names by reference, releasing
-    // whatever was actually acquired and no-oping for names still null (e.g. an
-    // early throw from client_ip_hash() before the per-IP lock is taken — the
-    // gap that previously stranded the global slot on the persistent connection).
+    // The global slot is held all the way through the render at the bottom of
+    // the file — that render is the expensive work the slot exists to bound,
+    // so releasing before it (as the old finally did) left it unbounded. The
+    // per-IP lock has a narrower job — serializing the rate-limit accounting —
+    // and is released explicitly the moment that accounting is decided (see
+    // below); holding it through the render would 503 a second preview fetch
+    // from the same IP (a NAT'd office, a crawler grabbing two share ids).
+    // bail() calls exit(), which skips finally, so the only release that runs
+    // on every path (503/429/404/500, a GD fatal, or normal completion) is
+    // this shutdown handler. It reads the lock names by reference, releasing
+    // whatever is still held and no-oping for names null (never acquired, an
+    // early throw from client_ip_hash() before the per-IP lock is taken, or
+    // the per-IP lock already released after accounting).
     // Track which backend acquired each lock (Redis vs MySQL) so the shutdown
     // release targets the same one. Redis can die between the two acquisitions,
     // so the per-IP and global locks may end up on different backends — keep a
@@ -484,6 +489,18 @@ try {
         header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
         bail(429);
     }
+
+    // The per-IP lock exists to serialize the rate-limit accounting above —
+    // two concurrent requests must not both read the same window count. That
+    // accounting is decided, so release the lock NOW instead of at shutdown:
+    // held any longer it turned concurrency from one IP into 503s (a NAT'd
+    // office or a crawler fetching two different uncached share ids), and on
+    // the Redis path even a back-to-back sequential request could collide
+    // with the post-flush cache-write tail. Total render CPU stays bounded by
+    // the global slots below; per-IP volume stays bounded by the rate limit
+    // just enforced. Null the name so the shutdown handler doesn't re-release.
+    RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken, $lockViaRedis);
+    $lockName = null;
 
     // ── Global concurrency guard ─────────────────────────────────────────────
     // GD true-color image generation is CPU-intensive. Without this, a flood of
