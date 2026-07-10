@@ -244,11 +244,16 @@ export default function BuildManager() {
   const handleClassSelect = useCallback(
     (id) => {
       if (classLocked) return;
+      // Re-selecting the already-active class is a no-op: the active button
+      // stays clickable while unlocked, and falling through would reach the
+      // clearAllBuilds below and wipe an in-progress interactive selection —
+      // the class-level twin of preloadSpec's same-spec guard.
+      if (id === activeClassId) return;
       setLocalClassId(id);
       // Reset spec + interactive tree when class changes in interactive mode
       if (buildStrings.length === 0) clearAllBuilds();
     },
-    [classLocked, buildStrings.length, clearAllBuilds],
+    [classLocked, activeClassId, buildStrings.length, clearAllBuilds],
   );
 
   const handleSpecSelect = useCallback(

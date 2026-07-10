@@ -218,6 +218,53 @@ describe("cold-start CTA", () => {
   });
 });
 
+describe("class grid", () => {
+  // Regression: handleClassSelect had no same-class guard, so clicking the
+  // already-highlighted class icon (clickable while the grid is unlocked) hit
+  // the interactive-mode clearAllBuilds and wiped an in-progress selection —
+  // unlike preloadSpec, whose same-spec guard exists for exactly this.
+  test("clicking the already-active class keeps the in-progress interactive selection", async () => {
+    const data = require("../data/death_knight.json");
+    await useBuildsStore.getState().preloadSpec(data.specs.blood.specId);
+    const seed = useBuildsStore.getState().interactiveNodes;
+    const pick = data.specs.blood.nodes.find((nd) => !nd.alreadyGranted);
+    const selection = {
+      ...seed,
+      [pick.id]: {
+        pointsInvested: pick.type === "choice" ? 1 : pick.maxRanks,
+        entryChosen: pick.type === "choice" ? 0 : null,
+      },
+    };
+    useBuildsStore.getState().setInteractiveNodes(selection);
+
+    render(<BuildManager />);
+    fireEvent.click(await screen.findByRole("button", { pressed: true }));
+
+    const st = useBuildsStore.getState();
+    expect(st.interactiveNodes).toEqual(selection);
+    expect(st.specId).toBe(data.specs.blood.specId);
+    expect(st.treeData).not.toBeNull();
+  });
+
+  test("clicking a different class still resets the interactive state", async () => {
+    const data = require("../data/death_knight.json");
+    await useBuildsStore.getState().preloadSpec(data.specs.blood.specId);
+
+    render(<BuildManager />);
+    await screen.findByRole("button", { pressed: true });
+    const other = screen
+      .getAllByRole("button", { pressed: false })
+      .find((b) => b.querySelector("img"));
+    fireEvent.click(other);
+
+    // The class change clears the loaded spec/tree back to a clean slate.
+    const st = useBuildsStore.getState();
+    expect(st.specId).toBeNull();
+    expect(st.treeData).toBeNull();
+    expect(st.interactiveNodes).toEqual({});
+  });
+});
+
 describe("ClassIcon", () => {
   // classes.json is not schema-validated; a malformed row (missing/non-string
   // name) must not throw and unmount the whole panel — it degrades to a broken
