@@ -102,6 +102,20 @@ describe("matchNodeIds", () => {
     assert.ok(matchNodeIds("phoenix", nodes).has(9));
   });
 
+  test("a query cannot match across field boundaries", () => {
+    // Regression: the index joined name/description/choice texts with single
+    // spaces, so "heart strike instantly …" let a search for the (unrelated)
+    // phrase "strike instantly" straddle node 4's name→description boundary
+    // and light it up. Fields are now separated by a character normalisation
+    // can never produce, so only same-field substrings match.
+    assert.strictEqual(matchNodeIds("strike instantly", NODES).size, 0);
+    // Choice-option boundaries too: option 1's description ends "…Shell." and
+    // option 2's name follows — "shell death pact" must not bridge them.
+    assert.strictEqual(matchNodeIds("shell death pact", NODES).size, 0);
+    // Multi-word queries WITHIN one field still match.
+    assert.deepStrictEqual([...matchNodeIds("instantly strike", NODES)], [4]);
+  });
+
   test("tolerates a missing/!array node list", () => {
     assert.strictEqual(matchNodeIds("x", null).size, 0);
   });
