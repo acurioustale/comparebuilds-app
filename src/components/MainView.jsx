@@ -240,26 +240,38 @@ export default function MainView() {
   const [changesOnly, setChangesOnly] = useState(false);
   const [spotlightId, setSpotlightId] = useState(null);
 
-  const valid = useMemo(
+  // The parsed slice is deliberately memoised WITHOUT the labels: renaming a
+  // build fires setBuildName per keystroke, and folding buildNames into the
+  // same memo used to mint a fresh identity per keystroke — re-running the
+  // O(nodes × builds) diff/stats passes below and reconciling the whole
+  // comparison subtree to change a label string none of them read.
+  const validEntries = useMemo(
     () =>
       parsedBuilds
-        .map((p, i) => ({
-          index: i,
-          parsed: p,
-          label:
-            buildNames[i]?.trim() ||
-            defaultBuildLabel({
-              index: i + 1,
-              total: buildStrings.length,
-              className: classDisplayName,
-              specName: specDisplayName,
-              treeData,
-              parsedBuild: p,
-            }),
-        }))
+        .map((p, i) => ({ index: i, parsed: p }))
         .filter(({ parsed }) => parsed),
+    [parsedBuilds],
+  );
+  const validParsed = useMemo(
+    () => validEntries.map((v) => v.parsed),
+    [validEntries],
+  );
+  const validLabels = useMemo(
+    () =>
+      validEntries.map(
+        ({ index, parsed }) =>
+          buildNames[index]?.trim() ||
+          defaultBuildLabel({
+            index: index + 1,
+            total: buildStrings.length,
+            className: classDisplayName,
+            specName: specDisplayName,
+            treeData,
+            parsedBuild: parsed,
+          }),
+      ),
     [
-      parsedBuilds,
+      validEntries,
       buildNames,
       buildStrings.length,
       classDisplayName,
@@ -267,30 +279,34 @@ export default function MainView() {
       treeData,
     ],
   );
-  const validParsed = useMemo(() => valid.map((v) => v.parsed), [valid]);
-  const validLabels = useMemo(() => valid.map((v) => v.label), [valid]);
+  // Combined shape for consumers that want both (the diff summary table).
+  const valid = useMemo(
+    () => validEntries.map((v, k) => ({ ...v, label: validLabels[k] })),
+    [validEntries, validLabels],
+  );
 
   // The comparison view (paired diff or heatmap) and the DiffSummaryTable mount
   // together for every 2+-build comparison and both read the same diff/adoption
   // data. Compute it once here so neither child recomputes: the 2-build diff and
-  // the 3+-build adoption stats are each an O(nodes × builds) pass.
+  // the 3+-build adoption stats are each an O(nodes × builds) pass. Both key on
+  // the label-free validEntries/validParsed so renames can't invalidate them.
   const pairDiff = useMemo(
     () =>
-      treeData && valid.length === 2
+      treeData && validEntries.length === 2
         ? computeDiff(
-            valid[0].parsed.nodes,
-            valid[1].parsed.nodes,
+            validEntries[0].parsed.nodes,
+            validEntries[1].parsed.nodes,
             treeData.nodes,
           )
         : null,
-    [treeData, valid],
+    [treeData, validEntries],
   );
   const heatmapStats = useMemo(
     () =>
-      treeData && valid.length >= 3
+      treeData && validEntries.length >= 3
         ? computeStats(validParsed, treeData.nodes)
         : null,
-    [treeData, valid.length, validParsed],
+    [treeData, validEntries.length, validParsed],
   );
 
   // Comparison-only view state must not outlive the comparison. Both live in
@@ -336,7 +352,7 @@ export default function MainView() {
   const comparisonFooter = addingBuild ? null : searchFooter;
 
   let comparisonEl = null;
-  if (valid.length >= 3) {
+  if (validEntries.length >= 3) {
     comparisonEl = (
       <ThreePlusBuildsView
         treeData={treeData}
@@ -349,27 +365,27 @@ export default function MainView() {
         setChangesOnly={setChangesOnly}
       />
     );
-  } else if (valid.length === 2) {
+  } else if (validEntries.length === 2) {
     comparisonEl = (
       <PairedBuildView
         treeData={treeData}
-        buildA={valid[0].parsed}
-        buildB={valid[1].parsed}
-        labelA={valid[0].label}
-        labelB={valid[1].label}
+        buildA={validEntries[0].parsed}
+        buildB={validEntries[1].parsed}
+        labelA={validLabels[0]}
+        labelB={validLabels[1]}
         diff={pairDiff}
         widths={pairedWidths}
         footer={comparisonFooter}
         changesOnly={changesOnly}
         setChangesOnly={setChangesOnly}
-        onSwap={() => swapBuilds(valid[0].index, valid[1].index)}
+        onSwap={() => swapBuilds(validEntries[0].index, validEntries[1].index)}
       />
     );
-  } else if (valid.length === 1) {
+  } else if (validEntries.length === 1) {
     comparisonEl = (
       <SingleBuildView
         treeData={treeData}
-        parsedBuild={valid[0].parsed}
+        parsedBuild={validEntries[0].parsed}
         widths={treeWidths}
         footer={comparisonFooter}
       />
