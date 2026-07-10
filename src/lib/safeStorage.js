@@ -57,7 +57,15 @@ export function getSafeStorage() {
         const cached = memStorage.get(name);
         return cached === REMOVED ? null : cached;
       }
-      return ls.getItem(name);
+      try {
+        return ls.getItem(name);
+      } catch {
+        // Access revoked after the startup probe (browser settings change,
+        // storage teardown in a strict webview). The write paths already
+        // degrade to the mirror; reads must not be the one path that throws
+        // out of a module whose contract is to never throw mid-session.
+        return null;
+      }
     },
     setItem: (name, value) => {
       try {
