@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback, memo } from "react";
 import Tooltip from "./Tooltip";
 import { MAX_BUILD_NAME_LEN } from "../store/buildsStore";
+import { copyToClipboard } from "../hooks/useShareActions";
 
 // ─── Build slot (filled) ──────────────────────────────────────────────────────
 
@@ -47,7 +48,7 @@ export const FilledSlot = memo(function FilledSlot({
 
   const handleCopy = useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(value);
+      await copyToClipboard(value);
       setFlash(true);
       // Clear any pending reset first: without this a rapid second copy would
       // leave the first timer running, so it fires ~1s early and drops the
