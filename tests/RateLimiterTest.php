@@ -120,4 +120,84 @@ final class RateLimiterTest extends TestCase
         $this->assertFalse(RateLimiter::acquireLock($pdo, $redis, 'cb_og_x', 'tok', 30, $usedRedis));
         $this->assertFalse($usedRedis, 'a busy lock acquires no backend');
     }
+
+    public function testCountDbWindowReturnsCountAndOldest(): void
+    {
+        $stmt = $this->createMock(PDOStatement::class);
+        $stmt->expects($this->once())->method('execute')->with(['hash123']);
+        $stmt->method('fetch')->willReturn(['c' => '7', 'oldest' => '1700000000']);
+
+        $pdo = $this->createMock(PDO::class);
+        $pdo->expects($this->once())->method('prepare')
+            ->with($this->logicalAnd(
+                $this->stringContains('FROM comparebuilds_share_requests'),
+                $this->stringContains('INTERVAL 3600 SECOND'),
+            ))
+            ->willReturn($stmt);
+
+        $res = RateLimiter::countDbWindow($pdo, 'comparebuilds_share_requests', 'hash123', 3600);
+        $this->assertSame(7, $res['count']);
+        $this->assertSame(1700000000, $res['oldest']);
+    }
+
+    public function testCountDbWindowReportsNullOldestForAnEmptyWindow(): void
+    {
+        $stmt = $this->createMock(PDOStatement::class);
+        $stmt->method('fetch')->willReturn(['c' => '0', 'oldest' => null]);
+
+        $pdo = $this->createMock(PDO::class);
+        $pdo->method('prepare')->willReturn($stmt);
+
+        $res = RateLimiter::countDbWindow($pdo, 'comparebuilds_og_requests', 'hash123', 60);
+        $this->assertSame(0, $res['count']);
+        $this->assertNull($res['oldest']);
+    }
+
+    public function testRecordDbRequestInsertsWhileUnderTheRowCap(): void
+    {
+        $ins = $this->createMock(PDOStatement::class);
+        $ins->expects($this->once())->method('execute')->with(['hash123']);
+
+        $pdo = $this->createMock(PDO::class);
+        $pdo->expects($this->once())->method('prepare')
+            ->with($this->stringContains('INSERT INTO comparebuilds_share_requests'))
+            ->willReturn($ins);
+
+        // Exactly at the 2x cap still logs (the window must keep reflecting an
+        // ongoing flood rather than freezing at the limit).
+        RateLimiter::recordDbRequest($pdo, 'comparebuilds_share_requests', 'hash123', 10, 5, 'share request');
+    }
+
+    public function testRecordDbRequestSlidesTheOldestRowPastTheCap(): void
+    {
+        $slide = $this->createMock(PDOStatement::class);
+        $slide->expects($this->once())->method('execute')->with(['hash123']);
+
+        $pdo = $this->createMock(PDO::class);
+        $pdo->expects($this->once())->method('prepare')
+            ->with($this->logicalAnd(
+                $this->stringContains('UPDATE comparebuilds_og_requests SET created_at = NOW()'),
+                $this->stringContains('ORDER BY created_at ASC LIMIT 1'),
+            ))
+            ->willReturn($slide);
+
+        // Past the 2x row cap: no INSERT — the oldest row slides forward so the
+        // abuser's recovery horizon keeps moving while the table stays bounded.
+        RateLimiter::recordDbRequest($pdo, 'comparebuilds_og_requests', 'hash123', 11, 5, 'OG request');
+    }
+
+    public function testRecordDbRequestSwallowsWriteFailures(): void
+    {
+        // Best-effort by contract: a failed write is logged, never thrown, so
+        // accounting can't mask the caller's own response (a 503/429 about to
+        // be sent, or a share commit already made).
+        $stmt = $this->createMock(PDOStatement::class);
+        $stmt->method('execute')->willThrowException(new PDOException('gone'));
+
+        $pdo = $this->createMock(PDO::class);
+        $pdo->method('prepare')->willReturn($stmt);
+
+        RateLimiter::recordDbRequest($pdo, 'comparebuilds_share_requests', 'hash123', 0, 5, 'share request');
+        $this->addToAssertionCount(1); // reaching here means nothing threw
+    }
 }

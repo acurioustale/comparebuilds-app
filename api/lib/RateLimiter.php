@@ -129,4 +129,83 @@ class RateLimiter
             return null;
         }
     }
+
+    /**
+     * One in-window COUNT for the DB sliding-window limiter, shared by
+     * share.php and og.php so their window reads cannot drift.
+     *
+     * @param PDO $pdo The MySQL connection.
+     * @param string $table The request-log table. Interpolated into SQL, so it
+     *   MUST be one of the module's own constant table names, never input.
+     * @param string $ipHash The salted IP hash the window is keyed on.
+     * @param int $window The window length in seconds. Bounded against the DB
+     *   clock (NOW()), not a PHP timestamp, so timezone/DST skew can't shift it.
+     * @return array{count: int, oldest: ?int} In-window request count, plus the
+     *   UNIX time of the oldest still-in-window request (null when the window
+     *   is empty) — a caller at the cap regains a slot at oldest + window, the
+     *   true sliding reset instant for the X-RateLimit-Reset header.
+     * @throws PDOException The caller chooses the failure posture: og.php
+     *   fails closed, share.php's in-lock path lets it surface as a 500, and
+     *   record_throttled_attempt swallows it (best-effort accounting).
+     */
+    public static function countDbWindow(PDO $pdo, string $table, string $ipHash, int $window): array
+    {
+        $stmt = $pdo->prepare(
+            'SELECT COUNT(*) AS c, UNIX_TIMESTAMP(MIN(created_at)) AS oldest FROM ' . $table
+            . ' WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . ((int) $window) . ' SECOND'
+        );
+        $stmt->execute([$ipHash]);
+        $row = $stmt->fetch();
+        $oldest = $row['oldest'] ?? null;
+        return [
+            'count'  => (int) $row['c'],
+            'oldest' => $oldest !== null ? (int) $oldest : null,
+        ];
+    }
+
+    /**
+     * The DB limiter's write-side accounting, shared by share.php's in-lock
+     * path, its lock-contention fallback (record_throttled_attempt), and
+     * og.php — previously three hand-synchronized copies. Given the in-window
+     * $count the caller just read: INSERT the request while this IP holds at
+     * most 2x $max rows (the window keeps reflecting an ongoing flood instead
+     * of freezing at the limit), otherwise slide the IP's oldest logged
+     * request forward to now — the row count stays bounded while the recovery
+     * horizon is pushed out for as long as the abuse continues, mirroring the
+     * Redis path's over-limit penalty.
+     *
+     * Best-effort by contract: each write failure is logged (labelled with
+     * $logLabel, e.g. "share request" / "OG request") and never thrown, so
+     * accounting can't mask the caller's own response — but it IS surfaced,
+     * because losing rows under-counts the window and silently relaxes the
+     * cap (schema drift and failed migrations must be visible in the logs).
+     *
+     * @param PDO $pdo The MySQL connection.
+     * @param string $table The request-log table (constant name, never input).
+     * @param string $ipHash The salted IP hash the window is keyed on.
+     * @param int $count The in-window count the caller read via countDbWindow.
+     * @param int $max The rate limit (row cap is 2x this).
+     * @param string $logLabel Log noun for failures, e.g. "share request".
+     */
+    public static function recordDbRequest(PDO $pdo, string $table, string $ipHash, int $count, int $max, string $logLabel): void
+    {
+        if ($count <= $max * 2) {
+            try {
+                $ins = $pdo->prepare('INSERT INTO ' . $table . ' (ip_hash) VALUES (?)');
+                $ins->execute([$ipHash]);
+            } catch (PDOException $e) {
+                error_log('Failed to log ' . $logLabel . ': ' . $e->getMessage());
+            }
+        } else {
+            try {
+                $slide = $pdo->prepare(
+                    'UPDATE ' . $table . ' SET created_at = NOW() '
+                    . 'WHERE ip_hash = ? ORDER BY created_at ASC LIMIT 1'
+                );
+                $slide->execute([$ipHash]);
+            } catch (PDOException $e) {
+                error_log('Failed to slide ' . $logLabel . ' window: ' . $e->getMessage());
+            }
+        }
+    }
 }

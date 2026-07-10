@@ -415,12 +415,9 @@ try {
         $count = 0;
         $countRead = false;
         try {
-            $rl = $pdo->prepare(
-                'SELECT COUNT(*) AS c FROM comparebuilds_og_requests '
-                . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . OG_RATE_LIMIT_WINDOW . ' SECOND'
-            );
-            $rl->execute([$ipHash]);
-            $count = (int) $rl->fetch()['c'];
+            // Shared DB sliding-window read (RateLimiter::countDbWindow — the
+            // same helper share.php uses, so the two windows can't drift).
+            ['count' => $count] = RateLimiter::countDbWindow($pdo, 'comparebuilds_og_requests', $ipHash, OG_RATE_LIMIT_WINDOW);
             $countRead = true;
         } catch (PDOException $e) {
             // Fail CLOSED: a failed count (missing table, schema drift, a
@@ -437,43 +434,22 @@ try {
         }
 
         // Only touch the log table when the count read succeeded. On the
-        // fail-closed path $count is a stand-in zero, so the `<= 2x` guard would
-        // otherwise fire an INSERT on the connection that just errored — noise at
-        // best, and if the read failure was transient the write could land and
-        // count a request we are about to reject, double-counting a 429'd caller.
-        if ($countRead && $count <= OG_RATE_LIMIT_MAX * 2) {
-            // Count every valid-id request, whether or not the share exists, so a
-            // flood of nonexistent ids is still bounded — matching the Redis path,
-            // which increments its counter before the share lookup. Logging
-            // continues past the cap (up to 2x) so the window keeps reflecting an
-            // ongoing flood rather than freezing at the limit.
-            try {
-                $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
-                $logReq->execute([$ipHash]);
-            } catch (PDOException $e) {
-                // Losing this row under-counts the window and weakens the
-                // rate limit; surface the failure so schema drift or a failed
-                // migration is visible instead of silently relaxing the cap.
-                error_log('Failed to log OG request: ' . $e->getMessage());
-            }
-        } elseif ($countRead) {
-            // Already at the per-IP row cap (2x the limit) and still hammering.
-            // Inserting another row would grow the table unbounded, but dropping
-            // the request outright lets the sliding window drain: as the oldest
-            // rows age out the count falls back under the cap and the abuser
-            // regains capacity while still hammering. Instead slide this IP's
-            // oldest logged request forward to now — the row count stays bounded
-            // while the recovery horizon is pushed out for as long as the abuse
-            // continues, mirroring share.php's over-limit penalty (see #270).
-            try {
-                $slide = $pdo->prepare(
-                    'UPDATE comparebuilds_og_requests SET created_at = NOW() '
-                    . 'WHERE ip_hash = ? ORDER BY created_at ASC LIMIT 1'
-                );
-                $slide->execute([$ipHash]);
-            } catch (PDOException $e) {
-                error_log('Failed to slide OG request window: ' . $e->getMessage());
-            }
+        // fail-closed path $count is a stand-in zero, so the shared helper's
+        // `<= 2x` guard would otherwise fire an INSERT on the connection that
+        // just errored — noise at best, and if the read failure was transient
+        // the write could land and count a request we are about to reject,
+        // double-counting a 429'd caller.
+        //
+        // Count every valid-id request, whether or not the share exists, so a
+        // flood of nonexistent ids is still bounded — matching the Redis path,
+        // which increments its counter before the share lookup. The shared
+        // accounting (RateLimiter::recordDbRequest — the same insert-or-slide
+        // share.php uses, see #270) keeps logging past the cap up to 2x so the
+        // window reflects an ongoing flood, then slides the oldest row forward
+        // so the abuser's recovery horizon keeps moving while the table stays
+        // bounded.
+        if ($countRead) {
+            RateLimiter::recordDbRequest($pdo, 'comparebuilds_og_requests', $ipHash, $count, OG_RATE_LIMIT_MAX, 'OG request');
         }
     }
 
