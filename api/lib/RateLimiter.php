@@ -155,11 +155,12 @@ class RateLimiter
             . ' WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . ((int) $window) . ' SECOND'
         );
         $stmt->execute([$ipHash]);
-        $row = $stmt->fetch();
-        $oldest = $row['oldest'] ?? null;
+        // COUNT(*) always yields one row; the ?: [] just keeps a degenerate
+        // driver/mocked false from warning on the offset reads.
+        $row = $stmt->fetch() ?: [];
         return [
-            'count'  => (int) $row['c'],
-            'oldest' => $oldest !== null ? (int) $oldest : null,
+            'count'  => (int) ($row['c'] ?? 0),
+            'oldest' => isset($row['oldest']) ? (int) $row['oldest'] : null,
         ];
     }
 
