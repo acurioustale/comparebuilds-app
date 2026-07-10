@@ -29,7 +29,10 @@ function fallbackCopyTextToClipboard(text) {
   return successful;
 }
 
-async function copyToClipboard(text) {
+// Shared by every copy control (share link, SimC export, build-string copy in
+// useBuildExport and BuildManagerSlots) so they all degrade the same way when
+// the async Clipboard API is unavailable (non-secure origins, older engines).
+export async function copyToClipboard(text) {
   if (!navigator.clipboard) {
     const success = fallbackCopyTextToClipboard(text);
     if (!success) throw new Error("Clipboard copy failed");
