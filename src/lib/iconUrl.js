@@ -21,6 +21,20 @@ export const iconUrl = (icon) =>
     : BLANK;
 
 /**
+ * Slug for a class's grid icon: classicon_<class slug, underscores removed>,
+ * lowercased. One formula shared by the class-grid renderer (BuildManager)
+ * and the icon downloader (scripts/fetchIcons.js), so the set of committed
+ * icons can't silently drift from what the UI requests. Coerces defensively —
+ * classes.json is not schema-validated, and a malformed name must degrade to
+ * the blank-pixel fallback via iconUrl/onIconError, never throw.
+ *
+ * @param {string} name Class slug from classes.json (e.g. "death_knight")
+ * @returns {string} Icon slug (e.g. "classicon_deathknight")
+ */
+export const classIconSlug = (name) =>
+  ("classicon_" + String(name ?? "").replaceAll("_", "")).toLowerCase();
+
+/**
  * onError handler for icon <img>s: swap a failed load for the blank pixel so a
  * missing file (a handful of upstream slugs have no real art) degrades to a
  * clean empty slot instead of the browser's broken-image glyph. The guard stops

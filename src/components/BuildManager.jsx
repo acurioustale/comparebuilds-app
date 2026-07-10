@@ -3,7 +3,7 @@ import { useShallow } from "zustand/react/shallow";
 import Tooltip from "./Tooltip";
 import { useBuildsStore, MAX_BUILDS } from "../store/buildsStore";
 import classesIndex from "../data/classes.json";
-import { iconUrl, onIconError } from "../lib/iconUrl";
+import { classIconSlug, iconUrl, onIconError } from "../lib/iconUrl";
 import { sectionPoints } from "../lib/spendRules";
 import { defaultBuildLabel } from "../lib/buildLabel";
 import { FilledSlot, EmptySlot } from "./BuildManagerSlots";
@@ -37,11 +37,11 @@ function pointSummary(parsed, treeData) {
 }
 
 export function ClassIcon({ name, size = 36 }) {
-  // WoW class icons use the slug classicon_{name} with underscores removed.
-  // classes.json is not schema-validated, so coerce defensively: a malformed
-  // row (missing or non-string name) must degrade to the broken-icon fallback
-  // via onIconError, never throw and unmount the whole class/build panel.
-  const slug = "classicon_" + String(name ?? "").replaceAll("_", "");
+  // classIconSlug owns the formula (shared with scripts/fetchIcons.js) and
+  // coerces defensively: a malformed classes.json row (missing or non-string
+  // name) must degrade to the broken-icon fallback via onIconError, never
+  // throw and unmount the whole class/build panel.
+  const slug = classIconSlug(name);
   return (
     <img
       src={iconUrl(slug)}

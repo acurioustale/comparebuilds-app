@@ -10,6 +10,7 @@ import { test } from "vitest";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import {
+  renderOrder,
   computeInvalidNodeIds,
   cellKey,
   spentPoints,
@@ -943,4 +944,17 @@ test("cellKey never collides across sections in any class's data", () => {
       }
     }
   }
+});
+
+describe("renderOrder", () => {
+  // The shared comparator behind the store's render sort AND
+  // computeInvalidNodeIds' topological pass — posY, then posX, then id.
+  test("orders by posY, then posX, then id", () => {
+    const n = (id, posX, posY) => ({ id, posX, posY });
+    const shuffled = [n(3, 0, 1), n(2, 1, 0), n(1, 0, 0), n(5, 0, 0)];
+    assert.deepStrictEqual(
+      [...shuffled].sort(renderOrder).map((x) => x.id),
+      [1, 5, 2, 3],
+    );
+  });
 });

@@ -37,6 +37,7 @@ import {
 } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { classIconSlug } from "../src/lib/iconUrl.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "src", "data");
@@ -70,13 +71,14 @@ function gatherIconNames() {
     if (!file.endsWith(".json")) continue;
     collectIcons(JSON.parse(readFileSync(join(DATA_DIR, file), "utf8")), icons);
   }
-  // The class grid derives its icon from the class slug (see BuildManager):
-  // classicon_<slug with underscores removed>.
+  // The class grid derives its icon via classIconSlug — the same shared
+  // formula BuildManager renders with, so the downloaded set can't drift from
+  // what the UI requests.
   const classes = JSON.parse(
     readFileSync(join(DATA_DIR, "classes.json"), "utf8"),
   );
   for (const cls of classes) {
-    icons.add(("classicon_" + cls.name.replaceAll("_", "")).toLowerCase());
+    icons.add(classIconSlug(cls.name));
   }
   return [...icons].sort();
 }

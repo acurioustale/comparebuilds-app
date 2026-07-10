@@ -231,6 +231,25 @@ export function activeHeroSubtree(allNodes, selected) {
 // ─── Exports used by both interactive and import contexts ─────────────────────
 
 /**
+ * Canonical node ordering: posY, then posX, then id as a stable tie-break.
+ * One comparator serves both the store's render-order sort (loadTreeData) and
+ * computeInvalidNodeIds' topological pass below — which depends on exactly
+ * this parents-before-children guarantee (upperParents only ever link to a
+ * strictly-smaller-posY node), so the two orderings must never drift.
+ *
+ * @param {object} a Node
+ * @param {object} b Node
+ * @returns {number} Comparator result
+ */
+export function renderOrder(a, b) {
+  return a.posY !== b.posY
+    ? a.posY - b.posY
+    : a.posX !== b.posX
+      ? a.posX - b.posX
+      : a.id - b.id;
+}
+
+/**
  * Builds an interactiveNodes map seeded with all alreadyGranted nodes at their
  * full rank. These nodes must be present in the selection state so that
  * prerequisite checks evaluate against the full effective selection set.
@@ -287,13 +306,7 @@ export function computeInvalidNodeIds(allNodes, selected, nodeById) {
   // node's prerequisites are already resolved when the single pass reaches it.
   const sorted = allNodes
     .filter((n) => selected[n.id] && !n.alreadyGranted)
-    .sort((a, b) =>
-      a.posY !== b.posY
-        ? a.posY - b.posY
-        : a.posX !== b.posX
-          ? a.posX - b.posX
-          : a.id - b.id,
-    );
+    .sort(renderOrder);
 
   // Hero-subtree exclusivity: a build may invest in only one hero subtree. A
   // crafted/corrupt build string (or an import path that bypasses canSpendPoint)
