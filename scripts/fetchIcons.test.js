@@ -7,14 +7,21 @@
 import { describe, test, beforeEach, afterEach, vi } from "vitest";
 import assert from "node:assert/strict";
 
-// fetchOne writes via fs.writeFileSync and skips via fs.existsSync. Mock fs so
-// the test never touches the real public/talent-icons/, and capture writes so we
-// can assert whether one happened. vi.hoisted makes `writes` available inside the
-// hoisted mock factory.
+// fetchOne writes via writeFileAtomic (tmp write + rename) and skips via
+// fs.existsSync. Mock fs so the test never touches the real
+// public/talent-icons/, and capture writes so we can assert whether one
+// happened — the rename retargets the captured entry to its final path, so
+// assertions see the destination exactly as the incremental skip would.
+// vi.hoisted makes `writes` available inside the hoisted mock factory.
 const { writes } = vi.hoisted(() => ({ writes: [] }));
 vi.mock("fs", () => ({
   existsSync: () => false,
   writeFileSync: (dest, buf) => writes.push({ dest, buf }),
+  renameSync: (from, to) => {
+    for (const w of writes) if (w.dest === from) w.dest = to;
+  },
+  unlinkSync: () => {},
+  rmSync: () => {},
   mkdirSync: () => {},
   readFileSync: () => "[]",
   readdirSync: () => [],
