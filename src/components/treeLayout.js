@@ -7,7 +7,7 @@ export const CELL = 36; // grid spacing between node centres
 export const ICON = 26; // round/square node size
 export const CHOICE_ICON = 20; // per-option size for choice nodes
 export const APEX_ICON = 34; // apex (capstone) node size
-export const CHOICE_GAP = 4; // gap between a choice node's two options
+export const CHOICE_GAP = 4; // gap between a choice node's options
 export const PAD = 24; // panel padding around the node grid
 
 /**
@@ -25,6 +25,21 @@ export function iconGeometry(node) {
     radius: isApex || node.type === "round" ? "50%" : 4,
     borderWidth: isApex ? 2 : 1.5,
   };
+}
+
+/**
+ * Pixel width of a choice node's option row, derived from the option count.
+ * The schema (validateClassData) permits 2–4 choices and the wire format
+ * encodes picks 0–3, so the row must size itself from the data rather than
+ * assume the common two-option shape — a hardcoded two-icon width would
+ * mis-centre a 3/4-option node and undersize its overlay/ring boxes in every
+ * view. Shared by TalentNode and HeatmapTree so the two can't drift.
+ * @param {object} node Choice node (node.choices is a 2–4 element array)
+ * @returns {number} Row width in px
+ */
+export function choiceRowWidth(node) {
+  const count = Array.isArray(node.choices) ? node.choices.length : 2;
+  return CHOICE_ICON * count + CHOICE_GAP * (count - 1);
 }
 
 // ─── Responsive stacking classes ──────────────────────────────────────────────
