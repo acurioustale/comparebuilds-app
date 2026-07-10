@@ -280,6 +280,60 @@ describe("persistence", () => {
     }
   });
 
+  test("keeps a persisted interactive-only selection when the tree-load fails transiently", async () => {
+    // An in-progress interactive selection (no imported builds) whose class-data
+    // import fails transiently on rehydration. The persisted specId and
+    // interactiveNodes must survive — resetting to EMPTY would let persist
+    // overwrite localStorage and lose the selection for good, even though a
+    // later reload with connectivity could have restored it. Regression test
+    // for the interactive-only analogue of the rehydrate data-loss bug.
+    await useBuildsStore.getState().preloadSpec(DK_BLOOD);
+    const seed = useBuildsStore.getState().interactiveNodes;
+    const pick = DK.specs.blood.nodes.find((nd) => !nd.alreadyGranted);
+    const selection = {
+      ...seed,
+      [pick.id]: {
+        pointsInvested: pick.type === "choice" ? 1 : pick.maxRanks,
+        entryChosen: pick.type === "choice" ? 0 : null,
+      },
+    };
+    useBuildsStore.getState().setInteractiveNodes(selection);
+
+    vi.resetModules();
+    vi.doMock("./storeHelpers.js", async () => {
+      const actual = await vi.importActual("./storeHelpers.js");
+      return {
+        ...actual,
+        importClassData: () => Promise.reject(new Error("chunk load failed")),
+      };
+    });
+    try {
+      const mod = await import("./buildsStore.js");
+      const fresh = mod.useBuildsStore;
+      // Persisted slices are restored synchronously before recovery runs.
+      assert.deepStrictEqual(fresh.getState().interactiveNodes, selection);
+
+      await fresh.getState().rehydrateTreeData();
+
+      const st = fresh.getState();
+      assert.strictEqual(st.treeData, null, "load failed, no tree rebuilt");
+      assert.strictEqual(
+        st.specId,
+        DK_BLOOD,
+        "spec retained for a later retry",
+      );
+      assert.deepStrictEqual(
+        st.interactiveNodes,
+        selection,
+        "in-progress selection NOT wiped by a transient failure",
+      );
+      assert.ok(st.error, "the load failure is surfaced");
+    } finally {
+      vi.doUnmock("./storeHelpers.js");
+      vi.resetModules();
+    }
+  });
+
   test("reconciles a skewed names length even when the tree-load fails transiently", async () => {
     // A too-short buildNames array AND a transient load failure together: the
     // name reconcile must still run, otherwise the skew persists and slots read

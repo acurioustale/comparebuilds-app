@@ -102,7 +102,15 @@ export async function loadTreeData(
     // their string and surface the error on the slot, as before. The branch
     // keys off the load-start snapshot, not a fresh get(): a build appended mid-
     // load must not flip this and strand its string with treeData still null.
-    if (startedWithNoBuilds) {
+    //
+    // Rehydration (preserveInteractive) is exempt from the reset even with no
+    // builds: it starts from a fresh page load where treeData/classNodes are
+    // still null — there is no stale previous-spec tree to guard against — and
+    // specId/interactiveNodes hold the persisted in-progress selection. A
+    // transient failure here (offline, or a stale chunk 404 right after a
+    // deploy) must leave that selection in localStorage so a later reload with
+    // connectivity retries the load, exactly like the imported-builds recovery.
+    if (startedWithNoBuilds && !preserveInteractive) {
       set({ ...EMPTY, error: message });
     } else {
       set({ isLoading: false, error: message });
