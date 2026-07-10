@@ -28,16 +28,11 @@
  * — the app already falls back to a blank pixel for those.
  */
 
-import {
-  readFileSync,
-  readdirSync,
-  mkdirSync,
-  existsSync,
-  writeFileSync,
-} from "fs";
+import { readFileSync, readdirSync, mkdirSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { classIconSlug } from "../src/lib/iconUrl.js";
+import { writeFileAtomic } from "./lib/blizzardApi.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "src", "data");
@@ -136,7 +131,11 @@ export async function fetchOne(name) {
         if (buf[0] !== 0xff || buf[1] !== 0xd8) {
           throw new Error("not a JPEG (bad start marker)");
         }
-        writeFileSync(dest, buf);
+        // Atomic (tmp + rename): the length/marker checks above catch network
+        // truncation, but a crash or disk-full mid-write would still leave a
+        // torn file that the incremental existsSync skip then treats as
+        // complete forever — the exact hazard writeFileAtomic exists for.
+        writeFileAtomic(dest, buf);
         return "downloaded";
       }
       // 403/404 is usually a placeholder with no real art, but a transient 403
