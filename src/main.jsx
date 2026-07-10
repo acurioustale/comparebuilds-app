@@ -16,8 +16,21 @@ if ("serviceWorker" in navigator) {
     .then((regs) => regs.forEach((reg) => reg.unregister()))
     .catch(() => {});
 }
-if ("caches" in window) {
-  caches.keys().then((keys) => keys.forEach((key) => caches.delete(key)));
+// Guarded like the serviceWorker block above, and more: the `in` check probes
+// the prototype without invoking the getter, but in restricted-storage modes
+// (historic Firefox private windows, strict webviews) merely *touching*
+// `caches` can throw synchronously — at module top level that would abort the
+// bundle before createRoot ever runs (blank page) — and keys()/delete() can
+// reject, surfacing as unhandled rejections on every load.
+try {
+  if ("caches" in window) {
+    caches
+      .keys()
+      .then((keys) => keys.forEach((key) => caches.delete(key).catch(() => {})))
+      .catch(() => {});
+  }
+} catch {
+  // Cache API unavailable — nothing to clean up.
 }
 
 createRoot(document.getElementById("root")).render(
