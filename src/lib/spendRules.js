@@ -11,6 +11,11 @@ import { hasUpperPrereq, cellKey, activeHeroSubtree } from "./treeLogic.js";
 // re-exporting it here so the interactive component's import path is unchanged.
 export { activeHeroSubtree };
 
+// Two-level cache: node list → (selection → memo). Keying on the selection
+// alone would make the exported tallies impure in allNodes — the same
+// selection object evaluated against a different node list (a test, or any
+// future caller reusing a selection across a treeData swap) would silently
+// return the first list's cached totals.
 const spendCache = new WeakMap();
 
 function getSpendMemo(allNodes, selected) {
@@ -22,7 +27,12 @@ function getSpendMemo(allNodes, selected) {
       heroSubPts: new Map(),
     };
   }
-  let memo = spendCache.get(selected);
+  let bySelected = spendCache.get(allNodes);
+  if (!bySelected) {
+    bySelected = new WeakMap();
+    spendCache.set(allNodes, bySelected);
+  }
+  let memo = bySelected.get(selected);
   if (!memo) {
     const activeSub = activeHeroSubtree(allNodes, selected);
     const selectedCells = new Map();
@@ -48,7 +58,7 @@ function getSpendMemo(allNodes, selected) {
     }
 
     memo = { activeSub, selectedCells, sectionPts, heroSubPts };
-    spendCache.set(selected, memo);
+    bySelected.set(selected, memo);
   }
   return memo;
 }

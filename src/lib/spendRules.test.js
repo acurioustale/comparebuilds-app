@@ -88,6 +88,19 @@ describe("activeHeroSubtree", () => {
   });
 });
 
+describe("spend memo purity", () => {
+  test("the same selection evaluated against a different node list is retallied", () => {
+    // Regression: the memo was keyed on the selection object alone, so the
+    // second call here returned the first node list's cached class total.
+    const selected = { 1: pt(), 2: pt() };
+    assert.strictEqual(sectionPoints("class", ALL, selected), 2);
+    const onlyRoot = [ROOT];
+    assert.strictEqual(sectionPoints("class", onlyRoot, selected), 1);
+    // And the first list's memo is still intact, not evicted.
+    assert.strictEqual(sectionPoints("class", ALL, selected), 2);
+  });
+});
+
 describe("canSpendPoint", () => {
   test("granted nodes can never be spent on", () => {
     assert.strictEqual(canSpendPoint(GRANTED, ALL, {}, byId, BUDGET), false);
