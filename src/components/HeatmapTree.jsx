@@ -12,6 +12,7 @@ import {
   CELL,
   CHOICE_ICON,
   CHOICE_GAP,
+  choiceRowWidth,
   PAD,
   byId,
   panelBounds,
