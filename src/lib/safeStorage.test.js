@@ -7,9 +7,12 @@ import { getSafeStorage } from "./safeStorage";
 // without a real browser localStorage.
 function makeFakeLocalStorage() {
   const store = new Map();
-  const ctrl = { throwOnSet: false, throwOnRemove: false };
+  const ctrl = { throwOnSet: false, throwOnRemove: false, throwOnGet: false };
   const ls = {
-    getItem: (k) => (store.has(k) ? store.get(k) : null),
+    getItem: (k) => {
+      if (ctrl.throwOnGet) throw new DOMException("SecurityError");
+      return store.has(k) ? store.get(k) : null;
+    },
     setItem: (k, v) => {
       if (ctrl.throwOnSet) throw new DOMException("QuotaExceededError");
       store.set(k, String(v));
@@ -55,6 +58,25 @@ describe("getSafeStorage", () => {
     s.removeItem("k");
     expect(store.has("k")).toBe(false);
     expect(s.getItem("k")).toBe(null);
+  });
+
+  it("returns null instead of throwing when getItem access is revoked mid-session", () => {
+    // Regression: setItem/removeItem caught storage exceptions and degraded to
+    // the mirror, but getItem called through unguarded — the one path that
+    // could throw out of a module whose contract is to never throw. Simulates
+    // access revoked AFTER the successful startup probe (browser settings
+    // change, strict-webview teardown).
+    const { ls, ctrl, store } = makeFakeLocalStorage();
+    vi.stubGlobal("localStorage", ls);
+    const s = getSafeStorage();
+    store.set("k", "v"); // present in the real store
+    ctrl.throwOnGet = true; // …but reads now throw
+    expect(() => s.getItem("k")).not.toThrow();
+    expect(s.getItem("k")).toBe(null);
+    // A mirror-held value still wins without touching the throwing store.
+    ctrl.throwOnSet = true;
+    s.setItem("m", "mirrored");
+    expect(s.getItem("m")).toBe("mirrored");
   });
 
   it("keeps a fresh write in the mirror when setItem hits quota mid-session", () => {
