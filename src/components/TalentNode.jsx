@@ -2,7 +2,12 @@ import { memo, useContext } from "react";
 import Tooltip from "./Tooltip";
 import NodeIcon from "./NodeIcon";
 import { useNodeEmphasis, SpotlightContext } from "./SearchContext";
-import { CHOICE_ICON, CHOICE_GAP, iconGeometry } from "./treeLayout";
+import {
+  CHOICE_ICON,
+  CHOICE_GAP,
+  choiceRowWidth,
+  iconGeometry,
+} from "./treeLayout";
 import { useTapGesture } from "./useTapGesture";
 
 // Hover highlight for a node's prerequisite chain.
@@ -300,7 +305,7 @@ export const TalentNode = memo(function TalentNode({
 
   // ── Choice node ─────────────────────────────────────────────────────────────
   if (node.type === "choice") {
-    const totalW = CHOICE_ICON * 2 + CHOICE_GAP;
+    const totalW = choiceRowWidth(node);
     return (
       <Tooltip
         renderContent={renderTip}
