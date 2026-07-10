@@ -204,13 +204,25 @@ export function cellKey(node) {
  * of "which subtree is active", shared by the spend rules and the validity
  * cascade so the interactive and import views agree.
  *
+ * Commitment requires an actual point: a zero-point entry (a corrupt or
+ * legacy persisted selection — the in-app refund path deletes entries at
+ * zero, and rehydration filters unknown ids but not zero-point ranks) must
+ * not lock the player out of the other subtree, flag its picks invalid, and
+ * skip the export's hero gate while showing zero hero points spent. Matches
+ * every point tally in this module (spentPoints, the gate cascade), which
+ * all skip zero-point entries.
+ *
  * @param {object[]} allNodes Full spec node list from treeData.nodes
  * @param {Record<number, { pointsInvested: number, entryChosen: number|null }>} selected Current selection state
  * @returns {string|null} Active hero subtree name, or null
  */
 export function activeHeroSubtree(allNodes, selected) {
   for (const n of allNodes) {
-    if (n.treeType === "hero" && !n.alreadyGranted && selected[n.id])
+    if (
+      n.treeType === "hero" &&
+      !n.alreadyGranted &&
+      (selected[n.id]?.pointsInvested ?? 0) > 0
+    )
       return n.heroSubtree;
   }
   return null;
