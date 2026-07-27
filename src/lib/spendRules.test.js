@@ -73,6 +73,32 @@ describe("activeHeroSubtree", () => {
   test("returns null when no hero node is selected", () => {
     assert.strictEqual(activeHeroSubtree(ALL, { 1: pt() }), null);
   });
+  test("a zero-point entry does not commit a subtree", () => {
+    // Regression: a corrupt/legacy persisted {pointsInvested: 0} entry (the
+    // in-app refund path deletes entries at zero; rehydration filters unknown
+    // ids but not zero-point ranks) used to count as commitment — locking the
+    // other subtree, flagging its picks invalid, and skipping the export's
+    // hero gate with zero visible hero points spent.
+    assert.strictEqual(activeHeroSubtree(ALL, { 10: pt(0) }), null);
+    // …and doesn't shadow a genuinely committed later subtree either.
+    assert.strictEqual(
+      activeHeroSubtree(ALL, { 10: pt(0), 11: pt() }),
+      "Right",
+    );
+  });
+});
+
+describe("spend memo purity", () => {
+  test("the same selection evaluated against a different node list is retallied", () => {
+    // Regression: the memo was keyed on the selection object alone, so the
+    // second call here returned the first node list's cached class total.
+    const selected = { 1: pt(), 2: pt() };
+    assert.strictEqual(sectionPoints("class", ALL, selected), 2);
+    const onlyRoot = [ROOT];
+    assert.strictEqual(sectionPoints("class", onlyRoot, selected), 1);
+    // And the first list's memo is still intact, not evicted.
+    assert.strictEqual(sectionPoints("class", ALL, selected), 2);
+  });
 });
 
 describe("canSpendPoint", () => {

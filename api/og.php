@@ -321,11 +321,12 @@ if ($mtime !== false) {
 // This caps total GD/CPU resource use regardless of how many distinct IPs are
 // requesting simultaneously. Adjust via config.php (OG_CONCURRENCY_SLOTS) if needed.
 const OG_CONCURRENCY_SLOTS = 4;
-// TTL (seconds) for the advisory locks below on the Redis path. Both the global
-// slot and the per-IP lock are held across the GD render at the bottom of this
-// file, so this must exceed the worst-case render time — a Redis lock auto-expires
-// after its TTL, and too short a value would let a second request seize a slot
-// that is still mid-render (the MySQL GET_LOCK path is connection-scoped instead).
+// TTL (seconds) for the advisory locks below on the Redis path. The global slot
+// is held across the GD render at the bottom of this file, so this must exceed
+// the worst-case render time — a Redis lock auto-expires after its TTL, and too
+// short a value would let a second request seize a slot that is still mid-render
+// (the MySQL GET_LOCK path is connection-scoped instead). The per-IP lock spans
+// only the rate-limit accounting and shares the TTL as a generous upper bound.
 const OG_LOCK_TTL = 30;
 
 try {
@@ -339,15 +340,19 @@ try {
     // advisory locks (cb_og_global_0 … cb_og_global_N); if none is free we return
     // 503 immediately rather than queuing.
     //
-    // Both this slot and the per-IP lock are held all the way through the render
-    // at the bottom of the file — that render is the expensive work the slot
-    // exists to bound, so releasing before it (as the old finally did) left it
-    // unbounded. bail() calls exit(), which skips finally, so the only release
-    // that runs on every path (503/429/404/500, a GD fatal, or normal completion)
-    // is this shutdown handler. It reads the lock names by reference, releasing
-    // whatever was actually acquired and no-oping for names still null (e.g. an
-    // early throw from client_ip_hash() before the per-IP lock is taken — the
-    // gap that previously stranded the global slot on the persistent connection).
+    // The global slot is held all the way through the render at the bottom of
+    // the file — that render is the expensive work the slot exists to bound,
+    // so releasing before it (as the old finally did) left it unbounded. The
+    // per-IP lock has a narrower job — serializing the rate-limit accounting —
+    // and is released explicitly the moment that accounting is decided (see
+    // below); holding it through the render would 503 a second preview fetch
+    // from the same IP (a NAT'd office, a crawler grabbing two share ids).
+    // bail() calls exit(), which skips finally, so the only release that runs
+    // on every path (503/429/404/500, a GD fatal, or normal completion) is
+    // this shutdown handler. It reads the lock names by reference, releasing
+    // whatever is still held and no-oping for names null (never acquired, an
+    // early throw from client_ip_hash() before the per-IP lock is taken, or
+    // the per-IP lock already released after accounting).
     // Track which backend acquired each lock (Redis vs MySQL) so the shutdown
     // release targets the same one. Redis can die between the two acquisitions,
     // so the per-IP and global locks may end up on different backends — keep a
@@ -410,12 +415,9 @@ try {
         $count = 0;
         $countRead = false;
         try {
-            $rl = $pdo->prepare(
-                'SELECT COUNT(*) AS c FROM comparebuilds_og_requests '
-                . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . OG_RATE_LIMIT_WINDOW . ' SECOND'
-            );
-            $rl->execute([$ipHash]);
-            $count = (int) $rl->fetch()['c'];
+            // Shared DB sliding-window read (RateLimiter::countDbWindow — the
+            // same helper share.php uses, so the two windows can't drift).
+            ['count' => $count] = RateLimiter::countDbWindow($pdo, 'comparebuilds_og_requests', $ipHash, OG_RATE_LIMIT_WINDOW);
             $countRead = true;
         } catch (PDOException $e) {
             // Fail CLOSED: a failed count (missing table, schema drift, a
@@ -432,43 +434,22 @@ try {
         }
 
         // Only touch the log table when the count read succeeded. On the
-        // fail-closed path $count is a stand-in zero, so the `<= 2x` guard would
-        // otherwise fire an INSERT on the connection that just errored — noise at
-        // best, and if the read failure was transient the write could land and
-        // count a request we are about to reject, double-counting a 429'd caller.
-        if ($countRead && $count <= OG_RATE_LIMIT_MAX * 2) {
-            // Count every valid-id request, whether or not the share exists, so a
-            // flood of nonexistent ids is still bounded — matching the Redis path,
-            // which increments its counter before the share lookup. Logging
-            // continues past the cap (up to 2x) so the window keeps reflecting an
-            // ongoing flood rather than freezing at the limit.
-            try {
-                $logReq = $pdo->prepare('INSERT INTO comparebuilds_og_requests (ip_hash) VALUES (?)');
-                $logReq->execute([$ipHash]);
-            } catch (PDOException $e) {
-                // Losing this row under-counts the window and weakens the
-                // rate limit; surface the failure so schema drift or a failed
-                // migration is visible instead of silently relaxing the cap.
-                error_log('Failed to log OG request: ' . $e->getMessage());
-            }
-        } elseif ($countRead) {
-            // Already at the per-IP row cap (2x the limit) and still hammering.
-            // Inserting another row would grow the table unbounded, but dropping
-            // the request outright lets the sliding window drain: as the oldest
-            // rows age out the count falls back under the cap and the abuser
-            // regains capacity while still hammering. Instead slide this IP's
-            // oldest logged request forward to now — the row count stays bounded
-            // while the recovery horizon is pushed out for as long as the abuse
-            // continues, mirroring share.php's over-limit penalty (see #270).
-            try {
-                $slide = $pdo->prepare(
-                    'UPDATE comparebuilds_og_requests SET created_at = NOW() '
-                    . 'WHERE ip_hash = ? ORDER BY created_at ASC LIMIT 1'
-                );
-                $slide->execute([$ipHash]);
-            } catch (PDOException $e) {
-                error_log('Failed to slide OG request window: ' . $e->getMessage());
-            }
+        // fail-closed path $count is a stand-in zero, so the shared helper's
+        // `<= 2x` guard would otherwise fire an INSERT on the connection that
+        // just errored — noise at best, and if the read failure was transient
+        // the write could land and count a request we are about to reject,
+        // double-counting a 429'd caller.
+        //
+        // Count every valid-id request, whether or not the share exists, so a
+        // flood of nonexistent ids is still bounded — matching the Redis path,
+        // which increments its counter before the share lookup. The shared
+        // accounting (RateLimiter::recordDbRequest — the same insert-or-slide
+        // share.php uses, see #270) keeps logging past the cap up to 2x so the
+        // window reflects an ongoing flood, then slides the oldest row forward
+        // so the abuser's recovery horizon keeps moving while the table stays
+        // bounded.
+        if ($countRead) {
+            RateLimiter::recordDbRequest($pdo, 'comparebuilds_og_requests', $ipHash, $count, OG_RATE_LIMIT_MAX, 'OG request');
         }
     }
 
@@ -484,6 +465,18 @@ try {
         header('Retry-After: ' . OG_RATE_LIMIT_WINDOW);
         bail(429);
     }
+
+    // The per-IP lock exists to serialize the rate-limit accounting above —
+    // two concurrent requests must not both read the same window count. That
+    // accounting is decided, so release the lock NOW instead of at shutdown:
+    // held any longer it turned concurrency from one IP into 503s (a NAT'd
+    // office or a crawler fetching two different uncached share ids), and on
+    // the Redis path even a back-to-back sequential request could collide
+    // with the post-flush cache-write tail. Total render CPU stays bounded by
+    // the global slots below; per-IP volume stays bounded by the rate limit
+    // just enforced. Null the name so the shutdown handler doesn't re-release.
+    RateLimiter::releaseLock($pdo, $redis, $lockName, $lockToken, $lockViaRedis);
+    $lockName = null;
 
     // ── Global concurrency guard ─────────────────────────────────────────────
     // GD true-color image generation is CPU-intensive. Without this, a flood of

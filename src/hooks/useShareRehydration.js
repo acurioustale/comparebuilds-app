@@ -59,7 +59,17 @@ export function useShareRehydration() {
       return;
     }
 
-    clearAllBuilds();
+    // Share route. The persisted local session is NOT cleared yet: the clear
+    // happens only after the share payload has been fetched and validated, so
+    // an expired/pruned link or a network failure can't destroy the previous
+    // session (persist would overwrite localStorage the moment the store is
+    // emptied). Until then the persisted state simply keeps rendering.
+    //
+    // Restores the persisted session's derived state (tree data, parsed
+    // builds) after a failed share load, exactly like the plain-local route —
+    // without it the session would sit in the store unrendered, since the
+    // share route skips the mount-time rehydrateTreeData call.
+    const restoreLocalSession = () => rehydrateTreeData();
 
     (async () => {
       try {
@@ -79,13 +89,19 @@ export function useShareRehydration() {
         if (!res.ok) {
           const body = await res.json().catch(() => ({}));
           setShareError(body.error ?? "Shared link not found or has expired.");
+          restoreLocalSession();
           return;
         }
         const data = await res.json();
         if (!Array.isArray(data.builds) || data.builds.length === 0) {
           setShareError("Invalid share data.");
+          restoreLocalSession();
           return;
         }
+        // The payload is valid — only now is replacing the previous session
+        // justified. clearAllBuilds resets sharedLayoutHash too, so the hash
+        // must be stamped after it.
+        clearAllBuilds();
         if (data.layoutHash) setSharedLayoutHash(data.layoutHash);
         // Drop duplicate build strings, keeping the first occurrence's label.
         // The store rejects identical strings, but the share API doesn't dedupe,
@@ -135,6 +151,10 @@ export function useShareRehydration() {
         setShareError(
           "Failed to load shared builds. Check your connection and try again.",
         );
+        // Before the clear this restores the intact persisted session; after
+        // it (an addBuild rejection) the store is already empty and the
+        // restore no-ops on the null specId — safe either way.
+        restoreLocalSession();
       }
     })();
   }, [

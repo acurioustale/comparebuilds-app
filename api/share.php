@@ -723,32 +723,19 @@ function record_throttled_attempt(PDO $pdo, ?object $redis, string $rlKey, strin
         return;
     }
 
-    // DB path: mirror the in-lock accounting EXACTLY (count the window; insert
-    // while under the 2x row cap, otherwise slide the oldest logged request
-    // forward instead of inserting). Without the advisory lock this read+write
-    // can race a concurrent writer, but that only overshoots the cap by the
-    // worker-pool concurrency margin for one burst — which then ages out within
-    // the window — so the table stays bounded rather than growing while a
-    // contention flood continues. Dropping the attempt outright (the previous
-    // behaviour past the cap) instead let the sliding window drain and handed the
-    // abuser capacity back; the slide penalty pushes the recovery horizon out for
-    // as long as the abuse lasts, matching the Redis path and the in-lock path.
+    // DB path: the SAME count + insert-or-slide accounting as the in-lock path
+    // (one shared RateLimiter helper, so the two can't drift). Without the
+    // advisory lock this read+write can race a concurrent writer, but that only
+    // overshoots the cap by the worker-pool concurrency margin for one burst —
+    // which then ages out within the window — so the table stays bounded rather
+    // than growing while a contention flood continues. Dropping the attempt
+    // outright (the previous behaviour past the cap) instead let the sliding
+    // window drain and handed the abuser capacity back; the slide penalty
+    // pushes the recovery horizon out for as long as the abuse lasts, matching
+    // the Redis path and the in-lock path.
     try {
-        $rl = $pdo->prepare(
-            'SELECT COUNT(*) FROM comparebuilds_share_requests '
-            . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . RATE_LIMIT_WINDOW . ' SECOND'
-        );
-        $rl->execute([$ipHash]);
-        if ((int) $rl->fetchColumn() <= RATE_LIMIT_MAX * 2) {
-            $ins = $pdo->prepare('INSERT INTO comparebuilds_share_requests (ip_hash) VALUES (?)');
-            $ins->execute([$ipHash]);
-        } else {
-            $slide = $pdo->prepare(
-                'UPDATE comparebuilds_share_requests SET created_at = NOW() '
-                . 'WHERE ip_hash = ? ORDER BY created_at ASC LIMIT 1'
-            );
-            $slide->execute([$ipHash]);
-        }
+        ['count' => $count] = RateLimiter::countDbWindow($pdo, 'comparebuilds_share_requests', $ipHash, RATE_LIMIT_WINDOW);
+        RateLimiter::recordDbRequest($pdo, 'comparebuilds_share_requests', $ipHash, $count, RATE_LIMIT_MAX, 'share request');
     } catch (PDOException $e) {
         error_log('Failed to record throttled share attempt: ' . $e->getMessage());
     }
@@ -868,57 +855,25 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
                 // Keep the conservative fallback.
             }
         } else {
-            // Bound the window against the DB clock (NOW()), not a PHP timestamp, so a
-            // timezone/DST skew can't shift it. The window is a trusted constant.
-            // MIN(created_at) is the oldest request still inside the window; it ages
-            // out at oldest + window, which is when a caller at the cap regains a
-            // slot — the true sliding-window reset the old flat value over-reported.
-            $rl = $pdo->prepare(
-                'SELECT COUNT(*) AS c, UNIX_TIMESTAMP(MIN(created_at)) AS oldest FROM comparebuilds_share_requests '
-                . 'WHERE ip_hash = ? AND created_at > NOW() - INTERVAL ' . RATE_LIMIT_WINDOW . ' SECOND'
-            );
-            $rl->execute([$ipHash]);
-            $row = $rl->fetch();
-            $currentCount = (int) $row['c'];
-            $oldest = $row['oldest'] ?? null;
+            // Shared DB sliding-window accounting (RateLimiter::countDbWindow /
+            // recordDbRequest — the same helpers og.php and the lock-contention
+            // fallback use, so the three sites can't drift). The window is
+            // bounded against the DB clock and `oldest` ages out at
+            // oldest + window — when a caller at the cap regains a slot, the
+            // true sliding-window reset the old flat value over-reported. A
+            // count failure here (unlike og.php's fail-closed read) surfaces
+            // as the endpoint's 500, unchanged from the inline query.
+            [
+                'count'  => $currentCount,
+                'oldest' => $oldest,
+            ] = RateLimiter::countDbWindow($pdo, 'comparebuilds_share_requests', $ipHash, RATE_LIMIT_WINDOW);
             if ($oldest !== null) {
-                $resetAt = (int) $oldest + RATE_LIMIT_WINDOW;
+                $resetAt = $oldest + RATE_LIMIT_WINDOW;
             }
             if ($currentCount >= RATE_LIMIT_MAX) {
                 $rateLimited = true;
             }
-
-            if ($currentCount <= RATE_LIMIT_MAX * 2) {
-                try {
-                    $logReq = $pdo->prepare('INSERT INTO comparebuilds_share_requests (ip_hash) VALUES (?)');
-                    $logReq->execute([$ipHash]);
-                } catch (PDOException $e) {
-                    // Losing this row under-counts the window and weakens the
-                    // rate limit; surface the failure so a persistent one (schema
-                    // drift, a renamed/dropped table) is visible in the logs
-                    // instead of silently relaxing the cap for every user.
-                    error_log('Failed to log share request: ' . $e->getMessage());
-                }
-            } else {
-                // Already at the per-IP row cap (2x the limit) and still
-                // hammering. Inserting another row would grow the table
-                // unbounded, but dropping the request outright lets the sliding
-                // window drain: as the oldest rows age out the count falls back
-                // under the cap and the abuser regains capacity while still
-                // hammering. Instead slide this IP's oldest logged request
-                // forward to now — the row count stays bounded while the
-                // recovery horizon is pushed out for as long as the abuse
-                // continues, mirroring the Redis path's over-limit penalty.
-                try {
-                    $slide = $pdo->prepare(
-                        'UPDATE comparebuilds_share_requests SET created_at = NOW() '
-                        . 'WHERE ip_hash = ? ORDER BY created_at ASC LIMIT 1'
-                    );
-                    $slide->execute([$ipHash]);
-                } catch (PDOException $e) {
-                    error_log('Failed to slide share request window: ' . $e->getMessage());
-                }
-            }
+            RateLimiter::recordDbRequest($pdo, 'comparebuilds_share_requests', $ipHash, $currentCount, RATE_LIMIT_MAX, 'share request');
         }
 
         if (!headers_sent()) {

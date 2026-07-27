@@ -14,9 +14,11 @@ final class ShareConcurrencyTest extends TestCase
 
         // A lock-timeout must still record the attempt against the limiter, so a
         // sustained lock-contention flood can't slip past the rate limit
-        // uncounted. Under the row cap here, so the attempt is logged.
+        // uncounted. Under the row cap here, so the attempt is logged. (The
+        // count runs through RateLimiter::countDbWindow, which fetches a
+        // c/oldest row.)
         $rlStmt = $this->createMock(PDOStatement::class);
-        $rlStmt->method('fetchColumn')->willReturn(5);
+        $rlStmt->method('fetch')->willReturn(['c' => 5, 'oldest' => null]);
 
         $logged = false;
         $insertStmt = $this->createMock(PDOStatement::class);
@@ -62,7 +64,7 @@ final class ShareConcurrencyTest extends TestCase
         $lockStmt->method('fetchColumn')->willReturn(0);
 
         $rlStmt = $this->createMock(PDOStatement::class);
-        $rlStmt->method('fetchColumn')->willReturn(999);
+        $rlStmt->method('fetch')->willReturn(['c' => 999, 'oldest' => 1700000000]);
 
         $slideStmt = $this->createMock(PDOStatement::class);
         $slideStmt->expects($this->once())->method('execute')->willReturn(true);

@@ -7,7 +7,13 @@
 
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 import { StrictMode } from "react";
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  cleanup,
+  waitFor,
+} from "@testing-library/react";
 import { createRequire } from "node:module";
 import App from "./App.jsx";
 import { useBuildsStore } from "./store/buildsStore.js";
@@ -149,6 +155,37 @@ describe("spotlight cleanup", () => {
   });
 });
 
+describe("changes-only cleanup", () => {
+  // Regression: the "Differences only" toggle state never reset, and its
+  // ChangesFilterContext provider also wraps the single-build view. Removing a
+  // build with the toggle on left the single view rendering with
+  // changesOnly=true — no highlights exist there, so every node dimmed to
+  // 0.12 — and the toggle button only renders in the 2+/3+ comparison views,
+  // leaving no way to turn it off.
+  const dimmedCount = (root) =>
+    Array.from(root.querySelectorAll('[style*="opacity: 0.12"]')).length;
+
+  test("clears the filter when a build is removed below the comparison threshold", async () => {
+    const { container } = render(<App />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+    await screen.findByText(/Differences/, { selector: "p" });
+
+    // Turn the filter on — nodes the builds agree on dim to 0.12.
+    fireEvent.click(screen.getByRole("button", { name: /differences only/i }));
+    expect(dimmedCount(container)).toBeGreaterThan(0);
+
+    // Drop to one valid build WITHOUT toggling the filter off first.
+    fireEvent.click(screen.getAllByTitle("Remove")[0]);
+
+    // The single-build view renders undimmed: the stale filter was reset.
+    expect(screen.queryByText(/Differences/, { selector: "p" })).toBeNull();
+    await waitFor(() => expect(dimmedCount(container)).toBe(0));
+  });
+});
+
 describe("share rehydration", () => {
   test("loads builds referenced by the URL hash", async () => {
     const builds = genStrings("death_knight", "blood", 2);
@@ -204,6 +241,62 @@ describe("share rehydration", () => {
     // The hash is stripped despite the second (duplicate) entry being rejected,
     // so a reload can't re-fetch the same share and loop forever.
     expect(window.location.hash).toBe("");
+  });
+
+  // Regression: clearAllBuilds() used to run before the share fetch, so an
+  // expired/pruned link (or a network failure) wiped the persisted local
+  // session — persist overwrote localStorage with the emptied store — while
+  // loading nothing. The clear now happens only after the payload validates,
+  // and a failed load restores the previous session's derived state.
+  test("a failed share fetch preserves the existing session", async () => {
+    const builds = genStrings("death_knight", "blood", 2);
+    render(<App />);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], builds[0]);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), builds[1]);
+    await screen.findByText(/Differences/, { selector: "p" });
+    cleanup();
+
+    // Reopen the app on someone's dead share link, previous session in store.
+    global.fetch = vi.fn(async () => ({
+      ok: false,
+      json: async () => ({}),
+    }));
+    window.location.hash = "#deadbeef";
+    render(<App />);
+
+    // The share error surfaces, and the previous comparison is still there —
+    // both in the store and re-rendered via the restored tree data.
+    await screen.findByText(/not found or has expired/i);
+    expect(useBuildsStore.getState().buildStrings).toEqual(builds);
+    expect(
+      await screen.findByText(/Differences/, { selector: "p" }),
+    ).toBeInTheDocument();
+    window.location.hash = "";
+  });
+
+  test("an invalid share payload preserves the existing session", async () => {
+    const builds = genStrings("death_knight", "blood", 2);
+    render(<App />);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], builds[0]);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), builds[1]);
+    await screen.findByText(/Differences/, { selector: "p" });
+    cleanup();
+
+    global.fetch = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ builds: [] }),
+    }));
+    window.location.hash = "#deadbeef";
+    render(<App />);
+
+    await screen.findByText(/Invalid share data/i);
+    expect(useBuildsStore.getState().buildStrings).toEqual(builds);
+    expect(
+      await screen.findByText(/Differences/, { selector: "p" }),
+    ).toBeInTheDocument();
+    window.location.hash = "";
   });
 
   test("a bad hash is ignored (no fetch)", async () => {

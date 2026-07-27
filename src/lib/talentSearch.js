@@ -101,7 +101,13 @@ function searchIndex(nodes) {
     if (Array.isArray(n.ranks)) {
       for (const r of n.ranks) parts.push(r?.description);
     }
-    index.set(n.id, parts.map(normalise).join(" "));
+    // Join with a newline, not a space: normalise() collapses all whitespace
+    // (the query's included) to single spaces, so "\n" can never occur inside
+    // a normalised part or query. A space separator let a query straddle two
+    // fields — name "Killing Frost" + description "Strikes the target…"
+    // indexed as "…killing frost strikes…" and falsely matched a search for
+    // the unrelated talent "Frost Strike".
+    index.set(n.id, parts.map(normalise).join("\n"));
   }
   indexCache.set(nodes, index);
   return index;

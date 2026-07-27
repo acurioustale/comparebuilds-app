@@ -1,5 +1,5 @@
 import { collectClassNodes } from "../../lib/buildString";
-import { buildGrantedSeed } from "../../lib/treeLogic";
+import { buildGrantedSeed, renderOrder } from "../../lib/treeLogic";
 import { wireLayout } from "../../lib/wireLayout";
 import * as storeHelpers from "../storeHelpers";
 import { EMPTY } from "./constants";
@@ -46,23 +46,16 @@ export async function loadTreeData(
       );
     }
 
-    // Render order is posY, then posX, then id. Sort a COPY of the nodes array
-    // rather than in place: `classData` is the cached ES-module object from the
-    // dynamic import, so sorting `rawTreeData.nodes` in place would permanently
-    // reorder the shared module for every other consumer of the same class JSON.
-    // (Order-independent anyway for the wire layout — collectClassNodes/wireLayout
-    // do their own ascending-id sort — so this only fixes the shared mutation.)
+    // Render order (renderOrder: posY, then posX, then id — the same shared
+    // comparator computeInvalidNodeIds' topological pass relies on). Sort a
+    // COPY of the nodes array rather than in place: `classData` is the cached
+    // ES-module object from the dynamic import, so sorting `rawTreeData.nodes`
+    // in place would permanently reorder the shared module for every other
+    // consumer of the same class JSON. (Order-independent anyway for the wire
+    // layout — collectClassNodes/wireLayout do their own ascending-id sort —
+    // so this only fixes the shared mutation.)
     const treeData = Array.isArray(rawTreeData.nodes)
-      ? {
-          ...rawTreeData,
-          nodes: [...rawTreeData.nodes].sort((a, b) =>
-            a.posY !== b.posY
-              ? a.posY - b.posY
-              : a.posX !== b.posX
-                ? a.posX - b.posX
-                : a.id - b.id,
-          ),
-        }
+      ? { ...rawTreeData, nodes: [...rawTreeData.nodes].sort(renderOrder) }
       : rawTreeData;
 
     const currentStrings = get().buildStrings;
@@ -102,7 +95,15 @@ export async function loadTreeData(
     // their string and surface the error on the slot, as before. The branch
     // keys off the load-start snapshot, not a fresh get(): a build appended mid-
     // load must not flip this and strand its string with treeData still null.
-    if (startedWithNoBuilds) {
+    //
+    // Rehydration (preserveInteractive) is exempt from the reset even with no
+    // builds: it starts from a fresh page load where treeData/classNodes are
+    // still null — there is no stale previous-spec tree to guard against — and
+    // specId/interactiveNodes hold the persisted in-progress selection. A
+    // transient failure here (offline, or a stale chunk 404 right after a
+    // deploy) must leave that selection in localStorage so a later reload with
+    // connectivity retries the load, exactly like the imported-builds recovery.
+    if (startedWithNoBuilds && !preserveInteractive) {
       set({ ...EMPTY, error: message });
     } else {
       set({ isLoading: false, error: message });

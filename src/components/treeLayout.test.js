@@ -4,7 +4,14 @@
 
 import { describe, test } from "vitest";
 import assert from "node:assert/strict";
-import { panelBounds, PAD, CELL } from "./treeLayout.js";
+import {
+  panelBounds,
+  choiceRowWidth,
+  PAD,
+  CELL,
+  CHOICE_ICON,
+  CHOICE_GAP,
+} from "./treeLayout.js";
 
 describe("panelBounds", () => {
   test("computes bounds from node positions", () => {
@@ -22,5 +29,36 @@ describe("panelBounds", () => {
     const b = panelBounds([]);
     assert.deepStrictEqual(b, { minX: 0, minY: 0, W: PAD * 2, H: PAD * 2 });
     for (const v of Object.values(b)) assert.ok(Number.isFinite(v));
+  });
+});
+
+describe("choiceRowWidth", () => {
+  // The schema permits 2-4 options (the wire field encodes picks 0-3); the row
+  // width must follow the option count so a 3/4-option node isn't rendered
+  // with a two-icon width (mis-centred, undersized overlays).
+  const withChoices = (n) => ({
+    choices: Array.from({ length: n }, () => ({})),
+  });
+
+  test("derives the row width from the option count", () => {
+    assert.strictEqual(
+      choiceRowWidth(withChoices(2)),
+      CHOICE_ICON * 2 + CHOICE_GAP,
+    );
+    assert.strictEqual(
+      choiceRowWidth(withChoices(3)),
+      CHOICE_ICON * 3 + CHOICE_GAP * 2,
+    );
+    assert.strictEqual(
+      choiceRowWidth(withChoices(4)),
+      CHOICE_ICON * 4 + CHOICE_GAP * 3,
+    );
+  });
+
+  test("falls back to the two-option width for a malformed node", () => {
+    assert.strictEqual(
+      choiceRowWidth({ choices: null }),
+      CHOICE_ICON * 2 + CHOICE_GAP,
+    );
   });
 });

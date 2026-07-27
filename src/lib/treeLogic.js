@@ -204,19 +204,50 @@ export function cellKey(node) {
  * of "which subtree is active", shared by the spend rules and the validity
  * cascade so the interactive and import views agree.
  *
+ * Commitment requires an actual point: a zero-point entry (a corrupt or
+ * legacy persisted selection — the in-app refund path deletes entries at
+ * zero, and rehydration filters unknown ids but not zero-point ranks) must
+ * not lock the player out of the other subtree, flag its picks invalid, and
+ * skip the export's hero gate while showing zero hero points spent. Matches
+ * every point tally in this module (spentPoints, the gate cascade), which
+ * all skip zero-point entries.
+ *
  * @param {object[]} allNodes Full spec node list from treeData.nodes
  * @param {Record<number, { pointsInvested: number, entryChosen: number|null }>} selected Current selection state
  * @returns {string|null} Active hero subtree name, or null
  */
 export function activeHeroSubtree(allNodes, selected) {
   for (const n of allNodes) {
-    if (n.treeType === "hero" && !n.alreadyGranted && selected[n.id])
+    if (
+      n.treeType === "hero" &&
+      !n.alreadyGranted &&
+      (selected[n.id]?.pointsInvested ?? 0) > 0
+    )
       return n.heroSubtree;
   }
   return null;
 }
 
 // ─── Exports used by both interactive and import contexts ─────────────────────
+
+/**
+ * Canonical node ordering: posY, then posX, then id as a stable tie-break.
+ * One comparator serves both the store's render-order sort (loadTreeData) and
+ * computeInvalidNodeIds' topological pass below — which depends on exactly
+ * this parents-before-children guarantee (upperParents only ever link to a
+ * strictly-smaller-posY node), so the two orderings must never drift.
+ *
+ * @param {object} a Node
+ * @param {object} b Node
+ * @returns {number} Comparator result
+ */
+export function renderOrder(a, b) {
+  return a.posY !== b.posY
+    ? a.posY - b.posY
+    : a.posX !== b.posX
+      ? a.posX - b.posX
+      : a.id - b.id;
+}
 
 /**
  * Builds an interactiveNodes map seeded with all alreadyGranted nodes at their
@@ -275,13 +306,7 @@ export function computeInvalidNodeIds(allNodes, selected, nodeById) {
   // node's prerequisites are already resolved when the single pass reaches it.
   const sorted = allNodes
     .filter((n) => selected[n.id] && !n.alreadyGranted)
-    .sort((a, b) =>
-      a.posY !== b.posY
-        ? a.posY - b.posY
-        : a.posX !== b.posX
-          ? a.posX - b.posX
-          : a.id - b.id,
-    );
+    .sort(renderOrder);
 
   // Hero-subtree exclusivity: a build may invest in only one hero subtree. A
   // crafted/corrupt build string (or an import path that bypasses canSpendPoint)

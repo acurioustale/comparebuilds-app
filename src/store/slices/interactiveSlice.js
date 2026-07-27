@@ -132,8 +132,9 @@ export const createInteractiveSlice = (set, get) => ({
     // entered builds for good. Instead keep them with parallel null parsed slots
     // — the same recoverable state an in-session failed import leaves — and let
     // loadTreeData's error surface, so a later reload with connectivity retries
-    // the load. With no restored builds there is nothing to preserve;
-    // loadTreeData already reset to EMPTY on that (startedWithNoBuilds) path.
+    // the load. With no restored builds the persisted interactive selection is
+    // what must survive; loadTreeData keeps it (the preserveInteractive
+    // exemption on its error path) and there are no parsed slots to reset.
     if (!get().treeData) {
       const { buildStrings } = get();
       if (buildStrings.length > 0) {

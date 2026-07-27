@@ -216,12 +216,14 @@ export class BlizzardDb2 {
     this._loaded = false;
   }
 
-  async _table(name) {
-    const file = join(this.cacheDir, `${name}.csv`);
+  // One cache-or-fetch pipeline for every wago.tools CSV pull — whole tables
+  // and filtered slices alike — so a timeout bump, retry policy, or response
+  // validation added later lands in both paths instead of silently diverging
+  // them (the two used to be verbatim copies).
+  async _fetchCsv(file, url) {
     if (this.useCache && existsSync(file)) {
       return parseCsv(readFileSync(file, "utf8"));
     }
-    const url = `https://wago.tools/db2/${name}/csv?build=${this.build}`;
     const res = await fetch(url, { signal: AbortSignal.timeout(60000) });
     if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
     const text = await res.text();
@@ -229,21 +231,22 @@ export class BlizzardDb2 {
     return parseCsv(text);
   }
 
+  async _table(name) {
+    return this._fetchCsv(
+      join(this.cacheDir, `${name}.csv`),
+      `https://wago.tools/db2/${name}/csv?build=${this.build}`,
+    );
+  }
+
   // A single-column-filtered slice of a table. Used for the few huge tables we
   // can't load whole (Spell, SpellEffect): we only need rows for a handful of
   // spell ids, so fetch them on demand via wago's `filter[col]=val` query and
   // cache each slice on disk.
   async _filtered(name, col, val) {
-    const file = join(this.cacheDir, `${name}__${col}_${val}.csv`);
-    if (this.useCache && existsSync(file)) {
-      return parseCsv(readFileSync(file, "utf8"));
-    }
-    const url = `https://wago.tools/db2/${name}/csv?build=${this.build}&filter[${col}]=${val}`;
-    const res = await fetch(url, { signal: AbortSignal.timeout(60000) });
-    if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
-    const text = await res.text();
-    if (this.useCache) writeFileAtomic(file, text);
-    return parseCsv(text);
+    return this._fetchCsv(
+      join(this.cacheDir, `${name}__${col}_${val}.csv`),
+      `https://wago.tools/db2/${name}/csv?build=${this.build}&filter[${col}]=${val}`,
+    );
   }
 
   /** Fetch + index the trait tables. Idempotent. */

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { copyToClipboard } from "../hooks/useShareActions";
 
 export function useBuildExport({
   currentBuildString,
@@ -34,7 +35,7 @@ export function useBuildExport({
     )
       return;
     try {
-      await navigator.clipboard.writeText(currentBuildString);
+      await copyToClipboard(currentBuildString);
       setCopyState("done");
       copyTimerRef.current = setTimeout(() => {
         copyTimerRef.current = null;
@@ -63,8 +64,12 @@ export function useBuildExport({
       if (editingIndex != null) {
         ok = await replaceBuild(editingIndex, currentBuildString);
       } else {
-        await navigator.clipboard.writeText(currentBuildString);
         ok = await addBuild(currentBuildString);
+        // The clipboard copy is a courtesy on top of the real work (committing
+        // the build), so it runs after the add and its failure is swallowed: a
+        // denied clipboard permission must not abort adding a valid build to
+        // the comparison. The edit path above never copied at all.
+        if (ok) await copyToClipboard(currentBuildString).catch(() => {});
       }
       // addBuild/replaceBuild set a store error and resolve falsy on rejection
       // (e.g. an identical build already in a slot); don't flash success or close

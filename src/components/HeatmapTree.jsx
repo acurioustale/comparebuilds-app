@@ -12,6 +12,7 @@ import {
   CELL,
   CHOICE_ICON,
   CHOICE_GAP,
+  choiceRowWidth,
   PAD,
   byId,
   panelBounds,
@@ -113,7 +114,7 @@ const HeatmapNode = memo(function HeatmapNode({
 
   // ── Choice node ───────────────────────────────────────────────────────────
   if (node.type === "choice") {
-    const totalW = CHOICE_ICON * 2 + CHOICE_GAP;
+    const totalW = choiceRowWidth(node);
 
     const renderTip = () => (
       <div className="space-y-1.5 py-0.5" style={{ maxWidth: 240 }}>
