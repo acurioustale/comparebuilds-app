@@ -387,11 +387,17 @@ export function calculatePointBudgets(nodes, left, right, baseBudget) {
         ).size
       : 0;
   const heroNodeCount = Math.max(heroCellCount(left), heroCellCount(right));
-  const apex = nodes.find((n) => n.type === "apex");
+  // Every apex capstone's ranks are spendable on top of the base spec budget.
+  // No shipped spec has more than one, but counting only the first would
+  // silently under-count the budget if a patch ever added a second, making
+  // legal in-game builds import as over-spent.
+  const apexRanks = nodes
+    .filter((n) => n.type === "apex")
+    .reduce((sum, n) => sum + n.maxRanks, 0);
 
   return {
     ...baseBudget,
-    spec: baseBudget.spec + (apex ? apex.maxRanks : 0),
+    spec: baseBudget.spec + apexRanks,
     hero: heroNodeCount,
   };
 }
