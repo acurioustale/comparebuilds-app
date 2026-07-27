@@ -128,9 +128,19 @@ export function useShareRehydration() {
         // mismatch, an over-cap slot, or a corrupt string among otherwise-valid
         // builds). The hash is stripped just below, so the dropped builds are
         // gone for good — surfacing fewer builds than the link encoded without a
-        // word would be silent data loss. Only meaningful once something landed;
-        // a total failure is handled by the retain-the-hash path below.
-        if (landed > 0 && landed < builds.length) {
+        // word would be silent data loss.
+        //
+        // A total failure needs its own message: addBuild rejects by returning
+        // false rather than throwing, so nothing reaches the catch below, and
+        // with no build committed the app falls back to the empty interactive
+        // tree — a blank page where a comparison was asked for. The hash is
+        // deliberately kept in that case (see below), so a reload retries.
+        if (landed === 0) {
+          setShareError(
+            "None of the builds in this link could be loaded. The link may be " +
+              "for an older version of the talent trees.",
+          );
+        } else if (landed < builds.length) {
           const dropped = builds.length - landed;
           setShareError(
             `${dropped} of ${builds.length} builds in this link couldn't be ` +
