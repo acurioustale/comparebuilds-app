@@ -18,7 +18,7 @@ import { useBuildsStore, MAX_BUILDS } from "../store/buildsStore";
 import { buildGrantedSeed, computeInvalidNodeIds } from "../lib/treeLogic";
 import { computeDiff } from "../lib/diff";
 import { computeStats } from "../lib/heatmap";
-import { defaultBuildLabel } from "../lib/buildLabel";
+import { defaultBuildLabel, buildOrdinal } from "../lib/buildLabel";
 import classesIndex from "../data/classes.json";
 import { byId, treeNaturalWidths, pairedNaturalWidths } from "./treeLayout";
 import { matchNodeIds } from "../lib/talentSearch";
@@ -207,8 +207,8 @@ export default function MainView() {
 
   // Class/spec display names for the default build labels, derived from specId
   // the same way BuildManager does, so the labels in the comparison views match
-  // the build-manager slots and the SimC export (all via defaultBuildLabel).
-  // Only the ordinal differs when a slot fails to parse — see validLabels.
+  // the build-manager slots and the SimC export exactly (all via
+  // defaultBuildLabel, over the one ordinal rule in buildOrdinal).
   const activeClass = useMemo(
     () => classesIndex.find((c) => c.specs.some((s) => s.id === specId)),
     [specId],
@@ -263,14 +263,13 @@ export default function MainView() {
         ({ index, parsed }, k) =>
           buildNames[index]?.trim() ||
           defaultBuildLabel({
-            // Ordinal and total both count the *rendered* builds, not the
-            // slots: a corrupt slot is never drawn, and it is the valid-build
-            // count that picks the view. Keying on slots would label the
-            // paired A/B diff "Build 1"/"Build 2" whenever a third slot failed
-            // to parse — contradicting the view's own A vs B colouring — and
-            // two valid builds in slots 2 and 3 would both come out as "B".
-            index: k + 1,
-            total: validEntries.length,
+            // Every build here parsed by definition, so it carries a rank
+            // among the rendered builds as well as its slot number.
+            ordinal: buildOrdinal({
+              slotNumber: index + 1,
+              validRank: k + 1,
+              validCount: validEntries.length,
+            }),
             className: classDisplayName,
             specName: specDisplayName,
             treeData,
