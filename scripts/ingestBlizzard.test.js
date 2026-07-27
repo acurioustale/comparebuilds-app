@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   normaliseSpec,
+  calculatePointBudgets,
   checkpointsFromNodes,
   collapseColocatedDuplicates,
   filterSpecVariants,
@@ -19,6 +20,28 @@ describe("parseArgs", () => {
     const args = parseArgs(["--promote", "--update-snapshot"]);
     expect(args.promote).toBe(true);
     expect(args.updateSnapshot).toBe(true);
+  });
+});
+
+describe("calculatePointBudgets", () => {
+  const base = { class: 31, spec: 30, hero: 0 };
+
+  it("adds the apex capstone's ranks to the spec budget", () => {
+    const nodes = [{ type: "apex", maxRanks: 3, posX: 0, posY: 0 }];
+    expect(calculatePointBudgets(nodes, null, null, base).spec).toBe(33);
+  });
+
+  it("counts every apex capstone, not just the first", () => {
+    const nodes = [
+      { type: "apex", maxRanks: 3, posX: 0, posY: 0 },
+      { type: "apex", maxRanks: 2, posX: 2, posY: 0 },
+    ];
+    expect(calculatePointBudgets(nodes, null, null, base).spec).toBe(35);
+  });
+
+  it("leaves the spec budget alone when there is no apex node", () => {
+    const nodes = [{ type: "active", maxRanks: 1, posX: 0, posY: 0 }];
+    expect(calculatePointBudgets(nodes, null, null, base).spec).toBe(30);
   });
 });
 
