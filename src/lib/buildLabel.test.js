@@ -1,5 +1,43 @@
 import { describe, test, expect } from "vitest";
-import { defaultBuildLabel } from "./buildLabel";
+import { defaultBuildLabel, buildOrdinal } from "./buildLabel";
+
+describe("buildOrdinal", () => {
+  const ordinals = (parsed) => {
+    const validCount = parsed.filter(Boolean).length;
+    let rank = 0;
+    return parsed.map((p, i) =>
+      buildOrdinal({
+        slotNumber: i + 1,
+        validRank: p ? ++rank : null,
+        validCount,
+      }),
+    );
+  };
+
+  test("names the pair A/B when exactly two builds parse", () => {
+    expect(ordinals([true, true])).toEqual(["A", "B"]);
+  });
+
+  test("names the pair A/B by parse order, not slot number", () => {
+    // Slots 2 and 3 hold the only two builds being diffed. Keying A/B off the
+    // slot number would make both of them "B".
+    expect(ordinals([false, true, true])).toEqual([1, "A", "B"]);
+  });
+
+  test("keeps slot numbers when only one of two slots parses", () => {
+    // One valid build renders the single-build view, which has no A/B pairing.
+    expect(ordinals([true, false])).toEqual([1, 2]);
+  });
+
+  test("keeps slot numbers for three or more builds, leaving no duplicates", () => {
+    expect(ordinals([true, true, true])).toEqual([1, 2, 3]);
+    expect(ordinals([false, true, true, true])).toEqual([1, 2, 3, 4]);
+  });
+
+  test("keeps slot numbers while nothing has parsed yet", () => {
+    expect(ordinals([false, false])).toEqual([1, 2]);
+  });
+});
 
 describe("defaultBuildLabel", () => {
   const treeData = {
@@ -17,7 +55,7 @@ describe("defaultBuildLabel", () => {
     const parsedBuild = { nodes: { 101: { pointsInvested: 1 } } };
     expect(
       defaultBuildLabel({
-        index: 1,
+        ordinal: 1,
         className: "Death Knight",
         specName: "Blood",
         treeData,
@@ -30,7 +68,7 @@ describe("defaultBuildLabel", () => {
     const parsedBuild = { nodes: {} };
     expect(
       defaultBuildLabel({
-        index: 2,
+        ordinal: 2,
         className: "Death Knight",
         specName: "Blood",
         treeData,
@@ -42,7 +80,7 @@ describe("defaultBuildLabel", () => {
   test("omits the hero prefix when tree data or parse is missing", () => {
     expect(
       defaultBuildLabel({
-        index: 3,
+        ordinal: 3,
         className: "Death Knight",
         specName: "Blood",
         treeData: null,
@@ -54,7 +92,7 @@ describe("defaultBuildLabel", () => {
   test("collapses to 'Build N' when class or spec name is absent", () => {
     expect(
       defaultBuildLabel({
-        index: 4,
+        ordinal: 4,
         className: "Death Knight",
         specName: "",
         treeData,
@@ -63,7 +101,7 @@ describe("defaultBuildLabel", () => {
     ).toBe("Build 4");
     expect(
       defaultBuildLabel({
-        index: 5,
+        ordinal: 5,
         className: undefined,
         specName: "Blood",
         treeData,
@@ -72,12 +110,11 @@ describe("defaultBuildLabel", () => {
     ).toBe("Build 5");
   });
 
-  test("labels index 1 and 2 as A/B when total is exactly two", () => {
+  test("renders an A/B ordinal verbatim", () => {
     const parsedBuild = { nodes: {} };
     expect(
       defaultBuildLabel({
-        index: 1,
-        total: 2,
+        ordinal: "A",
         className: "Death Knight",
         specName: "Blood",
         treeData,
@@ -86,8 +123,7 @@ describe("defaultBuildLabel", () => {
     ).toBe("Build A — Blood Death Knight");
     expect(
       defaultBuildLabel({
-        index: 2,
-        total: 2,
+        ordinal: "B",
         className: "Death Knight",
         specName: "Blood",
         treeData,
@@ -98,28 +134,10 @@ describe("defaultBuildLabel", () => {
 
   test("A/B applies to the 'Build N' fallback too", () => {
     expect(
-      defaultBuildLabel({ index: 1, total: 2, specName: "", className: "" }),
+      defaultBuildLabel({ ordinal: "A", specName: "", className: "" }),
     ).toBe("Build A");
     expect(
-      defaultBuildLabel({ index: 2, total: 2, specName: "", className: "" }),
+      defaultBuildLabel({ ordinal: "B", specName: "", className: "" }),
     ).toBe("Build B");
-  });
-
-  test("stays numeric when total is not exactly two", () => {
-    expect(
-      defaultBuildLabel({
-        index: 1,
-        total: 3,
-        className: "Death Knight",
-        specName: "Blood",
-      }),
-    ).toBe("Build 1 — Blood Death Knight");
-    expect(
-      defaultBuildLabel({
-        index: 1,
-        className: "Death Knight",
-        specName: "Blood",
-      }),
-    ).toBe("Build 1 — Blood Death Knight");
   });
 });
