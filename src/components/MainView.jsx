@@ -207,7 +207,8 @@ export default function MainView() {
 
   // Class/spec display names for the default build labels, derived from specId
   // the same way BuildManager does, so the labels in the comparison views match
-  // the build-manager slots and the SimC export exactly (all via defaultBuildLabel).
+  // the build-manager slots and the SimC export (all via defaultBuildLabel).
+  // Only the ordinal differs when a slot fails to parse — see validLabels.
   const activeClass = useMemo(
     () => classesIndex.find((c) => c.specs.some((s) => s.id === specId)),
     [specId],
@@ -259,25 +260,24 @@ export default function MainView() {
   const validLabels = useMemo(
     () =>
       validEntries.map(
-        ({ index, parsed }) =>
+        ({ index, parsed }, k) =>
           buildNames[index]?.trim() ||
           defaultBuildLabel({
-            index: index + 1,
-            total: buildStrings.length,
+            // Ordinal and total both count the *rendered* builds, not the
+            // slots: a corrupt slot is never drawn, and it is the valid-build
+            // count that picks the view. Keying on slots would label the
+            // paired A/B diff "Build 1"/"Build 2" whenever a third slot failed
+            // to parse — contradicting the view's own A vs B colouring — and
+            // two valid builds in slots 2 and 3 would both come out as "B".
+            index: k + 1,
+            total: validEntries.length,
             className: classDisplayName,
             specName: specDisplayName,
             treeData,
             parsedBuild: parsed,
           }),
       ),
-    [
-      validEntries,
-      buildNames,
-      buildStrings.length,
-      classDisplayName,
-      specDisplayName,
-      treeData,
-    ],
+    [validEntries, buildNames, classDisplayName, specDisplayName, treeData],
   );
   // Combined shape for consumers that want both (the diff summary table).
   const valid = useMemo(
