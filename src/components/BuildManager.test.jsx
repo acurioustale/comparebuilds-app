@@ -16,31 +16,9 @@ import {
 import { createRequire } from "node:module";
 import BuildManager, { ClassIcon } from "./BuildManager.jsx";
 import { useBuildsStore } from "../store/buildsStore.js";
-import { collectClassNodes, generateBuildString } from "../lib/buildString.js";
+import { genStrings, UNPARSEABLE_BLOOD } from "../test/buildStrings.js";
 
 const require = createRequire(import.meta.url);
-
-/** n distinct, valid build strings for one class+spec (selecting 1..n nodes). */
-function genStrings(classSlug, specSlug, n) {
-  const data = require(`../data/${classSlug}.json`);
-  const classNodes = collectClassNodes(data);
-  const spec = data.specs[specSlug];
-  const pickable = spec.nodes.filter((nd) => !nd.alreadyGranted);
-  const out = [];
-  for (let k = 1; k <= n; k++) {
-    const sel = {};
-    for (let i = 0; i < k; i++) {
-      const nd = pickable[i];
-      sel[nd.id] = {
-        pointsInvested:
-          nd.type === "choice" ? nd.choices[0].maxRanks : nd.maxRanks,
-        entryChosen: nd.type === "choice" ? 0 : null,
-      };
-    }
-    out.push(generateBuildString(sel, spec.specId, classNodes));
-  }
-  return out;
-}
 
 /** Paste a string into a build-input field, triggering the auto-submit handler. */
 function paste(input, text) {
@@ -181,6 +159,68 @@ describe("BuildManager import flow", () => {
 
     resolveWrite();
     await screen.findByRole("button", { name: /Copied!/i });
+  });
+});
+
+describe("build ordinal labels", () => {
+  // The default labels come from buildOrdinal: the slot number, unless exactly
+  // two builds parse — those two are A and B. These pin the wiring, since the
+  // rule reaches the user only through the slots it labels.
+  test("names the pair A/B once two builds parse", async () => {
+    render(<BuildManager />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+
+    await screen.findByPlaceholderText(/Build A — Blood Death Knight/);
+    expect(
+      screen.getByPlaceholderText(/Build B — Blood Death Knight/),
+    ).toBeInTheDocument();
+  });
+
+  test("a slot that fails to parse keeps its number, leaving the pair intact", async () => {
+    render(<BuildManager />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+    await screen.findByPlaceholderText(/Build A — Blood Death Knight/);
+
+    // Header intact (version 2, spec 250) so the slot commits, body truncated
+    // so the full parse throws — the state a corrupt share link lands in.
+    paste(
+      screen.getByPlaceholderText("Paste build string…"),
+      UNPARSEABLE_BLOOD,
+    );
+
+    await screen.findByPlaceholderText(/Build 3 — Blood Death Knight/);
+    // Still exactly two parsed builds, so they keep the pair's names.
+    expect(
+      screen.getByPlaceholderText(/Build A — Blood Death Knight/),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(/Build B — Blood Death Knight/),
+    ).toBeInTheDocument();
+    expect(useBuildsStore.getState().parsedBuilds[2]).toBeNull();
+  });
+
+  test("numbers the slots once three builds parse", async () => {
+    render(<BuildManager />);
+    const [a, b, c] = genStrings("death_knight", "blood", 3);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+    await screen.findByPlaceholderText(/Build B — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), c);
+
+    await screen.findByPlaceholderText(/Build 3 — Blood Death Knight/);
+    expect(
+      screen.getByPlaceholderText(/Build 1 — Blood Death Knight/),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(/Build 2 — Blood Death Knight/),
+    ).toBeInTheDocument();
   });
 });
 

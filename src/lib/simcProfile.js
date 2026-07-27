@@ -67,7 +67,9 @@ export function generateSimcProfileset(
     if (!cleanName) {
       cleanName = strip(
         defaultBuildLabel({
-          index: i + 1,
+          // Profileset names are slot-anchored: SimulationCraft keys on them,
+          // and the A/B pairing carries no meaning outside the diff view.
+          ordinal: i + 1,
           className: classDisplayName,
           specName: specDisplayName,
           treeData,

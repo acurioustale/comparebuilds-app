@@ -877,7 +877,14 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
         }
 
         if (!headers_sent()) {
-            $remaining = max(0, RATE_LIMIT_MAX - $currentCount);
+            // $currentCount is the window *before* this request. A request that is
+            // about to succeed consumes a slot, so report the post-request state —
+            // otherwise the last allowed request advertises one slot that the next
+            // request will find gone (429). A rejected request consumes nothing,
+            // and its count is already at or over the cap, so remaining is 0 either
+            // way.
+            $consumed  = $rateLimited ? $currentCount : $currentCount + 1;
+            $remaining = max(0, RATE_LIMIT_MAX - $consumed);
             header('X-RateLimit-Limit: ' . RATE_LIMIT_MAX);
             header('X-RateLimit-Remaining: ' . $remaining);
             header('X-RateLimit-Reset: ' . $resetAt);

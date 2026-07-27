@@ -1,11 +1,11 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, useMemo, memo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import Tooltip from "./Tooltip";
 import { useBuildsStore, MAX_BUILDS } from "../store/buildsStore";
 import classesIndex from "../data/classes.json";
 import { classIconSlug, iconUrl, onIconError } from "../lib/iconUrl";
 import { sectionPoints } from "../lib/spendRules";
-import { defaultBuildLabel } from "../lib/buildLabel";
+import { defaultBuildLabel, buildOrdinal } from "../lib/buildLabel";
 import { FilledSlot, EmptySlot } from "./BuildManagerSlots";
 import { useShareActions } from "../hooks/useShareActions";
 
@@ -228,13 +228,30 @@ export default function BuildManager() {
       layoutHash,
     });
 
+  // Per-slot ordinals: the slot number, or "A"/"B" when exactly two builds
+  // parse — the same rule the comparison panels label their builds by, so a
+  // slot and the panel it feeds always carry one name. A slot that hasn't
+  // parsed keeps its number and so can never collide with the pair.
+  const slotOrdinals = useMemo(() => {
+    const validCount = parsedBuilds.filter(Boolean).length;
+    let rank = 0;
+    return parsedBuilds.map((parsed, i) =>
+      buildOrdinal({
+        slotNumber: i + 1,
+        validRank: parsed ? ++rank : null,
+        validCount,
+      }),
+    );
+  }, [parsedBuilds]);
+
   // Human-readable build label: "Build N — [Hero Spec] Spec Class". With
-  // exactly two builds loaded this reads "Build A"/"Build B" instead, to
+  // exactly two builds parsed this reads "Build A"/"Build B" instead, to
   // signal these two are being diffed.
   const buildLabel = (n, parsedBuild) =>
     defaultBuildLabel({
-      index: n,
-      total: buildStrings.length,
+      // parsedBuilds can lag buildStrings while a slot is being added, so a
+      // slot with no entry yet falls back to its own number.
+      ordinal: slotOrdinals[n - 1] ?? n,
       className: classDisplayName,
       specName: specDisplayName,
       treeData,

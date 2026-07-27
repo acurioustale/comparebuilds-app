@@ -18,7 +18,7 @@ import { useBuildsStore, MAX_BUILDS } from "../store/buildsStore";
 import { buildGrantedSeed, computeInvalidNodeIds } from "../lib/treeLogic";
 import { computeDiff } from "../lib/diff";
 import { computeStats } from "../lib/heatmap";
-import { defaultBuildLabel } from "../lib/buildLabel";
+import { defaultBuildLabel, buildOrdinal } from "../lib/buildLabel";
 import classesIndex from "../data/classes.json";
 import { byId, treeNaturalWidths, pairedNaturalWidths } from "./treeLayout";
 import { matchNodeIds } from "../lib/talentSearch";
@@ -207,7 +207,8 @@ export default function MainView() {
 
   // Class/spec display names for the default build labels, derived from specId
   // the same way BuildManager does, so the labels in the comparison views match
-  // the build-manager slots and the SimC export exactly (all via defaultBuildLabel).
+  // the build-manager slots and the SimC export exactly (all via
+  // defaultBuildLabel, over the one ordinal rule in buildOrdinal).
   const activeClass = useMemo(
     () => classesIndex.find((c) => c.specs.some((s) => s.id === specId)),
     [specId],
@@ -259,25 +260,23 @@ export default function MainView() {
   const validLabels = useMemo(
     () =>
       validEntries.map(
-        ({ index, parsed }) =>
+        ({ index, parsed }, k) =>
           buildNames[index]?.trim() ||
           defaultBuildLabel({
-            index: index + 1,
-            total: buildStrings.length,
+            // Every build here parsed by definition, so it carries a rank
+            // among the rendered builds as well as its slot number.
+            ordinal: buildOrdinal({
+              slotNumber: index + 1,
+              validRank: k + 1,
+              validCount: validEntries.length,
+            }),
             className: classDisplayName,
             specName: specDisplayName,
             treeData,
             parsedBuild: parsed,
           }),
       ),
-    [
-      validEntries,
-      buildNames,
-      buildStrings.length,
-      classDisplayName,
-      specDisplayName,
-      treeData,
-    ],
+    [validEntries, buildNames, classDisplayName, specDisplayName, treeData],
   );
   // Combined shape for consumers that want both (the diff summary table).
   const valid = useMemo(
