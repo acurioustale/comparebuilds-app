@@ -71,7 +71,7 @@ final class RateLimiterTest extends TestCase
 
     public function testMysqlLockReportsMysqlBackendAndReleasesOnMysql(): void
     {
-        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt = $this->createStub(PDOStatement::class);
         $lockStmt->method('execute')->willReturn(true);
         $lockStmt->method('fetchColumn')->willReturn(1);
 
@@ -84,7 +84,7 @@ final class RateLimiterTest extends TestCase
                 return true;
             });
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $relStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
@@ -142,10 +142,10 @@ final class RateLimiterTest extends TestCase
 
     public function testCountDbWindowReportsNullOldestForAnEmptyWindow(): void
     {
-        $stmt = $this->createMock(PDOStatement::class);
+        $stmt = $this->createStub(PDOStatement::class);
         $stmt->method('fetch')->willReturn(['c' => '0', 'oldest' => null]);
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturn($stmt);
 
         $res = RateLimiter::countDbWindow($pdo, 'comparebuilds_og_requests', 'hash123', 60);
@@ -191,10 +191,10 @@ final class RateLimiterTest extends TestCase
         // Best-effort by contract: a failed write is logged, never thrown, so
         // accounting can't mask the caller's own response (a 503/429 about to
         // be sent, or a share commit already made).
-        $stmt = $this->createMock(PDOStatement::class);
+        $stmt = $this->createStub(PDOStatement::class);
         $stmt->method('execute')->willThrowException(new PDOException('gone'));
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturn($stmt);
 
         RateLimiter::recordDbRequest($pdo, 'comparebuilds_share_requests', 'hash123', 0, 5, 'share request');
