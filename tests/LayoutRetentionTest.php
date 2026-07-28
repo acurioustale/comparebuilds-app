@@ -104,7 +104,7 @@ final class LayoutRetentionTest extends TestCase
     {
         // Retention bookkeeping must never break serving a share, so a DB error
         // during the touch is swallowed rather than propagated.
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willThrowException(new PDOException('db down'));
 
         // Returns normally (void) despite the thrown PDOException — no rethrow.

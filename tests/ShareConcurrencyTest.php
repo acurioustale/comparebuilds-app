@@ -8,7 +8,7 @@ final class ShareConcurrencyTest extends TestCase
 {
     public function testStoreShareThrowsServerBusyWhenGetLockFails(): void
     {
-        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt = $this->createStub(PDOStatement::class);
         $lockStmt->method('execute')->willReturn(true);
         $lockStmt->method('fetchColumn')->willReturn(0); // GET_LOCK failed / timed out
 
@@ -17,7 +17,7 @@ final class ShareConcurrencyTest extends TestCase
         // uncounted. Under the row cap here, so the attempt is logged. (The
         // count runs through RateLimiter::countDbWindow, which fetches a
         // c/oldest row.)
-        $rlStmt = $this->createMock(PDOStatement::class);
+        $rlStmt = $this->createStub(PDOStatement::class);
         $rlStmt->method('fetch')->willReturn(['c' => 5, 'oldest' => null]);
 
         $logged = false;
@@ -29,7 +29,7 @@ final class ShareConcurrencyTest extends TestCase
                        return true;
                    });
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $insertStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
@@ -59,17 +59,17 @@ final class ShareConcurrencyTest extends TestCase
         // another row would grow the table unbounded, so no new row is written —
         // instead the oldest logged request is slid forward to now, mirroring the
         // in-lock over-cap penalty so a contention flood can't drain the window.
-        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt = $this->createStub(PDOStatement::class);
         $lockStmt->method('execute')->willReturn(true);
         $lockStmt->method('fetchColumn')->willReturn(0);
 
-        $rlStmt = $this->createMock(PDOStatement::class);
+        $rlStmt = $this->createStub(PDOStatement::class);
         $rlStmt->method('fetch')->willReturn(['c' => 999, 'oldest' => 1700000000]);
 
         $slideStmt = $this->createMock(PDOStatement::class);
         $slideStmt->expects($this->once())->method('execute')->willReturn(true);
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $slideStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
@@ -101,13 +101,13 @@ final class ShareConcurrencyTest extends TestCase
         $baseId = base62_encode_sha256($stored);
         $candidate = substr($baseId, 0, 8);
 
-        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt = $this->createStub(PDOStatement::class);
         $lockStmt->method('fetchColumn')->willReturn(1);
 
-        $rlStmt = $this->createMock(PDOStatement::class);
+        $rlStmt = $this->createStub(PDOStatement::class);
         $rlStmt->method('fetch')->willReturn(['c' => 0, 'oldest' => null]);
 
-        $checkStmt = $this->createMock(PDOStatement::class);
+        $checkStmt = $this->createStub(PDOStatement::class);
         // The dedup fast-path (find_existing_share_id) fetches first and must miss
         // (false) so the request proceeds to the claim loop; then the claim loop's
         // own check misses (false → attempt insert), the insert raises the
@@ -117,10 +117,10 @@ final class ShareConcurrencyTest extends TestCase
         $e = new PDOException('Duplicate entry');
         $e->errorInfo = ['23000', 1062, 'Duplicate entry'];
 
-        $insertStmt = $this->createMock(PDOStatement::class);
+        $insertStmt = $this->createStub(PDOStatement::class);
         $insertStmt->method('execute')->willThrowException($e);
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $checkStmt, $insertStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
@@ -155,14 +155,14 @@ final class ShareConcurrencyTest extends TestCase
         $baseId = base62_encode_sha256($stored);
         $candidate = substr($baseId, 0, 8);
 
-        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt = $this->createStub(PDOStatement::class);
         $lockStmt->method('fetchColumn')->willReturn(1); // GET_LOCK / RELEASE_LOCK
 
         // Already stored at the base (8-char) prefix → dedup fast-path hit.
-        $checkStmt = $this->createMock(PDOStatement::class);
+        $checkStmt = $this->createStub(PDOStatement::class);
         $checkStmt->method('fetch')->willReturn(['data' => $stored]);
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $checkStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK') || str_starts_with($query, 'SELECT RELEASE_LOCK')) {
                 return $lockStmt;
@@ -225,13 +225,13 @@ final class ShareConcurrencyTest extends TestCase
             }
         };
 
-        $checkStmt = $this->createMock(PDOStatement::class);
+        $checkStmt = $this->createStub(PDOStatement::class);
         $checkStmt->method('fetch')->willReturn(false);
 
-        $insertStmt = $this->createMock(PDOStatement::class);
+        $insertStmt = $this->createStub(PDOStatement::class);
         $insertStmt->method('execute')->willReturn(true);
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturnCallback(function ($query) use ($checkStmt, $insertStmt) {
             if (str_starts_with($query, 'SELECT data FROM')) {
                 return $checkStmt;
@@ -263,19 +263,19 @@ final class ShareConcurrencyTest extends TestCase
             }
         };
 
-        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt = $this->createStub(PDOStatement::class);
         $lockStmt->method('fetchColumn')->willReturn(1);
 
-        $rlStmt = $this->createMock(PDOStatement::class);
+        $rlStmt = $this->createStub(PDOStatement::class);
         $rlStmt->method('fetch')->willReturn(['c' => 0, 'oldest' => null]);
 
-        $checkStmt = $this->createMock(PDOStatement::class);
+        $checkStmt = $this->createStub(PDOStatement::class);
         $checkStmt->method('fetch')->willReturn(false);
 
-        $insertStmt = $this->createMock(PDOStatement::class);
+        $insertStmt = $this->createStub(PDOStatement::class);
         $insertStmt->method('execute')->willReturn(true);
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $checkStmt, $insertStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
@@ -305,16 +305,16 @@ final class ShareConcurrencyTest extends TestCase
         // request must not be INSERTed (unbounded growth) but must slide the
         // oldest logged row forward so the window can't drain while the abuse
         // continues — then still be rejected with 429.
-        $lockStmt = $this->createMock(PDOStatement::class);
+        $lockStmt = $this->createStub(PDOStatement::class);
         $lockStmt->method('fetchColumn')->willReturn(1);
 
-        $rlStmt = $this->createMock(PDOStatement::class);
+        $rlStmt = $this->createStub(PDOStatement::class);
         $rlStmt->method('fetch')->willReturn(['c' => 50, 'oldest' => time() - 10]);
 
         // The dedup fast-path runs first: this content is NOT already stored, so
         // it misses and the request falls through to the rate limiter, which is
         // where the over-cap slide + 429 under test happens.
-        $checkStmt = $this->createMock(PDOStatement::class);
+        $checkStmt = $this->createStub(PDOStatement::class);
         $checkStmt->method('fetch')->willReturn(false);
 
         $slid = false;
@@ -326,7 +326,7 @@ final class ShareConcurrencyTest extends TestCase
                       return true;
                   });
 
-        $pdo = $this->createMock(PDO::class);
+        $pdo = $this->createStub(PDO::class);
         $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $checkStmt, $slideStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
