@@ -53,12 +53,17 @@ require_version() {
 	fi
 }
 
-# CI pins Node. Warn (don't block) on a mismatch: a different engine can pass
-# here yet behave differently in CI.
+# CI pins Node through this same file, so a local mismatch means the JS stages
+# below prove nothing about CI. Block on it, as every other pin does - a warning
+# scrolls past on a script this long. Only the major is compared: setup-node
+# resolves the pin to the latest matching release, so an exact match is not
+# something a local install can be held to.
 ci_node_major="${ci_node_version%%.*}"
 local_node_major="$(node -v | sed 's/^v//; s/\..*//')"
 if [[ "$local_node_major" != "$ci_node_major" ]]; then
-	echo "warning: local Node is v$local_node_major, CI uses v$ci_node_major." >&2
+	echo "  Node version mismatch: want v$ci_node_major, got: $(node -v)" >&2
+	echo "  install the pinned version (see .tool-versions) so local matches CI" >&2
+	exit 1
 fi
 
 if [[ "$do_clean" -eq 1 ]]; then
