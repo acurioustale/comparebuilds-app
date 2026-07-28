@@ -47,14 +47,14 @@
     "prettier": "^3.8.4",
     "stylelint": "^17.14.0",
     "stylelint-config-standard": "^40.0.0",
-    "svgo": "^4.0.1",
+    "svgo": "^4.0.2",
     "tailwindcss": "^4.3.3",
     "vite": "^8.0.13",
     "vitest": "^4.1.9"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.19",
-    "dompurify": "^3.4.11",
+    "dompurify": "^3.4.12",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "zustand": "^5.0.13"
