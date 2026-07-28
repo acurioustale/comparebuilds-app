@@ -42,7 +42,7 @@
     "eslint-plugin-react-refresh": "^0.5.3",
     "fast-check": "^4.8.0",
     "globals": "^17.7.0",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.0",
     "markdownlint-cli2": "^0.23.2",
     "prettier": "^3.8.4",
     "stylelint": "^17.14.0",
