@@ -28,6 +28,7 @@ esac
 # "php-cs-fixer") rather than a prefix regex.
 tool_version() { awk -v tool="$1" '$1 == tool {print $2}' .tool-versions; }
 ci_node_version="$(tool_version nodejs)"
+ci_php_version="$(tool_version php)"
 SHFMT_VERSION="$(tool_version shfmt)"
 PHPCSFIXER_VERSION="$(tool_version php-cs-fixer)"
 PHPUNIT_VERSION="$(tool_version phpunit)"
@@ -64,6 +65,22 @@ if [[ "$local_node_major" != "$ci_node_major" ]]; then
 	echo "  Node version mismatch: want v$ci_node_major, got: $(node -v)" >&2
 	echo "  install the pinned version (see .tool-versions) so local matches CI" >&2
 	exit 1
+fi
+
+# PHP is the one runtime that also serves production, so the pin tracks the live
+# server (8.4 is the latest it supports) and both CI and this script must agree
+# with it - a syntax check or a test suite passing on a newer PHP says nothing
+# about the engine the API actually runs on. Compare major.minor: the patch
+# release is whatever the local package manager and setup-php each resolve to.
+# Guarded like the PHP stages below, so a machine without PHP still skips them
+# rather than failing on a version it was never going to run.
+if have php; then
+	local_php_version="$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;')"
+	if [[ "$local_php_version" != "$ci_php_version" ]]; then
+		echo "  PHP version mismatch: want $ci_php_version, got: $local_php_version" >&2
+		echo "  install the pinned version (see .tool-versions) so local matches CI" >&2
+		exit 1
+	fi
 fi
 
 if [[ "$do_clean" -eq 1 ]]; then
