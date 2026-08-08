@@ -237,8 +237,14 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const classIndex = loadClassIndex();
   let implemented = classIndex.filter((c) => c.implemented);
-  if (args.classSlug)
+  if (args.classSlug) {
     implemented = implemented.filter((c) => c.name === args.classSlug);
+    // Without this a typo'd slug filters to zero classes, the compare loop never
+    // runs, and the drift check reports "0 hard divergence(s)" and exits 0 —
+    // a green run that compared nothing. Mirrors ingestBlizzard.js.
+    if (implemented.length === 0)
+      throw new Error(`no implemented class named "${args.classSlug}"`);
+  }
 
   const fresh = await buildBlizzardClasses({
     implemented,
