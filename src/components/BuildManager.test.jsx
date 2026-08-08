@@ -305,6 +305,28 @@ describe("class grid", () => {
   });
 });
 
+describe("BuildManager rehydration", () => {
+  // parsedBuilds is derived, not persisted, so a restored session momentarily
+  // has buildStrings filled and parsedBuilds still []. Those slots are pending
+  // (undefined), not failed — showing ✕ "Failed to parse" for the duration of
+  // the class-data import is the exact flash the loading guard exists to avoid.
+  test("restored slots show loading, not a parse failure, while data loads", () => {
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    useBuildsStore.setState({
+      specId: 250,
+      buildStrings: [a, b],
+      buildNames: ["", ""],
+      parsedBuilds: [],
+      isLoading: true,
+    });
+
+    render(<BuildManager />);
+
+    expect(screen.getAllByText("loading…")).toHaveLength(2);
+    expect(screen.queryByText("✕")).toBeNull();
+  });
+});
+
 describe("ClassIcon", () => {
   // classes.json is not schema-validated; a malformed row (missing/non-string
   // name) must not throw and unmount the whole panel — it degrades to a broken

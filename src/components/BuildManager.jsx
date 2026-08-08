@@ -372,8 +372,11 @@ export default function BuildManager() {
                   // pending, not failed — show "loading" for all of them (a
                   // multi-build share rehydration adds several slots at once, so
                   // gating this to the last slot flashes a false "Failed to
-                  // parse" ✕ on the earlier pending ones).
-                  loading={isLoading && parsedBuilds[i] === null}
+                  // parse" ✕ on the earlier pending ones). parsedBuilds is
+                  // derived, not persisted, so after a rehydration it is still []
+                  // while buildStrings has the restored slots — the pending
+                  // marker there is `undefined`, not `null`, so test both.
+                  loading={isLoading && !parsedBuilds[i]}
                   onRemove={removeBuild}
                   onRename={setBuildName}
                   onEdit={editBuild}
