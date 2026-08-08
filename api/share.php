@@ -584,11 +584,18 @@ function ensure_share_schema(PDO $pdo): void
     // layout fingerprint into a column so the prune query can join against
     // comparebuilds_layout_history without JSON-parsing every row. Added via
     // ADD COLUMN IF NOT EXISTS (MariaDB) so existing deployments migrate in place.
+    // layout_hash MUST be utf8mb4_bin to match comparebuilds_layout_history.layout_hash:
+    // without it the column inherits the table's default (case-insensitive) collation
+    // and every prune subquery joining the two errors with 1267 (illegal mix of
+    // collations), so retention silently never prunes anything.
     $pdo->exec("
         ALTER TABLE comparebuilds_shares
             ADD COLUMN IF NOT EXISTS last_accessed TIMESTAMP  NULL DEFAULT NULL,
-            ADD COLUMN IF NOT EXISTS layout_hash   VARCHAR(16) NULL DEFAULT NULL
+            ADD COLUMN IF NOT EXISTS layout_hash   VARCHAR(16) COLLATE utf8mb4_bin NULL DEFAULT NULL
     ");
+    // Repair deployments migrated before the COLLATE was added above. MODIFY is
+    // idempotent, and rebuilding idx_layout_accessed is cheap at this table size.
+    $pdo->exec('ALTER TABLE comparebuilds_shares MODIFY COLUMN layout_hash VARCHAR(16) COLLATE utf8mb4_bin NULL DEFAULT NULL');
     // Seed last_accessed for pre-migration rows so they aren't treated as "never
     // accessed" (which would make them prunable one window after this migration
     // regardless of real use). created_at is the best proxy we have.
