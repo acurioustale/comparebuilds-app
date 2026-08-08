@@ -24,13 +24,26 @@ const jsPattern = (() => {
 })();
 
 // Every share-id regex literal (a /^[A-Za-z0-9]…$/ in a preg_match call) in a
-// PHP file. Deliberately anchored so it ignores BUILD_PATTERN and the like.
+// PHP file, as {body, flags}. Deliberately anchored so it ignores BUILD_PATTERN
+// and the like. Flags are captured because comparing bodies alone cannot see a
+// behavioural divergence — see the trailing-newline test below.
 const phpPatterns = (src) => {
   const out = [];
   const re =
-    /(?:preg_match\(\s*|const\s+SHARE_ID_PATTERN\s*=\s*)'\/(\^\[A-Za-z0-9\][^']*\$)\/'/g;
+    /(?:preg_match\(\s*|const\s+SHARE_ID_PATTERN\s*=\s*)'\/(\^\[A-Za-z0-9\][^']*\$)\/([a-zA-Z]*)'/g;
   let m;
-  while ((m = re.exec(src)) !== null) out.push(m[1]);
+  while ((m = re.exec(src)) !== null) out.push({ body: m[1], flags: m[2] });
+  return out;
+};
+
+// Every delimited PHP pattern constant, as {name, body, flags}. Used to hold the
+// whole family to the same end-of-subject semantics, not just the share id.
+const phpPatternConsts = (src) => {
+  const out = [];
+  const re = /const\s+(\w*PATTERN)\s*=\s*'\/(.+?)\/([a-zA-Z]*)';/g;
+  let m;
+  while ((m = re.exec(src)) !== null)
+    out.push({ name: m[1], body: m[2], flags: m[3] });
   return out;
 };
 
@@ -42,7 +55,35 @@ describe("share-id pattern parity across route.js, share.php, og.php", () => {
   test("share.php's share-id regex matches route.js", () => {
     const found = phpPatterns(sharePhp);
     expect(found.length).toBeGreaterThan(0);
-    for (const p of found) expect(p).toBe(jsPattern);
+    for (const p of found) expect(p.body).toBe(jsPattern);
+  });
+
+  // Comparing pattern bodies is not enough to prove the two stacks agree: in
+  // PCRE, `$` also matches immediately before a trailing newline unless the D
+  // modifier is set, while JS `$` (without `m`) means end-of-input. Identical
+  // bodies would therefore still accept different inputs — "abcdefgh\n" would
+  // pass in PHP and fail in JS. Pin the modifier that closes that gap.
+  test("share.php's share-id regex ends at end-of-subject (D modifier)", () => {
+    // The JS side must not be in multiline mode, or `$` would match at any
+    // line break and the D modifier could not restore parity.
+    const routeFlags = routeJs.match(/SHARE_ID_RE\s*=\s*\/.+?\/(\w*);/)?.[1];
+    expect(routeFlags).toBe("");
+
+    const found = phpPatterns(sharePhp);
+    expect(found.length).toBeGreaterThan(0);
+    for (const p of found) expect(p.flags).toContain("D");
+  });
+
+  // The share id is not the only cross-stack pattern: a build string or layout
+  // hash with a trailing newline must be rejected too, since the stored value
+  // is echoed back to a JS client that will not tolerate it.
+  test("every anchored pattern constant in share.php sets the D modifier", () => {
+    const consts = phpPatternConsts(sharePhp);
+    expect(consts.length).toBeGreaterThan(0);
+    for (const c of consts) {
+      if (!c.body.endsWith("$")) continue;
+      expect(c.flags, `${c.name} must set the D modifier`).toContain("D");
+    }
   });
 
   test("og.php delegates id validation to share.php's valid_share_id", () => {

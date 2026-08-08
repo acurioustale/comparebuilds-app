@@ -38,13 +38,16 @@ const MAX_ID_LEN        = 16;   // max chars after collision extension
 // Content-address id alphabet (base62). Self-consistent across the GMP and
 // pure-PHP encoders below; deliberately not the ordering gmp_strval(…, 62) uses.
 const BASE62_ALPHABET   = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+// All three carry the D modifier: without it PCRE's `$` also matches just before
+// a trailing newline, so "abcdefgh\n" would validate as a share id and the JS
+// mirrors (route.js) — where `$` means end-of-input — would then disagree.
 // Build strings are base64 (RFC 4648 alphabet, optional padding).
-const BUILD_PATTERN     = '/^[A-Za-z0-9+\/]{1,2000}={0,2}$/';
-const SHARE_ID_PATTERN  = '/^[A-Za-z0-9]{8,16}$/';
+const BUILD_PATTERN     = '/^[A-Za-z0-9+\/]{1,2000}={0,2}$/D';
+const SHARE_ID_PATTERN  = '/^[A-Za-z0-9]{8,16}$/D';
 // Wire-layout fingerprint: a lowercase-or-upper hex string, up to the 16 chars
 // wireLayout() emits (sha256 truncated). Validated on every share create and when
 // reading current_layouts.json, so it lives in one named constant.
-const LAYOUT_HASH_PATTERN = '/^[a-fA-F0-9]{1,16}$/';
+const LAYOUT_HASH_PATTERN = '/^[a-fA-F0-9]{1,16}$/D';
 
 /**
  * A share-creation failure the client should see verbatim (rate limit, server
