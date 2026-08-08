@@ -90,6 +90,7 @@ export default function InteractiveTalentTree({
     addBuild,
     replaceBuild,
     editingIndex,
+    sessionGen,
     finishAddingBuild,
   } = useBuildsStore(
     useShallow((s) => ({
@@ -99,6 +100,7 @@ export default function InteractiveTalentTree({
       addBuild: s.addBuild,
       replaceBuild: s.replaceBuild,
       editingIndex: s.editingIndex,
+      sessionGen: s.sessionGen,
       finishAddingBuild: s.finishAddingBuild,
     })),
   );
@@ -328,6 +330,7 @@ export default function InteractiveTalentTree({
       addBuild,
       replaceBuild,
       editingIndex,
+      sessionGen,
       finishAddingBuild,
     });
 

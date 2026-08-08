@@ -30,10 +30,14 @@ function renderExport(overrides = {}) {
     addBuild: vi.fn(async () => true),
     replaceBuild: vi.fn(async () => true),
     editingIndex: null,
+    sessionGen: 0,
     finishAddingBuild: vi.fn(),
     ...overrides,
   };
-  return { props, ...renderHook(() => useBuildExport(props)) };
+  return {
+    props,
+    ...renderHook((p) => useBuildExport(p), { initialProps: props }),
+  };
 }
 
 afterEach(() => {
@@ -91,6 +95,44 @@ describe("handleExport", () => {
     expect(props.addBuild.mock.invocationCallOrder[0]).toBeLessThan(
       writeText.mock.invocationCallOrder[0],
     );
+  });
+});
+
+describe("post-export countdown", () => {
+  test("closes the editor when no new session started", async () => {
+    vi.useFakeTimers();
+    setClipboard({ writeText: vi.fn(async () => {}) });
+    const { props, result } = renderExport();
+
+    await act(() => result.current.handleExport());
+    await act(async () => {
+      vi.advanceTimersByTime(2000);
+    });
+
+    expect(props.finishAddingBuild).toHaveBeenCalledTimes(1);
+    expect(result.current.exportState).toBe("idle");
+    vi.useRealTimers();
+  });
+
+  // Clicking Edit within the 2 s "Copied & added!" window opens a new session
+  // and seeds the calculator with that build's selection. The countdown armed
+  // by the previous export must not then fire finishAddingBuild() and wipe it.
+  test("a new session cancels the pending finishAddingBuild", async () => {
+    vi.useFakeTimers();
+    setClipboard({ writeText: vi.fn(async () => {}) });
+    const { props, result, rerender } = renderExport();
+
+    await act(() => result.current.handleExport());
+    expect(result.current.exportState).toBe("done");
+
+    rerender({ ...props, sessionGen: 1, editingIndex: 0 });
+    await act(async () => {
+      vi.advanceTimersByTime(2000);
+    });
+
+    expect(props.finishAddingBuild).not.toHaveBeenCalled();
+    expect(result.current.exportState).toBe("idle");
+    vi.useRealTimers();
   });
 });
 
