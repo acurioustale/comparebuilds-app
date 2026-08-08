@@ -816,6 +816,9 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     }
 
     $id = null;
+    // True when $id came from an existing row rather than our own INSERT — those
+    // need their retention clock reset (a fresh INSERT already stamps NOW()).
+    $deduped = false;
     try {
         // Content-addressing is deterministic and pure (a hash of the canonical
         // bytes), so compute it up front — cheap, and needed both for the
@@ -840,6 +843,12 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
         // — never a miss in the benign-retry direction this guards.
         $existingId = find_existing_share_id($pdo, $baseId, $stored);
         if ($existingId !== null) {
+            // Handing an id back to a sharer is use, so it must reset the
+            // retention clock exactly as a GET does. Without this a re-shared
+            // link whose layout is already superseded and whose last read
+            // predates the window stays prunable, and the nightly cron can
+            // delete it the same day it was handed out.
+            touch_share_access($pdo, $existingId);
             return $existingId;
         }
 
@@ -933,6 +942,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
             if ($row) {
                 if ($row['data'] === $stored) {
                     $id = $candidate; // identical content already stored
+                    $deduped = true;
                     break;
                 }
                 continue; // different content at this prefix — lengthen
@@ -953,6 +963,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
                 $row = $check->fetch();
                 if ($row && $row['data'] === $stored) {
                     $id = $candidate; // raced to the same content — dedup
+                    $deduped = true;
                     break;
                 }
                 // Raced to *different* content — lengthen the prefix and retry.
@@ -966,6 +977,13 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
         // The id is a deterministic function of the content, so retrying the same
         // payload would hit the same exhausted prefix chain — a hard failure.
         throw new ShareException(500, 'Could not generate a unique share ID');
+    }
+
+    // Same reasoning as the fast-path touch above, for the claim loop's two
+    // dedup exits. Deliberately outside the lock: touch_share_access is
+    // debounced and best-effort, so it needn't be serialized with the claim.
+    if ($deduped) {
+        touch_share_access($pdo, $id);
     }
 
     return $id;
