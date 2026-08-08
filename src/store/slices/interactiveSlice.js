@@ -5,6 +5,15 @@ import { loadTreeData } from "./loadTreeData";
 
 export const createInteractiveSlice = (set, get) => ({
   /**
+   * Bumped every time a new interactive session opens (startAddingBuild or
+   * editBuild). Lets useBuildExport tell "my post-export countdown still
+   * belongs to the session that armed it" from "the user has since opened
+   * another build", whose seeded selection the countdown must not wipe.
+   * @type {number}
+   */
+  sessionGen: 0,
+
+  /**
    * Loads tree data for the interactive calculator without importing a build
    * string. Only operates when no builds are present. Sets specId so the
    * spec row highlights correctly; leaves classId null so the class grid
@@ -48,7 +57,11 @@ export const createInteractiveSlice = (set, get) => ({
   startAddingBuild: () => {
     const { treeData } = get();
     if (!treeData) return;
-    set({ addingBuild: true, interactiveNodes: buildGrantedSeed(treeData) });
+    set({
+      addingBuild: true,
+      interactiveNodes: buildGrantedSeed(treeData),
+      sessionGen: get().sessionGen + 1,
+    });
   },
 
   /**
@@ -70,7 +83,11 @@ export const createInteractiveSlice = (set, get) => ({
   editBuild: (index) => {
     const { treeData, parsedBuilds } = get();
     if (!treeData || !parsedBuilds[index]) return;
-    set({ addingBuild: true, editingIndex: index });
+    set({
+      addingBuild: true,
+      editingIndex: index,
+      sessionGen: get().sessionGen + 1,
+    });
     // parsedBuilds[index].nodes carries the synthetic heroGateNodeId, which is
     // not a real tree node. Seed only with ids the tree actually contains so a
     // non-node id can't linger in the interactive selection (and persist to

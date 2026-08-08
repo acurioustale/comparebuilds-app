@@ -8,6 +8,7 @@ export function useBuildExport({
   addBuild,
   replaceBuild,
   editingIndex,
+  sessionGen,
   finishAddingBuild,
 }) {
   const [exportState, setExportState] = useState("idle");
@@ -25,6 +26,17 @@ export function useBuildExport({
     },
     [],
   );
+
+  // A new interactive session opened (Edit clicked, or another add started)
+  // while the post-export status was still counting down. That timer calls
+  // finishAddingBuild(), which would close the editor and discard the selection
+  // the new session just seeded — cancel it and drop straight back to idle.
+  useEffect(() => {
+    if (resetTimerRef.current == null) return;
+    clearTimeout(resetTimerRef.current);
+    resetTimerRef.current = null;
+    setExportState("idle");
+  }, [sessionGen]);
 
   const handleCopyString = useCallback(async () => {
     if (
