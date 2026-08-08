@@ -238,6 +238,16 @@ final class ShareValidationTest extends TestCase
         $this->assertFalse(is_ip_in_cidr('203.0.113.7', '10.0.0.0/-1'));
         $this->assertFalse(is_ip_in_cidr('8.8.8.8', '10.0.0.0/-1'));
         $this->assertFalse(is_ip_in_cidr('10.0.0.1', '10.0.0.0/33')); // IPv4 max is /32
+        // A non-numeric or empty prefix must not cast to /0 and match the whole
+        // internet — the same trust-all failure as a negative prefix.
+        foreach (['10.0.0.0/', '10.0.0.0/eight', '10.0.0.0/ 8', '10.0.0.0/8x'] as $cidr) {
+            $this->assertFalse(is_ip_in_cidr('203.0.113.7', $cidr), $cidr);
+            $this->assertFalse(is_ip_in_cidr('8.8.8.8', $cidr), $cidr);
+        }
+        // A trailing newline must not sneak past the digit check either.
+        $this->assertFalse(is_ip_in_cidr('203.0.113.7', "10.0.0.0/8\n"));
+        // A deliberate /0 written as a plain decimal is still honoured.
+        $this->assertTrue(is_ip_in_cidr('203.0.113.7', '0.0.0.0/0'));
         // A well-formed /32 still works and only matches the exact host.
         $this->assertTrue(is_ip_in_cidr('10.0.0.1', '10.0.0.1/32'));
         $this->assertFalse(is_ip_in_cidr('10.0.0.2', '10.0.0.1/32'));
