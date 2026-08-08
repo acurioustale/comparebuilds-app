@@ -192,8 +192,15 @@ function render_share_page(string $id, ?array $data): void
 function is_ip_in_cidr(string $ip, string $cidr): bool
 {
     if (str_contains($cidr, '/')) {
-        list($subnet, $bits) = explode('/', $cidr, 2);
-        $bits = (int) $bits;
+        list($subnet, $prefix) = explode('/', $cidr, 2);
+        // The prefix must be written as a plain decimal. Casting first would
+        // turn "10.0.0.0/" and "10.0.0.0/eight" into a /0 that passes the range
+        // check below and matches EVERY address — one typo in TRUSTED_PROXIES
+        // would silently trust the whole internet.
+        if (!preg_match('/^\d+$/D', $prefix)) {
+            return false;
+        }
+        $bits = (int) $prefix;
 
         $ipBinary = inet_pton($ip);
         $subnetBinary = inet_pton($subnet);
@@ -207,13 +214,13 @@ function is_ip_in_cidr(string $ip, string $cidr): bool
             return false;
         }
 
-        // Reject a malformed prefix length rather than silently matching. A
-        // negative prefix (a typo like "/-1") would break out of the loop below
-        // on the first byte and return true for EVERY address — turning one
-        // botched TRUSTED_PROXIES entry into "trust all", which lets spoofed
-        // forwarded-for headers mint a fresh rate-limit key per request. An
-        // over-length prefix is nonsense too. Valid range is 0..bits-in-address.
-        if ($bits < 0 || $bits > $ipLen * 8) {
+        // An over-length prefix is nonsense; reject it rather than silently
+        // matching. Same stakes as the malformed-prefix check above: a
+        // TRUSTED_PROXIES entry that matches too broadly lets spoofed
+        // forwarded-for headers mint a fresh rate-limit key per request.
+        // Valid range is 0..bits-in-address (negatives can't reach here — the
+        // decimal-only pattern above rejects "/-1").
+        if ($bits > $ipLen * 8) {
             return false;
         }
 
