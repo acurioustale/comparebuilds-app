@@ -27,6 +27,31 @@ final class ShareValidationTest extends TestCase
         $this->assertFalse(valid_share_id(''));        // empty
     }
 
+    /**
+     * PCRE's `$` also matches just before a trailing newline unless the D
+     * modifier is set. Without it "abc123xyz\n" would validate here while
+     * route.js's SHARE_ID_RE (where `$` is end-of-input) rejects it — the two
+     * stacks would silently disagree on what is a share id. Same for the build
+     * and layout-hash patterns, whose values are echoed back to that client.
+     */
+    public function testPatternsRejectATrailingNewline(): void
+    {
+        $this->assertFalse(valid_share_id("abc123xyz\n"));
+
+        $this->assertArrayHasKey('error', validate_share_input([
+            'classId' => 6,
+            'specId'  => 250,
+            'builds'  => ["AAAA\n", 'BBBB'],
+        ]));
+
+        $this->assertArrayHasKey('error', validate_share_input([
+            'classId'    => 6,
+            'specId'     => 250,
+            'builds'     => ['AAAA', 'BBBB'],
+            'layoutHash' => "6a9c38c6b2daa867\n",
+        ]));
+    }
+
     public function testValidInputReturnsNormalisedPayload(): void
     {
         $result = validate_share_input([
