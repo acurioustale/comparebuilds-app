@@ -120,8 +120,17 @@ final class ShareConcurrencyTest extends TestCase
         $insertStmt = $this->createStub(PDOStatement::class);
         $insertStmt->method('execute')->willThrowException($e);
 
+        // The row already existed, so returning its id is use — it must reset the
+        // retention clock, exactly as the fast-path dedup does.
+        $touched = [];
+        $touchStmt = $this->createStub(PDOStatement::class);
+        $touchStmt->method('execute')->willReturnCallback(function ($params) use (&$touched) {
+            $touched[] = $params[0];
+            return true;
+        });
+
         $pdo = $this->createStub(PDO::class);
-        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $checkStmt, $insertStmt) {
+        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $rlStmt, $checkStmt, $insertStmt, $touchStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK')) {
                 return $lockStmt;
             }
@@ -130,6 +139,9 @@ final class ShareConcurrencyTest extends TestCase
             }
             if (str_starts_with($query, 'SELECT data FROM')) {
                 return $checkStmt;
+            }
+            if (str_starts_with($query, 'UPDATE comparebuilds_shares SET last_accessed')) {
+                return $touchStmt;
             }
             if (str_starts_with($query, 'INSERT INTO')) {
                 return $insertStmt;
@@ -142,6 +154,7 @@ final class ShareConcurrencyTest extends TestCase
 
         $id = store_share($pdo, $payload, 'dummy-ip-hash');
         $this->assertSame($candidate, $id);
+        $this->assertSame([$candidate], $touched);
     }
 
     public function testDedupHitSkipsRateLimitAndReturnsExistingId(): void
@@ -162,13 +175,26 @@ final class ShareConcurrencyTest extends TestCase
         $checkStmt = $this->createStub(PDOStatement::class);
         $checkStmt->method('fetch')->willReturn(['data' => $stored]);
 
+        // A dedup hit still counts as use of the link, so its retention clock
+        // must be reset — otherwise a re-shared, long-idle, superseded-layout
+        // link can be pruned the same night it was handed out.
+        $touched = [];
+        $touchStmt = $this->createStub(PDOStatement::class);
+        $touchStmt->method('execute')->willReturnCallback(function ($params) use (&$touched) {
+            $touched[] = $params[0];
+            return true;
+        });
+
         $pdo = $this->createStub(PDO::class);
-        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $checkStmt) {
+        $pdo->method('prepare')->willReturnCallback(function ($query) use ($lockStmt, $checkStmt, $touchStmt) {
             if (str_starts_with($query, 'SELECT GET_LOCK') || str_starts_with($query, 'SELECT RELEASE_LOCK')) {
                 return $lockStmt;
             }
             if (str_starts_with($query, 'SELECT data FROM')) {
                 return $checkStmt;
+            }
+            if (str_starts_with($query, 'UPDATE comparebuilds_shares SET last_accessed')) {
+                return $touchStmt;
             }
             if (str_starts_with($query, 'SELECT COUNT(*)')
                 || str_starts_with($query, 'INSERT INTO comparebuilds_share_requests')
@@ -183,6 +209,7 @@ final class ShareConcurrencyTest extends TestCase
 
         $id = store_share($pdo, $payload, 'dummy-ip-hash');
         $this->assertSame($candidate, $id);
+        $this->assertSame([$candidate], $touched);
     }
 
     public function testStoreShareUsesRedisWhenAvailable(): void
