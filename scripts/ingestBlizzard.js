@@ -89,9 +89,14 @@ export function parseArgs(argv) {
     else if (a === "--icons") args.icons = true;
     else if (a === "--no-icons") args.icons = false;
     else if (a === "--no-cache") args.noCache = true;
-    else if (a.startsWith("--class="))
+    else if (a.startsWith("--class=")) {
       args.classSlug = a.slice("--class=".length);
-    else throw new Error(`unknown argument: ${a}`);
+      // An empty value is falsy, so it would slip past the `if (args.classSlug)`
+      // filter guard and silently act on EVERY class — `--class=$UNSET_VAR`
+      // must not quietly mean "no filter".
+      if (!args.classSlug)
+        throw new Error("--class= requires a class slug (got an empty value)");
+    } else throw new Error(`unknown argument: ${a}`);
   }
   // The snapshot is only rewritten on the promote path (writeNormalizedData).
   // Passing --update-snapshot without --promote takes the verify branch and

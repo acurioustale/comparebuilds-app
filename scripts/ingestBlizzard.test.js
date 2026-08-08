@@ -21,6 +21,18 @@ describe("parseArgs", () => {
     expect(args.promote).toBe(true);
     expect(args.updateSnapshot).toBe(true);
   });
+
+  // An unset shell variable expands to nothing, so `--class=$SLUG` arrives as a
+  // bare "--class=". An empty slug is falsy and would slip past the filter
+  // guard in main(), turning a targeted `--promote --class=…` into a promote of
+  // every class.
+  it("rejects an empty --class= value", () => {
+    expect(() => parseArgs(["--class="])).toThrow(/--class= requires a class/);
+  });
+
+  it("accepts a non-empty --class= value", () => {
+    expect(parseArgs(["--class=mage"]).classSlug).toBe("mage");
+  });
 });
 
 describe("calculatePointBudgets", () => {

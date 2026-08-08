@@ -39,13 +39,18 @@ import { loadClassIndex, buildBlizzardClasses } from "./ingestBlizzard.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "src", "data");
 
-function parseArgs(argv) {
+export function parseArgs(argv) {
   const args = { classSlug: null, descriptions: false };
   for (const a of argv) {
     if (a === "--descriptions") args.descriptions = true;
-    else if (a.startsWith("--class="))
+    else if (a.startsWith("--class=")) {
       args.classSlug = a.slice("--class=".length);
-    else throw new Error(`unknown argument: ${a}`);
+      // An empty value is falsy, so it would slip past the `if (args.classSlug)`
+      // filter guard and silently act on EVERY class — `--class=$UNSET_VAR`
+      // must not quietly mean "no filter".
+      if (!args.classSlug)
+        throw new Error("--class= requires a class slug (got an empty value)");
+    } else throw new Error(`unknown argument: ${a}`);
   }
   return args;
 }

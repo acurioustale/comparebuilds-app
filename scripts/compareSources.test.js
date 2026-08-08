@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createRequire } from "node:module";
-import { diffClass } from "./compareSources.js";
+import { diffClass, parseArgs } from "./compareSources.js";
 
 const require = createRequire(import.meta.url);
 const DK = require("../src/data/death_knight.json");
@@ -34,5 +34,17 @@ describe("compareSources diffClass", () => {
 
     const { hard } = diffClass("death_knight", fresh, DK, opts);
     expect(hard).toContain(`${removed}: missing from fresh ingest`);
+  });
+});
+
+describe("compareSources parseArgs", () => {
+  // Same hazard as ingestBlizzard: an empty slug is falsy, so it would disable
+  // the class filter instead of narrowing it.
+  it("rejects an empty --class= value", () => {
+    expect(() => parseArgs(["--class="])).toThrow(/--class= requires a class/);
+  });
+
+  it("accepts a non-empty --class= value", () => {
+    expect(parseArgs(["--class=mage"]).classSlug).toBe("mage");
   });
 });
