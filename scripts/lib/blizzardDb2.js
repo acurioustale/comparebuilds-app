@@ -119,10 +119,18 @@ export function parseCsv(text) {
  * Selects the spec branch of a `$?cN[a]?cM[b][else]` template: the `[…]` whose
  * condition matches this spec (N = ChrSpecialization OrderIndex + 1), else the
  * trailing default. A condition may OR several specs together (`c1|c3[…]`).
+ * A template that doesn't start with `$?c` is returned as-is.
+ *
  * Conditions we can't evaluate — an `&` AND, or a non-spec token such as
- * `s<spellId>` (is-spell-known) — don't match and fall through to the default,
- * rather than being mis-parsed as a broken single condition. A template that
- * doesn't start with `$?c` is returned as-is.
+ * `s<spellId>` (is-spell-known) — stop the scan, so they are never mis-parsed
+ * as a broken single condition. That also SUPPRESSES the trailing default: once
+ * a condition we cannot decide is in play, the default is no longer known to be
+ * the right answer either (the undecidable branch may well be), so the result is
+ * "" rather than a guess. Same policy as renderSpellDescription's bail on
+ * unsupported syntax — never show text we can't justify.
+ *
+ * An evaluable branch EARLIER in the template still wins if it matches: a
+ * matching `cN` is correct regardless of what any later branch says.
  */
 function selectSpecBranch(tpl, orderIndex) {
   if (!tpl.startsWith("$?c")) return tpl;
