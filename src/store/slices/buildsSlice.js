@@ -271,7 +271,17 @@ export const createBuildsSlice = (set, get) => ({
     // today the swap control isn't reachable mid-load, but keeping the structural
     // mutations' cancel-the-load contract uniform removes the latent trap where a
     // load committing against a captured pre-swap snapshot would desync the arrays.
-    set({ loadGen: get().loadGen + 1, slotGen: get().slotGen + 1 });
+    //
+    // Clearing isLoading is part of that contract. A cancelled load returns at
+    // its generation check without touching the flag — correct when the canceller
+    // starts a replacement load that will own it (removeBuild/clearAllBuilds reset
+    // via EMPTY), but a swap starts none, so leaving it set would strand the UI in
+    // a spinner that nothing can clear.
+    set({
+      loadGen: get().loadGen + 1,
+      slotGen: get().slotGen + 1,
+      isLoading: false,
+    });
 
     const swapAt = (arr) => {
       const next = [...arr];

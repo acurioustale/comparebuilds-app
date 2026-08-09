@@ -24,6 +24,25 @@ vi.hoisted(() => {
   };
 });
 
+// Lets a test hold each importClassData call open independently, so two loads
+// can be in flight at once and released in a chosen order — the only way to pin
+// down which of two racing continuations resumes first. Disabled by default, so
+// every other test keeps the real, unthrottled import.
+const importGate = vi.hoisted(() => ({ enabled: false, waiters: [] }));
+
+vi.mock("./storeHelpers.js", async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    importClassData: async (slug) => {
+      if (importGate.enabled) {
+        await new Promise((release) => importGate.waiters.push(release));
+      }
+      return actual.importClassData(slug);
+    },
+  };
+});
+
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import { useBuildsStore } from "./buildsStore.js";
@@ -194,6 +213,102 @@ describe("persistence", () => {
       "valid pick survives reconciliation",
     );
     assert.ok(!st.interactiveNodes["999999999"], "stale node id is dropped");
+  });
+
+  test("a build pasted mid-rehydration is not cancelled by the rehydrate", async () => {
+    // Regression: rehydrateTreeData's transient-failure recovery bumped loadGen
+    // unconditionally after its await. Pasting the first build while a persisted
+    // interactive session was still fetching its class chunk made addBuild start
+    // a NEWER load; the rehydrate's own load bailed at its generation check, and
+    // the recovery below then read treeData as null (only because that newer load
+    // was still in flight) and bumped loadGen — cancelling the paste's load. That
+    // load bailed at its own check without clearing isLoading, and nothing was
+    // left to clear it: the store sat at isLoading:true, treeData:null,
+    // parsedBuilds:[null] with no error, recoverable only by a page reload.
+    await useBuildsStore.getState().preloadSpec(DK_BLOOD);
+    assert.strictEqual(useBuildsStore.getState().buildStrings.length, 0);
+
+    const fresh = await reload();
+    assert.strictEqual(fresh.getState().specId, DK_BLOOD);
+    assert.strictEqual(fresh.getState().treeData, null);
+
+    // Interleave: hold both loads' class-data import open so the paste starts
+    // while the rehydrate is still awaiting. The paste takes addBuild's
+    // first-build branch, which starts its own load and supersedes the
+    // rehydrate's.
+    const [a] = dkStrings(1);
+    const tick = () => new Promise((r) => setTimeout(r, 0));
+    importGate.enabled = true;
+    importGate.waiters = [];
+
+    const rehydrating = fresh.getState().rehydrateTreeData();
+    const adding = fresh.getState().addBuild(a);
+
+    // addBuild is serialised through addBuildQueue, so let its queued body run
+    // and claim the newer generation before releasing either load.
+    await tick();
+    importGate.enabled = false;
+    assert.strictEqual(importGate.waiters.length, 2, "both loads in flight");
+    assert.deepStrictEqual(
+      fresh.getState().buildStrings,
+      [a],
+      "the paste has committed its string and started the newer load",
+    );
+
+    // Release the rehydrate's (now superseded) load and let its whole chain run
+    // to completion while the paste's load is still held. This is the ordering
+    // the bug needs: the recovery branch runs while treeData is still null.
+    importGate.waiters[0]();
+    await tick();
+    importGate.waiters[1]();
+    await Promise.all([rehydrating, adding]);
+
+    const st = fresh.getState();
+    assert.strictEqual(
+      st.isLoading,
+      false,
+      "the store must not be left loading",
+    );
+    assert.ok(st.treeData, "the pasted build's load must commit");
+    assert.deepStrictEqual(st.buildStrings, [a]);
+    assert.ok(st.parsedBuilds[0], "the pasted build must be parsed");
+  });
+
+  test("a swap that cancels an in-flight load leaves no stuck spinner", async () => {
+    // Regression: swapBuilds bumps loadGen to cancel an in-flight load, but a
+    // cancelled load returns at its generation check without touching isLoading
+    // — correct when the canceller starts a replacement load that will own the
+    // flag (removeBuild/clearAllBuilds reset via EMPTY), but a swap starts none.
+    // The flag was left set with nothing able to clear it.
+    const strings = dkStrings(2);
+    for (const s of strings) await useBuildsStore.getState().addBuild(s);
+
+    const fresh = await reload();
+    const tick = () => new Promise((r) => setTimeout(r, 0));
+    importGate.enabled = true;
+    importGate.waiters = [];
+
+    const rehydrating = fresh.getState().rehydrateTreeData();
+    await tick();
+    importGate.enabled = false;
+    assert.strictEqual(importGate.waiters.length, 1, "the load is in flight");
+    assert.strictEqual(fresh.getState().isLoading, true);
+
+    fresh.getState().swapBuilds(0, 1);
+    importGate.waiters[0]();
+    await rehydrating;
+
+    const st = fresh.getState();
+    assert.strictEqual(
+      st.isLoading,
+      false,
+      "the cancelled load must not strand the spinner",
+    );
+    assert.deepStrictEqual(
+      st.buildStrings,
+      [strings[1], strings[0]],
+      "the swap applied",
+    );
   });
 
   test("clears stale persisted state when the spec no longer resolves", async () => {

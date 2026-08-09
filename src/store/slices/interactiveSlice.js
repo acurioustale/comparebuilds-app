@@ -122,6 +122,11 @@ export const createInteractiveSlice = (set, get) => ({
       return;
     }
 
+    // loadTreeData claims loadGen + 1 for itself, so this is the generation our
+    // own load owns. Anything higher means a newer load superseded it while we
+    // were awaiting — see the supersession bail below.
+    const ownGen = get().loadGen + 1;
+
     await loadTreeData(set, get, match.cls.name, match.spec.name, specId, {
       preserveInteractive: true,
     });
@@ -152,13 +157,22 @@ export const createInteractiveSlice = (set, get) => ({
     // the load. With no restored builds the persisted interactive selection is
     // what must survive; loadTreeData keeps it (the preserveInteractive
     // exemption on its error path) and there are no parsed slots to reset.
+    // A newer load (a build pasted into an empty slot, a spec switch, a reset)
+    // started while we were awaiting, so our own load already bailed at its
+    // post-await generation check and that newer load now owns isLoading,
+    // treeData and the parsed slots. Everything below is recovery for OUR load's
+    // failure and must not run: treeData is null only because the newer load is
+    // still in flight, and the bump below would cancel it — that load would then
+    // bail at its own check and leave the store stuck at isLoading:true with no
+    // error and nothing left to clear it, recoverable only by a page reload.
+    if (get().loadGen !== ownGen) return;
+
     if (!get().treeData) {
       const { buildStrings } = get();
       if (buildStrings.length > 0) {
-        set({
-          parsedBuilds: buildStrings.map(() => null),
-          loadGen: get().loadGen + 1,
-        });
+        // No loadGen bump: our own load has already settled and the check above
+        // proved nothing newer is in flight, so there is nothing to cancel.
+        set({ parsedBuilds: buildStrings.map(() => null) });
       }
       return;
     }
