@@ -305,11 +305,11 @@ describe("filterSpecVariants", () => {
     alreadyGranted: false,
   });
 
-  it("does not grant a hero node whose only prereq is filtered out of the spec", () => {
+  it("follows a filtered-out prereq to the native variant of its cell", () => {
     // Node 99 is out-of-spec and shares a cell with the in-spec node 8, so the
-    // variant filter drops it. Node 7's sole prereq is 99, so after the
-    // connection prune 7 has zero connections — but it is NOT a root and must
-    // stay ungranted; only the true root (5, no prereqs) is auto-granted.
+    // variant filter drops it. 8 is the same talent, so node 7's sole prereq
+    // follows to 8 rather than being deleted. Only the true root (5, no prereqs)
+    // is auto-granted.
     const db2 = { appliesToSpec: (id) => id !== 99 };
     const built = [
       heroNode(5, 0, 0), // true root
@@ -324,7 +324,29 @@ describe("filterSpecVariants", () => {
     expect(out.find((n) => n.id === 5).alreadyGranted).toBe(true);
     const n7 = out.find((n) => n.id === 7);
     expect(n7.alreadyGranted).toBe(false);
+    expect(n7.connections).toEqual([8]);
+  });
+
+  it("does not grant a hero node left with no prereq by the filter", () => {
+    // Two natives share 99's cell, so the dropped edge has no unambiguous
+    // replacement and node 7 really does fall to zero connections. It is still
+    // NOT a root and must stay ungranted — heroRootIds is read from the ORIGINAL
+    // connections for exactly this case.
+    const db2 = { appliesToSpec: (id) => id !== 99 };
+    const built = [
+      heroNode(5, 0, 0), // true root
+      heroNode(7, 2, 2, [99]), // sole prereq is out-of-spec
+      heroNode(99, 4, 4), // out-of-spec, dropped
+      heroNode(8, 4, 4), // native variants sharing the cell — ambiguous target
+      heroNode(9, 4, 4),
+    ];
+
+    const out = filterSpecVariants(built, 100, db2);
+
+    const n7 = out.find((n) => n.id === 7);
     expect(n7.connections).toEqual([]);
+    expect(n7.alreadyGranted).toBe(false);
+    expect(out.find((n) => n.id === 5).alreadyGranted).toBe(true);
   });
 });
 
@@ -498,5 +520,67 @@ describe("hero-gate / empty-CHOICE reconciliation", () => {
     await expect(
       normaliseSpec(specInfo(100, "alpha"), tree, DB2_STUB, FNS),
     ).rejects.toThrow(/expected at most one empty CHOICE node/);
+  });
+});
+
+describe("connection remapping when a node is dropped", () => {
+  it("follows a prereq to the surviving co-located duplicate", () => {
+    // 100 and 200 are the same talent in one cell; 100 survives. The child's
+    // only prereq names 200. Pruning that edge would leave the child with no
+    // connections at all, and hasUpperPrereq reads that as a free root.
+    const spec = {
+      nodes: [
+        { id: 100, name: "Dup", posX: 1, posY: 1, connections: [] },
+        { id: 200, name: "Dup", posX: 1, posY: 1, connections: [] },
+        { id: 300, name: "Child", posX: 1, posY: 2, connections: [200] },
+      ],
+    };
+    expect(collapseColocatedDuplicates(spec)).toEqual([200]);
+    expect(spec.nodes.find((n) => n.id === 300).connections).toEqual([100]);
+  });
+
+  it("does not duplicate or self-reference after remapping", () => {
+    const spec = {
+      nodes: [
+        { id: 100, name: "Dup", posX: 1, posY: 1, connections: [200] },
+        { id: 200, name: "Dup", posX: 1, posY: 1, connections: [] },
+        { id: 300, name: "Child", posX: 1, posY: 2, connections: [100, 200] },
+      ],
+    };
+    collapseColocatedDuplicates(spec);
+    // The survivor named its own dropped twin; the child named both.
+    expect(spec.nodes.find((n) => n.id === 100).connections).toEqual([]);
+    expect(spec.nodes.find((n) => n.id === 300).connections).toEqual([100]);
+  });
+
+  it("follows a prereq to this spec's native variant", () => {
+    // 10 is another spec's variant at cell (1,1); 11 is this spec's. The child's
+    // prereq names 10, which the spec-variant filter drops.
+    const built = [
+      { id: 10, posX: 1, posY: 1, connections: [] },
+      { id: 11, posX: 1, posY: 1, connections: [] },
+      { id: 20, posX: 1, posY: 2, connections: [10] },
+    ];
+    const db2 = { appliesToSpec: (id) => id !== 10 };
+
+    const nodes = filterSpecVariants(built, 100, db2);
+
+    expect(nodes.map((n) => n.id)).toEqual([11, 20]);
+    expect(nodes.find((n) => n.id === 20).connections).toEqual([11]);
+  });
+
+  it("drops the edge when the cell has no unambiguous native variant", () => {
+    // Two natives share the cell, so there is no single right target: dropping
+    // beats inventing an edge to the wrong one.
+    const built = [
+      { id: 10, posX: 1, posY: 1, connections: [] },
+      { id: 11, posX: 1, posY: 1, connections: [] },
+      { id: 12, posX: 1, posY: 1, connections: [] },
+      { id: 20, posX: 1, posY: 2, connections: [10] },
+    ];
+    const db2 = { appliesToSpec: (id) => id !== 10 };
+
+    const nodes = filterSpecVariants(built, 100, db2);
+    expect(nodes.find((n) => n.id === 20).connections).toEqual([]);
   });
 });
