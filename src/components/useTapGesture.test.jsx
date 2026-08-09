@@ -74,4 +74,51 @@ describe("useTapGesture", () => {
     result.current.guardClick(click)(evt(false));
     expect(click).toHaveBeenCalledTimes(1);
   });
+
+  it("a second finger does not restart the in-progress gesture", () => {
+    // Regression: onTouchStart unconditionally overwrote tapStart, so a later
+    // touchpoint replaced the held gesture's start time. Lifting the FIRST
+    // finger then read as a fresh short tap and fired onTap — spending (or, at
+    // max ranks, refunding) a point the user never asked for.
+    const { result } = renderHook(() => useTapGesture());
+    const onTap = vi.fn();
+    const handlers = result.current.makeTouchHandlers(onTap);
+
+    // Press and hold to read the tooltip.
+    handlers.onTouchStart(touch(0, 0));
+    vi.advanceTimersByTime(600); // well past TAP_HOLD_MS
+
+    // A second finger taps the same node while the first is still down.
+    handlers.onTouchStart({
+      touches: [
+        { clientX: 0, clientY: 0 },
+        { clientX: 2, clientY: 2 },
+      ],
+    });
+
+    // Lifting the first finger must still read as the hold it was.
+    handlers.onTouchEnd();
+    expect(onTap).not.toHaveBeenCalled();
+  });
+
+  it("starts a fresh gesture on the next single touch", () => {
+    // The guard keys on the live touch count, not on tapStart already being
+    // set, so a dropped touchend can never wedge the gesture permanently.
+    const { result } = renderHook(() => useTapGesture());
+    const onTap = vi.fn();
+    const handlers = result.current.makeTouchHandlers(onTap);
+
+    handlers.onTouchStart(touch(0, 0));
+    handlers.onTouchStart({
+      touches: [
+        { clientX: 0, clientY: 0 },
+        { clientX: 2, clientY: 2 },
+      ],
+    });
+    // No touchend arrives for either finger.
+
+    handlers.onTouchStart(touch(5, 5));
+    handlers.onTouchEnd();
+    expect(onTap).toHaveBeenCalledTimes(1);
+  });
 });
