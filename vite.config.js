@@ -58,6 +58,18 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/test/setup.js"],
     include: ["src/**/*.test.{js,jsx}", "scripts/**/*.test.js"],
+    // Vitest's 5s default assumes a test gets the CPU when it asks for it. This
+    // suite runs 55 files — 20+ of them spinning up a jsdom environment — across
+    // however many cores the machine has, so on a cold cache a worker can be
+    // starved for seconds at a stretch: a pure-regex test in
+    // sanitizeDescription.test.js has been seen taking 5.4s of wall time doing
+    // microseconds of work. The tightest deadline then belongs to whichever test
+    // happens to be scheduled worst, which is why the failures moved around
+    // between the App comparison views, the ingest suite and the diff panels.
+    // 30s still catches a genuinely hung test; it just stops a busy machine
+    // being reported as a broken one.
+    testTimeout: 30_000,
+    hookTimeout: 30_000,
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],
