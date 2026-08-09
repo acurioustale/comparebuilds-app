@@ -172,6 +172,34 @@ function og_refresh_cache_mtime(string $cacheFile, int $mtime): void
     }
 }
 
+/**
+ * Retention bookkeeping for a cache HIT, gated on the cached file's mtime.
+ *
+ * Both halves are debounced to once a day — touch_share_access by its own
+ * `last_accessed < NOW() - INTERVAL 1 DAY` guard, og_refresh_cache_mtime by the
+ * matching mtime check — and the file's mtime is this host's local record of
+ * when that last happened. Reading it costs a stat() already done above, so it
+ * gates the database work rather than the database gating itself.
+ *
+ * That matters because the cache-serve path deliberately runs BEFORE all rate
+ * limiting (the per-IP limiter and the concurrency slots are only reached on a
+ * miss). Calling og_touch_access unconditionally meant every cache hit opened a
+ * connection and issued DO RELEASE_ALL_LOCKS() plus an UPDATE, uncounted by any
+ * limiter, so one warm id in a loop was an unbounded source of database
+ * round-trips. The WHERE guard suppressed the write, never the round-trip.
+ *
+ * Retention semantics are unchanged: the write this skips is exactly the write
+ * the database would have discarded.
+ */
+function og_touch_cache_hit(string $cacheFile, int $mtime, string $id): void
+{
+    if ($mtime >= time() - 86400) {
+        return;
+    }
+    og_touch_access(null, $id);
+    og_refresh_cache_mtime($cacheFile, $mtime);
+}
+
 // When this file is included for unit testing (with OG_API_NO_MAIN defined), stop
 // here: everything above is pure (font discovery, hex parsing, text sanitising)
 // and testable; everything below reads the request, opens a DB connection, and
@@ -297,8 +325,7 @@ if ($mtime !== false) {
             if (function_exists('fastcgi_finish_request')) {
                 fastcgi_finish_request();
             }
-            og_touch_access(null, $id);
-            og_refresh_cache_mtime($cacheFile, $mtime);
+            og_touch_cache_hit($cacheFile, $mtime, $id);
             exit;
         }
 
@@ -310,8 +337,7 @@ if ($mtime !== false) {
         if (function_exists('fastcgi_finish_request')) {
             fastcgi_finish_request();
         }
-        og_touch_access(null, $id);
-        og_refresh_cache_mtime($cacheFile, $mtime);
+        og_touch_cache_hit($cacheFile, $mtime, $id);
         exit;
     }
     // The file vanished under us (prune race) — fall through and regenerate.

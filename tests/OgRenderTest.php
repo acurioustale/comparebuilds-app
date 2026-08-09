@@ -113,6 +113,34 @@ final class OgRenderTest extends TestCase
         }
     }
 
+    public function testWarmCacheHitDoesNoDatabaseWork(): void
+    {
+        // Regression: the cache-serve path deliberately runs BEFORE all rate
+        // limiting, but called og_touch_access unconditionally — so every hit
+        // opened a connection and issued DO RELEASE_ALL_LOCKS() plus an UPDATE,
+        // uncounted by any limiter. One warm id in a loop was an unbounded source
+        // of database round-trips; the UPDATE's own WHERE guard suppressed the
+        // write, never the round-trip.
+        //
+        // No database is configured in this suite, so og_touch_access would fatal
+        // on connect if it were reached (it swallows Throwable, but nothing else
+        // here would). Reaching the end without contacting one IS the assertion.
+        $file = tempnam(sys_get_temp_dir(), 'ogtest_');
+        $this->assertNotFalse($file);
+        try {
+            $recent = time() - 100; // inside the 1-day debounce window
+            touch($file, $recent);
+            clearstatcache(true, $file);
+
+            og_touch_cache_hit($file, $recent, 'Ab12Cd34');
+            clearstatcache(true, $file);
+
+            $this->assertSame($recent, filemtime($file), 'a warm hit must not churn the mtime');
+        } finally {
+            @unlink($file);
+        }
+    }
+
     public function testRefreshCacheMtimeNeverRecreatesADeletedFile(): void
     {
         $file = tempnam(sys_get_temp_dir(), 'ogtest_');
