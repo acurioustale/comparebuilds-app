@@ -66,6 +66,29 @@ describe("BuildManager import flow", () => {
     expect(useBuildsStore.getState().buildStrings.length).toBe(0);
   });
 
+  test("a rejected paste is put back in the slot, not discarded", async () => {
+    // Regression: submit cleared the input before the async add resolved and
+    // never restored it on rejection, so a spec-mismatched paste left an error
+    // message above an empty box — nothing to read, correct or re-copy. For a
+    // string pasted straight from the game the only way back was to export it
+    // again.
+    render(<BuildManager />);
+    const [dk] = genStrings("death_knight", "blood", 1);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], dk);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+
+    const [mage] = genStrings("mage", "fire", 1);
+    const empty = screen.getByPlaceholderText("Paste build string…");
+    paste(empty, mage);
+
+    await waitFor(() =>
+      expect(useBuildsStore.getState().error).toMatch(/spec/i),
+    );
+    // Only the Blood DK build committed, and the rejected string is still there.
+    expect(useBuildsStore.getState().buildStrings).toEqual([dk]);
+    await waitFor(() => expect(empty).toHaveValue(mage));
+  });
+
   test("clear all removes loaded builds", async () => {
     render(<BuildManager />);
     const [s] = genStrings("death_knight", "blood", 1);

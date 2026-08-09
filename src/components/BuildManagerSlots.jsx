@@ -139,11 +139,21 @@ export const EmptySlot = memo(function EmptySlot({ index, onAdd, errorMsg }) {
   const inputRef = useRef(null);
 
   const submit = useCallback(
-    (text) => {
+    async (text) => {
       const trimmed = text ?? value.trim();
       if (!trimmed) return;
+      // Clear optimistically so the slot doesn't sit on a string that has been
+      // accepted, but put it back if the add is rejected (wrong spec, duplicate,
+      // build limit). Otherwise the user is left with an error message and an
+      // empty box — nothing to read, correct or re-copy — and for a paste from
+      // the game there is no way back to the string but to export it again.
       setValue("");
-      onAdd(trimmed);
+      // A throw is a rejection too — the string never landed either way.
+      const added = await Promise.resolve(onAdd(trimmed)).catch(() => false);
+      if (added === false) {
+        setValue(trimmed);
+        inputRef.current?.focus();
+      }
     },
     [value, onAdd],
   );
