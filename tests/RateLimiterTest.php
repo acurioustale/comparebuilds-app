@@ -121,6 +121,42 @@ final class RateLimiterTest extends TestCase
         $this->assertFalse($usedRedis, 'a busy lock acquires no backend');
     }
 
+    public function testRedisErrorReplyFallsBackToTheDbInsteadOfCountingZero(): void
+    {
+        // Regression: phpredis returns false (it does not throw) for a server
+        // error reply — -OOM, -NOSCRIPT, -BUSY, a read-only replica. (int) false
+        // is 0, which is non-null, so callers read a valid count of 0, compute
+        // count-1 = -1, pass every limit, and skip the DB fallback branch: both
+        // the share and OG limiters were disabled for as long as Redis stayed
+        // unhealthy. An error reply must read as a Redis failure.
+        $redis = new class () {
+            public function eval($script, $args, $numKeys)
+            {
+                return false;
+            }
+        };
+
+        $count = RateLimiter::checkRedis($redis, 'cb_rl_share_x', 20, 3600, true);
+
+        $this->assertNull($count, 'an error reply must not read as a count of 0');
+        $this->assertNull($redis, 'the handle must be dropped so callers use the DB limiter');
+    }
+
+    public function testRedisZeroCountIsStillARealCount(): void
+    {
+        // The false check must not swallow a genuine falsy count: Lua returning
+        // 0 is a real answer and has to stay distinguishable from an error.
+        $redis = new class () {
+            public function eval($script, $args, $numKeys)
+            {
+                return 0;
+            }
+        };
+
+        $this->assertSame(0, RateLimiter::checkRedis($redis, 'cb_rl_share_x', 20, 3600));
+        $this->assertNotNull($redis, 'a successful reply must keep the handle');
+    }
+
     public function testCountDbWindowReturnsCountAndOldest(): void
     {
         $stmt = $this->createMock(PDOStatement::class);

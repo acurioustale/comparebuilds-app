@@ -123,6 +123,18 @@ class RateLimiter
 
         try {
             $count = $redis->eval($script, [$rlKey, $window, $limit, $penalty ? '1' : '0'], 1);
+            // phpredis throws only on *connection* failure. A server error reply
+            // — -OOM under maxmemory/noeviction, -NOSCRIPT, -BUSY, a read-only
+            // replica — comes back as false with getLastError() set. Casting that
+            // to 0 would report a valid count, so callers take the "Redis
+            // answered" branch with count-1 = -1, under every limit, and skip the
+            // DB fallback that lives in the null branch: the limiter is silently
+            // disabled for as long as Redis stays unhealthy. Treat it as a Redis
+            // failure so the caller falls back to DB accounting.
+            if ($count === false) {
+                $redis = null;
+                return null;
+            }
             return (int) $count;
         } catch (Throwable $e) {
             $redis = null;
