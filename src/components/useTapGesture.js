@@ -20,6 +20,16 @@ export function useTapGesture() {
     onTap
       ? {
           onTouchStart: (e) => {
+            // Only the first finger down starts a gesture. A later touchpoint
+            // landing on the same node would otherwise overwrite tapStart, and
+            // the FIRST touchend to fire would then evaluate the hold check
+            // against the wrong start time: press and hold a node to read its
+            // tooltip, tap it with a second finger, and lifting the first finger
+            // looks like a fresh short tap — firing onTap and spending (or, at
+            // max ranks, refunding) a point the user never asked for. Keyed on
+            // the live touch count rather than "tapStart is already set" so a
+            // dropped touchend can't wedge the gesture permanently.
+            if (e.touches.length > 1) return;
             tapFired.current = false;
             const t = e.touches[0];
             tapStart.current = {
