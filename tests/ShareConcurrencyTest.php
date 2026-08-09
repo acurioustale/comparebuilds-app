@@ -276,6 +276,50 @@ final class ShareConcurrencyTest extends TestCase
         $this->assertSame(1, $redis->count);
     }
 
+    public function testStoreShareLockOutlivesItsCriticalSection(): void
+    {
+        // Regression: the lock was taken with acquireLock's 5-second default. A
+        // Redis lock auto-expires at its TTL, and the guarded section runs up to
+        // ~11 database round-trips (dedup lookup, rate-limit count and insert, id
+        // claim loop). Under database load it lapsed mid-section, letting a second
+        // request from the same IP read the pre-insert count and re-open the very
+        // TOCTOU race the lock exists to close.
+        $payload = ['classId' => 1, 'specId' => 1, 'builds' => ['AA', 'BB']];
+
+        $redis = new class () {
+            public array $setOpts = [];
+
+            public function set($key, $val, $opts)
+            {
+                $this->setOpts = $opts;
+                return true;
+            }
+            public function eval($script, $args, $numKeys)
+            {
+                return str_contains($script, 'incr') ? 1 : 1;
+            }
+        };
+
+        $checkStmt = $this->createStub(PDOStatement::class);
+        $checkStmt->method('fetch')->willReturn(false);
+        $insertStmt = $this->createStub(PDOStatement::class);
+        $insertStmt->method('execute')->willReturn(true);
+
+        $pdo = $this->createStub(PDO::class);
+        $pdo->method('prepare')->willReturnCallback(
+            fn ($q) => str_starts_with($q, 'INSERT INTO') ? $insertStmt : $checkStmt
+        );
+
+        store_share($pdo, $payload, 'dummy-ip-hash', $redis);
+
+        $this->assertSame(SHARE_LOCK_TTL, $redis->setOpts['ex'] ?? null, 'the lock must carry the sized TTL');
+        $this->assertGreaterThanOrEqual(
+            30,
+            SHARE_LOCK_TTL,
+            'the TTL must cover ~11 database round-trips on a contended server'
+        );
+    }
+
     public function testStoreShareFallsBackToMysqlWhenRedisFails(): void
     {
         $payload = ['classId' => 1, 'specId' => 1, 'builds' => ['AA', 'BB']];
