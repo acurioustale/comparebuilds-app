@@ -603,9 +603,25 @@ function ensure_share_schema(PDO $pdo): void
             ADD COLUMN IF NOT EXISTS last_accessed TIMESTAMP  NULL DEFAULT NULL,
             ADD COLUMN IF NOT EXISTS layout_hash   VARCHAR(16) COLLATE utf8mb4_bin NULL DEFAULT NULL
     ");
-    // Repair deployments migrated before the COLLATE was added above. MODIFY is
-    // idempotent, and rebuilding idx_layout_accessed is cheap at this table size.
-    $pdo->exec('ALTER TABLE comparebuilds_shares MODIFY COLUMN layout_hash VARCHAR(16) COLLATE utf8mb4_bin NULL DEFAULT NULL');
+    // Repair deployments migrated before the COLLATE was added above — but only
+    // when the column is actually wrong. MariaDB does not treat an identical
+    // MODIFY as a no-op: altering a column's collation rebuilds the table and
+    // idx_layout_accessed with it, taking a metadata lock that live share
+    // requests contend for. Running it unconditionally would pay that cost on
+    // every single deploy, and the cost grows with the table. The repair is
+    // needed at most once, so gate it on the column's current collation.
+    $currentCollation = $pdo->query(
+        "SELECT COLLATION_NAME FROM information_schema.COLUMNS
+          WHERE TABLE_SCHEMA = DATABASE()
+            AND TABLE_NAME = 'comparebuilds_shares'
+            AND COLUMN_NAME = 'layout_hash'"
+    )->fetchColumn();
+    // A false/null lookup means the column's collation could not be read. Repair
+    // anyway: a needless rebuild is recoverable, silently leaving the join
+    // broken (and retention dead) is not.
+    if ($currentCollation !== 'utf8mb4_bin') {
+        $pdo->exec('ALTER TABLE comparebuilds_shares MODIFY COLUMN layout_hash VARCHAR(16) COLLATE utf8mb4_bin NULL DEFAULT NULL');
+    }
     // Seed last_accessed for pre-migration rows so they aren't treated as "never
     // accessed" (which would make them prunable one window after this migration
     // regardless of real use). created_at is the best proxy we have.
