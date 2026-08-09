@@ -113,3 +113,35 @@ describe("fetchOne integrity guards", () => {
     assert.strictEqual(writes.length, 1);
   });
 });
+
+describe("fetchOne status classification", () => {
+  /** Answers every attempt with the given status and no body. */
+  function mockStatus(status) {
+    global.fetch = vi.fn(async () => ({
+      status,
+      ok: false,
+      headers: new Headers(),
+      arrayBuffer: async () => new ArrayBuffer(0),
+    }));
+  }
+
+  test("a stable 404 is missing art", async () => {
+    mockStatus(404);
+    assert.strictEqual(await fetchOne("no-art"), "missing");
+  });
+
+  test("a stable 403 is reported separately, not as missing art", async () => {
+    // Regression: 403 was filed under "missing (no real art — blank fallback)",
+    // which only prints an informational list and exits 0. But 403 is what a
+    // throttling CDN returns, and the whole retry budget is a few hundred ms
+    // across 16 workers — far below any throttle window — so a throttled run
+    // reported success while shipping talents that render as blank fallbacks.
+    mockStatus(403);
+    assert.strictEqual(await fetchOne("throttled"), "forbidden");
+  });
+
+  test("a 5xx is still a hard failure", async () => {
+    mockStatus(503);
+    await assert.rejects(fetchOne("down"), /HTTP 503/);
+  });
+});

@@ -415,7 +415,10 @@ descriptions, per-spec membership). It runs in the non-gating `sources.yml`
 workflow (it needs the API secrets and fetches live), so a red run means the
 committed data has drifted from a new game patch — investigate, not a blocked
 release. Icons come first-party from Blizzard's render CDN; re-run
-`scripts/fetchIcons.js` after an ingest that adds new icons and commit them.
+`scripts/fetchIcons.js` after an ingest that adds new icons and commit them. It
+exits non-zero if any icon came back `403`, which usually means the CDN
+throttled the run rather than that the art is missing — re-run to retry just
+those, since the download is incremental. Only a `404` is treated as "no art".
 
 The pipeline is source-agnostic: a new source can be added by writing a sibling
 importer that emits the same schema and reuses `ingestCore.js` — the validator,
