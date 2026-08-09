@@ -13,6 +13,7 @@ import {
   fireEvent,
   cleanup,
   waitFor,
+  configure,
 } from "@testing-library/react";
 import { createRequire } from "node:module";
 import App from "./App.jsx";
@@ -20,6 +21,15 @@ import { useBuildsStore } from "./store/buildsStore.js";
 import { collectClassNodes, generateBuildString } from "./lib/buildString.js";
 
 const require = createRequire(import.meta.url);
+
+// Companion to the raised testTimeout in vite.config.js. These flows render one
+// or two FULL talent trees per paste and then wait on the store's async class-data
+// load, and testing-library's own findBy/waitFor budget is a separate 1s of WALL
+// time. Under the same full-suite contention that motivated the test timeout, a
+// scheduling gap alone can blow that 1s while the app is working fine, so give
+// the waits room here too. The assertions are untouched — they are only allowed
+// to wait longer for a loaded machine.
+configure({ asyncUtilTimeout: 10_000 });
 
 function genStrings(classSlug, specSlug, n) {
   const data = require(`./data/${classSlug}.json`);
