@@ -474,4 +474,71 @@ final class ShareValidationTest extends TestCase
         $this->assertFalse(is_same_origin_write(null, '0', null));
         $this->assertFalse(is_same_origin_write(null, null, '0'));
     }
+
+    /**
+     * The ?touch beacon's only gate used to be is_same_origin_write, which is a
+     * browser guarantee only — Sec-Fetch-Site, Origin and Referer are ordinary
+     * request headers a scripted client sets at will. Uncapped, one such client
+     * could run a touch a day per id and hold last_accessed permanently fresh,
+     * making any share immortal against the 180-day prune.
+     */
+    public function testTouchBeaconIsCappedPerIpOnRedis(): void
+    {
+        $replies = [];
+        $redis = new class ($replies) {
+            public function __construct(public array &$replies)
+            {
+            }
+
+            public function eval($script, $args, $numKeys)
+            {
+                return array_shift($this->replies);
+            }
+        };
+        $pdo = $this->createMock(PDO::class);
+        $pdo->expects($this->never())->method('prepare');
+
+        // checkRedis returns the post-increment value, so the request that takes
+        // the window to exactly the cap is the last allowed one.
+        $replies = [TOUCH_RATE_LIMIT_MAX];
+        $this->assertFalse(touch_beacon_rate_limited($pdo, $redis, 'hash123'));
+
+        $replies = [TOUCH_RATE_LIMIT_MAX + 1];
+        $this->assertTrue(touch_beacon_rate_limited($pdo, $redis, 'hash123'));
+    }
+
+    public function testTouchBeaconFallsBackToItsOwnDbWindow(): void
+    {
+        $prepared = [];
+        $stmt = $this->createStub(PDOStatement::class);
+        $stmt->method('fetch')->willReturn(['c' => '5', 'oldest' => null]);
+
+        $pdo = $this->createStub(PDO::class);
+        $pdo->method('prepare')->willReturnCallback(function (string $sql) use ($stmt, &$prepared) {
+            $prepared[] = $sql;
+            return $stmt;
+        });
+
+        $this->assertFalse(touch_beacon_rate_limited($pdo, null, 'hash123'));
+        // Its own table: beacon traffic must not consume the share-creation
+        // budget, nor be consumed by it.
+        $this->assertNotEmpty($prepared);
+        foreach ($prepared as $sql) {
+            $this->assertStringContainsString('comparebuilds_touch_requests', $sql);
+        }
+    }
+
+    public function testTouchBeaconFailsClosedWhenTheCountCannotBeRead(): void
+    {
+        // A skipped touch is invisible (the beacon fires on every open, the write
+        // is debounced to one a day, the window is 180 days); an uncapped beacon
+        // is the vector. So a broken count must skip, not wave through.
+        $stmt = $this->createStub(PDOStatement::class);
+        $stmt->method('execute')->willThrowException(new PDOException('gone'));
+
+        $pdo = $this->createStub(PDO::class);
+        $pdo->method('prepare')->willReturn($stmt);
+
+        $this->assertTrue(touch_beacon_rate_limited($pdo, null, 'hash123'));
+    }
 }

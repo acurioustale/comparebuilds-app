@@ -33,6 +33,12 @@ const MAX_LABEL_LEN     = 40;    // per-slot name cap; mirrors MAX_BUILD_NAME_LE
 const MAX_NAME_LEN      = 64;    // class/spec display-name cap (used by the OG image)
 const RATE_LIMIT_MAX    = 20;    // max shares one IP may create per window
 const RATE_LIMIT_WINDOW = 3600;  // window length in seconds (1 hour)
+// Separate budget for the ?touch liveness beacon: it must not consume, or be
+// consumed by, the share-creation allowance. Deliberately generous — a real user
+// would have to cold-open 120 distinct shares in an hour to reach it — because
+// its job is to bound scripted abuse, not to ration normal browsing.
+const TOUCH_RATE_LIMIT_MAX    = 120;
+const TOUCH_RATE_LIMIT_WINDOW = 3600;
 const ID_LEN            = 8;
 const MAX_ID_LEN        = 16;   // max chars after collision extension
 // Content-address id alphabet (base62). Self-consistent across the GMP and
@@ -658,6 +664,15 @@ function ensure_share_schema(PDO $pdo): void
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     ");
     $pdo->exec("
+        CREATE TABLE IF NOT EXISTS comparebuilds_touch_requests (
+            id         INT AUTO_INCREMENT PRIMARY KEY,
+            ip_hash    CHAR(64)  NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_ip_created (ip_hash, created_at),
+            INDEX idx_created (created_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ");
+    $pdo->exec("
         CREATE TABLE IF NOT EXISTS comparebuilds_og_requests (
             id         INT AUTO_INCREMENT PRIMARY KEY,
             ip_hash    CHAR(64)  NOT NULL,
@@ -1061,6 +1076,56 @@ function touch_share_access(PDO $pdo, string $id): void
     }
 }
 
+/**
+ * Per-IP cap for the ?touch liveness beacon, counted separately from share
+ * creation so neither budget can starve the other. Mirrors og.php's limiter:
+ * Redis when it answers, the shared DB sliding window otherwise.
+ *
+ * Fails CLOSED — a count that can't be read skips the touch. Unlike a share
+ * write, a skipped touch costs nothing recoverable: the beacon fires on every
+ * open, the retention window is 180 days, and the write is debounced to one a
+ * day anyway, so losing one is invisible. Leaving the cap off is the vector.
+ *
+ * @return bool True when this request is over the cap and must not touch.
+ */
+function touch_beacon_rate_limited(PDO $pdo, ?object $redis, string $ipHash): bool
+{
+    $count = RateLimiter::checkRedis(
+        $redis,
+        'cb_rl_touch_' . $ipHash,
+        TOUCH_RATE_LIMIT_MAX,
+        TOUCH_RATE_LIMIT_WINDOW,
+        true,
+    );
+    if ($count !== null) {
+        // checkRedis returns the post-increment value; compare the window as it
+        // stood before this request, matching share.php's and og.php's paths.
+        return $count - 1 >= TOUCH_RATE_LIMIT_MAX;
+    }
+
+    try {
+        ['count' => $windowCount] = RateLimiter::countDbWindow(
+            $pdo,
+            'comparebuilds_touch_requests',
+            $ipHash,
+            TOUCH_RATE_LIMIT_WINDOW,
+        );
+    } catch (PDOException $e) {
+        error_log('Failed to read touch rate-limit count, failing closed: ' . $e->getMessage());
+        return true;
+    }
+
+    RateLimiter::recordDbRequest(
+        $pdo,
+        'comparebuilds_touch_requests',
+        $ipHash,
+        $windowCount,
+        TOUCH_RATE_LIMIT_MAX,
+        'touch beacon',
+    );
+    return $windowCount >= TOUCH_RATE_LIMIT_MAX;
+}
+
 // When this file is included for unit testing (with SHARE_API_NO_MAIN defined),
 // stop here: everything above is pure and testable, everything below opens a DB
 // connection and handles the live request.
@@ -1101,13 +1166,22 @@ if ($method === 'GET') {
     // returns 204 with no body — same-origin only, so a cross-site page can't
     // fire it to keep arbitrary links alive; and 204 regardless of whether the id
     // exists, so it's no enumeration oracle beyond what a normal GET already is.
+    //
+    // The same-origin check is a BROWSER guarantee only: Sec-Fetch-Site, Origin
+    // and Referer are ordinary request headers a non-browser client sets at will.
+    // So it bounds what another site can make a visitor's browser do, but nothing
+    // about a scripted client — which could otherwise fire the beacon in a loop
+    // for uncounted writes, or far more cheaply run one touch a day per id to
+    // hold last_accessed permanently fresh and make any share immortal against
+    // the 180-day prune. Cap it per IP; over the cap the beacon is a no-op and
+    // still answers 204, so it stays silent about both the cap and the id.
     if (isset($_GET['touch'])) {
         header('Cache-Control: no-store');
         if (is_same_origin_write(
             $_SERVER['HTTP_SEC_FETCH_SITE'] ?? null,
             $_SERVER['HTTP_ORIGIN'] ?? null,
             $_SERVER['HTTP_REFERER'] ?? null,
-        )) {
+        ) && !touch_beacon_rate_limited($pdo, get_redis_connection(), client_ip_hash())) {
             touch_share_access($pdo, $id); // debounced + best-effort inside
         }
         http_response_code(204);

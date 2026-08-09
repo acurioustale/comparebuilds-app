@@ -229,7 +229,11 @@ the same build twice returns the same id instead of creating a duplicate row.
 `share.php` is hardened for public exposure:
 
 - **Per-IP rate limit** — 20 creates per IP per hour (`429` past that), tracked via a
-  salted IP hash; set `SHARE_IP_SALT` in `config.php` to a random secret. Behind a
+  salted IP hash, plus a separate 120/hour budget for the `?touch=1` liveness beacon so
+  neither can starve the other. The beacon's same-origin check only binds browsers, so
+  without its own cap a scripted client could hold any link's `last_accessed` fresh and
+  make it immortal against the retention prune; over the cap it becomes a no-op and
+  still answers `204`. Set `SHARE_IP_SALT` in `config.php` to a random secret. Behind a
   trusted reverse proxy/CDN, set `TRUST_PROXY` so the limit keys on the real client
   (the last `X-Forwarded-For` hop) instead of the proxy address. For Cloudflare or
   Nginx, explicitly define `TRUST_CLOUDFLARE` or `TRUST_X_REAL_IP` to trust those headers.

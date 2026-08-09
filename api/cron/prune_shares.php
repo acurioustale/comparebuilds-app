@@ -184,6 +184,13 @@ try {
     )) {
         $failed = true;
     }
+    if (!prune_batched(
+        $pdo,
+        'DELETE FROM comparebuilds_touch_requests WHERE created_at < NOW() - INTERVAL ' . REQUEST_LOG_PRUNE_WINDOW . ' SECOND LIMIT 1000',
+        'touch requests'
+    )) {
+        $failed = true;
+    }
 } catch (Throwable $e) {
     // A connection failure (or anything else around the DB prunes) aborts them,
     // but the filesystem cache_og cleanup below can still run independently.
