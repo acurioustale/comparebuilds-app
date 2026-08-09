@@ -419,14 +419,30 @@ export async function normaliseSpec(specInfo, tree, db2, fns) {
   // The CHOICE one is this spec's hero gate (recorded here); the rest are reserved
   // slots, collected at class level from the base tree (see normaliseClass), since
   // the per-spec endpoint omits some of them. (see isEmptyNode).
-  let heroGateNodeId = null;
   const classAndSpec = [
     ...(tree.class_talent_nodes ?? []),
     ...(tree.spec_talent_nodes ?? []),
   ];
-  for (const n of classAndSpec) {
-    if (isEmptyNode(n) && n.node_type?.type === "CHOICE") heroGateNodeId = n.id;
+  // Exactly one empty CHOICE node is expected: this spec's hero gate. Picking
+  // last-in-array out of several would bind the wrong node as the gate, and
+  // normaliseClass's reconciliation would then file the real gate as an unused
+  // placeholder — a silent redefinition of the class's build-string oracle. We
+  // cannot tell which is which, so refuse to guess.
+  const emptyChoiceIds = [
+    ...new Set(
+      classAndSpec
+        .filter((n) => isEmptyNode(n) && n.node_type?.type === "CHOICE")
+        .map((n) => n.id),
+    ),
+  ];
+  if (emptyChoiceIds.length > 1) {
+    throw new Error(
+      `${specInfo.name}: expected at most one empty CHOICE node (the hero gate), ` +
+        `found ${emptyChoiceIds.length}: ${emptyChoiceIds.join(", ")}. ` +
+        `Identify which is the hero gate before promoting.`,
+    );
   }
+  const heroGateNodeId = emptyChoiceIds[0] ?? null;
   const placeholderIds = new Set(
     classAndSpec.filter(isEmptyNode).map((n) => n.id),
   );
@@ -596,7 +612,7 @@ export function idsUnusedAcrossSpecs(droppedIds, specs) {
   return [...droppedIds].filter((id) => !realNodeIds.has(id));
 }
 
-async function normaliseClass(cls, treeMap, api, db2, fns) {
+export async function normaliseClass(cls, treeMap, api, db2, fns) {
   const specs = {};
   for (const specInfo of cls.specs) {
     if (!treeMap.get(specInfo.id)) {
@@ -611,21 +627,50 @@ async function normaliseClass(cls, treeMap, api, db2, fns) {
     specs[specInfo.name] = await normaliseSpec(specInfo, tree, db2, fns);
   }
 
-  // Reserved/unused placeholder ids: spell-less, non-CHOICE nodes in the base
-  // tree's full node list (the gates are the CHOICE ones, captured per-spec).
-  // The base endpoint is the complete set — some of these never appear in any
-  // per-spec response (e.g. DH node 90912). Use the first spec that actually
-  // mapped to a tree id: taking specs[0] unconditionally would fetch
-  // talent-tree/undefined and crash the whole class if that one spec happens to
-  // be unmapped while its siblings resolve.
+  // Reserved/unused placeholder ids: spell-less nodes in the base tree's full
+  // node list. The base endpoint is the complete set — some of these never
+  // appear in any per-spec response (e.g. DH node 90912). Use the first spec
+  // that actually mapped to a tree id: taking specs[0] unconditionally would
+  // fetch talent-tree/undefined and crash the whole class if that one spec
+  // happens to be unmapped while its siblings resolve.
   const treeId = cls.specs.map((s) => treeMap.get(s.id)).find(Boolean);
   let unusedNodeIds = [];
   if (treeId) {
     const base = await api.get(`/data/wow/talent-tree/${treeId}`);
-    unusedNodeIds = (base.talent_nodes ?? [])
-      .filter((n) => isEmptyNode(n) && n.node_type?.type !== "CHOICE")
-      .map((n) => n.id)
-      .sort((a, b) => a - b);
+    const empty = (base.talent_nodes ?? []).filter(isEmptyNode);
+
+    // Empty CHOICE nodes are the hero gates, which normaliseSpec records per
+    // spec and collectClassNodes models into the serialisation space directly —
+    // so they must not ALSO be listed here, or they would occupy two slots.
+    // Excluding every empty CHOICE on the assumption it was claimed is what is
+    // dangerous: normaliseSpec lifts all empty nodes out of `nodes`, so one no
+    // spec claimed would appear in neither set, collectClassNodes would never
+    // emit it, and every node id above it would shift one slot in the bit
+    // stream — silently redefining the class's build-string oracle, with the
+    // wire snapshot reporting it as an ordinary "the patch added nodes" diff.
+    // Reconcile the two sets rather than assuming they match.
+    const claimedGates = new Set(
+      Object.values(specs)
+        .map((s) => s.heroGateNodeId)
+        .filter((id) => id != null),
+    );
+    const unclaimedGates = empty
+      .filter((n) => n.node_type?.type === "CHOICE" && !claimedGates.has(n.id))
+      .map((n) => n.id);
+    if (unclaimedGates.length > 0) {
+      // Keep the slot instead of dropping it. An unclaimed empty CHOICE is
+      // unreachable — no spell to buy, no spec that selects it — so it is always
+      // isSelected=0, which is exactly what an unusedNodeIds placeholder
+      // encodes. Bit positions are preserved either way.
+      console.warn(
+        `  ${cls.displayName}: ${unclaimedGates.length} empty CHOICE node(s) claimed by no spec ` +
+          `(${unclaimedGates.join(", ")}) — kept as unused placeholders to preserve the wire layout`,
+      );
+    }
+    unusedNodeIds = [
+      ...empty.filter((n) => n.node_type?.type !== "CHOICE").map((n) => n.id),
+      ...unclaimedGates,
+    ].sort((a, b) => a - b);
   }
 
   // Collapse same-talent co-located duplicates in each spec, and keep the dropped

@@ -6,6 +6,7 @@ import {
   collapseColocatedDuplicates,
   filterSpecVariants,
   idsUnusedAcrossSpecs,
+  normaliseClass,
   parseArgs,
 } from "./ingestBlizzard.js";
 
@@ -417,5 +418,85 @@ describe("idsUnusedAcrossSpecs", () => {
       B: { nodes: [{ id: 200 }] },
     };
     expect(idsUnusedAcrossSpecs(new Set([200]), specs)).toEqual([]);
+  });
+});
+
+describe("hero-gate / empty-CHOICE reconciliation", () => {
+  const specInfo = (id, name) => ({
+    id,
+    name,
+    displayName: name,
+    color: "#fff",
+    icon: "i",
+    description: "d",
+  });
+
+  /** A per-spec tree whose only empty CHOICE node is `gateId`. */
+  const specTree = (gateId) => ({
+    class_talent_nodes: [
+      node(1, "PASSIVE", { row: 1, col: 1 }),
+      node(gateId, "CHOICE_GATE", { row: 1, col: 5 }),
+      node(3, "ACTIVE", { row: 0, col: 9, empty: true }), // reserved placeholder
+    ],
+    spec_talent_nodes: [],
+    hero_talent_trees: [],
+  });
+
+  /** api stub: per-spec URLs answer from `trees`, the bare tree URL from `base`. */
+  const apiStub = (trees, base) => ({
+    get: async (url) => {
+      const m = url.match(/playable-specialization\/(\d+)$/);
+      return m ? trees[m[1]] : base;
+    },
+  });
+
+  it("keeps an empty CHOICE node no spec claimed as a gate", async () => {
+    // Node 99 is an empty CHOICE in the base tree that no spec's response
+    // contains, so no spec claims it. It is lifted out of every `nodes` array,
+    // and excluding it here too would drop it from the serialisation space
+    // entirely — shifting every id above it by one slot in the bit stream and
+    // silently redefining the class's build-string oracle.
+    const cls = {
+      id: 1,
+      displayName: "Test",
+      name: "test",
+      color: "#fff",
+      icon: "i",
+      specs: [specInfo(100, "alpha"), specInfo(200, "beta")],
+    };
+    const base = {
+      talent_nodes: [
+        node(1, "PASSIVE"),
+        node(2, "CHOICE_GATE"), // alpha's gate
+        node(3, "ACTIVE", { empty: true }), // reserved placeholder
+        node(4, "CHOICE_GATE"), // beta's gate
+        node(99, "CHOICE_GATE"), // claimed by nobody
+      ],
+    };
+    const out = await normaliseClass(
+      cls,
+      new Map([
+        [100, 7],
+        [200, 7],
+      ]),
+      apiStub({ 100: specTree(2), 200: specTree(4) }, base),
+      DB2_STUB,
+      FNS,
+    );
+
+    expect(out.specs.alpha.heroGateNodeId).toBe(2);
+    expect(out.specs.beta.heroGateNodeId).toBe(4);
+    // The claimed gates stay out (collectClassNodes models them itself, so
+    // listing them here would give them two slots); the unclaimed one is kept.
+    expect(out.unusedNodeIds).toEqual([3, 99]);
+  });
+
+  it("refuses to guess when one spec has several empty CHOICE nodes", async () => {
+    const tree = specTree(2);
+    tree.class_talent_nodes.push(node(77, "CHOICE_GATE", { row: 1, col: 7 }));
+
+    await expect(
+      normaliseSpec(specInfo(100, "alpha"), tree, DB2_STUB, FNS),
+    ).rejects.toThrow(/expected at most one empty CHOICE node/);
   });
 });
