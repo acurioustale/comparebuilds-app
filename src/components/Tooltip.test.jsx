@@ -5,11 +5,20 @@
  * number, array, nullish) is wrapped rather than crashing at children.props.
  */
 
-import { describe, test, expect, afterEach } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
+import { describe, test, expect, afterEach, vi } from "vitest";
+import {
+  render,
+  screen,
+  cleanup,
+  fireEvent,
+  act,
+} from "@testing-library/react";
 import Tooltip from "./Tooltip.jsx";
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.useRealTimers();
+});
 
 describe("Tooltip child handling", () => {
   test("renders a valid element child without wrapping it", () => {
@@ -38,5 +47,50 @@ describe("Tooltip child handling", () => {
         </Tooltip>,
       ),
     ).not.toThrow();
+  });
+});
+
+describe("Tooltip hold gesture", () => {
+  const touch = (x, y) => ({ clientX: x, clientY: y });
+
+  /** Renders a hold-mode tooltip and returns its anchor element. */
+  function renderHold() {
+    render(
+      <Tooltip content="tip" touch="hold">
+        <button>Talent</button>
+      </Tooltip>,
+    );
+    return screen.getByRole("button", { name: "Talent" });
+  }
+
+  test("a two-finger tap leaves no timer that opens the tooltip", () => {
+    // Regression: onTouchStart overwrote holdTimer.current without clearing it,
+    // so a second touchpoint orphaned the first timer. Nothing else held it, so
+    // neither touchend nor the unmount cleanup could reach it, and it fired
+    // setOpen(true) with no finger down — the tooltip popped open over the tree
+    // and stayed until an unrelated outside press dismissed it.
+    vi.useFakeTimers();
+    const btn = renderHold();
+
+    // Two fingers land on the same node, then both lift well inside the hold
+    // threshold — an accidental two-finger tap, or the start of a pinch-zoom.
+    fireEvent.touchStart(btn, { touches: [touch(10, 10)] });
+    fireEvent.touchStart(btn, { touches: [touch(12, 12)] });
+    fireEvent.touchEnd(btn, { touches: [] });
+    fireEvent.touchEnd(btn, { touches: [] });
+
+    act(() => vi.advanceTimersByTime(1000));
+
+    expect(screen.queryByText("tip")).not.toBeInTheDocument();
+  });
+
+  test("a single sustained hold still opens the tooltip", () => {
+    vi.useFakeTimers();
+    const btn = renderHold();
+
+    fireEvent.touchStart(btn, { touches: [touch(10, 10)] });
+    act(() => vi.advanceTimersByTime(400));
+
+    expect(screen.getByText("tip")).toBeInTheDocument();
   });
 });

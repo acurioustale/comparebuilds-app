@@ -133,6 +133,15 @@ export default function Tooltip({
     touch === "hold"
       ? {
           onTouchStart: (e) => {
+            // Clear any hold already pending before overwriting the ref. A
+            // second touchpoint on the same node — an accidental two-finger tap,
+            // or starting a pinch-zoom on a talent — would otherwise orphan the
+            // first timer: nothing else holds it, so neither touchend/touchcancel
+            // nor the unmount cleanup below could ever reach it, and it would
+            // fire setOpen(true) with no finger down, leaving the tooltip
+            // covering the tree until an unrelated outside press dismissed it
+            // (or setting state on an unmounted component, if the tree had gone).
+            clearTimeout(holdTimer.current);
             const t = e.touches[0];
             holdAt.current = { x: t.clientX, y: t.clientY };
             holdTimer.current = setTimeout(() => setOpen(true), HOLD_MS);
