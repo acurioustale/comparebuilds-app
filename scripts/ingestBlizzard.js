@@ -370,10 +370,36 @@ export function filterSpecVariants(built, specInfoId, db2) {
       .map((n) => n.id),
   );
 
-  // Drop connections to nodes not present in this spec
+  // Rewrite connections to nodes not present in this spec. A node the filter
+  // dropped is another spec's variant of the talent at that grid cell, so an
+  // edge naming it should follow the talent to this spec's native variant, not
+  // vanish: a deleted prerequisite makes its child look like a free root (see
+  // collapseColocatedDuplicates for the same reasoning and why no guard catches
+  // it). Only remap where the target is unambiguous — one native variant at the
+  // cell — and otherwise drop the edge, as before.
   const includedIds = new Set(nodes.map((n) => n.id));
+  const nativeAtCell = new Map();
+  for (const n of nodes) {
+    const key = cellKey(n);
+    // null marks a cell with several natives: no single right target.
+    nativeAtCell.set(key, nativeAtCell.has(key) ? null : n.id);
+  }
+  const nativeVariantOf = new Map();
+  for (const n of built) {
+    if (includedIds.has(n.id)) continue;
+    const native = nativeAtCell.get(cellKey(n));
+    if (native != null) nativeVariantOf.set(n.id, native);
+  }
   for (const n of nodes)
-    n.connections = (n.connections ?? []).filter((id) => includedIds.has(id));
+    n.connections = [
+      ...new Set(
+        (n.connections ?? [])
+          .map((id) =>
+            includedIds.has(id) ? id : (nativeVariantOf.get(id) ?? id),
+          )
+          .filter((id) => includedIds.has(id) && id !== n.id),
+      ),
+    ];
 
   // Auto-grant the hero-subtree roots (see above)
   for (const n of nodes) if (heroRootIds.has(n.id)) n.alreadyGranted = true;
@@ -580,17 +606,42 @@ export function collapseColocatedDuplicates(spec) {
   }
 
   const dropIds = new Set();
+  // dropped id → the surviving id for the same talent slot
+  const survivorOf = new Map();
   for (const byName of byCell.values())
     for (const ids of byName.values()) {
       if (ids.length < 2) continue;
       ids.sort((a, b) => a - b);
-      for (const id of ids.slice(1)) dropIds.add(id);
+      const [survivor, ...dropped] = ids;
+      for (const id of dropped) {
+        dropIds.add(id);
+        survivorOf.set(id, survivor);
+      }
     }
   if (dropIds.size === 0) return [];
 
   spec.nodes = spec.nodes.filter((n) => !dropIds.has(n.id));
+  // Remap edges to the survivor rather than pruning them. A dropped id is the
+  // SAME talent slot as its survivor by construction — same cell, same name — so
+  // a locked_by naming it means "unlocked by that talent", which still exists
+  // under the surviving id. Dropping the edge instead deletes a real
+  // prerequisite: hasUpperPrereq would then read a child left with no
+  // connections as a free root, so the calculator would let you buy it with
+  // nothing spent in its parent and computeInvalidNodeIds would stop flagging an
+  // imported build that selects it without one. Nothing would catch that —
+  // wireLayout fingerprints ids, ranks and choice arity but never connections,
+  // and compareSources derives its fresh side with this same code, so both sides
+  // would agree on the missing edge.
   for (const n of spec.nodes)
-    n.connections = (n.connections ?? []).filter((id) => !dropIds.has(id));
+    n.connections = [
+      ...new Set(
+        (n.connections ?? [])
+          .map((id) => survivorOf.get(id) ?? id)
+          // A node connected to both a survivor and its dropped twin would now
+          // name the survivor twice; the survivor itself would name itself.
+          .filter((id) => id !== n.id),
+      ),
+    ];
   return [...dropIds];
 }
 
