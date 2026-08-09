@@ -107,6 +107,32 @@ final class ShareValidationTest extends TestCase
         $this->assertArrayHasKey('error', $r);
     }
 
+    public function testRejectsAssociativeBuildsMap(): void
+    {
+        // Regression: builds was only checked with is_array(), so a JSON object
+        // passed — count() and foreach both accept a map. The row was stored,
+        // but the client aborts on !Array.isArray(data.builds), and because the
+        // id is a content hash of the stored bytes, re-posting the same payload
+        // dedups back to the same dead row instead of healing it.
+        $r = validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['x' => 'AA', 'y' => 'BB']]);
+        $this->assertArrayHasKey('error', $r);
+
+        // Sparse keys desync from slot position the same way.
+        $r = validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => [0 => 'AA', 7 => 'BB']]);
+        $this->assertArrayHasKey('error', $r);
+    }
+
+    public function testAcceptsSequentialNumericKeysAsAList(): void
+    {
+        // json_decode turns {"0":…,"1":…} into a real PHP list, and it
+        // re-encodes as an array, so it round-trips correctly and the new
+        // array_is_list guard must not reject it.
+        $decoded = json_decode('{"0":"AA","1":"BB"}', true);
+        $r = validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => $decoded]);
+        $this->assertArrayNotHasKey('error', $r);
+        $this->assertSame(['AA', 'BB'], $r['payload']['builds']);
+    }
+
     public function testRejectsOverlongLabel(): void
     {
         $r = validate_share_input(['classId' => 1, 'specId' => 1, 'builds' => ['AA', 'BB'], 'labels' => ['ok', str_repeat('x', 41)]]);

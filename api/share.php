@@ -345,7 +345,15 @@ function validate_share_input(mixed $body): array
     ) {
         return ['error' => 'classId and specId must be positive integers'];
     }
-    if (!is_array($builds)) {
+    // Require a positional list, for the same reason labels does below and with
+    // more at stake. count() and foreach both accept a JSON object, so a map
+    // like {"0":"…","1":"…"} would validate and be stored — and the client
+    // aborts on !Array.isArray(data.builds), so the link is dead on arrival.
+    // Because the id is a content hash of the stored bytes, re-posting the same
+    // payload dedups straight back to the broken row and it can never
+    // self-heal. It also splits one build set across several content addresses,
+    // bypassing the dedup fast path.
+    if (!is_array($builds) || !array_is_list($builds)) {
         return ['error' => 'builds must be a JSON array'];
     }
     if (count($builds) < MIN_BUILDS || count($builds) > MAX_BUILDS) {
