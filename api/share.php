@@ -39,6 +39,15 @@ const RATE_LIMIT_WINDOW = 3600;  // window length in seconds (1 hour)
 // its job is to bound scripted abuse, not to ration normal browsing.
 const TOUCH_RATE_LIMIT_MAX    = 120;
 const TOUCH_RATE_LIMIT_WINDOW = 3600;
+// TTL (seconds) for store_share's per-IP advisory lock on the Redis path. A
+// Redis lock auto-expires after its TTL, so this MUST exceed the worst-case
+// duration of the section it guards — the dedup lookup, the rate-limit count and
+// insert, and the id-claim loop, up to about eleven database round-trips. Too
+// short a value lets the lock lapse mid-section, and a second request from the
+// same IP then reads the pre-insert count and re-opens the exact TOCTOU race the
+// lock exists to close. (The MySQL GET_LOCK path is connection-scoped and
+// ignores this.) Sized like og.php's OG_LOCK_TTL, for the same reason.
+const SHARE_LOCK_TTL = 30;
 const ID_LEN            = 8;
 const MAX_ID_LEN        = 16;   // max chars after collision extension
 // Content-address id alphabet (base62). Self-consistent across the GMP and
@@ -850,7 +859,7 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
     // same one even if a mid-request Redis failure nulls $redis (which would
     // otherwise divert a Redis-held lock's release to MySQL and strand it).
     $lockViaRedis = false;
-    if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken, 5, $lockViaRedis)) {
+    if (!RateLimiter::acquireLock($pdo, $redis, $lockName, $lockToken, SHARE_LOCK_TTL, $lockViaRedis)) {
         // Count the attempt before bailing so lock contention can't be used to
         // slip past the limiter uncounted.
         record_throttled_attempt($pdo, $redis, $rlKey, $ipHash);
