@@ -846,14 +846,19 @@ function store_share(PDO $pdo, array $payload, string $ipHash, ?object $redis = 
         $baseId = base62_encode_sha256($stored);
 
         // ── Idempotent dedup fast-path ───────────────────────────────────────
-        // Re-POSTing content we already store creates no new row — it's a read,
-        // not a creation (the same content always maps to the same id). Return
-        // that id WITHOUT counting the request against the per-IP creation limit
-        // and without a 429, so a benign retry or double-submit of an
-        // already-shared build is never throttled. Only genuinely new content —
-        // which actually grows the table — reaches the rate limiter below (and on
-        // the Redis path, this early return means its INCR is never issued, so a
-        // dedup hit is uncounted there too without any compensating decrement).
+        // Re-POSTing content we already store creates no new row — it's a
+        // retrieval, not a creation (the same content always maps to the same
+        // id). Return that id WITHOUT counting the request against the per-IP
+        // creation limit and without a 429, so a benign retry or double-submit of
+        // an already-shared build is never throttled. Only genuinely new content
+        // — which actually grows the table — reaches the rate limiter below (and
+        // on the Redis path, this early return means its INCR is never issued, so
+        // a dedup hit is uncounted there too without any compensating decrement).
+        //
+        // Not counting it does mean the retention touch below is the one write an
+        // unmetered request can reach. That is bounded by its own guard: the
+        // UPDATE is debounced to one matching row per share per day, so repeat
+        // hits cost a round-trip that changes nothing.
         //
         // Runs under the same per-IP lock as the claim loop, so nothing from this
         // IP interleaves. A *different* IP that inserts this exact content between
@@ -1028,6 +1033,12 @@ function get_share(PDO $pdo, string $id): ?string
  * is cached `immutable` for a year, so repeat opens from one client never reach
  * here — "accessed" means "fetched by someone with a cold cache", which is a fine
  * proxy for liveness at this window.
+ *
+ * Callers are every path that hands a live share to someone: the GET handler and
+ * its ?touch beacon, og.php's unfurl card (post-response), and store_share's
+ * dedup exits, where re-sharing existing content returns its id. The last of
+ * those is not behind an HTTP cache and is not rate-limited, so the daily
+ * debounce is what keeps it from becoming a per-request write.
  */
 function touch_share_access(PDO $pdo, string $id): void
 {
