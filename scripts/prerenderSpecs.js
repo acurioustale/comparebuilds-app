@@ -166,12 +166,19 @@ const template = fs.readFileSync(templatePath, "utf8");
 
 // The home page lists every class/spec, so it's as fresh as the newest data file.
 const urls = [{ loc: `${ORIGIN}/`, lastmod: lastModified("src/data") }];
+
+// Every field these pages render — the class and spec display names, the spec
+// slug and description — comes from classes.json, the only data file this
+// script opens. The per-class talent file has no influence on the emitted HTML,
+// so keying <lastmod> to it reported the wrong date in both directions: editing
+// a spec description changed the visible copy and the meta description while
+// lastmod stayed put, so crawlers skipped the refresh; and a pure talent-data
+// re-ingest bumped lastmod on pages whose bytes were identical.
+const specLastmod = lastModified("src/data/classes.json");
+
 let count = 0;
 for (const cls of classes) {
   if (!cls.implemented) continue;
-  // A spec page's content is derived entirely from its class data file, so that
-  // file's last change is the page's true last-modified date.
-  const lastmod = lastModified(`src/data/${cls.name}.json`);
   for (const spec of cls.specs) {
     const url = `${ORIGIN}/${seg(cls.name)}/${seg(spec.name)}/`;
     const title = `${spec.displayName} ${cls.displayName} Talent Build Calculator — Compare Builds`;
@@ -186,7 +193,7 @@ for (const cls of classes) {
     const dir = path.join(DIST, seg(cls.name), seg(spec.name));
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, "index.html"), page);
-    urls.push({ loc: url, lastmod });
+    urls.push({ loc: url, lastmod: specLastmod });
     count++;
   }
 }
