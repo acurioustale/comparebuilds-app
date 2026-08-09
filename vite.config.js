@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+import { availableParallelism } from "node:os";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -58,6 +59,22 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/test/setup.js"],
     include: ["src/**/*.test.{js,jsx}", "scripts/**/*.test.js"],
+    // Vitest defaults to availableParallelism() - 1 workers. On a many-core dev
+    // machine that oversubscribes the box rather than using it: every fork
+    // carries its own V8 heap, and the 20+ jsdom suites each build a full DOM on
+    // top of that, so past a point the workers contend more than they run. This
+    // is the cause of the starvation the raised timeouts below merely absorb.
+    //
+    // Measured on a 10-core machine with six competing CPU hogs, 6 cold-cache
+    // runs per setting: the worst single-test wall time falls from ~1270ms at
+    // the default to ~940ms at five workers and then stops improving, while
+    // total wall clock is unchanged (7.5s vs 7.7s). Tightening past five only
+    // costs — three workers took 10.5s for no further gain.
+    //
+    // An absolute ceiling, not a fraction of the machine, so it bites only where
+    // the oversubscription is. CI's 4-core runner resolves to 3, exactly the
+    // default it already ran, and is left alone.
+    maxWorkers: Math.max(2, Math.min(availableParallelism() - 1, 5)),
     // Vitest's 5s default assumes a test gets the CPU when it asks for it. This
     // suite runs 55 files — 20+ of them spinning up a jsdom environment — across
     // however many cores the machine has, so on a cold cache a worker can be
