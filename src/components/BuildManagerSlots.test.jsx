@@ -26,7 +26,7 @@ function renderSlot() {
   render(
     <FilledSlot
       index={0}
-      total={1}
+      ordinal={1}
       name=""
       label="Build 1"
       summary="Blood Death Knight"

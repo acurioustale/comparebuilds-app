@@ -362,7 +362,7 @@ export default function BuildManager() {
                 <FilledSlot
                   key={buildStrings[i]}
                   index={i}
-                  total={filledCount}
+                  ordinal={slotOrdinals[i]}
                   name={buildNames[i] ?? ""}
                   label={buildLabel(i + 1, parsedBuilds[i])}
                   summary={pointSummary(parsedBuilds[i], treeData)}

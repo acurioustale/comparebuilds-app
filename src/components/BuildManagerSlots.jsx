@@ -31,7 +31,7 @@ function SlotStatus({ parsed, loading }) {
 
 export const FilledSlot = memo(function FilledSlot({
   index,
-  total,
+  ordinal,
   name,
   label,
   summary,
@@ -69,7 +69,7 @@ export const FilledSlot = memo(function FilledSlot({
 
   return (
     <div className="flex items-center gap-2 min-w-0">
-      <SlotNumber n={index + 1} total={total} />
+      <SlotNumber n={index + 1} ordinal={ordinal} />
 
       {/* Editable slot name. Empty shows the computed default as a placeholder. */}
       <input
@@ -226,12 +226,20 @@ export const EmptySlot = memo(function EmptySlot({ index, onAdd, errorMsg }) {
   );
 });
 
-// Shared slot number label. With exactly two builds loaded it shows a
-// coloured A/B badge instead of a plain ordinal — red = A, blue = B, matching
+// Shared slot number label. When the caller's ordinal is a letter it shows a
+// coloured A/B badge instead of a plain number — red = A, blue = B, matching
 // the tags SideBySideDiff already uses for the same two builds.
-function SlotNumber({ n, total, muted = false }) {
-  if (total === 2) {
-    const letter = n === 1 ? "A" : "B";
+//
+// The letter comes from the ordinal buildOrdinal derived from the count of
+// builds that PARSE, never from the slot count. Deciding it here from slots
+// instead meant one valid build plus one corrupt one rendered a red A and a
+// blue B — advertising the paired diff — while the slot names read "Build 1"
+// and "Build 2" and the main area rendered a single tree with no A/B panels at
+// all. buildLabel.js documents that rule; this is the only other place that
+// paints A/B, so it has to read the same value rather than re-derive it.
+function SlotNumber({ n, ordinal, muted = false }) {
+  const letter = ordinal === "A" || ordinal === "B" ? ordinal : null;
+  if (letter) {
     return (
       <span
         className={[

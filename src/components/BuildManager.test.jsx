@@ -205,6 +205,32 @@ describe("build ordinal labels", () => {
     expect(useBuildsStore.getState().parsedBuilds[2]).toBeNull();
   });
 
+  test("the A/B badge follows the parsed count, not the slot count", async () => {
+    // Regression: SlotNumber decided the badge from the filled-SLOT count while
+    // every label decided it from the PARSED count. One valid build plus one
+    // corrupt one rendered a red A and a blue B — advertising the paired diff —
+    // while the names read "Build 1"/"Build 2" and the main area showed a single
+    // tree with no A/B panels at all.
+    render(<BuildManager />);
+    const [a] = genStrings("death_knight", "blood", 1);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+
+    paste(
+      screen.getByPlaceholderText("Paste build string…"),
+      UNPARSEABLE_BLOOD,
+    );
+    await screen.findByPlaceholderText(/Build 2 — Blood Death Knight/);
+
+    // Two slots, one parse: no pair, so no A/B badge anywhere.
+    expect(useBuildsStore.getState().buildStrings.length).toBe(2);
+    expect(useBuildsStore.getState().parsedBuilds.filter(Boolean).length).toBe(
+      1,
+    );
+    expect(screen.queryByText("A")).not.toBeInTheDocument();
+    expect(screen.queryByText("B")).not.toBeInTheDocument();
+  });
+
   test("numbers the slots once three builds parse", async () => {
     render(<BuildManager />);
     const [a, b, c] = genStrings("death_knight", "blood", 3);
