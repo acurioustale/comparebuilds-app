@@ -314,7 +314,19 @@ export default function MainView() {
   // "Differences only" toggle would dim the single-build view's entire tree
   // (no highlights → every node reads as unchanged) with no button to turn it
   // off until another build is added.
+  //
+  // Gating them at the provider is what makes that safe, not the effect below.
+  // The effect is passive, so it runs AFTER the commit that dropped to one
+  // build has painted — a full frame in which the filter still applies to a
+  // view that has no changes, so every node clamps to 0.12 opacity and, with
+  // TalentNode's 0.2s opacity transition, the whole tree visibly fades out and
+  // back in. Deriving the values keeps that frame from ever existing.
   const summaryShown = valid.length >= 2;
+  const changesFilterActive = changesOnly && summaryShown;
+  const activeSpotlightId = summaryShown ? spotlightId : null;
+
+  // Still reset the underlying state, so the toggle doesn't come back on by
+  // itself when a second build is added later.
   useEffect(() => {
     if (!summaryShown) {
       setSpotlightId(null);
@@ -440,8 +452,8 @@ export default function MainView() {
         </div>
       )}
 
-      <ChangesFilterContext.Provider value={changesOnly}>
-        <SpotlightContext.Provider value={spotlightId}>
+      <ChangesFilterContext.Provider value={changesFilterActive}>
+        <SpotlightContext.Provider value={activeSpotlightId}>
           {comparisonEl}
           {valid.length >= 2 && (
             <DiffSummaryTable
