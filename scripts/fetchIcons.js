@@ -138,17 +138,28 @@ export async function fetchOne(name) {
         writeFileAtomic(dest, buf);
         return "downloaded";
       }
-      // 403/404 is usually a placeholder with no real art, but a transient 403
-      // (CDN rate-limit) looks identical — so retry rather than give up here.
+      // A 404 is a slug with no real art. A 403 may be that too (the CDN
+      // answers 403 for a denied key) or a rate-limit block — retry rather than
+      // give up here, and see the classification below.
       lastErr = new Error(`HTTP ${res.status}`);
     } catch (err) {
       lastStatus = 0; // a thrown error isn't a clean HTTP status
       lastErr = err;
     }
   }
-  // Only a *stable* 403/404 after all retries means "no real art"; a final
-  // network error or 5xx is a genuine failure to surface, not a silent skip.
-  if (lastStatus === 404 || lastStatus === 403) return "missing";
+  // Only a stable 404 means "no real art" — that is the CDN's answer for a slug
+  // it has no object for, and it is safe to exit 0 over.
+  //
+  // A stable 403 is NOT safe to treat the same way. It is what a throttling or
+  // blocking CDN returns, and the whole retry budget here is a few hundred
+  // milliseconds across CONCURRENCY workers — far below any real throttle
+  // window, so a throttled run burns all three attempts almost instantly on
+  // every icon in the window. Filing those under "no real art" and exiting 0
+  // let a run report success while shipping talents that render as blank
+  // fallbacks. Report it separately so the operator can re-run (the download is
+  // incremental, so a re-run only retries what didn't land).
+  if (lastStatus === 404) return "missing";
+  if (lastStatus === 403) return "forbidden";
   throw lastErr ?? new Error("unknown fetch failure");
 }
 
@@ -157,7 +168,13 @@ async function main() {
   const names = gatherIconNames();
   console.log(`${names.length} unique icons referenced.`);
 
-  const stats = { downloaded: 0, skipped: 0, missing: [], failed: [] };
+  const stats = {
+    downloaded: 0,
+    skipped: 0,
+    missing: [],
+    forbidden: [],
+    failed: [],
+  };
   let cursor = 0;
 
   async function worker() {
@@ -168,6 +185,7 @@ async function main() {
         if (result === "downloaded") stats.downloaded++;
         else if (result === "skipped") stats.skipped++;
         else if (result === "missing") stats.missing.push(name);
+        else if (result === "forbidden") stats.forbidden.push(name);
       } catch (err) {
         stats.failed.push(`${name} (${err.message})`);
       }
@@ -185,6 +203,14 @@ async function main() {
       `\n${stats.missing.length} icon(s) 404 (no real art — blank fallback):`,
     );
     for (const n of stats.missing) console.log(`  - ${n}`);
+  }
+  if (stats.forbidden.length) {
+    console.log(
+      `\n${stats.forbidden.length} icon(s) refused with HTTP 403 — most likely a rate limit,` +
+        ` not missing art. Re-run to retry just these (the download is incremental):`,
+    );
+    for (const n of stats.forbidden) console.log(`  - ${n}`);
+    process.exitCode = 1;
   }
   if (stats.failed.length) {
     console.log(`\n${stats.failed.length} icon(s) FAILED (network/other):`);
