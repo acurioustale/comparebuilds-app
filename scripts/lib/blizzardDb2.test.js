@@ -634,4 +634,41 @@ describe("renderSpellDescription", () => {
       }),
     ).toBe("");
   });
+
+  it("keeps an earlier matching branch but suppresses the default past an unevaluable one", () => {
+    // Mixed template: c2 is decidable, c3 is guarded by an AND we can't evaluate
+    // at ingest. A matching c2 is still correct — no later branch can change
+    // that — so it wins. For any other spec the undecidable c3 may have been the
+    // right branch, so the default is not known to be right either and we blank
+    // rather than guess.
+    const mixed =
+      "$?c2[Healing by $s1%.]?c3&s200[Damage by $s2%.][Default text]";
+
+    expect(
+      renderSpellDescription({
+        template: mixed,
+        orderIndex: 1, // c2 — decidable and matching
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("Healing by 6%.");
+
+    expect(
+      renderSpellDescription({
+        template: mixed,
+        orderIndex: 2, // c3, but undecidable
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("");
+
+    expect(
+      renderSpellDescription({
+        template: mixed,
+        orderIndex: 0, // matches nothing
+        thisSpellId: 100,
+        effects,
+      }),
+    ).toBe("");
+  });
 });
