@@ -28,6 +28,7 @@ import {
   spentPoints,
 } from "./treeLogic.js";
 import { buildExportString } from "./exportBuild.js";
+import { computeStats } from "./heatmap.js";
 
 const require = createRequire(import.meta.url);
 const classIndex = require("../data/classes.json");
@@ -294,6 +295,63 @@ describe("tool-built string with a co-located duplicate (Guardian Starfire)", ()
     expect(reparsed.nodes[STARFIRE_DUP]).toBeUndefined();
     expect(spentPoints(sd.nodes, reparsed.nodes, "class")).toBe(
       sd.pointBudget.class,
+    );
+  });
+});
+
+// A real string from Wowhead's calculator, which marks a hero subtree's granted
+// root as PURCHASED ('11') even though the node costs no talent point. The game
+// itself encodes it as selected-but-not-purchased ('10'), so a build imported
+// from Wowhead must still read as the same build as the in-game export of it:
+// 13 hero points not 14, no phantom difference against a game-sourced build.
+describe("tool-built string marking a granted hero root as purchased", () => {
+  const WOWHEAD =
+    "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGzYZAMD2AAAAAAAAAzYGzssNjZmxM4BMNjBjtlZmZmZmZmZhZWGMDAAYMzMGAz0GDDwGzsNjB";
+  const SENTINEL_ROOT = 94976; // alreadyGranted: Blizzard gives it default_points
+
+  const data = require("../data/hunter.json");
+  const sd = data.specs.marksmanship;
+  const classNodes = collectClassNodes(data);
+  const nodeById = Object.fromEntries(sd.nodes.map((n) => [n.id, n]));
+  const parsed = parseBuildString(WOWHEAD, classNodes);
+
+  test("the string really marks the granted root as purchased", () => {
+    expect(nodeById[SENTINEL_ROOT].alreadyGranted).toBe(true);
+    expect(parsed.nodes[SENTINEL_ROOT]).toBeTruthy();
+  });
+
+  test("the granted root costs nothing, so hero stays within budget", () => {
+    expect(spentPoints(sd.nodes, parsed.nodes, "hero", "Sentinel")).toBe(
+      sd.pointBudget.hero,
+    );
+  });
+
+  test("it is a prerequisite-valid build (no invalid nodes)", () => {
+    const selected = { ...buildGrantedSeed(sd), ...parsed.nodes };
+    expect(computeInvalidNodeIds(sd.nodes, selected, nodeById).size).toBe(0);
+  });
+
+  test("no phantom difference against a game-sourced build", () => {
+    const inGame = parseBuildString(
+      FIXTURES.find((f) => f.name === "Marksmanship Hunter (in-game Retail)")
+        .string,
+      classNodes,
+    );
+    // The seed is what makes the two sources converge in the 1- and 2-build views.
+    const seeded = (b) =>
+      ({ ...buildGrantedSeed(sd), ...b.nodes })[SENTINEL_ROOT];
+    expect(seeded(parsed)).toEqual(seeded(inGame));
+    // The heatmap (3+ builds) reads granted nodes as taken by everyone instead.
+    const stats = computeStats([parsed, inGame], sd.nodes);
+    expect(stats[SENTINEL_ROOT].count).toBe(2);
+    expect(stats[SENTINEL_ROOT].takenBy).toEqual([true, true]);
+  });
+
+  test("re-exporting emits the canonical granted marker", () => {
+    const selected = { ...buildGrantedSeed(sd), ...parsed.nodes };
+    const regen = buildExportString(sd, selected, parsed.specId, classNodes);
+    expect(parseBuildString(regen, classNodes).nodes[SENTINEL_ROOT]).toBe(
+      undefined,
     );
   });
 });
