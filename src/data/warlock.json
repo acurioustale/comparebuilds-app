@@ -67,7 +67,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Domination",
-          "icon": "spell_shadow_felmending",
+          "icon": "237564",
           "description": "Your next Imp, Voidwalker, Incubus, Succubus, Felhunter, or Felguard Summon spell is free and has its casting time reduced by 90%.\r\n",
           "choices": null
         },
@@ -82,7 +82,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soul Leech",
-          "icon": "warlock_siphonlife",
+          "icon": "571320",
           "description": "All single-target damage done by you and your minions grants you and your pet shadowy shields that absorb 3% of the damage dealt for 15 sec, up to 5% of maximum health.",
           "choices": null
         },
@@ -97,7 +97,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Rush",
-          "icon": "ability_deathwing_sealarmorbreachtga",
+          "icon": "538043",
           "description": "Increases your movement speed by 50%, but also damages you for 4% of your maximum health every 1 sec. Movement impairing effects may not reduce you below 100% of normal movement speed. Lasts until canceled.",
           "choices": null
         },
@@ -114,7 +114,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Pact",
-          "icon": "spell_shadow_impphaseshift",
+          "icon": "136164",
           "description": "Reduces the cooldown of Fel Domination by 60 sec.",
           "choices": null
         },
@@ -132,7 +132,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Demon Skin",
-          "icon": "spell_shadow_ragingscream",
+          "icon": "136185",
           "description": "Your Soul Leech absorption now passively recharges at a rate of 0.1% of maximum health every 1 sec, and may now absorb an additional 5% of maximum health.\r\n\r\nIncreases your armor by 45%.",
           "choices": null
         },
@@ -150,7 +150,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fel Armor",
-          "icon": "spell_shadow_felarmour",
+          "icon": "136156",
           "description": "When Soul Leech absorbs damage, 5% of damage taken is absorbed and spread out over 5 sec.\r\n\r\nReduces damage taken by 1.5%.",
           "choices": null
         },
@@ -167,7 +167,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fiendish Stride",
-          "icon": "inv_misc_moosehoof_fel",
+          "icon": "1508512",
           "description": "Reduces the damage dealt by Burning Rush by 10%. Burning Rush increases your movement speed by an additional 20%.",
           "choices": null
         },
@@ -185,7 +185,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Embrace",
-          "icon": "spell_shadow_metamorphosis",
+          "icon": "136172",
           "description": "Stamina increased by 10%.",
           "choices": null
         },
@@ -209,14 +209,14 @@
             {
               "spellId": 386648,
               "name": "Nightmare",
-              "icon": "spell_shadow_possession",
+              "icon": "136183",
               "description": "Increases the amount of damage required to break your fear effects by 60%.",
               "maxRanks": 1
             },
             {
               "spellId": 56244,
               "name": "Horrify",
-              "icon": "spell_nzinsanity_bloodthirst",
+              "icon": "3163621",
               "description": "Your Fear causes the target to tremble in place instead of fleeing in fear.",
               "maxRanks": 1
             }
@@ -236,8 +236,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Fortitude",
-          "icon": "spell_warlock_summonimpoutland",
-          "description": "Increases you and your pets&#39; maximum health by 5%.",
+          "icon": "615097",
+          "description": "Increases you and your pets' maximum health by 5%.",
           "choices": null
         },
         {
@@ -253,7 +253,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Banish",
-          "icon": "spell_shadow_cripple",
+          "icon": "136135",
           "description": "Banishes an enemy Demon, Aberration, or Elemental, preventing any action for 30 sec. Limit 1. Casting Banish again on the target will cancel the effect.",
           "choices": null
         },
@@ -271,8 +271,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Curse of Exhaustion",
-          "icon": "spell_shadow_grimward",
-          "description": "Reduces the target&#39;s movement speed by 50% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
+          "icon": "136162",
+          "description": "Reduces the target's movement speed by 50% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
           "choices": null
         },
         {
@@ -289,7 +289,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Curse of Tongues",
-          "icon": "spell_shadow_curseoftounges",
+          "icon": "136140",
           "description": "Forces the target to speak in Demonic, increasing the casting time of all spells by 30% for 1 min.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
           "choices": null
         },
@@ -306,7 +306,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Infernal Beneficiary",
-          "icon": "achievement_general_raidrepresentation",
+          "icon": "464118",
           "description": "Healing done by Drain Life also heals your primary demon at 400% effectiveness.",
           "choices": null
         },
@@ -323,7 +323,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mortal Coil",
-          "icon": "ability_warlock_mortalcoil",
+          "icon": "607853",
           "description": "Horrifies an enemy target into fleeing, incapacitating for 3 sec and healing you for 20% of maximum health.",
           "choices": null
         },
@@ -341,7 +341,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Annihilan",
-          "icon": "inv_misc_magtheridonshead",
+          "icon": "450904",
           "description": "Increases your critical strike chance by 2%.",
           "choices": null
         },
@@ -359,7 +359,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Circle",
-          "icon": "spell_shadow_demoniccirclesummon",
+          "icon": "237559",
           "description": "Summons a Demonic Circle for 15 min. Cast Demonic Circle: Teleport to teleport to its location and remove all movement slowing effects.\r\n\r\nYou also learn:\r\n\r\n Demonic Circle: Teleport\r\nTeleports you to your Demonic Circle and removes all movement slowing effects.",
           "choices": null
         },
@@ -370,15 +370,15 @@
           "posX": 12,
           "posY": 6,
           "connections": [
+            109844,
             109846,
-            71942,
-            109844
+            71942
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Satyr",
-          "icon": "spell_shadow_mindshear",
+          "icon": "237565",
           "description": "Increases your haste by 2%.",
           "choices": null
         },
@@ -395,7 +395,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Mortal Coil",
-          "icon": "spell_warlock_harvestoflife",
+          "icon": "537517",
           "description": "Increases the range of Mortal Coil by 10 yds and Mortal Coil now heals for an additional 5% of maximum health.",
           "choices": null
         },
@@ -412,7 +412,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Pact",
-          "icon": "spell_shadow_deathpact",
+          "icon": "136146",
           "description": "Sacrifices 20% of your current health to shield you for 200% of the sacrificed health plus an additional 950 for 20 sec. Usable while suffering from control impairing effects.",
           "choices": null
         },
@@ -429,7 +429,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Foul Mouth",
-          "icon": "ability_creature_cursed_02",
+          "icon": "132094",
           "description": "Casting Curse of Exhaustion, Curse of Tongues, or Curse of Weakness now curses all enemies within 10 yds of the target.",
           "choices": null
         },
@@ -447,7 +447,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Empowered Healthstone",
-          "icon": "inv_raid_creepingcoagulum_blue",
+          "icon": "5948203",
           "description": "Healthstones heal you for an additional 5% additional health.",
           "choices": null
         },
@@ -464,7 +464,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Abyss Walker",
-          "icon": "achievement_explore_argus",
+          "icon": "1714097",
           "description": "Using Demonic Circle: Teleport or your Demonic Gateway reduces all damage you take by 4% for 10 sec.",
           "choices": null
         },
@@ -482,7 +482,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fortified Soul",
-          "icon": "spell_warlock_demonsoul",
+          "icon": "463284",
           "description": "Soul Leech may now absorb an additional 5% of your maximum health.",
           "choices": null
         },
@@ -499,7 +499,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Teachings of the Black Harvest",
-          "icon": "inv_misc_codexofxerrath_nochains",
+          "icon": "666475",
           "description": "Your primary pets gain a bonus effect.\r\n\r\nImp: Successful Singe Magic casts grant the target 4% damage reduction for 5 sec.\r\n\r\nVoidwalker: Reduces the cooldown of Shadow Bulwark by 30 sec.\r\n\r\nFelhunter: Reduces the cooldown of Devour Magic by 5 sec.\r\n\r\nSayaad: Reduces the cooldown of Seduction by 10 sec and causes the target to walk faster towards the demon.",
           "choices": null
         },
@@ -510,14 +510,14 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            110072,
-            109845
+            109845,
+            110072
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Gorefiend's Avarice",
-          "icon": "inv_helmet_90",
+          "icon": "133186",
           "description": "Drain Life now channels 100% faster and restores health 100% faster.",
           "choices": null
         },
@@ -540,14 +540,14 @@
             {
               "spellId": 386664,
               "name": "Ichor of Devils",
-              "icon": "spell_yorsahj_bloodboil_greenoil",
+              "icon": "1129418",
               "description": "Dark Pact sacrifices only 5% of your current health for the same shield value.",
               "maxRanks": 1
             },
             {
               "spellId": 386686,
               "name": "Frequent Donor",
-              "icon": "ability_ironmaidens_bloodritual",
+              "icon": "1035037",
               "description": "Reduces the cooldown of Dark Pact by 15 sec.",
               "maxRanks": 1
             }
@@ -568,7 +568,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Eredar",
-          "icon": "achievement_boss_argus_femaleeredar",
+          "icon": "1711329",
           "description": "Increases your Intellect by 3%.",
           "choices": null
         },
@@ -586,7 +586,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Nathrezim",
-          "icon": "ability_physical_taunt_purple",
+          "icon": "3086045",
           "description": "Increases your Leech by 2%.",
           "choices": null
         },
@@ -605,7 +605,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Resilience",
-          "icon": "ability_warlock_avoidance",
+          "icon": "132332",
           "description": "Reduces the chance you will be critically struck by 2%. All damage your primary demon takes is reduced by 8%.",
           "choices": null
         },
@@ -622,7 +622,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Empowered Drain Life",
-          "icon": "spell_shadow_lifedrain02_purple",
+          "icon": "3154546",
           "description": "Drain Life heals for an additional 200% of damage dealt and grants Soul Leech equal to 10% of damage dealt.",
           "choices": null
         },
@@ -646,14 +646,14 @@
             {
               "spellId": 317138,
               "name": "Strength of Will",
-              "icon": "spell_shadow_demonictactics",
+              "icon": "136150",
               "description": "Unending Resolve reduces damage taken by an additional 15%.",
               "maxRanks": 1
             },
             {
               "spellId": 386659,
               "name": "Dark Accord",
-              "icon": "ability_warlock_improveddemonictactics",
+              "icon": "236299",
               "description": "Reduces the cooldown of Unending Resolve by 45 sec.",
               "maxRanks": 1
             }
@@ -673,7 +673,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Gateway",
-          "icon": "spell_warlock_demonicportal_green",
+          "icon": "607512",
           "description": "Creates a demonic gateway between two locations. Activating the gateway transports the user to the other gateway. Each player can use a Demonic Gateway only once per 90 sec.",
           "choices": null
         },
@@ -684,9 +684,9 @@
           "posX": 12,
           "posY": 9,
           "connections": [
+            71917,
             110073,
-            110076,
-            71917
+            110076
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -698,14 +698,14 @@
             {
               "spellId": 5484,
               "name": "Howl of Terror",
-              "icon": "ability_warlock_howlofterror",
+              "icon": "607852",
               "description": "Let loose a terrifying howl, causing 5 enemies within 10 yds to flee in fear, disorienting them for 20 sec. Damage may cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 30283,
               "name": "Shadowfury",
-              "icon": "ability_warlock_shadowfurytga",
+              "icon": "607865",
               "description": "Stuns all enemies within 8 yds for 3 sec.",
               "maxRanks": 1
             }
@@ -724,7 +724,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swift Artifice",
-          "icon": "spell_shadow_destructivesoul",
+          "icon": "136151",
           "description": "Reduces the cast time of Soulstone and Create Healthstone by 50%.",
           "choices": null
         },
@@ -742,7 +742,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Link",
-          "icon": "ability_warlock_soullink",
+          "icon": "607854",
           "description": "5% of all damage you take is taken by your demon pet instead. \r\n\r\nWhile Grimoire of Sacrifice is active, your Stamina is increased by 3%.",
           "choices": null
         },
@@ -759,7 +759,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frequent Traveler",
-          "icon": "achievement_dungeon_outland_dungeonmaster",
+          "icon": "255348",
           "description": "Reduces the cast time of Demonic Gateway by 0.5 sec and you can now use Demonic Gateways twice before triggering a cooldown.",
           "choices": null
         },
@@ -777,7 +777,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fel Synergy",
-          "icon": "inv_sword_1h_felfireraid_d_01",
+          "icon": "1112519",
           "description": "Soul Leech also heals you for 8% and your pet for 25% of the absorption it grants.",
           "choices": null
         },
@@ -794,7 +794,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Oppressive Darkness",
-          "icon": "spell_shadow_shadowfury",
+          "icon": "136201",
           "description": "Reduces the cooldown of Shadowfury by 15 sec and increases its radius by 2 yds.\r\n\r\nReduces the cooldown of Howl of Terror by 5 sec and it now fears 5 additional enemies.",
           "choices": null
         },
@@ -812,7 +812,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of Gluttony",
-          "icon": "warlock_bloodstone",
+          "icon": "538744",
           "description": "Healthstones you conjure for yourself are now Demonic Healthstones and can be used multiple times in combat. Demonic Healthstones cannot be traded.\r\n\r\n Demonic Healthstone\r\nInstantly restores 25% health. 60 sec cooldown.",
           "choices": null
         },
@@ -831,7 +831,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soulburn",
-          "icon": "spell_warlock_soulburn",
+          "icon": "463286",
           "description": "Consumes a Soul Shard, unlocking the hidden power of your spells.\r\n\r\nDemonic Circle: Teleport: Increases your movement speed by 50% and makes you immune to snares and roots for 6 sec.\r\n\r\nDemonic Gateway: Can be cast instantly.\r\n\r\nDrain Life: Gain an absorb shield equal to the amount of healing done for 30 sec. This shield cannot exceed 30% of your maximum health.\r\n\r\nHealthstone: Increases the healing of your Healthstone by 30% and increases your maximum health by 20% for 12 sec.",
           "choices": null
         },
@@ -855,14 +855,14 @@
             {
               "spellId": 1271748,
               "name": "Blight of Weakness",
-              "icon": "warlock_curse_weakness_amplified",
+              "icon": "5449820",
               "description": "Call forth a cloud of cloying shadow mist that envelopes the target and all enemies within 10 yds, increasing the time between their attacks by 100% and reducing their critical strike chance by 10% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse or Blight active per target.",
               "maxRanks": 1
             },
             {
               "spellId": 1271802,
               "name": "Blight of Tongues",
-              "icon": "spell_shadow_curseoftongues_amplified",
+              "icon": "5449818",
               "description": "Call forth a cloud of cloying shadow mist that envelopes the target and all enemies within 10 yds, increasing their casting time of all spells by 100% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse or Blight active per target.",
               "maxRanks": 1
             }
@@ -879,7 +879,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Agony",
-          "icon": "spell_shadow_curseofsargeras",
+          "icon": "136139",
           "description": "Inflicts increasing agony on the target, causing up to 2,379 Shadow damage over 18 sec. Damage starts low and increases over the duration. Refreshing Agony maintains its current damage level.\r\n\r\nAgony damage sometimes generates 1 Soul Shard.",
           "choices": null
         },
@@ -896,7 +896,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unstable Affliction",
-          "icon": "spell_shadow_unstableaffliction_3",
+          "icon": "136228",
           "description": "Afflicts the target with 1,287 Shadow damage over 8 sec. Multiple uses of this ability may overlap.\r\n\r\nIf dispelled, deals 14,850 damage to the dispeller and silences them for 4 sec. This damage is increased by 15% per stack on the target.\r\n\r\nGenerates 1 Soul Shard if the target dies while afflicted.",
           "choices": null
         },
@@ -913,7 +913,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Seed of Corruption",
-          "icon": "spell_shadow_seedofdestruction",
+          "icon": "136193",
           "description": "Embeds a demon seed in the enemy target that will explode after 10.7 sec, dealing 907 Shadow damage to all enemies within 10 yards and applying Corruption to them. Damage reduced beyond 8 targets.\r\n\r\nThe seed will detonate early if the target is hit by other detonations, or takes 190 damage from your spells.",
           "choices": null
         },
@@ -930,7 +930,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nightfall",
-          "icon": "spell_shadow_twilight",
+          "icon": "136223",
           "description": "Corruption damage has a chance to cause your next Shadow Bolt or Malefic Grasp to deal 25% increased damage. \r\n\r\nShadow Bolt is instant cast and Malefic Grasp channels 50% faster when affected.",
           "choices": null
         },
@@ -948,8 +948,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Haunt",
-          "icon": "ability_warlock_haunt",
-          "description": "A ghostly soul haunts a single target, dealing 2,677 Shadow damage and increasing your damage dealt to the target by 12% for 18 sec.\r\n\r\n If the target dies, Haunt&#39;s cooldown is reset.",
+          "icon": "236298",
+          "description": "A ghostly soul haunts a single target, dealing 2,719 Shadow damage and increasing your damage dealt to the target by 16% for 18 sec.\r\n\r\nIf the target dies, Haunt's cooldown is reset.",
           "choices": null
         },
         {
@@ -965,7 +965,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shared Agony",
-          "icon": "spell_shadow_curseofsargeras",
+          "icon": "136139",
           "description": "Increases Agony damage by 10% and Agony now hits another nearby enemy within 15 yds of the target.",
           "choices": null
         },
@@ -988,15 +988,15 @@
             {
               "spellId": 453080,
               "name": "Improved Shadow Bolt",
-              "icon": "spell_shadow_shadowbolt",
+              "icon": "136197",
               "description": "Reduces the cast time of Shadow Bolt by 15% and increases its damage by 40%.",
               "maxRanks": 1
             },
             {
               "spellId": 388667,
               "name": "Drain Soul",
-              "icon": "spell_shadow_haunting",
-              "description": "Replaces Shadow Bolt.\r\n\r\nDrains the target&#39;s soul, causing 2,117 Shadow damage over 4.5 sec.\r\n\r\nDamage is increased by 100% against enemies below 20% health.\r\n\r\nGenerates 1 Soul Shard if the target dies during this effect.",
+              "icon": "136163",
+              "description": "Replaces Shadow Bolt.\r\n\r\nDrains the target's soul, causing 2,117 Shadow damage over 4.5 sec.\r\n\r\nDamage is increased by 100% against enemies below 20% health.\r\n\r\nGenerates 1 Soul Shard if the target dies during this effect.",
               "maxRanks": 1
             }
           ]
@@ -1014,7 +1014,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Haunt",
-          "icon": "ability_warlock_haunt",
+          "icon": "236298",
           "description": "Increases the damage of Haunt by 35% and reduces its cast time by 0.3 sec.",
           "choices": null
         },
@@ -1037,14 +1037,14 @@
             {
               "spellId": 196103,
               "name": "Absolute Corruption",
-              "icon": "ability_bossmannoroth_empoweredmannorothsgaze",
+              "icon": "1117878",
               "description": "Corruption is now permanent and deals 15% increased damage.\r\n\r\nDuration reduced to 24 sec against players.",
               "maxRanks": 1
             },
             {
               "spellId": 452999,
               "name": "Siphon Life",
-              "icon": "spell_shadow_requiem",
+              "icon": "136188",
               "description": "Corruption deals 30% increased damage and its periodic damage heals you for 5% of the damage dealt.",
               "maxRanks": 1
             }
@@ -1063,8 +1063,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cunning Cruelty",
-          "icon": "inv_misc_coin_09",
-          "description": "Shadow Bolt and Drain Soul have a chance to trigger a Shadow Bolt Volley, dealing 488 Shadow damage to 5 enemies within 10 yards of your current target.",
+          "icon": "133792",
+          "description": "Shadow Bolt and Drain Soul have a chance to trigger a Shadow Bolt Volley, dealing 444 Shadow damage to 5 enemies within 10 yards of your current target.",
           "choices": null
         },
         {
@@ -1081,7 +1081,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Withering Bolt",
-          "icon": "spell_shadow_shadowbolt",
+          "icon": "136197",
           "description": "Shadow Bolt and Drain Soul deal 5% increased damage, up to 15%, per damage over time effect you have active on the target.",
           "choices": null
         },
@@ -1099,7 +1099,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Creeping Death",
-          "icon": "ability_creature_cursed_03",
+          "icon": "132095",
           "description": "Your Agony, Corruption, and Unstable Affliction deal damage 10% faster.",
           "choices": null
         },
@@ -1116,7 +1116,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Harvest",
-          "icon": "inv_ability_warlock_soulrot",
+          "icon": "6035321",
           "description": "Consume the life force of each target afflicted by your damaging periodic effects, dealing 12,764 Shadowflame damage over 2.7 sec.\r\n\r\nDamage dealt by Dark Harvest heals you for 50% of damage done.",
           "choices": null
         },
@@ -1134,7 +1134,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Practiced Pestilence",
-          "icon": "spell_nature_agitatingtotem",
+          "icon": "136008",
           "description": "Mastery increased by 2%.",
           "choices": null
         },
@@ -1152,8 +1152,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Summon Darkglare",
-          "icon": "inv_beholderwarlock",
-          "description": "Summons a Darkglare from the Twisting Nether that increases the damage of your Agony, Corruption, and Unstable Affliction by 20% while active.\r\n\r\nThe Darkglare will serve you for 20 sec, blasting its target for 1,826 Shadow damage, increased by 10% for every damage over time effect you have active on their current target.",
+          "icon": "1416161",
+          "description": "Summons a Darkglare from the Twisting Nether that increases the damage of your Agony, Corruption, and Unstable Affliction by 20% while active.\r\n\r\nThe Darkglare will serve you for 20 sec, blasting its target for 1,853 Shadow damage, increased by 10% for every damage over time effect you have active on their current target.",
           "choices": null
         },
         {
@@ -1176,15 +1176,15 @@
             {
               "spellId": 453105,
               "name": "Summoner's Embrace",
-              "icon": "spell_shadow_unsummonbuilding",
+              "icon": "136230",
               "description": "Increases the damage dealt by your spells and your demon by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 108503,
               "name": "Grimoire of Sacrifice",
-              "icon": "warlock_grimoireofsacrifice",
-              "description": "Sacrifices your demon pet for power, gaining its command demon ability, and causing your spells to sometimes also deal 138 additional Shadow damage.\r\n\r\nLasts until canceled or until you summon a demon pet.",
+              "icon": "538443",
+              "description": "Sacrifices your demon pet for power, gaining its command demon ability, and causing your spells to sometimes also deal 141 additional Shadow damage.\r\n\r\nLasts until canceled or until you summon a demon pet.",
               "maxRanks": 1
             }
           ]
@@ -1202,7 +1202,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cull the Weak",
-          "icon": "ability_warlock_soulsiphon",
+          "icon": "460700",
           "description": "Casting Unstable Affliction or Seed of Corruption reduces the cooldown of Dark Harvest by 1.5 sec.",
           "choices": null
         },
@@ -1219,7 +1219,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Malediction",
-          "icon": "spell_shadow_curseofachimonde",
+          "icon": "136137",
           "description": "Increases the critical strike chance of Agony, Corruption, and Unstable Affliction by 5%.",
           "choices": null
         },
@@ -1236,7 +1236,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sudden Onset",
-          "icon": "spell_shadow_curseofsargeras",
+          "icon": "136139",
           "description": "Agony damage is increased by 10% and starts at 3 stacks.",
           "choices": null
         },
@@ -1253,7 +1253,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Eye Contract",
-          "icon": "inv_misc_scrollunrolled01c",
+          "icon": "1500879",
           "description": "Increases the duration of Summon Darkglare by 5.0 sec.",
           "choices": null
         },
@@ -1270,7 +1270,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Malefic Grasp",
-          "icon": "ability_warlock_everlastingaffliction",
+          "icon": "236296",
           "description": "While Darkglare is active, your Shadow Bolt becomes Malefic Grasp. \r\n\r\n Malefic Grasp\r\nBinds the target in twilight, dealing 4,003 Shadow damage over 3.6 sec.\r\n\r\nWhen Malefic Grasp deals damage, it causes all of your other periodic Affliction damage effects to instantly deal 30% of their normal periodic damage.",
           "choices": null
         },
@@ -1287,7 +1287,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nether Plating",
-          "icon": "inv_antorus_orange",
+          "icon": "1729935",
           "description": "Adorns your Darkglare with armor forged from within Antorus, increasing their armor by 10%. \r\n\r\nEye Beam now jumps to up to 4 additional targets within 10 yards and deals 10% increased damage.",
           "choices": null
         },
@@ -1304,7 +1304,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sacrolash's Dark Strike",
-          "icon": "spell_nzinsanity_fearofdeath",
+          "icon": "3163624",
           "description": "Corruption damage is increased by 15%, and each time it deals damage any of your Curses active on the target are extended by 0.5 sec.",
           "choices": null
         },
@@ -1322,7 +1322,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Contagion",
-          "icon": "spell_shadow_creepingplague",
+          "icon": "136134",
           "description": "Increases critical strike damage dealt by Agony, Corruption, and Unstable Affliction by 15%.",
           "choices": null
         },
@@ -1340,8 +1340,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shard Instability",
-          "icon": "spell_warlock_focusshadow",
-          "description": "Damage dealt by Shadow Bolt has a 20% chance to make your next Unstable Affliction cost no Soul Shards and cast instantly.",
+          "icon": "463285",
+          "description": "Damage dealt by Shadow Bolt has a 20% chance to make your next Unstable Affliction or Seed of Corruption cost no Soul Shards and cast instantly.",
           "choices": null
         },
         {
@@ -1359,7 +1359,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Niskaran Methods",
-          "icon": "inv_lightforgedmatrixability_felheartofargus",
+          "icon": "1717019",
           "description": "Increases damage dealt by Agony and Corruption by 10%.",
           "choices": null
         },
@@ -1378,7 +1378,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Potent Soul Shards",
-          "icon": "inv_misc_gem_amethyst_02",
+          "icon": "134075",
           "description": "Increases damage dealt by Unstable Affliction and Seed of Corruption by 5%.",
           "choices": null
         },
@@ -1395,9 +1395,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Nocturnal Yield",
-          "icon": "inv_nulllotus_shadow",
-          "description": "Increases Corruption damage by 10% and Nightfall additionally makes your next Seed of Corruption cost no Soul Shards and cast instantly.",
+          "name": "Impetuous Wrath",
+          "icon": "136170",
+          "description": "Shadow Bolt and Malefic Grasp damage increased by 10% or 20% if the target is affected by Haunt. \r\n\r\nDark Harvest damage increased by 10% or 20% if the target is affected by Haunt.",
           "choices": null
         },
         {
@@ -1414,7 +1414,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Xavius' Gambit",
-          "icon": "spell_shadow_mindshear",
+          "icon": "237565",
           "description": "Reduces the cast time of Unstable Affliction by 0.15 sec and increases its damage by 5%.",
           "choices": null
         },
@@ -1432,7 +1432,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ravenous Afflictions",
-          "icon": "ability_warlock_improvedsoulleech",
+          "icon": "236300",
           "description": "Critical strikes from your Agony, Corruption, and Unstable Affliction have a chance to grant Nightfall.",
           "choices": null
         },
@@ -1450,7 +1450,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Seeds of Destruction",
-          "icon": "sha_inv_elemental_primal_shadow_nightmare",
+          "icon": "1357799",
           "description": "Reduces the cast time of Seed of Corruption by 0.20 sec and increases its damage by 5%.",
           "choices": null
         },
@@ -1467,7 +1467,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fatal Echoes",
-          "icon": "spell_shadow_unstableaffliction_3_purple",
+          "icon": "3033715",
           "description": "When Unstable Affliction expires, it has a 10% chance to reapply itself. ",
           "choices": null
         },
@@ -1484,7 +1484,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cascading Calamity",
-          "icon": "spell_shadow_unstableafllictions",
+          "icon": "136229",
           "description": "Casting Unstable Affliction on a target affected by your Unstable Affliction increases your Haste by 5% for 15 sec.",
           "choices": null
         },
@@ -1501,7 +1501,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Death's Embrace",
-          "icon": "spell_shadow_deathsembrace",
+          "icon": "237557",
           "description": "Agony, Corruption, Unstable Affliction, Seed of Corruption, and Shadow Bolt deal up to 40% increased damage on targets below 35% health. Damage increase is higher against lower health targets.",
           "choices": null
         },
@@ -1517,9 +1517,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Patient Zero",
-          "icon": "ability_warlock_soulswap",
-          "description": "Increases damage dealt by Seed of Corruption to its host by 50%.",
+          "name": "Hedonic Gorging",
+          "icon": "4050664",
+          "description": "Increases Drain Life damage by 10% and Siphon Life now increases the damage of Corruption by an additional 10%.\r\n\r\nDark Harvest channels 10% faster and deals 15% increased damage.",
           "choices": null
         },
         {
@@ -1535,7 +1535,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sow the Seeds",
-          "icon": "spell_shadow_seedofdestruction",
+          "icon": "136193",
           "description": "Seed of Corruption now embeds demon seeds into 2 additional nearby enemies at 50% effectiveness.",
           "choices": null
         },
@@ -1550,7 +1550,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Shadow of Nathreza",
-          "icon": "inv12_apextalent_warlock_shadowsofnathreza",
+          "icon": "7636569",
           "description": null,
           "levels": [
             81,
@@ -1589,7 +1589,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Wicked Reaping",
-          "icon": "inv_staff_2h_artifactdeadwind_d_05",
+          "icon": "1304738",
           "description": "Damage dealt by your demonic soul is increased by 10%.\r\n\r\nConsuming Demonic Core feeds the demonic entity within you, causing it to appear and deal 914 Shadow damage to your target.",
           "choices": null
         },
@@ -1613,14 +1613,14 @@
             {
               "spellId": 449704,
               "name": "Shared Fate",
-              "icon": "ability_warlock_soullink",
-              "description": "When you kill a target, its tortured soul is flung into a nearby enemy for 3 sec. This effect inflicts 189 Shadow damage to enemies within 10 yds every 0.9 sec.\r\n\r\nDeals reduced damage beyond 8 targets.",
+              "icon": "607854",
+              "description": "When you kill a target, its tortured soul is flung into a nearby enemy for 3 sec. This effect inflicts 190 Shadow damage to enemies within 10 yds every 0.9 sec.\r\n\r\nDeals reduced damage beyond 8 targets.",
               "maxRanks": 1
             },
             {
               "spellId": 449706,
               "name": "Feast of Souls",
-              "icon": "ability_warlock_improvedsoulleech",
+              "icon": "236300",
               "description": "When you kill a target, you have a chance to generate a Soul Shard that is guaranteed to be a Succulent Soul.",
               "maxRanks": 1
             }
@@ -1646,14 +1646,14 @@
             {
               "spellId": 449707,
               "name": "Eternal Servitude",
-              "icon": "ability_demonhunter_infernalchains",
+              "icon": "4067363",
               "description": "Fel Domination cooldown is reduced by 90 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 389623,
               "name": "Gorefiend's Resolve",
-              "icon": "ability_rogue_masterofsubtlety",
+              "icon": "132299",
               "description": "Targets resurrected with Soulstone resurrect with 40% additional health and 80% additional mana.",
               "maxRanks": 1
             }
@@ -1673,7 +1673,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Necrolyte Teachings",
-          "icon": "spell_necro_deathall",
+          "icon": "2576086",
           "description": "Shadow Bolt damage increased by 20%. Power Siphon increases the damage of Demonbolt by an additional 20%.",
           "choices": null
         },
@@ -1691,8 +1691,8 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Demoniac's Fervor",
-          "icon": "inv_helm_mask_zulgurub_d_01",
-          "description": "Your demonic soul deals 100% increased damage to the main target of Hand of Gul&#39;dan.",
+          "icon": "133067",
+          "description": "Your demonic soul deals 100% increased damage to the main target of Hand of Gul'dan.",
           "choices": null
         },
         {
@@ -1709,7 +1709,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Sataiel's Volition",
-          "icon": "spell_necro_deathlyecho",
+          "icon": "2576087",
           "description": "Wild Imp damage increased by 35% and Wild Imps that are imploded have an additional 5% chance to grant a Demonic Core.",
           "choices": null
         },
@@ -1727,7 +1727,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Quietus",
-          "icon": "spell_necro_conclave",
+          "icon": "2576085",
           "description": "Soul Anathema damage increased by 25% and is dealt 20% faster.\r\n\r\nConsuming Demonic Core activates Shared Fate or Feast of Souls.",
           "choices": null
         },
@@ -1745,7 +1745,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Soul Anathema",
-          "icon": "spell_necro_inevitableend",
+          "icon": "2576093",
           "description": "Unleashing your demonic soul bestows a fiendish entity unto the soul of its targets, dealing 488 Shadow damage over 10 sec.\r\n\r\nIf this effect is reapplied, any remaining damage will be added to the new Soul Anathema.",
           "choices": null
         },
@@ -1769,14 +1769,14 @@
             {
               "spellId": 449701,
               "name": "Gorebound Fortitude",
-              "icon": "spell_holy_consumemagic",
+              "icon": "135888",
               "description": "You always gain the benefit of Soulburn when consuming a Healthstone, increasing its healing by 30% and increasing your maximum health by 20% for 12 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 449703,
               "name": "Friends In Dark Places",
-              "icon": "spell_shadow_deathpact",
+              "icon": "136146",
               "description": "Dark Pact now shields you for an additional 50% of the sacrificed health.",
               "maxRanks": 1
             }
@@ -1794,8 +1794,8 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Demonic Soul",
-          "icon": "inv_ability_soulharvesterwarlock_demonicsoul",
-          "description": "A demonic entity now inhabits your soul, allowing you to detect if a Soul Shard has a Succulent Soul when it&#39;s generated.\r\n\r\nConsuming a Succulent Soul unleashes your demonic soul, dealing 1,342 Shadow damage to all enemies within 10 yds of the target. Damage reduced beyond 8 targets.",
+          "icon": "5927650",
+          "description": "A demonic entity now inhabits your soul, allowing you to detect if a Soul Shard has a Succulent Soul when it's generated.\r\n\r\nConsuming a Succulent Soul unleashes your demonic soul, dealing 1,342 Shadow damage to all enemies within 10 yds of the target. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -1815,7 +1815,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Shadow of Death",
-          "icon": "spell_arcane_prismaticcloak",
+          "icon": "135752",
           "description": "Your Summon Demonic Tyrant spell is empowered by the demonic entity within you, causing it to grant 3 Soul Shards that each contain a Succulent Soul.",
           "choices": null
         },
@@ -1833,7 +1833,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Eternal Hunger",
-          "icon": "ability_creature_poison_01_purple",
+          "icon": "2120320",
           "description": "Increases the duration of Manifested Avarice by 5 sec and increases the damage of Soul Swipe by 10%.",
           "choices": null
         },
@@ -1851,7 +1851,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Shared Vessel",
-          "icon": "inv_ability_priest_mindgames",
+          "icon": "6035316",
           "description": "Increases your Mastery by 2%.\r\n\r\nThis effect is doubled while the demonic entity is aiding you in combat.",
           "choices": null
         },
@@ -1869,7 +1869,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Manifested Avarice",
-          "icon": "ability_priest_shadowyapparition",
+          "icon": "458229",
           "description": "Each Succulent Soul consumed has an increasing chance to unleash the Demonic Soul within you, enabling it to assault your enemies for 9 sec.\r\n\r\n Soul Swipe\r\nStrikes nearby enemies with a malevolent claw, dealing 742 Shadow damage to its target and 495 Shadow damage to other enemies in 10 yds.",
           "choices": null
         },
@@ -1893,14 +1893,14 @@
             {
               "spellId": 440057,
               "name": "Curse of the Satyr",
-              "icon": "inv_fabric_felrag",
-              "description": "Curse of Weakness is empowered and transforms into Curse of the Satyr.\r\n\r\n Curse of the Satyr\r\nIncreases the time between an enemy&#39;s attacks by 20% and the casting time of all spells by 30% for 2 min.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
+              "icon": "132888",
+              "description": "Curse of Weakness is empowered and transforms into Curse of the Satyr.\r\n\r\n Curse of the Satyr\r\nIncreases the time between an enemy's attacks by 20% and the casting time of all spells by 30% for 2 min.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
               "maxRanks": 1
             },
             {
               "spellId": 440059,
               "name": "Aura of Enfeeblement",
-              "icon": "warlock_curse_weakness_aura",
+              "icon": "615102",
               "description": "While Unending Resolve is active, enemies within 30 yds are affected by Curse of Tongues and Curse of Weakness at 100% effectiveness.",
               "maxRanks": 1
             }
@@ -1920,8 +1920,8 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Seeds of Their Demise",
-          "icon": "ability_warlock_moltencoregreen",
-          "description": "After Wither reaches 8 stacks or when its host reaches 20% health, Wither deals 378 Shadowflame damage to its host every 1 sec until 1 stack remains.\r\n\r\nWhen Blackened Soul deals damage, you have a chance to gain Shard Instability.",
+          "icon": "840197",
+          "description": "After Wither reaches 8 stacks or when its host reaches 20% health, Wither deals 548 Shadowflame damage to its host every 1 sec until 1 stack remains.\r\n\r\nWhen Blackened Soul deals damage, you have a chance to gain Shard Instability.",
           "choices": null
         },
         {
@@ -1938,7 +1938,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Mark of Xavius",
-          "icon": "warlock_curse_shadow_aura",
+          "icon": "615100",
           "description": "Wither damage increased by 25%.\r\n\r\nBlackened Soul deals 2% increased damage per stack of Wither.",
           "choices": null
         },
@@ -1962,14 +1962,14 @@
             {
               "spellId": 440065,
               "name": "Zevrim's Resilience",
-              "icon": "ability_warrior_intensifyrage",
-              "description": "Dark Pact heals you for 625 every 1 sec while active.",
+              "icon": "236310",
+              "description": "Dark Pact heals you for 781 every 1 sec while active.",
               "maxRanks": 1
             },
             {
               "spellId": 440070,
               "name": "Illhoof's Design",
-              "icon": "sha_spell_fire_felfireward_nightmare",
+              "icon": "1357809",
               "description": "Sacrifice 10% of your maximum health. Soul Leech now absorbs an additional 15% of your maximum health.",
               "maxRanks": 1
             }
@@ -1989,8 +1989,8 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Blackened Soul",
-          "icon": "spell_nzinsanity_chasedbyshadows",
-          "description": "Spending Soul Shards on damaging spells will further corrupt enemies affected by your Wither, increasing its stack count by 1.\r\n\r\nEach time Wither gains a stack it has a chance to collapse, consuming a stack every 1 sec to deal 378 Shadowflame damage to its host until 1 stack remains.",
+          "icon": "3163618",
+          "description": "If the target is afflicted with your Wither, casting Chaos Bolt and Shadowburn increase its stack count by 1.\r\n\r\nEach time Wither gains a stack it has a chance to collapse, consuming a stack every 1 sec to deal 548 Shadowflame damage to its host until 1 stack remains.",
           "choices": null
         },
         {
@@ -2005,8 +2005,8 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Wither",
-          "icon": "inv_ability_hellcallerwarlock_wither",
-          "description": "Bestows a vile malediction upon the target, burning the sinew and muscle of its host, dealing 76 Shadowflame damage immediately and an additional 1,262 Shadowflame damage over 18 sec.\r\n\r\nReplaces Corruption.",
+          "icon": "5927632",
+          "description": "Bestows a vile malediction upon the target, burning the sinew and muscle of its host, dealing 95 Shadowflame damage immediately and an additional 1,564 Shadowflame damage over 18 sec.\r\n\r\nReplaces Corruption.",
           "choices": null
         },
         {
@@ -2026,7 +2026,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Malevolence",
-          "icon": "inv_ability_hellcallerwarlock_malevolence",
+          "icon": "5927631",
           "description": "Dark magic erupts from you and corrupts your soul for 20 sec, causing enemies suffering from your Wither to take 4,808 Shadowflame damage and increase its stack count by 6.\r\n\r\nWhile corrupted your Haste is increased by 8% and spending Soul Shards on damaging spells grants 1 additional stack of Wither.",
           "choices": null
         },
@@ -2044,8 +2044,8 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Mark of Peroth'arn",
-          "icon": "70_inscription_vantus_rune_tomb",
-          "description": "Critical strike damage dealt by Wither is increased by 10%. \r\n\r\nWither has a chance to gain a stack when it critically strikes. Stacks gained this way do not activate Blackened Soul.",
+          "icon": "1589502",
+          "description": "Damaging critical strikes dealt by Wither deal 215% damage instead of the usual 200%.\r\n\r\nDamaging critical strikes dealt by Blackened Soul deal 225% damage instead of the usual 200%.",
           "choices": null
         },
         {
@@ -2062,7 +2062,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Xalan's Cruelty",
-          "icon": "spell_shadow_demonicempathy",
+          "icon": "237561",
           "description": "Shadow damage dealt by your spells and abilities is increased by 6% and your Shadow spells gain 10% more critical strike chance from all sources.",
           "choices": null
         },
@@ -2080,7 +2080,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Xalan's Ferocity",
-          "icon": "spell_fire_felfire",
+          "icon": "135794",
           "description": "Fire damage dealt by your spells and abilities is increased by 6% and your Fire spells gain 10% more critical strike chance from all sources.",
           "choices": null
         },
@@ -2104,14 +2104,14 @@
             {
               "spellId": 440048,
               "name": "Hatefury Rituals",
-              "icon": "70_inscription_glyph_demonhunter_minor",
+              "icon": "1392948",
               "description": "Wither deals 30% increased periodic damage but its duration is 15% shorter.",
               "maxRanks": 1
             },
             {
               "spellId": 440051,
               "name": "Bleakheart Tactics",
-              "icon": "spell_shadow_mindshear",
+              "icon": "237565",
               "description": "Wither damage increased 20%. When Wither gains a stack from Blackened Soul, it has a chance to gain an additional stack.",
               "maxRanks": 1
             }
@@ -2131,7 +2131,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Alzzin's Iniquity",
-          "icon": "spell_shadow_improvedvampiricembrace",
+          "icon": "136165",
           "description": "Malevolence grants an additional 4% Haste and when cast increases the stack count of active Withers by an additional 2 stacks. ",
           "choices": null
         },
@@ -2149,7 +2149,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Devil Fruit",
-          "icon": "inv_112_raidtrinkets_blobofswirlingvoid_terra",
+          "icon": "7137507",
           "description": "Periodic damage dealt by Wither has a chance to grant Malevolence for 8 sec.",
           "choices": null
         },
@@ -2167,7 +2167,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Through the Felvine",
-          "icon": "spell_nature_thorns_nightmare",
+          "icon": "1357816",
           "description": "Increases the damage of Chaos Bolt by 35% and Rain of Fire by 6%.\r\n\r\nThis effect is doubled while Malevolence is active.",
           "choices": null
         }
@@ -2234,7 +2234,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Domination",
-          "icon": "spell_shadow_felmending",
+          "icon": "237564",
           "description": "Your next Imp, Voidwalker, Incubus, Succubus, Felhunter, or Felguard Summon spell is free and has its casting time reduced by 90%.\r\n",
           "choices": null
         },
@@ -2249,7 +2249,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soul Leech",
-          "icon": "warlock_siphonlife",
+          "icon": "571320",
           "description": "All single-target damage done by you and your minions grants you and your pet shadowy shields that absorb 3% of the damage dealt for 15 sec, up to 5% of maximum health.",
           "choices": null
         },
@@ -2264,7 +2264,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Rush",
-          "icon": "ability_deathwing_sealarmorbreachtga",
+          "icon": "538043",
           "description": "Increases your movement speed by 50%, but also damages you for 4% of your maximum health every 1 sec. Movement impairing effects may not reduce you below 100% of normal movement speed. Lasts until canceled.",
           "choices": null
         },
@@ -2281,7 +2281,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Pact",
-          "icon": "spell_shadow_impphaseshift",
+          "icon": "136164",
           "description": "Reduces the cooldown of Fel Domination by 60 sec.",
           "choices": null
         },
@@ -2299,7 +2299,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Demon Skin",
-          "icon": "spell_shadow_ragingscream",
+          "icon": "136185",
           "description": "Your Soul Leech absorption now passively recharges at a rate of 0.1% of maximum health every 1 sec, and may now absorb an additional 5% of maximum health.\r\n\r\nIncreases your armor by 45%.",
           "choices": null
         },
@@ -2317,7 +2317,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fel Armor",
-          "icon": "spell_shadow_felarmour",
+          "icon": "136156",
           "description": "When Soul Leech absorbs damage, 5% of damage taken is absorbed and spread out over 5 sec.\r\n\r\nReduces damage taken by 1.5%.",
           "choices": null
         },
@@ -2334,7 +2334,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fiendish Stride",
-          "icon": "inv_misc_moosehoof_fel",
+          "icon": "1508512",
           "description": "Reduces the damage dealt by Burning Rush by 10%. Burning Rush increases your movement speed by an additional 20%.",
           "choices": null
         },
@@ -2352,7 +2352,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Embrace",
-          "icon": "spell_shadow_metamorphosis",
+          "icon": "136172",
           "description": "Stamina increased by 10%.",
           "choices": null
         },
@@ -2376,14 +2376,14 @@
             {
               "spellId": 386648,
               "name": "Nightmare",
-              "icon": "spell_shadow_possession",
+              "icon": "136183",
               "description": "Increases the amount of damage required to break your fear effects by 60%.",
               "maxRanks": 1
             },
             {
               "spellId": 56244,
               "name": "Horrify",
-              "icon": "spell_nzinsanity_bloodthirst",
+              "icon": "3163621",
               "description": "Your Fear causes the target to tremble in place instead of fleeing in fear.",
               "maxRanks": 1
             }
@@ -2403,8 +2403,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Fortitude",
-          "icon": "spell_warlock_summonimpoutland",
-          "description": "Increases you and your pets&#39; maximum health by 5%.",
+          "icon": "615097",
+          "description": "Increases you and your pets' maximum health by 5%.",
           "choices": null
         },
         {
@@ -2420,7 +2420,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Banish",
-          "icon": "spell_shadow_cripple",
+          "icon": "136135",
           "description": "Banishes an enemy Demon, Aberration, or Elemental, preventing any action for 30 sec. Limit 1. Casting Banish again on the target will cancel the effect.",
           "choices": null
         },
@@ -2438,8 +2438,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Curse of Exhaustion",
-          "icon": "spell_shadow_grimward",
-          "description": "Reduces the target&#39;s movement speed by 50% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
+          "icon": "136162",
+          "description": "Reduces the target's movement speed by 50% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
           "choices": null
         },
         {
@@ -2456,7 +2456,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Curse of Tongues",
-          "icon": "spell_shadow_curseoftounges",
+          "icon": "136140",
           "description": "Forces the target to speak in Demonic, increasing the casting time of all spells by 30% for 1 min.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
           "choices": null
         },
@@ -2473,7 +2473,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Infernal Beneficiary",
-          "icon": "achievement_general_raidrepresentation",
+          "icon": "464118",
           "description": "Healing done by Drain Life also heals your primary demon at 400% effectiveness.",
           "choices": null
         },
@@ -2490,7 +2490,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mortal Coil",
-          "icon": "ability_warlock_mortalcoil",
+          "icon": "607853",
           "description": "Horrifies an enemy target into fleeing, incapacitating for 3 sec and healing you for 20% of maximum health.",
           "choices": null
         },
@@ -2508,7 +2508,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Annihilan",
-          "icon": "inv_misc_magtheridonshead",
+          "icon": "450904",
           "description": "Increases your critical strike chance by 2%.",
           "choices": null
         },
@@ -2526,7 +2526,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Circle",
-          "icon": "spell_shadow_demoniccirclesummon",
+          "icon": "237559",
           "description": "Summons a Demonic Circle for 15 min. Cast Demonic Circle: Teleport to teleport to its location and remove all movement slowing effects.\r\n\r\nYou also learn:\r\n\r\n Demonic Circle: Teleport\r\nTeleports you to your Demonic Circle and removes all movement slowing effects.",
           "choices": null
         },
@@ -2537,15 +2537,15 @@
           "posX": 12,
           "posY": 6,
           "connections": [
+            109844,
             109846,
-            71942,
-            109844
+            71942
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Satyr",
-          "icon": "spell_shadow_mindshear",
+          "icon": "237565",
           "description": "Increases your haste by 2%.",
           "choices": null
         },
@@ -2562,7 +2562,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Mortal Coil",
-          "icon": "spell_warlock_harvestoflife",
+          "icon": "537517",
           "description": "Increases the range of Mortal Coil by 10 yds and Mortal Coil now heals for an additional 5% of maximum health.",
           "choices": null
         },
@@ -2579,7 +2579,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Pact",
-          "icon": "spell_shadow_deathpact",
+          "icon": "136146",
           "description": "Sacrifices 20% of your current health to shield you for 200% of the sacrificed health plus an additional 950 for 20 sec. Usable while suffering from control impairing effects.",
           "choices": null
         },
@@ -2596,7 +2596,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Foul Mouth",
-          "icon": "ability_creature_cursed_02",
+          "icon": "132094",
           "description": "Casting Curse of Exhaustion, Curse of Tongues, or Curse of Weakness now curses all enemies within 10 yds of the target.",
           "choices": null
         },
@@ -2614,7 +2614,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Empowered Healthstone",
-          "icon": "inv_raid_creepingcoagulum_blue",
+          "icon": "5948203",
           "description": "Healthstones heal you for an additional 5% additional health.",
           "choices": null
         },
@@ -2631,7 +2631,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Abyss Walker",
-          "icon": "achievement_explore_argus",
+          "icon": "1714097",
           "description": "Using Demonic Circle: Teleport or your Demonic Gateway reduces all damage you take by 4% for 10 sec.",
           "choices": null
         },
@@ -2649,7 +2649,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fortified Soul",
-          "icon": "spell_warlock_demonsoul",
+          "icon": "463284",
           "description": "Soul Leech may now absorb an additional 5% of your maximum health.",
           "choices": null
         },
@@ -2666,7 +2666,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Teachings of the Black Harvest",
-          "icon": "inv_misc_codexofxerrath_nochains",
+          "icon": "666475",
           "description": "Your primary pets gain a bonus effect.\r\n\r\nImp: Successful Singe Magic casts grant the target 4% damage reduction for 5 sec.\r\n\r\nVoidwalker: Reduces the cooldown of Shadow Bulwark by 30 sec.\r\n\r\nFelhunter: Reduces the cooldown of Devour Magic by 5 sec.\r\n\r\nSayaad: Reduces the cooldown of Seduction by 10 sec and causes the target to walk faster towards the demon.",
           "choices": null
         },
@@ -2677,14 +2677,14 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            110072,
-            109845
+            109845,
+            110072
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Gorefiend's Avarice",
-          "icon": "inv_helmet_90",
+          "icon": "133186",
           "description": "Drain Life now channels 100% faster and restores health 100% faster.",
           "choices": null
         },
@@ -2707,14 +2707,14 @@
             {
               "spellId": 386664,
               "name": "Ichor of Devils",
-              "icon": "spell_yorsahj_bloodboil_greenoil",
+              "icon": "1129418",
               "description": "Dark Pact sacrifices only 5% of your current health for the same shield value.",
               "maxRanks": 1
             },
             {
               "spellId": 386686,
               "name": "Frequent Donor",
-              "icon": "ability_ironmaidens_bloodritual",
+              "icon": "1035037",
               "description": "Reduces the cooldown of Dark Pact by 15 sec.",
               "maxRanks": 1
             }
@@ -2735,7 +2735,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Eredar",
-          "icon": "achievement_boss_argus_femaleeredar",
+          "icon": "1711329",
           "description": "Increases your Intellect by 3%.",
           "choices": null
         },
@@ -2753,7 +2753,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Nathrezim",
-          "icon": "ability_physical_taunt_purple",
+          "icon": "3086045",
           "description": "Increases your Leech by 2%.",
           "choices": null
         },
@@ -2772,7 +2772,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Resilience",
-          "icon": "ability_warlock_avoidance",
+          "icon": "132332",
           "description": "Reduces the chance you will be critically struck by 2%. All damage your primary demon takes is reduced by 8%.",
           "choices": null
         },
@@ -2789,7 +2789,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Empowered Drain Life",
-          "icon": "spell_shadow_lifedrain02_purple",
+          "icon": "3154546",
           "description": "Drain Life heals for an additional 200% of damage dealt and grants Soul Leech equal to 10% of damage dealt.",
           "choices": null
         },
@@ -2813,14 +2813,14 @@
             {
               "spellId": 317138,
               "name": "Strength of Will",
-              "icon": "spell_shadow_demonictactics",
+              "icon": "136150",
               "description": "Unending Resolve reduces damage taken by an additional 15%.",
               "maxRanks": 1
             },
             {
               "spellId": 386659,
               "name": "Dark Accord",
-              "icon": "ability_warlock_improveddemonictactics",
+              "icon": "236299",
               "description": "Reduces the cooldown of Unending Resolve by 45 sec.",
               "maxRanks": 1
             }
@@ -2840,7 +2840,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Gateway",
-          "icon": "spell_warlock_demonicportal_green",
+          "icon": "607512",
           "description": "Creates a demonic gateway between two locations. Activating the gateway transports the user to the other gateway. Each player can use a Demonic Gateway only once per 90 sec.",
           "choices": null
         },
@@ -2851,9 +2851,9 @@
           "posX": 12,
           "posY": 9,
           "connections": [
+            71917,
             110073,
-            110076,
-            71917
+            110076
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -2865,14 +2865,14 @@
             {
               "spellId": 5484,
               "name": "Howl of Terror",
-              "icon": "ability_warlock_howlofterror",
+              "icon": "607852",
               "description": "Let loose a terrifying howl, causing 5 enemies within 10 yds to flee in fear, disorienting them for 20 sec. Damage may cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 30283,
               "name": "Shadowfury",
-              "icon": "ability_warlock_shadowfurytga",
+              "icon": "607865",
               "description": "Stuns all enemies within 8 yds for 3 sec.",
               "maxRanks": 1
             }
@@ -2891,7 +2891,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swift Artifice",
-          "icon": "spell_shadow_destructivesoul",
+          "icon": "136151",
           "description": "Reduces the cast time of Soulstone and Create Healthstone by 50%.",
           "choices": null
         },
@@ -2909,7 +2909,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Link",
-          "icon": "ability_warlock_soullink",
+          "icon": "607854",
           "description": "5% of all damage you take is taken by your demon pet instead. \r\n\r\nWhile Grimoire of Sacrifice is active, your Stamina is increased by 3%.",
           "choices": null
         },
@@ -2926,7 +2926,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frequent Traveler",
-          "icon": "achievement_dungeon_outland_dungeonmaster",
+          "icon": "255348",
           "description": "Reduces the cast time of Demonic Gateway by 0.5 sec and you can now use Demonic Gateways twice before triggering a cooldown.",
           "choices": null
         },
@@ -2944,7 +2944,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fel Synergy",
-          "icon": "inv_sword_1h_felfireraid_d_01",
+          "icon": "1112519",
           "description": "Soul Leech also heals you for 8% and your pet for 25% of the absorption it grants.",
           "choices": null
         },
@@ -2961,7 +2961,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Oppressive Darkness",
-          "icon": "spell_shadow_shadowfury",
+          "icon": "136201",
           "description": "Reduces the cooldown of Shadowfury by 15 sec and increases its radius by 2 yds.\r\n\r\nReduces the cooldown of Howl of Terror by 5 sec and it now fears 5 additional enemies.",
           "choices": null
         },
@@ -2979,7 +2979,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of Gluttony",
-          "icon": "warlock_bloodstone",
+          "icon": "538744",
           "description": "Healthstones you conjure for yourself are now Demonic Healthstones and can be used multiple times in combat. Demonic Healthstones cannot be traded.\r\n\r\n Demonic Healthstone\r\nInstantly restores 25% health. 60 sec cooldown.",
           "choices": null
         },
@@ -2998,7 +2998,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soulburn",
-          "icon": "spell_warlock_soulburn",
+          "icon": "463286",
           "description": "Consumes a Soul Shard, unlocking the hidden power of your spells.\r\n\r\nDemonic Circle: Teleport: Increases your movement speed by 50% and makes you immune to snares and roots for 6 sec.\r\n\r\nDemonic Gateway: Can be cast instantly.\r\n\r\nDrain Life: Gain an absorb shield equal to the amount of healing done for 30 sec. This shield cannot exceed 30% of your maximum health.\r\n\r\nHealthstone: Increases the healing of your Healthstone by 30% and increases your maximum health by 20% for 12 sec.",
           "choices": null
         },
@@ -3022,14 +3022,14 @@
             {
               "spellId": 1271748,
               "name": "Blight of Weakness",
-              "icon": "warlock_curse_weakness_amplified",
+              "icon": "5449820",
               "description": "Call forth a cloud of cloying shadow mist that envelopes the target and all enemies within 10 yds, increasing the time between their attacks by 100% and reducing their critical strike chance by 10% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse or Blight active per target.",
               "maxRanks": 1
             },
             {
               "spellId": 1271802,
               "name": "Blight of Tongues",
-              "icon": "spell_shadow_curseoftongues_amplified",
+              "icon": "5449818",
               "description": "Call forth a cloud of cloying shadow mist that envelopes the target and all enemies within 10 yds, increasing their casting time of all spells by 100% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse or Blight active per target.",
               "maxRanks": 1
             }
@@ -3046,8 +3046,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hand of Gul'dan",
-          "icon": "ability_warlock_handofguldan",
-          "description": "Calls down a demonic meteor full of Wild Imps which burst forth to attack the target.\r\n\r\nDeals up to 577 Shadowflame damage on impact to all enemies within 8 yds of the target and summons 3 Wild Imps.",
+          "icon": "535592",
+          "description": "Calls down a demonic meteor full of Wild Imps which burst forth to attack the target.\r\n\r\nDeals up to 579 Shadowflame damage on impact to all enemies within 8 yds of the target and summons 3 Wild Imps.",
           "choices": null
         },
         {
@@ -3063,8 +3063,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demoniac",
-          "icon": "inv_demonbolt",
-          "description": "Grants access to the following abilities:\r\n\r\n Demonbolt\r\nSend the fiery soul of a fallen demon at the enemy, causing 1,524 Shadowflame damage.\r\n\r\n Demonic Core\r\nWhen your Wild Imps fade or are imploded, you have a 10% chance to absorb their life essence, granting you a stack of Demonic Core. \r\n\r\nWhen your summoned Dreadstalkers fade away, you have a 100% chance to absorb their life essence, granting you a stack of Demonic Core.\r\n\r\nDemonic Core reduces the cast time of Demonbolt by 100%. Maximum 4 stacks.",
+          "icon": "2065566",
+          "description": "Grants access to the following abilities:\r\n\r\n Demonbolt\r\nSend the fiery soul of a fallen demon at the enemy, causing 2,353 Shadowflame damage.\r\n\r\n Demonic Core\r\nWhen your Wild Imps fade or are imploded, you have a 10% chance to absorb their life essence, granting you a stack of Demonic Core. \r\n\r\nWhen your summoned Dreadstalkers fade away, you have a 100% chance to absorb their life essence, granting you a stack of Demonic Core.\r\n\r\nDemonic Core reduces the cast time of Demonbolt by 100%. Maximum 4 stacks.",
           "choices": null
         },
         {
@@ -3080,7 +3080,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Call Dreadstalkers",
-          "icon": "spell_warlock_calldreadstalkers",
+          "icon": "1378282",
           "description": "Summons 2 ferocious Dreadstalkers to attack the target for 12 sec.",
           "choices": null
         },
@@ -3097,8 +3097,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dominant Hand",
-          "icon": "warlock_curse_shadow",
-          "description": "Increases damage dealt by Hand of Gul&#39;dan to its main target by 20%.",
+          "icon": "615099",
+          "description": "Increases damage dealt by Hand of Gul'dan to its main target by 20%.",
           "choices": null
         },
         {
@@ -3114,7 +3114,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Intellect",
-          "icon": "ability_kaztik_dominatemind",
+          "icon": "878214",
           "description": "Increases your Intellect by 2%.",
           "choices": null
         },
@@ -3131,7 +3131,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Practiced Rituals",
-          "icon": "inv_10_inscription_illusoryspellscrolls_color4",
+          "icon": "4555012",
           "description": "Increases your Mastery by 2%.",
           "choices": null
         },
@@ -3148,7 +3148,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dreadlash",
-          "icon": "spell_shadow_summonvoidwalker",
+          "icon": "136221",
           "description": "When your Dreadstalkers charge into battle, their Dreadbite attack now hits all targets within 8 yards and deals 10% more damage.",
           "choices": null
         },
@@ -3166,8 +3166,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Imp-erator",
-          "icon": "spell_warlock_summonimpoutland",
-          "description": "Increases the critical strike chance of your Wild Imp&#39;s Fel Firebolt by 15%.",
+          "icon": "615097",
+          "description": "Increases the critical strike chance of your Wild Imp's Fel Firebolt by 15%.",
           "choices": null
         },
         {
@@ -3190,14 +3190,14 @@
             {
               "spellId": 196277,
               "name": "Implosion",
-              "icon": "inv_implosion",
-              "description": "Demonic forces suck 6 of your Wild Imps toward the target, and then cause them to violently explode, dealing 508 Shadowflame damage to all enemies within 8 yards.",
+              "icon": "2065588",
+              "description": "Demonic forces suck 6 of your Wild Imps toward the target, and then cause them to violently explode, dealing 507 Shadowflame damage to all enemies within 8 yards.",
               "maxRanks": 1
             },
             {
               "spellId": 264130,
               "name": "Power Siphon",
-              "icon": "ability_warlock_backdraft",
+              "icon": "236290",
               "description": "Instantly sacrifice up to 2 Wild Imps, generating 2 charges of Demonic Core that cause Demonbolt to deal 30% additional damage.",
               "maxRanks": 1
             }
@@ -3217,7 +3217,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Summon Felguard",
-          "icon": "spell_shadow_summonfelguard",
+          "icon": "136216",
           "description": "Summons a Felguard under your command as a powerful melee combatant.",
           "choices": null
         },
@@ -3234,7 +3234,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Infernal Rapidity",
-          "icon": "spell_argus_withering_fire",
+          "icon": "1719208",
           "description": "When your Wild Imps cast Fel Firebolt, they have 10% chance to instantly cast another Fel Firebolt at 200% effectiveness.",
           "choices": null
         },
@@ -3252,7 +3252,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Rune of Shadows",
-          "icon": "spell_shadow_rune",
+          "icon": "252272",
           "description": "Reduces the cast time of Shadow Bolt by 10% and increases its damage by 15%.",
           "choices": null
         },
@@ -3270,8 +3270,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Carnivorous Stalkers",
-          "icon": "warlock_pvp_callfelhunter",
-          "description": "Your Dreadstalkers&#39; attacks have a 10% chance to trigger an additional Dreadbite.",
+          "icon": "1380868",
+          "description": "Your Dreadstalkers' attacks have a 10% chance to trigger an additional Dreadbite.",
           "choices": null
         },
         {
@@ -3287,8 +3287,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Armaments",
-          "icon": "inv_misc_desecrated_plategloves",
-          "description": "The cooldown of your Felguard&#39;s Felstorm is reduced by 10 sec and damage dealt to your primary demon is reduced by 10%.",
+          "icon": "133832",
+          "description": "The cooldown of your Felguard's Felstorm is reduced by 10 sec and damage dealt to your primary demon is reduced by 10%.",
           "choices": null
         },
         {
@@ -3304,8 +3304,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Imp Gang Boss",
-          "icon": "ability_warlock_empoweredimp",
-          "description": "Hand of Gul&#39;dan now empowers 1 of the Wild Imps it summons, increasing its damage dealt by 100%.",
+          "icon": "236294",
+          "description": "Hand of Gul'dan now empowers 1 of the Wild Imps it summons, increasing its damage dealt by 100%.",
           "choices": null
         },
         {
@@ -3322,7 +3322,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Brutality",
-          "icon": "ability_demonhunter_bladedance",
+          "icon": "1305149",
           "description": "Damaging critical strikes dealt by you and your demons deal 230% damage instead of the usual 200%.",
           "choices": null
         },
@@ -3339,7 +3339,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inner Demons",
-          "icon": "ability_warlock_eradication",
+          "icon": "236295",
           "description": "You passively summon a Wild Imp to fight for you every 12 sec.",
           "choices": null
         },
@@ -3357,7 +3357,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Summon Demonic Tyrant",
-          "icon": "inv_summondemonictyrant",
+          "icon": "2065628",
           "description": "Summon a Demonic Tyrant that damages your target for 15 sec. \r\n\r\nDamage dealt by Demonic Tyrant is increased by 10% for each Wild Imp and Dreadstalker active.",
           "choices": null
         },
@@ -3374,7 +3374,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blighted Maw",
-          "icon": "ability_creature_poison_01",
+          "icon": "132103",
           "description": "The fangs of your Dreadstalkers are coated in corrosive bile, causing Dreadbite to deal additional damage equal to 50% of damage dealt as Plague damage.",
           "choices": null
         },
@@ -3392,7 +3392,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Demonic Tactics",
-          "icon": "ability_warlock_ancientgrimoire",
+          "icon": "460694",
           "description": "Increases the critical strike chance of your primary demon by 50% of your critical strike chance.",
           "choices": null
         },
@@ -3409,8 +3409,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Empowered Felstorm",
-          "icon": "inv_axe_2h_demonweapon_c_01",
-          "description": "Increases the damage of your Felguard&#39;s Felstorm by 20% and its duration by 4.0 sec.",
+          "icon": "1380962",
+          "description": "Increases the damage of your Felguard's Felstorm by 20% and its duration by 4.0 sec.",
           "choices": null
         },
         {
@@ -3428,7 +3428,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiteful Reconstitution",
-          "icon": "spell_shadow_impphaseshift",
+          "icon": "136164",
           "description": "Increases Demonbolt damage by 10% and consuming a Demonic Core has a chance to summon a Wild Imp.",
           "choices": null
         },
@@ -3445,7 +3445,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tyrant's Oblation",
-          "icon": "spell_warlock_demonwrath",
+          "icon": "1378284",
           "description": "Your Demonic Tyrant also empowers you while active, increasing your haste by 8%.",
           "choices": null
         },
@@ -3462,8 +3462,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Antoran Armaments",
-          "icon": "inv_plate_helmet_eredarargus_d_01",
-          "description": "Your Demonic Tyrant is equipped with armor forged within Antorus, increasing their armor by 10%. While summoned, your Demonic Tyrant now assaults enemies with powerful melee attacks.\r\n\r\n Burning Cleave\r\nCleaves all enemies in a cone in front of the caster, inflicting 362 Shadowflame damage. Damage reduced beyond 8 targets.",
+          "icon": "1604396",
+          "description": "Your Demonic Tyrant is equipped with armor forged within Antorus, increasing their armor by 10%. While summoned, your Demonic Tyrant now assaults enemies with powerful melee attacks.\r\n\r\n Burning Cleave\r\nCleaves the area in front of the caster, inflicting 364 Shadowflame damage. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -3481,7 +3481,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flametouched",
-          "icon": "spell_shaman_firenova",
+          "icon": "459026",
           "description": "Increases the attack speed of your Dreadstalkers by 10% and their critical strike chance by 15%.",
           "choices": null
         },
@@ -3498,8 +3498,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Demonic Knowledge",
-          "icon": "ability_warlock_improveddemonictactics",
-          "description": "Hand of Gul&#39;dan has a 8% chance to generate a charge of Demonic Core.",
+          "icon": "236299",
+          "description": "Hand of Gul'dan has a 8% chance to generate a charge of Demonic Core.",
           "choices": null
         },
         {
@@ -3516,7 +3516,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sacrificed Souls",
-          "icon": "ability_creature_disease_05",
+          "icon": "132102",
           "description": "Shadow Bolt and Demonbolt deal 2% additional damage per demon you have summoned.",
           "choices": null
         },
@@ -3534,7 +3534,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Reign of Tyranny",
-          "icon": "ability_warlock_demonicpower",
+          "icon": "236293",
           "description": "Your Demonic Tyrant lasts an additional 5 sec and extends the duration of your Dreadstalkers by 15 sec when summoned.",
           "choices": null
         },
@@ -3552,7 +3552,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Master Summoner",
-          "icon": "spell_nature_removecurse",
+          "icon": "136082",
           "description": "Increases Mastery by 3% and reduces the cast time of your Summon Demonic Tyrant and Summon Felguard by 0.5 sec.",
           "choices": null
         },
@@ -3569,7 +3569,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Demonic Calling",
-          "icon": "inv_felstalker_pet",
+          "icon": "1129035",
           "description": "Call Dreadstalkers costs 1 less Soul Shard and its cast time is reduced by 50%.",
           "choices": null
         },
@@ -3586,8 +3586,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Doom",
-          "icon": "spell_shadow_auraofdarkness",
-          "description": "When Demonbolt consumes a Demonic Core it inflicts impending doom upon the target, dealing 1,531 Shadow damage to enemies within 10 yds of its target after 20 sec or when removed. Damage is reduced beyond 8 targets.\r\n\r\nHand of Gul&#39;dan reduces the duration of Doom by 3 sec.",
+          "icon": "136122",
+          "description": "When Demonbolt consumes a Demonic Core it inflicts impending doom upon the target, dealing 1,531 Shadow damage to enemies within 10 yds of its target after 20 sec or when removed. Damage is reduced beyond 8 targets.\r\n\r\nHand of Gul'dan reduces the duration of Doom by 3 sec.",
           "choices": null
         },
         {
@@ -3605,7 +3605,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hellbent Commander",
-          "icon": "inv_helm_cloth_pvpwarlock_o_01",
+          "icon": "1030292",
           "description": "Your demons deal 1.0% increased damage for each demon you control.",
           "choices": null
         },
@@ -3630,14 +3630,14 @@
             {
               "spellId": 1276452,
               "name": "Grimoire: Imp Lord",
-              "icon": "inv_imp3_purple",
+              "icon": "5178162",
               "description": "Summons an Imp Lord to assist you in combat for 20 sec and will remove 1 harmful effect from you when summoned. \r\n\r\nTransforms into Singe Magic while on cooldown.",
               "maxRanks": 1
             },
             {
               "spellId": 1276467,
               "name": "Grimoire: Fel Ravager",
-              "icon": "spell_shadow_summonfelhunter",
+              "icon": "136217",
               "description": "Summons a Fel Ravager to assist you in combat for 20 sec and will purge 1 beneficial magic effect from an enemy.\r\n\r\nTurns into Devour Magic while on cooldown. ",
               "maxRanks": 1
             }
@@ -3656,7 +3656,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Summon Vilefiend",
-          "icon": "inv_argusfelstalkermount",
+          "icon": "1616211",
           "description": "Call Dreadstalkers also summons a Vilefiend that assists you in combat for 15 sec.",
           "choices": null
         },
@@ -3673,8 +3673,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Summon Doomguard",
-          "icon": "warlock_summon_doomguard",
-          "description": "Summons a Doomguard to assist you in combat for 12 sec. Consuming a Demonic Core reduces the cooldown of Summon Doomguard by 3 sec.\r\n\r\n Doom Bolt Volley\r\nSends a volley of malefic bolts at 5 enemies within 40 yds, inflicting 1,563 Shadow damage to each target.",
+          "icon": "615103",
+          "description": "Summons a Doomguard to assist you in combat for 12 sec. Consuming a Demonic Core reduces the cooldown of Summon Doomguard by 3 sec.\r\n\r\n Doom Bolt Volley\r\nSends a volley of malefic bolts at 5 enemies within 40 yds, inflicting 1,571 Shadow damage to each target.",
           "choices": null
         },
         {
@@ -3690,7 +3690,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "To Hell and Back",
-          "icon": "ability_warlock_impoweredimp",
+          "icon": "460856",
           "description": "Power Siphon and Implosion summon 1 Imp Gang Boss for every 2 Wild Imps sacrificed. Wild Imps summoned this way gain Unstable Soul.\r\n\r\n Unstable Soul\r\nIncreases damage done by 50% and Fel Firebolt now jumps to 4 additional targets.",
           "choices": null
         },
@@ -3707,7 +3707,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stabilized Portals",
-          "icon": "ability_demonhunter_netherbond",
+          "icon": "1450144",
           "description": "Increases the duration of your Summon Vilefiend, Grimoire: Imp Lord, and Grimoire: Fel Ravager by 3 sec.",
           "choices": null
         },
@@ -3730,14 +3730,14 @@
             {
               "spellId": 455449,
               "name": "Mark of Shatug",
-              "icon": "inv_felhound3_shadow_mount",
-              "description": "Your Summon Vilefiend becomes Summon Gloomhound and learns the following ability:\r\n\r\n Gloom Slash\r\nTooth and claw are drenched in malignant shadow magic, causing the Gloomhound&#39;s melee attacks to deal an additional 120 Shadow damage.",
+              "icon": "1709932",
+              "description": "Your Summon Vilefiend becomes Summon Gloomhound and learns the following ability:\r\n\r\n Gloom Slash\r\nTooth and claw are drenched in malignant shadow magic, causing the Gloomhound's melee attacks to deal an additional 120 Shadow damage.",
               "maxRanks": 1
             },
             {
               "spellId": 455450,
               "name": "Mark of F'harg",
-              "icon": "inv_felhound3_shadow_fire",
+              "icon": "1709931",
               "description": "Your Summon Vilefiend becomes Summon Charhound and learns the following ability:\r\n\r\n Infernal Presence\r\nCloaked in the ever-burning flames of the abyss, dealing 60 Fire damage to enemies within 10 yards every 0.9 sec.",
               "maxRanks": 1
             }
@@ -3754,7 +3754,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Dominion of Argus",
-          "icon": "inv12_apextalent_warlock_dominionofargus",
+          "icon": "7636567",
           "description": null,
           "levels": [
             81,
@@ -3764,17 +3764,17 @@
           "ranks": [
             {
               "spellId": 1276163,
-              "description": "Summoning your Demonic Tyrant leaves open a portal to Argus for 15 sec, causing every 2 casts of Hand of Gul&#39;dan to summon a subjugated demon that serves you for 10 sec.",
+              "description": "Summoning your Demonic Tyrant leaves open a portal to Argus for 15 sec, causing every 2 casts of Hand of Gul'dan to summon a subjugated demon that serves you for 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1276190,
-              "description": "Increases the duration of Dominion of Argus by 5 sec and increases damage dealt by Hand of Gul&#39;dan by 10%.",
+              "description": "Increases the duration of Dominion of Argus by 5 sec and increases damage dealt by Hand of Gul'dan by 10%.",
               "maxRanks": 2
             },
             {
               "spellId": 1276222,
-              "description": "While Dominion of Argus is active, Hand of Gul&#39;dan refunds 1 Soul Shard.\r\n\r\nDemons summoned by Dominion of Argus last an additional 4 sec.",
+              "description": "While Dominion of Argus is active, Hand of Gul'dan refunds 1 Soul Shard.\r\n\r\nDemons summoned by Dominion of Argus last an additional 4 sec.",
               "maxRanks": 1
             }
           ]
@@ -3793,7 +3793,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Wicked Reaping",
-          "icon": "inv_staff_2h_artifactdeadwind_d_05",
+          "icon": "1304738",
           "description": "Damage dealt by your demonic soul is increased by 10%.\r\n\r\nConsuming Demonic Core feeds the demonic entity within you, causing it to appear and deal 914 Shadow damage to your target.",
           "choices": null
         },
@@ -3817,14 +3817,14 @@
             {
               "spellId": 449704,
               "name": "Shared Fate",
-              "icon": "ability_warlock_soullink",
-              "description": "When you kill a target, its tortured soul is flung into a nearby enemy for 3 sec. This effect inflicts 192 Shadow damage to enemies within 10 yds every 0.9 sec.\r\n\r\nDeals reduced damage beyond 8 targets.",
+              "icon": "607854",
+              "description": "When you kill a target, its tortured soul is flung into a nearby enemy for 3 sec. This effect inflicts 194 Shadow damage to enemies within 10 yds every 0.9 sec.\r\n\r\nDeals reduced damage beyond 8 targets.",
               "maxRanks": 1
             },
             {
               "spellId": 449706,
               "name": "Feast of Souls",
-              "icon": "ability_warlock_improvedsoulleech",
+              "icon": "236300",
               "description": "When you kill a target, you have a chance to generate a Soul Shard that is guaranteed to be a Succulent Soul.",
               "maxRanks": 1
             }
@@ -3850,14 +3850,14 @@
             {
               "spellId": 449707,
               "name": "Eternal Servitude",
-              "icon": "ability_demonhunter_infernalchains",
+              "icon": "4067363",
               "description": "Fel Domination cooldown is reduced by 90 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 389623,
               "name": "Gorefiend's Resolve",
-              "icon": "ability_rogue_masterofsubtlety",
+              "icon": "132299",
               "description": "Targets resurrected with Soulstone resurrect with 40% additional health and 80% additional mana.",
               "maxRanks": 1
             }
@@ -3877,7 +3877,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Necrolyte Teachings",
-          "icon": "spell_necro_deathall",
+          "icon": "2576086",
           "description": "Shadow Bolt damage increased by 20%. Power Siphon increases the damage of Demonbolt by an additional 20%.",
           "choices": null
         },
@@ -3895,8 +3895,8 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Demoniac's Fervor",
-          "icon": "inv_helm_mask_zulgurub_d_01",
-          "description": "Your demonic soul deals 100% increased damage to the main target of Hand of Gul&#39;dan.",
+          "icon": "133067",
+          "description": "Your demonic soul deals 100% increased damage to the main target of Hand of Gul'dan.",
           "choices": null
         },
         {
@@ -3913,7 +3913,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Sataiel's Volition",
-          "icon": "spell_necro_deathlyecho",
+          "icon": "2576087",
           "description": "Wild Imp damage increased by 35% and Wild Imps that are imploded have an additional 5% chance to grant a Demonic Core.",
           "choices": null
         },
@@ -3931,7 +3931,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Quietus",
-          "icon": "spell_necro_conclave",
+          "icon": "2576085",
           "description": "Soul Anathema damage increased by 25% and is dealt 20% faster.\r\n\r\nConsuming Demonic Core activates Shared Fate or Feast of Souls.",
           "choices": null
         },
@@ -3949,7 +3949,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Soul Anathema",
-          "icon": "spell_necro_inevitableend",
+          "icon": "2576093",
           "description": "Unleashing your demonic soul bestows a fiendish entity unto the soul of its targets, dealing 488 Shadow damage over 10 sec.\r\n\r\nIf this effect is reapplied, any remaining damage will be added to the new Soul Anathema.",
           "choices": null
         },
@@ -3973,14 +3973,14 @@
             {
               "spellId": 449701,
               "name": "Gorebound Fortitude",
-              "icon": "spell_holy_consumemagic",
+              "icon": "135888",
               "description": "You always gain the benefit of Soulburn when consuming a Healthstone, increasing its healing by 30% and increasing your maximum health by 20% for 12 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 449703,
               "name": "Friends In Dark Places",
-              "icon": "spell_shadow_deathpact",
+              "icon": "136146",
               "description": "Dark Pact now shields you for an additional 50% of the sacrificed health.",
               "maxRanks": 1
             }
@@ -3998,8 +3998,8 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Demonic Soul",
-          "icon": "inv_ability_soulharvesterwarlock_demonicsoul",
-          "description": "A demonic entity now inhabits your soul, allowing you to detect if a Soul Shard has a Succulent Soul when it&#39;s generated.\r\n\r\nConsuming a Succulent Soul unleashes your demonic soul, dealing 1,342 Shadow damage to all enemies within 10 yds of the target. Damage reduced beyond 8 targets.",
+          "icon": "5927650",
+          "description": "A demonic entity now inhabits your soul, allowing you to detect if a Soul Shard has a Succulent Soul when it's generated.\r\n\r\nConsuming a Succulent Soul unleashes your demonic soul, dealing 1,342 Shadow damage to all enemies within 10 yds of the target. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -4019,7 +4019,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Shadow of Death",
-          "icon": "spell_arcane_prismaticcloak",
+          "icon": "135752",
           "description": "Your Summon Demonic Tyrant spell is empowered by the demonic entity within you, causing it to grant 3 Soul Shards that each contain a Succulent Soul.",
           "choices": null
         },
@@ -4037,7 +4037,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Eternal Hunger",
-          "icon": "ability_creature_poison_01_purple",
+          "icon": "2120320",
           "description": "Increases the duration of Manifested Avarice by 5 sec and increases the damage of Soul Swipe by 10%.",
           "choices": null
         },
@@ -4055,7 +4055,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Shared Vessel",
-          "icon": "inv_ability_priest_mindgames",
+          "icon": "6035316",
           "description": "Increases your Mastery by 2%.\r\n\r\nThis effect is doubled while the demonic entity is aiding you in combat.",
           "choices": null
         },
@@ -4073,7 +4073,7 @@
           "heroSubtree": "Soul Harvester",
           "maxRanks": 1,
           "name": "Manifested Avarice",
-          "icon": "ability_priest_shadowyapparition",
+          "icon": "458229",
           "description": "Each Succulent Soul consumed has an increasing chance to unleash the Demonic Soul within you, enabling it to assault your enemies for 9 sec.\r\n\r\n Soul Swipe\r\nStrikes nearby enemies with a malevolent claw, dealing 742 Shadow damage to its target and 495 Shadow damage to other enemies in 10 yds.",
           "choices": null
         },
@@ -4091,7 +4091,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Secrets of the Coven",
-          "icon": "achievement_boss_argus_shivan",
+          "icon": "1711332",
           "description": "Mother of Chaos empowers your next Incinerate to become Infernal Bolt.\r\n\r\n Infernal Bolt\r\nHurl a bolt enveloped in the infernal flames of the abyss, dealing 5,119 Fire damage to your enemy target and generating 3 Soul Shards.",
           "choices": null
         },
@@ -4112,7 +4112,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Ruination",
-          "icon": "ability_bossmannoroth_empoweredmannorothsgaze",
+          "icon": "1117878",
           "description": "Summoning a Pit Lord causes your next Chaos Bolt to become Ruination.\r\n\r\n Ruination\r\nCall down a demon-infested meteor from the depths of the Twisting Nether, dealing 9,644 Chaos damage on impact to all enemies within 8 yds of the target and summoning 3 Wild Imps.\r\n\r\nDamage is reduced beyond 8 targets.",
           "choices": null
         },
@@ -4130,7 +4130,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Abyssal Dominion",
-          "icon": "70_inscription_vantus_rune_tomb",
+          "icon": "1589502",
           "description": "Summon Infernal becomes empowered, dealing 40% increased damage. When your Summon Infernal ends, it fragments into two smaller Infernals at 50% effectiveness that lasts 10 sec.",
           "choices": null
         },
@@ -4148,7 +4148,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Flames of Xoroth",
-          "icon": "ability_warlock_burningembers",
+          "icon": "460952",
           "description": "Fire damage increased by 4% and damage dealt by your demons is increased by 4%.",
           "choices": null
         },
@@ -4172,14 +4172,14 @@
             {
               "spellId": 428911,
               "name": "Soul-Etched Circles",
-              "icon": "spell_shadow_demoniccircleteleport",
+              "icon": "237560",
               "description": "You always gain the benefit of Soulburn when casting Demonic Circle: Teleport, increasing your movement speed by 50% and making you immune to snares and roots for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429072,
               "name": "Annihilan's Bellow",
-              "icon": "ability_physical_taunt",
+              "icon": "132270",
               "description": "Howl of Terror cooldown is reduced by 10 sec and range is increased by 5 yds.",
               "maxRanks": 1
             }
@@ -4199,7 +4199,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Gloom of Nathreza",
-          "icon": "ability_rogue_envelopingshadows",
+          "icon": "132291",
           "description": "Enemies marked by your Havoc take 7% increased damage from your single target spells.",
           "choices": null
         },
@@ -4223,14 +4223,14 @@
             {
               "spellId": 429902,
               "name": "Cruelty of Kerxan",
-              "icon": "creatureportrait_fomorhand",
+              "icon": "978470",
               "description": "Summon Infernal grants Diabolic Ritual and reduces its duration by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429917,
               "name": "Infernal Machine",
-              "icon": "inv_misc_supersoulash",
+              "icon": "4067362",
               "description": "Spending Soul Shards on damaging spells while your Infernal is active decreases the duration of Diabolic Ritual by 1 additional sec.",
               "maxRanks": 1
             }
@@ -4250,7 +4250,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Cloven Souls",
-          "icon": "ability_creature_felfrenzy",
+          "icon": "1388064",
           "description": "Enemies damaged by your Overlord have their souls cloven, increasing damage taken by you and your pets by 5% for 15 sec.",
           "choices": null
         },
@@ -4274,14 +4274,14 @@
             {
               "spellId": 429115,
               "name": "Infernal Vitality",
-              "icon": "inv_fabric_felcloth_ebon",
+              "icon": "132887",
               "description": "Unending Resolve heals you for 30% of your maximum health over 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429130,
               "name": "Infernal Bulwark",
-              "icon": "spell_fire_felfireward",
+              "icon": "135796",
               "description": "Unending Resolve grants Soul Leech equal to 10% of your maximum health and increases the maximum amount Soul Leech can absorb by 10% for 8 sec.",
               "maxRanks": 1
             }
@@ -4299,7 +4299,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Diabolic Ritual",
-          "icon": "ability_bossfelorcs_necromancer_purple",
+          "icon": "1121021",
           "description": "Casting Chaos Bolt, Rain of Fire, or Shadowburn grants Diabolic Ritual for 20 sec. If Diabolic Ritual is already active, its duration is reduced by 1 sec instead.\r\n\r\nWhen Diabolic Ritual expires you gain Demonic Art, causing your next Chaos Bolt, Rain of Fire, or Shadowburn to summon an Overlord, Mother of Chaos, or Pit Lord that unleashes a devastating attack against your enemies.",
           "choices": null
         },
@@ -4317,7 +4317,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Touch of Rancora",
-          "icon": "ability_bossfellord_felspike",
+          "icon": "1118739",
           "description": "Demonic Art increases the damage of your next Chaos Bolt, Rain of Fire, or Shadowburn by 20% and reduces its cast time by 50%.\r\n\r\nCasting Chaos Bolt reduces the duration of Diabolic Ritual by 1 additional sec.",
           "choices": null
         },
@@ -4335,7 +4335,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Mind's Eyes",
-          "icon": "spell_holy_healingfocus",
+          "icon": "135918",
           "description": "Your Diabolic Oculi observe the battlefield and collect information that is imparted to you upon being exploded, each Diabolic Oculi increasing your Intellect by 2% for 10 sec.",
           "choices": null
         },
@@ -4353,8 +4353,8 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Looks That Kill",
-          "icon": "ability_bosskilrogg_deadeye",
-          "description": "Your Diabolic Oculi now cast Diabolic Gaze at your primary demon&#39;s target every 1 sec while active.\r\n\r\n Diabolic Gaze\r\nFire a beam of destructive chaos magic at the target, dealing 304 Chaos damage.\r\n\r\nDamage is increased by 100% per Demonic Oculus active.",
+          "icon": "1117876",
+          "description": "Your Diabolic Oculi now cast Diabolic Gaze at your primary demon's target every 1 sec while active.\r\n\r\n Diabolic Gaze\r\nFire a beam of destructive chaos magic at the target, dealing 304 Chaos damage.\r\n\r\nDamage is increased by 100% per Demonic Oculus active.",
           "choices": null
         },
         {
@@ -4371,7 +4371,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Diabolic Oculi",
-          "icon": "inv_pet_inquisitoreye",
+          "icon": "1387707",
           "description": "You summon a Diabolic Oculus, up to 3, each time the duration of Diabolic Ritual is reduced by one of your spells.\r\n\r\nDiabolic Oculi explode when consuming Demonic Art, dealing 891 Fire damage to all enemies within 10 yds of the target. Damage reduced beyond 8 targets.",
           "choices": null
         }
@@ -4438,7 +4438,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Domination",
-          "icon": "spell_shadow_felmending",
+          "icon": "237564",
           "description": "Your next Imp, Voidwalker, Incubus, Succubus, Felhunter, or Felguard Summon spell is free and has its casting time reduced by 90%.\r\n",
           "choices": null
         },
@@ -4453,7 +4453,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soul Leech",
-          "icon": "warlock_siphonlife",
+          "icon": "571320",
           "description": "All single-target damage done by you and your minions grants you and your pet shadowy shields that absorb 3% of the damage dealt for 15 sec, up to 5% of maximum health.",
           "choices": null
         },
@@ -4468,7 +4468,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Rush",
-          "icon": "ability_deathwing_sealarmorbreachtga",
+          "icon": "538043",
           "description": "Increases your movement speed by 50%, but also damages you for 4% of your maximum health every 1 sec. Movement impairing effects may not reduce you below 100% of normal movement speed. Lasts until canceled.",
           "choices": null
         },
@@ -4485,7 +4485,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Pact",
-          "icon": "spell_shadow_impphaseshift",
+          "icon": "136164",
           "description": "Reduces the cooldown of Fel Domination by 60 sec.",
           "choices": null
         },
@@ -4503,7 +4503,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Demon Skin",
-          "icon": "spell_shadow_ragingscream",
+          "icon": "136185",
           "description": "Your Soul Leech absorption now passively recharges at a rate of 0.1% of maximum health every 1 sec, and may now absorb an additional 5% of maximum health.\r\n\r\nIncreases your armor by 45%.",
           "choices": null
         },
@@ -4521,7 +4521,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fel Armor",
-          "icon": "spell_shadow_felarmour",
+          "icon": "136156",
           "description": "When Soul Leech absorbs damage, 5% of damage taken is absorbed and spread out over 5 sec.\r\n\r\nReduces damage taken by 1.5%.",
           "choices": null
         },
@@ -4538,7 +4538,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fiendish Stride",
-          "icon": "inv_misc_moosehoof_fel",
+          "icon": "1508512",
           "description": "Reduces the damage dealt by Burning Rush by 10%. Burning Rush increases your movement speed by an additional 20%.",
           "choices": null
         },
@@ -4556,7 +4556,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Embrace",
-          "icon": "spell_shadow_metamorphosis",
+          "icon": "136172",
           "description": "Stamina increased by 10%.",
           "choices": null
         },
@@ -4580,14 +4580,14 @@
             {
               "spellId": 386648,
               "name": "Nightmare",
-              "icon": "spell_shadow_possession",
+              "icon": "136183",
               "description": "Increases the amount of damage required to break your fear effects by 60%.",
               "maxRanks": 1
             },
             {
               "spellId": 56244,
               "name": "Horrify",
-              "icon": "spell_nzinsanity_bloodthirst",
+              "icon": "3163621",
               "description": "Your Fear causes the target to tremble in place instead of fleeing in fear.",
               "maxRanks": 1
             }
@@ -4607,8 +4607,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Fortitude",
-          "icon": "spell_warlock_summonimpoutland",
-          "description": "Increases you and your pets&#39; maximum health by 5%.",
+          "icon": "615097",
+          "description": "Increases you and your pets' maximum health by 5%.",
           "choices": null
         },
         {
@@ -4624,7 +4624,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Banish",
-          "icon": "spell_shadow_cripple",
+          "icon": "136135",
           "description": "Banishes an enemy Demon, Aberration, or Elemental, preventing any action for 30 sec. Limit 1. Casting Banish again on the target will cancel the effect.",
           "choices": null
         },
@@ -4642,8 +4642,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Curse of Exhaustion",
-          "icon": "spell_shadow_grimward",
-          "description": "Reduces the target&#39;s movement speed by 50% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
+          "icon": "136162",
+          "description": "Reduces the target's movement speed by 50% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
           "choices": null
         },
         {
@@ -4660,7 +4660,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Curse of Tongues",
-          "icon": "spell_shadow_curseoftounges",
+          "icon": "136140",
           "description": "Forces the target to speak in Demonic, increasing the casting time of all spells by 30% for 1 min.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
           "choices": null
         },
@@ -4677,7 +4677,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Infernal Beneficiary",
-          "icon": "achievement_general_raidrepresentation",
+          "icon": "464118",
           "description": "Healing done by Drain Life also heals your primary demon at 400% effectiveness.",
           "choices": null
         },
@@ -4694,7 +4694,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mortal Coil",
-          "icon": "ability_warlock_mortalcoil",
+          "icon": "607853",
           "description": "Horrifies an enemy target into fleeing, incapacitating for 3 sec and healing you for 20% of maximum health.",
           "choices": null
         },
@@ -4712,7 +4712,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Annihilan",
-          "icon": "inv_misc_magtheridonshead",
+          "icon": "450904",
           "description": "Increases your critical strike chance by 2%.",
           "choices": null
         },
@@ -4730,7 +4730,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Circle",
-          "icon": "spell_shadow_demoniccirclesummon",
+          "icon": "237559",
           "description": "Summons a Demonic Circle for 15 min. Cast Demonic Circle: Teleport to teleport to its location and remove all movement slowing effects.\r\n\r\nYou also learn:\r\n\r\n Demonic Circle: Teleport\r\nTeleports you to your Demonic Circle and removes all movement slowing effects.",
           "choices": null
         },
@@ -4741,15 +4741,15 @@
           "posX": 12,
           "posY": 6,
           "connections": [
+            109844,
             109846,
-            71942,
-            109844
+            71942
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Satyr",
-          "icon": "spell_shadow_mindshear",
+          "icon": "237565",
           "description": "Increases your haste by 2%.",
           "choices": null
         },
@@ -4766,7 +4766,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Mortal Coil",
-          "icon": "spell_warlock_harvestoflife",
+          "icon": "537517",
           "description": "Increases the range of Mortal Coil by 10 yds and Mortal Coil now heals for an additional 5% of maximum health.",
           "choices": null
         },
@@ -4783,7 +4783,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Pact",
-          "icon": "spell_shadow_deathpact",
+          "icon": "136146",
           "description": "Sacrifices 20% of your current health to shield you for 200% of the sacrificed health plus an additional 950 for 20 sec. Usable while suffering from control impairing effects.",
           "choices": null
         },
@@ -4800,7 +4800,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Foul Mouth",
-          "icon": "ability_creature_cursed_02",
+          "icon": "132094",
           "description": "Casting Curse of Exhaustion, Curse of Tongues, or Curse of Weakness now curses all enemies within 10 yds of the target.",
           "choices": null
         },
@@ -4818,7 +4818,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Empowered Healthstone",
-          "icon": "inv_raid_creepingcoagulum_blue",
+          "icon": "5948203",
           "description": "Healthstones heal you for an additional 5% additional health.",
           "choices": null
         },
@@ -4835,7 +4835,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Abyss Walker",
-          "icon": "achievement_explore_argus",
+          "icon": "1714097",
           "description": "Using Demonic Circle: Teleport or your Demonic Gateway reduces all damage you take by 4% for 10 sec.",
           "choices": null
         },
@@ -4853,7 +4853,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fortified Soul",
-          "icon": "spell_warlock_demonsoul",
+          "icon": "463284",
           "description": "Soul Leech may now absorb an additional 5% of your maximum health.",
           "choices": null
         },
@@ -4870,7 +4870,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Teachings of the Black Harvest",
-          "icon": "inv_misc_codexofxerrath_nochains",
+          "icon": "666475",
           "description": "Your primary pets gain a bonus effect.\r\n\r\nImp: Successful Singe Magic casts grant the target 4% damage reduction for 5 sec.\r\n\r\nVoidwalker: Reduces the cooldown of Shadow Bulwark by 30 sec.\r\n\r\nFelhunter: Reduces the cooldown of Devour Magic by 5 sec.\r\n\r\nSayaad: Reduces the cooldown of Seduction by 10 sec and causes the target to walk faster towards the demon.",
           "choices": null
         },
@@ -4881,14 +4881,14 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            110072,
-            109845
+            109845,
+            110072
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Gorefiend's Avarice",
-          "icon": "inv_helmet_90",
+          "icon": "133186",
           "description": "Drain Life now channels 100% faster and restores health 100% faster.",
           "choices": null
         },
@@ -4911,14 +4911,14 @@
             {
               "spellId": 386664,
               "name": "Ichor of Devils",
-              "icon": "spell_yorsahj_bloodboil_greenoil",
+              "icon": "1129418",
               "description": "Dark Pact sacrifices only 5% of your current health for the same shield value.",
               "maxRanks": 1
             },
             {
               "spellId": 386686,
               "name": "Frequent Donor",
-              "icon": "ability_ironmaidens_bloodritual",
+              "icon": "1035037",
               "description": "Reduces the cooldown of Dark Pact by 15 sec.",
               "maxRanks": 1
             }
@@ -4939,7 +4939,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Eredar",
-          "icon": "achievement_boss_argus_femaleeredar",
+          "icon": "1711329",
           "description": "Increases your Intellect by 3%.",
           "choices": null
         },
@@ -4957,7 +4957,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of the Nathrezim",
-          "icon": "ability_physical_taunt_purple",
+          "icon": "3086045",
           "description": "Increases your Leech by 2%.",
           "choices": null
         },
@@ -4976,7 +4976,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Resilience",
-          "icon": "ability_warlock_avoidance",
+          "icon": "132332",
           "description": "Reduces the chance you will be critically struck by 2%. All damage your primary demon takes is reduced by 8%.",
           "choices": null
         },
@@ -4993,7 +4993,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Empowered Drain Life",
-          "icon": "spell_shadow_lifedrain02_purple",
+          "icon": "3154546",
           "description": "Drain Life heals for an additional 200% of damage dealt and grants Soul Leech equal to 10% of damage dealt.",
           "choices": null
         },
@@ -5017,14 +5017,14 @@
             {
               "spellId": 317138,
               "name": "Strength of Will",
-              "icon": "spell_shadow_demonictactics",
+              "icon": "136150",
               "description": "Unending Resolve reduces damage taken by an additional 15%.",
               "maxRanks": 1
             },
             {
               "spellId": 386659,
               "name": "Dark Accord",
-              "icon": "ability_warlock_improveddemonictactics",
+              "icon": "236299",
               "description": "Reduces the cooldown of Unending Resolve by 45 sec.",
               "maxRanks": 1
             }
@@ -5044,7 +5044,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Gateway",
-          "icon": "spell_warlock_demonicportal_green",
+          "icon": "607512",
           "description": "Creates a demonic gateway between two locations. Activating the gateway transports the user to the other gateway. Each player can use a Demonic Gateway only once per 90 sec.",
           "choices": null
         },
@@ -5055,9 +5055,9 @@
           "posX": 12,
           "posY": 9,
           "connections": [
+            71917,
             110073,
-            110076,
-            71917
+            110076
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5069,14 +5069,14 @@
             {
               "spellId": 5484,
               "name": "Howl of Terror",
-              "icon": "ability_warlock_howlofterror",
+              "icon": "607852",
               "description": "Let loose a terrifying howl, causing 5 enemies within 10 yds to flee in fear, disorienting them for 20 sec. Damage may cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 30283,
               "name": "Shadowfury",
-              "icon": "ability_warlock_shadowfurytga",
+              "icon": "607865",
               "description": "Stuns all enemies within 8 yds for 3 sec.",
               "maxRanks": 1
             }
@@ -5095,7 +5095,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swift Artifice",
-          "icon": "spell_shadow_destructivesoul",
+          "icon": "136151",
           "description": "Reduces the cast time of Soulstone and Create Healthstone by 50%.",
           "choices": null
         },
@@ -5113,7 +5113,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Link",
-          "icon": "ability_warlock_soullink",
+          "icon": "607854",
           "description": "5% of all damage you take is taken by your demon pet instead. \r\n\r\nWhile Grimoire of Sacrifice is active, your Stamina is increased by 3%.",
           "choices": null
         },
@@ -5130,7 +5130,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frequent Traveler",
-          "icon": "achievement_dungeon_outland_dungeonmaster",
+          "icon": "255348",
           "description": "Reduces the cast time of Demonic Gateway by 0.5 sec and you can now use Demonic Gateways twice before triggering a cooldown.",
           "choices": null
         },
@@ -5148,7 +5148,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fel Synergy",
-          "icon": "inv_sword_1h_felfireraid_d_01",
+          "icon": "1112519",
           "description": "Soul Leech also heals you for 8% and your pet for 25% of the absorption it grants.",
           "choices": null
         },
@@ -5165,7 +5165,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Oppressive Darkness",
-          "icon": "spell_shadow_shadowfury",
+          "icon": "136201",
           "description": "Reduces the cooldown of Shadowfury by 15 sec and increases its radius by 2 yds.\r\n\r\nReduces the cooldown of Howl of Terror by 5 sec and it now fears 5 additional enemies.",
           "choices": null
         },
@@ -5183,7 +5183,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pact of Gluttony",
-          "icon": "warlock_bloodstone",
+          "icon": "538744",
           "description": "Healthstones you conjure for yourself are now Demonic Healthstones and can be used multiple times in combat. Demonic Healthstones cannot be traded.\r\n\r\n Demonic Healthstone\r\nInstantly restores 25% health. 60 sec cooldown.",
           "choices": null
         },
@@ -5202,7 +5202,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soulburn",
-          "icon": "spell_warlock_soulburn",
+          "icon": "463286",
           "description": "Consumes a Soul Shard, unlocking the hidden power of your spells.\r\n\r\nDemonic Circle: Teleport: Increases your movement speed by 50% and makes you immune to snares and roots for 6 sec.\r\n\r\nDemonic Gateway: Can be cast instantly.\r\n\r\nDrain Life: Gain an absorb shield equal to the amount of healing done for 30 sec. This shield cannot exceed 30% of your maximum health.\r\n\r\nHealthstone: Increases the healing of your Healthstone by 30% and increases your maximum health by 20% for 12 sec.",
           "choices": null
         },
@@ -5226,14 +5226,14 @@
             {
               "spellId": 1271748,
               "name": "Blight of Weakness",
-              "icon": "warlock_curse_weakness_amplified",
+              "icon": "5449820",
               "description": "Call forth a cloud of cloying shadow mist that envelopes the target and all enemies within 10 yds, increasing the time between their attacks by 100% and reducing their critical strike chance by 10% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse or Blight active per target.",
               "maxRanks": 1
             },
             {
               "spellId": 1271802,
               "name": "Blight of Tongues",
-              "icon": "spell_shadow_curseoftongues_amplified",
+              "icon": "5449818",
               "description": "Call forth a cloud of cloying shadow mist that envelopes the target and all enemies within 10 yds, increasing their casting time of all spells by 100% for 12 sec.\r\n\r\nCurses: A warlock can only have one Curse or Blight active per target.",
               "maxRanks": 1
             }
@@ -5250,8 +5250,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chaos Bolt",
-          "icon": "ability_warlock_chaosbolt",
-          "description": "Unleashes a devastating blast of chaos, dealing a critical strike for 3,161 Chaos damage. Damage is further increased by your critical strike chance.",
+          "icon": "236291",
+          "description": "Unleashes a devastating blast of chaos, dealing a critical strike for 3,282 Chaos damage. Damage is further increased by your critical strike chance.",
           "choices": null
         },
         {
@@ -5267,8 +5267,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Conflagrate",
-          "icon": "spell_fire_fireball",
-          "description": "Triggers an explosion on the target, dealing 1,363 Fire damage.\r\n\r\nGenerates 5 Soul Shard Fragments.",
+          "icon": "135807",
+          "description": "Triggers an explosion on the target, dealing 1,349 Fire damage.\r\n\r\nGenerates 5 Soul Shard Fragments.",
           "choices": null
         },
         {
@@ -5290,14 +5290,14 @@
             {
               "spellId": 5740,
               "name": "Rain of Fire",
-              "icon": "spell_shadow_rainoffire",
+              "icon": "136186",
               "description": "Calls down a rain of hellfire the target location, dealing 1,395 Fire damage over 7.1 sec to enemies in the area.\r\n\r\nThis spell is cast at a selected location.",
               "maxRanks": 1
             },
             {
               "spellId": 1214467,
               "name": "Rain of Fire",
-              "icon": "spell_shadow_rainoffire",
+              "icon": "136186",
               "description": "Calls down a rain of hellfire upon your target, dealing 1,395 Fire damage over 7.1 sec to enemies in the area.\r\n\r\nThis spell is cast at your target.",
               "maxRanks": 1
             }
@@ -5316,7 +5316,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Conflagrate",
-          "icon": "spell_fire_fireball",
+          "icon": "135807",
           "description": "Conflagrate gains an additional charge.",
           "choices": null
         },
@@ -5333,7 +5333,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Backdraft",
-          "icon": "ability_warlock_backdraft",
+          "icon": "236290",
           "description": "Conflagrate reduces the cast time of your next Incinerate, Chaos Bolt, or Soul Fire by 30%. Maximum 2 charges.",
           "choices": null
         },
@@ -5350,7 +5350,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Practiced Chaos",
-          "icon": "ability_demonhunter_chaoticimprint_fire",
+          "icon": "4226151",
           "description": "Increases Mastery by 2%.",
           "choices": null
         },
@@ -5367,8 +5367,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Roaring Blaze",
-          "icon": "ability_warlock_inferno",
-          "description": "Increases Conflagrate damage by 10%. \r\n\r\nConflagrate now erupts the target&#39;s Immolate, spreading it up to 3 nearby enemies.",
+          "icon": "460698",
+          "description": "Increases Conflagrate damage by 10%. \r\n\r\nConflagrate now erupts the target's Immolate, spreading it up to 3 nearby enemies.",
           "choices": null
         },
         {
@@ -5385,7 +5385,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Explosive Potential",
-          "icon": "spell_fire_felflamering_red",
+          "icon": "2175503",
           "description": "Reduces the cooldown of Conflagrate by 2 sec.",
           "choices": null
         },
@@ -5409,15 +5409,15 @@
             {
               "spellId": 387506,
               "name": "Mayhem",
-              "icon": "spell_warlock_demonbolt",
-              "description": "Your single target spells have a 35% chance to apply Havoc to a nearby enemy for 5.0 sec.\r\n\r\n Havoc\r\nMarks a target with Havoc for 5.0 sec, causing your single target spells to also strike the Havoc victim for 60% of the damage dealt.",
+              "icon": "1020342",
+              "description": "Your single target spells have a 35% chance to apply Havoc to a nearby enemy for 5.0 sec.\r\n\r\n Havoc\r\nMarks a target with Havoc for 5.0 sec, causing your single target spells to also strike the Havoc victim for 50% of the damage dealt.",
               "maxRanks": 1
             },
             {
               "spellId": 80240,
               "name": "Havoc",
-              "icon": "ability_warlock_baneofhavoc",
-              "description": "Marks a target with Havoc for 15 sec, causing your single target spells to also strike the Havoc victim for 60% of the damage dealt.",
+              "icon": "460695",
+              "description": "Marks a target with Havoc for 15 sec, causing your single target spells to also strike the Havoc victim for 50% of the damage dealt.",
               "maxRanks": 1
             }
           ]
@@ -5436,7 +5436,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Scalding Flames",
-          "icon": "spell_burningsoul",
+          "icon": "429590",
           "description": "Increases the damage of Immolate by 25% and its duration by 3 sec.",
           "choices": null
         },
@@ -5453,8 +5453,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowburn",
-          "icon": "spell_shadow_scourgebuild",
-          "description": "Blasts a target for 1,862 Shadowflame damage. Only usable on enemies that have less than 20% health.\r\n\r\nRestores 1 Soul Shard and refunds a charge if the target dies within 5 sec.",
+          "icon": "136191",
+          "description": "Blasts a target for 1,865 Shadowflame damage. Only usable on enemies that have less than 20% health.\r\n\r\nRestores 1 Soul Shard and removes its cooldown if the target dies within until canceled.",
           "choices": null
         },
         {
@@ -5464,14 +5464,14 @@
           "posX": 34,
           "posY": 6,
           "connections": [
-            71979,
-            72059
+            72059,
+            71979
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Backlash",
-          "icon": "spell_fire_playingwithfire",
+          "icon": "135823",
           "description": "Increases your critical strike chance by 2%.\r\n\r\nPhysical attacks against you have a 20% chance to make your next Incinerate instant cast. This effect can only occur once every 6 sec.",
           "choices": null
         },
@@ -5488,7 +5488,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Havoc",
-          "icon": "ability_warlock_baneofhavoc",
+          "icon": "460695",
           "description": "Increases the duration of Havoc by 5 sec and increases the damage Havoc victims are dealt by an additional 10%.",
           "choices": null
         },
@@ -5506,7 +5506,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Ashen Remains",
-          "icon": "inv_enchanting_dust",
+          "icon": "3528445",
           "description": "Chaos Bolt, Shadowburn, and Incinerate deal 3% increased damage to targets afflicted by Immolate.",
           "choices": null
         },
@@ -5523,8 +5523,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cataclysm",
-          "icon": "achievement_zone_cataclysm",
-          "description": "Calls forth a cataclysm at the target location, dealing 1,388 Shadowflame damage to all enemies within 8 yards and afflicting them with Immolate.",
+          "icon": "409545",
+          "description": "Calls forth a cataclysm at the target location, dealing 1,382 Shadowflame damage to all enemies within 8 yards and afflicting them with Immolate.",
           "choices": null
         },
         {
@@ -5540,7 +5540,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fiendish Cruelty",
-          "icon": "spell_fire_soulburn",
+          "icon": "135827",
           "description": "Critical strikes dealt by Chaos Bolt, Conflagrate, or Incinerate have a 10% chance to make your next cast of Shadowburn within 30 sec cost no Soul Shards and usable on any target regardless of health.",
           "choices": null
         },
@@ -5558,7 +5558,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chaotic Inferno",
-          "icon": "spell_fire_burnout",
+          "icon": "135789",
           "description": "Increases Chaos Bolt damage by 5% and Chaos Bolt now has a 25% chance to make your next Incinerate instant.",
           "choices": null
         },
@@ -5575,7 +5575,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flashpoint",
-          "icon": "spell_fire_moltenblood",
+          "icon": "135822",
           "description": "When your Immolate deals periodic damage to a target above 80% health, gain 2% Haste for 10 sec.\r\n\r\nStacks up to 3 times.",
           "choices": null
         },
@@ -5594,8 +5594,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Summon Infernal",
-          "icon": "spell_shadow_summoninfernal",
-          "description": "Summons an Infernal from the Twisting Nether, impacting for 227 Fire damage and stunning all enemies in the area for 2 sec.\r\n\r\nThe Infernal will serve you for 30 sec, dealing 207 damage to all nearby enemies every 1.8 sec and generating 1 Soul Shard Fragment every 1 sec.",
+          "icon": "136219",
+          "description": "Summons an Infernal from the Twisting Nether, impacting for 226 Fire damage and stunning all enemies in the area for 2 sec.\r\n\r\nThe Infernal will serve you for 30 sec, dealing 218 damage to all nearby enemies every 1.8 sec and generating 1 Soul Shard Fragment every 1 sec.",
           "choices": null
         },
         {
@@ -5611,7 +5611,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Emberstorm",
-          "icon": "spell_fire_selfdestruct",
+          "icon": "135826",
           "description": "Increases the damage done by your Fire spells by 2% and reduces the cast time of your Incinerate spell by 20%.",
           "choices": null
         },
@@ -5629,7 +5629,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fire and Brimstone",
-          "icon": "ability_warlock_fireandbrimstone",
+          "icon": "236297",
           "description": "Incinerate now also hits all enemies near your target for 25% damage.",
           "choices": null
         },
@@ -5646,7 +5646,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lake of Fire",
-          "icon": "spell_fire_ragnaros_molteninferno",
+          "icon": "525024",
           "description": "Cataclysm now leaves behind a lake of fire that deals 2,281 Fire damage to enemies within it over 8.9 sec.\r\n\r\nImmolate deals 20% increased damage to enemies within the lake of fire.",
           "choices": null
         },
@@ -5671,15 +5671,15 @@
             {
               "spellId": 205148,
               "name": "Reverse Entropy",
-              "icon": "spell_fire_playingwithfiregreen",
+              "icon": "840406",
               "description": "Your spells have a chance to grant you 15% Haste for 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 266134,
               "name": "Internal Combustion",
-              "icon": "ability_mage_livingbomb",
-              "description": "Chaos Bolt consumes up to 5 sec of Immolate&#39;s damage over time effect on your target, instantly dealing that much damage.",
+              "icon": "236220",
+              "description": "Chaos Bolt consumes up to 5 sec of Immolate's damage over time effect on your target, instantly dealing that much damage.",
               "maxRanks": 1
             }
           ]
@@ -5703,14 +5703,14 @@
             {
               "spellId": 417234,
               "name": "Crashing Chaos",
-              "icon": "inv_infernalmount",
+              "icon": "1367345",
               "description": "Summon Infernal increases the damage of your next 8 casts of Chaos Bolt by 25% or your next 8 casts of Rain of Fire by 35%.",
               "maxRanks": 1
             },
             {
               "spellId": 266086,
               "name": "Rain of Chaos",
-              "icon": "spell_fire_felrainoffire",
+              "icon": "135804",
               "description": "While your initial Infernal is active, every Soul Shard you spend has a 15% chance to summon an additional Infernal that lasts 8 sec.",
               "maxRanks": 1
             }
@@ -5737,15 +5737,15 @@
             {
               "spellId": 453105,
               "name": "Summoner's Embrace",
-              "icon": "spell_shadow_unsummonbuilding",
+              "icon": "136230",
               "description": "Increases the damage dealt by your spells and your demon by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 108503,
               "name": "Grimoire of Sacrifice",
-              "icon": "warlock_grimoireofsacrifice",
-              "description": "Sacrifices your demon pet for power, gaining its command demon ability, and causing your spells to sometimes also deal 142 additional Shadow damage.\r\n\r\nLasts until canceled or until you summon a demon pet.",
+              "icon": "538443",
+              "description": "Sacrifices your demon pet for power, gaining its command demon ability, and causing your spells to sometimes also deal 139 additional Shadow damage.\r\n\r\nLasts until canceled or until you summon a demon pet.",
               "maxRanks": 1
             }
           ]
@@ -5763,7 +5763,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Ruin",
-          "icon": "spell_shadow_shadowwordpain",
+          "icon": "136207",
           "description": "Increases the critical strike damage of your Destruction spells by 15%.",
           "choices": null
         },
@@ -5774,14 +5774,14 @@
           "posX": 34,
           "posY": 9,
           "connections": [
-            71980,
-            71960
+            71960,
+            71980
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Chaos Bolt",
-          "icon": "ability_warlock_chaosbolt",
+          "icon": "236291",
           "description": "Increases the damage of Chaos Bolt by 10% and reduces its cast time by 0.5 sec.",
           "choices": null
         },
@@ -5792,15 +5792,15 @@
           "posX": 38,
           "posY": 9,
           "connections": [
-            71971,
-            71960
+            71960,
+            71971
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Destructive Rapidity",
-          "icon": "spell_shadow_rainoffire",
-          "description": "Increases how quickly Rain of Fire deals damage by 25% and how quickly your Infernal&#39;s Immolation deals damage by 10%.",
+          "icon": "136186",
+          "description": "Increases how quickly Rain of Fire deals damage by 25% and how quickly your Infernal's Immolation deals damage by 10%.",
           "choices": null
         },
         {
@@ -5816,7 +5816,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Devastation",
-          "icon": "spell_fire_flameshock",
+          "icon": "135813",
           "description": "Increases the critical strike chance of your Destruction spells by 3%.",
           "choices": null
         },
@@ -5839,15 +5839,15 @@
             {
               "spellId": 1280868,
               "name": "Dimensional Rift",
-              "icon": "inv_artifact_dimensionalrift",
+              "icon": "1394890",
               "description": "Chaos Bolt and Shadowburn have a 10% chance to rip open a hole in space and time, opening a random portal that damages your target:\r\n\r\nShadowy Tear\r\nDeals 3,143 Shadow damage over 14 sec.\r\n\r\nUnstable Tear\r\nDeals 2,696 Chaos damage over 6 sec.\r\n\r\nChaos Tear\r\nFires a Chaos Bolt, dealing 1,240 Chaos damage. This Chaos Bolt always critically strikes and your critical strike chance increases its damage.\r\n\r\nGenerates 10 Soul Shard Fragments.",
               "maxRanks": 1
             },
             {
               "spellId": 6353,
               "name": "Soul Fire",
-              "icon": "spell_fire_firebolt",
-              "description": "Burns the enemy&#39;s soul, dealing 10,249 Fire damage and applying Immolate.\r\n\r\nGenerates 1 Soul Shard.",
+              "icon": "135809",
+              "description": "Burns the enemy's soul, dealing 14,510 Fire damage and applying Immolate.\r\n\r\nGenerates 1 Soul Shard.",
               "maxRanks": 1
             }
           ]
@@ -5866,7 +5866,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chaos Incarnate",
-          "icon": "spell_fire_felflamering",
+          "icon": "135799",
           "description": "Chaos Bolt, Rain of Fire, and Shadowburn always gain at least 70% of the maximum benefit from your Mastery: Chaotic Energies.",
           "choices": null
         },
@@ -5884,8 +5884,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Conflagration of Chaos",
-          "icon": "inv_shadowflame_buff",
-          "description": "Conflagrate and Shadowburn have a 100% chance to guarantee your next cast of either ability to critically strike, and increase its damage by your critical strike chance.",
+          "icon": "4914674",
+          "description": "Conflagrate and Shadowburn have a 100% chance to critical strike and their damage is increased by your critical strike chance.",
           "choices": null
         },
         {
@@ -5902,7 +5902,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Diabolic Embers",
-          "icon": "inv_shoulder_robe_raidmage_j_01",
+          "icon": "521223",
           "description": "Incinerate now generates 100% additional Soul Shard Fragments.",
           "choices": null
         },
@@ -5925,15 +5925,15 @@
             {
               "spellId": 1214442,
               "name": "Demonfire Infusion",
-              "icon": "spell_shadow_shadowandflame",
+              "icon": "136196",
               "description": "Periodic damage from Immolate has a 4% chance to fire a Demonfire bolt at 100% increased effectiveness.\r\n\r\nIncinerate has a 25% chance to fire a Demonfire bolt at 100% increased effectiveness.",
               "maxRanks": 1
             },
             {
               "spellId": 196447,
               "name": "Channel Demonfire",
-              "icon": "spell_fire_ragnaros_lavaboltgreen",
-              "description": "Launches 15 bolts of felfire over 2.7 sec at random targets afflicted by your Immolate within 40 yds. Each bolt deals 149 Fire damage to the target and 74 Fire damage to nearby enemies.",
+              "icon": "840407",
+              "description": "Launches 15 bolts of felfire over 2.7 sec at random targets afflicted by your Immolate within 40 yds. Each bolt deals 150 Fire damage to the target and 74 Fire damage to nearby enemies.",
               "maxRanks": 1
             }
           ]
@@ -5951,8 +5951,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Avatar of Destruction",
-          "icon": "inv12_ability_warlock_overfiend",
-          "description": "Casting Soul Fire summons an Overfiend.\r\n\r\nOpening a Dimensional Rift has a chance to summon an Overfiend instead.\r\n\r\n Summon Overfiend\r\nGenerates 1 Soul Shard Fragment every 1 sec and casts Chaos Bolt at 80% effectiveness at its summoner&#39;s target. Lasts 8 sec.",
+          "icon": "7439231",
+          "description": "Casting Soul Fire summons an Overfiend.\r\n\r\nOpening a Dimensional Rift has a chance to summon an Overfiend instead.\r\n\r\n Summon Overfiend\r\nGenerates 1 Soul Shard Fragment every 1 sec and casts Chaos Bolt at 80% effectiveness at its summoner's target. Lasts 8 sec.",
           "choices": null
         },
         {
@@ -5968,7 +5968,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inferno",
-          "icon": "warlock_pvp_burninglegion",
+          "icon": "1380867",
           "description": "Reduces the cooldown of Summon Infernal by 30.0 sec and increases your Mastery by 3%.",
           "choices": null
         },
@@ -5985,7 +5985,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Alythess's Ire",
-          "icon": "ability_ironmaidens_rapidfire",
+          "icon": "1035051",
           "description": "Rain of Fire has a 20% chance to reduce the cost of your next Rain of Fire within 8 sec by 100%.",
           "choices": null
         },
@@ -6002,7 +6002,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Raging Demonfire",
-          "icon": "spell_fire_ragnaros_lavaboltgreen",
+          "icon": "840407",
           "description": "Channel Demonfire fires an additional 2 bolts. Each bolt increases the remaining duration of Immolate on all targets hit by 0.5 sec.",
           "choices": null
         },
@@ -6017,7 +6017,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Embers of Nihilam",
-          "icon": "inv12_apextalent_warlock_embersofnihilam",
+          "icon": "7636568",
           "description": null,
           "levels": [
             81,
@@ -6027,17 +6027,17 @@
           "ranks": [
             {
               "spellId": 1265770,
-              "description": "Casting Incinerate has a chance to evoke an echo of the Dark Titan&#39;s power.\r\n\r\n Echo of Sargeras\r\nHurl an ember torn from Nihilam at the target, dealing 712 Shadowflame damage and an additional 617 Shadowflame damage to all enemies within 10 yds.\r\n\r\nDamage reduced beyond 8 targets.",
+              "description": "Casting Incinerate has a 10% chance to evoke an echo of the Dark Titan's power.\r\n\r\n Echo of Sargeras\r\nHurl an ember torn from Nihilam at the target, dealing 712 Shadowflame damage and an additional 617 Shadowflame damage to all enemies within 10 yds.\r\n\r\nDamage reduced beyond 8 targets.",
               "maxRanks": 1
             },
             {
               "spellId": 1265772,
-              "description": "Memories of the Titans&#39; destruction flash in your mind when you evoke the Dark Titan&#39;s power, increasing critical strike by 4% and haste by 4% for 6 sec.",
+              "description": "Memories of the Titans' destruction flash in your mind when you evoke the Dark Titan's power, increasing critical strike by 4% and haste by 4% for 6 sec.",
               "maxRanks": 2
             },
             {
               "spellId": 1265774,
-              "description": "Casting Chaos Bolt, Shadowburn, or Rain of Fire evokes an echo of the Dark Titan&#39;s power at 50%, 50%, or 60% effectiveness respectively.\r\n\r\nIf no target is found, a random target suffering from your Immolate will be selected.",
+              "description": "Casting Chaos Bolt, Shadowburn, or Rain of Fire evokes an echo of the Dark Titan's power at 50%, 50%, or 60% effectiveness respectively.\r\n\r\nIf no target is found, a random target suffering from your Immolate will be selected.",
               "maxRanks": 1
             }
           ]
@@ -6062,14 +6062,14 @@
             {
               "spellId": 440057,
               "name": "Curse of the Satyr",
-              "icon": "inv_fabric_felrag",
-              "description": "Curse of Weakness is empowered and transforms into Curse of the Satyr.\r\n\r\n Curse of the Satyr\r\nIncreases the time between an enemy&#39;s attacks by 20% and the casting time of all spells by 30% for 2 min.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
+              "icon": "132888",
+              "description": "Curse of Weakness is empowered and transforms into Curse of the Satyr.\r\n\r\n Curse of the Satyr\r\nIncreases the time between an enemy's attacks by 20% and the casting time of all spells by 30% for 2 min.\r\n\r\nCurses: A warlock can only have one Curse active per target.",
               "maxRanks": 1
             },
             {
               "spellId": 440059,
               "name": "Aura of Enfeeblement",
-              "icon": "warlock_curse_weakness_aura",
+              "icon": "615102",
               "description": "While Unending Resolve is active, enemies within 30 yds are affected by Curse of Tongues and Curse of Weakness at 100% effectiveness.",
               "maxRanks": 1
             }
@@ -6089,8 +6089,8 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Seeds of Their Demise",
-          "icon": "ability_warlock_moltencoregreen",
-          "description": "After Wither reaches 8 stacks or when its host reaches 20% health, Wither deals 378 Shadowflame damage to its host every 1 sec until 1 stack remains.\r\n\r\nWhen Blackened Soul deals damage, you have a chance to gain Shard Instability.",
+          "icon": "840197",
+          "description": "After Wither reaches 8 stacks or when its host reaches 20% health, Wither deals 548 Shadowflame damage to its host every 1 sec until 1 stack remains.\r\n\r\nWhen Blackened Soul deals damage, you have a chance to gain Shard Instability.",
           "choices": null
         },
         {
@@ -6107,7 +6107,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Mark of Xavius",
-          "icon": "warlock_curse_shadow_aura",
+          "icon": "615100",
           "description": "Wither damage increased by 25%.\r\n\r\nBlackened Soul deals 2% increased damage per stack of Wither.",
           "choices": null
         },
@@ -6131,14 +6131,14 @@
             {
               "spellId": 440065,
               "name": "Zevrim's Resilience",
-              "icon": "ability_warrior_intensifyrage",
-              "description": "Dark Pact heals you for 625 every 1 sec while active.",
+              "icon": "236310",
+              "description": "Dark Pact heals you for 781 every 1 sec while active.",
               "maxRanks": 1
             },
             {
               "spellId": 440070,
               "name": "Illhoof's Design",
-              "icon": "sha_spell_fire_felfireward_nightmare",
+              "icon": "1357809",
               "description": "Sacrifice 10% of your maximum health. Soul Leech now absorbs an additional 15% of your maximum health.",
               "maxRanks": 1
             }
@@ -6158,8 +6158,8 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Blackened Soul",
-          "icon": "spell_nzinsanity_chasedbyshadows",
-          "description": "Spending Soul Shards on damaging spells will further corrupt enemies affected by your Wither, increasing its stack count by 1.\r\n\r\nEach time Wither gains a stack it has a chance to collapse, consuming a stack every 1 sec to deal 378 Shadowflame damage to its host until 1 stack remains.",
+          "icon": "3163618",
+          "description": "If the target is afflicted with your Wither, casting Chaos Bolt and Shadowburn increase its stack count by 1.\r\n\r\nEach time Wither gains a stack it has a chance to collapse, consuming a stack every 1 sec to deal 548 Shadowflame damage to its host until 1 stack remains.",
           "choices": null
         },
         {
@@ -6174,8 +6174,8 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Wither",
-          "icon": "inv_ability_hellcallerwarlock_wither",
-          "description": "Bestows a vile malediction upon the target, burning the sinew and muscle of its host, dealing 75 Shadowflame damage immediately and an additional 1,239 Shadowflame damage over 18 sec.\r\n\r\nReplaces Corruption.",
+          "icon": "5927632",
+          "description": "Bestows a vile malediction upon the target, burning the sinew and muscle of its host, dealing 94 Shadowflame damage immediately and an additional 1,569 Shadowflame damage over 18 sec.\r\n\r\nReplaces Corruption.",
           "choices": null
         },
         {
@@ -6195,7 +6195,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Malevolence",
-          "icon": "inv_ability_hellcallerwarlock_malevolence",
+          "icon": "5927631",
           "description": "Dark magic erupts from you and corrupts your soul for 20 sec, causing enemies suffering from your Wither to take 4,808 Shadowflame damage and increase its stack count by 6.\r\n\r\nWhile corrupted your Haste is increased by 8% and spending Soul Shards on damaging spells grants 1 additional stack of Wither.",
           "choices": null
         },
@@ -6213,8 +6213,8 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Mark of Peroth'arn",
-          "icon": "70_inscription_vantus_rune_tomb",
-          "description": "Critical strike damage dealt by Wither is increased by 10%. \r\n\r\nWither has a chance to gain a stack when it critically strikes. Stacks gained this way do not activate Blackened Soul.",
+          "icon": "1589502",
+          "description": "Damaging critical strikes dealt by Wither deal 215% damage instead of the usual 200%.\r\n\r\nDamaging critical strikes dealt by Blackened Soul deal 225% damage instead of the usual 200%.",
           "choices": null
         },
         {
@@ -6231,7 +6231,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Xalan's Cruelty",
-          "icon": "spell_shadow_demonicempathy",
+          "icon": "237561",
           "description": "Shadow damage dealt by your spells and abilities is increased by 6% and your Shadow spells gain 10% more critical strike chance from all sources.",
           "choices": null
         },
@@ -6249,7 +6249,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Xalan's Ferocity",
-          "icon": "spell_fire_felfire",
+          "icon": "135794",
           "description": "Fire damage dealt by your spells and abilities is increased by 6% and your Fire spells gain 10% more critical strike chance from all sources.",
           "choices": null
         },
@@ -6273,14 +6273,14 @@
             {
               "spellId": 440048,
               "name": "Hatefury Rituals",
-              "icon": "70_inscription_glyph_demonhunter_minor",
+              "icon": "1392948",
               "description": "Wither deals 30% increased periodic damage but its duration is 15% shorter.",
               "maxRanks": 1
             },
             {
               "spellId": 440051,
               "name": "Bleakheart Tactics",
-              "icon": "spell_shadow_mindshear",
+              "icon": "237565",
               "description": "Wither damage increased 20%. When Wither gains a stack from Blackened Soul, it has a chance to gain an additional stack.",
               "maxRanks": 1
             }
@@ -6300,7 +6300,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Alzzin's Iniquity",
-          "icon": "spell_shadow_improvedvampiricembrace",
+          "icon": "136165",
           "description": "Malevolence grants an additional 4% Haste and when cast increases the stack count of active Withers by an additional 2 stacks. ",
           "choices": null
         },
@@ -6318,7 +6318,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Devil Fruit",
-          "icon": "inv_112_raidtrinkets_blobofswirlingvoid_terra",
+          "icon": "7137507",
           "description": "Periodic damage dealt by Wither has a chance to grant Malevolence for 8 sec.",
           "choices": null
         },
@@ -6336,7 +6336,7 @@
           "heroSubtree": "Hellcaller",
           "maxRanks": 1,
           "name": "Through the Felvine",
-          "icon": "spell_nature_thorns_nightmare",
+          "icon": "1357816",
           "description": "Increases the damage of Chaos Bolt by 35% and Rain of Fire by 6%.\r\n\r\nThis effect is doubled while Malevolence is active.",
           "choices": null
         },
@@ -6354,7 +6354,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Secrets of the Coven",
-          "icon": "achievement_boss_argus_shivan",
+          "icon": "1711332",
           "description": "Mother of Chaos empowers your next Incinerate to become Infernal Bolt.\r\n\r\n Infernal Bolt\r\nHurl a bolt enveloped in the infernal flames of the abyss, dealing 5,119 Fire damage to your enemy target and generating 3 Soul Shards.",
           "choices": null
         },
@@ -6375,7 +6375,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Ruination",
-          "icon": "ability_bossmannoroth_empoweredmannorothsgaze",
+          "icon": "1117878",
           "description": "Summoning a Pit Lord causes your next Chaos Bolt to become Ruination.\r\n\r\n Ruination\r\nCall down a demon-infested meteor from the depths of the Twisting Nether, dealing 9,644 Chaos damage on impact to all enemies within 8 yds of the target and summoning 3 Wild Imps.\r\n\r\nDamage is reduced beyond 8 targets.",
           "choices": null
         },
@@ -6393,7 +6393,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Abyssal Dominion",
-          "icon": "70_inscription_vantus_rune_tomb",
+          "icon": "1589502",
           "description": "Summon Infernal becomes empowered, dealing 40% increased damage. When your Summon Infernal ends, it fragments into two smaller Infernals at 50% effectiveness that lasts 10 sec.",
           "choices": null
         },
@@ -6411,7 +6411,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Flames of Xoroth",
-          "icon": "ability_warlock_burningembers",
+          "icon": "460952",
           "description": "Fire damage increased by 4% and damage dealt by your demons is increased by 4%.",
           "choices": null
         },
@@ -6435,14 +6435,14 @@
             {
               "spellId": 428911,
               "name": "Soul-Etched Circles",
-              "icon": "spell_shadow_demoniccircleteleport",
+              "icon": "237560",
               "description": "You always gain the benefit of Soulburn when casting Demonic Circle: Teleport, increasing your movement speed by 50% and making you immune to snares and roots for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429072,
               "name": "Annihilan's Bellow",
-              "icon": "ability_physical_taunt",
+              "icon": "132270",
               "description": "Howl of Terror cooldown is reduced by 10 sec and range is increased by 5 yds.",
               "maxRanks": 1
             }
@@ -6462,7 +6462,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Gloom of Nathreza",
-          "icon": "ability_rogue_envelopingshadows",
+          "icon": "132291",
           "description": "Enemies marked by your Havoc take 7% increased damage from your single target spells.",
           "choices": null
         },
@@ -6486,14 +6486,14 @@
             {
               "spellId": 429902,
               "name": "Cruelty of Kerxan",
-              "icon": "creatureportrait_fomorhand",
+              "icon": "978470",
               "description": "Summon Infernal grants Diabolic Ritual and reduces its duration by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429917,
               "name": "Infernal Machine",
-              "icon": "inv_misc_supersoulash",
+              "icon": "4067362",
               "description": "Spending Soul Shards on damaging spells while your Infernal is active decreases the duration of Diabolic Ritual by 1 additional sec.",
               "maxRanks": 1
             }
@@ -6513,7 +6513,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Cloven Souls",
-          "icon": "ability_creature_felfrenzy",
+          "icon": "1388064",
           "description": "Enemies damaged by your Overlord have their souls cloven, increasing damage taken by you and your pets by 5% for 15 sec.",
           "choices": null
         },
@@ -6537,14 +6537,14 @@
             {
               "spellId": 429115,
               "name": "Infernal Vitality",
-              "icon": "inv_fabric_felcloth_ebon",
+              "icon": "132887",
               "description": "Unending Resolve heals you for 30% of your maximum health over 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429130,
               "name": "Infernal Bulwark",
-              "icon": "spell_fire_felfireward",
+              "icon": "135796",
               "description": "Unending Resolve grants Soul Leech equal to 10% of your maximum health and increases the maximum amount Soul Leech can absorb by 10% for 8 sec.",
               "maxRanks": 1
             }
@@ -6562,7 +6562,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Diabolic Ritual",
-          "icon": "ability_bossfelorcs_necromancer_purple",
+          "icon": "1121021",
           "description": "Casting Chaos Bolt, Rain of Fire, or Shadowburn grants Diabolic Ritual for 20 sec. If Diabolic Ritual is already active, its duration is reduced by 1 sec instead.\r\n\r\nWhen Diabolic Ritual expires you gain Demonic Art, causing your next Chaos Bolt, Rain of Fire, or Shadowburn to summon an Overlord, Mother of Chaos, or Pit Lord that unleashes a devastating attack against your enemies.",
           "choices": null
         },
@@ -6580,7 +6580,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Touch of Rancora",
-          "icon": "ability_bossfellord_felspike",
+          "icon": "1118739",
           "description": "Demonic Art increases the damage of your next Chaos Bolt, Rain of Fire, or Shadowburn by 20% and reduces its cast time by 50%.\r\n\r\nCasting Chaos Bolt reduces the duration of Diabolic Ritual by 1 additional sec.",
           "choices": null
         },
@@ -6598,7 +6598,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Mind's Eyes",
-          "icon": "spell_holy_healingfocus",
+          "icon": "135918",
           "description": "Your Diabolic Oculi observe the battlefield and collect information that is imparted to you upon being exploded, each Diabolic Oculi increasing your Intellect by 2% for 10 sec.",
           "choices": null
         },
@@ -6616,8 +6616,8 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Looks That Kill",
-          "icon": "ability_bosskilrogg_deadeye",
-          "description": "Your Diabolic Oculi now cast Diabolic Gaze at your primary demon&#39;s target every 1 sec while active.\r\n\r\n Diabolic Gaze\r\nFire a beam of destructive chaos magic at the target, dealing 304 Chaos damage.\r\n\r\nDamage is increased by 100% per Demonic Oculus active.",
+          "icon": "1117876",
+          "description": "Your Diabolic Oculi now cast Diabolic Gaze at your primary demon's target every 1 sec while active.\r\n\r\n Diabolic Gaze\r\nFire a beam of destructive chaos magic at the target, dealing 304 Chaos damage.\r\n\r\nDamage is increased by 100% per Demonic Oculus active.",
           "choices": null
         },
         {
@@ -6634,7 +6634,7 @@
           "heroSubtree": "Diabolist",
           "maxRanks": 1,
           "name": "Diabolic Oculi",
-          "icon": "inv_pet_inquisitoreye",
+          "icon": "1387707",
           "description": "You summon a Diabolic Oculus, up to 3, each time the duration of Diabolic Ritual is reduced by one of your spells.\r\n\r\nDiabolic Oculi explode when consuming Demonic Art, dealing 891 Fire damage to all enemies within 10 yds of the target. Damage reduced beyond 8 targets.",
           "choices": null
         }

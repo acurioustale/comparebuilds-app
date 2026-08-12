@@ -67,7 +67,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Shiv",
-          "icon": "inv_throwingknife_04",
+          "icon": "135428",
           "description": "Attack with your off-hand, dealing 2 Physical damage, dispelling all enrage effects and applying a concentrated form of your active Non-Lethal poison.\r\n\r\nAwards 1 combo point.",
           "choices": null
         },
@@ -82,7 +82,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blind",
-          "icon": "spell_shadow_mindsteal",
+          "icon": "136175",
           "description": "Blinds the target, causing it to wander disoriented for 1 min. Damage may interrupt the effect. Limit 1.",
           "choices": null
         },
@@ -97,7 +97,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cloak of Shadows",
-          "icon": "spell_shadow_nethercloak",
+          "icon": "136177",
           "description": "Provides a moment of magic immunity, instantly removing all harmful spell effects. The cloak lingers, causing you to resist harmful spells for 5 sec.",
           "choices": null
         },
@@ -114,8 +114,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Toxic Stiletto",
-          "icon": "ability_rogue_poisonedknife",
-          "description": "Shiv&#39;s Energy cost is reduced by 20, its cooldown is reduced by 15 sec, and its range is increased by 3 yds.",
+          "icon": "1373909",
+          "description": "Shiv's Energy cost is reduced by 20, its cooldown is reduced by 15 sec, and its range is increased by 3 yds.",
           "choices": null
         },
         {
@@ -132,7 +132,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fleet Footed",
-          "icon": "ability_rogue_quickrecovery",
+          "icon": "132301",
           "description": "Movement speed increased by 15%.",
           "choices": null
         },
@@ -155,14 +155,14 @@
             {
               "spellId": 1776,
               "name": "Gouge",
-              "icon": "ability_gouge",
+              "icon": "132155",
               "description": "Gouges the eyes of an enemy target, incapacitating for 4 sec. Damage may interrupt the effect.\r\n\r\nMust be in front of your target.\r\n\r\nAwards 1 combo point.",
               "maxRanks": 1
             },
             {
               "spellId": 200733,
               "name": "Airborne Irritant",
-              "icon": "ability_rogue_bloodyeye",
+              "icon": "132284",
               "description": "Blind has 50% reduced cooldown, 70% reduced duration, and applies to all nearby enemies.",
               "maxRanks": 1
             }
@@ -182,7 +182,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thrill Seeking",
-          "icon": "inv_ragnaros_heart_shadowflame",
+          "icon": "5415954",
           "description": "Shadowstep has 1 additional charge.",
           "choices": null
         },
@@ -199,7 +199,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowrunner",
-          "icon": "ability_stealth",
+          "icon": "132320",
           "description": "While Stealth or Shadow Dance is active, you move 20% faster.",
           "choices": null
         },
@@ -210,14 +210,14 @@
           "posX": 4,
           "posY": 4,
           "connections": [
-            110325,
-            90764
+            90764,
+            110325
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Master Poisoner",
-          "icon": "ability_creature_poison_06",
+          "icon": "132108",
           "description": "Increases the non-damaging effects of your weapon poisons by 20%.",
           "choices": null
         },
@@ -242,14 +242,14 @@
             {
               "spellId": 79008,
               "name": "Elusiveness",
-              "icon": "ability_rogue_turnthetables",
+              "icon": "236284",
               "description": "Evasion also reduces damage taken by 20%, and Feint also reduces non-area-of-effect damage taken by 20%.",
               "maxRanks": 1
             },
             {
               "spellId": 31230,
               "name": "Cheat Death",
-              "icon": "ability_rogue_cheatdeath",
+              "icon": "132285",
               "description": "Fatal attacks instead reduce you to 7% of your maximum health. For 3 sec afterward, you take 85% reduced damage. Cannot trigger more often than once per 6 min.",
               "maxRanks": 1
             }
@@ -262,8 +262,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            110324,
-            90695
+            90695,
+            110324
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -275,15 +275,15 @@
             {
               "spellId": 57934,
               "name": "Tricks of the Trade",
-              "icon": "ability_rogue_tricksofthetrade",
+              "icon": "236283",
               "description": "Redirects all threat you cause to the targeted party or raid member, beginning with your next damaging attack within the next 30 sec and lasting 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 379005,
               "name": "Blackjack",
-              "icon": "ability_rogue_blackjack",
-              "description": "Enemies have 30% reduced damage and healing for 6 sec after Blind or Sap&#39;s effect on them ends.",
+              "icon": "458797",
+              "description": "Enemies have 30% reduced damage and healing for 6 sec after Blind or Sap's effect on them ends.",
               "maxRanks": 1
             }
           ]
@@ -301,7 +301,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Wound Poison",
-          "icon": "inv_misc_herb_16",
+          "icon": "134197",
           "description": "Wound Poison can now stack 2 additional times.",
           "choices": null
         },
@@ -318,7 +318,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nimble Fingers",
-          "icon": "ability_rogue_crimsonvial",
+          "icon": "1373904",
           "description": "Energy cost of Feint and Crimson Vial reduced by 10.",
           "choices": null
         },
@@ -335,7 +335,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deadened Nerves",
-          "icon": "ability_rogue_nervesofsteel",
+          "icon": "132300",
           "description": "Physical damage taken reduced by 5%.\r\n",
           "choices": null
         },
@@ -352,7 +352,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Quick Fingers",
-          "icon": "ability_rogue_improvedrecuperate",
+          "icon": "457635",
           "description": "Increases your Agility by 3%.\r\n",
           "choices": null
         },
@@ -369,7 +369,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Sprint",
-          "icon": "ability_rogue_sprint",
+          "icon": "132307",
           "description": "Reduces the cooldown of Sprint by 60 sec.",
           "choices": null
         },
@@ -386,7 +386,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Superior Mixture",
-          "icon": "inv_misc_potionsete",
+          "icon": "463547",
           "description": "Crippling Poison reduces movement speed by an additional 10%.",
           "choices": null
         },
@@ -397,14 +397,14 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            90637,
-            90745
+            90745,
+            90637
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Evasion",
-          "icon": "spell_shadow_shadowward",
+          "icon": "136205",
           "description": "Increases your dodge chance by 100% for 10 sec.",
           "choices": null
         },
@@ -421,7 +421,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Iron Stomach",
-          "icon": "inv_misc_organ_11",
+          "icon": "237415",
           "description": "Increases the healing you receive from Crimson Vial, healing potions, and healthstones by 25%.",
           "choices": null
         },
@@ -432,15 +432,15 @@
           "posX": 8,
           "posY": 6,
           "connections": [
-            110323,
             90745,
-            90746
+            90746,
+            110323
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Virulent Poisons",
-          "icon": "ability_creature_poison_06",
+          "icon": "132108",
           "description": "Increases the damage of your weapon poisons by 10%.",
           "choices": null
         },
@@ -457,7 +457,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stillshroud",
-          "icon": "ability_rogue_shroudofconcealment",
+          "icon": "635350",
           "description": "Shroud of Concealment has 50% reduced cooldown.\r\n",
           "choices": null
         },
@@ -468,14 +468,14 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            90687,
-            90746
+            90746,
+            90687
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Graceful Guile",
-          "icon": "ability_rogue_ghostpirate",
+          "icon": "1373905",
           "description": "Feint has 1 additional charge.\r\n",
           "choices": null
         },
@@ -492,7 +492,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Featherfoot",
-          "icon": "spell_magic_featherfall",
+          "icon": "135992",
           "description": "Sprint increases movement speed by an additional 30% and has 4 sec increased duration.",
           "choices": null
         },
@@ -516,15 +516,15 @@
             {
               "spellId": 5761,
               "name": "Numbing Poison",
-              "icon": "spell_nature_nullifydisease",
+              "icon": "136066",
               "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, clouding their mind and slowing their attack and casting speed by 15% for 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 381637,
               "name": "Atrophic Poison",
-              "icon": "ability_rogue_nervesofsteel",
-              "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, reducing their damage by 3.0% for 10 sec.",
+              "icon": "132300",
+              "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, reducing their damage by 4.0% for 1 min.",
               "maxRanks": 1
             }
           ]
@@ -544,7 +544,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deadly Precision",
-          "icon": "ability_rogue_deadenednerves",
+          "icon": "132286",
           "description": "Increases the critical strike chance of your attacks that generate combo points by 5%.",
           "choices": null
         },
@@ -561,7 +561,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sanguine Vial",
-          "icon": "inv_misc_potiona5",
+          "icon": "463862",
           "description": "When you deal the killing blow to a target that yields experience or honor, the cooldown of Crimson Vial is reduced by 15 sec and your next use heals 5% of your health instantly.",
           "choices": null
         },
@@ -580,7 +580,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deep Cuts",
-          "icon": "inv_1115_firstkilloftheday_firstkilloftheday",
+          "icon": "6439626",
           "description": "Your finishing moves deal 6% increased damage.\r\n",
           "choices": null
         },
@@ -598,7 +598,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unbreakable Stride",
-          "icon": "ability_rogue_trip",
+          "icon": "132309",
           "description": "Reduces the duration of movement slowing effects 30%.",
           "choices": null
         },
@@ -616,7 +616,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Danger Sense",
-          "icon": "ability_rogue_wrongfullyaccused",
+          "icon": "236287",
           "description": "You have a 20% chance to partially evade any damage dealt to you, reducing the damage it deals by 20%.",
           "choices": null
         },
@@ -627,15 +627,15 @@
           "posX": 8,
           "posY": 8,
           "connections": [
+            110576,
             90743,
-            94562,
-            110576
+            94562
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swift Slasher",
-          "icon": "ability_rogue_slicedice",
+          "icon": "132306",
           "description": "Slice and Dice grants additional attack speed equal to 100% of your Haste.",
           "choices": null
         },
@@ -659,14 +659,14 @@
             {
               "spellId": 381620,
               "name": "Improved Ambush",
-              "icon": "ability_rogue_ambush",
+              "icon": "132282",
               "description": "Ambush generates 1 additional combo point.",
               "maxRanks": 1
             },
             {
               "spellId": 381621,
               "name": "Tight Spender",
-              "icon": "inv_misc_coin_03",
+              "icon": "133786",
               "description": "Energy cost of finishing moves reduced by 6%.",
               "maxRanks": 1
             }
@@ -685,7 +685,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leeching Poison",
-          "icon": "rogue_leeching_poison",
+          "icon": "538440",
           "description": "Adds a Leeching effect to your Lethal poisons, granting you 3.0% Leech.",
           "choices": null
         },
@@ -703,7 +703,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Lethality",
-          "icon": "ability_criticalstrike",
+          "icon": "132109",
           "description": "Critical strike chance increased by 1%. Critical strike damage bonus of your attacks that generate combo points increased by 10%.",
           "choices": null
         },
@@ -720,7 +720,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Recuperator",
-          "icon": "inv_gizmo_runichealthinjector",
+          "icon": "237031",
           "description": "Slice and Dice heals you for up to 1% of your maximum health per 3 sec.",
           "choices": null
         },
@@ -738,7 +738,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Alacrity",
-          "icon": "ability_paladin_speedoflight",
+          "icon": "571558",
           "description": "Haste increased by 1.5%.",
           "choices": null
         },
@@ -755,7 +755,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soothing Darkness",
-          "icon": "spell_shadow_twilight",
+          "icon": "136223",
           "description": "You are healed for 30% of your maximum health over 6 sec after activating Vanish.",
           "choices": null
         },
@@ -772,7 +772,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Vigor",
-          "icon": "ability_rogue_vigor",
+          "icon": "458737",
           "description": "Increases your maximum Energy by 50 and Energy regeneration by 5%.",
           "choices": null
         },
@@ -789,7 +789,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Supercharger",
-          "icon": "inv_engineering_90_electrifiedether",
+          "icon": "3610503",
           "description": "Kingsbane supercharges 1 combo point.\r\n\r\nDamaging finishing moves consume a supercharged combo point to function as if they spent 2 additional combo points.",
           "choices": null
         },
@@ -806,13 +806,13 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Subterfuge",
-          "icon": "rogue_subterfuge",
+          "icon": "571317",
           "description": "Abilities requiring Stealth can be used for 3 sec after Stealth breaks.\r\n\r\nCombat benefits requiring Stealth persist for an additional 3 sec after Stealth breaks.",
           "choices": null
         },
         {
           "id": 90756,
-          "type": "square",
+          "type": "choice",
           "treeType": "class",
           "posX": 4,
           "posY": 11,
@@ -822,10 +822,25 @@
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Thistle Tea",
-          "icon": "inv_drink_milk_05",
-          "description": "Restore 100 Energy.\r\n\r\nWhen your Energy is reduced below 30, drink a Thistle Tea.",
-          "choices": null
+          "name": null,
+          "icon": null,
+          "description": null,
+          "choices": [
+            {
+              "spellId": 381623,
+              "name": "Thistle Tea",
+              "icon": "132819",
+              "description": "Restore 100 Energy.\r\n\r\nWhen your Energy is reduced below 30, drink a Thistle Tea.",
+              "maxRanks": 1
+            },
+            {
+              "spellId": 1298826,
+              "name": "Thistle Tea",
+              "icon": "132819",
+              "description": "Restore 100 Energy.",
+              "maxRanks": 1
+            }
+          ]
         },
         {
           "id": 90748,
@@ -840,7 +855,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cold Blooded Killer",
-          "icon": "spell_ice_lament",
+          "icon": "135988",
           "description": "Critically striking with an attack that generates combo points increases the critical strike chance of your next finishing move by 10%.",
           "choices": null
         },
@@ -863,14 +878,14 @@
             {
               "spellId": 470669,
               "name": "Echoing Reprimand",
-              "icon": "inv_ability_rogue_echoingreprimand",
-              "description": "After consuming a supercharged combo point, your next Mutilate also strikes the target with an Echoing Reprimand dealing 42 Physical damage.",
+              "icon": "6035317",
+              "description": "After consuming a supercharged combo point, your next Mutilate also strikes the target with an Echoing Reprimand dealing 41 Physical damage.",
               "maxRanks": 1
             },
             {
               "spellId": 470668,
               "name": "Forced Induction",
-              "icon": "inv_misc_enggizmos_06",
+              "icon": "133864",
               "description": "Increase the bonus granted when a damaging finishing move consumes a supercharged combo point by 1.",
               "maxRanks": 1
             }
@@ -889,7 +904,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deeper Stratagem",
-          "icon": "archaeology_5_0_changkiboard",
+          "icon": "644377",
           "description": "Gain 1 additional max combo point.\r\n\r\nYour finishing moves that consume more than 5 combo points have increased effects, and your finishing moves deal 5% increased damage.",
           "choices": null
         },
@@ -906,7 +921,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Without a Trace",
-          "icon": "ability_vanish",
+          "icon": "132331",
           "description": "Vanish has 1 additional charge.",
           "choices": null
         },
@@ -921,7 +936,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deadly Poison",
-          "icon": "ability_rogue_dualweild",
+          "icon": "132290",
           "description": "Coats your weapons with a Lethal Poison that lasts for 1 hour. Each strike has a 30% chance to poison the enemy for 27 Nature damage over 12 sec. Subsequent poison applications will instantly deal 2 Nature damage.",
           "choices": null
         },
@@ -938,7 +953,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Motivated Murderer",
-          "icon": "ability_rogue_deadliness",
+          "icon": "458726",
           "description": "Increases your Energy regeneration by 20%.",
           "choices": null
         },
@@ -955,7 +970,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Poisons",
-          "icon": "ability_poisons",
+          "icon": "132273",
           "description": "Increases the application chance of your weapon poisons by 5%.",
           "choices": null
         },
@@ -972,7 +987,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Path of Blood",
-          "icon": "inv_artifact_bloodoftheassassinated",
+          "icon": "1394887",
           "description": "Increases maximum Energy by 50.",
           "choices": null
         },
@@ -989,7 +1004,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crimson Tempest",
-          "icon": "inv12_ability_rogue_crimsontempest",
+          "icon": "7439214",
           "description": "Slash all enemies within 10 yds dealing 39 damage. Deals reduced damage beyond 5 targets.\r\n\r\nCopy the longest Garrote and Rupture on the enemies you hit onto up to 2 other enemies. \r\n\r\nAwards 1 combo point.",
           "choices": null
         },
@@ -1013,15 +1028,15 @@
             {
               "spellId": 1250359,
               "name": "Canny Strikes",
-              "icon": "ability_rogue_combatexpertise",
+              "icon": "458723",
               "description": "Increases Critical Strike chance by 2%.",
               "maxRanks": 1
             },
             {
               "spellId": 381627,
               "name": "Internal Bleeding",
-              "icon": "ability_rogue_bloodsplatter",
-              "description": "Kidney Shot and Rupture also apply Internal Bleeding, dealing up to 77 Bleed damage over 6 sec, based on combo points spent.",
+              "icon": "236268",
+              "description": "Kidney Shot and Rupture also apply Internal Bleeding, dealing up to 84 Bleed damage over 6 sec, based on combo points spent.",
               "maxRanks": 1
             }
           ]
@@ -1039,7 +1054,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Garrote",
-          "icon": "ability_rogue_garrote",
+          "icon": "132297",
           "description": "Garrote deals 50% increased damage and has no cooldown when used from Stealth and for 6 sec after breaking Stealth.",
           "choices": null
         },
@@ -1056,7 +1071,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thrown Precision",
-          "icon": "ability_hunter_cobrashot",
+          "icon": "461114",
           "description": "Fan of Knives has 5% increased critical strike chance and its critical strikes always apply your weapon poisons.",
           "choices": null
         },
@@ -1074,7 +1089,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Seal Fate",
-          "icon": "ability_rogue_stayofexecution",
+          "icon": "236281",
           "description": "Critical strikes with attacks that generate combo points grant an additional combo point per critical strike.",
           "choices": null
         },
@@ -1092,7 +1107,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Doomblade",
-          "icon": "ability_deathwing_bloodcorruption_earth",
+          "icon": "538040",
           "description": "Mutilate deals an additional 25% Bleed damage over 8 sec.",
           "choices": null
         },
@@ -1109,7 +1124,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Razor Wire",
-          "icon": "ability_hunter_razorwire",
+          "icon": "4067366",
           "description": "Garrote lasts 6 sec longer.",
           "choices": null
         },
@@ -1128,7 +1143,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bloody Mess",
-          "icon": "ability_rogue_rupture",
+          "icon": "132302",
           "description": "Garrote and Rupture damage increased by 15%.",
           "choices": null
         },
@@ -1146,8 +1161,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deathmark",
-          "icon": "ability_rogue_deathmark",
-          "description": "Carve a deathmark into an enemy, dealing 125 Bleed damage and restoring 80 Energy to you over 16 sec. Damage dealt to the target by your Garrote, Rupture, and Lethal Poisons is increased by 100%.\r\n\r\nEach time you apply a Lethal Poison to the target, apply it twice.",
+          "icon": "4667421",
+          "description": "Carve a deathmark into an enemy, dealing 125 Bleed damage and restoring 80 Energy to you over 16 sec. Damage dealt to the target by your Garrote, Rupture, and Lethal Poisons is increased by 75%.\r\n\r\nEach time you apply a Lethal Poison to the target, apply it twice.",
           "choices": null
         },
         {
@@ -1165,7 +1180,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Caustic Spatter",
-          "icon": "ability_creature_poison_02",
+          "icon": "132104",
           "description": "Envenom or Kingsbane apply Caustic Spatter for 10 sec. Limit 1.\r\n\r\nCaustic Spatter causes 20% of your Nature damage dealt to splash onto other nearby enemies, reduced beyond 5 targets.",
           "choices": null
         },
@@ -1182,7 +1197,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sanguine Stratagem",
-          "icon": "archaeology_5_0_changkiboard",
+          "icon": "644377",
           "description": "Gain 1 additional max combo point.\r\n\r\nYour finishing moves that consume more than 5 combo points have increased effects, and your finishing moves deal 5% increased damage.",
           "choices": null
         },
@@ -1205,15 +1220,15 @@
             {
               "spellId": 381630,
               "name": "Intent to Kill",
-              "icon": "ability_rogue_bloodyeye",
-              "description": "Shadowstep&#39;s cooldown is reduced by 33% when used on a target afflicted by your Garrote.",
+              "icon": "132284",
+              "description": "Shadowstep's cooldown is reduced by 33% when used on a target afflicted by your Garrote.",
               "maxRanks": 1
             },
             {
               "spellId": 196861,
               "name": "Iron Wire",
-              "icon": "inv_jewelcrafting_delicatecopperwire",
-              "description": "Garrote silences the target for 5 sec when used from Stealth.\r\n\r\nEnemies silenced by Garrote deal 15% reduced damage for 5 sec.",
+              "icon": "133243",
+              "description": "Garrotes applied from stealth or during the Improved Garrote window silence their target for 5 sec.\r\n\r\nEnemies silenced by Garrote deal 15% reduced damage for 5 sec.",
               "maxRanks": 1
             }
           ]
@@ -1232,7 +1247,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fatal Concoction",
-          "icon": "ability_creature_poison_06",
+          "icon": "132108",
           "description": "Increases the damage of your weapon poisons by 20%.",
           "choices": null
         },
@@ -1255,14 +1270,14 @@
             {
               "spellId": 1249809,
               "name": "Finish the Job",
-              "icon": "ability_revendreth_demonhunter",
+              "icon": "3565717",
               "description": "All damage you deal is increased by 10% while Deathmark is active.",
               "maxRanks": 1
             },
             {
               "spellId": 1292996,
               "name": "Negotiable Contract",
-              "icon": "ability_revendreth_rogue",
+              "icon": "3565724",
               "description": "If the target of your Deathmark dies, Deathmark jumps to a nearby enemy combatant for its remaining duration.",
               "maxRanks": 1
             }
@@ -1282,7 +1297,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Lethal Dose",
-          "icon": "ability_rogue_deviouspoisons",
+          "icon": "236271",
           "description": "Your weapon poisons and Nature or Bleed damage over time abilities deal 1% increased damage to targets for each of your lethal poison or damage over time effects on them.",
           "choices": null
         },
@@ -1305,14 +1320,14 @@
             {
               "spellId": 381631,
               "name": "Flying Daggers",
-              "icon": "ability_rogue_fanofknives",
+              "icon": "236273",
               "description": "Fan of Knives has its radius increased to 12 yds, deals 20% more damage, and an additional 10% when striking 5 or more targets.",
               "maxRanks": 1
             },
             {
               "spellId": 1250141,
               "name": "Secondary Poisoning",
-              "icon": "ability_poisons",
+              "icon": "132273",
               "description": "When you apply a Weapon Poison with a single-target attack, you have a 50% chance to strike a nearby enemy for 5 Physical damage and apply the same Weapon Poison to them.",
               "maxRanks": 1
             }
@@ -1331,13 +1346,13 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Poison Bomb",
-          "icon": "rogue_paralytic_poison",
-          "description": "Envenom has a 5% chance per combo point spent to smash a vial of poison at the target&#39;s location, creating a pool of acidic death that deals 55 Nature damage over 2 sec to all enemies within it.",
+          "icon": "538441",
+          "description": "Envenom has a 5% chance per combo point spent to smash a vial of poison at the target's location, creating a pool of acidic death that deals 53 Nature damage over 2 sec to all enemies within it.",
           "choices": null
         },
         {
           "id": 90771,
-          "type": "round",
+          "type": "square",
           "treeType": "spec",
           "posX": 32,
           "posY": 8,
@@ -1349,9 +1364,9 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Systemic Failure",
-          "icon": "ability_skeer_bloodletting",
-          "description": "Garrote increases the damage of Ambush and Mutilate on the target by 30%.",
+          "name": "Amplifying Poison",
+          "icon": "134207",
+          "description": "Coats your weapons with a Lethal Poison that lasts for 1 hour. Each strike has a 30% chance to poison the enemy, dealing 2 Nature damage and applying Amplifying Poison for 12 sec. Envenom can consume 10 stacks of Amplifying Poison to deal 35% increased damage. Max 20 stacks.",
           "choices": null
         },
         {
@@ -1369,13 +1384,13 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Venomous Wounds",
-          "icon": "ability_rogue_venomouswounds",
+          "icon": "458736",
           "description": "You regain 3 Energy each time your Garrote or Rupture deal Bleed damage to a target affected by your weapon poisons. Energy gain is reduced for bleeds beyond the first.\r\n\r\nIf an enemy dies while afflicted by your Rupture, you regain energy based on its remaining duration.",
           "choices": null
         },
         {
           "id": 90777,
-          "type": "square",
+          "type": "round",
           "treeType": "spec",
           "posX": 40,
           "posY": 8,
@@ -1387,9 +1402,9 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Amplifying Poison",
-          "icon": "inv_misc_herb_fellotus",
-          "description": "Coats your weapons with a Lethal Poison that lasts for 1 hour. Each strike has a 30% chance to poison the enemy, dealing 2 Nature damage and applying Amplifying Poison for 12 sec. Envenom can consume 10 stacks of Amplifying Poison to deal 35% increased damage. Max 20 stacks.",
+          "name": "Systemic Failure",
+          "icon": "878217",
+          "description": "Garrote increases the damage of Ambush and Mutilate on the target by 30%.",
           "choices": null
         },
         {
@@ -1404,9 +1419,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Blindside",
-          "icon": "ability_rogue_focusedattacks",
-          "description": "Ambush and Mutilate have a 15% chance to make your next Ambush free and usable without Stealth. Chance increased to 30% if the target is under 35% health.",
+          "name": "Dashing Scoundrel",
+          "icon": "458736",
+          "description": "Envenom's effect also increases the critical strike chance of your weapon poisons by 8%. Your Energy generation is increased by 4% for each lethal poison on your weapons.",
           "choices": null
         },
         {
@@ -1423,8 +1438,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Kingsbane",
-          "icon": "inv_knife_1h_artifactgarona_d_01",
-          "description": "Release a powerful poison from your weapons and inject it into your target, dealing 60 Nature damage instantly and an additional 71 Nature damage over 14 sec. \r\n\r\nEach time you apply a Lethal Poison to a target affected by Kingsbane, Kingsbane damage increases by 20%, up to 1,000%.\r\n\r\nAwards 1 combo point.",
+          "icon": "1259291",
+          "description": "Release a powerful poison from your weapons and inject it into your target, dealing 51 Nature damage instantly and an additional 71 Nature damage over 14 sec. \r\n\r\nEach time you apply a Lethal Poison to a target affected by Kingsbane, Kingsbane damage increases by 20%, up to 1,000%.\r\n\r\nAwards 1 combo point.",
           "choices": null
         },
         {
@@ -1440,8 +1455,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Rapid Injection",
-          "icon": "inv_ammo_arrow_04",
-          "description": "Envenom&#39;s effect increases the damage of Envenom by 15%.",
+          "icon": "249171",
+          "description": "Envenom's effect increases the damage of Envenom by 20%.",
           "choices": null
         },
         {
@@ -1458,8 +1473,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shrouded Suffocation",
-          "icon": "ability_rogue_garrote",
-          "description": "Garrote damage increased by 20%. Garrote generates 2 additional combo points when used from Stealth.",
+          "icon": "132297",
+          "description": "Garrote damage increased by 30%. Garrote generates 2 additional combo points when used from Stealth.",
           "choices": null
         },
         {
@@ -1474,9 +1489,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Avulsion",
-          "icon": "inv_artifact_corruptedbloodofzakajz",
-          "description": "Rupture damage increased by 20%.",
+          "name": "Blindside",
+          "icon": "236274",
+          "description": "Ambush and Mutilate have a 10% chance to make your next Ambush free and usable without Stealth. Chance increased to 20% if the target is under 35% health.",
           "choices": null
         },
         {
@@ -1493,7 +1508,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Zoldyck Recipe",
-          "icon": "archaeology_5_0_thunderkinginsignia",
+          "icon": "646682",
           "description": "Your Bleed, weapon poison, and other Nature damage is increased by 15% against targets below 35% health.",
           "choices": null
         },
@@ -1510,7 +1525,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Regicide's Reward",
-          "icon": "inv_knife_1h_artifactfangs_d_02",
+          "icon": "1120131",
           "description": "When Kingsbane ends, gain 2% haste for every 5 stacks of increased Kingsbane damage that you had, decreasing by 2% every 2 sec.",
           "choices": null
         },
@@ -1533,14 +1548,14 @@
             {
               "spellId": 1250036,
               "name": "Inspiring Strike",
-              "icon": "ability_rogue_disembowel",
+              "icon": "132287",
               "description": "Applying Envenom while Envenom is already active causes it to increase all damage you deal by 5% in addition to increasing your poison application chance.",
               "maxRanks": 1
             },
             {
               "spellId": 1250318,
               "name": "Poisoner's Drive",
-              "icon": "inv_ability_rogue_sepsis",
+              "icon": "6035319",
               "description": "Applying Envenom while Envenom is already active restores 1 combo point.",
               "maxRanks": 1
             }
@@ -1559,9 +1574,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Deadly Momentum",
-          "icon": "ability_rogue_deadlymomentum",
-          "description": "Finishing moves have a 3% chance per combo point spent to increase your chance to critically strike by 6% for 6 sec.",
+          "name": "Avulsion",
+          "icon": "1394889",
+          "description": "Rupture damage increased by 25%.",
           "choices": null
         },
         {
@@ -1578,7 +1593,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Scent of Blood",
-          "icon": "ability_rogue_rupture",
+          "icon": "132302",
           "description": "Each enemy afflicted by your Rupture increases your Agility by 2%, up to a maximum of 20%.",
           "choices": null
         },
@@ -1594,9 +1609,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Dashing Scoundrel",
-          "icon": "ability_rogue_venomouswounds",
-          "description": "Envenom&#39;s effect also increases the critical strike chance of your weapon poisons by 5%, and their critical strikes generate 1 Energy.",
+          "name": "Unstable Toxin",
+          "icon": "987740",
+          "description": "Envenom's damage is increased by 18%, but its duration is reduced by 2 sec.",
           "choices": null
         },
         {
@@ -1612,7 +1627,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dragon-Tempered Blades",
-          "icon": "spell_fire_flameblades",
+          "icon": "135811",
           "description": "You may apply 1 additional Lethal and Non-Lethal Poison to your weapons, but they have 30% less application chance.",
           "choices": null
         },
@@ -1629,7 +1644,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sudden Demise",
-          "icon": "ability_deathknight_hemorrhagicfever",
+          "icon": "460687",
           "description": "Bleed damage increased by 10%.\r\n\r\nTargets below 35% health instantly bleed out and take fatal damage when the remaining Bleed damage you would deal to them exceeds 150% of their remaining health.",
           "choices": null
         },
@@ -1644,7 +1659,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Implacable",
-          "icon": "inv12_apextalent_rogue_implacable",
+          "icon": "7636563",
           "description": null,
           "levels": [
             81,
@@ -1654,7 +1669,7 @@
           "ranks": [
             {
               "spellId": 1265385,
-              "description": "Nothing will save your target from you. Envenom damage increased by 10%. When your Envenom bonus expires, gain 20% increased Energy generation for 5 sec. \r\n\r\nGain an additional 15% increased Energy generation for each Envenom you used while Envenom&#39;s bonus was active, up to 80% total.",
+              "description": "Nothing will save your target from you. Envenom damage increased by 10%. Envenom restores 2 Energy per combo point spent.",
               "maxRanks": 1
             },
             {
@@ -1664,7 +1679,7 @@
             },
             {
               "spellId": 1265387,
-              "description": "After striking with Kingsbane, rapidly strike that target 5 times over 1 sec for 91 Physical and 62 Nature damage. Each strike applies the Lethal Poisons on your weapons and generates a combo point.",
+              "description": "After striking with Kingsbane, rapidly strike that target 5 times over 1 sec for 105 Physical and 73 Nature damage. Each strike applies the Lethal Poisons on your weapons and generates a combo point.",
               "maxRanks": 1
             }
           ]
@@ -1683,8 +1698,8 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Deal Fate",
-          "icon": "ability_rogue_preparation",
-          "description": "Mutilate, Ambush, and Fan of Knives generate 1 additional combo point when they trigger Seal Fate.",
+          "icon": "460693",
+          "description": "Mutilate, Ambush, and Fan of Knives have a 60% chance to generate 1 additional combo point when they trigger Seal Fate.",
           "choices": null
         },
         {
@@ -1707,14 +1722,14 @@
             {
               "spellId": 1249190,
               "name": "Overflowing Purse",
-              "icon": "inv_misc_coinbag_special",
+              "icon": "901746",
               "description": "Envenom has a 15% chance to flip 3 Fatebound Coins.",
               "maxRanks": 1
             },
             {
               "spellId": 454435,
               "name": "Destiny Defined",
-              "icon": "ability_boss_fatescribe_rune6",
+              "icon": "4067928",
               "description": "Sinister Strike has 5% increased chance to strike an additional time and grant Opportunity and your Fatebound Coins flipped have an additional 5% chance to match the same face as the last flip. ",
               "maxRanks": 1
             }
@@ -1734,7 +1749,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Delivered Doom",
-          "icon": "ability_bossgorefiend_touchofdoom",
+          "icon": "1120185",
           "description": "Envenom deals 5% more damage when it consumes 5 or more combo points.",
           "choices": null
         },
@@ -1752,7 +1767,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Edge Case",
-          "icon": "item_icecrownnecklacea",
+          "icon": "348281",
           "description": "Activating Deathmark flips a Fatebound Coin and causes it to land on its edge, counting as both Heads and Tails.",
           "choices": null
         },
@@ -1770,7 +1785,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Mean Streak",
-          "icon": "inv_sigil_thorim",
+          "icon": "254885",
           "description": "Fatebound Coins flipped by Envenom are 33% more likely to match the same face as the last flip.",
           "choices": null
         },
@@ -1786,8 +1801,8 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Hand of Fate",
-          "icon": "inv_ability_fateboundrogue_handoffateheads",
-          "description": "Flip a Fatebound Coin each time a finishing move consumes 5 or more combo points. Heads increases the damage of your attacks by 10%, lasting 15 sec or until you flip Tails. Tails deals 58 Cosmic damage to your target.\r\n\r\nFor each time the same face is flipped in a row, Heads increases damage by an additional 2% and Tails increases its damage by 10%.",
+          "icon": "5927626",
+          "description": "Flip a Fatebound Coin each time a finishing move consumes 5 or more combo points. Heads increases the damage of your attacks by 10%, lasting 15 sec or until you flip Tails. Tails deals 59 Cosmic damage to your target.\r\n\r\nFor each time the same face is flipped in a row, Heads increases damage by an additional 2% and Tails increases its damage by 10%.",
           "choices": null
         },
         {
@@ -1807,7 +1822,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Lucky Coin",
-          "icon": "inv_misc_markoftheworldtree",
+          "icon": "513195",
           "description": "Every 7 coin flips, keep a lucky coin that bends you towards your fate for 12 sec. Your Agility is increased by 4%, the damage and bonuses of Fatebound Coins are increased by 50%, and coin flips are 15% more likely to match the same face as the last flip.\r\n\r\nCoin flips do not count toward finding a lucky coin while you have a lucky coin.",
           "choices": null
         },
@@ -1825,7 +1840,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Rush to the Inevitable",
-          "icon": "ability_rogue_vigor",
+          "icon": "458737",
           "description": "Gain 5 Energy every time you flip a Fatebound Coin. Gain 15 Energy for Coins that land on their edge.",
           "choices": null
         },
@@ -1849,14 +1864,14 @@
             {
               "spellId": 454432,
               "name": "Inexorable March",
-              "icon": "ability_monk_ridethewind",
+              "icon": "1381298",
               "description": "You cannot be slowed below 70% of normal movement speed while your Fatebound Coin flips have an active streak of at least 2 flips matching the same face.",
               "maxRanks": 1
             },
             {
               "spellId": 454433,
               "name": "Death's Arrival",
-              "icon": "achievement_guildperk_havegroupwilltravel",
+              "icon": "413583",
               "description": "Grappling Hook may be used a second time within 3 sec with no cooldown, but its total cooldown is increased by 5 sec.",
               "maxRanks": 1
             }
@@ -1882,14 +1897,14 @@
             {
               "spellId": 1249201,
               "name": "Chosen's Revelry",
-              "icon": "ability_priest_heavanlyvoice",
+              "icon": "458228",
               "description": "Flipping a Fatebound Coin restores 10 health.",
               "maxRanks": 1
             },
             {
               "spellId": 454286,
               "name": "Tempted Fate",
-              "icon": "ability_rogue_sabreslash",
+              "icon": "1373911",
               "description": "You have a 30% chance to absorb 10% of any damage taken.",
               "maxRanks": 1
             }
@@ -1909,7 +1924,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Fate Intertwined",
-          "icon": "inv_cosmicvoid_beam",
+          "icon": "4913233",
           "description": "Caustic Spatter causes an additional 5% of Nature damage dealt to be dealt to affected enemies.",
           "choices": null
         },
@@ -1927,7 +1942,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Ravenholdt Mint",
-          "icon": "inv_misc_coin_02",
+          "icon": "133785",
           "description": "Flipping Heads increases damage by an additional 4%. Damage dealt by flipping Tails is increased by 12%.",
           "choices": null
         },
@@ -1945,7 +1960,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Sometimes Lucky",
-          "icon": "inv_misc_celestialmap",
+          "icon": "1519351",
           "description": "Critical strike chance increased by 3%.",
           "choices": null
         },
@@ -1963,7 +1978,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Controlled Chaos",
-          "icon": "inv_112_raidtrinkets_blobofswirlingvoid_purple",
+          "icon": "7137506",
           "description": "After flipping a Fatebound Coin that ends a streak of 4 or more, flip another that matches the same face.",
           "choices": null
         },
@@ -1987,14 +2002,14 @@
             {
               "spellId": 457022,
               "name": "Ethereal Cloak",
-              "icon": "spell_arcane_prismaticcloak",
+              "icon": "135752",
               "description": "Cloak of Shadows duration increased by 2 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 457034,
               "name": "Bait and Switch",
-              "icon": "ability_druid_earthandsky",
+              "icon": "236150",
               "description": "Evasion reduces magical damage taken by 15%. \r\n\r\nCloak of Shadows reduces physical damage taken by 20%.",
               "maxRanks": 1
             }
@@ -2014,7 +2029,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Corrupt the Blood",
-          "icon": "ability_ironmaidens_bloodritual",
+          "icon": "1035037",
           "description": "Rupture damage increased by 20%.",
           "choices": null
         },
@@ -2038,14 +2053,14 @@
             {
               "spellId": 457056,
               "name": "Lingering Darkness",
-              "icon": "ability_rogue_envelopingshadows",
+              "icon": "132291",
               "description": "After Deathmark expires, gain 30% increased Nature damage for 30 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 457062,
               "name": "Symbolic Victory",
-              "icon": "ability_priest_surgeofdarkness",
+              "icon": "633004",
               "description": "Shadow Dance additionally increases the damage of your next Eviscerate or Black Powder by 15%.",
               "maxRanks": 1
             }
@@ -2065,7 +2080,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Clear the Witnesses",
-          "icon": "ability_rogue_fanofknives",
+          "icon": "236273",
           "description": "Fan of Knives damage increased by 60%.",
           "choices": null
         },
@@ -2083,7 +2098,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Singular Focus",
-          "icon": "spell_hunter_focusingshot",
+          "icon": "1033497",
           "description": "Damage dealt to targets other than your Marked target deals 5% Plague damage to your Marked target.\r\n",
           "choices": null
         },
@@ -2107,14 +2122,14 @@
             {
               "spellId": 457057,
               "name": "Shadewalker",
-              "icon": "rogue_shadow_reflection",
-              "description": "Each time you consume a stack of Deathstalker&#39;s Mark, reduce the cooldown of Shadowstep by 3 sec.",
+              "icon": "1020341",
+              "description": "Each time you consume a stack of Deathstalker's Mark, reduce the cooldown of Shadowstep by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 457063,
               "name": "Shroud of Night",
-              "icon": "spell_holy_elunesgrace",
+              "icon": "135900",
               "description": "Shroud of Concealment duration increased by 5 sec.",
               "maxRanks": 1
             }
@@ -2140,14 +2155,14 @@
             {
               "spellId": 457067,
               "name": "Momentum of Despair",
-              "icon": "spell_shadow_shadesofdarkness",
+              "icon": "136194",
               "description": "If you have critically struck with Fan of Knives, increase the critical strike chance of Fan of Knives and Crimson Tempest by 10% and critical strike damage by 20% for 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 457068,
               "name": "Follow the Blood",
-              "icon": "sha_ability_rogue_bloodyeye_nightmare",
+              "icon": "1357795",
               "description": "Fan of Knives and Crimson Tempest deal 30% additional damage while 2 or more enemies are afflicted with Rupture.",
               "maxRanks": 1
             }
@@ -2167,7 +2182,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Hunt Them Down",
-          "icon": "ability_rogue_creepingvenom",
+          "icon": "1398086",
           "description": "Auto-attacks against Marked targets deal an additional 3 Plague damage.",
           "choices": null
         },
@@ -2185,8 +2200,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Unshakeable Drive",
-          "icon": "ability_warrior_deepcuts",
-          "description": "When you consume an application of Deathstalker&#39;s Mark, the damage of your next Ambush or Mutilate is increased by 50%.",
+          "icon": "4067373",
+          "description": "When you consume an application of Deathstalker's Mark, the damage of your next Ambush or Mutilate is increased by 50%.",
           "choices": null
         },
         {
@@ -2201,8 +2216,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Deathstalker's Mark",
-          "icon": "inv_ability_deathstalkerrogue_deathstalkersmark",
-          "description": "Garrote applies 3 stacks of Deathstalker&#39;s Mark to your target, unless Deathstalker&#39;s Mark is already active. You learn Mark for Death.\r\n\r\nWhen you spend 5 or more combo points on attacks against a Marked target you consume an application of Deathstalker&#39;s Mark, dealing 54 Plague damage.\r\n\r\n\r\nMark for Death\r\nMove your active Deathstalker&#39;s Mark to your target.",
+          "icon": "5927622",
+          "description": "Garrote applies 3 stacks of Deathstalker's Mark to your target, unless Deathstalker's Mark is already active. You learn Mark for Death.\r\n\r\nWhen you spend 5 or more combo points on attacks against a Marked target you consume an application of Deathstalker's Mark, dealing 54 Plague damage.\r\n\r\n\r\nMark for Death\r\nMove your active Deathstalker's Mark to your target.",
           "choices": null
         },
         {
@@ -2222,8 +2237,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Darkest Night",
-          "icon": "spell_shadow_twilight",
-          "description": "When you consume the final Deathstalker&#39;s Mark from a target or your target dies, gain 30 Energy and Darkest Night, causing your next Envenom cast with 5 or more combo points to critically strike, deal 35% additional damage, and apply 3 stacks of Deathstalker&#39;s Mark to the target if no other Deathstalker&#39;s Mark is active.\r\n\r\nEnvenom cast with Darkest Night does not consume a stack of active Deathstalker&#39;s Marks.",
+          "icon": "136223",
+          "description": "When you consume the final Deathstalker's Mark from a target or your target dies, gain 30 Energy and Darkest Night, causing your next Envenom cast with 5 or more combo points to critically strike, deal 35% additional damage, and apply 3 stacks of Deathstalker's Mark to the target if no other Deathstalker's Mark is active.\r\n\r\nEnvenom cast with Darkest Night does not consume a stack of active Deathstalker's Marks.",
           "choices": null
         },
         {
@@ -2240,8 +2255,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Mass Casualty",
-          "icon": "ability_hunter_rapidkilling",
-          "description": "Deathstalker&#39;s Mark deals 40% of its normal damage to all other enemies within 8 yds that are afflicted by Rupture.",
+          "icon": "132205",
+          "description": "Deathstalker's Mark deals 40% of its normal damage to all other enemies within 8 yds that are afflicted by Rupture.",
           "choices": null
         },
         {
@@ -2258,8 +2273,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Quietus Celeris",
-          "icon": "ability_argus_deathfog",
-          "description": "Deathstalker&#39;s Mark has a 30% chance to immediately consume a stack when applied.",
+          "icon": "1778226",
+          "description": "Deathstalker's Mark has a 30% chance to immediately consume a stack when applied.",
           "choices": null
         },
         {
@@ -2276,7 +2291,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Precise Killer",
-          "icon": "inv_tradeskillitem_sorcererswind",
+          "icon": "1020351",
           "description": "Critical strike damage bonus increased by 20%.",
           "choices": null
         }
@@ -2321,7 +2336,7 @@
         "left": {
           "name": "Trickster",
           "icon": "Trickster",
-          "description": "Dirty tricks and flashing blades are on display when a Trickster enters a fight. Tricksters distract opponents with misdirection or a sword&#39;s flourish, then slash them with a blade they never saw coming.",
+          "description": "Dirty tricks and flashing blades are on display when a Trickster enters a fight. Tricksters distract opponents with misdirection or a sword's flourish, then slash them with a blade they never saw coming.",
           "rootNodeId": 95140
         },
         "right": {
@@ -2343,7 +2358,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shiv",
-          "icon": "inv_throwingknife_04",
+          "icon": "135428",
           "description": "Attack with your off-hand, dealing 2 Physical damage, dispelling all enrage effects and applying a concentrated form of your active Non-Lethal poison.\r\n\r\nAwards 1 combo point.",
           "choices": null
         },
@@ -2358,7 +2373,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Blind",
-          "icon": "spell_shadow_mindsteal",
+          "icon": "136175",
           "description": "Blinds the target, causing it to wander disoriented for 1 min. Damage may interrupt the effect. Limit 1.",
           "choices": null
         },
@@ -2373,7 +2388,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cloak of Shadows",
-          "icon": "spell_shadow_nethercloak",
+          "icon": "136177",
           "description": "Provides a moment of magic immunity, instantly removing all harmful spell effects. The cloak lingers, causing you to resist harmful spells for 5 sec.",
           "choices": null
         },
@@ -2390,8 +2405,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Toxic Stiletto",
-          "icon": "ability_rogue_poisonedknife",
-          "description": "Shiv&#39;s Energy cost is reduced by 20, its cooldown is reduced by 15 sec, and its range is increased by 3 yds.",
+          "icon": "1373909",
+          "description": "Shiv's Energy cost is reduced by 20, its cooldown is reduced by 15 sec, and its range is increased by 3 yds.",
           "choices": null
         },
         {
@@ -2408,7 +2423,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fleet Footed",
-          "icon": "ability_rogue_quickrecovery",
+          "icon": "132301",
           "description": "Movement speed increased by 15%.",
           "choices": null
         },
@@ -2431,14 +2446,14 @@
             {
               "spellId": 1776,
               "name": "Gouge",
-              "icon": "ability_gouge",
+              "icon": "132155",
               "description": "Gouges the eyes of an enemy target, incapacitating for 4 sec. Damage may interrupt the effect.\r\n\r\nMust be in front of your target.\r\n\r\nAwards 1 combo point.",
               "maxRanks": 1
             },
             {
               "spellId": 200733,
               "name": "Airborne Irritant",
-              "icon": "ability_rogue_bloodyeye",
+              "icon": "132284",
               "description": "Blind has 50% reduced cooldown, 70% reduced duration, and applies to all nearby enemies.",
               "maxRanks": 1
             }
@@ -2458,7 +2473,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thrill Seeking",
-          "icon": "inv_ragnaros_heart_shadowflame",
+          "icon": "5415954",
           "description": "Shadowstep has 1 additional charge.",
           "choices": null
         },
@@ -2475,7 +2490,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowrunner",
-          "icon": "ability_stealth",
+          "icon": "132320",
           "description": "While Stealth or Shadow Dance is active, you move 20% faster.",
           "choices": null
         },
@@ -2486,14 +2501,14 @@
           "posX": 4,
           "posY": 4,
           "connections": [
-            110325,
-            90764
+            90764,
+            110325
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Master Poisoner",
-          "icon": "ability_creature_poison_06",
+          "icon": "132108",
           "description": "Increases the non-damaging effects of your weapon poisons by 20%.",
           "choices": null
         },
@@ -2518,14 +2533,14 @@
             {
               "spellId": 79008,
               "name": "Elusiveness",
-              "icon": "ability_rogue_turnthetables",
+              "icon": "236284",
               "description": "Evasion also reduces damage taken by 20%, and Feint also reduces non-area-of-effect damage taken by 20%.",
               "maxRanks": 1
             },
             {
               "spellId": 31230,
               "name": "Cheat Death",
-              "icon": "ability_rogue_cheatdeath",
+              "icon": "132285",
               "description": "Fatal attacks instead reduce you to 7% of your maximum health. For 3 sec afterward, you take 85% reduced damage. Cannot trigger more often than once per 6 min.",
               "maxRanks": 1
             }
@@ -2538,8 +2553,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            110324,
-            90695
+            90695,
+            110324
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2551,15 +2566,15 @@
             {
               "spellId": 57934,
               "name": "Tricks of the Trade",
-              "icon": "ability_rogue_tricksofthetrade",
+              "icon": "236283",
               "description": "Redirects all threat you cause to the targeted party or raid member, beginning with your next damaging attack within the next 30 sec and lasting 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 379005,
               "name": "Blackjack",
-              "icon": "ability_rogue_blackjack",
-              "description": "Enemies have 30% reduced damage and healing for 6 sec after Blind or Sap&#39;s effect on them ends.",
+              "icon": "458797",
+              "description": "Enemies have 30% reduced damage and healing for 6 sec after Blind or Sap's effect on them ends.",
               "maxRanks": 1
             }
           ]
@@ -2577,7 +2592,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Wound Poison",
-          "icon": "inv_misc_herb_16",
+          "icon": "134197",
           "description": "Wound Poison can now stack 2 additional times.",
           "choices": null
         },
@@ -2594,7 +2609,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nimble Fingers",
-          "icon": "ability_rogue_crimsonvial",
+          "icon": "1373904",
           "description": "Energy cost of Feint and Crimson Vial reduced by 10.",
           "choices": null
         },
@@ -2611,7 +2626,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deadened Nerves",
-          "icon": "ability_rogue_nervesofsteel",
+          "icon": "132300",
           "description": "Physical damage taken reduced by 5%.\r\n",
           "choices": null
         },
@@ -2628,7 +2643,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Quick Fingers",
-          "icon": "ability_rogue_improvedrecuperate",
+          "icon": "457635",
           "description": "Increases your Agility by 3%.\r\n",
           "choices": null
         },
@@ -2645,7 +2660,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Sprint",
-          "icon": "ability_rogue_sprint",
+          "icon": "132307",
           "description": "Reduces the cooldown of Sprint by 60 sec.",
           "choices": null
         },
@@ -2662,7 +2677,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Superior Mixture",
-          "icon": "inv_misc_potionsete",
+          "icon": "463547",
           "description": "Crippling Poison reduces movement speed by an additional 10%.",
           "choices": null
         },
@@ -2673,14 +2688,14 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            90637,
-            90745
+            90745,
+            90637
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Evasion",
-          "icon": "spell_shadow_shadowward",
+          "icon": "136205",
           "description": "Increases your dodge chance by 100% for 10 sec.",
           "choices": null
         },
@@ -2697,7 +2712,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Iron Stomach",
-          "icon": "inv_misc_organ_11",
+          "icon": "237415",
           "description": "Increases the healing you receive from Crimson Vial, healing potions, and healthstones by 25%.",
           "choices": null
         },
@@ -2708,15 +2723,15 @@
           "posX": 8,
           "posY": 6,
           "connections": [
-            110323,
             90745,
-            90746
+            90746,
+            110323
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Virulent Poisons",
-          "icon": "ability_creature_poison_06",
+          "icon": "132108",
           "description": "Increases the damage of your weapon poisons by 10%.",
           "choices": null
         },
@@ -2733,7 +2748,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stillshroud",
-          "icon": "ability_rogue_shroudofconcealment",
+          "icon": "635350",
           "description": "Shroud of Concealment has 50% reduced cooldown.\r\n",
           "choices": null
         },
@@ -2744,14 +2759,14 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            90687,
-            90746
+            90746,
+            90687
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Graceful Guile",
-          "icon": "ability_rogue_ghostpirate",
+          "icon": "1373905",
           "description": "Feint has 1 additional charge.\r\n",
           "choices": null
         },
@@ -2768,7 +2783,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Featherfoot",
-          "icon": "spell_magic_featherfall",
+          "icon": "135992",
           "description": "Sprint increases movement speed by an additional 30% and has 4 sec increased duration.",
           "choices": null
         },
@@ -2792,15 +2807,15 @@
             {
               "spellId": 5761,
               "name": "Numbing Poison",
-              "icon": "spell_nature_nullifydisease",
+              "icon": "136066",
               "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, clouding their mind and slowing their attack and casting speed by 15% for 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 381637,
               "name": "Atrophic Poison",
-              "icon": "ability_rogue_nervesofsteel",
-              "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, reducing their damage by 3.0% for 10 sec.",
+              "icon": "132300",
+              "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, reducing their damage by 4.0% for 1 min.",
               "maxRanks": 1
             }
           ]
@@ -2820,7 +2835,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deadly Precision",
-          "icon": "ability_rogue_deadenednerves",
+          "icon": "132286",
           "description": "Increases the critical strike chance of your attacks that generate combo points by 5%.",
           "choices": null
         },
@@ -2837,7 +2852,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sanguine Vial",
-          "icon": "inv_misc_potiona5",
+          "icon": "463862",
           "description": "When you deal the killing blow to a target that yields experience or honor, the cooldown of Crimson Vial is reduced by 15 sec and your next use heals 5% of your health instantly.",
           "choices": null
         },
@@ -2856,7 +2871,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deep Cuts",
-          "icon": "inv_1115_firstkilloftheday_firstkilloftheday",
+          "icon": "6439626",
           "description": "Your finishing moves deal 6% increased damage.\r\n",
           "choices": null
         },
@@ -2874,7 +2889,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unbreakable Stride",
-          "icon": "ability_rogue_trip",
+          "icon": "132309",
           "description": "Reduces the duration of movement slowing effects 30%.",
           "choices": null
         },
@@ -2892,7 +2907,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Danger Sense",
-          "icon": "ability_rogue_wrongfullyaccused",
+          "icon": "236287",
           "description": "You have a 20% chance to partially evade any damage dealt to you, reducing the damage it deals by 20%.",
           "choices": null
         },
@@ -2903,15 +2918,15 @@
           "posX": 8,
           "posY": 8,
           "connections": [
+            110576,
             90743,
-            94562,
-            110576
+            94562
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swift Slasher",
-          "icon": "ability_rogue_slicedice",
+          "icon": "132306",
           "description": "Slice and Dice grants additional attack speed equal to 100% of your Haste.",
           "choices": null
         },
@@ -2935,14 +2950,14 @@
             {
               "spellId": 381620,
               "name": "Improved Ambush",
-              "icon": "ability_rogue_ambush",
+              "icon": "132282",
               "description": "Ambush generates 1 additional combo point.",
               "maxRanks": 1
             },
             {
               "spellId": 381621,
               "name": "Tight Spender",
-              "icon": "inv_misc_coin_03",
+              "icon": "133786",
               "description": "Energy cost of finishing moves reduced by 6%.",
               "maxRanks": 1
             }
@@ -2961,7 +2976,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leeching Poison",
-          "icon": "rogue_leeching_poison",
+          "icon": "538440",
           "description": "Adds a Leeching effect to your Lethal poisons, granting you 3.0% Leech.",
           "choices": null
         },
@@ -2979,7 +2994,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Lethality",
-          "icon": "ability_criticalstrike",
+          "icon": "132109",
           "description": "Critical strike chance increased by 1%. Critical strike damage bonus of your attacks that generate combo points increased by 10%.",
           "choices": null
         },
@@ -2996,7 +3011,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Recuperator",
-          "icon": "inv_gizmo_runichealthinjector",
+          "icon": "237031",
           "description": "Slice and Dice heals you for up to 1% of your maximum health per 3 sec.",
           "choices": null
         },
@@ -3014,7 +3029,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Alacrity",
-          "icon": "ability_paladin_speedoflight",
+          "icon": "571558",
           "description": "Haste increased by 1.5%.",
           "choices": null
         },
@@ -3031,7 +3046,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soothing Darkness",
-          "icon": "spell_shadow_twilight",
+          "icon": "136223",
           "description": "You are healed for 30% of your maximum health over 6 sec after activating Vanish.",
           "choices": null
         },
@@ -3048,7 +3063,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Vigor",
-          "icon": "ability_rogue_vigor",
+          "icon": "458737",
           "description": "Increases your maximum Energy by 50 and Energy regeneration by 5%.",
           "choices": null
         },
@@ -3065,7 +3080,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Supercharger",
-          "icon": "inv_engineering_90_electrifiedether",
+          "icon": "3610503",
           "description": "Kingsbane supercharges 1 combo point.\r\n\r\nDamaging finishing moves consume a supercharged combo point to function as if they spent 2 additional combo points.",
           "choices": null
         },
@@ -3082,13 +3097,13 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Subterfuge",
-          "icon": "rogue_subterfuge",
+          "icon": "571317",
           "description": "Abilities requiring Stealth can be used for 3 sec after Stealth breaks.\r\n\r\nCombat benefits requiring Stealth persist for an additional 3 sec after Stealth breaks.",
           "choices": null
         },
         {
           "id": 90756,
-          "type": "square",
+          "type": "choice",
           "treeType": "class",
           "posX": 4,
           "posY": 11,
@@ -3098,10 +3113,25 @@
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Thistle Tea",
-          "icon": "inv_drink_milk_05",
-          "description": "Restore 100 Energy.\r\n\r\nWhen your Energy is reduced below 30, drink a Thistle Tea.",
-          "choices": null
+          "name": null,
+          "icon": null,
+          "description": null,
+          "choices": [
+            {
+              "spellId": 381623,
+              "name": "Thistle Tea",
+              "icon": "132819",
+              "description": "Restore 100 Energy.\r\n\r\nWhen your Energy is reduced below 30, drink a Thistle Tea.",
+              "maxRanks": 1
+            },
+            {
+              "spellId": 1298826,
+              "name": "Thistle Tea",
+              "icon": "132819",
+              "description": "Restore 100 Energy.",
+              "maxRanks": 1
+            }
+          ]
         },
         {
           "id": 90748,
@@ -3116,7 +3146,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cold Blooded Killer",
-          "icon": "spell_ice_lament",
+          "icon": "135988",
           "description": "Critically striking with an attack that generates combo points increases the critical strike chance of your next finishing move by 10%.",
           "choices": null
         },
@@ -3139,14 +3169,14 @@
             {
               "spellId": 470669,
               "name": "Echoing Reprimand",
-              "icon": "inv_ability_rogue_echoingreprimand",
+              "icon": "6035317",
               "description": "After consuming a supercharged combo point, your next Mutilate also strikes the target with an Echoing Reprimand dealing 41 Physical damage.",
               "maxRanks": 1
             },
             {
               "spellId": 470668,
               "name": "Forced Induction",
-              "icon": "inv_misc_enggizmos_06",
+              "icon": "133864",
               "description": "Increase the bonus granted when a damaging finishing move consumes a supercharged combo point by 1.",
               "maxRanks": 1
             }
@@ -3165,7 +3195,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deeper Stratagem",
-          "icon": "archaeology_5_0_changkiboard",
+          "icon": "644377",
           "description": "Gain 1 additional max combo point.\r\n\r\nYour finishing moves that consume more than 5 combo points have increased effects, and your finishing moves deal 5% increased damage.",
           "choices": null
         },
@@ -3182,7 +3212,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Without a Trace",
-          "icon": "ability_vanish",
+          "icon": "132331",
           "description": "Vanish has 1 additional charge.",
           "choices": null
         },
@@ -3197,7 +3227,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Opportunity",
-          "icon": "ability_rogue_pistolshot",
+          "icon": "1373908",
           "description": "Sinister Strike has a 30% chance to hit an additional time and grant Opportunity.\r\n\r\n Opportunity\r\nYour next Pistol Shot costs 50% less Energy and deals 100% increased damage.",
           "choices": null
         },
@@ -3220,14 +3250,14 @@
             {
               "spellId": 196922,
               "name": "Hit and Run",
-              "icon": "ability_rogue_fleetfooted",
+              "icon": "132296",
               "description": "Movement speed increased by 15%.",
               "maxRanks": 1
             },
             {
               "spellId": 381877,
               "name": "Combat Stamina",
-              "icon": "ability_rogue_imrovedrecuperate",
+              "icon": "460692",
               "description": "Stamina increased by 5%.",
               "maxRanks": 1
             }
@@ -3246,7 +3276,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Adrenaline Rush",
-          "icon": "spell_shadow_shadowworddominate",
+          "icon": "136206",
           "description": "Increases your Energy regeneration rate by 75%, your maximum Energy by 50, and your attack speed by 20% for 15 sec.\r\n",
           "choices": null
         },
@@ -3269,14 +3299,14 @@
             {
               "spellId": 256188,
               "name": "Retractable Hook",
-              "icon": "ability_rogue_grapplinghook",
+              "icon": "1373906",
               "description": "Reduces the cooldown of Grappling Hook by 15 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 256165,
               "name": "Blinding Powder",
-              "icon": "inv_misc_ammo_gunpowder_06",
+              "icon": "133592",
               "description": "Reduces the cooldown of Blind by 25% and increases its range by 5 yds.",
               "maxRanks": 1
             }
@@ -3296,7 +3326,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Expert Duelist",
-          "icon": "inv_weapon_rifle_01",
+          "icon": "135610",
           "description": "Between the Eyes increases your damage dealt by an additional 2%.",
           "choices": null
         },
@@ -3314,7 +3344,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Combat Potency",
-          "icon": "inv_weapon_shortblade_38",
+          "icon": "135673",
           "description": "Increases your Energy regeneration rate by 16%.",
           "choices": null
         },
@@ -3331,7 +3361,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deadly Pursuit",
-          "icon": "ability_rogue_murderspree",
+          "icon": "236277",
           "description": "After spending 15 combo points, if you spend no combo points for 4 sec, abilities affected by Restless Blades will cool down 200% faster for 5 sec or until you spend a combo point.",
           "choices": null
         },
@@ -3348,7 +3378,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Precision Shot",
-          "icon": "inv_legendary_gun",
+          "icon": "645221",
           "description": "Between the Eyes and Pistol Shot have 10 yd increased range and deal 20% increased damage.",
           "choices": null
         },
@@ -3365,7 +3395,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crescendo of Violence",
-          "icon": "ability_rogue_dirtydeeds",
+          "icon": "460691",
           "description": "Your finishing moves deal 10% increased damage.",
           "choices": null
         },
@@ -3382,8 +3412,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deft Maneuvers",
-          "icon": "spell_warrior_wildstrike",
-          "description": "Blade Flurry&#39;s initial damage is increased by 100% and generates 1 combo point per target struck, but its Energy cost is increased by 30.",
+          "icon": "589068",
+          "description": "Blade Flurry's initial damage is increased by 100% and generates 1 combo point per target struck, but its Energy cost is increased by 30.",
           "choices": null
         },
         {
@@ -3400,7 +3430,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Devious Stratagem",
-          "icon": "archaeology_5_0_changkiboard",
+          "icon": "644377",
           "description": "Gain 1 additional max combo point.\r\n\r\nYour finishing moves that consume more than 5 combo points have increased effects, and your finishing moves deal 5% increased damage.",
           "choices": null
         },
@@ -3417,7 +3447,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fatal Flourish",
-          "icon": "ability_rogue_unfairadvantage",
+          "icon": "236285",
           "description": "Your off-hand attacks and Pistol Shots have a 25% chance to generate 8 Energy.",
           "choices": null
         },
@@ -3435,7 +3465,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Quick Draw",
-          "icon": "inv_weapon_rifle_40",
+          "icon": "331438",
           "description": "Opportunity increases the damage of Pistol Shot by an additional 20%. Each charge of Opportunity consumed by Pistol Shot generates 1 combo point.",
           "choices": null
         },
@@ -3452,7 +3482,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ruthlessness",
-          "icon": "ability_druid_disembowel",
+          "icon": "132122",
           "description": "Your finishing moves have a 20% chance per combo point spent to grant a combo point.",
           "choices": null
         },
@@ -3469,8 +3499,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blade Rush",
-          "icon": "ability_arakkoa_spinning_blade",
-          "description": "Charge to your target with your blades out, dealing 298 Physical damage to the target and 129 to all other nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nWhile Blade Flurry is active, damage to non-primary targets is increased by 100%.\r\n\r\nGenerates 25 Energy over 5 sec.",
+          "icon": "1016243",
+          "description": "Charge to your target with your blades out, dealing 300 Physical damage to the target and 130 to all other nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nWhile Blade Flurry is active, damage to non-primary targets is increased by 100%.\r\n\r\nGenerates 25 Energy over 5 sec.",
           "choices": null
         },
         {
@@ -3487,7 +3517,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Loaded Dice",
-          "icon": "ability_rogue_rollthebones",
+          "icon": "1373910",
           "description": "Activating Adrenaline Rush improves the result of your next Roll the Bones by one level.",
           "choices": null
         },
@@ -3505,7 +3535,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sleight of Hand",
-          "icon": "inv_misc_dice_02",
+          "icon": "237285",
           "description": "Roll the Bones has a 20% increased chance of granting more powerful results.",
           "choices": null
         },
@@ -3522,8 +3552,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Between the Eyes",
-          "icon": "ability_rogue_rollthebones01",
-          "description": "Critical strikes with Between the Eyes deal 3.0 times normal damage.\r\n",
+          "icon": "1269439",
+          "description": "Critical strikes with Between the Eyes deal 2.5 times normal damage.\r\n",
           "choices": null
         },
         {
@@ -3545,14 +3575,14 @@
             {
               "spellId": 381619,
               "name": "Thief's Versatility",
-              "icon": "ability_rogue_versatility",
+              "icon": "636277",
               "description": "Versatility increased by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 1259492,
               "name": "Flickering Steel",
-              "icon": "inv_1115_warrior_fastermeleeattacks",
+              "icon": "6712967",
               "description": "Sinister Strike and Ambush deal 20% increased damage. They also generate 5 Energy when they grant you Opportunity.",
               "maxRanks": 1
             }
@@ -3571,8 +3601,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Audacity",
-          "icon": "ability_rogue_ambush",
-          "description": "Using Pistol Shot with Opportunity has a 30% chance to make your next Ambush usable without Stealth.\r\n\r\nChance to trigger this effect matches the chance for Sinister Strike to grant Opportunity.",
+          "icon": "132282",
+          "description": "Using Pistol Shot with Opportunity has a 30% chance to make your next Ambush usable without Stealth.\r\n\r\nChance to trigger this effect matches the chance for Sinister Strike to grant Opportunity.\r\n\r\nAmbush damage increased by 80%.",
           "choices": null
         },
         {
@@ -3590,8 +3620,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Heavy Hitter",
-          "icon": "spell_shadow_ritualofsacrifice",
-          "description": "Attacks that generate combo points deal 10% increased damage.",
+          "icon": "136189",
+          "description": "Attacks that generate combo points deal 15% increased damage.",
           "choices": null
         },
         {
@@ -3607,7 +3637,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Adrenaline Rush",
-          "icon": "spell_shadow_shadowworddominate",
+          "icon": "136206",
           "description": "Generate full combo points when you gain Adrenaline Rush.",
           "choices": null
         },
@@ -3626,7 +3656,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Ace Up Your Sleeve",
-          "icon": "inv_inscription_darkmooncard_putrescence",
+          "icon": "3717311",
           "description": "Between the Eyes has a 3% chance per combo point spent to grant 4 combo points and reset its own cooldown.",
           "choices": null
         },
@@ -3643,7 +3673,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dancing Steel",
-          "icon": "ability_warrior_punishingblow",
+          "icon": "132350",
           "description": "Blade Flurry strikes 3 additional enemies and its duration is increased by 3 sec.",
           "choices": null
         },
@@ -3654,6 +3684,7 @@
           "posX": 30,
           "posY": 9,
           "connections": [
+            90680,
             90641,
             90678
           ],
@@ -3661,7 +3692,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Find an Opening",
-          "icon": "ability_rogue_pistolshot",
+          "icon": "1373908",
           "description": "Your chance for Sinister Strike to strike twice and grant Opportunity is increased by 10%",
           "choices": null
         },
@@ -3672,14 +3703,14 @@
           "posX": 34,
           "posY": 9,
           "connections": [
-            90654,
-            90678
+            90678,
+            90654
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Acrobatic Strikes",
-          "icon": "spell_warrior_wildstrike",
+          "icon": "589068",
           "description": "Auto-attacks increase auto-attack damage by 3% and movement speed by 1% for 3 sec, stacking up to 10 times.",
           "choices": null
         },
@@ -3702,14 +3733,14 @@
             {
               "spellId": 1259465,
               "name": "Heightened Rush",
-              "icon": "spell_shadow_unholyfrenzy",
-              "description": "Adrenaline Rush&#39;s duration is increased by 4 sec.",
+              "icon": "136224",
+              "description": "Adrenaline Rush's duration is increased by 4 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1256630,
               "name": "Menacing Rush",
-              "icon": "inv_1115_warrior_fasterreflexes",
+              "icon": "6712968",
               "description": "Adrenaline Rush magnifies your precision and power, increasing the damage your combo point generating abilities and finishers deal by 20%.",
               "maxRanks": 1
             }
@@ -3722,15 +3753,15 @@
           "posX": 38,
           "posY": 9,
           "connections": [
-            90654,
-            90668
+            90668,
+            90654
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Zero In",
-          "icon": "ability_hisek_aim",
-          "description": "Your auto-attack critical strikes increase the damage and critical strike chance of your next Between the Eyes by 3%, stacking up to 20 times.",
+          "icon": "878211",
+          "description": "Your auto-attack critical strikes increase the damage and critical strike chance of your next Between the Eyes by 2%, stacking up to 20 times.",
           "choices": null
         },
         {
@@ -3740,6 +3771,7 @@
           "posX": 42,
           "posY": 9,
           "connections": [
+            90671,
             90669,
             90668
           ],
@@ -3747,7 +3779,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Grand Melee",
-          "icon": "ability_rogue_rollthebones02",
+          "icon": "1269440",
           "description": "Blade Flurry causes your attacks to hit nearby enemies for an additional 8% of their normal damage.",
           "choices": null
         },
@@ -3765,8 +3797,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Summarily Dispatched",
-          "icon": "ability_rogue_waylay",
-          "description": "Dispatch deals 10% increased damage and costs 3 less Energy. This damage bonus is increased by 50% while your damage is enhanced by your Between the Eyes.",
+          "icon": "236286",
+          "description": "Dispatch deals 15% increased damage and costs 3 less Energy. This damage bonus is increased by 50% while your damage is enhanced by your Between the Eyes.",
           "choices": null
         },
         {
@@ -3784,8 +3816,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dragon-Bone Dice",
-          "icon": "ability_rogue_rollthebones",
-          "description": "The bonuses granted by your Roll the Bones are stronger.\r\n\r\nBonuses to chance for Sinister Strike to strike twice are 5% greater.\r\nBonuses to Sinister Strike and Ambush damage are 5% greater.\r\nBonuses to Restless Blades cooldown reduction are 10% greater.\r\nJackpot&#39;s bonus to critical strike chance is 5% greater.",
+          "icon": "1373910",
+          "description": "The bonuses granted by your Roll the Bones are stronger.\r\n\r\nBonuses to chance for Sinister Strike to strike twice are 5% greater.\r\nBonuses to Sinister Strike and Ambush damage are 5% greater.\r\nBonuses to Restless Blades cooldown reduction are 10% greater.\r\nJackpot's bonus to critical strike chance is 5% greater.",
           "choices": null
         },
         {
@@ -3802,7 +3834,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fan the Hammer",
-          "icon": "ability_rogue_pistolshot",
+          "icon": "1373908",
           "description": "When you gain Opportunity, gain 1 additional charge. Max 6 charges.\r\n\r\nPistol Shot consumes 1 additional charge of Opportunity to fire 1 additional bullet. Additional shots deal 20% reduced damage.",
           "choices": null
         },
@@ -3819,8 +3851,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hidden Opportunity",
-          "icon": "ability_rogue_ambush",
-          "description": "Ambush has a chance to grant Opportunity. Chance to trigger this effect is 80% of the chance for Sinister Strike to grant Opportunity.",
+          "icon": "132282",
+          "description": "Ambush has a chance to grant Opportunity. Chance to trigger this effect is 100% of the chance for Sinister Strike to grant Opportunity.\r\n\r\nEnergy cost of Ambush reduced by 5.",
           "choices": null
         },
         {
@@ -3837,8 +3869,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Killing Spree",
-          "icon": "inv_112_rogue_betweentheeyes",
-          "description": "Finishing move that unleashes a barrage of gunfire, striking random enemies within 8 yards for Physical damage. Number of strikes increased per combo point.\r\n\r\nRestores 1 combo point every 0.45 sec.\r\n\r\n   1 point  : 196 over 0.45 sec\r\n   2 points: 294 over 0.89 sec\r\n   3 points: 393 over 1.34 sec\r\n   4 points: 491 over 1.78 sec\r\n   5 points: 589 over 2.23 sec",
+          "icon": "6735718",
+          "description": "Finishing move that unleashes a barrage of gunfire, striking random enemies within 8 yards for Physical damage. Number of strikes increased per combo point.\r\n\r\nRestores 1 combo point every 0.45 sec. Each combo point spent above 5 increases damage by 15%.\r\n\r\n   1 point  : 318 over 0.45 sec\r\n   2 points: 477 over 0.89 sec\r\n   3 points: 636 over 1.34 sec\r\n   4 points: 795 over 1.78 sec\r\n   5 points: 954 over 2.23 sec",
           "choices": null
         },
         {
@@ -3854,7 +3886,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Keep It Rolling",
-          "icon": "ability_rogue_keepitrolling",
+          "icon": "4667423",
           "description": "Increase the remaining duration of your active Roll the Bones combat enhancement by 30 sec.",
           "choices": null
         },
@@ -3872,8 +3904,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fast Action",
-          "icon": "inv_musket_02",
-          "description": "The cooldown of Between the Eyes is reduced by 5 sec.",
+          "icon": "134536",
+          "description": "The cooldown of Between the Eyes is reduced by 8 sec.\r\n\r\nBetween the Eyes increases your damage dealt by an additional 1%.",
           "choices": null
         },
         {
@@ -3889,7 +3921,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Preparation",
-          "icon": "ability_rogue_preparation",
+          "icon": "460693",
           "description": "Immediately reset the cooldowns of Adrenaline Rush, Between the Eyes, Blade Flurry, Blade Rush, and Killing Spree.",
           "choices": null
         },
@@ -3904,7 +3936,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Gravedigger",
-          "icon": "inv12_apextalent_rogue_gravedigger",
+          "icon": "7636562",
           "description": null,
           "levels": [
             81,
@@ -3919,12 +3951,12 @@
             },
             {
               "spellId": 1265862,
-              "description": "When you spend 5 or more combo points on Dispatch, immediately strike your target with an underhanded Scoundrel Strike for 53 Physical damage.",
+              "description": "When you spend 5 or more combo points on Dispatch, immediately strike your target with an underhanded Scoundrel Strike for 56 Physical damage.",
               "maxRanks": 2
             },
             {
               "spellId": 1265863,
-              "description": "When you Dispatch you have a 12% chance per combo point spent to hide a bullet up your sleeve. When you&#39;ve hidden 6 bullets, your next Between the Eyes consumes them and costs no Energy, generates 6 combo points, and immediately resets its own cooldown.",
+              "description": "When you Dispatch you have a 12% chance per combo point spent to hide a bullet up your sleeve. When you've hidden 6 bullets, your next Between the Eyes consumes them and costs no Energy, generates 6 combo points, and immediately resets its own cooldown.",
               "maxRanks": 1
             }
           ]
@@ -3943,7 +3975,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Flawless Form",
-          "icon": "inv_qiraj_jewelblessed",
+          "icon": "134888",
           "description": "Unseen Blade and Secret Technique increase the damage of your finishing moves by 4% for 12 sec. Max 5 stacks.",
           "choices": null
         },
@@ -3964,7 +3996,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Coup de Grace",
-          "icon": "inv_ability_tricksterrogue_coupdegrace",
+          "icon": "5927656",
           "description": "After 4 strikes with Unseen Blade, your next Eviscerate will be performed as a Coup de Grace, functioning as if it had consumed 5 additional combo points, and granting you 5 stacks of Flawless Form.",
           "choices": null
         },
@@ -3988,14 +4020,14 @@
             {
               "spellId": 441429,
               "name": "Cloud Cover",
-              "icon": "ability_rogue_smoke",
+              "icon": "458733",
               "description": "Activating Shadow Blades creates a cloud of smoke for 6 sec, allowing attacks from within the cloud to apply Fazed, stacking up to 2 additional times.\r\n\r\nEffect persists for 6 sec after leaving the cloud.",
               "maxRanks": 1
             },
             {
               "spellId": 441398,
               "name": "No Scruples",
-              "icon": "ability_rogue_surpriseattack",
+              "icon": "132308",
               "description": "Finishing moves have 12% increased chance to critically strike Fazed targets.",
               "maxRanks": 1
             }
@@ -4015,7 +4047,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Disorienting Strikes",
-          "icon": "petbattle_speed",
+          "icon": "648208",
           "description": "Secret Technique has 10% reduced cooldown and allows your next 2 strikes of Unseen Blade to ignore its cooldown.",
           "choices": null
         },
@@ -4033,7 +4065,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Surprising Strikes",
-          "icon": "ability_rogue_surpriseattack2",
+          "icon": "643249",
           "description": "Attacks that generate combo points deal 50% increased critical strike damage to Fazed targets.",
           "choices": null
         },
@@ -4051,7 +4083,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Nimble Flurry",
-          "icon": "ability_rogue_bladetwisting",
+          "icon": "132283",
           "description": "Your auto-attacks, Unseen Blade, and Coup de Grace also strike up to 7 nearby enemies for 50% of normal damage while Flawless Form is active.",
           "choices": null
         },
@@ -4069,7 +4101,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Devious Distractions",
-          "icon": "ability_rogue_ghostpirate",
+          "icon": "1373905",
           "description": "Secret Technique applies Fazed to any targets struck.",
           "choices": null
         },
@@ -4093,14 +4125,14 @@
             {
               "spellId": 441403,
               "name": "So Tricky",
-              "icon": "ability_rogue_tricksofthetrade",
-              "description": "Tricks of the Trade&#39;s threat redirect duration is increased to 1 hour.",
+              "icon": "236283",
+              "description": "Tricks of the Trade's threat redirect duration is increased to 1 hour.",
               "maxRanks": 1
             },
             {
               "spellId": 441415,
               "name": "Don't Be Suspicious",
-              "icon": "ability_rogue_disguise",
+              "icon": "132288",
               "description": "Blind and Shroud of Concealment have 10% reduced cooldown.\r\n\r\nPick Pocket and Sap have 10 yd increased range.",
               "maxRanks": 1
             }
@@ -4126,14 +4158,14 @@
             {
               "spellId": 441346,
               "name": "Thousand Cuts",
-              "icon": "inv_10_specialization_blacksmithing_blades_color1",
+              "icon": "4624383",
               "description": "Slice and Dice grants 10% additional attack speed and gives your auto-attacks a chance to refresh your opportunity to strike with Unseen Blade.",
               "maxRanks": 1
             },
             {
               "spellId": 441359,
               "name": "Flickerstrike",
-              "icon": "spell_nature_invisibilty",
+              "icon": "136047",
               "description": "Taking damage from an area-of-effect attack while Feint is active or dodging while Evasion is active refreshes your opportunity to strike with Unseen Blade.\r\n\r\nThis effect may only occur once every 5 sec.",
               "maxRanks": 1
             }
@@ -4151,8 +4183,8 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Unseen Blade",
-          "icon": "inv_weapon_shortblade_55",
-          "description": "Backstab and Shadowstrike now also strike with an Unseen Blade dealing 100 damage. Targets struck are Fazed for 10 sec.\r\n\r\nFazed enemies take 5% more damage from you and cannot parry your attacks.\r\n\r\nThis effect may occur once every 20 sec.",
+          "icon": "135690",
+          "description": "Backstab and Shadowstrike now also strike with an Unseen Blade dealing 98 damage. Targets struck are Fazed for 10 sec.\r\n\r\nFazed enemies take 5% more damage from you and cannot parry your attacks.\r\n\r\nThis effect may occur once every 20 sec.",
           "choices": null
         },
         {
@@ -4175,14 +4207,14 @@
             {
               "spellId": 441247,
               "name": "Smoke",
-              "icon": "rogue_dirtytricks",
+              "icon": "571694",
               "description": "You take 5% reduced damage from Fazed targets.",
               "maxRanks": 1
             },
             {
               "spellId": 441250,
               "name": "Mirrors",
-              "icon": "trade_archaeology_highbornesoulmirror",
+              "icon": "458243",
               "description": "Feint reduces damage taken from area-of-effect attacks by an additional 10%",
               "maxRanks": 1
             }
@@ -4202,7 +4234,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Clever Combatant",
-          "icon": "ability_rogue_versatility",
+          "icon": "636277",
           "description": "Shuriken Storm has 10% increased critical strike chance and now triggers Unseen Blade when available.",
           "choices": null
         },
@@ -4220,7 +4252,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Flashing Steel",
-          "icon": "inv_1115_warrior_fastermeleeattacks",
+          "icon": "6712967",
           "description": "Unseen Blade may now occur once every 15 sec and has 25% chance to strike twice.",
           "choices": null
         },
@@ -4238,7 +4270,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Hoodwink",
-          "icon": "spell_holy_dizzy",
+          "icon": "135899",
           "description": "Fazed increases damage taken by an additional 3%.",
           "choices": null
         },
@@ -4256,8 +4288,8 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Deal Fate",
-          "icon": "ability_rogue_preparation",
-          "description": "Mutilate, Ambush, and Fan of Knives generate 1 additional combo point when they trigger Seal Fate.",
+          "icon": "460693",
+          "description": "Mutilate, Ambush, and Fan of Knives have a 60% chance to generate 1 additional combo point when they trigger Seal Fate.",
           "choices": null
         },
         {
@@ -4280,14 +4312,14 @@
             {
               "spellId": 1249190,
               "name": "Overflowing Purse",
-              "icon": "inv_misc_coinbag_special",
+              "icon": "901746",
               "description": "Envenom has a 15% chance to flip 3 Fatebound Coins.",
               "maxRanks": 1
             },
             {
               "spellId": 454435,
               "name": "Destiny Defined",
-              "icon": "ability_boss_fatescribe_rune6",
+              "icon": "4067928",
               "description": "Sinister Strike has 5% increased chance to strike an additional time and grant Opportunity and your Fatebound Coins flipped have an additional 5% chance to match the same face as the last flip. ",
               "maxRanks": 1
             }
@@ -4307,7 +4339,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Delivered Doom",
-          "icon": "ability_bossgorefiend_touchofdoom",
+          "icon": "1120185",
           "description": "Envenom deals 5% more damage when it consumes 5 or more combo points.",
           "choices": null
         },
@@ -4325,7 +4357,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Edge Case",
-          "icon": "item_icecrownnecklacea",
+          "icon": "348281",
           "description": "Activating Deathmark flips a Fatebound Coin and causes it to land on its edge, counting as both Heads and Tails.",
           "choices": null
         },
@@ -4343,7 +4375,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Mean Streak",
-          "icon": "inv_sigil_thorim",
+          "icon": "254885",
           "description": "Fatebound Coins flipped by Envenom are 33% more likely to match the same face as the last flip.",
           "choices": null
         },
@@ -4359,8 +4391,8 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Hand of Fate",
-          "icon": "inv_ability_fateboundrogue_handoffateheads",
-          "description": "Flip a Fatebound Coin each time a finishing move consumes 5 or more combo points. Heads increases the damage of your attacks by 10%, lasting 15 sec or until you flip Tails. Tails deals 57 Cosmic damage to your target.\r\n\r\nFor each time the same face is flipped in a row, Heads increases damage by an additional 2% and Tails increases its damage by 10%.",
+          "icon": "5927626",
+          "description": "Flip a Fatebound Coin each time a finishing move consumes 5 or more combo points. Heads increases the damage of your attacks by 10%, lasting 15 sec or until you flip Tails. Tails deals 58 Cosmic damage to your target.\r\n\r\nFor each time the same face is flipped in a row, Heads increases damage by an additional 2% and Tails increases its damage by 10%.",
           "choices": null
         },
         {
@@ -4380,7 +4412,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Lucky Coin",
-          "icon": "inv_misc_markoftheworldtree",
+          "icon": "513195",
           "description": "Every 7 coin flips, keep a lucky coin that bends you towards your fate for 12 sec. Your Agility is increased by 4%, the damage and bonuses of Fatebound Coins are increased by 50%, and coin flips are 15% more likely to match the same face as the last flip.\r\n\r\nCoin flips do not count toward finding a lucky coin while you have a lucky coin.",
           "choices": null
         },
@@ -4398,7 +4430,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Rush to the Inevitable",
-          "icon": "ability_rogue_vigor",
+          "icon": "458737",
           "description": "Gain 5 Energy every time you flip a Fatebound Coin. Gain 15 Energy for Coins that land on their edge.",
           "choices": null
         },
@@ -4422,14 +4454,14 @@
             {
               "spellId": 454432,
               "name": "Inexorable March",
-              "icon": "ability_monk_ridethewind",
+              "icon": "1381298",
               "description": "You cannot be slowed below 70% of normal movement speed while your Fatebound Coin flips have an active streak of at least 2 flips matching the same face.",
               "maxRanks": 1
             },
             {
               "spellId": 454433,
               "name": "Death's Arrival",
-              "icon": "achievement_guildperk_havegroupwilltravel",
+              "icon": "413583",
               "description": "Grappling Hook may be used a second time within 3 sec with no cooldown, but its total cooldown is increased by 5 sec.",
               "maxRanks": 1
             }
@@ -4455,14 +4487,14 @@
             {
               "spellId": 1249201,
               "name": "Chosen's Revelry",
-              "icon": "ability_priest_heavanlyvoice",
+              "icon": "458228",
               "description": "Flipping a Fatebound Coin restores 10 health.",
               "maxRanks": 1
             },
             {
               "spellId": 454286,
               "name": "Tempted Fate",
-              "icon": "ability_rogue_sabreslash",
+              "icon": "1373911",
               "description": "You have a 30% chance to absorb 10% of any damage taken.",
               "maxRanks": 1
             }
@@ -4482,7 +4514,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Fate Intertwined",
-          "icon": "inv_cosmicvoid_beam",
+          "icon": "4913233",
           "description": "Caustic Spatter causes an additional 5% of Nature damage dealt to be dealt to affected enemies.",
           "choices": null
         },
@@ -4500,7 +4532,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Ravenholdt Mint",
-          "icon": "inv_misc_coin_02",
+          "icon": "133785",
           "description": "Flipping Heads increases damage by an additional 4%. Damage dealt by flipping Tails is increased by 12%.",
           "choices": null
         },
@@ -4518,7 +4550,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Sometimes Lucky",
-          "icon": "inv_misc_celestialmap",
+          "icon": "1519351",
           "description": "Critical strike chance increased by 3%.",
           "choices": null
         },
@@ -4536,7 +4568,7 @@
           "heroSubtree": "Fatebound",
           "maxRanks": 1,
           "name": "Controlled Chaos",
-          "icon": "inv_112_raidtrinkets_blobofswirlingvoid_purple",
+          "icon": "7137506",
           "description": "After flipping a Fatebound Coin that ends a streak of 4 or more, flip another that matches the same face.",
           "choices": null
         }
@@ -4581,7 +4613,7 @@
         "left": {
           "name": "Trickster",
           "icon": "Trickster",
-          "description": "Dirty tricks and flashing blades are on display when a Trickster enters a fight. Tricksters distract opponents with misdirection or a sword&#39;s flourish, then slash them with a blade they never saw coming.",
+          "description": "Dirty tricks and flashing blades are on display when a Trickster enters a fight. Tricksters distract opponents with misdirection or a sword's flourish, then slash them with a blade they never saw coming.",
           "rootNodeId": 95140
         },
         "right": {
@@ -4603,7 +4635,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shiv",
-          "icon": "inv_throwingknife_04",
+          "icon": "135428",
           "description": "Attack with your off-hand, dealing 2 Physical damage, dispelling all enrage effects and applying a concentrated form of your active Non-Lethal poison.\r\n\r\nAwards 1 combo point.",
           "choices": null
         },
@@ -4618,7 +4650,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blind",
-          "icon": "spell_shadow_mindsteal",
+          "icon": "136175",
           "description": "Blinds the target, causing it to wander disoriented for 1 min. Damage may interrupt the effect. Limit 1.",
           "choices": null
         },
@@ -4633,7 +4665,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Cloak of Shadows",
-          "icon": "spell_shadow_nethercloak",
+          "icon": "136177",
           "description": "Provides a moment of magic immunity, instantly removing all harmful spell effects. The cloak lingers, causing you to resist harmful spells for 5 sec.",
           "choices": null
         },
@@ -4650,8 +4682,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Toxic Stiletto",
-          "icon": "ability_rogue_poisonedknife",
-          "description": "Shiv&#39;s Energy cost is reduced by 20, its cooldown is reduced by 15 sec, and its range is increased by 3 yds.",
+          "icon": "1373909",
+          "description": "Shiv's Energy cost is reduced by 20, its cooldown is reduced by 15 sec, and its range is increased by 3 yds.",
           "choices": null
         },
         {
@@ -4668,7 +4700,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fleet Footed",
-          "icon": "ability_rogue_quickrecovery",
+          "icon": "132301",
           "description": "Movement speed increased by 15%.",
           "choices": null
         },
@@ -4691,14 +4723,14 @@
             {
               "spellId": 1776,
               "name": "Gouge",
-              "icon": "ability_gouge",
+              "icon": "132155",
               "description": "Gouges the eyes of an enemy target, incapacitating for 4 sec. Damage may interrupt the effect.\r\n\r\nMust be in front of your target.\r\n\r\nAwards 1 combo point.",
               "maxRanks": 1
             },
             {
               "spellId": 200733,
               "name": "Airborne Irritant",
-              "icon": "ability_rogue_bloodyeye",
+              "icon": "132284",
               "description": "Blind has 50% reduced cooldown, 70% reduced duration, and applies to all nearby enemies.",
               "maxRanks": 1
             }
@@ -4718,7 +4750,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thrill Seeking",
-          "icon": "inv_ragnaros_heart_shadowflame",
+          "icon": "5415954",
           "description": "Shadowstep has 1 additional charge.",
           "choices": null
         },
@@ -4735,7 +4767,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowrunner",
-          "icon": "ability_stealth",
+          "icon": "132320",
           "description": "While Stealth or Shadow Dance is active, you move 20% faster.",
           "choices": null
         },
@@ -4746,14 +4778,14 @@
           "posX": 4,
           "posY": 4,
           "connections": [
-            110325,
-            90764
+            90764,
+            110325
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Master Poisoner",
-          "icon": "ability_creature_poison_06",
+          "icon": "132108",
           "description": "Increases the non-damaging effects of your weapon poisons by 20%.",
           "choices": null
         },
@@ -4778,14 +4810,14 @@
             {
               "spellId": 79008,
               "name": "Elusiveness",
-              "icon": "ability_rogue_turnthetables",
+              "icon": "236284",
               "description": "Evasion also reduces damage taken by 20%, and Feint also reduces non-area-of-effect damage taken by 20%.",
               "maxRanks": 1
             },
             {
               "spellId": 31230,
               "name": "Cheat Death",
-              "icon": "ability_rogue_cheatdeath",
+              "icon": "132285",
               "description": "Fatal attacks instead reduce you to 7% of your maximum health. For 3 sec afterward, you take 85% reduced damage. Cannot trigger more often than once per 6 min.",
               "maxRanks": 1
             }
@@ -4798,8 +4830,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            110324,
-            90695
+            90695,
+            110324
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4811,15 +4843,15 @@
             {
               "spellId": 57934,
               "name": "Tricks of the Trade",
-              "icon": "ability_rogue_tricksofthetrade",
+              "icon": "236283",
               "description": "Redirects all threat you cause to the targeted party or raid member, beginning with your next damaging attack within the next 30 sec and lasting 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 379005,
               "name": "Blackjack",
-              "icon": "ability_rogue_blackjack",
-              "description": "Enemies have 30% reduced damage and healing for 6 sec after Blind or Sap&#39;s effect on them ends.",
+              "icon": "458797",
+              "description": "Enemies have 30% reduced damage and healing for 6 sec after Blind or Sap's effect on them ends.",
               "maxRanks": 1
             }
           ]
@@ -4837,7 +4869,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Wound Poison",
-          "icon": "inv_misc_herb_16",
+          "icon": "134197",
           "description": "Wound Poison can now stack 2 additional times.",
           "choices": null
         },
@@ -4854,7 +4886,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nimble Fingers",
-          "icon": "ability_rogue_crimsonvial",
+          "icon": "1373904",
           "description": "Energy cost of Feint and Crimson Vial reduced by 10.",
           "choices": null
         },
@@ -4871,7 +4903,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deadened Nerves",
-          "icon": "ability_rogue_nervesofsteel",
+          "icon": "132300",
           "description": "Physical damage taken reduced by 5%.\r\n",
           "choices": null
         },
@@ -4888,7 +4920,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Quick Fingers",
-          "icon": "ability_rogue_improvedrecuperate",
+          "icon": "457635",
           "description": "Increases your Agility by 3%.\r\n",
           "choices": null
         },
@@ -4905,7 +4937,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Sprint",
-          "icon": "ability_rogue_sprint",
+          "icon": "132307",
           "description": "Reduces the cooldown of Sprint by 60 sec.",
           "choices": null
         },
@@ -4922,7 +4954,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Superior Mixture",
-          "icon": "inv_misc_potionsete",
+          "icon": "463547",
           "description": "Crippling Poison reduces movement speed by an additional 10%.",
           "choices": null
         },
@@ -4933,14 +4965,14 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            90637,
-            90745
+            90745,
+            90637
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Evasion",
-          "icon": "spell_shadow_shadowward",
+          "icon": "136205",
           "description": "Increases your dodge chance by 100% for 10 sec.",
           "choices": null
         },
@@ -4957,7 +4989,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Iron Stomach",
-          "icon": "inv_misc_organ_11",
+          "icon": "237415",
           "description": "Increases the healing you receive from Crimson Vial, healing potions, and healthstones by 25%.",
           "choices": null
         },
@@ -4968,15 +5000,15 @@
           "posX": 8,
           "posY": 6,
           "connections": [
-            110323,
             90745,
-            90746
+            90746,
+            110323
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Virulent Poisons",
-          "icon": "ability_creature_poison_06",
+          "icon": "132108",
           "description": "Increases the damage of your weapon poisons by 10%.",
           "choices": null
         },
@@ -4993,7 +5025,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stillshroud",
-          "icon": "ability_rogue_shroudofconcealment",
+          "icon": "635350",
           "description": "Shroud of Concealment has 50% reduced cooldown.\r\n",
           "choices": null
         },
@@ -5004,14 +5036,14 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            90687,
-            90746
+            90746,
+            90687
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Graceful Guile",
-          "icon": "ability_rogue_ghostpirate",
+          "icon": "1373905",
           "description": "Feint has 1 additional charge.\r\n",
           "choices": null
         },
@@ -5028,7 +5060,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Featherfoot",
-          "icon": "spell_magic_featherfall",
+          "icon": "135992",
           "description": "Sprint increases movement speed by an additional 30% and has 4 sec increased duration.",
           "choices": null
         },
@@ -5052,15 +5084,15 @@
             {
               "spellId": 5761,
               "name": "Numbing Poison",
-              "icon": "spell_nature_nullifydisease",
+              "icon": "136066",
               "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, clouding their mind and slowing their attack and casting speed by 15% for 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 381637,
               "name": "Atrophic Poison",
-              "icon": "ability_rogue_nervesofsteel",
-              "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, reducing their damage by 3.0% for 10 sec.",
+              "icon": "132300",
+              "description": "Coats your weapons with a Non-Lethal Poison that lasts for 1 hour. Each strike has a 30% chance of poisoning the enemy, reducing their damage by 4.0% for 1 min.",
               "maxRanks": 1
             }
           ]
@@ -5080,7 +5112,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deadly Precision",
-          "icon": "ability_rogue_deadenednerves",
+          "icon": "132286",
           "description": "Increases the critical strike chance of your attacks that generate combo points by 5%.",
           "choices": null
         },
@@ -5097,7 +5129,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sanguine Vial",
-          "icon": "inv_misc_potiona5",
+          "icon": "463862",
           "description": "When you deal the killing blow to a target that yields experience or honor, the cooldown of Crimson Vial is reduced by 15 sec and your next use heals 5% of your health instantly.",
           "choices": null
         },
@@ -5116,7 +5148,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deep Cuts",
-          "icon": "inv_1115_firstkilloftheday_firstkilloftheday",
+          "icon": "6439626",
           "description": "Your finishing moves deal 6% increased damage.\r\n",
           "choices": null
         },
@@ -5134,7 +5166,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unbreakable Stride",
-          "icon": "ability_rogue_trip",
+          "icon": "132309",
           "description": "Reduces the duration of movement slowing effects 30%.",
           "choices": null
         },
@@ -5152,7 +5184,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Danger Sense",
-          "icon": "ability_rogue_wrongfullyaccused",
+          "icon": "236287",
           "description": "You have a 20% chance to partially evade any damage dealt to you, reducing the damage it deals by 20%.",
           "choices": null
         },
@@ -5163,15 +5195,15 @@
           "posX": 8,
           "posY": 8,
           "connections": [
+            110576,
             90743,
-            94562,
-            110576
+            94562
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swift Slasher",
-          "icon": "ability_rogue_slicedice",
+          "icon": "132306",
           "description": "Slice and Dice grants additional attack speed equal to 100% of your Haste.",
           "choices": null
         },
@@ -5195,14 +5227,14 @@
             {
               "spellId": 381620,
               "name": "Improved Ambush",
-              "icon": "ability_rogue_ambush",
+              "icon": "132282",
               "description": "Ambush generates 1 additional combo point.",
               "maxRanks": 1
             },
             {
               "spellId": 381621,
               "name": "Tight Spender",
-              "icon": "inv_misc_coin_03",
+              "icon": "133786",
               "description": "Energy cost of finishing moves reduced by 6%.",
               "maxRanks": 1
             }
@@ -5221,7 +5253,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leeching Poison",
-          "icon": "rogue_leeching_poison",
+          "icon": "538440",
           "description": "Adds a Leeching effect to your Lethal poisons, granting you 3.0% Leech.",
           "choices": null
         },
@@ -5239,7 +5271,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Lethality",
-          "icon": "ability_criticalstrike",
+          "icon": "132109",
           "description": "Critical strike chance increased by 1%. Critical strike damage bonus of your attacks that generate combo points increased by 10%.",
           "choices": null
         },
@@ -5256,7 +5288,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Recuperator",
-          "icon": "inv_gizmo_runichealthinjector",
+          "icon": "237031",
           "description": "Slice and Dice heals you for up to 1% of your maximum health per 3 sec.",
           "choices": null
         },
@@ -5274,7 +5306,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Alacrity",
-          "icon": "ability_paladin_speedoflight",
+          "icon": "571558",
           "description": "Haste increased by 1.5%.",
           "choices": null
         },
@@ -5291,7 +5323,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soothing Darkness",
-          "icon": "spell_shadow_twilight",
+          "icon": "136223",
           "description": "You are healed for 30% of your maximum health over 6 sec after activating Vanish.",
           "choices": null
         },
@@ -5308,7 +5340,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Vigor",
-          "icon": "ability_rogue_vigor",
+          "icon": "458737",
           "description": "Increases your maximum Energy by 50 and Energy regeneration by 5%.",
           "choices": null
         },
@@ -5325,7 +5357,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Supercharger",
-          "icon": "inv_engineering_90_electrifiedether",
+          "icon": "3610503",
           "description": "Kingsbane supercharges 1 combo point.\r\n\r\nDamaging finishing moves consume a supercharged combo point to function as if they spent 2 additional combo points.",
           "choices": null
         },
@@ -5342,13 +5374,13 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Subterfuge",
-          "icon": "rogue_subterfuge",
+          "icon": "571317",
           "description": "Abilities requiring Stealth can be used for 3 sec after Stealth breaks.\r\n\r\nCombat benefits requiring Stealth persist for an additional 3 sec after Stealth breaks.",
           "choices": null
         },
         {
           "id": 90756,
-          "type": "square",
+          "type": "choice",
           "treeType": "class",
           "posX": 4,
           "posY": 11,
@@ -5358,10 +5390,25 @@
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Thistle Tea",
-          "icon": "inv_drink_milk_05",
-          "description": "Restore 100 Energy.\r\n\r\nWhen your Energy is reduced below 30, drink a Thistle Tea.",
-          "choices": null
+          "name": null,
+          "icon": null,
+          "description": null,
+          "choices": [
+            {
+              "spellId": 381623,
+              "name": "Thistle Tea",
+              "icon": "132819",
+              "description": "Restore 100 Energy.\r\n\r\nWhen your Energy is reduced below 30, drink a Thistle Tea.",
+              "maxRanks": 1
+            },
+            {
+              "spellId": 1298826,
+              "name": "Thistle Tea",
+              "icon": "132819",
+              "description": "Restore 100 Energy.",
+              "maxRanks": 1
+            }
+          ]
         },
         {
           "id": 90748,
@@ -5376,7 +5423,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cold Blooded Killer",
-          "icon": "spell_ice_lament",
+          "icon": "135988",
           "description": "Critically striking with an attack that generates combo points increases the critical strike chance of your next finishing move by 10%.",
           "choices": null
         },
@@ -5399,14 +5446,14 @@
             {
               "spellId": 470669,
               "name": "Echoing Reprimand",
-              "icon": "inv_ability_rogue_echoingreprimand",
+              "icon": "6035317",
               "description": "After consuming a supercharged combo point, your next Mutilate also strikes the target with an Echoing Reprimand dealing 41 Physical damage.",
               "maxRanks": 1
             },
             {
               "spellId": 470668,
               "name": "Forced Induction",
-              "icon": "inv_misc_enggizmos_06",
+              "icon": "133864",
               "description": "Increase the bonus granted when a damaging finishing move consumes a supercharged combo point by 1.",
               "maxRanks": 1
             }
@@ -5425,7 +5472,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deeper Stratagem",
-          "icon": "archaeology_5_0_changkiboard",
+          "icon": "644377",
           "description": "Gain 1 additional max combo point.\r\n\r\nYour finishing moves that consume more than 5 combo points have increased effects, and your finishing moves deal 5% increased damage.",
           "choices": null
         },
@@ -5442,7 +5489,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Without a Trace",
-          "icon": "ability_vanish",
+          "icon": "132331",
           "description": "Vanish has 1 additional charge.",
           "choices": null
         },
@@ -5457,8 +5504,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Find Weakness",
-          "icon": "ability_rogue_findweakness",
-          "description": "Your Stealth abilities allow you to see the flaws in enemies&#39; defenses, causing your attacks to ignore 30% armor for 10 sec.",
+          "icon": "132295",
+          "description": "Your Stealth abilities allow you to see the flaws in enemies' defenses, causing your attacks to ignore 30% armor for 10 sec.",
           "choices": null
         },
         {
@@ -5474,7 +5521,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Backstab",
-          "icon": "ability_backstab",
+          "icon": "132090",
           "description": "Backstab has 15% increased critical strike chance.\r\n\r\nWhile behind your target, Backstab critical strikes grant Find Weakness for 10 sec.",
           "choices": null
         },
@@ -5491,7 +5538,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Blades",
-          "icon": "inv_knife_1h_grimbatolraid_d_03",
+          "icon": "376022",
           "description": "Draws upon surrounding shadows to empower your weapons, causing your attacks to deal 20% additional damage as Shadow and causing your combo point generating abilities to generate double combo points for 16 sec.",
           "choices": null
         },
@@ -5508,7 +5555,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Shuriken Storm",
-          "icon": "ability_rogue_shurikenstorm",
+          "icon": "1373913",
           "description": "Shuriken Storm has 15% increased critical strike chance.\r\n\r\nShuriken Storm critical strikes grant Find Weakness for 10 sec.",
           "choices": null
         },
@@ -5525,7 +5572,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Premeditation",
-          "icon": "spell_shadow_possession",
+          "icon": "136183",
           "description": "After entering Stealth, your next combo point generating ability generates full combo points.",
           "choices": null
         },
@@ -5548,14 +5595,14 @@
             {
               "spellId": 382503,
               "name": "Quick Decisions",
-              "icon": "inv_misc_hook_01",
-              "description": "Shadowstep&#39;s cooldown is reduced by 20%, and its maximum range is increased by 20%.",
+              "icon": "134226",
+              "description": "Shadowstep's cooldown is reduced by 20%, and its maximum range is increased by 20%.",
               "maxRanks": 1
             },
             {
               "spellId": 426563,
               "name": "Ephemeral Bond",
-              "icon": "ability_warlock_soullink",
+              "icon": "607854",
               "description": "Increases healing received by 8%.\r\n",
               "maxRanks": 1
             }
@@ -5574,7 +5621,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Silent Storm",
-          "icon": "ability_rogue_shurikenstorm",
+          "icon": "1373913",
           "description": "Gaining Stealth, Vanish, or Shadow Dance causes your next Shuriken Storm to have 100% increased chance to critically strike.",
           "choices": null
         },
@@ -5591,7 +5638,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shrouded in Darkness",
-          "icon": "ability_rogue_envelopingshadows",
+          "icon": "132291",
           "description": "Shroud of Concealment increases the movement speed of allies by 100% and leaving its area no longer cancels the effect.",
           "choices": null
         },
@@ -5615,14 +5662,14 @@
             {
               "spellId": 257505,
               "name": "Shot in the Dark",
-              "icon": "ability_cheapshot",
+              "icon": "132092",
               "description": "After using Vanish or Shadow Dance, your next Cheap Shot is free and ignores its cooldown.",
               "maxRanks": 1
             },
             {
               "spellId": 428486,
               "name": "Exhilarating Execution",
-              "icon": "inv_weapon_hand_04",
+              "icon": "135595",
               "description": "Your finishing moves heal you for 5% of damage done. At full health gain shielding instead, absorbing up to 10% of your maximum health.",
               "maxRanks": 1
             }
@@ -5648,14 +5695,14 @@
             {
               "spellId": 382515,
               "name": "Cloaked in Shadows",
-              "icon": "inv_helm_cloth_shadowmoonclan_b_01",
+              "icon": "1045771",
               "description": "Vanish grants you a shield for 6 sec, absorbing damage equal to 18% of your maximum health.",
               "maxRanks": 1
             },
             {
               "spellId": 382514,
               "name": "Fade to Nothing",
-              "icon": "ability_warlock_everlastingaffliction",
+              "icon": "236296",
               "description": "Movement speed increased by 20% and damage taken reduced by 10% for 8 sec after gaining Stealth, Vanish, or Shadow Dance.",
               "maxRanks": 1
             }
@@ -5680,14 +5727,14 @@
             {
               "spellId": 277953,
               "name": "Night Terrors",
-              "icon": "spell_shadow_shadesofdarkness",
-              "description": "Shuriken Storm reduces enemies&#39; movement speed by 50% for 8 sec.",
+              "icon": "136194",
+              "description": "Shuriken Storm reduces enemies' movement speed by 50% for 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 428387,
               "name": "Terrifying Pace",
-              "icon": "ability_druid_typhoon",
+              "icon": "236170",
               "description": "Shuriken Storm increases your movement speed by 30% for 3 sec when striking 3 or more enemies.",
               "maxRanks": 1
             }
@@ -5707,7 +5754,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Master of Shadows",
-          "icon": "spell_shadow_charm",
+          "icon": "136129",
           "description": "Gain 30 Energy over 3 sec when you enter Stealth or activate Shadow Dance.",
           "choices": null
         },
@@ -5724,7 +5771,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Gloomblade",
-          "icon": "ability_ironmaidens_convulsiveshadows",
+          "icon": "1035040",
           "description": "Punctures your target with your shadow-infused blade for 43 Shadow damage, bypassing armor.\r\n\r\nAwards 1 combo point.",
           "choices": null
         },
@@ -5735,14 +5782,14 @@
           "posX": 36,
           "posY": 6,
           "connections": [
-            90733,
-            90701
+            90701,
+            90733
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Focus",
-          "icon": "rogue_shadowfocus",
+          "icon": "571316",
           "description": "Abilities deal 10% more damage while Stealth or Shadow Dance is active.",
           "choices": null
         },
@@ -5759,7 +5806,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Secret Technique",
-          "icon": "ability_rogue_sinistercalling",
+          "icon": "132305",
           "description": "Secret Technique damage increased by 15%.",
           "choices": null
         },
@@ -5770,15 +5817,15 @@
           "posX": 40,
           "posY": 6,
           "connections": [
-            90733,
-            90714
+            90714,
+            90733
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Relentless Strikes",
-          "icon": "ability_warrior_decisivestrike",
-          "description": "Your finishing moves generate 5 Energy per combo point spent.",
+          "icon": "132340",
+          "description": "Your finishing moves generate 4 Energy per combo point spent.",
           "choices": null
         },
         {
@@ -5794,7 +5841,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Weaponmaster",
-          "icon": "ability_ironmaidens_bladerush",
+          "icon": "1035036",
           "description": "Backstab and Shadowstrike have a 15% chance to create a Shadow Clone that repeats the attack for 50% of normal damage as Shadow.",
           "choices": null
         },
@@ -5817,14 +5864,14 @@
             {
               "spellId": 382508,
               "name": "Planned Execution",
-              "icon": "ability_creature_cursed_02",
+              "icon": "132094",
               "description": "Shadow Dance increases the critical strike damage bonus of your abilities by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 426555,
               "name": "Warning Signs",
-              "icon": "achievement_bg_kill_flag_carrier",
+              "icon": "236358",
               "description": "Shadow Dance increases attack speed by 25%.",
               "maxRanks": 1
             }
@@ -5837,15 +5884,15 @@
           "posX": 34,
           "posY": 7,
           "connections": [
+            90727,
             90699,
-            90734,
-            90727
+            90734
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Double Dance",
-          "icon": "warrior_doubletime",
+          "icon": "589546",
           "description": "Shadow Dance has 1 additional charge.",
           "choices": null
         },
@@ -5856,15 +5903,15 @@
           "posX": 38,
           "posY": 7,
           "connections": [
+            90715,
             90709,
-            90734,
-            90715
+            90734
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowed Finishers",
-          "icon": "ability_rogue_eviscerate",
+          "icon": "132292",
           "description": "Eviscerate and Black Powder deal an additional 30% damage as Shadow while Find Weakness is active.",
           "choices": null
         },
@@ -5881,7 +5928,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Secret Stratagem",
-          "icon": "archaeology_5_0_changkiboard",
+          "icon": "644377",
           "description": "Gain 1 additional max combo point.\r\n\r\nYour finishing moves that consume more than 5 combo points have increased effects, and your finishing moves deal 5% increased damage.",
           "choices": null
         },
@@ -5898,7 +5945,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shuriken Tornado",
-          "icon": "ability_rogue_throwingspecialization",
+          "icon": "236282",
           "description": "Shuriken Storm has a 15% chance to create a Shadow Clone that repeats the attack for 50% of normal damage as Shadow.",
           "choices": null
         },
@@ -5916,7 +5963,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Umbral Edge",
-          "icon": "ability_rogue_nightblade",
+          "icon": "1373907",
           "description": "Shadow Clones deal 15% increased damage.\r\n\r\nCheap Shot creates a Shadow Clone to Shadowstrike the target for 50% of normal damage as Shadow.\r\n\r\nKidney Shot creates a Shadow Clone to Eviscerate the target for 50% of normal damage as Shadow.",
           "choices": null
         },
@@ -5933,14 +5980,14 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "The First Dance",
-          "icon": "ability_rogue_shadowdance",
-          "description": "Remaining out of combat for 6 sec increases the duration of your next Shadow Dance by 3 sec.",
+          "name": "Deepening Shadows",
+          "icon": "136223",
+          "description": "Shadow Dance duration is increased by 150% of your Haste stat.\r\n\r\nCurrent bonus duration: 0.00 sec",
           "choices": null
         },
         {
           "id": 90724,
-          "type": "round",
+          "type": "square",
           "treeType": "spec",
           "posX": 36,
           "posY": 8,
@@ -5951,9 +5998,9 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Deepening Shadows",
-          "icon": "spell_shadow_twilight",
-          "description": "Shadow Dance duration is increased by 150% of your Haste stat.\r\n\r\nCurrent bonus duration: 0.00 sec",
+          "name": "Goremaw's Bite",
+          "icon": "1120132",
+          "description": "Lash out at your target and 2 additional nearby enemies, inflicting 219 Shadow damage and causing them to Bleed for 435 damage over 14 sec.\r\n\r\n20% of all damage from Finishing Moves is repeated as Shadow, split evenly among affected enemies.",
           "choices": null
         },
         {
@@ -5970,7 +6017,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Veiltouched",
-          "icon": "spell_arcane_prismaticcloak",
+          "icon": "135752",
           "description": "Your abilities deal 5% increased magic damage.",
           "choices": null
         },
@@ -5988,7 +6035,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Replicating Shadows",
-          "icon": "spell_deathknight_strangulate",
+          "icon": "237532",
           "description": "Shadow Clones deal 15% increased damage and your effects that have a chance to create them have 5% additional chance to occur.",
           "choices": null
         },
@@ -6006,7 +6053,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Find Weakness",
-          "icon": "ability_rogue_findweakness",
+          "icon": "132295",
           "description": "Find Weakness causes your attacks to ignore an additional 20% armor.",
           "choices": null
         },
@@ -6024,7 +6071,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Perforated Veins",
-          "icon": "ability_warrior_bloodfrenzy",
+          "icon": "132334",
           "description": "Backstab, Shuriken Storm, and Shadowstrike have 10% increased damage while Find Weakness is active.",
           "choices": null
         },
@@ -6041,8 +6088,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lingering Shadow",
-          "icon": "spell_fire_twilightnova",
-          "description": "After Shadow Dance ends, Backstab deals an additional 50% damage as Shadow, fading by 2.8% per sec.",
+          "icon": "425958",
+          "description": "After Shadow Dance ends, Backstab and Shuriken Storm deal an additional 50% damage as Shadow, fading by 2.8% per sec.",
           "choices": null
         },
         {
@@ -6059,7 +6106,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deeper Daggers",
-          "icon": "inv_weapon_shortblade_15",
+          "icon": "135651",
           "description": "Shadow damage increased by 8%.",
           "choices": null
         },
@@ -6077,7 +6124,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Potent Powder",
-          "icon": "spell_priest_divinestar_shadow",
+          "icon": "608955",
           "description": "Black Powder deals increased damage equal to 20% of your Mastery when it spends 5 or more combo points.",
           "choices": null
         },
@@ -6095,7 +6142,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Death Perception",
-          "icon": "spell_nzinsanity_shortsighted",
+          "icon": "3163628",
           "description": "Find Weakness increases the damage of finishing moves by 5%.\r\n\r\nShadow Dance increases the damage of finishing moves by 5%.\r\n\r\nShadow Blades increases the damage of finishing moves by 5%.",
           "choices": null
         },
@@ -6114,7 +6161,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Dark Shadow",
-          "icon": "spell_warlock_demonsoul",
+          "icon": "463284",
           "description": "Shadow Dance increases all ability damage by 5%, and Shadowstrike and Shuriken Storm damage by an additional 5%.",
           "choices": null
         },
@@ -6132,7 +6179,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Finality",
-          "icon": "ability_rogue_eviscerate",
+          "icon": "132292",
           "description": "Eviscerate and Black Powder have 15% increased critical strike damage bonus.",
           "choices": null
         },
@@ -6149,7 +6196,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "The Rotten",
-          "icon": "spell_shadow_nightofthedead",
+          "icon": "136179",
           "description": "After activating Shadow Dance, your next 2 attacks that generate combo points deal 35% increased damage.",
           "choices": null
         },
@@ -6167,8 +6214,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowcraft",
-          "icon": "spell_shadow_sealofkings",
-          "description": "While Shadow Dance is active, your Shadow Techniques triggers 40% more frequently, stores 1 additional combo point, and generates 2 additional Energy.",
+          "icon": "136192",
+          "description": "While Shadow Dance is active, your Shadow Techniques triggers 25% more frequently and generates 1 additional combo point.",
           "choices": null
         },
         {
@@ -6184,13 +6231,13 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Danse Macabre",
-          "icon": "ability_deathwing_bloodcorruption_death",
-          "description": "While Shadow Dance is active, each different attack that generates or spends combo points lashes out at the target, dealing 146 Shadow damage.",
+          "icon": "538039",
+          "description": "While Shadow Dance is active, each different attack that generates or spends combo points lashes out at the target, dealing 147 Shadow damage.",
           "choices": null
         },
         {
           "id": 94581,
-          "type": "square",
+          "type": "round",
           "treeType": "spec",
           "posX": 38,
           "posY": 11,
@@ -6201,9 +6248,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Goremaw's Bite",
-          "icon": "inv_knife_1h_artifactfangs_d_01",
-          "description": "Lashes out at the target, inflicting 114 Shadow damage and causing your next 3 finishing moves to cost no Energy.\r\n\r\nAwards 3 combo points.",
+          "name": "The First Dance",
+          "icon": "236279",
+          "description": "Remaining out of combat for 6 sec increases the duration of your next Shadow Dance by 4 sec.",
           "choices": null
         },
         {
@@ -6219,7 +6266,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Brew",
-          "icon": "spell_nature_slowpoison",
+          "icon": "136093",
           "description": "Your weapon poisons have 10% increased application chance and now deal damage as Shadow instead of Nature.\r\n\r\nShadow damage increased by 10%.",
           "choices": null
         },
@@ -6234,7 +6281,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Ancient Arts",
-          "icon": "inv12_apextalent_rogue_ancientarts",
+          "icon": "7636561",
           "description": null,
           "levels": [
             81,
@@ -6249,7 +6296,7 @@
             },
             {
               "spellId": 1268936,
-              "description": "Shadow damage increased by 5%.\r\n\r\nShadow Clones have a 50% chance to trigger Shadow Techniques&#39; effect.",
+              "description": "Shadow damage increased by 5%.\r\n\r\nShadow Clones have a 50% chance to trigger Shadow Techniques' effect.",
               "maxRanks": 2
             },
             {
@@ -6273,7 +6320,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Flawless Form",
-          "icon": "inv_qiraj_jewelblessed",
+          "icon": "134888",
           "description": "Unseen Blade and Secret Technique increase the damage of your finishing moves by 4% for 12 sec. Max 5 stacks.",
           "choices": null
         },
@@ -6294,7 +6341,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Coup de Grace",
-          "icon": "inv_ability_tricksterrogue_coupdegrace",
+          "icon": "5927656",
           "description": "After 4 strikes with Unseen Blade, your next Eviscerate will be performed as a Coup de Grace, functioning as if it had consumed 5 additional combo points, and granting you 5 stacks of Flawless Form.",
           "choices": null
         },
@@ -6318,14 +6365,14 @@
             {
               "spellId": 441429,
               "name": "Cloud Cover",
-              "icon": "ability_rogue_smoke",
+              "icon": "458733",
               "description": "Activating Shadow Blades creates a cloud of smoke for 6 sec, allowing attacks from within the cloud to apply Fazed, stacking up to 2 additional times.\r\n\r\nEffect persists for 6 sec after leaving the cloud.",
               "maxRanks": 1
             },
             {
               "spellId": 441398,
               "name": "No Scruples",
-              "icon": "ability_rogue_surpriseattack",
+              "icon": "132308",
               "description": "Finishing moves have 12% increased chance to critically strike Fazed targets.",
               "maxRanks": 1
             }
@@ -6345,7 +6392,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Disorienting Strikes",
-          "icon": "petbattle_speed",
+          "icon": "648208",
           "description": "Secret Technique has 10% reduced cooldown and allows your next 2 strikes of Unseen Blade to ignore its cooldown.",
           "choices": null
         },
@@ -6363,7 +6410,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Surprising Strikes",
-          "icon": "ability_rogue_surpriseattack2",
+          "icon": "643249",
           "description": "Attacks that generate combo points deal 50% increased critical strike damage to Fazed targets.",
           "choices": null
         },
@@ -6381,7 +6428,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Nimble Flurry",
-          "icon": "ability_rogue_bladetwisting",
+          "icon": "132283",
           "description": "Your auto-attacks, Unseen Blade, and Coup de Grace also strike up to 7 nearby enemies for 50% of normal damage while Flawless Form is active.",
           "choices": null
         },
@@ -6399,7 +6446,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Devious Distractions",
-          "icon": "ability_rogue_ghostpirate",
+          "icon": "1373905",
           "description": "Secret Technique applies Fazed to any targets struck.",
           "choices": null
         },
@@ -6423,14 +6470,14 @@
             {
               "spellId": 441403,
               "name": "So Tricky",
-              "icon": "ability_rogue_tricksofthetrade",
-              "description": "Tricks of the Trade&#39;s threat redirect duration is increased to 1 hour.",
+              "icon": "236283",
+              "description": "Tricks of the Trade's threat redirect duration is increased to 1 hour.",
               "maxRanks": 1
             },
             {
               "spellId": 441415,
               "name": "Don't Be Suspicious",
-              "icon": "ability_rogue_disguise",
+              "icon": "132288",
               "description": "Blind and Shroud of Concealment have 10% reduced cooldown.\r\n\r\nPick Pocket and Sap have 10 yd increased range.",
               "maxRanks": 1
             }
@@ -6456,14 +6503,14 @@
             {
               "spellId": 441346,
               "name": "Thousand Cuts",
-              "icon": "inv_10_specialization_blacksmithing_blades_color1",
+              "icon": "4624383",
               "description": "Slice and Dice grants 10% additional attack speed and gives your auto-attacks a chance to refresh your opportunity to strike with Unseen Blade.",
               "maxRanks": 1
             },
             {
               "spellId": 441359,
               "name": "Flickerstrike",
-              "icon": "spell_nature_invisibilty",
+              "icon": "136047",
               "description": "Taking damage from an area-of-effect attack while Feint is active or dodging while Evasion is active refreshes your opportunity to strike with Unseen Blade.\r\n\r\nThis effect may only occur once every 5 sec.",
               "maxRanks": 1
             }
@@ -6481,7 +6528,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Unseen Blade",
-          "icon": "inv_weapon_shortblade_55",
+          "icon": "135690",
           "description": "Backstab and Shadowstrike now also strike with an Unseen Blade dealing 98 damage. Targets struck are Fazed for 10 sec.\r\n\r\nFazed enemies take 5% more damage from you and cannot parry your attacks.\r\n\r\nThis effect may occur once every 20 sec.",
           "choices": null
         },
@@ -6505,14 +6552,14 @@
             {
               "spellId": 441247,
               "name": "Smoke",
-              "icon": "rogue_dirtytricks",
+              "icon": "571694",
               "description": "You take 5% reduced damage from Fazed targets.",
               "maxRanks": 1
             },
             {
               "spellId": 441250,
               "name": "Mirrors",
-              "icon": "trade_archaeology_highbornesoulmirror",
+              "icon": "458243",
               "description": "Feint reduces damage taken from area-of-effect attacks by an additional 10%",
               "maxRanks": 1
             }
@@ -6532,7 +6579,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Clever Combatant",
-          "icon": "ability_rogue_versatility",
+          "icon": "636277",
           "description": "Shuriken Storm has 10% increased critical strike chance and now triggers Unseen Blade when available.",
           "choices": null
         },
@@ -6550,7 +6597,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Flashing Steel",
-          "icon": "inv_1115_warrior_fastermeleeattacks",
+          "icon": "6712967",
           "description": "Unseen Blade may now occur once every 15 sec and has 25% chance to strike twice.",
           "choices": null
         },
@@ -6568,7 +6615,7 @@
           "heroSubtree": "Trickster",
           "maxRanks": 1,
           "name": "Hoodwink",
-          "icon": "spell_holy_dizzy",
+          "icon": "135899",
           "description": "Fazed increases damage taken by an additional 3%.",
           "choices": null
         },
@@ -6592,14 +6639,14 @@
             {
               "spellId": 457022,
               "name": "Ethereal Cloak",
-              "icon": "spell_arcane_prismaticcloak",
+              "icon": "135752",
               "description": "Cloak of Shadows duration increased by 2 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 457034,
               "name": "Bait and Switch",
-              "icon": "ability_druid_earthandsky",
+              "icon": "236150",
               "description": "Evasion reduces magical damage taken by 15%. \r\n\r\nCloak of Shadows reduces physical damage taken by 20%.",
               "maxRanks": 1
             }
@@ -6619,7 +6666,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Corrupt the Blood",
-          "icon": "ability_ironmaidens_bloodritual",
+          "icon": "1035037",
           "description": "Rupture damage increased by 20%.",
           "choices": null
         },
@@ -6643,14 +6690,14 @@
             {
               "spellId": 457056,
               "name": "Lingering Darkness",
-              "icon": "ability_rogue_envelopingshadows",
+              "icon": "132291",
               "description": "After Deathmark expires, gain 30% increased Nature damage for 30 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 457062,
               "name": "Symbolic Victory",
-              "icon": "ability_priest_surgeofdarkness",
+              "icon": "633004",
               "description": "Shadow Dance additionally increases the damage of your next Eviscerate or Black Powder by 15%.",
               "maxRanks": 1
             }
@@ -6670,7 +6717,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Clear the Witnesses",
-          "icon": "ability_rogue_fanofknives",
+          "icon": "236273",
           "description": "Fan of Knives damage increased by 60%.",
           "choices": null
         },
@@ -6688,7 +6735,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Singular Focus",
-          "icon": "spell_hunter_focusingshot",
+          "icon": "1033497",
           "description": "Damage dealt to targets other than your Marked target deals 5% Plague damage to your Marked target.\r\n",
           "choices": null
         },
@@ -6712,14 +6759,14 @@
             {
               "spellId": 457057,
               "name": "Shadewalker",
-              "icon": "rogue_shadow_reflection",
-              "description": "Each time you consume a stack of Deathstalker&#39;s Mark, reduce the cooldown of Shadowstep by 3 sec.",
+              "icon": "1020341",
+              "description": "Each time you consume a stack of Deathstalker's Mark, reduce the cooldown of Shadowstep by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 457063,
               "name": "Shroud of Night",
-              "icon": "spell_holy_elunesgrace",
+              "icon": "135900",
               "description": "Shroud of Concealment duration increased by 5 sec.",
               "maxRanks": 1
             }
@@ -6745,14 +6792,14 @@
             {
               "spellId": 457067,
               "name": "Momentum of Despair",
-              "icon": "spell_shadow_shadesofdarkness",
+              "icon": "136194",
               "description": "If you have critically struck with Fan of Knives, increase the critical strike chance of Fan of Knives and Crimson Tempest by 10% and critical strike damage by 20% for 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 457068,
               "name": "Follow the Blood",
-              "icon": "sha_ability_rogue_bloodyeye_nightmare",
+              "icon": "1357795",
               "description": "Fan of Knives and Crimson Tempest deal 30% additional damage while 2 or more enemies are afflicted with Rupture.",
               "maxRanks": 1
             }
@@ -6772,7 +6819,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Hunt Them Down",
-          "icon": "ability_rogue_creepingvenom",
+          "icon": "1398086",
           "description": "Auto-attacks against Marked targets deal an additional 3 Plague damage.",
           "choices": null
         },
@@ -6790,8 +6837,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Unshakeable Drive",
-          "icon": "ability_warrior_deepcuts",
-          "description": "When you consume an application of Deathstalker&#39;s Mark, the damage of your next Ambush or Mutilate is increased by 50%.",
+          "icon": "4067373",
+          "description": "When you consume an application of Deathstalker's Mark, the damage of your next Ambush or Mutilate is increased by 50%.",
           "choices": null
         },
         {
@@ -6806,8 +6853,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Deathstalker's Mark",
-          "icon": "inv_ability_deathstalkerrogue_deathstalkersmark",
-          "description": "Garrote applies 3 stacks of Deathstalker&#39;s Mark to your target, unless Deathstalker&#39;s Mark is already active. You learn Mark for Death.\r\n\r\nWhen you spend 5 or more combo points on attacks against a Marked target you consume an application of Deathstalker&#39;s Mark, dealing 54 Plague damage.\r\n\r\n\r\nMark for Death\r\nMove your active Deathstalker&#39;s Mark to your target.",
+          "icon": "5927622",
+          "description": "Garrote applies 3 stacks of Deathstalker's Mark to your target, unless Deathstalker's Mark is already active. You learn Mark for Death.\r\n\r\nWhen you spend 5 or more combo points on attacks against a Marked target you consume an application of Deathstalker's Mark, dealing 54 Plague damage.\r\n\r\n\r\nMark for Death\r\nMove your active Deathstalker's Mark to your target.",
           "choices": null
         },
         {
@@ -6827,8 +6874,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Darkest Night",
-          "icon": "spell_shadow_twilight",
-          "description": "When you consume the final Deathstalker&#39;s Mark from a target or your target dies, gain 30 Energy and Darkest Night, causing your next Envenom cast with 5 or more combo points to critically strike, deal 35% additional damage, and apply 3 stacks of Deathstalker&#39;s Mark to the target if no other Deathstalker&#39;s Mark is active.\r\n\r\nEnvenom cast with Darkest Night does not consume a stack of active Deathstalker&#39;s Marks.",
+          "icon": "136223",
+          "description": "When you consume the final Deathstalker's Mark from a target or your target dies, gain 30 Energy and Darkest Night, causing your next Envenom cast with 5 or more combo points to critically strike, deal 35% additional damage, and apply 3 stacks of Deathstalker's Mark to the target if no other Deathstalker's Mark is active.\r\n\r\nEnvenom cast with Darkest Night does not consume a stack of active Deathstalker's Marks.",
           "choices": null
         },
         {
@@ -6845,8 +6892,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Mass Casualty",
-          "icon": "ability_hunter_rapidkilling",
-          "description": "Deathstalker&#39;s Mark deals 40% of its normal damage to all other enemies within 8 yds that are afflicted by Rupture.",
+          "icon": "132205",
+          "description": "Deathstalker's Mark deals 40% of its normal damage to all other enemies within 8 yds that are afflicted by Rupture.",
           "choices": null
         },
         {
@@ -6863,8 +6910,8 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Quietus Celeris",
-          "icon": "ability_argus_deathfog",
-          "description": "Deathstalker&#39;s Mark has a 30% chance to immediately consume a stack when applied.",
+          "icon": "1778226",
+          "description": "Deathstalker's Mark has a 30% chance to immediately consume a stack when applied.",
           "choices": null
         },
         {
@@ -6881,7 +6928,7 @@
           "heroSubtree": "Deathstalker",
           "maxRanks": 1,
           "name": "Precise Killer",
-          "icon": "inv_tradeskillitem_sorcererswind",
+          "icon": "1020351",
           "description": "Critical strike damage bonus increased by 20%.",
           "choices": null
         }
