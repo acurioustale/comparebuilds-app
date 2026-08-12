@@ -50,7 +50,12 @@ jobs:
         run: |
           mapfile -t sh_files < <(git ls-files '*.sh')
           shellcheck "${sh_files[@]}"
-          curl -sSfL "https://github.com/mvdan/sh/releases/download/v${SHFMT_VERSION}/shfmt_v${SHFMT_VERSION}_linux_amd64" -o /tmp/shfmt
+          # Every tool below is fetched from a third-party host, so a transient
+          # network fault there fails the gate on code that is perfectly fine
+          # (a truncated actionlint tarball did exactly that). --retry-all-errors
+          # covers the transport faults plain --retry ignores, notably the
+          # mid-transfer "connection died" that a bare retry count won't catch.
+          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "https://github.com/mvdan/sh/releases/download/v${SHFMT_VERSION}/shfmt_v${SHFMT_VERSION}_linux_amd64" -o /tmp/shfmt
           chmod +x /tmp/shfmt
           /tmp/shfmt -d "${sh_files[@]}"
 
@@ -67,16 +72,20 @@ jobs:
           PHPUNIT_VERSION: ${{ steps.versions.outputs.phpunit }}
         run: |
           for f in $(git ls-files '*.php' '*.php.example'); do php -l "$f"; done
-          curl -sSfL "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v${PHPCSFIXER_VERSION}/php-cs-fixer.phar" -o /tmp/php-cs-fixer
+          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v${PHPCSFIXER_VERSION}/php-cs-fixer.phar" -o /tmp/php-cs-fixer
           php /tmp/php-cs-fixer fix --dry-run --config .php-cs-fixer.dist.php
-          curl -sSfL "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar" -o /tmp/phpunit
+          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar" -o /tmp/phpunit
           php /tmp/phpunit
 
       - name: Workflows (actionlint)
         env:
           ACTIONLINT_VERSION: ${{ steps.versions.outputs.actionlint }}
         run: |
-          curl -sSfL "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" | tar xz actionlint
+          # Downloaded to a file rather than piped into tar: a retried transfer
+          # restarts from zero, but tar has already eaten the bytes from the
+          # failed attempt, so the pipe would corrupt what the retry repairs.
+          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" -o /tmp/actionlint.tar.gz
+          tar xzf /tmp/actionlint.tar.gz actionlint
           ./actionlint
 
       - name: Set up Node
@@ -163,7 +172,7 @@ jobs:
       # checked — vnu rejects modern properties it doesn't yet recognise.
       - name: Validate built HTML + SVG (vnu)
         run: |
-          curl -sSfL -o "$RUNNER_TEMP/vnu.jar" \
+          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors -o "$RUNNER_TEMP/vnu.jar" \
             https://github.com/validator/validator/releases/download/latest/vnu.jar
           mapfile -t html_files < <(find dist -name '*.html')
           java -jar "$RUNNER_TEMP/vnu.jar" \
