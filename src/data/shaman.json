@@ -67,8 +67,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chain Heal",
-          "icon": "inv_1115_shaman_chainheal",
-          "description": "Heals the friendly target for 899, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
+          "icon": "6712961",
+          "description": "Heals the friendly target for 870, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
           "choices": null
         },
         {
@@ -82,8 +82,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Lava Burst",
-          "icon": "spell_shaman_lavaburst",
-          "description": "Hurls molten lava at the target, dealing 519 Fire damage. Lava Burst will always critically strike if the target is affected by Flame Shock and its damage is increased by your critical strike chance.",
+          "icon": "237582",
+          "description": "Hurls molten lava at the target, dealing 696 Fire damage. Lava Burst will always critically strike if the target is affected by Flame Shock and its damage is increased by your critical strike chance.",
           "choices": null
         },
         {
@@ -97,8 +97,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chain Lightning",
-          "icon": "spell_nature_chainlightning",
-          "description": "Hurls a lightning bolt at the enemy, dealing 279 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
+          "icon": "136015",
+          "description": "Hurls a lightning bolt at the enemy, dealing 441 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
           "choices": null
         },
         {
@@ -114,8 +114,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earth Shield",
-          "icon": "spell_nature_skinofearth",
-          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 334 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
+          "icon": "136089",
+          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 330 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
           "choices": null
         },
         {
@@ -132,7 +132,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ancestral Wolf Affinity",
-          "icon": "spell_beastmaster_wolf",
+          "icon": "1027879",
           "description": "Cleanse Spirit, Wind Shear, Purge, and totem casts no longer cancel Ghost Wolf.",
           "choices": null
         },
@@ -149,7 +149,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fire and Ice",
-          "icon": "spell_firefrostorb",
+          "icon": "430840",
           "description": "Increases all Fire and Frost damage you deal by 3%.",
           "choices": null
         },
@@ -173,14 +173,14 @@
             {
               "spellId": 260878,
               "name": "Spirit Wolf",
-              "icon": "spell_hunter_lonewolf",
+              "icon": "1033494",
               "description": "While transformed into a Ghost Wolf, you gain 5% increased movement speed and 5% damage reduction every 1 sec, stacking up to 4 times.",
               "maxRanks": 1
             },
             {
               "spellId": 378075,
               "name": "Thunderous Paws",
-              "icon": "ability_hunter_longevity",
+              "icon": "236186",
               "description": "Ghost Wolf removes snares and increases your movement speed by an additional 25% for the first 3 sec. May only occur once every 20 sec.",
               "maxRanks": 1
             }
@@ -199,8 +199,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frost Shock",
-          "icon": "spell_frost_frostshock",
-          "description": "Chills the target with frost, causing 280 Frost damage and reducing the target&#39;s movement speed by 50% for 6 sec.",
+          "icon": "135849",
+          "description": "Chills the target with frost, causing 273 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
           "choices": null
         },
         {
@@ -216,7 +216,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Orbit",
-          "icon": "ability_mage_shattershield",
+          "icon": "236224",
           "description": "Increases the number of Elemental Shields you can have active on yourself by 1.\r\n\r\nYou can have Earth Shield on yourself and one ally at the same time.",
           "choices": null
         },
@@ -240,14 +240,14 @@
             {
               "spellId": 58875,
               "name": "Spirit Walk",
-              "icon": "ability_tracking",
+              "icon": "132328",
               "description": "Removes all movement impairing effects and increases your movement speed by 60% for 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 192063,
               "name": "Gust of Wind",
-              "icon": "inv_misc_volatileair",
+              "icon": "463565",
               "description": "A gust of wind hurls you forward.",
               "maxRanks": 1
             }
@@ -268,7 +268,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Astral Shift",
-          "icon": "ability_shaman_astralshift",
+          "icon": "538565",
           "description": "Shift partially into the elemental planes, taking 40% less damage for 12 sec.",
           "choices": null
         },
@@ -279,14 +279,14 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            103581,
-            109492
+            109492,
+            103581
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nature's Guardian",
-          "icon": "spell_nature_natureguardian",
+          "icon": "136060",
           "description": "When your health is brought below 35%, you instantly heal for 40% of your maximum health. Cannot occur more than once every 45 sec.",
           "choices": null
         },
@@ -309,14 +309,14 @@
             {
               "spellId": 462762,
               "name": "Encasing Cold",
-              "icon": "ability_mage_coldasice",
+              "icon": "236209",
               "description": "Increases the cooldown of Frost Shock by 15 sec, but Frost Shock now freezes targets in place for 4 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 462764,
               "name": "Arctic Snowstorm",
-              "icon": "spell_frost_glacier",
+              "icon": "135852",
               "description": "Enemies within 10 yds of your Frost Shock are snared by 30%.",
               "maxRanks": 1
             }
@@ -336,8 +336,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Healing Stream Totem",
-          "icon": "inv_spear_04",
-          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 256 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
+          "icon": "135127",
+          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 252 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
           "choices": null
         },
         {
@@ -354,7 +354,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Winds of Al'Akir",
-          "icon": "ability_druid_galewinds",
+          "icon": "236154",
           "description": "Increases your movement speed by 3% and the movement speed bonus of Ghost Wolf by an additional 5%.",
           "choices": null
         },
@@ -377,14 +377,14 @@
             {
               "spellId": 381647,
               "name": "Planes Traveler",
-              "icon": "spell_shaman_astralshift",
+              "icon": "237572",
               "description": "Reduces the cooldown of Astral Shift by 30 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 377933,
               "name": "Astral Bulwark",
-              "icon": "spell_shaman_ancestralawakening",
+              "icon": "237571",
               "description": "Astral Shift reduces damage taken by an additional 20%.",
               "maxRanks": 1
             }
@@ -404,7 +404,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Brimming with Life",
-          "icon": "inv_jewelry_talisman_06",
+          "icon": "133439",
           "description": "Stamina increased by 8%.\r\n\r\nWhile you are at full health, Reincarnation cools down 50% faster.",
           "choices": null
         },
@@ -415,15 +415,15 @@
           "posX": 14,
           "posY": 5,
           "connections": [
-            103613,
-            109493
+            109493,
+            103613
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wind Shear",
-          "icon": "spell_nature_cyclone",
-          "description": "Disrupts the target&#39;s concentration with a burst of wind, interrupting spellcasting and preventing any spell in that school from being cast for 4 sec.",
+          "icon": "136018",
+          "description": "Disrupts the target's concentration with a burst of wind, interrupting spellcasting and preventing any spell in that school from being cast for 4 sec.",
           "choices": null
         },
         {
@@ -439,7 +439,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Resistance",
-          "icon": "spell_fireresistancetotem_01",
+          "icon": "135832",
           "description": "Healing from Healing Stream Totem reduces Fire, Frost, and Nature damage taken by 6% for 3 sec.",
           "choices": null
         },
@@ -457,7 +457,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthgrab Totem",
-          "icon": "spell_nature_stranglevines",
+          "icon": "136100",
           "description": "Summons a totem at the target location for 20 sec. The totem pulses every 2 sec, rooting all enemies within 8 yards for 8 sec. Enemies previously rooted by the totem instead suffer 50% movement speed reduction.",
           "choices": null
         },
@@ -475,7 +475,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Capacitor Totem",
-          "icon": "spell_nature_brilliance",
+          "icon": "136013",
           "description": "Summons a totem at the target location that gathers electrical energy from the surrounding air and explodes after 2 sec, stunning all enemies within 8 yards for 3 sec.",
           "choices": null
         },
@@ -493,7 +493,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritual Awakening",
-          "icon": "spell_shaman_blessingoftheeternals",
+          "icon": "237574",
           "description": "Mastery increased by 3%.",
           "choices": null
         },
@@ -511,7 +511,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Enhanced Imbues",
-          "icon": "spell_nature_rockbiter",
+          "icon": "136086",
           "description": "The effects of your weapon and shield imbues are increased by 30%.",
           "choices": null
         },
@@ -528,7 +528,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Windveil",
-          "icon": "inv_elemental_primal_air",
+          "icon": "132845",
           "description": "Interrupting a spell with Wind Shear reduces all spell damage taken by 15% for 12 sec.",
           "choices": null
         },
@@ -546,7 +546,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Refreshing Waters",
-          "icon": "ability_shaman_fortifyingwaters",
+          "icon": "538567",
           "description": "Your Healing Surge is 25% more effective on yourself.\r\n",
           "choices": null
         },
@@ -557,14 +557,14 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            103622,
-            103579
+            103579,
+            103622
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cleanse Spirit",
-          "icon": "ability_shaman_cleansespirit",
+          "icon": "236288",
           "description": "Removes all Curse effects from a friendly target.",
           "choices": null
         },
@@ -581,7 +581,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Static Charge",
-          "icon": "spell_nature_brilliance",
+          "icon": "136013",
           "description": "Reduces the cooldown of Capacitor Totem by 10 sec.",
           "choices": null
         },
@@ -599,7 +599,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wind Rush Totem",
-          "icon": "ability_shaman_windwalktotem",
+          "icon": "538576",
           "description": "Summons a totem at the target location for 15 sec, continually granting all allies who pass within 10 yards 40% increased movement speed for 5 sec.",
           "choices": null
         },
@@ -617,7 +617,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earth Elemental",
-          "icon": "spell_nature_earthelemental_totem",
+          "icon": "136024",
           "description": "Calls forth a Greater Earth Elemental to protect you and your allies, generating high threat and taunting enemies periodically for 30 sec.",
           "choices": null
         },
@@ -641,14 +641,14 @@
             {
               "spellId": 370,
               "name": "Purge",
-              "icon": "spell_nature_purge",
+              "icon": "136075",
               "description": "Purges the enemy target, removing 1 beneficial Magic effect.",
               "maxRanks": 1
             },
             {
               "spellId": 378773,
               "name": "Greater Purge",
-              "icon": "spell_shaman_focusedstrikes",
+              "icon": "451166",
               "description": "Purges the enemy target, removing 2 beneficial Magic effects.",
               "maxRanks": 1
             }
@@ -669,7 +669,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Nature's Fury",
-          "icon": "spell_nature_spiritarmor",
+          "icon": "136094",
           "description": "Increases the critical strike chance of your Nature spells and abilities by 2%.",
           "choices": null
         },
@@ -692,15 +692,15 @@
             {
               "spellId": 462791,
               "name": "Ascending Air",
-              "icon": "achievement_raidprimalist_windelemental",
-              "description": "Wind Rush Totem&#39;s cooldown is reduced by 30 sec and its movement speed effect lasts an additional 2 sec.",
+              "icon": "4630367",
+              "description": "Wind Rush Totem's cooldown is reduced by 30 sec and its movement speed effect lasts an additional 2 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 462817,
               "name": "Jet Stream",
-              "icon": "inv_elemental_primal_air",
-              "description": "Wind Rush Totem&#39;s movement speed bonus is increased by 10% and now removes snares.",
+              "icon": "132845",
+              "description": "Wind Rush Totem's movement speed bonus is increased by 10% and now removes snares.",
               "maxRanks": 1
             }
           ]
@@ -718,7 +718,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Primordial Bond",
-          "icon": "inv_elemental_primal_earth",
+          "icon": "132846",
           "description": "Your Earth Elemental no longer taunts nearby enemies or generates threat and instead increases your maximum health by 15% while active.",
           "choices": null
         },
@@ -729,14 +729,14 @@
           "posX": 14,
           "posY": 8,
           "connections": [
-            103585,
-            103628
+            103628,
+            103585
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hex",
-          "icon": "spell_shaman_hex",
+          "icon": "237579",
           "description": "Transforms the enemy into a frog for 1 min. While hexed, the victim is incapacitated, and cannot attack or cast spells. Damage may cancel the effect. Limit 1. Only works on Humanoids and Beasts.",
           "choices": null
         },
@@ -754,7 +754,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritwalker's Grace",
-          "icon": "spell_shaman_spiritwalkersgrace",
+          "icon": "451170",
           "description": "Calls upon the guidance of the spirits for 15 sec, permitting movement while casting Shaman spells. Castable while casting.",
           "choices": null
         },
@@ -772,7 +772,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Projection",
-          "icon": "ability_shaman_totemrelocation",
+          "icon": "538574",
           "description": "Relocates your active totems to the specified location.",
           "choices": null
         },
@@ -790,7 +790,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Warding",
-          "icon": "inv_10_elementalcombinedfoozles_primordial",
+          "icon": "4554441",
           "description": "Reduces all magic damage taken by 8%.",
           "choices": null
         },
@@ -801,15 +801,15 @@
           "posX": 12,
           "posY": 9,
           "connections": [
+            103623,
             103607,
-            103612,
-            103623
+            103612
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Focus",
-          "icon": "inv_relics_totemofrebirth",
+          "icon": "134920",
           "description": "Increases the radius of your totem effects by 15%.\r\n\r\nIncreases the duration of your Earthbind and Earthgrab Totems by 10 sec.\r\n\r\nIncreases the duration of your Healing Stream, Tremor, Poison Cleansing, and Wind Rush Totems by 3.0 sec.",
           "choices": null
         },
@@ -832,15 +832,15 @@
             {
               "spellId": 192088,
               "name": "Graceful Spirit",
-              "icon": "spell_shaman_spectraltransformation",
-              "description": "Reduces the cooldown of Spiritwalker&#39;s Grace by 30 sec and increases your movement speed by 20% while it is active.",
+              "icon": "237585",
+              "description": "Reduces the cooldown of Spiritwalker's Grace by 30 sec and increases your movement speed by 20% while it is active.",
               "maxRanks": 1
             },
             {
               "spellId": 378077,
               "name": "Spiritwalker's Aegis",
-              "icon": "ability_racial_forceshield",
-              "description": "When you cast Spiritwalker&#39;s Grace, you become immune to Silence and Interrupt effects for 5 sec.",
+              "icon": "1851463",
+              "description": "When you cast Spiritwalker's Grace, you become immune to Silence and Interrupt effects for 5 sec.",
               "maxRanks": 1
             }
           ]
@@ -859,8 +859,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mana Spring",
-          "icon": "spell_nature_manaregentotem",
-          "description": "Your Lava Burst casts restore 22 mana to you and 4 allies nearest to you within 40 yards.\r\n\r\nAllies can only benefit from one Shaman&#39;s Mana Spring effect at a time, prioritizing healers.",
+          "icon": "136053",
+          "description": "Your Lava Burst casts restore 22 mana to you and 4 allies nearest to you within 40 yards.\r\n\r\nAllies can only benefit from one Shaman's Mana Spring effect at a time, prioritizing healers.",
           "choices": null
         },
         {
@@ -882,14 +882,14 @@
             {
               "spellId": 8143,
               "name": "Tremor Totem",
-              "icon": "spell_nature_tremortotem",
+              "icon": "136108",
               "description": "Summons a totem at your feet that shakes the ground around it for 10 sec, removing Fear, Charm and Sleep effects from party and raid members within 30 yards.",
               "maxRanks": 1
             },
             {
               "spellId": 383013,
               "name": "Poison Cleansing Totem",
-              "icon": "spell_nature_poisoncleansingtotem",
+              "icon": "136070",
               "description": "Summons a totem at your feet that removes all Poison effects from a nearby party or raid member within 30 yards every 1.5 sec for 6 sec.",
               "maxRanks": 1
             }
@@ -902,8 +902,8 @@
           "posX": 10,
           "posY": 10,
           "connections": [
-            103586,
-            103625
+            103625,
+            103586
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -915,15 +915,15 @@
             {
               "spellId": 1217622,
               "name": "Therazane's Resilience",
-              "icon": "shaman_pvp_rockshield",
+              "icon": "1385913",
               "description": "Earth Shield no longer loses charges and is 115% effective.",
               "maxRanks": 1
             },
             {
               "spellId": 462454,
               "name": "Reactive Warding",
-              "icon": "inv_10_elementalcombinedfoozles_water",
-              "description": "When refreshing Earth Shield, your target is healed for 830 for each stack of Earth Shield they are missing.\r\n\r\nAdditionally, Earth Shield can consume charges 1.0 sec faster.",
+              "icon": "4554443",
+              "description": "When refreshing Earth Shield, your target is healed for 1,038 for each stack of Earth Shield they are missing.\r\n\r\nAdditionally, Earth Shield can consume charges 1.0 sec faster.",
               "maxRanks": 1
             }
           ]
@@ -941,7 +941,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voodoo Mastery",
-          "icon": "spell_shaman_hex",
+          "icon": "237579",
           "description": "Your Hex target is slowed by 70% during Hex and for 6 sec after it ends.\r\n\r\nReduces the cooldown of Hex by 15 sec.",
           "choices": null
         },
@@ -959,7 +959,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nature's Swiftness",
-          "icon": "spell_nature_ravenform",
+          "icon": "136076",
           "description": "Your next healing or damaging Nature spell is instant cast and costs no mana.",
           "choices": null
         },
@@ -978,7 +978,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Surge",
-          "icon": "spell_nature_agitatingtotem",
+          "icon": "136008",
           "description": "Reduces the cooldown of most totems by 5 sec.",
           "choices": null
         },
@@ -997,7 +997,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Instinctive Imbuements",
-          "icon": "ability_shaman_ascendance",
+          "icon": "643246",
           "description": "Lightning Shield increases your Intellect by 3%.\r\n\r\nCasting Lightning Shield now applies your weapon imbuements. Earth Shield is also applied if you have the Elemental Orbit talent.",
           "choices": null
         },
@@ -1018,15 +1018,15 @@
             {
               "spellId": 8042,
               "name": "Earth Shock",
-              "icon": "spell_nature_earthshock",
-              "description": "Instantly shocks the target with concussive force, causing 2,958 Nature damage.",
+              "icon": "136026",
+              "description": "Instantly shocks the target with concussive force, causing 3,026 Nature damage.",
               "maxRanks": 1
             },
             {
               "spellId": 117014,
               "name": "Elemental Blast",
-              "icon": "shaman_talent_elementalblast",
-              "description": "Harnesses the raw power of the elements, dealing 764 Elemental damage and increasing your Critical Strike or Haste by 3% or Mastery by 6% for 10 sec.",
+              "icon": "651244",
+              "description": "Harnesses the raw power of the elements, dealing 776 Elemental damage and increasing your Critical Strike or Haste by 3% or Mastery by 6% for 10 sec.",
               "maxRanks": 1
             }
           ]
@@ -1050,15 +1050,15 @@
             {
               "spellId": 462620,
               "name": "Earthquake",
-              "icon": "spell_shaman_earthquake",
-              "description": "Causes the earth within 8 yards of your target to tremble and break, dealing 1,447 Nature damage over 6 sec and has a 5% chance to knock the enemy down. Multiple uses of Earthquake may overlap.\r\n\r\nThis spell is cast at your target.",
+              "icon": "451165",
+              "description": "Causes the earth within 8 yards of your target to tremble and break, dealing 1,411 Nature damage over 6 sec and has a 5% chance to knock the enemy down. Multiple uses of Earthquake may overlap.\r\n\r\nThis spell is cast at your target.",
               "maxRanks": 1
             },
             {
               "spellId": 61882,
               "name": "Earthquake",
-              "icon": "spell_shaman_earthquake",
-              "description": "Causes the earth within 8 yards of the target location to tremble and break, dealing 1,471 Nature damage over 6 sec and has a 5% chance to knock the enemy down. Multiple uses of Earthquake may overlap.\r\n\r\nThis spell is cast at a selected location.",
+              "icon": "451165",
+              "description": "Causes the earth within 8 yards of the target location to tremble and break, dealing 1,442 Nature damage over 6 sec and has a 5% chance to knock the enemy down. Multiple uses of Earthquake may overlap.\r\n\r\nThis spell is cast at a selected location.",
               "maxRanks": 1
             }
           ]
@@ -1076,7 +1076,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Fury",
-          "icon": "spell_fire_volcano",
+          "icon": "135830",
           "description": "Your damaging critical strikes deal 250% damage instead of the usual 200%.",
           "choices": null
         },
@@ -1093,7 +1093,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Echo of the Elements",
-          "icon": "ability_shaman_echooftheelements",
+          "icon": "538566",
           "description": "Lava Burst has an additional charge.",
           "choices": null
         },
@@ -1110,7 +1110,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flash of Lightning",
-          "icon": "spell_lightning_lightningbolt01",
+          "icon": "135990",
           "description": "Increases the critical strike chance of Lightning Bolt and Chain Lightning by 10%.",
           "choices": null
         },
@@ -1133,14 +1133,14 @@
             {
               "spellId": 1258899,
               "name": "Tectonic Collapse",
-              "icon": "item_earthenmight",
+              "icon": "348539",
               "description": "Earth Shock, Elemental Blast, and Earthquake deal 20% increased damage.",
               "maxRanks": 1
             },
             {
               "spellId": 273221,
               "name": "Aftershock",
-              "icon": "spell_nature_stormreach",
+              "icon": "136099",
               "description": "Earth Shock, Elemental Blast, and Earthquake have a 25% chance to refund all Maelstrom spent.",
               "maxRanks": 1
             }
@@ -1165,14 +1165,14 @@
             {
               "spellId": 1258843,
               "name": "Molten Wrath",
-              "icon": "spell_shaman_lavaburst",
-              "description": "Lava Burst deals 15% additional damage.",
+              "icon": "237582",
+              "description": "Lava Burst deals 10% additional damage.",
               "maxRanks": 1
             },
             {
               "spellId": 16166,
               "name": "Master of the Elements",
-              "icon": "spell_nature_elementalabsorption",
+              "icon": "136027",
               "description": "Casting Lava Burst increases the damage or healing of your next Nature, Physical, or Frost spell by 15%.",
               "maxRanks": 1
             }
@@ -1191,7 +1191,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lightning Capacitor",
-          "icon": "spell_nature_lightningshield",
+          "icon": "136051",
           "description": "While Lightning Shield is active, your Nature damage dealt is increased by 8%.",
           "choices": null
         },
@@ -1208,8 +1208,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stormkeeper",
-          "icon": "ability_thunderking_lightningwhip",
-          "description": "Charge yourself with lightning, causing your next 2 Lightning Bolts to deal 150% more damage, and also causes your next 2 Lightning Bolts or Chain Lightings to be instant cast and trigger an Elemental Overload on every target.",
+          "icon": "839977",
+          "description": "Charge yourself with lightning, causing your next 2 Lightning Bolts to be instant cast and deal 150% more damage, or cause your next 2 Chain Lightings to be instant cast and trigger an Elemental Overload on every target.",
           "choices": null
         },
         {
@@ -1225,7 +1225,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flametongue Weapon",
-          "icon": "spell_fire_flametounge",
+          "icon": "135814",
           "description": "Imbue your weapon with the element of Fire for 1 hour, increasing the damage of your Fire spells by 5.0%.",
           "choices": null
         },
@@ -1242,7 +1242,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Storm Frenzy",
-          "icon": "spell_nature_callstorm",
+          "icon": "136014",
           "description": "Reduces the cast time of Lightning Bolt and Chain Lightning by 15%.",
           "choices": null
         },
@@ -1259,7 +1259,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swelling Maelstrom",
-          "icon": "spell_shaman_maelstromweapon",
+          "icon": "237584",
           "description": "Increases your maximum Maelstrom by 50.\r\n\r\nIncreases Earth Shock, Elemental Blast, and Earthquake damage by 5%.",
           "choices": null
         },
@@ -1276,7 +1276,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Primordial Fury",
-          "icon": "inv_10_elementalshardfoozles_primordial",
+          "icon": "4554451",
           "description": "Elemental Fury increases critical strike damage by an additional 25%.",
           "choices": null
         },
@@ -1299,14 +1299,14 @@
             {
               "spellId": 191717,
               "name": "Fury of the Storms",
-              "icon": "inv_stormelemental",
+              "icon": "2065626",
               "description": "Casting Stormkeeper summons a Greater Storm Elemental to hurl gusts of wind at your enemies for 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 468571,
               "name": "Herald of the Storms",
-              "icon": "achievement_raidprimalist_windelemental",
+              "icon": "4630367",
               "description": "Reduces the cooldown of Stormkeeper by 15 sec.",
               "maxRanks": 1
             }
@@ -1325,7 +1325,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flames of the Cauldron",
-          "icon": "inv_misc_cauldron_fire",
+          "icon": "133779",
           "description": "Reduces the cooldown of Flame Shock and Voltaic Blaze by 1.5 sec.\r\n\r\nFlame Shock deals damage 15% faster.",
           "choices": null
         },
@@ -1343,7 +1343,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Amped Up",
-          "icon": "inv_10_elementalcombinedfoozles_lightning",
+          "icon": "4554440",
           "description": "Increases your haste by 3%.",
           "choices": null
         },
@@ -1368,14 +1368,14 @@
             {
               "spellId": 1258895,
               "name": "Elemental Resonance",
-              "icon": "inv_10_elementalcombinedfoozles_primordial",
+              "icon": "4554441",
               "description": "All Elemental damage increased by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 462757,
               "name": "Thunderstrike Ward",
-              "icon": "inv_armorkit_lightning_imbued",
+              "icon": "5975854",
               "description": "Imbue your shield with the element of Lightning for 1 hour, giving Lightning Bolt and Chain Lightning a chance to call down 2 Thunderstrikes on your target for 271 Nature damage.",
               "maxRanks": 1
             }
@@ -1394,7 +1394,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Path of the Seer",
-          "icon": "spell_shaman_elementaloath",
+          "icon": "237576",
           "description": "Increases your Intellect by 3%.",
           "choices": null
         },
@@ -1411,7 +1411,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Unity",
-          "icon": "inv_10_elementalspiritfoozles_air",
+          "icon": "4554454",
           "description": "While a Fire Elemental is active, your Fire damage dealt is increased by 6%.\r\n\r\nWhile a Storm Elemental is active, your Nature damage dealt is increased by 6%.",
           "choices": null
         },
@@ -1429,7 +1429,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Searing Flames",
-          "icon": "inv_offhand_1h_artifactdoomhammer_d_01",
+          "icon": "1282282",
           "description": "Flame Shock damage has a chance to generate 2 Maelstrom.",
           "choices": null
         },
@@ -1446,8 +1446,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power of the Maelstrom",
-          "icon": "spell_fire_masterofelements",
-          "description": "Casting Lava Burst has a 15% chance to cause your next Lightning Bolt or Chain Lightning cast to trigger Elemental Overload an additional time, stacking up to 2 times.",
+          "icon": "135820",
+          "description": "Chain Lightning and Lightning Bolt have a 15% chance to cause your next Lava Burst deal 20% extra damage, stacking up to 2 times.",
           "choices": null
         },
         {
@@ -1465,7 +1465,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthshatter",
-          "icon": "spell_nature_earthquake",
+          "icon": "136025",
           "description": "Increases Earth Shock and Earthquake damage by 8% and the stat bonuses granted by Elemental Blast by 25%.",
           "choices": null
         },
@@ -1482,7 +1482,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Storm Infusion",
-          "icon": "inv_misc_stormlordsfavor",
+          "icon": "463562",
           "description": " Elemental Resonance\r\nAll elemental damage is increased by an additional 2%.\r\n\r\n Thunderstrike Ward\r\nIncreases the chance for Thunderstrikes to occur by 30% and increases Thunderstrike damage by 75%.",
           "choices": null
         },
@@ -1493,15 +1493,15 @@
           "posX": 34,
           "posY": 8,
           "connections": [
-            103633,
             110066,
-            103631
+            103631,
+            103633
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Echo Chamber",
-          "icon": "spell_nature_lightningoverload",
+          "icon": "136050",
           "description": "Increases the damage dealt by your Elemental Overloads by 25%.",
           "choices": null
         },
@@ -1518,7 +1518,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Everlasting Elements",
-          "icon": "spell_nature_earthelemental_totem",
+          "icon": "136024",
           "description": "Increases the duration of your Elementals by 20%.",
           "choices": null
         },
@@ -1529,15 +1529,15 @@
           "posX": 38,
           "posY": 8,
           "connections": [
-            103633,
-            81005
+            81005,
+            103633
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthen Rage",
-          "icon": "ability_earthen_pillar",
-          "description": "Your damaging spells incite the earth around you to come to your aid for 6 sec, repeatedly dealing 162 Nature damage to your most recently attacked target.",
+          "icon": "1016245",
+          "description": "Your damaging spells incite the earth around you to come to your aid for 6 sec, repeatedly dealing 160 Nature damage to your most recently attacked target.",
           "choices": null
         },
         {
@@ -1554,7 +1554,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lava Flows",
-          "icon": "spell_shaman_lavaflow",
+          "icon": "237583",
           "description": "Lava Burst damage increased by 5%.\r\n\r\nLava Burst and Lava Burst Overload generate 1 additional Maelstrom.",
           "choices": null
         },
@@ -1571,7 +1571,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fusion of Elements",
-          "icon": "achievement_raidprimalist_council",
+          "icon": "4630359",
           "description": "Consuming Power of the Maelstrom additionally fires an Elemental Blast at your target at 40% effectiveness.",
           "choices": null
         },
@@ -1582,15 +1582,15 @@
           "posX": 32,
           "posY": 9,
           "connections": [
+            80995,
             81015,
-            103636,
-            80995
+            103636
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Eye of the Storm",
-          "icon": "spell_shadow_soulleech_2",
+          "icon": "136213",
           "description": "Reduces the Maelstrom cost of Earth Shock and Earthquake by 5.\r\n\r\nReduces the Maelstrom cost of Elemental Blast by 10.",
           "choices": null
         },
@@ -1607,8 +1607,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ascendance",
-          "icon": "spell_fire_elementaldevastation",
-          "description": "Transform into a Flame Ascendant for 15 sec, instantly casting a Flame Shock and a 100% effectiveness Lava Burst at up to 6 nearby enemies.\r\n\r\nWhile ascended, Elemental Overload damage is increased by 75% and spells affected by your Mastery: Elemental Overload cause 1 additional Elemental Overload.",
+          "icon": "8026697",
+          "description": "Transform into a Flame Ascendant for 15 sec, instantly casting a Flame Shock and a 50% effectiveness Lava Burst at up to 6 nearby enemies.\r\n\r\nWhile ascended, Elemental Overload damage is increased by 30% and spells affected by your Mastery: Elemental Overload cause 1 additional Elemental Overload.",
           "choices": null
         },
         {
@@ -1618,15 +1618,15 @@
           "posX": 36,
           "posY": 9,
           "connections": [
+            81015,
             81010,
-            103634,
-            81015
+            103634
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inferno Arc",
-          "icon": "spell_shaman_shockinglava",
+          "icon": "1020305",
           "description": "Lightning Bolt, Chain Lightning, Earth Shock, Elemental Blast, and Earthquake deal 10% increased damage to targets affected by Flame Shock.",
           "choices": null
         },
@@ -1644,7 +1644,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flames of the Firelord",
-          "icon": "achievement_firelandsraid_ragnaros",
+          "icon": "512617",
           "description": "Flame Shock damage increased by 100%.",
           "choices": null
         },
@@ -1655,14 +1655,14 @@
           "posX": 30,
           "posY": 10,
           "connections": [
-            80993,
-            81003
+            81003,
+            80993
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lightning Rod",
-          "icon": "inv_rod_enchantedcobalt",
+          "icon": "237443",
           "description": "Lightning Bolt and Chain Lightning make your target a Lightning Rod for 8 sec.\r\n \r\nLightning Rods take 10% of all damage you deal with Lightning Bolt and Chain Lightning.",
           "choices": null
         },
@@ -1680,7 +1680,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mountains Will Fall",
-          "icon": "inv_elementalearth2",
+          "icon": "2101174",
           "description": "Earth Shock, Elemental Blast, and Earthquake can trigger your Mastery: Elemental Overload at 50% effectiveness.\r\n\r\nOverloaded Earthquakes do not knock enemies down.",
           "choices": null
         },
@@ -1697,7 +1697,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Call of Fire",
-          "icon": "spell_fire_elemental_totem",
+          "icon": "135790",
           "description": "Ascendance summons a Greater Fire Elemental to rain destruction on your enemies for 20 sec. \r\n\r\nWhile the Fire Elemental is active, Flame Shock deals damage 33% faster, and newly applied Flame Shocks last 100% longer.\r\n",
           "choices": null
         },
@@ -1708,15 +1708,15 @@
           "posX": 38,
           "posY": 10,
           "connections": [
-            103641,
-            81008
+            81008,
+            103641
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voltaic Blaze",
-          "icon": "inv_10_dungeonjewelry_primalist_trinket_1ragingelement_fire",
-          "description": "Instantly shocks the target and 5 enemies within 10 yds with blazing thunder, applying Flame Shock and dealing 1,510 Nature damage. Always critically strikes.\r\n\r\nGenerates 1 stack of Maelstrom Weapon.",
+          "icon": "4638593",
+          "description": "Instantly shocks the target and 5 enemies within 10 yds with blazing thunder, applying Flame Shock and dealing 1,523 Nature damage. Always critically strikes.\r\n\r\nGenerates 1 stack of Maelstrom Weapon.",
           "choices": null
         },
         {
@@ -1732,7 +1732,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Charged Conduit",
-          "icon": "ability_thunderking_thunderstruck",
+          "icon": "839983",
           "description": "Increases the duration of Lightning Rod by 4 sec and its damage bonus by 25%.",
           "choices": null
         },
@@ -1755,14 +1755,14 @@
             {
               "spellId": 462440,
               "name": "First Ascendant",
-              "icon": "spell_shaman_astralshift",
+              "icon": "237572",
               "description": "The cooldown of Ascendance is reduced by 60 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 462443,
               "name": "Preeminence",
-              "icon": "spell_shaman_improvedreincarnation",
+              "icon": "451167",
               "description": "Your haste is increased by 25% during Ascendance and its duration is increased by 3 sec.",
               "maxRanks": 1
             }
@@ -1781,7 +1781,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Primal Elementalist",
-          "icon": "shaman_talent_primalelementalist",
+          "icon": "651081",
           "description": "Your Earth, Fire, and Storm Elementals are drawn from primal elementals 80% more powerful than regular elementals, with additional abilities, and you gain direct control over your Primal Fire Elemental.",
           "choices": null
         },
@@ -1798,8 +1798,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Crackling Fury",
-          "icon": "inv_10_dungeonjewelry_primalist_trinket_1ragingelement_air",
-          "description": "Voltaic Blaze&#39;s cooldown is reduced by 3 sec and its instant damage is increased by 50%.",
+          "icon": "4638591",
+          "description": "Voltaic Blaze's cooldown is reduced by 3 sec and its instant damage is increased by 50%.",
           "choices": null
         },
         {
@@ -1815,7 +1815,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Purging Flames",
-          "icon": "inv12_ability_shaman_purgingflames",
+          "icon": "7439228",
           "description": "Voltaic Blaze unleashes volcanic rage, causing your next Lava Burst to also fire at 5 additional targets with your Flame Shock at 80% effectiveness with reduced Maelstrom generation.\r\n\r\nLava Burst damage increased by 10%.",
           "choices": null
         },
@@ -1830,7 +1830,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Feedback Loop",
-          "icon": "inv12_apextalent_shaman_feedbackloop",
+          "icon": "7636564",
           "description": null,
           "levels": [
             81,
@@ -1840,12 +1840,12 @@
           "ranks": [
             {
               "spellId": 1270061,
-              "description": "Elemental Overload damage increased by 35%.",
+              "description": "Damage of your spells and abilities increased by 10%. Elemental Overload damage increased by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 1270062,
-              "description": "Spell critical strike chance increased by 5%. Elemental Fury increases spell critical strike damage by an additional 25%.",
+              "description": "Spell critical strike chance increased by 5%. Elemental Fury increases spell critical strike damage by an additional 15%.",
               "maxRanks": 2
             },
             {
@@ -1875,14 +1875,14 @@
             {
               "spellId": 467778,
               "name": "Lightning Conduit",
-              "icon": "spell_shaman_staticshock",
+              "icon": "237587",
               "description": "You have a chance to get struck by lightning, increasing your movement speed by 50% for 5 sec. The effectiveness is increased to 100% in outdoor areas.\r\n\r\nYou call down a Thunderstorm when you Reincarnate.",
               "maxRanks": 1
             },
             {
               "spellId": 454022,
               "name": "Electroshock",
-              "icon": "ability_thunderking_overcharge",
+              "icon": "839979",
               "description": "Tempest increases your movement speed by 20% for 5 sec.",
               "maxRanks": 1
             }
@@ -1905,7 +1905,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Awakening Storms",
-          "icon": "spell_nature_stormreach",
+          "icon": "136099",
           "description": "Stormstrike has a small chance to upgrade your next Lightning Bolt to Tempest.",
           "choices": null
         },
@@ -1923,7 +1923,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Conductive Energy",
-          "icon": "inv_rod_enchantedcobalt",
+          "icon": "237443",
           "description": "Gain the effects of the Lightning Rod talent:\r\n\r\n Lightning Rod\r\nLightning Bolt and Chain Lightning make your target a Lightning Rod for 8 sec.\r\n \r\nLightning Rods take 10% of all damage you deal with Lightning Bolt and Chain Lightning.",
           "choices": null
         },
@@ -1941,7 +1941,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Voltaic Surge",
-          "icon": "spell_nature_callstorm",
+          "icon": "136014",
           "description": "Crash Lightning and Chain Lightning damage increased by 15%.",
           "choices": null
         },
@@ -1965,14 +1965,14 @@
             {
               "spellId": 455088,
               "name": "Storm Swell",
-              "icon": "spell_nature_unrelentingstorm",
+              "icon": "136111",
               "description": "Tempest grants 7% Mastery for 6 sec.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 455110,
               "name": "Supercharge",
-              "icon": "inv_misc_stormlordsfavor",
+              "icon": "463562",
               "description": "Lightning Bolt, Tempest, and Chain Lightning have a 35% chance to refund 2 Maelstrom Weapon stacks.",
               "maxRanks": 1
             }
@@ -1998,14 +1998,14 @@
             {
               "spellId": 454027,
               "name": "Nature's Protection",
-              "icon": "spell_nature_lightningshield",
+              "icon": "136051",
               "description": "Lightning Shield reduces the damage you take by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 454372,
               "name": "Surging Currents",
-              "icon": "ability_thunderking_thunderstruck",
+              "icon": "839983",
               "description": "Casting Tempest grants Surging Currents, increasing the effectiveness of your next Chain Heal or Healing Surge by 16%, up to 80%.",
               "maxRanks": 1
             }
@@ -2025,7 +2025,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Arc Discharge",
-          "icon": "ability_thunderking_balllightning",
+          "icon": "839974",
           "description": "Tempest causes your next Chain Lightning to be instant cast, deal 40% increased damage, and cast an additional time.\r\n\r\nCan accumulate up to 2 charges.",
           "choices": null
         },
@@ -2043,7 +2043,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Unlimited Power",
-          "icon": "spell_nature_purge",
+          "icon": "136075",
           "description": "Spending Maelstrom Weapon stacks grants you 1% haste for 15 sec.\r\n\r\nMultiple applications may overlap.",
           "choices": null
         },
@@ -2061,7 +2061,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Rolling Thunder",
-          "icon": "spell_lightning_lightningbolt01",
+          "icon": "135990",
           "description": "Doom Winds summons a Nature Feral Spirit for 12 sec.\r\n\r\nFeral Spirit\r\nAn Elemental Spirit infused with Nature magic, granting the summoner with 5% increased Nature damage and 5% Physical damage for 12 sec.",
           "choices": null
         },
@@ -2077,7 +2077,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Tempest",
-          "icon": "inv_ability_stormcallershaman_tempest",
+          "icon": "5927653",
           "description": "Each Maelstrom Weapon spent has a 2.00% chance to upgrade your next Lightning Bolt to Tempest.\r\n\r\n",
           "choices": null
         },
@@ -2095,7 +2095,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Stormcaller",
-          "icon": "ability_vehicle_electrocharge",
+          "icon": "252174",
           "description": "Increases the critical strike chance of your Nature damage spells by 5% and the critical strike damage of your Nature spells by 5%.",
           "choices": null
         },
@@ -2113,7 +2113,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Descending Skies",
-          "icon": "spell_nature_wispheal",
+          "icon": "136115",
           "description": "Casting Ascendance upgrades your next Lightning Bolt to Tempest.",
           "choices": null
         },
@@ -2131,7 +2131,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Natural Gift",
-          "icon": "spell_shaman_maelstromweapon",
+          "icon": "237584",
           "description": "Nature damage is increased by 2%",
           "choices": null
         },
@@ -2149,7 +2149,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Stormwell",
-          "icon": "inv_112_raidtrinkets_etherealenergystoragesphere_purple",
+          "icon": "7137526",
           "description": "Storm Elemental lasts 2 sec longer, and Stormkeeper generates 10 Maelstrom.",
           "choices": null
         },
@@ -2173,14 +2173,14 @@
             {
               "spellId": 443442,
               "name": "Natural Harmony",
-              "icon": "spell_nature_natureguardian",
-              "description": "Reduces the cooldown of Nature&#39;s Guardian by 15 sec and causes it to heal for an additional 10% of your maximum health.",
+              "icon": "136060",
+              "description": "Reduces the cooldown of Nature's Guardian by 15 sec and causes it to heal for an additional 10% of your maximum health.",
               "maxRanks": 1
             },
             {
               "spellId": 443441,
               "name": "Earthen Communion",
-              "icon": "spell_nature_skinofearth",
+              "icon": "136089",
               "description": "Earth Shield has an additional 3 charges and heals you for 25% more.",
               "maxRanks": 1
             }
@@ -2200,7 +2200,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Primordial Capacity",
-          "icon": "ability_monk_chiswirl",
+          "icon": "1056569",
           "description": "Increases your maximum mana by 10%.\r\n\r\nTidal Waves can now stack up to 3 times.",
           "choices": null
         },
@@ -2218,8 +2218,8 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Spiritwalker's Momentum",
-          "icon": "spell_shaman_spiritwalkersgrace",
-          "description": "Using spells with a cast time increases the duration of Spiritwalker&#39;s Grace and Spiritwalker&#39;s Aegis by 1 sec, up to a maximum of 4 sec.",
+          "icon": "451170",
+          "description": "Using spells with a cast time increases the duration of Spiritwalker's Grace and Spiritwalker's Aegis by 1 sec, up to a maximum of 4 sec.",
           "choices": null
         },
         {
@@ -2242,14 +2242,14 @@
             {
               "spellId": 443449,
               "name": "Latent Wisdom",
-              "icon": "spell_holy_spiritualguidence",
-              "description": "Your Ancestors&#39; spells are 25% more powerful.",
+              "icon": "135977",
+              "description": "Your Ancestors' spells are 25% more powerful.",
               "maxRanks": 1
             },
             {
               "spellId": 443423,
               "name": "Ancient Fellowship",
-              "icon": "spell_shaman_astralshift",
+              "icon": "237572",
               "description": "Ancestors have a 20% chance to call another Ancestor for 8 sec when they depart.",
               "maxRanks": 1
             }
@@ -2269,7 +2269,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Elemental Reverb",
-          "icon": "ability_shaman_echooftheelements",
+          "icon": "538566",
           "description": "Lava Burst gains an additional charge and deals 10% increased damage.",
           "choices": null
         },
@@ -2287,7 +2287,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Final Calling",
-          "icon": "spell_shaman_ancestralawakening",
+          "icon": "237571",
           "description": "When an Ancestor departs, they cast Hydrobubble on a nearby injured ally.\r\n\r\n Hydrobubble\r\nSurrounds your target in a protective water bubble for 15 sec.\r\n\r\nThe shield absorbs the next 1,795 incoming damage, but the absorb amount decays fully over its duration.",
           "choices": null
         },
@@ -2305,7 +2305,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Maelstrom Supremacy",
-          "icon": "spell_shadow_soulleech_2",
+          "icon": "136213",
           "description": "Increases the healing done by Healing Wave, Downpour, and Chain Heal by 25%.",
           "choices": null
         },
@@ -2329,14 +2329,14 @@
             {
               "spellId": 443444,
               "name": "Heed My Call",
-              "icon": "spell_unused2",
+              "icon": "136234",
               "description": "Ancestors last an additional 4 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 443445,
               "name": "Routine Communication",
-              "icon": "spell_nature_undyingstrength",
+              "icon": "136109",
               "description": "Riptide has a 15% chance to call an Ancestor to your side for 8 sec.",
               "maxRanks": 1
             }
@@ -2356,7 +2356,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Offering from Beyond",
-          "icon": "spell_shaman_blessingoftheeternals",
+          "icon": "237574",
           "description": "When an Ancestor is called, they reduce the cooldown of Riptide by 2 sec.",
           "choices": null
         },
@@ -2372,7 +2372,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Call of the Ancestors",
-          "icon": "ability_racial_ancestralcall",
+          "icon": "2021574",
           "description": "Unleash Life calls an Ancestor to your side for 12 sec.\r\n\r\nWhenever you cast a healing or damaging spell, the Ancestor will cast a similar spell.",
           "choices": null
         },
@@ -2393,8 +2393,8 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Ancestral Swiftness",
-          "icon": "inv_ability_farseershaman_ancestralswiftness",
-          "description": "Your next healing or damaging spell is instant, costs no mana, and deals 10% increased damage and healing.\r\n\r\nIf you know Nature&#39;s Swiftness, it is replaced by Ancestral Swiftness and causes Ancestral Swiftness to call an Ancestor to your side for 8 sec.",
+          "icon": "5927625",
+          "description": "Your next healing or damaging spell is instant, costs no mana, and deals 10% increased damage and healing.\r\n\r\nIf you know Nature's Swiftness, it is replaced by Ancestral Swiftness and causes Ancestral Swiftness to call an Ancestor to your side for 8 sec.",
           "choices": null
         },
         {
@@ -2411,7 +2411,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Mystic Knowledge",
-          "icon": "achievement_raidprimalist_council",
+          "icon": "4630359",
           "description": "Increases the chance for Lava Surge to occur by 20%.",
           "choices": null
         },
@@ -2429,7 +2429,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Windspeaker",
-          "icon": "achievement_raidprimalist_windelemental",
+          "icon": "4630367",
           "description": "The cast times of Healing Surge, Chain Heal and Lava Burst are reduced by 10%.",
           "choices": null
         },
@@ -2447,7 +2447,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Ancestral Influence",
-          "icon": "shaman_pvp_leaderclan",
+          "icon": "1385910",
           "description": "Your Intellect is increased by 1.0% for each Ancestor active.",
           "choices": null
         }
@@ -2514,8 +2514,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chain Heal",
-          "icon": "inv_1115_shaman_chainheal",
-          "description": "Heals the friendly target for 892, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
+          "icon": "6712961",
+          "description": "Heals the friendly target for 889, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
           "choices": null
         },
         {
@@ -2529,7 +2529,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Lava Lash",
-          "icon": "ability_shaman_lavalash",
+          "icon": "236289",
           "description": "Charges your off-hand weapon with lava and burns your target, dealing 4 Fire damage.\r\n\r\nDamage is increased by 100% if your offhand weapon is imbued with Flametongue Weapon. ",
           "choices": null
         },
@@ -2544,8 +2544,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chain Lightning",
-          "icon": "spell_nature_chainlightning",
-          "description": "Hurls a lightning bolt at the enemy, dealing 275 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
+          "icon": "136015",
+          "description": "Hurls a lightning bolt at the enemy, dealing 445 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
           "choices": null
         },
         {
@@ -2561,8 +2561,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earth Shield",
-          "icon": "spell_nature_skinofearth",
-          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 340 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
+          "icon": "136089",
+          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 341 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
           "choices": null
         },
         {
@@ -2579,7 +2579,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ancestral Wolf Affinity",
-          "icon": "spell_beastmaster_wolf",
+          "icon": "1027879",
           "description": "Cleanse Spirit, Wind Shear, Purge, and totem casts no longer cancel Ghost Wolf.",
           "choices": null
         },
@@ -2596,7 +2596,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fire and Ice",
-          "icon": "spell_firefrostorb",
+          "icon": "430840",
           "description": "Increases all Fire and Frost damage you deal by 3%.",
           "choices": null
         },
@@ -2620,14 +2620,14 @@
             {
               "spellId": 260878,
               "name": "Spirit Wolf",
-              "icon": "spell_hunter_lonewolf",
+              "icon": "1033494",
               "description": "While transformed into a Ghost Wolf, you gain 5% increased movement speed and 5% damage reduction every 1 sec, stacking up to 4 times.",
               "maxRanks": 1
             },
             {
               "spellId": 378075,
               "name": "Thunderous Paws",
-              "icon": "ability_hunter_longevity",
+              "icon": "236186",
               "description": "Ghost Wolf removes snares and increases your movement speed by an additional 25% for the first 3 sec. May only occur once every 20 sec.",
               "maxRanks": 1
             }
@@ -2646,8 +2646,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frost Shock",
-          "icon": "spell_frost_frostshock",
-          "description": "Chills the target with frost, causing 276 Frost damage and reducing the target&#39;s movement speed by 50% for 6 sec.",
+          "icon": "135849",
+          "description": "Chills the target with frost, causing 276 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
           "choices": null
         },
         {
@@ -2663,7 +2663,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Orbit",
-          "icon": "ability_mage_shattershield",
+          "icon": "236224",
           "description": "Increases the number of Elemental Shields you can have active on yourself by 1.\r\n\r\nYou can have Earth Shield on yourself and one ally at the same time.",
           "choices": null
         },
@@ -2687,14 +2687,14 @@
             {
               "spellId": 58875,
               "name": "Spirit Walk",
-              "icon": "ability_tracking",
+              "icon": "132328",
               "description": "Removes all movement impairing effects and increases your movement speed by 60% for 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 192063,
               "name": "Gust of Wind",
-              "icon": "inv_misc_volatileair",
+              "icon": "463565",
               "description": "A gust of wind hurls you forward.",
               "maxRanks": 1
             }
@@ -2715,7 +2715,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Astral Shift",
-          "icon": "ability_shaman_astralshift",
+          "icon": "538565",
           "description": "Shift partially into the elemental planes, taking 40% less damage for 12 sec.",
           "choices": null
         },
@@ -2726,14 +2726,14 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            103581,
-            109492
+            109492,
+            103581
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nature's Guardian",
-          "icon": "spell_nature_natureguardian",
+          "icon": "136060",
           "description": "When your health is brought below 35%, you instantly heal for 40% of your maximum health. Cannot occur more than once every 45 sec.",
           "choices": null
         },
@@ -2756,14 +2756,14 @@
             {
               "spellId": 462762,
               "name": "Encasing Cold",
-              "icon": "ability_mage_coldasice",
+              "icon": "236209",
               "description": "Increases the cooldown of Frost Shock by 15 sec, but Frost Shock now freezes targets in place for 4 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 462764,
               "name": "Arctic Snowstorm",
-              "icon": "spell_frost_glacier",
+              "icon": "135852",
               "description": "Enemies within 10 yds of your Frost Shock are snared by 30%.",
               "maxRanks": 1
             }
@@ -2783,8 +2783,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Healing Stream Totem",
-          "icon": "inv_spear_04",
-          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 260 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
+          "icon": "135127",
+          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 253 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
           "choices": null
         },
         {
@@ -2801,7 +2801,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Winds of Al'Akir",
-          "icon": "ability_druid_galewinds",
+          "icon": "236154",
           "description": "Increases your movement speed by 3% and the movement speed bonus of Ghost Wolf by an additional 5%.",
           "choices": null
         },
@@ -2824,14 +2824,14 @@
             {
               "spellId": 381647,
               "name": "Planes Traveler",
-              "icon": "spell_shaman_astralshift",
+              "icon": "237572",
               "description": "Reduces the cooldown of Astral Shift by 30 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 377933,
               "name": "Astral Bulwark",
-              "icon": "spell_shaman_ancestralawakening",
+              "icon": "237571",
               "description": "Astral Shift reduces damage taken by an additional 20%.",
               "maxRanks": 1
             }
@@ -2851,7 +2851,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Brimming with Life",
-          "icon": "inv_jewelry_talisman_06",
+          "icon": "133439",
           "description": "Stamina increased by 8%.\r\n\r\nWhile you are at full health, Reincarnation cools down 50% faster.",
           "choices": null
         },
@@ -2862,15 +2862,15 @@
           "posX": 14,
           "posY": 5,
           "connections": [
-            103613,
-            109493
+            109493,
+            103613
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wind Shear",
-          "icon": "spell_nature_cyclone",
-          "description": "Disrupts the target&#39;s concentration with a burst of wind, interrupting spellcasting and preventing any spell in that school from being cast for 4 sec.",
+          "icon": "136018",
+          "description": "Disrupts the target's concentration with a burst of wind, interrupting spellcasting and preventing any spell in that school from being cast for 4 sec.",
           "choices": null
         },
         {
@@ -2886,7 +2886,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Resistance",
-          "icon": "spell_fireresistancetotem_01",
+          "icon": "135832",
           "description": "Healing from Healing Stream Totem reduces Fire, Frost, and Nature damage taken by 6% for 3 sec.",
           "choices": null
         },
@@ -2904,7 +2904,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthgrab Totem",
-          "icon": "spell_nature_stranglevines",
+          "icon": "136100",
           "description": "Summons a totem at the target location for 20 sec. The totem pulses every 2 sec, rooting all enemies within 8 yards for 8 sec. Enemies previously rooted by the totem instead suffer 50% movement speed reduction.",
           "choices": null
         },
@@ -2922,7 +2922,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Capacitor Totem",
-          "icon": "spell_nature_brilliance",
+          "icon": "136013",
           "description": "Summons a totem at the target location that gathers electrical energy from the surrounding air and explodes after 2 sec, stunning all enemies within 8 yards for 3 sec.",
           "choices": null
         },
@@ -2940,7 +2940,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritual Awakening",
-          "icon": "spell_shaman_blessingoftheeternals",
+          "icon": "237574",
           "description": "Mastery increased by 3%.",
           "choices": null
         },
@@ -2958,7 +2958,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Enhanced Imbues",
-          "icon": "spell_nature_rockbiter",
+          "icon": "136086",
           "description": "The effects of your weapon and shield imbues are increased by 30%.",
           "choices": null
         },
@@ -2975,7 +2975,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Windveil",
-          "icon": "inv_elemental_primal_air",
+          "icon": "132845",
           "description": "Interrupting a spell with Wind Shear reduces all spell damage taken by 15% for 12 sec.",
           "choices": null
         },
@@ -2993,7 +2993,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Refreshing Waters",
-          "icon": "ability_shaman_fortifyingwaters",
+          "icon": "538567",
           "description": "Your Healing Surge is 25% more effective on yourself.\r\n",
           "choices": null
         },
@@ -3004,14 +3004,14 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            103622,
-            103579
+            103579,
+            103622
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cleanse Spirit",
-          "icon": "ability_shaman_cleansespirit",
+          "icon": "236288",
           "description": "Removes all Curse effects from a friendly target.",
           "choices": null
         },
@@ -3028,7 +3028,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Static Charge",
-          "icon": "spell_nature_brilliance",
+          "icon": "136013",
           "description": "Reduces the cooldown of Capacitor Totem by 10 sec.",
           "choices": null
         },
@@ -3046,7 +3046,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wind Rush Totem",
-          "icon": "ability_shaman_windwalktotem",
+          "icon": "538576",
           "description": "Summons a totem at the target location for 15 sec, continually granting all allies who pass within 10 yards 40% increased movement speed for 5 sec.",
           "choices": null
         },
@@ -3064,7 +3064,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earth Elemental",
-          "icon": "spell_nature_earthelemental_totem",
+          "icon": "136024",
           "description": "Calls forth a Greater Earth Elemental to protect you and your allies, generating high threat and taunting enemies periodically for 30 sec.",
           "choices": null
         },
@@ -3088,14 +3088,14 @@
             {
               "spellId": 370,
               "name": "Purge",
-              "icon": "spell_nature_purge",
+              "icon": "136075",
               "description": "Purges the enemy target, removing 1 beneficial Magic effect.",
               "maxRanks": 1
             },
             {
               "spellId": 378773,
               "name": "Greater Purge",
-              "icon": "spell_shaman_focusedstrikes",
+              "icon": "451166",
               "description": "Purges the enemy target, removing 2 beneficial Magic effects.",
               "maxRanks": 1
             }
@@ -3116,7 +3116,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Nature's Fury",
-          "icon": "spell_nature_spiritarmor",
+          "icon": "136094",
           "description": "Increases the critical strike chance of your Nature spells and abilities by 2%.",
           "choices": null
         },
@@ -3139,15 +3139,15 @@
             {
               "spellId": 462791,
               "name": "Ascending Air",
-              "icon": "achievement_raidprimalist_windelemental",
-              "description": "Wind Rush Totem&#39;s cooldown is reduced by 30 sec and its movement speed effect lasts an additional 2 sec.",
+              "icon": "4630367",
+              "description": "Wind Rush Totem's cooldown is reduced by 30 sec and its movement speed effect lasts an additional 2 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 462817,
               "name": "Jet Stream",
-              "icon": "inv_elemental_primal_air",
-              "description": "Wind Rush Totem&#39;s movement speed bonus is increased by 10% and now removes snares.",
+              "icon": "132845",
+              "description": "Wind Rush Totem's movement speed bonus is increased by 10% and now removes snares.",
               "maxRanks": 1
             }
           ]
@@ -3165,7 +3165,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Primordial Bond",
-          "icon": "inv_elemental_primal_earth",
+          "icon": "132846",
           "description": "Your Earth Elemental no longer taunts nearby enemies or generates threat and instead increases your maximum health by 15% while active.",
           "choices": null
         },
@@ -3176,14 +3176,14 @@
           "posX": 14,
           "posY": 8,
           "connections": [
-            103585,
-            103628
+            103628,
+            103585
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hex",
-          "icon": "spell_shaman_hex",
+          "icon": "237579",
           "description": "Transforms the enemy into a frog for 1 min. While hexed, the victim is incapacitated, and cannot attack or cast spells. Damage may cancel the effect. Limit 1. Only works on Humanoids and Beasts.",
           "choices": null
         },
@@ -3201,7 +3201,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritwalker's Grace",
-          "icon": "spell_shaman_spiritwalkersgrace",
+          "icon": "451170",
           "description": "Calls upon the guidance of the spirits for 15 sec, permitting movement while casting Shaman spells. Castable while casting.",
           "choices": null
         },
@@ -3219,7 +3219,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Projection",
-          "icon": "ability_shaman_totemrelocation",
+          "icon": "538574",
           "description": "Relocates your active totems to the specified location.",
           "choices": null
         },
@@ -3237,7 +3237,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Warding",
-          "icon": "inv_10_elementalcombinedfoozles_primordial",
+          "icon": "4554441",
           "description": "Reduces all magic damage taken by 8%.",
           "choices": null
         },
@@ -3248,15 +3248,15 @@
           "posX": 12,
           "posY": 9,
           "connections": [
+            103623,
             103607,
-            103612,
-            103623
+            103612
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Focus",
-          "icon": "inv_relics_totemofrebirth",
+          "icon": "134920",
           "description": "Increases the radius of your totem effects by 15%.\r\n\r\nIncreases the duration of your Earthbind and Earthgrab Totems by 10 sec.\r\n\r\nIncreases the duration of your Healing Stream, Tremor, Poison Cleansing, and Wind Rush Totems by 3.0 sec.",
           "choices": null
         },
@@ -3279,15 +3279,15 @@
             {
               "spellId": 192088,
               "name": "Graceful Spirit",
-              "icon": "spell_shaman_spectraltransformation",
-              "description": "Reduces the cooldown of Spiritwalker&#39;s Grace by 30 sec and increases your movement speed by 20% while it is active.",
+              "icon": "237585",
+              "description": "Reduces the cooldown of Spiritwalker's Grace by 30 sec and increases your movement speed by 20% while it is active.",
               "maxRanks": 1
             },
             {
               "spellId": 378077,
               "name": "Spiritwalker's Aegis",
-              "icon": "ability_racial_forceshield",
-              "description": "When you cast Spiritwalker&#39;s Grace, you become immune to Silence and Interrupt effects for 5 sec.",
+              "icon": "1851463",
+              "description": "When you cast Spiritwalker's Grace, you become immune to Silence and Interrupt effects for 5 sec.",
               "maxRanks": 1
             }
           ]
@@ -3306,8 +3306,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mana Spring",
-          "icon": "spell_nature_manaregentotem",
-          "description": "Your Lava Burst casts restore 22 mana to you and 4 allies nearest to you within 40 yards.\r\n\r\nAllies can only benefit from one Shaman&#39;s Mana Spring effect at a time, prioritizing healers.",
+          "icon": "136053",
+          "description": "Your Lava Burst casts restore 22 mana to you and 4 allies nearest to you within 40 yards.\r\n\r\nAllies can only benefit from one Shaman's Mana Spring effect at a time, prioritizing healers.",
           "choices": null
         },
         {
@@ -3329,14 +3329,14 @@
             {
               "spellId": 8143,
               "name": "Tremor Totem",
-              "icon": "spell_nature_tremortotem",
+              "icon": "136108",
               "description": "Summons a totem at your feet that shakes the ground around it for 10 sec, removing Fear, Charm and Sleep effects from party and raid members within 30 yards.",
               "maxRanks": 1
             },
             {
               "spellId": 383013,
               "name": "Poison Cleansing Totem",
-              "icon": "spell_nature_poisoncleansingtotem",
+              "icon": "136070",
               "description": "Summons a totem at your feet that removes all Poison effects from a nearby party or raid member within 30 yards every 1.5 sec for 6 sec.",
               "maxRanks": 1
             }
@@ -3349,8 +3349,8 @@
           "posX": 10,
           "posY": 10,
           "connections": [
-            103586,
-            103625
+            103625,
+            103586
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -3362,15 +3362,15 @@
             {
               "spellId": 1217622,
               "name": "Therazane's Resilience",
-              "icon": "shaman_pvp_rockshield",
+              "icon": "1385913",
               "description": "Earth Shield no longer loses charges and is 115% effective.",
               "maxRanks": 1
             },
             {
               "spellId": 462454,
               "name": "Reactive Warding",
-              "icon": "inv_10_elementalcombinedfoozles_water",
-              "description": "When refreshing Earth Shield, your target is healed for 830 for each stack of Earth Shield they are missing.\r\n\r\nAdditionally, Earth Shield can consume charges 1.0 sec faster.",
+              "icon": "4554443",
+              "description": "When refreshing Earth Shield, your target is healed for 1,038 for each stack of Earth Shield they are missing.\r\n\r\nAdditionally, Earth Shield can consume charges 1.0 sec faster.",
               "maxRanks": 1
             }
           ]
@@ -3388,7 +3388,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voodoo Mastery",
-          "icon": "spell_shaman_hex",
+          "icon": "237579",
           "description": "Your Hex target is slowed by 70% during Hex and for 6 sec after it ends.\r\n\r\nReduces the cooldown of Hex by 15 sec.",
           "choices": null
         },
@@ -3406,7 +3406,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nature's Swiftness",
-          "icon": "spell_nature_ravenform",
+          "icon": "136076",
           "description": "Your next healing or damaging Nature spell is instant cast and costs no mana.",
           "choices": null
         },
@@ -3425,7 +3425,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Surge",
-          "icon": "spell_nature_agitatingtotem",
+          "icon": "136008",
           "description": "Reduces the cooldown of most totems by 5 sec.",
           "choices": null
         },
@@ -3444,7 +3444,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Instinctive Imbuements",
-          "icon": "ability_shaman_ascendance",
+          "icon": "643246",
           "description": "Lightning Shield increases your Intellect by 3%.\r\n\r\nCasting Lightning Shield now applies your weapon imbuements. Earth Shield is also applied if you have the Elemental Orbit talent.",
           "choices": null
         },
@@ -3459,7 +3459,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Maelstrom Weapon",
-          "icon": "spell_shaman_maelstromweapon",
+          "icon": "237584",
           "description": "When you deal damage with a melee weapon, you have a chance to generate Maelstrom Weapon, stacking up to 5 times. \r\n\r\nEach stack of Maelstrom Weapon reduces the cast time of your next Lightning Bolt or Chain Lightning by 20% and increases its damage by 20%.",
           "choices": null
         },
@@ -3476,7 +3476,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Windfury Weapon",
-          "icon": "spell_shaman_unleashweapon_wind",
+          "icon": "462329",
           "description": "Imbue your main-hand weapon with the element of Wind for 1 hour. Each main-hand attack has a 15% chance to trigger two extra attacks, dealing 9 Physical damage each.",
           "choices": null
         },
@@ -3493,7 +3493,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flametongue Weapon",
-          "icon": "spell_fire_flametounge",
+          "icon": "135814",
           "description": "Imbue your weapon with the element of Fire for 1 hour, increasing the damage of your Fire spells by 5.0%.",
           "choices": null
         },
@@ -3510,7 +3510,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Forceful Winds",
-          "icon": "spell_shaman_unleashweapon_wind",
+          "icon": "462329",
           "description": "Windfury has a 10% additional chance to trigger and its damage is increased by 50%.",
           "choices": null
         },
@@ -3528,8 +3528,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crash Lightning",
-          "icon": "spell_shaman_crashlightning",
-          "description": "Electrocutes all enemies in front of you, dealing 65 Nature damage. \r\n\r\nEnhances your weapons for 12 sec, causing Stormstrike and Lava Lash to discharge 34 Nature damage split between up to 5 enemies in front of you. ",
+          "icon": "1370984",
+          "description": "Electrocutes all enemies in front of you, dealing 63 Nature damage. \r\n\r\nEnhances your weapons for 12 sec, causing Stormstrike and Lava Lash to discharge 33 Nature damage split between up to 5 enemies in front of you. ",
           "choices": null
         },
         {
@@ -3545,7 +3545,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Molten Assault",
-          "icon": "spell_fire_ragnaros_lavabolt",
+          "icon": "525023",
           "description": "Lava Lash cooldown reduced by 6.0 sec, and if Lava Lash is used against a target affected by your Flame Shock, Flame Shock will be spread to up to 5 nearby enemies.",
           "choices": null
         },
@@ -3562,7 +3562,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unruly Winds",
-          "icon": "ability_skyreach_wind_wall",
+          "icon": "1029596",
           "description": "Windfury Weapon has a 100% chance to trigger a third attack.",
           "choices": null
         },
@@ -3579,7 +3579,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overflowing Maelstrom",
-          "icon": "inv_magic_swirl_color3",
+          "icon": "5929586",
           "description": "Maelstrom Weapon can now stack 5 additional times.\r\n\r\nEach Maelstrom Weapon stacks consumed grants Overflowing Maelstrom, reducing the cast time of your next Healing Surge or Chain Heal by 10%, and increasing their healing by 10% up to 10 times. This effect can be accumulated up to 20 times.",
           "choices": null
         },
@@ -3596,7 +3596,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ashen Catalyst",
-          "icon": "spell_shaman_stormearthfire",
+          "icon": "237588",
           "description": "When Lava Lash strikes a target affected by your Flame Shock, its cooldown is reduced by 2.0 sec.",
           "choices": null
         },
@@ -3613,7 +3613,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stormblast",
-          "icon": "spell_shaman_focusedstrikes",
+          "icon": "451166",
           "description": "Stormstrike has an additional charge.\r\n\r\nStormsurge now also causes your next Stormstrike to deal 25% additional damage as Nature damage, stacking up to 2 times.",
           "choices": null
         },
@@ -3631,7 +3631,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overcharge",
-          "icon": "spell_nature_unrelentingstorm",
+          "icon": "136111",
           "description": "The critical strike damage of your Nature abilities are increased by 40% of your critical strike chance.",
           "choices": null
         },
@@ -3648,7 +3648,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Raging Maelstrom",
-          "icon": "spell_nature_elementalabsorption",
+          "icon": "136027",
           "description": "Lightning Bolt and Chain Lightning can consume up to 10 Maelstrom Weapon stacks. ",
           "choices": null
         },
@@ -3666,7 +3666,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flurry",
-          "icon": "ability_ghoulfrenzy",
+          "icon": "132152",
           "description": "Increases your attack speed by 15% for your next 3 melee swings after dealing a critical strike with a spell or ability.",
           "choices": null
         },
@@ -3683,7 +3683,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Hot Hand",
-          "icon": "spell_fire_playingwithfire",
+          "icon": "135823",
           "description": "Melee auto-attacks with Flametongue Weapon active have a 5% chance to reduce the cooldown of Lava Lash by 25% and increase the damage of Lava Lash by 20% for 8 sec.\r\n\r\nMay not occur during an active Hot Hand.",
           "choices": null
         },
@@ -3702,7 +3702,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Storm's Wrath",
-          "icon": "spell_nature_stormreach",
+          "icon": "136099",
           "description": "Increase the chance for Mastery: Enhanced Elements to trigger Windfury and Stormsurge by 150%. ",
           "choices": null
         },
@@ -3721,7 +3721,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Tempo",
-          "icon": "spell_nature_elementalprecision_1",
+          "icon": "136028",
           "description": "Elemental damage increased by 10%. \r\n\r\nEach stack of Maelstrom Weapon consumed reduces the cooldown of Stormstrike by 0.3 sec and Lava Lash by 0.3 sec.\r\n",
           "choices": null
         },
@@ -3740,8 +3740,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voltaic Blaze",
-          "icon": "inv_10_dungeonjewelry_primalist_trinket_1ragingelement_fire",
-          "description": "Instantly shocks the target and 5 enemies within 10 yds with blazing thunder, applying Flame Shock and dealing 1,512 Nature damage. Always critically strikes.\r\n\r\nGenerates 1 stack of Maelstrom Weapon.",
+          "icon": "4638593",
+          "description": "Instantly shocks the target and 5 enemies within 10 yds with blazing thunder, applying Flame Shock and dealing 1,500 Nature damage. Always critically strikes.\r\n\r\nGenerates 1 stack of Maelstrom Weapon.",
           "choices": null
         },
         {
@@ -3751,14 +3751,14 @@
           "posX": 28,
           "posY": 8,
           "connections": [
-            80967,
-            80960
+            80960,
+            80967
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chaining Storms",
-          "icon": "spell_nature_chainlightning",
+          "icon": "136015",
           "description": "Chain Lightning now jumps to 2 additional targets and deals 10% increased damage.",
           "choices": null
         },
@@ -3775,7 +3775,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Converging Storms",
-          "icon": "warrior_talent_icon_stormbolt",
+          "icon": "613535",
           "description": "Each target hit by Crash Lightning increases the damage of your next Stormstrike by 25%, up to a maximum of 6 stacks.",
           "choices": null
         },
@@ -3793,7 +3793,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stormflurry",
-          "icon": "ability_shaman_stormstrike",
+          "icon": "132314",
           "description": "Stormstrike has a 20% chance to strike the target an additional time for 40% of normal damage. This effect can chain off of itself.",
           "choices": null
         },
@@ -3810,8 +3810,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stormbind",
-          "icon": "ability_siege_engineer_magnetic_lasso",
-          "description": "Critical strikes of your Nature abilities reduce the target&#39;s movement speed by 60% for 5 sec.",
+          "icon": "896468",
+          "description": "Critical strikes of your Nature abilities reduce the target's movement speed by 60% for 5 sec.",
           "choices": null
         },
         {
@@ -3828,7 +3828,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Weapons",
-          "icon": "inv_mace_2h_draenorraid_d_03",
+          "icon": "1006574",
           "description": "Each active weapon imbue increases all Fire, Frost, and Nature damage dealt by 5.0%.",
           "choices": null
         },
@@ -3845,7 +3845,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fire Nova",
-          "icon": "spell_shaman_lavaflow",
+          "icon": "237583",
           "description": "Voltaic Blaze generates 2 additional Maelstrom Weapon and has a 30% chance to cause a Fire Nova.\r\n\r\nFire Nova\r\nErupt a burst of fiery damage from all targets affected by your Flame Shock, dealing 35 Volcanic damage to up to 6 targets within 8 yds of your Flame Shock targets.",
           "choices": null
         },
@@ -3863,7 +3863,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lashing Flames",
-          "icon": "spell_shaman_shockinglava",
+          "icon": "1020305",
           "description": "Lava Lash and Sundering increases the damage of Flame Shock on its target by 100% for 20 sec.",
           "choices": null
         },
@@ -3874,15 +3874,15 @@
           "posX": 30,
           "posY": 9,
           "connections": [
-            109192,
             103871,
+            109192,
             80973
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ride the Lightning",
-          "icon": "ability_thunderking_balllightning",
+          "icon": "839974",
           "description": "Stormstrike and Lava Lash unleash a Chain Lightning at 100% effectiveness that deals 20% reduced damage with each jump.",
           "choices": null
         },
@@ -3901,8 +3901,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Doom Winds",
-          "icon": "ability_ironmaidens_swirlingvortex",
-          "description": "Unleash a devastating storm around yourself, dealing 42 Stormstrike damage every 1 sec to nearby enemies for 8 sec.\r\n\r\nIncreases your chance to activate Windfury Weapon by 100%, and the damage of Windfury Weapon by 20%.\r\n",
+          "icon": "1035054",
+          "description": "Unleash a devastating storm around yourself, dealing 42 Stormstrike damage every 1 sec to nearby enemies for 8 sec.\r\n\r\nIncreases your chance to activate Windfury Weapon by 50%, and the damage of Windfury Weapon by 20%.\r\n",
           "choices": null
         },
         {
@@ -3920,7 +3920,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sundering",
-          "icon": "ability_rhyolith_lavapool",
+          "icon": "524794",
           "description": "Shatters a line of earth in front of you with your main hand weapon, causing 89 Flamestrike damage to any enemy hit.",
           "choices": null
         },
@@ -3937,7 +3937,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lightning Strikes",
-          "icon": "ability_thunderclap",
+          "icon": "132326",
           "description": "Consuming 10 stacks of Maelstrom Weapon increases the damage of your next Stormstrike or Lava Lash by 25% and causes them to generate a stack of Maelstrom Weapon.",
           "choices": null
         },
@@ -3955,7 +3955,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Assault",
-          "icon": "spell_shaman_improvedstormstrike",
+          "icon": "237581",
           "description": "Stormstrike damage is increased by 20%, and Stormstrike and Lava Lash have a 100% chance to generate 1 stack of Maelstrom Weapon.",
           "choices": null
         },
@@ -3972,7 +3972,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Static Accumulation",
-          "icon": "spell_nature_callstorm",
+          "icon": "136014",
           "description": "During Doom Winds or Ascendance, you generate 1 Maelstrom Weapon stack every 1 sec.",
           "choices": null
         },
@@ -3990,7 +3990,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Feral Spirit",
-          "icon": "spell_shaman_feralspirit",
+          "icon": "237577",
           "description": "Casting Sundering summons 1 Fire Feral Spirit and Doom Winds summons 1 Nature Feral Spirit by your side for 8 sec.\r\n\r\nFeral Spirit\r\nAn Elemental Spirit Wolf infused with Fire or Nature magic, granting the summoner with 5% increased Fire or Nature damage and 5% Physical damage for 8 sec.",
           "choices": null
         },
@@ -4007,7 +4007,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Surging Elements",
-          "icon": "item_sparkofragnoros",
+          "icon": "348560",
           "description": "Casting Sundering grants you 15% Haste for 12 sec, and generates 5 stacks of Maelstrom Weapon.",
           "choices": null
         },
@@ -4024,7 +4024,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thunder Capacitor",
-          "icon": "ability_thunderking_thunderstruck",
+          "icon": "839983",
           "description": "Lightning Bolt and Chain Lightning deal 20% increased damage and have a 20% chance to refund the Maelstrom Weapon spent.",
           "choices": null
         },
@@ -4047,14 +4047,14 @@
             {
               "spellId": 378270,
               "name": "Deeply Rooted Elements",
-              "icon": "inv_misc_herb_liferoot_stem",
+              "icon": "960689",
               "description": "Each stack of Maelstrom Weapon consumed has a 0.6% chance to activate Ascendance for 6.0 sec.\r\n\r\n Ascendance\r\nTransform into an Air Ascendant for 15 sec and unleash Doom Winds, reducing the cooldown and cost of Stormstrike by 60%, and transforming your auto attack and Stormstrike into Wind attacks which bypass armor and have a 30 yd range.",
               "maxRanks": 1
             },
             {
               "spellId": 114051,
               "name": "Ascendance",
-              "icon": "spell_fire_elementaldevastation",
+              "icon": "8026696",
               "description": "Transform into an Air Ascendant for 15 sec and unleash Doom Winds, reducing the cooldown and cost of Stormstrike by 60%, and transforming your auto attack and Stormstrike into Wind attacks which bypass armor and have a 30 yd range.\r\n\r\nMaelstrom Weapon spenders have a 0.5% chance to unleash Doom Winds per Maelstrom Weapon spent while Ascendance is not active.",
               "maxRanks": 1
             }
@@ -4073,7 +4073,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thorim's Invocation",
-          "icon": "spell_shaman_ancestralawakening",
+          "icon": "237571",
           "description": "Doom Winds and Deeply Rooted Elements last 2 sec longer, and the cooldown of Ascendance is reduced by 60 sec.\r\n\r\nDuring Doom Winds or Ascendance, Stormstrike and Crash Lightning consume up to 10 Maelstrom Weapon to discharge a Lightning Bolt or Chain Lightning at 100% effectiveness at your enemy, whichever you most recently used.",
           "choices": null
         },
@@ -4090,8 +4090,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Primordial Storm",
-          "icon": "ability_shaman_ascendance",
-          "description": "Sundering transforms into a single use Primordial Storm for 15 sec after it is cast.\r\n\r\nPrimordial Storm\r\nDevastate nearby enemies with a Primordial Storm dealing 42 Flamestrike, 42 Froststrike, 41 Stormstrike damage, and unleashing a Lightning Bolt or a Chain Lightning at 150% effectiveness. Deals reduced damage beyond 5 targets.\r\n\r\nConsumes Maelstrom Weapon for increased damage.",
+          "icon": "643246",
+          "description": "Sundering transforms into a single use Primordial Storm for 15 sec after it is cast.\r\n\r\nPrimordial Storm\r\nDevastate nearby enemies with a Primordial Storm dealing 41 Flamestrike, 41 Froststrike, 41 Stormstrike damage, and unleashing a Lightning Bolt or a Chain Lightning at 150% effectiveness. Deals reduced damage beyond 5 targets.\r\n\r\nConsumes Maelstrom Weapon for increased damage.",
           "choices": null
         },
         {
@@ -4105,7 +4105,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Storm Unleashed",
-          "icon": "inv12_apextalent_shaman_stormunleashed",
+          "icon": "7636566",
           "description": null,
           "levels": [
             81,
@@ -4150,14 +4150,14 @@
             {
               "spellId": 445026,
               "name": "Oversized Totems",
-              "icon": "ability_shaman_totemrelocation",
+              "icon": "538574",
               "description": "Increases the size and radius of your totems by 15%, and the health of your totems by 30%.",
               "maxRanks": 1
             },
             {
               "spellId": 445027,
               "name": "Swift Recall",
-              "icon": "spell_nature_brilliance",
+              "icon": "136013",
               "description": "Successfully removing a harmful effect with Tremor Totem or Poison Cleansing Totem, or controlling an enemy with Capacitor Totem or Earthgrab Totem reduces the cooldown of the totem used by 5 sec.\r\n\r\nCannot occur more than once every 20 sec per totem.",
               "maxRanks": 1
             }
@@ -4183,15 +4183,15 @@
             {
               "spellId": 445032,
               "name": "Pulse Capacitor",
-              "icon": "spell_nature_elementalprecision_1",
-              "description": "Increases the healing done by Surging Totem by 25%.",
+              "icon": "136028",
+              "description": "Increases the healing done by Surging Totem by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 445033,
               "name": "Supportive Imbuements",
-              "icon": "ability_shaman_fortifyingwaters",
-              "description": "Learn a new weapon imbue, Tidecaller&#39;s Guard.\r\n\r\n Tidecaller&#39;s Guard\r\nImbue your shield with the element of Water for 1 hour. Your healing done is increased by 2.0% and the duration of your Healing Stream Totem is increased by 3.0 sec. ",
+              "icon": "538567",
+              "description": "Learn a new weapon imbue, Tidecaller's Guard.\r\n\r\n Tidecaller's Guard\r\nImbue your shield with the element of Water for 1 hour. Your healing done is increased by 2.0% and the duration of your Healing Stream Totem is increased by 3.0 sec. ",
               "maxRanks": 1
             }
           ]
@@ -4210,7 +4210,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Imbuement Mastery",
-          "icon": "spell_shaman_unleashweapon_wind",
+          "icon": "462329",
           "description": "Increases the duration of your Earthliving effect by 3 sec.\r\n",
           "choices": null
         },
@@ -4228,7 +4228,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Splitstream",
-          "icon": "inv_spear_04",
+          "icon": "135127",
           "description": "Your Healing Stream Totems heals an additional ally at 30% effectiveness.\r\n\r\nHealing Tide Totem healing increased by 25%.",
           "choices": null
         },
@@ -4252,14 +4252,14 @@
             {
               "spellId": 445029,
               "name": "Amplification Core",
-              "icon": "ability_evoker_essenceburststacks",
+              "icon": "4630443",
               "description": "While Surging Totem is active, your damage and healing done is increased by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 445030,
               "name": "Oversurge",
-              "icon": "spell_fire_elementaldevastation",
+              "icon": "135791",
               "description": "Surging Totem deals 50% more damage while Ascendance or Healing Tide Totem is active.",
               "maxRanks": 1
             }
@@ -4277,8 +4277,8 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Surging Totem",
-          "icon": "inv_ability_totemicshaman_surgingtotem",
-          "description": "Summons a totem at the target location that creates a Tremor immediately and every 5.4 sec for 43 Flamestrike damage. Damage reduced beyond 5 targets. Lasts 25 sec.",
+          "icon": "5927655",
+          "description": "Summons a totem at the target location that creates a Tremor immediately and every 5.4 sec for 42 Flamestrike damage. Damage reduced beyond 5 targets. Lasts 25 sec.",
           "choices": null
         },
         {
@@ -4298,7 +4298,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Whirling Elements",
-          "icon": "inv_10_enchanting2_elementalswirl_color1",
+          "icon": "4631364",
           "description": "Elemental motes orbit around your Surging Totem. Your abilities consume the motes for enhanced effects. \r\n\r\nWater: Your next Healing Wave also heals an ally inside of your Healing Rain at 50% effectiveness.\r\n\r\nAir: The cast time of your next healing spell is reduced by 40%.\r\n\r\nEarth: Your next Chain Heal applies Earthliving at 150% effectiveness to all targets hit.",
           "choices": null
         },
@@ -4322,14 +4322,14 @@
             {
               "spellId": 445036,
               "name": "Totemic Coordination",
-              "icon": "ability_shaman_echooftheelements",
+              "icon": "538566",
               "description": "Chain Heals from Lively Totem and Totemic Rebound are 25% more effective.",
               "maxRanks": 1
             },
             {
               "spellId": 455590,
               "name": "Earthsurge",
-              "icon": "inv_elementalearth2",
+              "icon": "2101174",
               "description": "Allies affected by your Earthliving effect receive 15% increased healing from you.",
               "maxRanks": 1
             }
@@ -4349,7 +4349,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Lively Totems",
-          "icon": "inv_1115_shaman_chainheal",
+          "icon": "6712961",
           "description": "When you summon a Healing Tide Totem, Healing Stream Totem, or Spirit Link Totem you cast a free instant Chain Heal at 100% effectiveness.",
           "choices": null
         },
@@ -4367,8 +4367,8 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Totemic Rebound",
-          "icon": "ability_vehicle_electrocharge",
-          "description": "Chain Heal now jumps to a nearby totem within 20 yards once it reaches its last target, causing the totem to cast Chain Heal on an injured ally within 30 yards for 844. Jumps to 2 nearby targets within 20 yards.",
+          "icon": "252174",
+          "description": "Chain Heal now jumps to a nearby totem within 20 yards once it reaches its last target, causing the totem to cast Chain Heal on an injured ally within 30 yards for 846. Jumps to 2 nearby targets within 20 yards.",
           "choices": null
         },
         {
@@ -4385,7 +4385,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Wind Barrier",
-          "icon": "spell_nature_eyeofthestorm",
+          "icon": "136032",
           "description": "If you have a totem active, your totem grants you a shield absorbing 1,833 damage for 30 sec every 30 sec.",
           "choices": null
         },
@@ -4403,7 +4403,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Primal Catalyst",
-          "icon": "spell_shaman_giftearthmother",
+          "icon": "237578",
           "description": "Healing Stream Totem and Healing Tide Totem healing has a 8% chance to apply Earthliving to allies it heals.",
           "choices": null
         },
@@ -4421,7 +4421,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Elemental Attunement",
-          "icon": "inv_10_elementalcombinedfoozles_primordial",
+          "icon": "4554441",
           "description": "Mastery increased by 2%.",
           "choices": null
         },
@@ -4439,7 +4439,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Totemic Momentum",
-          "icon": "ability_shaman_manatidetotem",
+          "icon": "4667424",
           "description": "Reduces the cooldown of Healing Stream Totem by 3 sec.",
           "choices": null
         },
@@ -4463,14 +4463,14 @@
             {
               "spellId": 467778,
               "name": "Lightning Conduit",
-              "icon": "spell_shaman_staticshock",
+              "icon": "237587",
               "description": "You have a chance to get struck by lightning, increasing your movement speed by 50% for 5 sec. The effectiveness is increased to 100% in outdoor areas.\r\n\r\nYou call down a Thunderstorm when you Reincarnate.",
               "maxRanks": 1
             },
             {
               "spellId": 454022,
               "name": "Electroshock",
-              "icon": "ability_thunderking_overcharge",
+              "icon": "839979",
               "description": "Tempest increases your movement speed by 20% for 5 sec.",
               "maxRanks": 1
             }
@@ -4493,7 +4493,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Awakening Storms",
-          "icon": "spell_nature_stormreach",
+          "icon": "136099",
           "description": "Stormstrike has a small chance to upgrade your next Lightning Bolt to Tempest.",
           "choices": null
         },
@@ -4511,7 +4511,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Conductive Energy",
-          "icon": "inv_rod_enchantedcobalt",
+          "icon": "237443",
           "description": "Gain the effects of the Lightning Rod talent:\r\n\r\n Lightning Rod\r\nLightning Bolt and Chain Lightning make your target a Lightning Rod for 8 sec.\r\n \r\nLightning Rods take 10% of all damage you deal with Lightning Bolt and Chain Lightning.",
           "choices": null
         },
@@ -4529,7 +4529,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Voltaic Surge",
-          "icon": "spell_nature_callstorm",
+          "icon": "136014",
           "description": "Crash Lightning and Chain Lightning damage increased by 15%.",
           "choices": null
         },
@@ -4553,14 +4553,14 @@
             {
               "spellId": 455088,
               "name": "Storm Swell",
-              "icon": "spell_nature_unrelentingstorm",
+              "icon": "136111",
               "description": "Tempest grants 7% Mastery for 6 sec.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 455110,
               "name": "Supercharge",
-              "icon": "inv_misc_stormlordsfavor",
+              "icon": "463562",
               "description": "Lightning Bolt, Tempest, and Chain Lightning have a 35% chance to refund 2 Maelstrom Weapon stacks.",
               "maxRanks": 1
             }
@@ -4586,14 +4586,14 @@
             {
               "spellId": 454027,
               "name": "Nature's Protection",
-              "icon": "spell_nature_lightningshield",
+              "icon": "136051",
               "description": "Lightning Shield reduces the damage you take by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 454372,
               "name": "Surging Currents",
-              "icon": "ability_thunderking_thunderstruck",
+              "icon": "839983",
               "description": "Casting Tempest grants Surging Currents, increasing the effectiveness of your next Chain Heal or Healing Surge by 16%, up to 80%.",
               "maxRanks": 1
             }
@@ -4613,7 +4613,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Arc Discharge",
-          "icon": "ability_thunderking_balllightning",
+          "icon": "839974",
           "description": "Tempest causes your next Chain Lightning to be instant cast, deal 40% increased damage, and cast an additional time.\r\n\r\nCan accumulate up to 2 charges.",
           "choices": null
         },
@@ -4631,7 +4631,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Unlimited Power",
-          "icon": "spell_nature_purge",
+          "icon": "136075",
           "description": "Spending Maelstrom Weapon stacks grants you 1% haste for 15 sec.\r\n\r\nMultiple applications may overlap.",
           "choices": null
         },
@@ -4649,7 +4649,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Rolling Thunder",
-          "icon": "spell_lightning_lightningbolt01",
+          "icon": "135990",
           "description": "Doom Winds summons a Nature Feral Spirit for 12 sec.\r\n\r\nFeral Spirit\r\nAn Elemental Spirit infused with Nature magic, granting the summoner with 5% increased Nature damage and 5% Physical damage for 12 sec.",
           "choices": null
         },
@@ -4665,7 +4665,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Tempest",
-          "icon": "inv_ability_stormcallershaman_tempest",
+          "icon": "5927653",
           "description": "Each Maelstrom Weapon spent has a 2.00% chance to upgrade your next Lightning Bolt to Tempest.\r\n\r\n",
           "choices": null
         },
@@ -4683,7 +4683,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Stormcaller",
-          "icon": "ability_vehicle_electrocharge",
+          "icon": "252174",
           "description": "Increases the critical strike chance of your Nature damage spells by 5% and the critical strike damage of your Nature spells by 5%.",
           "choices": null
         },
@@ -4701,7 +4701,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Descending Skies",
-          "icon": "spell_nature_wispheal",
+          "icon": "136115",
           "description": "Casting Ascendance upgrades your next Lightning Bolt to Tempest.",
           "choices": null
         },
@@ -4719,7 +4719,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Natural Gift",
-          "icon": "spell_shaman_maelstromweapon",
+          "icon": "237584",
           "description": "Nature damage is increased by 2%",
           "choices": null
         },
@@ -4737,7 +4737,7 @@
           "heroSubtree": "Stormbringer",
           "maxRanks": 1,
           "name": "Stormwell",
-          "icon": "inv_112_raidtrinkets_etherealenergystoragesphere_purple",
+          "icon": "7137526",
           "description": "Storm Elemental lasts 2 sec longer, and Stormkeeper generates 10 Maelstrom.",
           "choices": null
         }
@@ -4804,8 +4804,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Chain Heal",
-          "icon": "inv_1115_shaman_chainheal",
-          "description": "Heals the friendly target for 872, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
+          "icon": "6712961",
+          "description": "Heals the friendly target for 876, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
           "choices": null
         },
         {
@@ -4819,8 +4819,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lava Burst",
-          "icon": "spell_shaman_lavaburst",
-          "description": "Hurls molten lava at the target, dealing 532 Fire damage. Lava Burst will always critically strike if the target is affected by Flame Shock and its damage is increased by your critical strike chance.",
+          "icon": "237582",
+          "description": "Hurls molten lava at the target, dealing 687 Fire damage. Lava Burst will always critically strike if the target is affected by Flame Shock and its damage is increased by your critical strike chance.",
           "choices": null
         },
         {
@@ -4834,8 +4834,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chain Lightning",
-          "icon": "spell_nature_chainlightning",
-          "description": "Hurls a lightning bolt at the enemy, dealing 273 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
+          "icon": "136015",
+          "description": "Hurls a lightning bolt at the enemy, dealing 444 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
           "choices": null
         },
         {
@@ -4851,8 +4851,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earth Shield",
-          "icon": "spell_nature_skinofearth",
-          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 336 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
+          "icon": "136089",
+          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 330 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
           "choices": null
         },
         {
@@ -4869,7 +4869,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ancestral Wolf Affinity",
-          "icon": "spell_beastmaster_wolf",
+          "icon": "1027879",
           "description": "Cleanse Spirit, Wind Shear, Purge, and totem casts no longer cancel Ghost Wolf.",
           "choices": null
         },
@@ -4886,7 +4886,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fire and Ice",
-          "icon": "spell_firefrostorb",
+          "icon": "430840",
           "description": "Increases all Fire and Frost damage you deal by 3%.",
           "choices": null
         },
@@ -4910,14 +4910,14 @@
             {
               "spellId": 260878,
               "name": "Spirit Wolf",
-              "icon": "spell_hunter_lonewolf",
+              "icon": "1033494",
               "description": "While transformed into a Ghost Wolf, you gain 5% increased movement speed and 5% damage reduction every 1 sec, stacking up to 4 times.",
               "maxRanks": 1
             },
             {
               "spellId": 378075,
               "name": "Thunderous Paws",
-              "icon": "ability_hunter_longevity",
+              "icon": "236186",
               "description": "Ghost Wolf removes snares and increases your movement speed by an additional 25% for the first 3 sec. May only occur once every 20 sec.",
               "maxRanks": 1
             }
@@ -4936,8 +4936,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frost Shock",
-          "icon": "spell_frost_frostshock",
-          "description": "Chills the target with frost, causing 278 Frost damage and reducing the target&#39;s movement speed by 50% for 6 sec.",
+          "icon": "135849",
+          "description": "Chills the target with frost, causing 274 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
           "choices": null
         },
         {
@@ -4953,7 +4953,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Orbit",
-          "icon": "ability_mage_shattershield",
+          "icon": "236224",
           "description": "Increases the number of Elemental Shields you can have active on yourself by 1.\r\n\r\nYou can have Earth Shield on yourself and one ally at the same time.",
           "choices": null
         },
@@ -4977,14 +4977,14 @@
             {
               "spellId": 58875,
               "name": "Spirit Walk",
-              "icon": "ability_tracking",
+              "icon": "132328",
               "description": "Removes all movement impairing effects and increases your movement speed by 60% for 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 192063,
               "name": "Gust of Wind",
-              "icon": "inv_misc_volatileair",
+              "icon": "463565",
               "description": "A gust of wind hurls you forward.",
               "maxRanks": 1
             }
@@ -5005,7 +5005,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Astral Shift",
-          "icon": "ability_shaman_astralshift",
+          "icon": "538565",
           "description": "Shift partially into the elemental planes, taking 40% less damage for 12 sec.",
           "choices": null
         },
@@ -5016,14 +5016,14 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            103581,
-            109492
+            109492,
+            103581
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nature's Guardian",
-          "icon": "spell_nature_natureguardian",
+          "icon": "136060",
           "description": "When your health is brought below 35%, you instantly heal for 40% of your maximum health. Cannot occur more than once every 45 sec.",
           "choices": null
         },
@@ -5046,14 +5046,14 @@
             {
               "spellId": 462762,
               "name": "Encasing Cold",
-              "icon": "ability_mage_coldasice",
+              "icon": "236209",
               "description": "Increases the cooldown of Frost Shock by 15 sec, but Frost Shock now freezes targets in place for 4 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 462764,
               "name": "Arctic Snowstorm",
-              "icon": "spell_frost_glacier",
+              "icon": "135852",
               "description": "Enemies within 10 yds of your Frost Shock are snared by 30%.",
               "maxRanks": 1
             }
@@ -5073,8 +5073,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Healing Stream Totem",
-          "icon": "inv_spear_04",
-          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 252 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
+          "icon": "135127",
+          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 260 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
           "choices": null
         },
         {
@@ -5091,7 +5091,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Winds of Al'Akir",
-          "icon": "ability_druid_galewinds",
+          "icon": "236154",
           "description": "Increases your movement speed by 3% and the movement speed bonus of Ghost Wolf by an additional 5%.",
           "choices": null
         },
@@ -5114,14 +5114,14 @@
             {
               "spellId": 381647,
               "name": "Planes Traveler",
-              "icon": "spell_shaman_astralshift",
+              "icon": "237572",
               "description": "Reduces the cooldown of Astral Shift by 30 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 377933,
               "name": "Astral Bulwark",
-              "icon": "spell_shaman_ancestralawakening",
+              "icon": "237571",
               "description": "Astral Shift reduces damage taken by an additional 20%.",
               "maxRanks": 1
             }
@@ -5141,7 +5141,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Brimming with Life",
-          "icon": "inv_jewelry_talisman_06",
+          "icon": "133439",
           "description": "Stamina increased by 8%.\r\n\r\nWhile you are at full health, Reincarnation cools down 50% faster.",
           "choices": null
         },
@@ -5152,15 +5152,15 @@
           "posX": 14,
           "posY": 5,
           "connections": [
-            103613,
-            109493
+            109493,
+            103613
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wind Shear",
-          "icon": "spell_nature_cyclone",
-          "description": "Disrupts the target&#39;s concentration with a burst of wind, interrupting spellcasting and preventing any spell in that school from being cast for 4 sec.",
+          "icon": "136018",
+          "description": "Disrupts the target's concentration with a burst of wind, interrupting spellcasting and preventing any spell in that school from being cast for 4 sec.",
           "choices": null
         },
         {
@@ -5176,7 +5176,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Resistance",
-          "icon": "spell_fireresistancetotem_01",
+          "icon": "135832",
           "description": "Healing from Healing Stream Totem reduces Fire, Frost, and Nature damage taken by 6% for 3 sec.",
           "choices": null
         },
@@ -5194,7 +5194,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthgrab Totem",
-          "icon": "spell_nature_stranglevines",
+          "icon": "136100",
           "description": "Summons a totem at the target location for 20 sec. The totem pulses every 2 sec, rooting all enemies within 8 yards for 8 sec. Enemies previously rooted by the totem instead suffer 50% movement speed reduction.",
           "choices": null
         },
@@ -5212,7 +5212,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Capacitor Totem",
-          "icon": "spell_nature_brilliance",
+          "icon": "136013",
           "description": "Summons a totem at the target location that gathers electrical energy from the surrounding air and explodes after 2 sec, stunning all enemies within 8 yards for 3 sec.",
           "choices": null
         },
@@ -5230,7 +5230,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritual Awakening",
-          "icon": "spell_shaman_blessingoftheeternals",
+          "icon": "237574",
           "description": "Mastery increased by 3%.",
           "choices": null
         },
@@ -5248,7 +5248,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Enhanced Imbues",
-          "icon": "spell_nature_rockbiter",
+          "icon": "136086",
           "description": "The effects of your weapon and shield imbues are increased by 30%.",
           "choices": null
         },
@@ -5265,7 +5265,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Windveil",
-          "icon": "inv_elemental_primal_air",
+          "icon": "132845",
           "description": "Interrupting a spell with Wind Shear reduces all spell damage taken by 15% for 12 sec.",
           "choices": null
         },
@@ -5283,7 +5283,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Refreshing Waters",
-          "icon": "ability_shaman_fortifyingwaters",
+          "icon": "538567",
           "description": "Your Healing Surge is 25% more effective on yourself.\r\n",
           "choices": null
         },
@@ -5301,7 +5301,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Purify Spirit",
-          "icon": "ability_shaman_cleansespirit",
+          "icon": "236288",
           "description": "Purify Spirit additionally removes all Curse effects.",
           "choices": null
         },
@@ -5318,7 +5318,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Static Charge",
-          "icon": "spell_nature_brilliance",
+          "icon": "136013",
           "description": "Reduces the cooldown of Capacitor Totem by 10 sec.",
           "choices": null
         },
@@ -5336,7 +5336,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wind Rush Totem",
-          "icon": "ability_shaman_windwalktotem",
+          "icon": "538576",
           "description": "Summons a totem at the target location for 15 sec, continually granting all allies who pass within 10 yards 40% increased movement speed for 5 sec.",
           "choices": null
         },
@@ -5354,7 +5354,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earth Elemental",
-          "icon": "spell_nature_earthelemental_totem",
+          "icon": "136024",
           "description": "Calls forth a Greater Earth Elemental to protect you and your allies, generating high threat and taunting enemies periodically for 30 sec.",
           "choices": null
         },
@@ -5378,14 +5378,14 @@
             {
               "spellId": 370,
               "name": "Purge",
-              "icon": "spell_nature_purge",
+              "icon": "136075",
               "description": "Purges the enemy target, removing 1 beneficial Magic effect.",
               "maxRanks": 1
             },
             {
               "spellId": 378773,
               "name": "Greater Purge",
-              "icon": "spell_shaman_focusedstrikes",
+              "icon": "451166",
               "description": "Purges the enemy target, removing 2 beneficial Magic effects.",
               "maxRanks": 1
             }
@@ -5406,7 +5406,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Nature's Fury",
-          "icon": "spell_nature_spiritarmor",
+          "icon": "136094",
           "description": "Increases the critical strike chance of your Nature spells and abilities by 2%.",
           "choices": null
         },
@@ -5429,15 +5429,15 @@
             {
               "spellId": 462791,
               "name": "Ascending Air",
-              "icon": "achievement_raidprimalist_windelemental",
-              "description": "Wind Rush Totem&#39;s cooldown is reduced by 30 sec and its movement speed effect lasts an additional 2 sec.",
+              "icon": "4630367",
+              "description": "Wind Rush Totem's cooldown is reduced by 30 sec and its movement speed effect lasts an additional 2 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 462817,
               "name": "Jet Stream",
-              "icon": "inv_elemental_primal_air",
-              "description": "Wind Rush Totem&#39;s movement speed bonus is increased by 10% and now removes snares.",
+              "icon": "132845",
+              "description": "Wind Rush Totem's movement speed bonus is increased by 10% and now removes snares.",
               "maxRanks": 1
             }
           ]
@@ -5455,7 +5455,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Primordial Bond",
-          "icon": "inv_elemental_primal_earth",
+          "icon": "132846",
           "description": "Your Earth Elemental no longer taunts nearby enemies or generates threat and instead increases your maximum health by 15% while active.",
           "choices": null
         },
@@ -5466,14 +5466,14 @@
           "posX": 14,
           "posY": 8,
           "connections": [
-            103585,
-            103628
+            103628,
+            103585
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hex",
-          "icon": "spell_shaman_hex",
+          "icon": "237579",
           "description": "Transforms the enemy into a frog for 1 min. While hexed, the victim is incapacitated, and cannot attack or cast spells. Damage may cancel the effect. Limit 1. Only works on Humanoids and Beasts.",
           "choices": null
         },
@@ -5491,7 +5491,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritwalker's Grace",
-          "icon": "spell_shaman_spiritwalkersgrace",
+          "icon": "451170",
           "description": "Calls upon the guidance of the spirits for 15 sec, permitting movement while casting Shaman spells. Castable while casting.",
           "choices": null
         },
@@ -5509,7 +5509,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Projection",
-          "icon": "ability_shaman_totemrelocation",
+          "icon": "538574",
           "description": "Relocates your active totems to the specified location.",
           "choices": null
         },
@@ -5527,7 +5527,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Elemental Warding",
-          "icon": "inv_10_elementalcombinedfoozles_primordial",
+          "icon": "4554441",
           "description": "Reduces all magic damage taken by 8%.",
           "choices": null
         },
@@ -5538,15 +5538,15 @@
           "posX": 12,
           "posY": 9,
           "connections": [
+            103623,
             103607,
-            103612,
-            103623
+            103612
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Focus",
-          "icon": "inv_relics_totemofrebirth",
+          "icon": "134920",
           "description": "Increases the radius of your totem effects by 15%.\r\n\r\nIncreases the duration of your Earthbind and Earthgrab Totems by 10 sec.\r\n\r\nIncreases the duration of your Healing Stream, Tremor, Poison Cleansing, and Wind Rush Totems by 3.0 sec.",
           "choices": null
         },
@@ -5569,15 +5569,15 @@
             {
               "spellId": 192088,
               "name": "Graceful Spirit",
-              "icon": "spell_shaman_spectraltransformation",
-              "description": "Reduces the cooldown of Spiritwalker&#39;s Grace by 30 sec and increases your movement speed by 20% while it is active.",
+              "icon": "237585",
+              "description": "Reduces the cooldown of Spiritwalker's Grace by 30 sec and increases your movement speed by 20% while it is active.",
               "maxRanks": 1
             },
             {
               "spellId": 378077,
               "name": "Spiritwalker's Aegis",
-              "icon": "ability_racial_forceshield",
-              "description": "When you cast Spiritwalker&#39;s Grace, you become immune to Silence and Interrupt effects for 5 sec.",
+              "icon": "1851463",
+              "description": "When you cast Spiritwalker's Grace, you become immune to Silence and Interrupt effects for 5 sec.",
               "maxRanks": 1
             }
           ]
@@ -5596,8 +5596,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mana Spring",
-          "icon": "spell_nature_manaregentotem",
-          "description": "Your Lava Burst casts restore 22 mana to you and 4 allies nearest to you within 40 yards.\r\n\r\nAllies can only benefit from one Shaman&#39;s Mana Spring effect at a time, prioritizing healers.",
+          "icon": "136053",
+          "description": "Your Lava Burst casts restore 22 mana to you and 4 allies nearest to you within 40 yards.\r\n\r\nAllies can only benefit from one Shaman's Mana Spring effect at a time, prioritizing healers.",
           "choices": null
         },
         {
@@ -5619,14 +5619,14 @@
             {
               "spellId": 8143,
               "name": "Tremor Totem",
-              "icon": "spell_nature_tremortotem",
+              "icon": "136108",
               "description": "Summons a totem at your feet that shakes the ground around it for 10 sec, removing Fear, Charm and Sleep effects from party and raid members within 30 yards.",
               "maxRanks": 1
             },
             {
               "spellId": 383013,
               "name": "Poison Cleansing Totem",
-              "icon": "spell_nature_poisoncleansingtotem",
+              "icon": "136070",
               "description": "Summons a totem at your feet that removes all Poison effects from a nearby party or raid member within 30 yards every 1.5 sec for 6 sec.",
               "maxRanks": 1
             }
@@ -5639,8 +5639,8 @@
           "posX": 10,
           "posY": 10,
           "connections": [
-            103586,
-            103625
+            103625,
+            103586
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5652,15 +5652,15 @@
             {
               "spellId": 1217622,
               "name": "Therazane's Resilience",
-              "icon": "shaman_pvp_rockshield",
+              "icon": "1385913",
               "description": "Earth Shield no longer loses charges and is 115% effective.",
               "maxRanks": 1
             },
             {
               "spellId": 462454,
               "name": "Reactive Warding",
-              "icon": "inv_10_elementalcombinedfoozles_water",
-              "description": "When refreshing Earth Shield, your target is healed for 830 for each stack of Earth Shield they are missing.\r\n\r\nAdditionally, Earth Shield can consume charges 1.0 sec faster.",
+              "icon": "4554443",
+              "description": "When refreshing Earth Shield, your target is healed for 1,038 for each stack of Earth Shield they are missing.\r\n\r\nAdditionally, Earth Shield can consume charges 1.0 sec faster.",
               "maxRanks": 1
             }
           ]
@@ -5678,7 +5678,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voodoo Mastery",
-          "icon": "spell_shaman_hex",
+          "icon": "237579",
           "description": "Your Hex target is slowed by 70% during Hex and for 6 sec after it ends.\r\n\r\nReduces the cooldown of Hex by 15 sec.",
           "choices": null
         },
@@ -5696,7 +5696,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Nature's Swiftness",
-          "icon": "spell_nature_ravenform",
+          "icon": "136076",
           "description": "Your next healing or damaging Nature spell is instant cast and costs no mana.",
           "choices": null
         },
@@ -5715,7 +5715,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Totemic Surge",
-          "icon": "spell_nature_agitatingtotem",
+          "icon": "136008",
           "description": "Reduces the cooldown of most totems by 5 sec.",
           "choices": null
         },
@@ -5734,7 +5734,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Instinctive Imbuements",
-          "icon": "ability_shaman_ascendance",
+          "icon": "643246",
           "description": "Lightning Shield increases your Intellect by 3%.\r\n\r\nCasting Lightning Shield now applies your weapon imbuements. Earth Shield is also applied if you have the Elemental Orbit talent.",
           "choices": null
         },
@@ -5749,8 +5749,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Riptide",
-          "icon": "spell_nature_riptide",
-          "description": "Restorative waters wash over a friendly target, healing them for 1,803 and an additional 1,018 over 18 sec.",
+          "icon": "252995",
+          "description": "Restorative waters wash over a friendly target, healing them for 2,246 and an additional 2,036 over 18 sec.",
           "choices": null
         },
         {
@@ -5766,8 +5766,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Healing Rain",
-          "icon": "spell_nature_giftofthewaterspirit",
-          "description": "Blanket the target area in healing rains, restoring 2,244 health to up to 5 allies over 18 sec.",
+          "icon": "136037",
+          "description": "Blanket the target area in healing rains, restoring 1,086 health to up to 6 allies over 18 sec.\r\n\r\nYou can only have one Healing Rain active at a time.",
           "choices": null
         },
         {
@@ -5783,8 +5783,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Healing Stream Totem",
-          "icon": "inv_spear_04",
-          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 259 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
+          "icon": "135127",
+          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 255 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
           "choices": null
         },
         {
@@ -5800,7 +5800,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soothing Rain",
-          "icon": "spell_shadow_soulleech_2",
+          "icon": "136213",
           "description": "Increases the healing done by Healing Rain by 10% and reduces its cast time by 0.5 sec.",
           "choices": null
         },
@@ -5817,8 +5817,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Acid Rain",
-          "icon": "spell_nature_acid_01",
-          "description": "Deal 253 Nature damage every 1 sec to up to 5 enemies inside of your Healing Rain.",
+          "icon": "136007",
+          "description": "Deal 379 Nature damage every 1.8 sec to up to 5 enemies inside of your Healing Rain.",
           "choices": null
         },
         {
@@ -5841,15 +5841,15 @@
             {
               "spellId": 114052,
               "name": "Ascendance",
-              "icon": "spell_fire_elementaldevastation",
-              "description": "Immediately heals for 4,803 split between allies within 20 yds and transforms into a Water Ascendant for 15 sec.\r\n\r\nWhile ascended, Chain Heal jumps to 3 additional allies with 10% healing reduced for all jumps, Healing Wave always critical heals and heals 1 additional ally at 50% effectiveness, and the mana cost of Chain Heal and Healing Wave is reduced by 25%.",
+              "icon": "8026698",
+              "description": "Immediately heals for 4,918 split between allies within 20 yds and transforms into a Water Ascendant for 15 sec.\r\n\r\nWhile ascended, Chain Heal jumps to 3 additional allies with 10% healing reduced for all jumps, Healing Wave always critical heals and heals 1 additional ally at 50% effectiveness, and the mana cost of Chain Heal and Healing Wave is reduced by 25%.",
               "maxRanks": 1
             },
             {
               "spellId": 108280,
               "name": "Healing Tide Totem",
-              "icon": "ability_shaman_healingtide",
-              "description": "Summons a totem at your feet for 10 sec, which pulses every 1.8 sec, healing all party or raid members within 40 yards for 1,974.\r\n\r\nHealing reduced beyond 5 targets.",
+              "icon": "538569",
+              "description": "Summons a totem at your feet for 10 sec, which pulses every 1.8 sec, healing all party or raid members within 40 yards for 1,941.\r\n\r\nHealing reduced beyond 5 targets.",
               "maxRanks": 1
             }
           ]
@@ -5867,7 +5867,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Water Totem Mastery",
-          "icon": "ability_shaman_totemcooldownrefund",
+          "icon": "538573",
           "description": "Reduces the cooldown of Healing Stream Totem by 5 sec.",
           "choices": null
         },
@@ -5884,7 +5884,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overflowing Shores",
-          "icon": "spell_nature_giftofthewaterspirit",
+          "icon": "136037",
           "description": "Healing Rain instantly restores 287 health to 5 allies within its area, and its radius is increased by 2 yards.",
           "choices": null
         },
@@ -5903,8 +5903,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Ancestral Vigor",
-          "icon": "spell_shaman_blessingoftheeternals",
-          "description": "Targets you heal with Healing Wave, Chain Heal, or Riptide&#39;s initial heal gain 5% increased health for 10 sec.",
+          "icon": "237574",
+          "description": "Targets you heal with Healing Wave, Chain Heal, or Riptide's initial heal gain 5% increased health for 10 sec.",
           "choices": null
         },
         {
@@ -5926,14 +5926,14 @@
             {
               "spellId": 462440,
               "name": "First Ascendant",
-              "icon": "spell_shaman_astralshift",
+              "icon": "237572",
               "description": "The cooldown of Ascendance is reduced by 60 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 462443,
               "name": "Preeminence",
-              "icon": "spell_shaman_improvedreincarnation",
+              "icon": "451167",
               "description": "Your haste is increased by 25% during Ascendance and its duration is increased by 3 sec.",
               "maxRanks": 1
             }
@@ -5953,7 +5953,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Resurgence",
-          "icon": "ability_shaman_watershield",
+          "icon": "132315",
           "description": "Your direct heal criticals refund a percentage of your maximum mana: 0.80% from Healing Wave, 0.48% from Riptide, and 0.20% from Chain Heal.",
           "choices": null
         },
@@ -5970,7 +5970,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Living Stream",
-          "icon": "spell_nature_natureresistancetotem",
+          "icon": "136061",
           "description": "Healing Stream Totem heals for 100% more, decaying over its duration.",
           "choices": null
         },
@@ -5988,8 +5988,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Current Control",
-          "icon": "inv_misc_volatilewater",
-          "description": "Reduces the mana cost of Healing Wave by 15%.",
+          "icon": "463570",
+          "description": "Reduces the mana cost of Healing Wave by 15% and the mana cost of Chain Heal by 15%.",
           "choices": null
         },
         {
@@ -6007,12 +6007,12 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "White Water",
-          "icon": "ability_shawaterelemental_swirl",
+          "icon": "893779",
           "description": "Your critical heals have 215% effectiveness instead of the usual 200%.",
           "choices": null
         },
         {
-          "id": 81019,
+          "id": 103427,
           "type": "round",
           "treeType": "spec",
           "posX": 40,
@@ -6023,10 +6023,10 @@
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
-          "maxRanks": 1,
-          "name": "Calm Waters",
-          "icon": "inv_10_elementalshardfoozles_water",
-          "description": "Reduces the mana cost of Chain Heal by 15%.",
+          "maxRanks": 2,
+          "name": "Wavespeaker's Blessing",
+          "icon": "2451604",
+          "description": "Increases Riptide's duration by 3.0 sec and its healing over time by 10%.",
           "choices": null
         },
         {
@@ -6042,7 +6042,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Quickstream",
-          "icon": "inv_spear_04",
+          "icon": "135127",
           "description": "Healing Stream Totem heals 15% more often.",
           "choices": null
         },
@@ -6060,7 +6060,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rip Current",
-          "icon": "spell_frost_summonwaterelemental",
+          "icon": "135861",
           "description": "Reduces the cooldown of Riptide by 1.0 sec.",
           "choices": null
         },
@@ -6077,8 +6077,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crashing Waves",
-          "icon": "spell_nature_healingwavelesser",
-          "description": "Healing Wave&#39;s critical strike chance is increased by 12%.",
+          "icon": "136043",
+          "description": "Healing Wave's critical strike chance is increased by 12%.",
           "choices": null
         },
         {
@@ -6095,8 +6095,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unleash Life",
-          "icon": "spell_shaman_unleashweapon_life",
-          "description": "Unleash elemental forces of Life, healing a friendly target for 2,274.\r\n\r\nIncreases the healing of your next Riptide, Chain Heal, or Healing Wave by 25% and reduces its cast time by 30%.",
+          "icon": "462328",
+          "description": "Unleash elemental forces of Life, healing a friendly target for 4,719.\r\n\r\nIncreases the healing of your next Riptide, Chain Heal, or Healing Wave by 25% and reduces its cast time by 30%.",
           "choices": null
         },
         {
@@ -6112,8 +6112,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Torrent",
-          "icon": "spell_nature_riptide",
-          "description": "Riptide&#39;s initial heal is increased 20% and has a 10% increased critical strike chance.",
+          "icon": "252995",
+          "description": "Riptide's initial heal is increased 20% and has a 10% increased critical strike chance.",
           "choices": null
         },
         {
@@ -6123,14 +6123,14 @@
           "posX": 38,
           "posY": 7,
           "connections": [
-            81047,
-            81019
+            103427,
+            81047
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthliving Weapon",
-          "icon": "spell_shaman_giftearthmother",
+          "icon": "237578",
           "description": "Imbue your weapon with the element of Earth for 1 hour. Your Riptide, Healing Wave, and Chain Heal healing has a 20% chance to trigger Earthliving on the target, healing for 591 over 6 sec.",
           "choices": null
         },
@@ -6141,14 +6141,14 @@
           "posX": 42,
           "posY": 7,
           "connections": [
-            81048,
-            81019
+            103427,
+            81048
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthweaver",
-          "icon": "spell_nature_skinofearth",
+          "icon": "136089",
           "description": "Increases Earth Shield healing by 40%.",
           "choices": null
         },
@@ -6167,7 +6167,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deluge",
-          "icon": "ability_shawaterelemental_reform",
+          "icon": "893777",
           "description": "Healing Wave and Chain Heal heal for an additional 15% on targets affected by your Healing Rain or Riptide.",
           "choices": null
         },
@@ -6184,7 +6184,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthen Accord",
-          "icon": "ability_evoker_earthensky",
+          "icon": "5199628",
           "description": "Unleash Life heals for 30% more and its bonus healing effect is increased by 20%.",
           "choices": null
         },
@@ -6195,15 +6195,15 @@
           "posX": 36,
           "posY": 8,
           "connections": [
-            81049,
             92675,
-            103432
+            103432,
+            81049
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tidal Waves",
-          "icon": "spell_shaman_tidalwaves",
+          "icon": "237590",
           "description": "Casting Riptide grants 1 stack of Tidal Waves. Tidal Waves reduces the cast time of your next Healing Wave or Chain Heal by 20%.\r\n\r\nCan accumulate up to 2 stacks.",
           "choices": null
         },
@@ -6220,7 +6220,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Earthliving Weapon",
-          "icon": "spell_shaman_giftearthmother",
+          "icon": "237578",
           "description": "Earthliving receives 150% additional benefit from Mastery: Deep Healing.\r\n\r\nHealing Wave always triggers Earthliving on its target.",
           "choices": null
         },
@@ -6231,8 +6231,8 @@
           "posX": 40,
           "posY": 8,
           "connections": [
+            103427,
             81046,
-            81019,
             81049
           ],
           "spentRequired": 8,
@@ -6245,14 +6245,14 @@
             {
               "spellId": 382732,
               "name": "Ancestral Reach",
-              "icon": "inv_1115_shaman_chainheal",
+              "icon": "6712961",
               "description": "Chain Heal bounces an additional time and its healing is increased by 8%.",
               "maxRanks": 1
             },
             {
               "spellId": 382039,
               "name": "Flow of the Tides",
-              "icon": "spell_frost_manarecharge",
+              "icon": "135859",
               "description": "Chain Heal bounces an additional time and casting Chain Heal on a target affected by Riptide consumes Riptide, increasing the healing of your Chain Heal by 30%.\r\n\r\n",
               "maxRanks": 1
             }
@@ -6272,8 +6272,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Downpour",
-          "icon": "ability_mage_waterjet",
-          "description": "Casting Healing Rain grants a use of Downpour for 16 sec.\r\n\r\n Downpour\r\nA burst of water at your Healing Rain&#39;s location heals up to 5 injured allies within 12 yards for 1,219.",
+          "icon": "1698701",
+          "description": "Casting Healing Rain grants a use of Downpour for 16 sec.\r\n\r\n Downpour\r\nA burst of water at your Healing Rain's location heals up to 5 injured allies within 12 yards for 1,249.",
           "choices": null
         },
         {
@@ -6283,15 +6283,15 @@
           "posX": 34,
           "posY": 9,
           "connections": [
-            110083,
             81037,
-            81044
+            81044,
+            110083
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Echo of the Elements",
-          "icon": "ability_shaman_echooftheelements",
+          "icon": "538566",
           "description": "Lava Burst has an additional charge.",
           "choices": null
         },
@@ -6302,15 +6302,15 @@
           "posX": 38,
           "posY": 9,
           "connections": [
+            81044,
             81031,
-            81050,
-            81044
+            81050
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spirit Link Totem",
-          "icon": "spell_shaman_spiritlink",
+          "icon": "237586",
           "description": "Summons a totem at the target location for 6 sec, which reduces damage taken by all party and raid members within 10 yards by 10%. Immediately and every 1 sec, the health of all affected players is redistributed evenly.",
           "choices": null
         },
@@ -6328,8 +6328,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthen Harmony",
-          "icon": "spell_shaman_improvedearthshield",
-          "description": "Earth Shield reduces damage taken by 3% and its healing is increased by up to 150% as its target&#39;s health decreases. Maximum benefit is reached below 50% health.",
+          "icon": "237580",
+          "description": "Earth Shield reduces damage taken by 3% and its healing is increased by up to 150% as its target's health decreases. Maximum benefit is reached below 50% health.",
           "choices": null
         },
         {
@@ -6345,7 +6345,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Water Expulsion",
-          "icon": "inv_elemental_primal_water",
+          "icon": "132852",
           "description": "Increases Downpour healing by 20%.",
           "choices": null
         },
@@ -6363,7 +6363,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Ancestral Awakening",
-          "icon": "spell_shaman_ancestralawakening",
+          "icon": "237571",
           "description": "When you heal with your Healing Wave or Riptide you have a 30% chance to summon an Ancestral spirit to aid you, instantly healing an injured friendly party or raid target within 40 yards for 25% of the amount healed. Critical strikes increase this chance to 60%.",
           "choices": null
         },
@@ -6380,7 +6380,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tidewaters",
-          "icon": "ability_shawaterelemental_split",
+          "icon": "893778",
           "description": "When you cast Healing Rain, each ally with your Riptide on them is healed for 1,005.",
           "choices": null
         },
@@ -6391,14 +6391,14 @@
           "posX": 36,
           "posY": 10,
           "connections": [
-            81041,
-            81055
+            81055,
+            81041
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Undercurrent",
-          "icon": "spell_fire_bluehellfire",
+          "icon": "135784",
           "description": "For each Riptide active on an ally, your heals are 0.5% more effective.",
           "choices": null
         },
@@ -6415,12 +6415,12 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spouting Spirits",
-          "icon": "spell_shaman_spiritlink",
+          "icon": "237586",
           "description": "Spirit Link Totem reduces damage taken by an additional 5%, and it restores 4,357 health to all nearby allies 1 second after it is dropped. Healing reduced beyond 5 targets.\r\n",
           "choices": null
         },
         {
-          "id": 103427,
+          "id": 113376,
           "type": "round",
           "treeType": "spec",
           "posX": 40,
@@ -6431,10 +6431,10 @@
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
-          "maxRanks": 2,
-          "name": "Wavespeaker's Blessing",
-          "icon": "inv_alchemist_81_spiritedalchemiststone",
-          "description": "Increases Riptide&#39;s duration by 3.0 sec and its healing over time by 10%.",
+          "maxRanks": 1,
+          "name": "Swelling Tides",
+          "icon": "4667424",
+          "description": "Healing Stream Totem extends the duration of your active Riptides by 3.0 sec.",
           "choices": null
         },
         {
@@ -6450,7 +6450,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Double Dip",
-          "icon": "ability_mage_waterjet",
+          "icon": "1698701",
           "description": "Healing Rain grants an additional use of Downpour.\r\n",
           "choices": null
         },
@@ -6461,15 +6461,15 @@
           "posX": 34,
           "posY": 11,
           "connections": [
+            81052,
             103433,
-            81043,
-            81052
+            81043
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Primal Tide Core",
-          "icon": "ability_shaman_repulsiontotem",
+          "icon": "538571",
           "description": "Every 4 casts of Riptide also applies Riptide to another friendly target near your Riptide target.",
           "choices": null
         },
@@ -6480,15 +6480,15 @@
           "posX": 38,
           "posY": 11,
           "connections": [
-            103427,
+            81052,
             103915,
-            81052
+            113376
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Coalescing Water",
-          "icon": "inv_helm_mail_raidshamanmythic_s_01",
+          "icon": "1568673",
           "description": "Healing Wave and Chain Heal increase the initial healing of your next Riptide by 30%, stacking up to 2 times.",
           "choices": null
         },
@@ -6499,14 +6499,14 @@
           "posX": 42,
           "posY": 11,
           "connections": [
-            103427,
-            103430
+            103430,
+            113376
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deeply Rooted Elements",
-          "icon": "inv_misc_herb_liferoot_stem",
+          "icon": "960689",
           "description": "Each stack of Maelstrom Weapon consumed has a 0.6% chance to activate Ascendance for 6.0 sec.\r\n\r\n Ascendance\r\nTransform into an Air Ascendant for 15 sec and unleash Doom Winds, reducing the cooldown and cost of Stormstrike by 60%, and transforming your auto attack and Stormstrike into Wind attacks which bypass armor and have a 30 yd range.",
           "choices": null
         },
@@ -6521,7 +6521,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Stormstream Totem",
-          "icon": "inv12_apextalent_shaman_stormstreamtotem",
+          "icon": "7636565",
           "description": null,
           "levels": [
             81,
@@ -6531,7 +6531,7 @@
           "ranks": [
             {
               "spellId": 1267016,
-              "description": "Riptide has a 6% chance to upgrade your next Healing Stream Totem to Stormstream Totem which heals for 10% more, heals 1 additional ally at 100% effectiveness, and heals 2 injured allies for 5,001 healing when used.",
+              "description": "Riptide has a 6% chance to upgrade your next Healing Stream Totem to Stormstream Totem which heals for 10% more, heals 1 additional ally at 100% effectiveness, and heals 2 injured allies for 5,006 healing when used.",
               "maxRanks": 1
             },
             {
@@ -6541,7 +6541,7 @@
             },
             {
               "spellId": 1267120,
-              "description": "Casting Nature&#39;s Swiftness grants a use of Stormstream Totem and Stormstream Totem no longer consumes a charge of Healing Stream Totem when used.",
+              "description": "Casting Nature's Swiftness grants a use of Stormstream Totem and Stormstream Totem no longer consumes a charge of Healing Stream Totem when used.",
               "maxRanks": 1
             }
           ]
@@ -6566,14 +6566,14 @@
             {
               "spellId": 445026,
               "name": "Oversized Totems",
-              "icon": "ability_shaman_totemrelocation",
+              "icon": "538574",
               "description": "Increases the size and radius of your totems by 15%, and the health of your totems by 30%.",
               "maxRanks": 1
             },
             {
               "spellId": 445027,
               "name": "Swift Recall",
-              "icon": "spell_nature_brilliance",
+              "icon": "136013",
               "description": "Successfully removing a harmful effect with Tremor Totem or Poison Cleansing Totem, or controlling an enemy with Capacitor Totem or Earthgrab Totem reduces the cooldown of the totem used by 5 sec.\r\n\r\nCannot occur more than once every 20 sec per totem.",
               "maxRanks": 1
             }
@@ -6599,15 +6599,15 @@
             {
               "spellId": 445032,
               "name": "Pulse Capacitor",
-              "icon": "spell_nature_elementalprecision_1",
-              "description": "Increases the healing done by Surging Totem by 25%.",
+              "icon": "136028",
+              "description": "Increases the healing done by Surging Totem by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 445033,
               "name": "Supportive Imbuements",
-              "icon": "ability_shaman_fortifyingwaters",
-              "description": "Learn a new weapon imbue, Tidecaller&#39;s Guard.\r\n\r\n Tidecaller&#39;s Guard\r\nImbue your shield with the element of Water for 1 hour. Your healing done is increased by 2.0% and the duration of your Healing Stream Totem is increased by 3.0 sec. ",
+              "icon": "538567",
+              "description": "Learn a new weapon imbue, Tidecaller's Guard.\r\n\r\n Tidecaller's Guard\r\nImbue your shield with the element of Water for 1 hour. Your healing done is increased by 2.0% and the duration of your Healing Stream Totem is increased by 3.0 sec. ",
               "maxRanks": 1
             }
           ]
@@ -6626,7 +6626,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Imbuement Mastery",
-          "icon": "spell_shaman_unleashweapon_wind",
+          "icon": "462329",
           "description": "Increases the duration of your Earthliving effect by 3 sec.\r\n",
           "choices": null
         },
@@ -6644,7 +6644,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Splitstream",
-          "icon": "inv_spear_04",
+          "icon": "135127",
           "description": "Your Healing Stream Totems heals an additional ally at 30% effectiveness.\r\n\r\nHealing Tide Totem healing increased by 25%.",
           "choices": null
         },
@@ -6668,14 +6668,14 @@
             {
               "spellId": 445029,
               "name": "Amplification Core",
-              "icon": "ability_evoker_essenceburststacks",
+              "icon": "4630443",
               "description": "While Surging Totem is active, your damage and healing done is increased by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 445030,
               "name": "Oversurge",
-              "icon": "spell_fire_elementaldevastation",
+              "icon": "135791",
               "description": "Surging Totem deals 50% more damage while Ascendance or Healing Tide Totem is active.",
               "maxRanks": 1
             }
@@ -6693,8 +6693,8 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Surging Totem",
-          "icon": "inv_ability_totemicshaman_surgingtotem",
-          "description": "Summons a totem at the target location that creates a Tremor immediately and every 5.4 sec for 43 Flamestrike damage. Damage reduced beyond 5 targets. Lasts 25 sec.",
+          "icon": "5927655",
+          "description": "Summons a totem at the target location that creates a Tremor immediately and every 5.4 sec for 42 Flamestrike damage. Damage reduced beyond 5 targets. Lasts 25 sec.",
           "choices": null
         },
         {
@@ -6714,7 +6714,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Whirling Elements",
-          "icon": "inv_10_enchanting2_elementalswirl_color1",
+          "icon": "4631364",
           "description": "Elemental motes orbit around your Surging Totem. Your abilities consume the motes for enhanced effects. \r\n\r\nWater: Your next Healing Wave also heals an ally inside of your Healing Rain at 50% effectiveness.\r\n\r\nAir: The cast time of your next healing spell is reduced by 40%.\r\n\r\nEarth: Your next Chain Heal applies Earthliving at 150% effectiveness to all targets hit.",
           "choices": null
         },
@@ -6738,14 +6738,14 @@
             {
               "spellId": 445036,
               "name": "Totemic Coordination",
-              "icon": "ability_shaman_echooftheelements",
+              "icon": "538566",
               "description": "Chain Heals from Lively Totem and Totemic Rebound are 25% more effective.",
               "maxRanks": 1
             },
             {
               "spellId": 455590,
               "name": "Earthsurge",
-              "icon": "inv_elementalearth2",
+              "icon": "2101174",
               "description": "Allies affected by your Earthliving effect receive 15% increased healing from you.",
               "maxRanks": 1
             }
@@ -6765,7 +6765,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Lively Totems",
-          "icon": "inv_1115_shaman_chainheal",
+          "icon": "6712961",
           "description": "When you summon a Healing Tide Totem, Healing Stream Totem, or Spirit Link Totem you cast a free instant Chain Heal at 100% effectiveness.",
           "choices": null
         },
@@ -6783,8 +6783,8 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Totemic Rebound",
-          "icon": "ability_vehicle_electrocharge",
-          "description": "Chain Heal now jumps to a nearby totem within 20 yards once it reaches its last target, causing the totem to cast Chain Heal on an injured ally within 30 yards for 842. Jumps to 2 nearby targets within 20 yards.",
+          "icon": "252174",
+          "description": "Chain Heal now jumps to a nearby totem within 20 yards once it reaches its last target, causing the totem to cast Chain Heal on an injured ally within 30 yards for 818. Jumps to 2 nearby targets within 20 yards.",
           "choices": null
         },
         {
@@ -6801,7 +6801,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Wind Barrier",
-          "icon": "spell_nature_eyeofthestorm",
+          "icon": "136032",
           "description": "If you have a totem active, your totem grants you a shield absorbing 1,833 damage for 30 sec every 30 sec.",
           "choices": null
         },
@@ -6819,7 +6819,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Primal Catalyst",
-          "icon": "spell_shaman_giftearthmother",
+          "icon": "237578",
           "description": "Healing Stream Totem and Healing Tide Totem healing has a 8% chance to apply Earthliving to allies it heals.",
           "choices": null
         },
@@ -6837,7 +6837,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Elemental Attunement",
-          "icon": "inv_10_elementalcombinedfoozles_primordial",
+          "icon": "4554441",
           "description": "Mastery increased by 2%.",
           "choices": null
         },
@@ -6855,7 +6855,7 @@
           "heroSubtree": "Totemic",
           "maxRanks": 1,
           "name": "Totemic Momentum",
-          "icon": "ability_shaman_manatidetotem",
+          "icon": "4667424",
           "description": "Reduces the cooldown of Healing Stream Totem by 3 sec.",
           "choices": null
         },
@@ -6879,14 +6879,14 @@
             {
               "spellId": 443442,
               "name": "Natural Harmony",
-              "icon": "spell_nature_natureguardian",
-              "description": "Reduces the cooldown of Nature&#39;s Guardian by 15 sec and causes it to heal for an additional 10% of your maximum health.",
+              "icon": "136060",
+              "description": "Reduces the cooldown of Nature's Guardian by 15 sec and causes it to heal for an additional 10% of your maximum health.",
               "maxRanks": 1
             },
             {
               "spellId": 443441,
               "name": "Earthen Communion",
-              "icon": "spell_nature_skinofearth",
+              "icon": "136089",
               "description": "Earth Shield has an additional 3 charges and heals you for 25% more.",
               "maxRanks": 1
             }
@@ -6906,7 +6906,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Primordial Capacity",
-          "icon": "ability_monk_chiswirl",
+          "icon": "1056569",
           "description": "Increases your maximum mana by 10%.\r\n\r\nTidal Waves can now stack up to 3 times.",
           "choices": null
         },
@@ -6924,8 +6924,8 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Spiritwalker's Momentum",
-          "icon": "spell_shaman_spiritwalkersgrace",
-          "description": "Using spells with a cast time increases the duration of Spiritwalker&#39;s Grace and Spiritwalker&#39;s Aegis by 1 sec, up to a maximum of 4 sec.",
+          "icon": "451170",
+          "description": "Using spells with a cast time increases the duration of Spiritwalker's Grace and Spiritwalker's Aegis by 1 sec, up to a maximum of 4 sec.",
           "choices": null
         },
         {
@@ -6948,14 +6948,14 @@
             {
               "spellId": 443449,
               "name": "Latent Wisdom",
-              "icon": "spell_holy_spiritualguidence",
-              "description": "Your Ancestors&#39; spells are 25% more powerful.",
+              "icon": "135977",
+              "description": "Your Ancestors' spells are 25% more powerful.",
               "maxRanks": 1
             },
             {
               "spellId": 443423,
               "name": "Ancient Fellowship",
-              "icon": "spell_shaman_astralshift",
+              "icon": "237572",
               "description": "Ancestors have a 20% chance to call another Ancestor for 8 sec when they depart.",
               "maxRanks": 1
             }
@@ -6975,7 +6975,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Elemental Reverb",
-          "icon": "ability_shaman_echooftheelements",
+          "icon": "538566",
           "description": "Lava Burst gains an additional charge and deals 10% increased damage.",
           "choices": null
         },
@@ -6993,7 +6993,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Final Calling",
-          "icon": "spell_shaman_ancestralawakening",
+          "icon": "237571",
           "description": "When an Ancestor departs, they cast Hydrobubble on a nearby injured ally.\r\n\r\n Hydrobubble\r\nSurrounds your target in a protective water bubble for 15 sec.\r\n\r\nThe shield absorbs the next 1,795 incoming damage, but the absorb amount decays fully over its duration.",
           "choices": null
         },
@@ -7011,7 +7011,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Maelstrom Supremacy",
-          "icon": "spell_shadow_soulleech_2",
+          "icon": "136213",
           "description": "Increases the healing done by Healing Wave, Downpour, and Chain Heal by 25%.",
           "choices": null
         },
@@ -7035,14 +7035,14 @@
             {
               "spellId": 443444,
               "name": "Heed My Call",
-              "icon": "spell_unused2",
+              "icon": "136234",
               "description": "Ancestors last an additional 4 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 443445,
               "name": "Routine Communication",
-              "icon": "spell_nature_undyingstrength",
+              "icon": "136109",
               "description": "Riptide has a 15% chance to call an Ancestor to your side for 8 sec.",
               "maxRanks": 1
             }
@@ -7062,7 +7062,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Offering from Beyond",
-          "icon": "spell_shaman_blessingoftheeternals",
+          "icon": "237574",
           "description": "When an Ancestor is called, they reduce the cooldown of Riptide by 2 sec.",
           "choices": null
         },
@@ -7078,7 +7078,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Call of the Ancestors",
-          "icon": "ability_racial_ancestralcall",
+          "icon": "2021574",
           "description": "Unleash Life calls an Ancestor to your side for 12 sec.\r\n\r\nWhenever you cast a healing or damaging spell, the Ancestor will cast a similar spell.",
           "choices": null
         },
@@ -7099,8 +7099,8 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Ancestral Swiftness",
-          "icon": "inv_ability_farseershaman_ancestralswiftness",
-          "description": "Your next healing or damaging spell is instant, costs no mana, and deals 10% increased damage and healing.\r\n\r\nIf you know Nature&#39;s Swiftness, it is replaced by Ancestral Swiftness and causes Ancestral Swiftness to call an Ancestor to your side for 8 sec.",
+          "icon": "5927625",
+          "description": "Your next healing or damaging spell is instant, costs no mana, and deals 10% increased damage and healing.\r\n\r\nIf you know Nature's Swiftness, it is replaced by Ancestral Swiftness and causes Ancestral Swiftness to call an Ancestor to your side for 8 sec.",
           "choices": null
         },
         {
@@ -7117,7 +7117,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Mystic Knowledge",
-          "icon": "achievement_raidprimalist_council",
+          "icon": "4630359",
           "description": "Increases the chance for Lava Surge to occur by 20%.",
           "choices": null
         },
@@ -7135,7 +7135,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Windspeaker",
-          "icon": "achievement_raidprimalist_windelemental",
+          "icon": "4630367",
           "description": "The cast times of Healing Surge, Chain Heal and Lava Burst are reduced by 10%.",
           "choices": null
         },
@@ -7153,7 +7153,7 @@
           "heroSubtree": "Farseer",
           "maxRanks": 1,
           "name": "Ancestral Influence",
-          "icon": "shaman_pvp_leaderclan",
+          "icon": "1385910",
           "description": "Your Intellect is increased by 1.0% for each Ancestor active.",
           "choices": null
         }

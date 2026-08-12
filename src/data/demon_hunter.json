@@ -69,7 +69,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Vengeful Retreat",
-          "icon": "inv_12_voiddh_ability_vengefulretreat",
+          "icon": "7554169",
           "description": "Remove all snares and vault away. Nearby enemies take 5 Physical damage.",
           "choices": null
         },
@@ -84,8 +84,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Voidblade",
-          "icon": "inv_12_voiddh_ability_voidblade",
-          "description": "Unleash your glaives and charge to your target, dealing 858 Cosmic damage.\r\n",
+          "icon": "7554171",
+          "description": "Unleash your glaives and charge to your target, dealing 857 Cosmic damage.\r\n",
           "choices": null
         },
         {
@@ -99,7 +99,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sigil of Misery",
-          "icon": "ability_demonhunter_sigilofmisery",
+          "icon": "1418287",
           "description": "Place a Sigil of Misery at the target location that activates after 2 sec.\r\n\r\nCauses all enemies affected by the sigil to cower in fear, disorienting them for 15 sec.",
           "choices": null
         },
@@ -116,7 +116,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Vengeful Bonds",
-          "icon": "ability_demonhunter_vengefulretreat2",
+          "icon": "1348401",
           "description": "Vengeful Retreat reduces the movement speed of all nearby enemies by 70% for 3 sec.",
           "choices": null
         },
@@ -134,7 +134,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unrestrained Fury",
-          "icon": "ability_warrior_improveddisciplines",
+          "icon": "132346",
           "description": "Increases maximum Fury by 20.",
           "choices": null
         },
@@ -152,7 +152,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shattered Restoration",
-          "icon": "ability_warlock_soulsiphon",
+          "icon": "460700",
           "description": "The healing of Shattered Souls is increased by 10%.",
           "choices": null
         },
@@ -169,7 +169,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Sigil of Misery",
-          "icon": "ability_demonhunter_sigilofmisery",
+          "icon": "1418287",
           "description": "Reduces the cooldown of Sigil of Misery by 30 sec.",
           "choices": null
         },
@@ -187,7 +187,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bouncing Glaives",
-          "icon": "ability_demonhunter_throwglaive",
+          "icon": "1305159",
           "description": "Throw Glaive ricochets to 1 additional target.",
           "choices": null
         },
@@ -205,7 +205,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Imprison",
-          "icon": "ability_demonhunter_imprison",
+          "icon": "1380368",
           "description": "Imprisons a demon, beast, or humanoid, incapacitating them for 1 min. Damage may cancel the effect. Limit 1.",
           "choices": null
         },
@@ -223,7 +223,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Charred Warblades",
-          "icon": "spell_fire_incinerate",
+          "icon": "135818",
           "description": "You heal for 3% of all Fire damage you deal.",
           "choices": null
         },
@@ -240,8 +240,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Void Nova",
-          "icon": "inv_12_voiddh_ability_voidnova",
-          "description": "Unleash an eruption of void energy, dealing 104 Cosmic damage and stunning your target and all nearby enemies for 2 sec.",
+          "icon": "7554172",
+          "description": "Unleash an eruption of void energy, dealing 102 Cosmic damage and stunning your target and all nearby enemies for 2 sec.",
           "choices": null
         },
         {
@@ -258,7 +258,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Disrupt",
-          "icon": "ability_demonhunter_consumemagic",
+          "icon": "1305153",
           "description": "Increases the range of Disrupt to 10 yds.",
           "choices": null
         },
@@ -276,7 +276,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Consume Magic",
-          "icon": "spell_misc_zandalari_council_soulswap",
+          "icon": "828455",
           "description": "Consume 1 beneficial Magic effect removing it from the target.",
           "choices": null
         },
@@ -293,7 +293,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aldrachi Design",
-          "icon": "inv_glaive_1h_artifactaldrochi_d_01dual",
+          "icon": "1309100",
           "description": "Increases your chance to parry by 3%.",
           "choices": null
         },
@@ -310,7 +310,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focused Ire",
-          "icon": "ability_bossfellord_felspike",
+          "icon": "1118739",
           "description": "The primary target of Chaos Nova is stunned for an additional 2 sec.",
           "choices": null
         },
@@ -334,14 +334,14 @@
             {
               "spellId": 389763,
               "name": "Master of the Glaive",
-              "icon": "inv_glaive_1h_demonhunter_a_01",
+              "icon": "1278164",
               "description": "Throw Glaive has 2 charges and snares all enemies hit by 50% for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429211,
               "name": "Champion of the Glaive",
-              "icon": "inv_glaive_1h_battledungeon_c_01",
+              "icon": "1970139",
               "description": "Throw Glaive has 2 charges and 10 yard increased range.",
               "maxRanks": 1
             }
@@ -360,7 +360,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Disrupting Fury",
-          "icon": "ability_demonhunter_consumemagic",
+          "icon": "1305153",
           "description": "Disrupt generates 30 Fury on a successful interrupt.",
           "choices": null
         },
@@ -378,7 +378,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blazing Path",
-          "icon": "ability_demonhunter_felrush",
+          "icon": "1247261",
           "description": "Shift gains an additional charge.",
           "choices": null
         },
@@ -395,7 +395,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swallowed Anger",
-          "icon": "spell_misc_zandalari_council_soulswap",
+          "icon": "828455",
           "description": "Consume Magic generates 20 Fury when a beneficial Magic effect is successfully removed from the target.",
           "choices": null
         },
@@ -413,7 +413,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aura of Pain",
-          "icon": "spell_fire_felimmolation",
+          "icon": "135802",
           "description": "Increases the critical strike chance of Immolation Aura by 6%.",
           "choices": null
         },
@@ -430,7 +430,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Live by the Glaive",
-          "icon": "inv_sword_108",
+          "icon": "135289",
           "description": "When you parry an attack or have one of your attacks parried, restore 2% of max health and 10 Fury. \r\n\r\nThis effect may only occur once every 5 sec.",
           "choices": null
         },
@@ -448,7 +448,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pursuit",
-          "icon": "ability_demonhunter_infernalstrike2",
+          "icon": "1344651",
           "description": "Mastery increases your movement speed.",
           "choices": null
         },
@@ -467,7 +467,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Rending",
-          "icon": "ability_demonhunter_soulcleave2",
+          "icon": "1354410",
           "description": "Leech increased by 5%.\r\n\r\nGain an additional 5% leech while Metamorphosis is active.",
           "choices": null
         },
@@ -484,7 +484,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Felfire Haste",
-          "icon": "inv_boots_cloth_35v4",
+          "icon": "446089",
           "description": "Fel Rush increases your movement speed by 10% for 8 sec.",
           "choices": null
         },
@@ -502,7 +502,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Infernal Armor",
-          "icon": "ability_demonhunter_immolation",
+          "icon": "1344649",
           "description": "Immolation Aura increases your armor by 10% and causes melee attackers to suffer 2 Fire damage.",
           "choices": null
         },
@@ -525,14 +525,14 @@
             {
               "spellId": 1266316,
               "name": "Burn It Out",
-              "icon": "spell_fel_elementaldevastation",
+              "icon": "841219",
               "description": "Immolation Aura removes 1 Disease effect.",
               "maxRanks": 1
             },
             {
               "spellId": 1266496,
               "name": "Soul Cleanse",
-              "icon": "spell_nature_removecurse",
+              "icon": "136082",
               "description": "Immolation Aura removes 1 Curse effect.",
               "maxRanks": 1
             }
@@ -552,7 +552,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lost in Darkness",
-          "icon": "inv_pet_inquisitoreye",
+          "icon": "1387707",
           "description": "Spectral Sight has 5 sec reduced cooldown and no longer reduces movement speed. ",
           "choices": null
         },
@@ -570,7 +570,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Illidari Knowledge",
-          "icon": "spell_mage_overpowered",
+          "icon": "1033914",
           "description": "Reduces magic damage taken by 3%.",
           "choices": null
         },
@@ -582,14 +582,14 @@
           "posY": 8,
           "connections": [
             91004,
-            90939,
-            90936
+            90936,
+            90939
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Guile",
-          "icon": "spell_shadow_demonform",
+          "icon": "237558",
           "description": "The cast range of Voidblade, Consume Magic, and Disrupt are increased by 20 yds.",
           "choices": null
         },
@@ -600,15 +600,15 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            91004,
             90947,
+            91004,
             90927
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Will of the Illidari",
-          "icon": "ability_demonhunter_spectank",
+          "icon": "1247265",
           "description": "Increases maximum health by 3%.",
           "choices": null
         },
@@ -625,7 +625,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Internal Struggle",
-          "icon": "ability_warlock_demonicpower",
+          "icon": "236293",
           "description": "Increases your mastery by 2.6%.",
           "choices": null
         },
@@ -643,7 +643,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Furious",
-          "icon": "ability_warlock_shadowfurytga",
+          "icon": "607865",
           "description": "Attacks and abilities that generate Fury deal 3% increased damage.",
           "choices": null
         },
@@ -661,7 +661,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Remorseless",
-          "icon": "inv_glaive_1h_npc_d_02",
+          "icon": "1303275",
           "description": "Attacks and abilities that spend Fury deal 3% increased damage.",
           "choices": null
         },
@@ -678,7 +678,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "First In, Last Out",
-          "icon": "ability_demonhunter_demonictrample",
+          "icon": "1380365",
           "description": "Shift grants you a rapidly decaying shield equal to 6% of your maximum health.",
           "choices": null
         },
@@ -689,14 +689,13 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            90934,
             90934
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Erratic Felheart",
-          "icon": "inv_archaeology_70_crystallineeyeofundravius",
+          "icon": "1379226",
           "description": "The cooldown of Fel Rush is reduced by 1.0 sec.",
           "choices": null
         },
@@ -713,7 +712,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Final Breath",
-          "icon": "spell_fire_twilightflamebreath",
+          "icon": "425954",
           "description": "Fully channeling Void Ray increases the damage of its final tick by 300%.",
           "choices": null
         },
@@ -731,7 +730,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Darkness",
-          "icon": "ability_demonhunter_darkness",
+          "icon": "1305154",
           "description": "Summons darkness around you in an 8 yd radius, granting friendly targets a 15% chance to avoid all damage from an attack. Lasts 8 sec.\r\n\r\nChance to avoid damage increased by 100% when not in a raid.",
           "choices": null
         },
@@ -748,7 +747,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demon Muzzle",
-          "icon": "spell_warlock_demonicservitude",
+          "icon": "1032478",
           "description": "Interrupting a spell with Disrupt decreases your magic damage taken by 15% for 12 sec.",
           "choices": null
         },
@@ -765,7 +764,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Splitter",
-          "icon": "ability_warlock_soulswap",
+          "icon": "460857",
           "description": "Any time you would generate one or more Soul Fragments, you have a 2% chance to generate an additional Soul Fragment.",
           "choices": null
         },
@@ -782,7 +781,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wings of Wrath",
-          "icon": "ability_demonhunter_glide",
+          "icon": "1305157",
           "description": "Glide speed increased by 10%.",
           "choices": null
         },
@@ -805,14 +804,14 @@
             {
               "spellId": 389781,
               "name": "Long Night",
-              "icon": "spell_fire_twilightimmolation",
+              "icon": "425957",
               "description": "Increases the duration of Darkness by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 389783,
               "name": "Pitch Black",
-              "icon": "sha_spell_warlock_demonsoul",
+              "icon": "895888",
               "description": "Reduces the cooldown of Darkness by 120 sec.",
               "maxRanks": 1
             }
@@ -831,7 +830,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Resilience",
-          "icon": "inv_summondemonictyrant",
+          "icon": "2065628",
           "description": "Blur gains 1 additional charge.",
           "choices": null
         },
@@ -846,7 +845,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Void Ray",
-          "icon": "inv_12_dh_void_ability_voidray",
+          "icon": "7554220",
           "description": "Requires 100 Fury\r\nUnleash a beam of concentrated void energy, dealing 77 Cosmic damage and consuming 5 Fury every 0.1 sec.\r\n\r\nEffect ends after 2.7 sec or upon reaching 0 Fury.",
           "choices": null
         },
@@ -863,7 +862,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soul Immolation",
-          "icon": "inv_12_dh_void_ability_voidpurge",
+          "icon": "7554219",
           "description": "Light your soul aflame, healing yourself for 24% of your maximum health, generating 30 Fury and shattering 3 Soul Fragments over 5 sec.",
           "choices": null
         },
@@ -880,7 +879,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Predator's Thirst",
-          "icon": "inv_12_dh_void_ability_consume",
+          "icon": "7554200",
           "description": "Consume damage increased by 15%.\r\n\r\nConsume generates a Soul Fragment.",
           "choices": null
         },
@@ -903,15 +902,15 @@
             {
               "spellId": 1246555,
               "name": "Tempered Soul",
-              "icon": "inv_12_dh_void_ability_voidpurge",
+              "icon": "7554219",
               "description": "The cooldown of Soul Immolation is reduced by 30 sec and it gains 1 additional charge.",
               "maxRanks": 1
             },
             {
               "spellId": 1246556,
               "name": "Spontaneous Immolation",
-              "icon": "spell_fire_twilightimmolation",
-              "description": "Soul Immolation heals for an additional 4% of your health over its duration and its cooldown is reset upon killing an enemy that yields experience or honor.",
+              "icon": "425957",
+              "description": "Soul Immolation heals for an additional 6% of your health over its duration and its cooldown is reset upon killing an enemy that yields experience or honor.",
               "maxRanks": 1
             }
           ]
@@ -930,7 +929,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Void Metamorphosis",
-          "icon": "inv_112_ability_demonhunter_metamorphasisvoid",
+          "icon": "7135881",
           "description": "Collecting 50 Soul Fragments grants access to Void Metamorphosis.\r\n\r\n Void Metamorphosis\r\nRequires 50 Soul Fragments\r\n\r\nYou ascend to a higher state of being, substantially empowering your abilities.\r\n\r\nWhile in Void Metamorphosis, your Consume and Reap are enhanced and your Fury will slowly drain. Additionally, Void Ray reduces your Fury drain, deals increased damage, and no longer consumes Fury.",
           "choices": null
         },
@@ -947,7 +946,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Feast of Souls",
-          "icon": "inv_12_dh_void_ability_firstofsouls",
+          "icon": "7554205",
           "description": "Soul Fragments grant 1% increased damage for 6 sec. Multiple applications may overlap.",
           "choices": null
         },
@@ -970,14 +969,14 @@
             {
               "spellId": 1246558,
               "name": "Scythe's Embrace",
-              "icon": "inv_12_dh_void_ability_voidreaper",
+              "icon": "7554221",
               "description": "Reap now generates 10 Fury.",
               "maxRanks": 1
             },
             {
               "spellId": 1246562,
               "name": "Duty Eternal",
-              "icon": "inv_12_voiddh_ability_voidblade",
+              "icon": "7554171",
               "description": "Voidblade damage increased by 100% and Voidblade now generates 20 Fury.",
               "maxRanks": 1
             }
@@ -996,8 +995,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Collapsing Star",
-          "icon": "inv_12_dh_void_ability_collapsingstar",
-          "description": "While in Void Metamorphosis, every 30 Soul Fragments harvested grants access to Collapsing Star.\r\n\r\n Collapsing Star\r\nChannel an immense amount of void energy into a single, cataclysmic blast, dealing 2,121 Cosmic damage to your target and 1,619 Cosmic damage to all nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nWhile casting Collapsing Star, your Fury drain is significantly reduced.",
+          "icon": "7554199",
+          "description": "While in Void Metamorphosis, every 30 Soul Fragments harvested grants access to Collapsing Star.\r\n\r\n Collapsing Star\r\nChannel an immense amount of void energy into a single, cataclysmic blast, dealing 2,401 Cosmic damage to your target and 1,767 Cosmic damage to all nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nWhile casting Collapsing Star, your Fury drain is significantly reduced.",
           "choices": null
         },
         {
@@ -1013,7 +1012,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Moment of Craving",
-          "icon": "inv_12_dh_void_ability_momentofcraving",
+          "icon": "7554208",
           "description": "After fully channeling Void Ray, the cooldown of Reap is reset and your next Reap will collect up to 6 additional Soul Fragments.",
           "choices": null
         },
@@ -1030,7 +1029,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Gift of the Void",
-          "icon": "ability_demonhunter_reversemagic",
+          "icon": "1380372",
           "description": "Your critical strike chance is increased by 2%.",
           "choices": null
         },
@@ -1048,7 +1047,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Entropy",
-          "icon": "inv_112_raidtrinkets_voidprism",
+          "icon": "7137586",
           "description": "While in combat, generate 1 Soul Fragment every 12 sec.\r\n\r\nWhile out of combat, you will slowly build towards your Void Metamorphosis, up to 25 Soul Fragments.",
           "choices": null
         },
@@ -1066,7 +1065,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Waste Not",
-          "icon": "inv_12_dh_void_ability_wastenot",
+          "icon": "7554223",
           "description": "Damage from Void Ray has a 200% increased chance to generate a Soul Fragment.",
           "choices": null
         },
@@ -1083,7 +1082,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soulshaper",
-          "icon": "inv_12_dh_void_ability_sunder",
+          "icon": "7554217",
           "description": "Each Soul Fragment gathered by Reap increases its damage by 8%.",
           "choices": null
         },
@@ -1098,8 +1097,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonsurge",
-          "icon": "inv_12_voiddh_ability_demonsurge",
-          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,361 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
+          "icon": "7554161",
+          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,363 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -1115,7 +1114,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Singed Spirit",
-          "icon": "inv_11_0_misc_candlekobold_color3",
+          "icon": "6012046",
           "description": "Soul Immolation generates an additional 12 Fury over its duration.",
           "choices": null
         },
@@ -1133,7 +1132,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Sweet Suffering",
-          "icon": "ability_demonhunter_shatteredsouls",
+          "icon": "1305158",
           "description": "The duration of Feast of Souls is increased by 1 sec.\r\n\r\n Feast of Souls\r\nSoul Fragments grant 1% increased damage for 6 sec. Multiple applications may overlap.",
           "choices": null
         },
@@ -1150,7 +1149,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Second Helping",
-          "icon": "inv_polearm_2h_voidscythe_d_01",
+          "icon": "7126991",
           "description": "Reap gains an additional charge.",
           "choices": null
         },
@@ -1168,8 +1167,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Umbral Blade",
-          "icon": "inv_12_dh_void_ability_reap",
-          "description": "Reap&#39;s cooldown is reduced by your Haste.",
+          "icon": "7554210",
+          "description": "Reap's cooldown is reduced by your Haste.",
           "choices": null
         },
         {
@@ -1185,7 +1184,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Consume",
-          "icon": "inv_12_dh_void_ability_feast",
+          "icon": "7554204",
           "description": "Consume deals 10% increased damage and its cast time is reduced by 0.25 sec.",
           "choices": null
         },
@@ -1203,7 +1202,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Sweet Release",
-          "icon": "spell_misc_zandalari_council_soulswap",
+          "icon": "828455",
           "description": "Your chance to shatter a Soul Fragment from enemies you damage is increased by 2%.",
           "choices": null
         },
@@ -1220,8 +1219,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voidpurge",
-          "icon": "inv_12_dh_void_ability_voidray",
-          "description": "Void Ray&#39;s cooldown during Void Metamorphosis is reduced by 2.0 sec.",
+          "icon": "7554220",
+          "description": "Void Ray's cooldown during Void Metamorphosis is reduced by 2.0 sec.",
           "choices": null
         },
         {
@@ -1243,14 +1242,14 @@
             {
               "spellId": 452403,
               "name": "Wave of Debilitation",
-              "icon": "spell_fire_felfirenova",
+              "icon": "135795",
               "description": "Chaos Nova slows enemies by 60% and reduces attack and cast speed by 15% for 5 sec after its stun fades. ",
               "maxRanks": 1
             },
             {
               "spellId": 452404,
               "name": "Pursuit of Angriness",
-              "icon": "ability_felarakkoa_focusedblast",
+              "icon": "1117885",
               "description": "Movement speed increased by 1% per 10 Fury.",
               "maxRanks": 1
             }
@@ -1269,7 +1268,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focused Hatred",
-          "icon": "ability_demonhunter_illidansgrasp",
+          "icon": "1380367",
           "description": "Voidsurge deals 50% increased damage when it strikes a single target.\r\n\r\nEach additional target reduces this bonus by 10%.",
           "choices": null
         },
@@ -1292,14 +1291,14 @@
             {
               "spellId": 452406,
               "name": "Set Fire to the Pain",
-              "icon": "ability_demonhunter_empowerwards",
+              "icon": "1450142",
               "description": "5% of all non-Fire damage taken is instead taken as Fire damage over 6 sec.\r\n\r\nFire damage taken reduced by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 452407,
               "name": "Improved Soul Rending",
-              "icon": "ability_demonhunter_soulcleave2",
+              "icon": "1354410",
               "description": "Leech granted by Soul Rending increased by 2% and an additional 2% while Void Metamorphosis is active.",
               "maxRanks": 1
             }
@@ -1318,7 +1317,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blind Focus",
-          "icon": "inv_belt_leather_raiddemonhunter_r_01",
+          "icon": "1531487",
           "description": "Cosmic damage increased by 2%.\r\n\r\nEffect is doubled while in demon form.",
           "choices": null
         },
@@ -1337,7 +1336,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hungering Slash",
-          "icon": "inv_12_dh_void_ability_reapersslice",
+          "icon": "7554211",
           "description": "After dealing damage with The Hunt or Voidblade, Voidblade is replaced with Hungering Slash for 6 sec.\r\n\r\n Hungering Slash\r\nViolently slash your scythe around you, dealing 940 Cosmic damage to nearby enemies and generating 10 Fury. Shatters up to 2 Soul Fragments from nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nHungering Slash grants a temporary charge of Vengeful Retreat and causes your next Vengeful Retreat within 6 sec to deal an additional 570 Cosmic damage.",
           "choices": null
         },
@@ -1356,7 +1355,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Voidrage",
-          "icon": "inv_12_dh_void_ability_soulimmolation",
+          "icon": "7554215",
           "description": "Your Mastery is increased by 2%.",
           "choices": null
         },
@@ -1375,7 +1374,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focused Ray",
-          "icon": "inv_cosmicvoid_beam",
+          "icon": "4913233",
           "description": "Void Ray deals 80% more damage when damaging 3 targets.",
           "choices": null
         },
@@ -1392,7 +1391,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Blades",
-          "icon": "inv_glaive_1h_artifactazgalor_d_02dual",
+          "icon": "1273721",
           "description": "Your blades burn with Cosmic energy, causing your Voidblade, Hungering Slash, and Throw Glaive to deal an additional 35% damage as Cosmic damage.\r\n\r\nReap damage increased by 20%.",
           "choices": null
         },
@@ -1409,7 +1408,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Violent Transformation",
-          "icon": "spell_shadow_demoniccirclesummon",
+          "icon": "237559",
           "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and The Hunt.\r\n\r\nThe Hunt deals 25% increased damage and resets the cooldown of Soul Immolation.",
           "choices": null
         },
@@ -1426,8 +1425,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Enduring Torment",
-          "icon": "spell_fire_felimmolation",
-          "description": "The effects of your demon form persist outside of it in a weakened state, increasing Mastery: Monster Within&#39;s effectiveness by 20%.",
+          "icon": "135802",
+          "description": "The effects of your demon form persist outside of it in a weakened state, increasing Mastery: Monster Within's effectiveness by 20%.",
           "choices": null
         },
         {
@@ -1443,7 +1442,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Undying Embers",
-          "icon": "ability_warlock_burningembersgreen",
+          "icon": "840194",
           "description": "Soul Immolation has a 25% chance to reignite after it expires, reapplying its effect.",
           "choices": null
         },
@@ -1460,8 +1459,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soulforged Blades",
-          "icon": "inv12_ability_deathknight_frostscythe",
-          "description": "Hungering Slash and Voidblade&#39;s critical strike chance is increased by 15%.",
+          "icon": "7439190",
+          "description": "Hungering Slash and Voidblade's critical strike chance is increased by 15%.",
           "choices": null
         },
         {
@@ -1477,7 +1476,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Singular Strikes",
-          "icon": "inv_12_dh_void_ability_scythethrow",
+          "icon": "7554212",
           "description": "Voidblade damage increased by 25%.\r\n\r\nHungering Slash deals 50% increased damage to its primary target.",
           "choices": null
         },
@@ -1495,7 +1494,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Demonic Instinct",
-          "icon": "inv_12_dh_void_ability_predatorsthirst",
+          "icon": "7554209",
           "description": "Void Ray and Hungering Slash damage increased by 10%.",
           "choices": null
         },
@@ -1513,7 +1512,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Devourer's Edge",
-          "icon": "inv_12_dh_void_ability_empoweredreap",
+          "icon": "7554202",
           "description": "Reap and Consume damage increased by 10%.",
           "choices": null
         },
@@ -1530,7 +1529,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voidglare Boon",
-          "icon": "inv_nulllotus_cosmicvoid",
+          "icon": "5976933",
           "description": "After fully channeling Void Ray, gain 10 Fury.",
           "choices": null
         },
@@ -1547,7 +1546,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rolling Torment",
-          "icon": "inv_cosmicvoid_debuff",
+          "icon": "4914666",
           "description": "When Void Metamorphosis expires, for each unused Soul you harvested, gain 5 Fury and increase your damage by 0.50% for 12 sec.",
           "choices": null
         },
@@ -1564,7 +1563,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Untethered Fury",
-          "icon": "inv__felbarrage",
+          "icon": "2032602",
           "description": "Maximum Fury increased by 20.",
           "choices": null
         },
@@ -1587,14 +1586,14 @@
             {
               "spellId": 452412,
               "name": "Student of Suffering",
-              "icon": "achievement_dungeon_theatreofpain_kultharok",
+              "icon": "3601553",
               "description": "Void Ray applies Student of Suffering to you, increasing Mastery by 10.6% and granting 5 Fury every 2 sec, for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 452413,
               "name": "Flamebound",
-              "icon": "spell_fire_felflamering",
+              "icon": "135799",
               "description": "Hungering Slash has 2 yd increased radius and 50% increased critical strike damage bonus.",
               "maxRanks": 1
             }
@@ -1613,7 +1612,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Monster Rising",
-          "icon": "ability_warlock_demonicpower",
+          "icon": "236293",
           "description": "Intellect increased by 15% while not in demon form.",
           "choices": null
         },
@@ -1630,7 +1629,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Volatile Instinct",
-          "icon": "inv_nature_nova",
+          "icon": "7501339",
           "description": "Entering demon form causes your next Voidsurge to repeat after a short delay.",
           "choices": null
         },
@@ -1648,7 +1647,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voidrush",
-          "icon": "inv_12_dh_void_ability_voidstep",
+          "icon": "7554222",
           "description": "Collapsing Star reduces the cooldown of Voidblade by 10 sec.\r\n\r\nVoidblade and The Hunt briefly reduce your Fury drain while in Void Metamorphosis.",
           "choices": null
         },
@@ -1665,7 +1664,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Devourer's Bite",
-          "icon": "inv_12_dh_void_ability_devourerbite",
+          "icon": "7554201",
           "description": "Damage from Voidblade and the Hunt increases the damage your target takes from you by 12% for 10 sec. Multiple applications may overlap.",
           "choices": null
         },
@@ -1683,8 +1682,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Impending Apocalypse",
-          "icon": "inv_12_dh_void_ability_impendingapocalypse",
-          "description": "Each Collapsing Star you cast increases the damage of your next Collapsing Star by 30%.",
+          "icon": "7554207",
+          "description": "Each Collapsing Star you cast increases the damage of your next Collapsing Star by 20%.",
           "choices": null
         },
         {
@@ -1700,7 +1699,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Calamitous",
-          "icon": "ability_argus_soulbombdebuffsmall",
+          "icon": "1778229",
           "description": "Your damaging critical strikes deal 240% damage instead of the usual 200%.",
           "choices": null
         },
@@ -1718,7 +1717,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Star Fragments",
-          "icon": "inv_12_dh_void_ability_starfragments",
+          "icon": "7554216",
           "description": "Collapsing Star now generates 3 Soul Fragments.",
           "choices": null
         },
@@ -1731,14 +1730,14 @@
           "connections": [
             94904,
             94902,
-            94909,
-            109772
+            109772,
+            94909
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Intensity",
-          "icon": "spell_warlock_demonicempowerment",
+          "icon": "1378283",
           "description": "Activating Void Metamorphosis greatly empowers The Hunt.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
           "choices": null
         },
@@ -1755,8 +1754,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "The Hunt",
-          "icon": "inv_12_voiddh_ability_thehunt",
-          "description": "Charge to your target, striking them for 2,283 Cosmic damage, rooting them in place for 1.5 sec and inflicting 1,628 Cosmic damage over 6 sec to up to 5 enemies in your path.",
+          "icon": "7554167",
+          "description": "Charge to your target, striking them for 2,300 Cosmic damage, rooting them in place for 1.5 sec and inflicting 1,628 Cosmic damage over 6 sec to up to 5 enemies in your path.",
           "choices": null
         },
         {
@@ -1778,14 +1777,14 @@
             {
               "spellId": 1242492,
               "name": "Emptiness",
-              "icon": "inv_cosmicvoid_buff",
+              "icon": "4913234",
               "description": "Every soul consumed in Void Metamorphosis grants 0.25% haste, up to 25%.",
               "maxRanks": 1
             },
             {
               "spellId": 1247534,
               "name": "Soul Glutton",
-              "icon": "ability_bossgorefiend_gorefiendscorruption",
+              "icon": "1120184",
               "description": "Void Metamorphosis requires 15 less souls.\r\n\r\nYour Fury drains 25% faster while in Void Metamorphosis.",
               "maxRanks": 1
             }
@@ -1804,8 +1803,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Eradicate",
-          "icon": "inv_12_dh_void_ability_eradicate",
-          "description": "Fully channeling Void Ray upgrades your Reap to Eradicate.\r\n\r\n Eradicate\r\nSlam your Scythe to the ground, dealing 2,558 Cosmic damage to your primary target and 2,558 to all other enemies within a 25 yd cone in front of you. Damage reduced beyond 5 targets.\r\n\r\nEradicate gathers up to 4 nearby souls.",
+          "icon": "7554203",
+          "description": "Fully channeling Void Ray upgrades your Reap to Eradicate.\r\n\r\n Eradicate\r\nSlam your Scythe to the ground, dealing 2,404 Cosmic damage to your primary target and 2,043 to all other enemies within a 25 yd cone in front of you. Damage reduced beyond 5 targets.\r\n\r\nEradicate gathers up to 4 nearby souls.",
           "choices": null
         },
         {
@@ -1819,7 +1818,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Midnight",
-          "icon": "inv12_apextalent_demonhunter_midnight",
+          "icon": "7514177",
           "description": null,
           "levels": [
             81,
@@ -1834,7 +1833,7 @@
             },
             {
               "spellId": 1250088,
-              "description": "All Cosmic damage dealt increased by 3%.\r\n\r\nCollapsing Star&#39;s critical strike damage is increased by 50% of your critical strike chance.",
+              "description": "All Cosmic damage dealt increased by 3%.\r\n\r\nCollapsing Star's critical strike damage is increased by 50% of your critical strike chance.",
               "maxRanks": 2
             },
             {
@@ -1861,7 +1860,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "World Killer",
-          "icon": "inv_112_raiddimensius_brokenworld",
+          "icon": "7127719",
           "description": "The third Voidfall meteor strike called down in sequence is larger, has 50% increased area, deals 50% increased damage, and generates 1 Soul Fragment.",
           "choices": null
         },
@@ -1879,8 +1878,8 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Otherworldly Focus",
-          "icon": "inv_babyvoidwalker_blue",
-          "description": "Collapsing Star and Voidfall meteors deal 35% increased damage when striking a single target.\r\n\r\nEach additional target reduces this bonus by 5%.",
+          "icon": "6992623",
+          "description": "Collapsing Star and Voidfall meteors deal 30% increased damage when striking a single target.\r\n\r\nEach additional target reduces this bonus by 5%.",
           "choices": null
         },
         {
@@ -1897,8 +1896,8 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Dark Matter",
-          "icon": "inv_cosmicvoid_nova",
-          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,304 Cosmic damage over 6 sec.",
+          "icon": "4914669",
+          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,306 Cosmic damage over 6 sec.",
           "choices": null
         },
         {
@@ -1915,7 +1914,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Final Hour",
-          "icon": "inv_10_worlddroplevelingoptionalreagent_relics_hourglass_color1",
+          "icon": "4632795",
           "description": "Passive bonuses granted by each stack of Voidfall persist for 8 sec after being consumed.",
           "choices": null
         },
@@ -1933,7 +1932,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Meteoric Fall",
-          "icon": "ability_socererking_arcanereplication",
+          "icon": "1041233",
           "description": "While at 3 stacks of Voidfall, Reap consumes all 3 to rapidly call down that many meteor strikes.",
           "choices": null
         },
@@ -1951,7 +1950,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Mass Acceleration",
-          "icon": "inv_nullstone_cosmicvoid",
+          "icon": "5976939",
           "description": "Gain 3 stacks of Voidfall and reset the cooldown of Reap upon activating Void Metamorphosis.",
           "choices": null
         },
@@ -1975,14 +1974,14 @@
             {
               "spellId": 1253399,
               "name": "Path to Oblivion",
-              "icon": "ability_socererking_arcaneacceleration",
+              "icon": "1041230",
               "description": "Each stack of Voidfall grants 3% increased movement speed.",
               "maxRanks": 1
             },
             {
               "spellId": 1253402,
               "name": "State of Matter",
-              "icon": "inv_112_arcane_buff",
+              "icon": "6891021",
               "description": "Shift has 1 additional charge.",
               "maxRanks": 1
             }
@@ -2000,8 +1999,8 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Voidfall",
-          "icon": "inv_12_dh_void_ability_voidfall",
-          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target&#39;s location, dealing 673 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
+          "icon": "7554218",
+          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 666 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -2024,14 +2023,14 @@
             {
               "spellId": 1253676,
               "name": "Doomsayer",
-              "icon": "inv_shadowflame_buff",
+              "icon": "4914674",
               "description": "Activating Void Ray out of combat or within 5 sec of entering combat calls down 3 Voidfall Meteors over its duration.",
               "maxRanks": 1
             },
             {
               "spellId": 1279247,
               "name": "Harness the Cosmos",
-              "icon": "inv_cosmicvoid_orb",
+              "icon": "4914670",
               "description": "Voidfall Meteor damage increased by 15%.",
               "maxRanks": 1
             }
@@ -2051,7 +2050,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Celestial Echoes",
-          "icon": "inv_polearm_2h_voidscythe_d_01",
+          "icon": "7126991",
           "description": "Consume generates 2 additional Fury and deals 15% increased damage.",
           "choices": null
         },
@@ -2069,7 +2068,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Phase Shift",
-          "icon": "ability_demonhunter_blur",
+          "icon": "1305150",
           "description": "Each stack of Voidfall grants 2% reduced damage taken.",
           "choices": null
         },
@@ -2087,7 +2086,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Catastrophe",
-          "icon": "inv_netherportal",
+          "icon": "2065615",
           "description": "Enemies struck by a Voidfall Meteor take an additional 25% damage over 8 sec.",
           "choices": null
         },
@@ -2105,7 +2104,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Swift Erasure",
-          "icon": "ability_priest_darkarchangel",
+          "icon": "1445237",
           "description": "Each stack of Voidfall grants 2% Haste.",
           "choices": null
         },
@@ -2123,7 +2122,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Meteoric Rise",
-          "icon": "ability_socererking_arcanefortification",
+          "icon": "1041231",
           "description": "Void Ray damage increased by 15%.\r\n\r\nFully channeling Void Ray generates 1 stack of Voidfall.",
           "choices": null
         },
@@ -2141,7 +2140,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Monster Rising",
-          "icon": "ability_warlock_demonicpower",
+          "icon": "236293",
           "description": "Intellect increased by 15% while not in demon form.",
           "choices": null
         },
@@ -2159,7 +2158,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Blind Focus",
-          "icon": "inv_belt_leather_raiddemonhunter_r_01",
+          "icon": "1531487",
           "description": "Cosmic damage increased by 2%.\r\n\r\nEffect is doubled while in demon form.",
           "choices": null
         },
@@ -2177,8 +2176,8 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Enduring Torment",
-          "icon": "spell_fire_felimmolation",
-          "description": "The effects of your demon form persist outside of it in a weakened state, increasing Mastery: Monster Within&#39;s effectiveness by 20%.",
+          "icon": "135802",
+          "description": "The effects of your demon form persist outside of it in a weakened state, increasing Mastery: Monster Within's effectiveness by 20%.",
           "choices": null
         },
         {
@@ -2201,14 +2200,14 @@
             {
               "spellId": 452412,
               "name": "Student of Suffering",
-              "icon": "achievement_dungeon_theatreofpain_kultharok",
+              "icon": "3601553",
               "description": "Void Ray applies Student of Suffering to you, increasing Mastery by 10.6% and granting 5 Fury every 2 sec, for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 452413,
               "name": "Flamebound",
-              "icon": "spell_fire_felflamering",
+              "icon": "135799",
               "description": "Hungering Slash has 2 yd increased radius and 50% increased critical strike damage bonus.",
               "maxRanks": 1
             }
@@ -2228,7 +2227,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Undying Embers",
-          "icon": "ability_warlock_burningembersgreen",
+          "icon": "840194",
           "description": "Soul Immolation has a 25% chance to reignite after it expires, reapplying its effect.",
           "choices": null
         },
@@ -2246,7 +2245,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Untethered Fury",
-          "icon": "inv__felbarrage",
+          "icon": "2032602",
           "description": "Maximum Fury increased by 20.",
           "choices": null
         },
@@ -2264,7 +2263,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Volatile Instinct",
-          "icon": "inv_nature_nova",
+          "icon": "7501339",
           "description": "Entering demon form causes your next Voidsurge to repeat after a short delay.",
           "choices": null
         },
@@ -2282,7 +2281,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Burning Blades",
-          "icon": "inv_glaive_1h_artifactazgalor_d_02dual",
+          "icon": "1273721",
           "description": "Your blades burn with Cosmic energy, causing your Voidblade, Hungering Slash, and Throw Glaive to deal an additional 35% damage as Cosmic damage.\r\n\r\nReap damage increased by 20%.",
           "choices": null
         },
@@ -2298,8 +2297,8 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Demonsurge",
-          "icon": "inv_12_voiddh_ability_demonsurge",
-          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,357 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
+          "icon": "7554161",
+          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,361 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -2316,7 +2315,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Focused Hatred",
-          "icon": "ability_demonhunter_illidansgrasp",
+          "icon": "1380367",
           "description": "Voidsurge deals 50% increased damage when it strikes a single target.\r\n\r\nEach additional target reduces this bonus by 10%.",
           "choices": null
         },
@@ -2340,14 +2339,14 @@
             {
               "spellId": 452403,
               "name": "Wave of Debilitation",
-              "icon": "spell_fire_felfirenova",
+              "icon": "135795",
               "description": "Chaos Nova slows enemies by 60% and reduces attack and cast speed by 15% for 5 sec after its stun fades. ",
               "maxRanks": 1
             },
             {
               "spellId": 452404,
               "name": "Pursuit of Angriness",
-              "icon": "ability_felarakkoa_focusedblast",
+              "icon": "1117885",
               "description": "Movement speed increased by 1% per 10 Fury.",
               "maxRanks": 1
             }
@@ -2367,7 +2366,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Violent Transformation",
-          "icon": "spell_shadow_demoniccirclesummon",
+          "icon": "237559",
           "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and The Hunt.\r\n\r\nThe Hunt deals 25% increased damage and resets the cooldown of Soul Immolation.",
           "choices": null
         },
@@ -2388,7 +2387,7 @@
           "heroSubtree": "Void-Scarred",
           "maxRanks": 1,
           "name": "Demonic Intensity",
-          "icon": "spell_warlock_demonicempowerment",
+          "icon": "1378283",
           "description": "Activating Void Metamorphosis greatly empowers The Hunt.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
           "choices": null
         },
@@ -2412,14 +2411,14 @@
             {
               "spellId": 452406,
               "name": "Set Fire to the Pain",
-              "icon": "ability_demonhunter_empowerwards",
+              "icon": "1450142",
               "description": "5% of all non-Fire damage taken is instead taken as Fire damage over 6 sec.\r\n\r\nFire damage taken reduced by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 452407,
               "name": "Improved Soul Rending",
-              "icon": "ability_demonhunter_soulcleave2",
+              "icon": "1354410",
               "description": "Leech granted by Soul Rending increased by 2% and an additional 2% while Void Metamorphosis is active.",
               "maxRanks": 1
             }
@@ -2488,7 +2487,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Vengeful Retreat",
-          "icon": "inv_12_voiddh_ability_vengefulretreat",
+          "icon": "7554169",
           "description": "Remove all snares and vault away. Nearby enemies take 5 Physical damage.",
           "choices": null
         },
@@ -2503,7 +2502,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Felblade",
-          "icon": "ability_demonhunter_felblade",
+          "icon": "1344646",
           "description": "Charge to your target and deal 43 Fire damage.\r\n\r\nGenerates 15 Fury.",
           "choices": null
         },
@@ -2518,7 +2517,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sigil of Misery",
-          "icon": "ability_demonhunter_sigilofmisery",
+          "icon": "1418287",
           "description": "Place a Sigil of Misery at the target location that activates after 2 sec.\r\n\r\nCauses all enemies affected by the sigil to cower in fear, disorienting them for 15 sec.",
           "choices": null
         },
@@ -2535,7 +2534,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Vengeful Bonds",
-          "icon": "ability_demonhunter_vengefulretreat2",
+          "icon": "1348401",
           "description": "Vengeful Retreat reduces the movement speed of all nearby enemies by 70% for 3 sec.",
           "choices": null
         },
@@ -2553,7 +2552,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unrestrained Fury",
-          "icon": "ability_warrior_improveddisciplines",
+          "icon": "132346",
           "description": "Increases maximum Fury by 20.",
           "choices": null
         },
@@ -2565,14 +2564,13 @@
           "posY": 3,
           "connections": [
             90946,
-            91008,
             91008
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shattered Restoration",
-          "icon": "ability_warlock_soulsiphon",
+          "icon": "460700",
           "description": "The healing of Shattered Souls is increased by 10%.",
           "choices": null
         },
@@ -2589,7 +2587,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Sigil of Misery",
-          "icon": "ability_demonhunter_sigilofmisery",
+          "icon": "1418287",
           "description": "Reduces the cooldown of Sigil of Misery by 30 sec.",
           "choices": null
         },
@@ -2607,7 +2605,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bouncing Glaives",
-          "icon": "ability_demonhunter_throwglaive",
+          "icon": "1305159",
           "description": "Throw Glaive ricochets to 1 additional target.",
           "choices": null
         },
@@ -2625,7 +2623,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Imprison",
-          "icon": "ability_demonhunter_imprison",
+          "icon": "1380368",
           "description": "Imprisons a demon, beast, or humanoid, incapacitating them for 1 min. Damage may cancel the effect. Limit 1.",
           "choices": null
         },
@@ -2643,7 +2641,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Charred Warblades",
-          "icon": "spell_fire_incinerate",
+          "icon": "135818",
           "description": "You heal for 3% of all Fire damage you deal.",
           "choices": null
         },
@@ -2654,17 +2652,13 @@
           "posX": 2,
           "posY": 5,
           "connections": [
-            90931,
-            90931,
-            90931,
-            90931,
             90931
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chaos Nova",
-          "icon": "spell_fire_felfirenova",
+          "icon": "135795",
           "description": "Unleash an eruption of fel energy, dealing 9 Chaos damage and stunning all nearby enemies for 3 sec.",
           "choices": null
         },
@@ -2682,7 +2676,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Disrupt",
-          "icon": "ability_demonhunter_consumemagic",
+          "icon": "1305153",
           "description": "Increases the range of Disrupt to 10 yds.",
           "choices": null
         },
@@ -2700,7 +2694,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Consume Magic",
-          "icon": "spell_misc_zandalari_council_soulswap",
+          "icon": "828455",
           "description": "Consume 1 beneficial Magic effect removing it from the target.",
           "choices": null
         },
@@ -2717,7 +2711,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aldrachi Design",
-          "icon": "inv_glaive_1h_artifactaldrochi_d_01dual",
+          "icon": "1309100",
           "description": "Increases your chance to parry by 3%.",
           "choices": null
         },
@@ -2734,7 +2728,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focused Ire",
-          "icon": "ability_bossfellord_felspike",
+          "icon": "1118739",
           "description": "The primary target of Chaos Nova is stunned for an additional 2 sec.",
           "choices": null
         },
@@ -2758,14 +2752,14 @@
             {
               "spellId": 389763,
               "name": "Master of the Glaive",
-              "icon": "inv_glaive_1h_demonhunter_a_01",
+              "icon": "1278164",
               "description": "Throw Glaive has 2 charges and snares all enemies hit by 50% for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429211,
               "name": "Champion of the Glaive",
-              "icon": "inv_glaive_1h_battledungeon_c_01",
+              "icon": "1970139",
               "description": "Throw Glaive has 2 charges and 10 yard increased range.",
               "maxRanks": 1
             }
@@ -2784,7 +2778,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Disrupting Fury",
-          "icon": "ability_demonhunter_consumemagic",
+          "icon": "1305153",
           "description": "Disrupt generates 30 Fury on a successful interrupt.",
           "choices": null
         },
@@ -2802,7 +2796,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blazing Path",
-          "icon": "ability_demonhunter_felrush",
+          "icon": "1247261",
           "description": "Shift gains an additional charge.",
           "choices": null
         },
@@ -2819,7 +2813,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swallowed Anger",
-          "icon": "spell_misc_zandalari_council_soulswap",
+          "icon": "828455",
           "description": "Consume Magic generates 20 Fury when a beneficial Magic effect is successfully removed from the target.",
           "choices": null
         },
@@ -2837,7 +2831,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aura of Pain",
-          "icon": "spell_fire_felimmolation",
+          "icon": "135802",
           "description": "Increases the critical strike chance of Immolation Aura by 6%.",
           "choices": null
         },
@@ -2854,7 +2848,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Live by the Glaive",
-          "icon": "inv_sword_108",
+          "icon": "135289",
           "description": "When you parry an attack or have one of your attacks parried, restore 2% of max health and 10 Fury. \r\n\r\nThis effect may only occur once every 5 sec.",
           "choices": null
         },
@@ -2872,7 +2866,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pursuit",
-          "icon": "ability_demonhunter_infernalstrike2",
+          "icon": "1344651",
           "description": "Mastery increases your movement speed.",
           "choices": null
         },
@@ -2891,7 +2885,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Rending",
-          "icon": "ability_demonhunter_soulcleave2",
+          "icon": "1354410",
           "description": "Leech increased by 5%.\r\n\r\nGain an additional 5% leech while Metamorphosis is active.",
           "choices": null
         },
@@ -2908,7 +2902,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Felfire Haste",
-          "icon": "inv_boots_cloth_35v4",
+          "icon": "446089",
           "description": "Fel Rush increases your movement speed by 10% for 8 sec.",
           "choices": null
         },
@@ -2926,7 +2920,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Infernal Armor",
-          "icon": "ability_demonhunter_immolation",
+          "icon": "1344649",
           "description": "Immolation Aura increases your armor by 10% and causes melee attackers to suffer 2 Fire damage.",
           "choices": null
         },
@@ -2949,14 +2943,14 @@
             {
               "spellId": 1266316,
               "name": "Burn It Out",
-              "icon": "spell_fel_elementaldevastation",
+              "icon": "841219",
               "description": "Immolation Aura removes 1 Disease effect.",
               "maxRanks": 1
             },
             {
               "spellId": 1266496,
               "name": "Soul Cleanse",
-              "icon": "spell_nature_removecurse",
+              "icon": "136082",
               "description": "Immolation Aura removes 1 Curse effect.",
               "maxRanks": 1
             }
@@ -2976,7 +2970,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lost in Darkness",
-          "icon": "inv_pet_inquisitoreye",
+          "icon": "1387707",
           "description": "Spectral Sight has 5 sec reduced cooldown and no longer reduces movement speed. ",
           "choices": null
         },
@@ -2994,7 +2988,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Illidari Knowledge",
-          "icon": "spell_mage_overpowered",
+          "icon": "1033914",
           "description": "Reduces magic damage taken by 3%.",
           "choices": null
         },
@@ -3005,15 +2999,15 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            91004,
             90936,
+            91004,
             90939
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Felbound",
-          "icon": "ability_demonhunter_doublejump",
+          "icon": "1305155",
           "description": "Your movement speed is increased by 3%.",
           "choices": null
         },
@@ -3024,15 +3018,15 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            91004,
             90947,
+            91004,
             90927
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Will of the Illidari",
-          "icon": "ability_demonhunter_spectank",
+          "icon": "1247265",
           "description": "Increases maximum health by 3%.",
           "choices": null
         },
@@ -3049,7 +3043,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Internal Struggle",
-          "icon": "ability_warlock_demonicpower",
+          "icon": "236293",
           "description": "Increases your mastery by 2.6%.",
           "choices": null
         },
@@ -3067,7 +3061,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Furious",
-          "icon": "ability_warlock_shadowfurytga",
+          "icon": "607865",
           "description": "Attacks and abilities that generate Fury deal 3% increased damage.",
           "choices": null
         },
@@ -3085,7 +3079,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Remorseless",
-          "icon": "inv_glaive_1h_npc_d_02",
+          "icon": "1303275",
           "description": "Attacks and abilities that spend Fury deal 3% increased damage.",
           "choices": null
         },
@@ -3102,7 +3096,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "First In, Last Out",
-          "icon": "ability_demonhunter_demonictrample",
+          "icon": "1380365",
           "description": "Shift grants you a rapidly decaying shield equal to 6% of your maximum health.",
           "choices": null
         },
@@ -3113,14 +3107,13 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            90934,
             90934
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Erratic Felheart",
-          "icon": "inv_archaeology_70_crystallineeyeofundravius",
+          "icon": "1379226",
           "description": "The cooldown of Fel Rush is reduced by 1.0 sec.",
           "choices": null
         },
@@ -3137,7 +3130,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Final Breath",
-          "icon": "spell_fire_twilightflamebreath",
+          "icon": "425954",
           "description": "Fully channeling Void Ray increases the damage of its final tick by 300%.",
           "choices": null
         },
@@ -3155,7 +3148,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Darkness",
-          "icon": "ability_demonhunter_darkness",
+          "icon": "1305154",
           "description": "Summons darkness around you in an 8 yd radius, granting friendly targets a 15% chance to avoid all damage from an attack. Lasts 8 sec.\r\n\r\nChance to avoid damage increased by 100% when not in a raid.",
           "choices": null
         },
@@ -3172,7 +3165,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demon Muzzle",
-          "icon": "spell_warlock_demonicservitude",
+          "icon": "1032478",
           "description": "Interrupting a spell with Disrupt decreases your magic damage taken by 15% for 12 sec.",
           "choices": null
         },
@@ -3189,7 +3182,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Splitter",
-          "icon": "ability_warlock_soulswap",
+          "icon": "460857",
           "description": "Any time you would generate one or more Soul Fragments, you have a 2% chance to generate an additional Soul Fragment.",
           "choices": null
         },
@@ -3206,7 +3199,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wings of Wrath",
-          "icon": "ability_demonhunter_glide",
+          "icon": "1305157",
           "description": "Glide speed increased by 10%.",
           "choices": null
         },
@@ -3229,14 +3222,14 @@
             {
               "spellId": 389781,
               "name": "Long Night",
-              "icon": "spell_fire_twilightimmolation",
+              "icon": "425957",
               "description": "Increases the duration of Darkness by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 389783,
               "name": "Pitch Black",
-              "icon": "sha_spell_warlock_demonsoul",
+              "icon": "895888",
               "description": "Reduces the cooldown of Darkness by 120 sec.",
               "maxRanks": 1
             }
@@ -3255,7 +3248,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Resilience",
-          "icon": "inv_summondemonictyrant",
+          "icon": "2065628",
           "description": "Blur gains 1 additional charge.",
           "choices": null
         },
@@ -3270,8 +3263,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonsurge",
-          "icon": "inv_12_voiddh_ability_demonsurge",
-          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,387 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
+          "icon": "7554161",
+          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,421 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -3285,8 +3278,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Eye Beam",
-          "icon": "ability_demonhunter_eyebeam",
-          "description": "Blasts all enemies in front of you, for up to 282 Chaos damage over 1.8 sec. Deals reduced damage beyond 5 targets.",
+          "icon": "1305156",
+          "description": "Blasts all enemies in front of you, for up to 283 Chaos damage over 1.8 sec. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -3308,14 +3301,14 @@
             {
               "spellId": 452403,
               "name": "Wave of Debilitation",
-              "icon": "spell_fire_felfirenova",
+              "icon": "135795",
               "description": "Chaos Nova slows enemies by 60% and reduces attack and cast speed by 15% for 5 sec after its stun fades. ",
               "maxRanks": 1
             },
             {
               "spellId": 452404,
               "name": "Pursuit of Angriness",
-              "icon": "ability_felarakkoa_focusedblast",
+              "icon": "1117885",
               "description": "Movement speed increased by 1% per 10 Fury.",
               "maxRanks": 1
             }
@@ -3334,7 +3327,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focused Hatred",
-          "icon": "ability_demonhunter_illidansgrasp",
+          "icon": "1380367",
           "description": "Voidsurge deals 50% increased damage when it strikes a single target.\r\n\r\nEach additional target reduces this bonus by 10%.",
           "choices": null
         },
@@ -3357,14 +3350,14 @@
             {
               "spellId": 452406,
               "name": "Set Fire to the Pain",
-              "icon": "ability_demonhunter_empowerwards",
+              "icon": "1450142",
               "description": "5% of all non-Fire damage taken is instead taken as Fire damage over 6 sec.\r\n\r\nFire damage taken reduced by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 452407,
               "name": "Improved Soul Rending",
-              "icon": "ability_demonhunter_soulcleave2",
+              "icon": "1354410",
               "description": "Leech granted by Soul Rending increased by 2% and an additional 2% while Void Metamorphosis is active.",
               "maxRanks": 1
             }
@@ -3383,7 +3376,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blind Focus",
-          "icon": "inv_belt_leather_raiddemonhunter_r_01",
+          "icon": "1531487",
           "description": "Cosmic damage increased by 2%.\r\n\r\nEffect is doubled while in demon form.",
           "choices": null
         },
@@ -3400,7 +3393,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Critical Chaos",
-          "icon": "inv_glaive_1h_battledungeon_c_02",
+          "icon": "1970140",
           "description": "The chance that Chaos Strike will refund 20 Fury is increased by 30% of your critical strike chance.",
           "choices": null
         },
@@ -3417,8 +3410,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Hatred",
-          "icon": "ability_demonhunter_immolation",
-          "description": "Immolation Aura generates an additional 24 Fury over 6 sec.",
+          "icon": "1344649",
+          "description": "Immolation Aura generates an additional 18 Fury over 6 sec.",
           "choices": null
         },
         {
@@ -3434,7 +3427,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Blades",
-          "icon": "inv_glaive_1h_artifactazgalor_d_02dual",
+          "icon": "1273721",
           "description": "Your blades burn with Cosmic energy, causing your Voidblade, Hungering Slash, and Throw Glaive to deal an additional 35% damage as Cosmic damage.\r\n\r\nReap damage increased by 20%.",
           "choices": null
         },
@@ -3451,7 +3444,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Violent Transformation",
-          "icon": "spell_shadow_demoniccirclesummon",
+          "icon": "237559",
           "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and The Hunt.\r\n\r\nThe Hunt deals 25% increased damage and resets the cooldown of Soul Immolation.",
           "choices": null
         },
@@ -3468,8 +3461,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Enduring Torment",
-          "icon": "spell_fire_felimmolation",
-          "description": "The effects of your demon form persist outside of it in a weakened state, increasing Mastery: Monster Within&#39;s effectiveness by 20%.",
+          "icon": "135802",
+          "description": "The effects of your demon form persist outside of it in a weakened state, increasing Mastery: Monster Within's effectiveness by 20%.",
           "choices": null
         },
         {
@@ -3485,7 +3478,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Undying Embers",
-          "icon": "ability_warlock_burningembersgreen",
+          "icon": "840194",
           "description": "Soul Immolation has a 25% chance to reignite after it expires, reapplying its effect.",
           "choices": null
         },
@@ -3501,9 +3494,9 @@
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Dash of Chaos",
-          "icon": "inv_boots_cloth_35v3",
-          "description": "For 2 sec after using Fel Rush, activating it again will dash back towards your initial location.",
+          "name": "Never Say Die",
+          "icon": "1500936",
+          "description": "Damage is increased by 3% while above 50% Health.\r\n\r\nLeech is increased by 5% while below 50% Health.",
           "choices": null
         },
         {
@@ -3519,7 +3512,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Chaos Strike",
-          "icon": "ability_demonhunter_chaosstrike",
+          "icon": "1305152",
           "description": "Chaos Strike damage increased by 10%.",
           "choices": null
         },
@@ -3537,8 +3530,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "First Blood",
-          "icon": "ability_deathwing_bloodcorruption_death",
-          "description": "Blade Dance deals 96 Chaos damage to the first target struck.",
+          "icon": "538039",
+          "description": "Blade Dance deals 100 Chaos damage to the first target struck.",
           "choices": null
         },
         {
@@ -3554,7 +3547,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Accelerated Blade",
-          "icon": "ability_demonhunter_throwglaive",
+          "icon": "1305159",
           "description": "Throw Glaive deals 60% increased damage, reduced by 30% for each previous enemy hit.",
           "choices": null
         },
@@ -3571,7 +3564,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demon Hide",
-          "icon": "misc_legionfall_demonhunter",
+          "icon": "1603005",
           "description": "Magical damage increased by 3%, and Physical damage taken reduced by 5%.",
           "choices": null
         },
@@ -3588,7 +3581,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Untethered Fury",
-          "icon": "inv__felbarrage",
+          "icon": "2032602",
           "description": "Maximum Fury increased by 20.",
           "choices": null
         },
@@ -3611,14 +3604,14 @@
             {
               "spellId": 452412,
               "name": "Student of Suffering",
-              "icon": "achievement_dungeon_theatreofpain_kultharok",
+              "icon": "3601553",
               "description": "Void Ray applies Student of Suffering to you, increasing Mastery by 10.6% and granting 5 Fury every 2 sec, for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 452413,
               "name": "Flamebound",
-              "icon": "spell_fire_felflamering",
+              "icon": "135799",
               "description": "Hungering Slash has 2 yd increased radius and 50% increased critical strike damage bonus.",
               "maxRanks": 1
             }
@@ -3637,7 +3630,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Monster Rising",
-          "icon": "ability_warlock_demonicpower",
+          "icon": "236293",
           "description": "Intellect increased by 15% while not in demon form.",
           "choices": null
         },
@@ -3654,7 +3647,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Volatile Instinct",
-          "icon": "inv_nature_nova",
+          "icon": "7501339",
           "description": "Entering demon form causes your next Voidsurge to repeat after a short delay.",
           "choices": null
         },
@@ -3673,7 +3666,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Desperate Instincts",
-          "icon": "spell_shadow_manafeed",
+          "icon": "136171",
           "description": "Blur now reduces damage taken by an additional 10%.\r\n\r\nAdditionally, damage taken below 35% Health is reduced by 10%.",
           "choices": null
         },
@@ -3698,15 +3691,15 @@
             {
               "spellId": 427776,
               "name": "Deflecting Dance",
-              "icon": "ability_ironmaidens_bladerush",
+              "icon": "1035036",
               "description": "You deflect incoming attacks while Blade Dancing, absorbing damage up to 15% of your maximum health.",
               "maxRanks": 1
             },
             {
               "spellId": 328725,
               "name": "Mortal Dance",
-              "icon": "ability_demonhunter_vengefulretreat",
-              "description": "Blade Dance now reduces targets&#39; healing received by 50% for 6 sec.",
+              "icon": "1305160",
+              "description": "Blade Dance now reduces targets' healing received by 50% for 6 sec.",
               "maxRanks": 1
             }
           ]
@@ -3727,7 +3720,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Intensity",
-          "icon": "spell_warlock_demonicempowerment",
+          "icon": "1378283",
           "description": "Activating Void Metamorphosis greatly empowers The Hunt.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
           "choices": null
         },
@@ -3744,7 +3737,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Initiative",
-          "icon": "ability_rogue_surpriseattack",
+          "icon": "132308",
           "description": "Damaging an enemy before they damage you increases your critical strike chance by 10% for 5 sec.\r\n\r\nVengeful Retreat refreshes your potential to trigger this effect on any enemies you are in combat with.",
           "choices": null
         },
@@ -3761,7 +3754,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Scars of Suffering",
-          "icon": "spell_fire_felimmolation",
+          "icon": "135802",
           "description": "Increases Versatility by 4% and reduces threat generated by 8%.",
           "choices": null
         },
@@ -3779,7 +3772,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic",
-          "icon": "spell_shadow_demonform",
+          "icon": "237558",
           "description": "Eye Beam causes you to enter demon form for 5 sec after it finishes dealing damage.",
           "choices": null
         },
@@ -3796,7 +3789,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Furious Throws",
-          "icon": "inv_glaive_1h_npc_d_01",
+          "icon": "1302006",
           "description": "Throw Glaive now costs 25 Fury and throws a second glaive at the target.",
           "choices": null
         },
@@ -3813,8 +3806,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Trail of Ruin",
-          "icon": "ability_demonhunter_bladedance",
-          "description": "The final slash of Blade Dance inflicts an additional 25 Chaos damage over 4 sec.",
+          "icon": "1305149",
+          "description": "The final slash of Blade Dance inflicts an additional 25 Chaos damage.",
           "choices": null
         },
         {
@@ -3828,8 +3821,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voidfall",
-          "icon": "inv_12_dh_void_ability_voidfall",
-          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target&#39;s location, dealing 676 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
+          "icon": "7554218",
+          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 659 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -3845,7 +3838,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tactical Retreat",
-          "icon": "ability_demonhunter_vengefulretreat2",
+          "icon": "1348401",
           "description": "Vengeful Retreat has a 5 sec reduced cooldown and generates 80 Fury over 10 sec.",
           "choices": null
         },
@@ -3864,8 +3857,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Blind Fury",
-          "icon": "ability_bosskilrogg_deadeye",
-          "description": "Eye Beam generates 15 Fury every second, has 10% increased duration, and deals 10% increased damage.",
+          "icon": "1117876",
+          "description": "Eye Beam generates 10 Fury every second, has 10% increased duration, and deals 10% increased damage.",
           "choices": null
         },
         {
@@ -3881,7 +3874,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Furious Gaze",
-          "icon": "ability_demonhunter_eyebeam",
+          "icon": "1305156",
           "description": "When Eye Beam finishes fully channeling, your Haste is increased by an additional 8% for 8 sec.",
           "choices": null
         },
@@ -3900,7 +3893,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Dancing with Fate",
-          "icon": "inv_polearm_1h_felfireraid_d_02",
+          "icon": "1108795",
           "description": "The final slash of Blade Dance deals an additional 25% damage.",
           "choices": null
         },
@@ -3917,8 +3910,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Growing Inferno",
-          "icon": "spell_fel_incinerate",
-          "description": "Immolation Aura&#39;s damage increases by 10% each time it deals damage.",
+          "icon": "841221",
+          "description": "Immolation Aura's damage increases by 10% each time it deals damage.",
           "choices": null
         },
         {
@@ -3934,7 +3927,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swift Erasure",
-          "icon": "ability_priest_darkarchangel",
+          "icon": "1445237",
           "description": "Each stack of Voidfall grants 2% Haste.",
           "choices": null
         },
@@ -3951,7 +3944,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Meteoric Rise",
-          "icon": "ability_socererking_arcanefortification",
+          "icon": "1041231",
           "description": "Void Ray damage increased by 15%.\r\n\r\nFully channeling Void Ray generates 1 stack of Voidfall.",
           "choices": null
         },
@@ -3968,7 +3961,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Catastrophe",
-          "icon": "inv_netherportal",
+          "icon": "2065615",
           "description": "Enemies struck by a Voidfall Meteor take an additional 25% damage over 8 sec.",
           "choices": null
         },
@@ -3985,7 +3978,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Phase Shift",
-          "icon": "ability_demonhunter_blur",
+          "icon": "1305150",
           "description": "Each stack of Voidfall grants 2% reduced damage taken.",
           "choices": null
         },
@@ -4008,15 +4001,15 @@
             {
               "spellId": 206476,
               "name": "Exergy",
-              "icon": "ability_foundryraid_demolition",
+              "icon": "1029722",
               "description": "The Hunt and Vengeful Retreat increase your damage by 5% for 20 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 427640,
               "name": "Inertia",
-              "icon": "inv_10_inscription3_pigments_black",
-              "description": "The Hunt and Vengeful Retreat cause your next Fel Rush or Felblade to empower you, increasing damage by 18% for 5 sec.",
+              "icon": "4631349",
+              "description": "The Hunt and Vengeful Retreat cause your next Fel Rush or Felblade to empower you, increasing damage by 12% for 5 sec.",
               "maxRanks": 1
             }
           ]
@@ -4035,7 +4028,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Isolated Prey",
-          "icon": "spell_shadow_shadesofdarkness",
+          "icon": "136194",
           "description": "Chaos Nova, Eye Beam, and Immolation Aura gain bonuses when striking 1 target.\r\n\r\n Chaos Nova:\r\nStun duration increased by 2 sec.\r\n\r\n Eye Beam:\r\nDeals 30% increased damage.\r\n\r\n Immolation Aura:\r\nAlways critically strikes.",
           "choices": null
         },
@@ -4054,8 +4047,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "The Hunt",
-          "icon": "inv_ability_demonhunter_thehunt",
-          "description": "Charge to your target, striking them for 238 Chaos damage, rooting them in place for 1.5 sec and inflicting 168 Chaos damage over 6 sec to up to 5 enemies in your path. ",
+          "icon": "6035307",
+          "description": "Charge to your target, striking them for 258 Chaos damage, rooting them in place for 1.5 sec and inflicting 188 Chaos damage over 6 sec to up to 5 enemies in your path. ",
           "choices": null
         },
         {
@@ -4072,8 +4065,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Serrated Glaive",
-          "icon": "inv_glaive_1h_artifactaldrochi_d_03dual",
-          "description": "Enemies hit by Chaos Strike or Throw Glaive take 15% increased damage from Chaos Strike and Throw Glaive for 15 sec.",
+          "icon": "1309101",
+          "description": "Striking an enemy with Chaos Strike or Throw Glaive increases Chaos Strike and Throw Glaive damage by 15% for 12 sec.",
           "choices": null
         },
         {
@@ -4089,8 +4082,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Wound",
-          "icon": "spell_fire_felhellfire",
-          "description": "Demon&#39;s Bite and Throw Glaive leave open wounds on your enemies, dealing 25 Chaos damage over 15 sec and increasing damage taken from your Immolation Aura by 35%.\r\n\r\nMay be applied to up to 3 targets.",
+          "icon": "135801",
+          "description": "Demon's Bite and Throw Glaive leave open wounds on your enemies, dealing 25 Chaos damage over 15 sec and increasing damage taken from your Immolation Aura by 35%.\r\n\r\nMay be applied to up to 3 targets.",
           "choices": null
         },
         {
@@ -4112,14 +4105,14 @@
             {
               "spellId": 1253399,
               "name": "Path to Oblivion",
-              "icon": "ability_socererking_arcaneacceleration",
+              "icon": "1041230",
               "description": "Each stack of Voidfall grants 3% increased movement speed.",
               "maxRanks": 1
             },
             {
               "spellId": 1253402,
               "name": "State of Matter",
-              "icon": "inv_112_arcane_buff",
+              "icon": "6891021",
               "description": "Shift has 1 additional charge.",
               "maxRanks": 1
             }
@@ -4138,7 +4131,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mass Acceleration",
-          "icon": "inv_nullstone_cosmicvoid",
+          "icon": "5976939",
           "description": "Gain 3 stacks of Voidfall and reset the cooldown of Reap upon activating Void Metamorphosis.",
           "choices": null
         },
@@ -4161,14 +4154,14 @@
             {
               "spellId": 1253676,
               "name": "Doomsayer",
-              "icon": "inv_shadowflame_buff",
+              "icon": "4914674",
               "description": "Activating Void Ray out of combat or within 5 sec of entering combat calls down 3 Voidfall Meteors over its duration.",
               "maxRanks": 1
             },
             {
               "spellId": 1279247,
               "name": "Harness the Cosmos",
-              "icon": "inv_cosmicvoid_orb",
+              "icon": "4914670",
               "description": "Voidfall Meteor damage increased by 15%.",
               "maxRanks": 1
             }
@@ -4187,7 +4180,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Celestial Echoes",
-          "icon": "inv_polearm_2h_voidscythe_d_01",
+          "icon": "7126991",
           "description": "Consume generates 2 additional Fury and deals 15% increased damage.",
           "choices": null
         },
@@ -4204,37 +4197,20 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unbound Chaos",
-          "icon": "artifactability_vengeancedemonhunter_painbringer",
+          "icon": "1392567",
           "description": "The Hunt and Vengeful Retreat increase the damage of your next Fel Rush or Felblade by 300%. Lasts 12 sec.",
           "choices": null
         },
         {
           "id": 91035,
-          "type": "round",
+          "type": "choice",
           "treeType": "spec",
           "posX": 32,
           "posY": 9,
           "connections": [
+            90921,
             91036,
-            91021,
-            90921
-          ],
-          "spentRequired": 20,
-          "alreadyGranted": false,
-          "maxRanks": 1,
-          "name": "Chaos Theory",
-          "icon": "inv_glaive_1h_artifactaldrochi_d_03dual",
-          "description": "Blade Dance causes your next Chaos Strike within 8 sec to have a 14-30% increased critical strike chance and will always refund Fury.",
-          "choices": null
-        },
-        {
-          "id": 91024,
-          "type": "choice",
-          "treeType": "spec",
-          "posX": 36,
-          "posY": 9,
-          "connections": [
-            90921
+            91021
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -4244,20 +4220,37 @@
           "description": null,
           "choices": [
             {
-              "spellId": 389693,
-              "name": "Inner Demon",
-              "icon": "ability_demonhunter_glide",
-              "description": "Entering demon form causes your next Chaos Strike to unleash your inner demon, causing it to crash into your target and deal 74 Chaos damage to all nearby enemies. Deals reduced damage beyond 5 targets.",
+              "spellId": 389687,
+              "name": "Chaos Theory",
+              "icon": "1309101",
+              "description": "Blade Dance causes your next Chaos Strike within 8 sec to have a 14-30% increased critical strike chance and will always refund Fury.",
               "maxRanks": 1
             },
             {
-              "spellId": 388112,
-              "name": "Chaotic Transformation",
-              "icon": "ability_demonhunter_glide",
-              "description": "When you activate Metamorphosis, the cooldowns of Blade Dance and Eye Beam are immediately reset.",
+              "spellId": 389693,
+              "name": "Inner Demon",
+              "icon": "1305157",
+              "description": "Entering demon form causes your next Chaos Strike to unleash your inner demon, causing it to crash into your target and deal 74 Chaos damage to all nearby enemies. Deals reduced damage beyond 5 targets.",
               "maxRanks": 1
             }
           ]
+        },
+        {
+          "id": 91024,
+          "type": "round",
+          "treeType": "spec",
+          "posX": 36,
+          "posY": 9,
+          "connections": [
+            90921
+          ],
+          "spentRequired": 20,
+          "alreadyGranted": false,
+          "maxRanks": 1,
+          "name": "Chaotic Transformation",
+          "icon": "1305157",
+          "description": "When you activate Metamorphosis, the cooldowns of Blade Dance and Eye Beam are immediately reset.",
+          "choices": null
         },
         {
           "id": 91012,
@@ -4266,9 +4259,9 @@
           "posX": 38,
           "posY": 9,
           "connections": [
+            90921,
             90917,
-            91013,
-            90921
+            91013
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -4280,14 +4273,14 @@
             {
               "spellId": 389977,
               "name": "Relentless Onslaught",
-              "icon": "ability_demonhunter_soulcleave2",
+              "icon": "1354410",
               "description": "Chaos Strike has a 10% chance to trigger a second Chaos Strike.",
               "maxRanks": 1
             },
             {
               "spellId": 388106,
               "name": "Soulscar",
-              "icon": "ability_demonhunter_bloodlet",
+              "icon": "1450139",
               "description": "Throw Glaive causes targets to take an additional 80% of damage dealt as Chaos over 6 sec.",
               "maxRanks": 1
             }
@@ -4306,7 +4299,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ragefire",
-          "icon": "spell_fire_fireballgreen",
+          "icon": "840199",
           "description": "Each time Immolation Aura deals damage, 35% of the damage dealt by up to 3 critical strikes is gathered as Ragefire.\r\n\r\nWhen Immolation Aura expires you explode, dealing all stored Ragefire damage to nearby enemies.",
           "choices": null
         },
@@ -4323,7 +4316,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Final Hour",
-          "icon": "inv_10_worlddroplevelingoptionalreagent_relics_hourglass_color1",
+          "icon": "4632795",
           "description": "Passive bonuses granted by each stack of Voidfall persist for 8 sec after being consumed.",
           "choices": null
         },
@@ -4340,7 +4333,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Meteoric Fall",
-          "icon": "ability_socererking_arcanereplication",
+          "icon": "1041233",
           "description": "While at 3 stacks of Voidfall, Reap consumes all 3 to rapidly call down that many meteor strikes.",
           "choices": null
         },
@@ -4357,8 +4350,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Matter",
-          "icon": "inv_cosmicvoid_nova",
-          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,304 Cosmic damage over 6 sec.",
+          "icon": "4914669",
+          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,281 Cosmic damage over 6 sec.",
           "choices": null
         },
         {
@@ -4374,8 +4367,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Otherworldly Focus",
-          "icon": "inv_babyvoidwalker_blue",
-          "description": "Collapsing Star and Voidfall meteors deal 35% increased damage when striking a single target.\r\n\r\nEach additional target reduces this bonus by 5%.",
+          "icon": "6992623",
+          "description": "Collapsing Star and Voidfall meteors deal 30% increased damage when striking a single target.\r\n\r\nEach additional target reduces this bonus by 5%.",
           "choices": null
         },
         {
@@ -4393,7 +4386,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Know Your Enemy",
-          "icon": "ability_demonhunter_eyeofleotheras",
+          "icon": "1380366",
           "description": "Gain critical strike damage equal to 40% of your critical strike chance.",
           "choices": null
         },
@@ -4410,7 +4403,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cycle of Hatred",
-          "icon": "ability_ironmaidens_whirlofblood",
+          "icon": "1035055",
           "description": "Activating Eye Beam reduces the cooldown of your next Eye Beam by 2.5 sec, stacking up to 10 sec.",
           "choices": null
         },
@@ -4429,7 +4422,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Chaotic Disposition",
-          "icon": "inv_inscription_tarotchaos",
+          "icon": "237164",
           "description": "Your Chaos damage has a 7.77% chance to be increased by 17%, occurring up to 3 total times.",
           "choices": null
         },
@@ -4449,7 +4442,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "World Killer",
-          "icon": "inv_112_raiddimensius_brokenworld",
+          "icon": "7127719",
           "description": "The third Voidfall meteor strike called down in sequence is larger, has 50% increased area, deals 50% increased damage, and generates 1 Soul Fragment.",
           "choices": null
         },
@@ -4466,8 +4459,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Essence Break",
-          "icon": "spell_shadow_ritualofsacrifice",
-          "description": "Slash all enemies in front of you for 110 Chaos damage, causing Chaos Strike and Blade Dance to deal 70 Chaos damage to them for 4 sec. Deals reduced damage beyond 8 targets.",
+          "icon": "136189",
+          "description": "Slash all enemies in front of you for 164 Chaos damage, causing Chaos Strike and Blade Dance to deal 90 Chaos damage to them for 4 sec. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -4484,8 +4477,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Glaive Tempest",
-          "icon": "inv_glaive_1h_artifactazgalor_d_06dual",
-          "description": "The final slash of Blade Dance consumes 25 Fury when it strikes 3 or more enemies, launching two demonic glaives in a whirlwind of energy, causing 64 Chaos damage over 3 sec to all nearby enemies. Deals reduced damage beyond 8 targets.",
+          "icon": "1455916",
+          "description": "The final slash of Blade Dance consumes 25 Fury when it strikes 3 or more enemies, launching two demonic glaives in a whirlwind of energy, causing 66 Chaos damage over 3 sec to all nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -4507,15 +4500,15 @@
             {
               "spellId": 388116,
               "name": "Shattered Destiny",
-              "icon": "achievement_boss_triumvirate_darknaaru",
+              "icon": "1711336",
               "description": "The duration of your active demon form is extended by 0.1 sec per 12 Fury spent.",
               "maxRanks": 1
             },
             {
               "spellId": 390152,
               "name": "Collective Anguish",
-              "icon": "artifactability_havocdemonhunter_anguishofthedeceiver",
-              "description": "Eye Beam summons an allied Vengeance Demon Hunter who casts Fel Devastation, dealing 91 Fire damage over 2 sec. Dealing damage heals you for up to 48 health.",
+              "icon": "1392554",
+              "description": "Eye Beam summons an allied Vengeance Demon Hunter who casts Fel Devastation, dealing 90 Fire damage over 2 sec. Dealing damage heals you for up to 61 health.",
               "maxRanks": 1
             }
           ]
@@ -4534,7 +4527,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Screaming Brutality",
-          "icon": "inv_misc_magtheridonshead",
+          "icon": "450904",
           "description": "Blade Dance automatically triggers Throw Glaive on your primary target for 100% damage and each slash has a 50% chance to Throw Glaive an enemy for 35% damage.",
           "choices": null
         },
@@ -4551,7 +4544,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "A Fire Inside",
-          "icon": "ability_demonhunter_chaoticimprint_fire",
+          "icon": "4226151",
           "description": "Immolation Aura has 1 additional charge, has 6 sec reduced cooldown, and deals Chaos damage instead of Fire.\r\n\r\nYou can have multiple Immolation Auras active at a time.",
           "choices": null
         },
@@ -4566,7 +4559,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Eternal Hunt",
-          "icon": "inv12_apextalent_demonhunter_eternalhunt",
+          "icon": "7636528",
           "description": null,
           "levels": [
             81,
@@ -4611,14 +4604,14 @@
             {
               "spellId": 452406,
               "name": "Set Fire to the Pain",
-              "icon": "ability_demonhunter_empowerwards",
+              "icon": "1450142",
               "description": "5% of all non-Fire damage taken is instead taken as Fire damage over 6 sec.\r\n\r\nFire damage taken reduced by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 452407,
               "name": "Improved Soul Rending",
-              "icon": "ability_demonhunter_soulcleave2",
+              "icon": "1354410",
               "description": "Leech granted by Soul Rending increased by 2% and an additional 2% while Void Metamorphosis is active.",
               "maxRanks": 1
             }
@@ -4633,15 +4626,15 @@
           "connections": [
             94904,
             94902,
-            94909,
-            109772
+            109772,
+            94909
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Demonic Intensity",
-          "icon": "spell_warlock_demonicempowerment",
+          "icon": "1378283",
           "description": "Activating Void Metamorphosis greatly empowers The Hunt.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
           "choices": null
         },
@@ -4665,14 +4658,14 @@
             {
               "spellId": 452412,
               "name": "Student of Suffering",
-              "icon": "achievement_dungeon_theatreofpain_kultharok",
+              "icon": "3601553",
               "description": "Void Ray applies Student of Suffering to you, increasing Mastery by 10.6% and granting 5 Fury every 2 sec, for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 452413,
               "name": "Flamebound",
-              "icon": "spell_fire_felflamering",
+              "icon": "135799",
               "description": "Hungering Slash has 2 yd increased radius and 50% increased critical strike damage bonus.",
               "maxRanks": 1
             }
@@ -4692,7 +4685,7 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Untethered Fury",
-          "icon": "inv__felbarrage",
+          "icon": "2032602",
           "description": "Maximum Fury increased by 20.",
           "choices": null
         },
@@ -4710,7 +4703,7 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Burning Blades",
-          "icon": "inv_glaive_1h_artifactazgalor_d_02dual",
+          "icon": "1273721",
           "description": "Your blades burn with Cosmic energy, causing your Voidblade, Hungering Slash, and Throw Glaive to deal an additional 35% damage as Cosmic damage.\r\n\r\nReap damage increased by 20%.",
           "choices": null
         },
@@ -4728,7 +4721,7 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Monster Rising",
-          "icon": "ability_warlock_demonicpower",
+          "icon": "236293",
           "description": "Intellect increased by 15% while not in demon form.",
           "choices": null
         },
@@ -4746,7 +4739,7 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Violent Transformation",
-          "icon": "spell_shadow_demoniccirclesummon",
+          "icon": "237559",
           "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and The Hunt.\r\n\r\nThe Hunt deals 25% increased damage and resets the cooldown of Soul Immolation.",
           "choices": null
         },
@@ -4770,14 +4763,14 @@
             {
               "spellId": 452403,
               "name": "Wave of Debilitation",
-              "icon": "spell_fire_felfirenova",
+              "icon": "135795",
               "description": "Chaos Nova slows enemies by 60% and reduces attack and cast speed by 15% for 5 sec after its stun fades. ",
               "maxRanks": 1
             },
             {
               "spellId": 452404,
               "name": "Pursuit of Angriness",
-              "icon": "ability_felarakkoa_focusedblast",
+              "icon": "1117885",
               "description": "Movement speed increased by 1% per 10 Fury.",
               "maxRanks": 1
             }
@@ -4797,8 +4790,8 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Enduring Torment",
-          "icon": "spell_fire_felimmolation",
-          "description": "The effects of your demon form persist outside of it in a weakened state, increasing Mastery: Monster Within&#39;s effectiveness by 20%.",
+          "icon": "135802",
+          "description": "The effects of your demon form persist outside of it in a weakened state, increasing Mastery: Monster Within's effectiveness by 20%.",
           "choices": null
         },
         {
@@ -4813,8 +4806,8 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Demonsurge",
-          "icon": "inv_12_voiddh_ability_demonsurge",
-          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,360 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
+          "icon": "7554161",
+          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,416 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -4831,7 +4824,7 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Focused Hatred",
-          "icon": "ability_demonhunter_illidansgrasp",
+          "icon": "1380367",
           "description": "Voidsurge deals 50% increased damage when it strikes a single target.\r\n\r\nEach additional target reduces this bonus by 10%.",
           "choices": null
         },
@@ -4849,7 +4842,7 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Volatile Instinct",
-          "icon": "inv_nature_nova",
+          "icon": "7501339",
           "description": "Entering demon form causes your next Voidsurge to repeat after a short delay.",
           "choices": null
         },
@@ -4867,7 +4860,7 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Blind Focus",
-          "icon": "inv_belt_leather_raiddemonhunter_r_01",
+          "icon": "1531487",
           "description": "Cosmic damage increased by 2%.\r\n\r\nEffect is doubled while in demon form.",
           "choices": null
         },
@@ -4885,7 +4878,7 @@
           "heroSubtree": "Fel-Scarred",
           "maxRanks": 1,
           "name": "Undying Embers",
-          "icon": "ability_warlock_burningembersgreen",
+          "icon": "840194",
           "description": "Soul Immolation has a 25% chance to reignite after it expires, reapplying its effect.",
           "choices": null
         },
@@ -4903,7 +4896,7 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Incisive Blade",
-          "icon": "ability_dualwieldspecialization",
+          "icon": "132148",
           "description": "Soul Cleave deals 10% increased damage.",
           "choices": null
         },
@@ -4927,14 +4920,14 @@
             {
               "spellId": 442714,
               "name": "Army Unto Oneself",
-              "icon": "ability_warlock_avoidance",
+              "icon": "132332",
               "description": "Felblade surrounds you with a Blade Ward, reducing damage taken by 10% for 5 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 442736,
               "name": "Incorruptible Spirit",
-              "icon": "spell_nzinsanity_chasedbyshadows",
+              "icon": "3163618",
               "description": "Each Soul Fragment you consume shields you for an additional 15% of the amount healed.",
               "maxRanks": 1
             }
@@ -4954,8 +4947,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Wounded Quarry",
-          "icon": "ability_rogue_venomouswounds",
-          "description": "Expose weaknesses in the target of your Reaver&#39;s Mark, causing your Physical damage to any enemy to also deal 30% of the damage dealt to your marked target as Chaos, and sometimes shatter a Soul Fragment.\r\n\r\n",
+          "icon": "458736",
+          "description": "Expose weaknesses in the target of your Reaver's Mark, causing your Physical damage to any enemy to also deal 30% of the damage dealt to your marked target as Chaos, and sometimes shatter a Soul Fragment.\r\n\r\n",
           "choices": null
         },
         {
@@ -4972,8 +4965,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Fury of the Aldrachi",
-          "icon": "spell_fire_felflamestrike",
-          "description": "When enhanced by Reaver&#39;s Glaive, Soul Cleave casts 3 additional glaive slashes to nearby targets. Deals reduced damage beyond 8 targets.\r\n\r\nIf cast after Shear, cast 6 slashes instead.",
+          "icon": "135800",
+          "description": "When enhanced by Reaver's Glaive, Soul Cleave casts 3 additional glaive slashes to nearby targets. Deals reduced damage beyond 8 targets.\r\n\r\nIf cast after Shear, cast 6 slashes instead.",
           "choices": null
         },
         {
@@ -4990,8 +4983,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Reaver's Mark",
-          "icon": "ability_hunter_harass",
-          "description": "When enhanced by Reaver&#39;s Glaive, Shear applies Reaver&#39;s Mark, which causes the target to take 7% increased damage for 20 sec. Max 2 stacks.\r\n\r\nApplies 1 additional stack of Reaver&#39;s Mark If cast after Soul Cleave.",
+          "icon": "132175",
+          "description": "When enhanced by Reaver's Glaive, Shear applies Reaver's Mark, which causes the target to take 7% increased damage for 20 sec. Max 2 stacks.\r\n\r\nApplies 1 additional stack of Reaver's Mark If cast after Soul Cleave.",
           "choices": null
         },
         {
@@ -5008,8 +5001,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Bladecraft",
-          "icon": "ability_demonhunter_soulcleave3",
-          "description": "Fury of the Aldrachi further empowers Blade Dance when cast after Chaos Strike, increasing slashes to 12.\r\n\r\nReaver&#39;s Mark now stacks up to 2 times and further empowers Chaos Strike when cast after Blade Dance, applying an additional stack.",
+          "icon": "1355116",
+          "description": "Fury of the Aldrachi further empowers Blade Dance when cast after Chaos Strike, increasing slashes to 12.\r\n\r\nReaver's Mark now stacks up to 2 times and further empowers Chaos Strike when cast after Blade Dance, applying an additional stack.",
           "choices": null
         },
         {
@@ -5032,14 +5025,14 @@
             {
               "spellId": 442497,
               "name": "Keen Engagement",
-              "icon": "ability_warlock_shadowfurytga",
-              "description": "Reaver&#39;s Glaive generates 20 Fury.",
+              "icon": "607865",
+              "description": "Reaver's Glaive generates 20 Fury.",
               "maxRanks": 1
             },
             {
               "spellId": 444997,
               "name": "Preemptive Strike",
-              "icon": "ability_rogue_focusedattacks",
+              "icon": "236274",
               "description": "Throw Glaive deals 7 Physical damage to enemies near its initial target.",
               "maxRanks": 1
             }
@@ -5065,14 +5058,14 @@
             {
               "spellId": 444926,
               "name": "Evasive Action",
-              "icon": "ability_demonhunter_vengefulretreat",
+              "icon": "1305160",
               "description": "Vengeful Retreat can be cast a second time within 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 444931,
               "name": "Unhindered Assault",
-              "icon": "ability_ironmaidens_bladerush",
+              "icon": "1035036",
               "description": "Vengeful Retreat resets the cooldown of Felblade.",
               "maxRanks": 1
             }
@@ -5092,7 +5085,7 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Aldrachi Tactics",
-          "icon": "ability_demonhunter_soulcleave2",
+          "icon": "1354410",
           "description": "The second enhanced ability in a pattern shatters an additional Soul Fragment.",
           "choices": null
         },
@@ -5108,8 +5101,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Art of the Glaive",
-          "icon": "inv_ability_aldrachireaverdemonhunter_reaversglaive",
-          "description": "Consuming 20 Soul Fragments or casting Sigil of Spite converts your next Throw Glaive into Reaver&#39;s Glaive.\r\n\r\n Reaver&#39;s Glaive: \r\nThrow a glaive enhanced with the essence of consumed souls at your target, dealing 134 Physical damage and ricocheting to 2 additional enemies.\r\n \r\nBegins a well-practiced pattern of glaivework, enhancing your next Shear and Soul Cleave.\r\n\r\nThe enhanced ability you cast first deals 10% increased damage, and the second deals 20% increased damage.",
+          "icon": "5927616",
+          "description": "Consuming 20 Soul Fragments or casting Sigil of Spite converts your next Throw Glaive into Reaver's Glaive.\r\n\r\n Reaver's Glaive: \r\nThrow a glaive enhanced with the essence of consumed souls at your target, dealing 134 Physical damage and ricocheting to 2 additional enemies.\r\n \r\nBegins a well-practiced pattern of glaivework, enhancing your next Shear and Soul Cleave.\r\n\r\nThe enhanced ability you cast first deals 10% increased damage, and the second deals 20% increased damage.",
           "choices": null
         },
         {
@@ -5121,16 +5114,16 @@
           "connections": [
             94910,
             94895,
-            94906,
-            109769
+            109769,
+            94906
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Thrill of the Fight",
-          "icon": "spell_arcane_arcanetactics",
-          "description": "After consuming both enhancements, gain Thrill of the Fight, increasing the damage of your next Reaver&#39;s Glaive by 30% and increasing Haste by 8% for 30 sec.",
+          "icon": "429382",
+          "description": "After consuming both enhancements, gain Thrill of the Fight, increasing the damage of your next Reaver's Glaive by 30% and increasing Haste by 8% for 30 sec.",
           "choices": null
         },
         {
@@ -5147,7 +5140,7 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Warblade's Hunger",
-          "icon": "ability_warlock_soulsiphon",
+          "icon": "460700",
           "description": "Consuming a Soul Fragment causes your next Shear to deal 21 additional Physical damage.",
           "choices": null
         },
@@ -5165,8 +5158,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Keen Edge",
-          "icon": "inv_glaive_1h_tyrande_d_01",
-          "description": "Reaver&#39;s Glaive damage is increased by 20% and other Physical-only damage is increased by 10%.",
+          "icon": "2267322",
+          "description": "Reaver's Glaive damage is increased by 20% and other Physical-only damage is increased by 10%.",
           "choices": null
         },
         {
@@ -5183,7 +5176,7 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Broken Spirit",
-          "icon": "ability_argus_soulbombdebufflarge",
+          "icon": "1778228",
           "description": "The Hunt shatters 1 Soul Fragment. Blade Dance and Chaos Strike have a 15% chance to shatter a Soul Fragment.",
           "choices": null
         }
@@ -5250,7 +5243,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Vengeful Retreat",
-          "icon": "inv_12_voiddh_ability_vengefulretreat",
+          "icon": "7554169",
           "description": "Remove all snares and vault away. Nearby enemies take 5 Physical damage.",
           "choices": null
         },
@@ -5265,8 +5258,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Felblade",
-          "icon": "ability_demonhunter_felblade",
-          "description": "Charge to your target and deal 43 Fire damage.\r\n\r\nGenerates 15 Fury.",
+          "icon": "1344646",
+          "description": "Charge to your target and deal 42 Fire damage.\r\n\r\nGenerates 15 Fury.",
           "choices": null
         },
         {
@@ -5280,7 +5273,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Sigil of Misery",
-          "icon": "ability_demonhunter_sigilofmisery",
+          "icon": "1418287",
           "description": "Place a Sigil of Misery at the target location that activates after 2 sec.\r\n\r\nCauses all enemies affected by the sigil to cower in fear, disorienting them for 15 sec.",
           "choices": null
         },
@@ -5297,7 +5290,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Vengeful Bonds",
-          "icon": "ability_demonhunter_vengefulretreat2",
+          "icon": "1348401",
           "description": "Vengeful Retreat reduces the movement speed of all nearby enemies by 70% for 3 sec.",
           "choices": null
         },
@@ -5315,7 +5308,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unrestrained Fury",
-          "icon": "ability_warrior_improveddisciplines",
+          "icon": "132346",
           "description": "Increases maximum Fury by 20.",
           "choices": null
         },
@@ -5326,14 +5319,14 @@
           "posX": 10,
           "posY": 3,
           "connections": [
-            108722,
-            90946
+            90946,
+            108722
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shattered Restoration",
-          "icon": "ability_warlock_soulsiphon",
+          "icon": "460700",
           "description": "The healing of Shattered Souls is increased by 10%.",
           "choices": null
         },
@@ -5350,7 +5343,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Sigil of Misery",
-          "icon": "ability_demonhunter_sigilofmisery",
+          "icon": "1418287",
           "description": "Reduces the cooldown of Sigil of Misery by 30 sec.",
           "choices": null
         },
@@ -5368,7 +5361,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bouncing Glaives",
-          "icon": "ability_demonhunter_throwglaive",
+          "icon": "1305159",
           "description": "Throw Glaive ricochets to 1 additional target.",
           "choices": null
         },
@@ -5386,7 +5379,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Imprison",
-          "icon": "ability_demonhunter_imprison",
+          "icon": "1380368",
           "description": "Imprisons a demon, beast, or humanoid, incapacitating them for 1 min. Damage may cancel the effect. Limit 1.",
           "choices": null
         },
@@ -5404,7 +5397,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Charred Warblades",
-          "icon": "spell_fire_incinerate",
+          "icon": "135818",
           "description": "You heal for 3% of all Fire damage you deal.",
           "choices": null
         },
@@ -5421,7 +5414,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chaos Nova",
-          "icon": "spell_fire_felfirenova",
+          "icon": "135795",
           "description": "Unleash an eruption of fel energy, dealing 9 Chaos damage and stunning all nearby enemies for 3 sec.",
           "choices": null
         },
@@ -5439,7 +5432,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Disrupt",
-          "icon": "ability_demonhunter_consumemagic",
+          "icon": "1305153",
           "description": "Increases the range of Disrupt to 10 yds.",
           "choices": null
         },
@@ -5457,7 +5450,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Consume Magic",
-          "icon": "spell_misc_zandalari_council_soulswap",
+          "icon": "828455",
           "description": "Consume 1 beneficial Magic effect removing it from the target.",
           "choices": null
         },
@@ -5474,7 +5467,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aldrachi Design",
-          "icon": "inv_glaive_1h_artifactaldrochi_d_01dual",
+          "icon": "1309100",
           "description": "Increases your chance to parry by 3%.",
           "choices": null
         },
@@ -5485,14 +5478,13 @@
           "posX": 2,
           "posY": 6,
           "connections": [
-            108729,
             108729
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focused Ire",
-          "icon": "ability_bossfellord_felspike",
+          "icon": "1118739",
           "description": "The primary target of Chaos Nova is stunned for an additional 2 sec.",
           "choices": null
         },
@@ -5515,14 +5507,14 @@
             {
               "spellId": 389763,
               "name": "Master of the Glaive",
-              "icon": "inv_glaive_1h_demonhunter_a_01",
+              "icon": "1278164",
               "description": "Throw Glaive has 2 charges and snares all enemies hit by 50% for 6 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 429211,
               "name": "Champion of the Glaive",
-              "icon": "inv_glaive_1h_battledungeon_c_01",
+              "icon": "1970139",
               "description": "Throw Glaive has 2 charges and 10 yard increased range.",
               "maxRanks": 1
             }
@@ -5541,7 +5533,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Disrupting Fury",
-          "icon": "ability_demonhunter_consumemagic",
+          "icon": "1305153",
           "description": "Disrupt generates 30 Fury on a successful interrupt.",
           "choices": null
         },
@@ -5559,7 +5551,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blazing Path",
-          "icon": "ability_demonhunter_felrush",
+          "icon": "1247261",
           "description": "Shift gains an additional charge.",
           "choices": null
         },
@@ -5576,7 +5568,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Swallowed Anger",
-          "icon": "spell_misc_zandalari_council_soulswap",
+          "icon": "828455",
           "description": "Consume Magic generates 20 Fury when a beneficial Magic effect is successfully removed from the target.",
           "choices": null
         },
@@ -5594,7 +5586,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aura of Pain",
-          "icon": "spell_fire_felimmolation",
+          "icon": "135802",
           "description": "Increases the critical strike chance of Immolation Aura by 6%.",
           "choices": null
         },
@@ -5611,7 +5603,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Live by the Glaive",
-          "icon": "inv_sword_108",
+          "icon": "135289",
           "description": "When you parry an attack or have one of your attacks parried, restore 2% of max health and 10 Fury. \r\n\r\nThis effect may only occur once every 5 sec.",
           "choices": null
         },
@@ -5629,7 +5621,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pursuit",
-          "icon": "ability_demonhunter_infernalstrike2",
+          "icon": "1344651",
           "description": "Mastery increases your movement speed.",
           "choices": null
         },
@@ -5648,7 +5640,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Rending",
-          "icon": "ability_demonhunter_soulcleave2",
+          "icon": "1354410",
           "description": "Leech increased by 5%.\r\n\r\nGain an additional 5% leech while Metamorphosis is active.",
           "choices": null
         },
@@ -5665,7 +5657,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Felfire Haste",
-          "icon": "inv_boots_cloth_35v4",
+          "icon": "446089",
           "description": "Fel Rush increases your movement speed by 10% for 8 sec.",
           "choices": null
         },
@@ -5683,7 +5675,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Infernal Armor",
-          "icon": "ability_demonhunter_immolation",
+          "icon": "1344649",
           "description": "Immolation Aura increases your armor by 10% and causes melee attackers to suffer 2 Fire damage.",
           "choices": null
         },
@@ -5706,14 +5698,14 @@
             {
               "spellId": 1266316,
               "name": "Burn It Out",
-              "icon": "spell_fel_elementaldevastation",
+              "icon": "841219",
               "description": "Immolation Aura removes 1 Disease effect.",
               "maxRanks": 1
             },
             {
               "spellId": 1266496,
               "name": "Soul Cleanse",
-              "icon": "spell_nature_removecurse",
+              "icon": "136082",
               "description": "Immolation Aura removes 1 Curse effect.",
               "maxRanks": 1
             }
@@ -5733,7 +5725,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lost in Darkness",
-          "icon": "inv_pet_inquisitoreye",
+          "icon": "1387707",
           "description": "Spectral Sight has 5 sec reduced cooldown and no longer reduces movement speed. ",
           "choices": null
         },
@@ -5751,7 +5743,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Illidari Knowledge",
-          "icon": "spell_mage_overpowered",
+          "icon": "1033914",
           "description": "Reduces magic damage taken by 3%.",
           "choices": null
         },
@@ -5763,14 +5755,14 @@
           "posY": 8,
           "connections": [
             91004,
-            90939,
-            90936
+            90936,
+            90939
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Felbound",
-          "icon": "ability_demonhunter_doublejump",
+          "icon": "1305155",
           "description": "Your movement speed is increased by 3%.",
           "choices": null
         },
@@ -5781,15 +5773,15 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            91004,
             90947,
+            91004,
             90927
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Will of the Illidari",
-          "icon": "ability_demonhunter_spectank",
+          "icon": "1247265",
           "description": "Increases maximum health by 3%.",
           "choices": null
         },
@@ -5806,7 +5798,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Internal Struggle",
-          "icon": "ability_warlock_demonicpower",
+          "icon": "236293",
           "description": "Increases your mastery by 2.6%.",
           "choices": null
         },
@@ -5824,7 +5816,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Furious",
-          "icon": "ability_warlock_shadowfurytga",
+          "icon": "607865",
           "description": "Attacks and abilities that generate Fury deal 3% increased damage.",
           "choices": null
         },
@@ -5842,7 +5834,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Remorseless",
-          "icon": "inv_glaive_1h_npc_d_02",
+          "icon": "1303275",
           "description": "Attacks and abilities that spend Fury deal 3% increased damage.",
           "choices": null
         },
@@ -5859,7 +5851,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "First In, Last Out",
-          "icon": "ability_demonhunter_demonictrample",
+          "icon": "1380365",
           "description": "Shift grants you a rapidly decaying shield equal to 6% of your maximum health.",
           "choices": null
         },
@@ -5870,14 +5862,13 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            90934,
             90934
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Erratic Felheart",
-          "icon": "inv_archaeology_70_crystallineeyeofundravius",
+          "icon": "1379226",
           "description": "The cooldown of Fel Rush is reduced by 1.0 sec.",
           "choices": null
         },
@@ -5894,7 +5885,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Final Breath",
-          "icon": "spell_fire_twilightflamebreath",
+          "icon": "425954",
           "description": "Fully channeling Void Ray increases the damage of its final tick by 300%.",
           "choices": null
         },
@@ -5912,7 +5903,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Darkness",
-          "icon": "ability_demonhunter_darkness",
+          "icon": "1305154",
           "description": "Summons darkness around you in an 8 yd radius, granting friendly targets a 15% chance to avoid all damage from an attack. Lasts 8 sec.\r\n\r\nChance to avoid damage increased by 100% when not in a raid.",
           "choices": null
         },
@@ -5929,7 +5920,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demon Muzzle",
-          "icon": "spell_warlock_demonicservitude",
+          "icon": "1032478",
           "description": "Interrupting a spell with Disrupt decreases your magic damage taken by 15% for 12 sec.",
           "choices": null
         },
@@ -5946,7 +5937,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Soul Splitter",
-          "icon": "ability_warlock_soulswap",
+          "icon": "460857",
           "description": "Any time you would generate one or more Soul Fragments, you have a 2% chance to generate an additional Soul Fragment.",
           "choices": null
         },
@@ -5963,7 +5954,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wings of Wrath",
-          "icon": "ability_demonhunter_glide",
+          "icon": "1305157",
           "description": "Glide speed increased by 10%.",
           "choices": null
         },
@@ -5986,14 +5977,14 @@
             {
               "spellId": 389781,
               "name": "Long Night",
-              "icon": "spell_fire_twilightimmolation",
+              "icon": "425957",
               "description": "Increases the duration of Darkness by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 389783,
               "name": "Pitch Black",
-              "icon": "sha_spell_warlock_demonsoul",
+              "icon": "895888",
               "description": "Reduces the cooldown of Darkness by 120 sec.",
               "maxRanks": 1
             }
@@ -6012,7 +6003,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Resilience",
-          "icon": "inv_summondemonictyrant",
+          "icon": "2065628",
           "description": "Blur gains 1 additional charge.",
           "choices": null
         },
@@ -6027,8 +6018,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Devastation",
-          "icon": "ability_demonhunter_feldevastation",
-          "description": "Unleash the fel within you, damaging enemies directly in front of you for 161 Fire damage over 2 sec.",
+          "icon": "1450143",
+          "description": "Unleash the fel within you, damaging enemies directly in front of you for 162 Fire damage over 2 sec.",
           "choices": null
         },
         {
@@ -6044,8 +6035,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spirit Bomb",
-          "icon": "inv_icon_shadowcouncilorb_purple",
-          "description": "Consume up to 5 Soul Fragments then explode, dealing 70 Fire damage to nearby enemies, increased by 20% per fragment consumed. Deals reduced damage beyond 8 targets.",
+          "icon": "1097742",
+          "description": "Consume up to 5 Soul Fragments then explode, dealing 71 Fire damage to nearby enemies, increased by 20% per fragment consumed. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -6061,8 +6052,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fiery Brand",
-          "icon": "ability_demonhunter_fierybrand",
-          "description": "Brand yourself and an enemy target with demonic symbols, reducing the damage you take by 40% and instantly dealing 142 Fire damage to the enemy.",
+          "icon": "1344647",
+          "description": "Brand yourself and an enemy target with demonic symbols, reducing the damage you take by 40% and instantly dealing 145 Fire damage to the enemy.",
           "choices": null
         },
         {
@@ -6078,7 +6069,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Perfectly Balanced Glaive",
-          "icon": "ability_demonhunter_throwglaive",
+          "icon": "1305159",
           "description": "Reduces the cooldown of Fracture by 1 sec and Throw Glaive by 6 sec.",
           "choices": null
         },
@@ -6096,7 +6087,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Quickened Sigils",
-          "icon": "ability_demonhunter_concentratedsigils",
+          "icon": "1450141",
           "description": "Your Sigils activate 1 second faster.",
           "choices": null
         },
@@ -6113,7 +6104,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ascending Flame",
-          "icon": "inv_helm_suncrown_d_01",
+          "icon": "840662",
           "description": "Sigil of Flame damage increased by 50%.",
           "choices": null
         },
@@ -6130,7 +6121,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tempered Steel",
-          "icon": "ability_demonhunter_manabreak",
+          "icon": "1380369",
           "description": "Physical damage increased by 12%.",
           "choices": null
         },
@@ -6147,13 +6138,13 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Calcified Spikes",
-          "icon": "ability_demonhunter_demonspikes",
+          "icon": "1344645",
           "description": "Demon Spikes reduces damage taken by 5% while active.",
           "choices": null
         },
         {
           "id": 90988,
-          "type": "choice",
+          "type": "round",
           "treeType": "spec",
           "posX": 36,
           "posY": 5,
@@ -6163,25 +6154,10 @@
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": null,
-          "icon": null,
-          "description": null,
-          "choices": [
-            {
-              "spellId": 391178,
-              "name": "Roaring Fire",
-              "icon": "spell_fire_felflamering",
-              "description": "Fel Devastation heals you for up to 50% more, based on your missing health.",
-              "maxRanks": 1
-            },
-            {
-              "spellId": 202137,
-              "name": "Sigil of Silence",
-              "icon": "ability_demonhunter_sigilofsilence",
-              "description": "Place a Sigil of Silence at the target location that activates after 2 sec.\r\n\r\nSilences all enemies affected by the sigil for 2 sec.",
-              "maxRanks": 1
-            }
-          ]
+          "name": "Feed the Demon",
+          "icon": "1378283",
+          "description": "Every 20 Fury spent reduces the remaining cooldown of Demon Spikes by 1.00 sec.",
+          "choices": null
         },
         {
           "id": 90952,
@@ -6196,7 +6172,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Retaliation",
-          "icon": "ability_demonhunter_demonspikes2",
+          "icon": "1418495",
           "description": "While Demon Spikes is active, melee attacks against you cause the attacker to take 10 Physical damage. Generates high threat.",
           "choices": null
         },
@@ -6213,7 +6189,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Felfire Fist",
-          "icon": "inv12_ability_demonhunter_felfirefists",
+          "icon": "7439192",
           "description": "Activating Infernal Strike out of combat or within 5 sec of entering combat places a Sigil of Flame at the target location.",
           "choices": null
         },
@@ -6230,8 +6206,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sigil of Spite",
-          "icon": "inv_ability_demonhunter_elysiandecree",
-          "description": "Place a demonic sigil at the target location that activates after 2 sec.\r\n\r\nDetonates to deal 241 Chaos damage and shatter up to 3 Soul Fragments from enemies affected by the sigil. Deals reduced damage beyond 5 targets.",
+          "icon": "6035306",
+          "description": "Place a demonic sigil at the target location that activates after 2 sec.\r\n\r\nDetonates to deal 247 Chaos damage and shatter up to 3 Soul Fragments from enemies affected by the sigil. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -6249,13 +6225,13 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Agonizing Flames",
-          "icon": "achievment_raid_houroftwilight",
+          "icon": "574795",
           "description": "Immolation Aura increases your movement speed by 10% and its duration is increased by 50%.",
           "choices": null
         },
         {
           "id": 90966,
-          "type": "round",
+          "type": "square",
           "treeType": "spec",
           "posX": 36,
           "posY": 6,
@@ -6265,9 +6241,9 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Feed the Demon",
-          "icon": "spell_warlock_demonicempowerment",
-          "description": "Every 20 Fury spent reduces the remaining cooldown of Demon Spikes by 1.00 sec.",
+          "name": "Sigil of Silence",
+          "icon": "1418288",
+          "description": "Place a Sigil of Silence at the target location that activates after 2 sec.\r\n\r\nSilences all enemies affected by the sigil for 2 sec.",
           "choices": null
         },
         {
@@ -6285,7 +6261,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Blood",
-          "icon": "ability_demonhunter_immolation",
+          "icon": "1344649",
           "description": "Fire damage increased by 8%.",
           "choices": null
         },
@@ -6302,8 +6278,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Revel in Pain",
-          "icon": "ability_bossfelmagnaron_handempowered",
-          "description": "5.0% of your Fire damage shields you, up to a maximum of 3,055.\r\n\r\nShield and maximum values are doubled while Fiery Brand is active.",
+          "icon": "1122135",
+          "description": "6.0% of your Fire damage shields you, up to a maximum of 3,055.\r\n\r\nShield and maximum values are doubled while Fiery Brand is active.",
           "choices": null
         },
         {
@@ -6320,8 +6296,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frailty",
-          "icon": "inv_icon_shadowcouncilorb_purple",
-          "description": "Enemies struck by Sigil of Flame, Soul Cleave, and Spirit Bomb are afflicted with Frailty for 8 sec.\r\n\r\nYou heal for 8% of all damage you deal to targets with Frailty.",
+          "icon": "1097742",
+          "description": "Enemies struck by Sigil of Flame, Soul Cleave, and Spirit Bomb are afflicted with Frailty for 8 sec.\r\n\r\nYou heal for 10% of all damage you deal to targets with Frailty.",
           "choices": null
         },
         {
@@ -6337,8 +6313,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Feast of Souls",
-          "icon": "spell_shadow_soulleech",
-          "description": "Soul Cleave heals for an additional 63.",
+          "icon": "136211",
+          "description": "Soul Cleave heals for an additional 78.",
           "choices": null
         },
         {
@@ -6355,8 +6331,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fallout",
-          "icon": "spell_volatilefiregreen",
-          "description": "Immolation Aura&#39;s initial burst has a chance to shatter Soul Fragments from enemies.",
+          "icon": "840409",
+          "description": "Immolation Aura's initial burst has a chance to shatter Soul Fragments from enemies.",
           "choices": null
         },
         {
@@ -6372,7 +6348,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ruinous Bulwark",
-          "icon": "ability_demonhunter_feldevastation",
+          "icon": "1450143",
           "description": "Fel Devastation heals for an additional 10%, and 50% of its healing is converted into an absorb shield for 10 sec.",
           "choices": null
         },
@@ -6390,7 +6366,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Volatile Flameblood",
-          "icon": "ability_demonhunter_immolation",
+          "icon": "1344649",
           "description": "Immolation Aura has 10% increased critical strike chance and generates 1-5 Fury when it deals critical damage.\r\n\r\nThis effect may only occur once per 1 sec.",
           "choices": null
         },
@@ -6413,14 +6389,14 @@
             {
               "spellId": 1265924,
               "name": "Soul Barrier",
-              "icon": "inv_soulbarrier",
+              "icon": "2065625",
               "description": "Spirit Bomb shields you for 10 sec, absorbing 2,444 damage plus 611 for each Soul Fragment consumed.",
               "maxRanks": 1
             },
             {
               "spellId": 395446,
               "name": "Soul Sigils",
-              "icon": "ability_demonhunter_sigilofinquisition",
+              "icon": "1344652",
               "description": "Afflicting an enemy with a Sigil generates 1 Soul Fragment. ",
               "maxRanks": 1
             }
@@ -6440,7 +6416,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fel Flame Fortification",
-          "icon": "spell_fire_felfire",
+          "icon": "135794",
           "description": "You take 10% reduced magic damage while Immolation Aura is active.",
           "choices": null
         },
@@ -6457,7 +6433,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Void Reaver",
-          "icon": "spell_shadow_demonicempathy",
+          "icon": "237561",
           "description": "Frailty now also reduces all damage you take from afflicted targets by 5%.",
           "choices": null
         },
@@ -6476,13 +6452,13 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Painbringer",
-          "icon": "artifactability_vengeancedemonhunter_painbringer",
+          "icon": "1392567",
           "description": "Consuming a Soul Fragment reduces all damage you take by 3% for 8 sec.",
           "choices": null
         },
         {
           "id": 90954,
-          "type": "square",
+          "type": "round",
           "treeType": "spec",
           "posX": 36,
           "posY": 8,
@@ -6494,9 +6470,9 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Sigil of Chains",
-          "icon": "ability_demonhunter_sigilofchains",
-          "description": "Place a Sigil of Chains at the target location that activates after 2 sec.\r\n\r\nAll enemies affected by the sigil are pulled to its center and are snared, reducing movement speed by 70% for 6 sec.",
+          "name": "Roaring Fire",
+          "icon": "135799",
+          "description": "Fel Devastation heals you for up to 50% more, based on your missing health.",
           "choices": null
         },
         {
@@ -6514,7 +6490,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fiery Demise",
-          "icon": "ability_demonhunter_fierybrand",
+          "icon": "1344647",
           "description": "Fiery Brand also increases Fire damage you deal to the target by 15%.",
           "choices": null
         },
@@ -6531,7 +6507,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Chains of Anger",
-          "icon": "ability_demonhunter_sigilofchains",
+          "icon": "1418286",
           "description": "Increases the duration of your Sigils by 2 sec and radius by 2 yds.",
           "choices": null
         },
@@ -6549,7 +6525,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focused Cleave",
-          "icon": "ability_demonhunter_soulcleave",
+          "icon": "1344653",
           "description": "Soul Cleave deals 60% increased damage to your primary target.",
           "choices": null
         },
@@ -6566,7 +6542,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soulmonger",
-          "icon": "ability_demonhunter_shatteredsouls",
+          "icon": "1305158",
           "description": "When consuming a Soul Fragment would heal you above full health it shields you instead, up to a maximum of 3,055.",
           "choices": null
         },
@@ -6585,7 +6561,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stoke the Flames",
-          "icon": "ability_demonhunter_feldevastation",
+          "icon": "1450143",
           "description": "Fel Devastation damage increased by 30%.",
           "choices": null
         },
@@ -6602,7 +6578,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Alive",
-          "icon": "spell_fire_elementaldevastation",
+          "icon": "135791",
           "description": "Every 1 sec, Fiery Brand spreads to one nearby enemy.",
           "choices": null
         },
@@ -6620,7 +6596,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cycle of Binding",
-          "icon": "ability_demonhunter_sigilofinquisition",
+          "icon": "1344652",
           "description": "Your Sigils have 15% reduced cooldowns.",
           "choices": null
         },
@@ -6638,7 +6614,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Vulnerability",
-          "icon": "inv_icon_shadowcouncilorb_purple",
+          "icon": "1097742",
           "description": "Frailty now also increases all damage you deal to afflicted targets by 3%.",
           "choices": null
         },
@@ -6657,7 +6633,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Vengeful Beast",
-          "icon": "inv12_ability_demonhunter_vengeanceismine",
+          "icon": "7439193",
           "description": "Metamorphosis has 5 sec increased duration and increases the damage of Fracture, Soul Cleave, and Spirit Bomb by 20%.",
           "choices": null
         },
@@ -6675,7 +6651,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Charred Flesh",
-          "icon": "ability_warlock_backdraft",
+          "icon": "236290",
           "description": "Immolation Aura damage increases the duration of your Fiery Brand and Sigil of Flame by 0.25 sec.",
           "choices": null
         },
@@ -6692,7 +6668,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soulcrush",
-          "icon": "inv_icon_shadowcouncilorb_purple",
+          "icon": "1097742",
           "description": "The effects of Frailty are doubled.",
           "choices": null
         },
@@ -6710,8 +6686,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Soul Carver",
-          "icon": "inv_glaive_1h_artifactaldrochi_d_01",
-          "description": "Carve into the soul of your target, dealing 171 Fire damage and an additional 106 Fire damage over 3 sec.  Immediately shatters 3 Soul Fragments from the target and 1 additional Soul Fragment every 1 sec.",
+          "icon": "1309072",
+          "description": "Carve into the soul of your target, dealing 171 Fire damage and an additional 104 Fire damage over 3 sec.  Immediately shatters 3 Soul Fragments from the target and 1 additional Soul Fragment every 1 sec.",
           "choices": null
         },
         {
@@ -6727,7 +6703,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Last Resort",
-          "icon": "inv_glaive_1h_artifactaldorchi_d_06",
+          "icon": "1348655",
           "description": "Sustaining fatal damage instead transforms you to Metamorphosis form.\r\n\r\nThis may occur once every 8 min.",
           "choices": null
         },
@@ -6745,7 +6721,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Darkglare Boon",
-          "icon": "inv_jewelry_necklace_53",
+          "icon": "338485",
           "description": "When Fel Devastation finishes fully channeling, it refreshes 15-30% of its cooldown and refunds 15-30 Fury.",
           "choices": null
         },
@@ -6762,7 +6738,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Down in Flames",
-          "icon": "ability_demonhunter_fierybrand",
+          "icon": "1344647",
           "description": "Fiery Brand has 12 sec reduced cooldown and 1 additional charge.",
           "choices": null
         },
@@ -6777,7 +6753,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Untethered Rage",
-          "icon": "inv12_apextalent_demonhunter_untetheredrage",
+          "icon": "7636527",
           "description": null,
           "levels": [
             81,
@@ -6816,7 +6792,7 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Incisive Blade",
-          "icon": "ability_dualwieldspecialization",
+          "icon": "132148",
           "description": "Soul Cleave deals 10% increased damage.",
           "choices": null
         },
@@ -6840,14 +6816,14 @@
             {
               "spellId": 442714,
               "name": "Army Unto Oneself",
-              "icon": "ability_warlock_avoidance",
+              "icon": "132332",
               "description": "Felblade surrounds you with a Blade Ward, reducing damage taken by 10% for 5 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 442736,
               "name": "Incorruptible Spirit",
-              "icon": "spell_nzinsanity_chasedbyshadows",
+              "icon": "3163618",
               "description": "Each Soul Fragment you consume shields you for an additional 15% of the amount healed.",
               "maxRanks": 1
             }
@@ -6867,8 +6843,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Wounded Quarry",
-          "icon": "ability_rogue_venomouswounds",
-          "description": "Expose weaknesses in the target of your Reaver&#39;s Mark, causing your Physical damage to any enemy to also deal 30% of the damage dealt to your marked target as Chaos, and sometimes shatter a Soul Fragment.\r\n\r\n",
+          "icon": "458736",
+          "description": "Expose weaknesses in the target of your Reaver's Mark, causing your Physical damage to any enemy to also deal 30% of the damage dealt to your marked target as Chaos, and sometimes shatter a Soul Fragment.\r\n\r\n",
           "choices": null
         },
         {
@@ -6885,8 +6861,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Fury of the Aldrachi",
-          "icon": "spell_fire_felflamestrike",
-          "description": "When enhanced by Reaver&#39;s Glaive, Soul Cleave casts 3 additional glaive slashes to nearby targets. Deals reduced damage beyond 8 targets.\r\n\r\nIf cast after Shear, cast 6 slashes instead.",
+          "icon": "135800",
+          "description": "When enhanced by Reaver's Glaive, Soul Cleave casts 3 additional glaive slashes to nearby targets. Deals reduced damage beyond 8 targets.\r\n\r\nIf cast after Shear, cast 6 slashes instead.",
           "choices": null
         },
         {
@@ -6903,8 +6879,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Reaver's Mark",
-          "icon": "ability_hunter_harass",
-          "description": "When enhanced by Reaver&#39;s Glaive, Shear applies Reaver&#39;s Mark, which causes the target to take 7% increased damage for 20 sec. Max 2 stacks.\r\n\r\nApplies 1 additional stack of Reaver&#39;s Mark If cast after Soul Cleave.",
+          "icon": "132175",
+          "description": "When enhanced by Reaver's Glaive, Shear applies Reaver's Mark, which causes the target to take 7% increased damage for 20 sec. Max 2 stacks.\r\n\r\nApplies 1 additional stack of Reaver's Mark If cast after Soul Cleave.",
           "choices": null
         },
         {
@@ -6921,8 +6897,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Bladecraft",
-          "icon": "ability_demonhunter_soulcleave3",
-          "description": "Fury of the Aldrachi further empowers Blade Dance when cast after Chaos Strike, increasing slashes to 12.\r\n\r\nReaver&#39;s Mark now stacks up to 2 times and further empowers Chaos Strike when cast after Blade Dance, applying an additional stack.",
+          "icon": "1355116",
+          "description": "Fury of the Aldrachi further empowers Blade Dance when cast after Chaos Strike, increasing slashes to 12.\r\n\r\nReaver's Mark now stacks up to 2 times and further empowers Chaos Strike when cast after Blade Dance, applying an additional stack.",
           "choices": null
         },
         {
@@ -6945,14 +6921,14 @@
             {
               "spellId": 442497,
               "name": "Keen Engagement",
-              "icon": "ability_warlock_shadowfurytga",
-              "description": "Reaver&#39;s Glaive generates 20 Fury.",
+              "icon": "607865",
+              "description": "Reaver's Glaive generates 20 Fury.",
               "maxRanks": 1
             },
             {
               "spellId": 444997,
               "name": "Preemptive Strike",
-              "icon": "ability_rogue_focusedattacks",
+              "icon": "236274",
               "description": "Throw Glaive deals 7 Physical damage to enemies near its initial target.",
               "maxRanks": 1
             }
@@ -6978,14 +6954,14 @@
             {
               "spellId": 444926,
               "name": "Evasive Action",
-              "icon": "ability_demonhunter_vengefulretreat",
+              "icon": "1305160",
               "description": "Vengeful Retreat can be cast a second time within 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 444931,
               "name": "Unhindered Assault",
-              "icon": "ability_ironmaidens_bladerush",
+              "icon": "1035036",
               "description": "Vengeful Retreat resets the cooldown of Felblade.",
               "maxRanks": 1
             }
@@ -7005,7 +6981,7 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Aldrachi Tactics",
-          "icon": "ability_demonhunter_soulcleave2",
+          "icon": "1354410",
           "description": "The second enhanced ability in a pattern shatters an additional Soul Fragment.",
           "choices": null
         },
@@ -7021,8 +6997,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Art of the Glaive",
-          "icon": "inv_ability_aldrachireaverdemonhunter_reaversglaive",
-          "description": "Consuming 20 Soul Fragments or casting Sigil of Spite converts your next Throw Glaive into Reaver&#39;s Glaive.\r\n\r\n Reaver&#39;s Glaive: \r\nThrow a glaive enhanced with the essence of consumed souls at your target, dealing 134 Physical damage and ricocheting to 2 additional enemies.\r\n \r\nBegins a well-practiced pattern of glaivework, enhancing your next Shear and Soul Cleave.\r\n\r\nThe enhanced ability you cast first deals 10% increased damage, and the second deals 20% increased damage.",
+          "icon": "5927616",
+          "description": "Consuming 20 Soul Fragments or casting Sigil of Spite converts your next Throw Glaive into Reaver's Glaive.\r\n\r\n Reaver's Glaive: \r\nThrow a glaive enhanced with the essence of consumed souls at your target, dealing 134 Physical damage and ricocheting to 2 additional enemies.\r\n \r\nBegins a well-practiced pattern of glaivework, enhancing your next Shear and Soul Cleave.\r\n\r\nThe enhanced ability you cast first deals 10% increased damage, and the second deals 20% increased damage.",
           "choices": null
         },
         {
@@ -7034,16 +7010,16 @@
           "connections": [
             94910,
             94895,
-            94906,
-            109769
+            109769,
+            94906
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Thrill of the Fight",
-          "icon": "spell_arcane_arcanetactics",
-          "description": "After consuming both enhancements, gain Thrill of the Fight, increasing the damage of your next Reaver&#39;s Glaive by 30% and increasing Haste by 8% for 30 sec.",
+          "icon": "429382",
+          "description": "After consuming both enhancements, gain Thrill of the Fight, increasing the damage of your next Reaver's Glaive by 30% and increasing Haste by 8% for 30 sec.",
           "choices": null
         },
         {
@@ -7060,7 +7036,7 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Warblade's Hunger",
-          "icon": "ability_warlock_soulsiphon",
+          "icon": "460700",
           "description": "Consuming a Soul Fragment causes your next Shear to deal 21 additional Physical damage.",
           "choices": null
         },
@@ -7078,8 +7054,8 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Keen Edge",
-          "icon": "inv_glaive_1h_tyrande_d_01",
-          "description": "Reaver&#39;s Glaive damage is increased by 20% and other Physical-only damage is increased by 10%.",
+          "icon": "2267322",
+          "description": "Reaver's Glaive damage is increased by 20% and other Physical-only damage is increased by 10%.",
           "choices": null
         },
         {
@@ -7096,7 +7072,7 @@
           "heroSubtree": "Aldrachi Reaver",
           "maxRanks": 1,
           "name": "Broken Spirit",
-          "icon": "ability_argus_soulbombdebufflarge",
+          "icon": "1778228",
           "description": "The Hunt shatters 1 Soul Fragment. Blade Dance and Chaos Strike have a 15% chance to shatter a Soul Fragment.",
           "choices": null
         },
@@ -7117,7 +7093,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "World Killer",
-          "icon": "inv_112_raiddimensius_brokenworld",
+          "icon": "7127719",
           "description": "The third Voidfall meteor strike called down in sequence is larger, has 50% increased area, deals 50% increased damage, and generates 1 Soul Fragment.",
           "choices": null
         },
@@ -7135,8 +7111,8 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Otherworldly Focus",
-          "icon": "inv_babyvoidwalker_blue",
-          "description": "Collapsing Star and Voidfall meteors deal 35% increased damage when striking a single target.\r\n\r\nEach additional target reduces this bonus by 5%.",
+          "icon": "6992623",
+          "description": "Collapsing Star and Voidfall meteors deal 30% increased damage when striking a single target.\r\n\r\nEach additional target reduces this bonus by 5%.",
           "choices": null
         },
         {
@@ -7153,8 +7129,8 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Dark Matter",
-          "icon": "inv_cosmicvoid_nova",
-          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,308 Cosmic damage over 6 sec.",
+          "icon": "4914669",
+          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,294 Cosmic damage over 6 sec.",
           "choices": null
         },
         {
@@ -7171,7 +7147,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Final Hour",
-          "icon": "inv_10_worlddroplevelingoptionalreagent_relics_hourglass_color1",
+          "icon": "4632795",
           "description": "Passive bonuses granted by each stack of Voidfall persist for 8 sec after being consumed.",
           "choices": null
         },
@@ -7189,7 +7165,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Meteoric Fall",
-          "icon": "ability_socererking_arcanereplication",
+          "icon": "1041233",
           "description": "While at 3 stacks of Voidfall, Reap consumes all 3 to rapidly call down that many meteor strikes.",
           "choices": null
         },
@@ -7207,7 +7183,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Mass Acceleration",
-          "icon": "inv_nullstone_cosmicvoid",
+          "icon": "5976939",
           "description": "Gain 3 stacks of Voidfall and reset the cooldown of Reap upon activating Void Metamorphosis.",
           "choices": null
         },
@@ -7231,14 +7207,14 @@
             {
               "spellId": 1253399,
               "name": "Path to Oblivion",
-              "icon": "ability_socererking_arcaneacceleration",
+              "icon": "1041230",
               "description": "Each stack of Voidfall grants 3% increased movement speed.",
               "maxRanks": 1
             },
             {
               "spellId": 1253402,
               "name": "State of Matter",
-              "icon": "inv_112_arcane_buff",
+              "icon": "6891021",
               "description": "Shift has 1 additional charge.",
               "maxRanks": 1
             }
@@ -7256,8 +7232,8 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Voidfall",
-          "icon": "inv_12_dh_void_ability_voidfall",
-          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target&#39;s location, dealing 675 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
+          "icon": "7554218",
+          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 666 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -7280,14 +7256,14 @@
             {
               "spellId": 1253676,
               "name": "Doomsayer",
-              "icon": "inv_shadowflame_buff",
+              "icon": "4914674",
               "description": "Activating Void Ray out of combat or within 5 sec of entering combat calls down 3 Voidfall Meteors over its duration.",
               "maxRanks": 1
             },
             {
               "spellId": 1279247,
               "name": "Harness the Cosmos",
-              "icon": "inv_cosmicvoid_orb",
+              "icon": "4914670",
               "description": "Voidfall Meteor damage increased by 15%.",
               "maxRanks": 1
             }
@@ -7307,7 +7283,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Celestial Echoes",
-          "icon": "inv_polearm_2h_voidscythe_d_01",
+          "icon": "7126991",
           "description": "Consume generates 2 additional Fury and deals 15% increased damage.",
           "choices": null
         },
@@ -7325,7 +7301,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Phase Shift",
-          "icon": "ability_demonhunter_blur",
+          "icon": "1305150",
           "description": "Each stack of Voidfall grants 2% reduced damage taken.",
           "choices": null
         },
@@ -7343,7 +7319,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Catastrophe",
-          "icon": "inv_netherportal",
+          "icon": "2065615",
           "description": "Enemies struck by a Voidfall Meteor take an additional 25% damage over 8 sec.",
           "choices": null
         },
@@ -7361,7 +7337,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Swift Erasure",
-          "icon": "ability_priest_darkarchangel",
+          "icon": "1445237",
           "description": "Each stack of Voidfall grants 2% Haste.",
           "choices": null
         },
@@ -7379,7 +7355,7 @@
           "heroSubtree": "Annihilator",
           "maxRanks": 1,
           "name": "Meteoric Rise",
-          "icon": "ability_socererking_arcanefortification",
+          "icon": "1041231",
           "description": "Void Ray damage increased by 15%.\r\n\r\nFully channeling Void Ray generates 1 stack of Voidfall.",
           "choices": null
         }

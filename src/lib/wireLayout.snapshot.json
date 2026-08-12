@@ -5,50 +5,50 @@
   },
   "demon_hunter": {
     "count": 227,
-    "hash": "f6d30725494ea547"
+    "hash": "27febac19299e2bd"
   },
   "druid": {
-    "count": 281,
-    "hash": "75b9d99b9a543b2c"
+    "count": 282,
+    "hash": "758d3d08ccc97fad"
   },
   "evoker": {
     "count": 219,
     "hash": "d599e1bdbab6e850"
   },
   "hunter": {
-    "count": 211,
-    "hash": "dab13bf7d507ae6f"
+    "count": 210,
+    "hash": "577f515b6e31ef3e"
   },
   "mage": {
-    "count": 206,
-    "hash": "f05e7488c38ba213"
+    "count": 208,
+    "hash": "7eb2f0d1ff912abc"
   },
   "monk": {
     "count": 253,
-    "hash": "0de8e5c23b519b8a"
+    "hash": "e391f14e9475c870"
   },
   "paladin": {
-    "count": 237,
-    "hash": "c184c416cdc2a370"
+    "count": 233,
+    "hash": "ed65260b09406bc6"
   },
   "priest": {
-    "count": 226,
-    "hash": "9a9918351889756f"
+    "count": 227,
+    "hash": "21cc33a72c978d0a"
   },
   "rogue": {
     "count": 206,
-    "hash": "1e72c6e62b55be3b"
+    "hash": "748bd3a729c16aa9"
   },
   "shaman": {
     "count": 214,
-    "hash": "2df94c19085e3c11"
+    "hash": "765cfabd64d02ed0"
   },
   "warlock": {
     "count": 202,
     "hash": "40312b3fdd27fee3"
   },
   "warrior": {
-    "count": 208,
-    "hash": "824ed442c9d7684f"
+    "count": 209,
+    "hash": "bbfff35cff39264b"
   }
 }

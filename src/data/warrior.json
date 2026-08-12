@@ -67,7 +67,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Battle Stance",
-          "icon": "ability_warrior_offensivestance",
+          "icon": "132349",
           "description": "A balanced combat state that increases the critical strike chance of your abilities by 3% and reduces the duration of movement impairing effects by 10%. \r\n\r\nLasts until canceled.",
           "choices": null
         },
@@ -82,7 +82,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Defensive Stance",
-          "icon": "ability_warrior_defensivestance",
+          "icon": "132341",
           "description": "A defensive combat state that reduces all damage you take by 15% and all damage you deal by 10%.\r\n\r\nLasts until canceled.",
           "choices": null
         },
@@ -99,7 +99,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fast Footwork",
-          "icon": "ability_hunter_posthaste",
+          "icon": "461119",
           "description": "Movement speed increased by 5%.",
           "choices": null
         },
@@ -116,7 +116,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "War Machine",
-          "icon": "ability_hunter_rapidkilling",
+          "icon": "132205",
           "description": "Your auto-attacks generate 10% more Rage.\r\n\r\nKilling an enemy instantly generates 5 Rage and increases your movement speed by 30% for 8 sec.",
           "choices": null
         },
@@ -133,8 +133,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thunder Clap",
-          "icon": "spell_nature_thunderclap",
-          "description": "Blasts all enemies within 8 yards for 81 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.\r\n\r\nIf you know Rend, inflicts Rend on all targets.",
+          "icon": "136105",
+          "description": "Blasts all enemies within 8 yards for 83 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -150,7 +150,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leeching Strikes",
-          "icon": "inv_artifact_bloodoftheassassinated",
+          "icon": "1394887",
           "description": "Leech increased by 3%.",
           "choices": null
         },
@@ -168,8 +168,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Impending Victory",
-          "icon": "spell_impending_victory",
-          "description": "Instantly attack the target, causing 21 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
+          "icon": "589768",
+          "description": "Instantly attack the target, causing 20 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
           "choices": null
         },
         {
@@ -179,14 +179,14 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            90328,
-            90343
+            90343,
+            90328
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Heroic Leap",
-          "icon": "ability_heroicleap",
+          "icon": "236171",
           "description": "Leap through the air toward a target location, slamming down with destructive force to deal 8 Physical damage to all enemies within 8 yards.",
           "choices": null
         },
@@ -203,8 +203,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crackling Thunder",
-          "icon": "ability_thunderking_overcharge",
-          "description": "Thunder Clap&#39;s radius is increased by 50% and it reduces affected target&#39;s movement speed by an additional 20%.",
+          "icon": "839979",
+          "description": "Thunder Clap's radius is increased by 50% and it reduces affected target's movement speed by an additional 20%.",
           "choices": null
         },
         {
@@ -221,7 +221,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Storm Bolt",
-          "icon": "warrior_talent_icon_stormbolt",
+          "icon": "613535",
           "description": "Hurls your weapon at an enemy, causing 10 Physical damage and stunning for 4 sec.",
           "choices": null
         },
@@ -239,8 +239,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rend",
-          "icon": "ability_gouge",
-          "description": "Lash out with your weapon, striking all targets within 10 yds for 92 Physical damage instantly and wounding them for an additional 74 Bleed damage over 15 sec.",
+          "icon": "132155",
+          "description": "Wounds the target, causing 44 Physical damage instantly and an additional 74 Bleed damage over 15 sec.",
           "choices": null
         },
         {
@@ -256,7 +256,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Second Wind",
-          "icon": "ability_hunter_harass",
+          "icon": "132175",
           "description": "Restores 6% health every 1 sec when you have not taken damage for 5 sec.\r\n\r\nRestores 2% health every 1 sec while you are below 35% health. The amount restored increases the closer you are to death.",
           "choices": null
         },
@@ -275,7 +275,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frothing Berserker",
-          "icon": "warrior_talent_icon_furyintheblood",
+          "icon": "458971",
           "description": "Mortal Strike and Cleave have a 20% chance to immediately refund 10% of the Rage spent.",
           "choices": null
         },
@@ -292,7 +292,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bounding Stride",
-          "icon": "ability_heroicleap",
+          "icon": "236171",
           "description": "Reduces the cooldown of Heroic Leap by 15 sec and Heroic Leap also increases your movement speed by 70% for 3 sec.",
           "choices": null
         },
@@ -303,14 +303,14 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            90346,
-            90337
+            90337,
+            90346
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pain and Gain",
-          "icon": "spell_holy_painsupression",
+          "icon": "135936",
           "description": "When you take any damage, heal for 2.0% of your maximum health. \r\n\r\nThis can only occur once every 10 sec.",
           "choices": null
         },
@@ -334,14 +334,14 @@
             {
               "spellId": 3411,
               "name": "Intervene",
-              "icon": "ability_warrior_victoryrush",
+              "icon": "132365",
               "description": "Run at high speed toward an ally, intercepting all melee and ranged attacks against them for 6 sec while they remain within 10 yds.",
               "maxRanks": 1
             },
             {
               "spellId": 1244088,
               "name": "Interpose",
-              "icon": "ability_paladin_speedoflight",
+              "icon": "571558",
               "description": "Run at high speed toward a target location near your allies, taking 30% of all damage dealt to allies within 3 yards for 8 sec or until you take at least 6,110 damage from this effect.",
               "maxRanks": 1
             }
@@ -361,8 +361,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shockwave",
-          "icon": "ability_warrior_shockwave",
-          "description": "Sends a wave of force in a frontal cone, causing 7 damage and stunning all enemies within 10 yards for 2 sec.",
+          "icon": "236312",
+          "description": "Sends a wave of force in a frontal cone, causing 6 damage and stunning all enemies within 10 yards for 2 sec.",
           "choices": null
         },
         {
@@ -378,7 +378,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overwhelming Rage",
-          "icon": "racial_orc_berserkerstrength",
+          "icon": "135726",
           "description": "Maximum Rage increased by 30.",
           "choices": null
         },
@@ -396,7 +396,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rallying Cry",
-          "icon": "ability_warrior_rallyingcry",
+          "icon": "132351",
           "description": "Lets loose a rallying cry, granting all party or raid members within 40 yards 10% temporary and maximum health for 10 sec.\r\n\r\nHealth granted increased by 50% when not in a raid.",
           "choices": null
         },
@@ -413,7 +413,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Field Dressing",
-          "icon": "inv_misc_bandage_08",
+          "icon": "133678",
           "description": "Healing received increased by 3% and all self-healing increased by an additional 10%.",
           "choices": null
         },
@@ -424,14 +424,14 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            90353,
-            108676
+            108676,
+            90353
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spell Reflection",
-          "icon": "ability_warrior_shieldreflection",
+          "icon": "132361",
           "description": "Raise your weapon, reflecting the first spell cast on you and reducing magic damage you take by 20% for 5 sec.",
           "choices": null
         },
@@ -455,14 +455,14 @@
             {
               "spellId": 384110,
               "name": "Wrecking Throw",
-              "icon": "warrior_talent_icon_mastercleaver",
-              "description": "Hurl your weapon at the enemy, causing 211 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
+              "icon": "460959",
+              "description": "Hurl your weapon at the enemy, causing 208 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 64382,
               "name": "Shattering Throw",
-              "icon": "ability_warrior_shatteringthrow",
+              "icon": "311430",
               "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 211 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
               "maxRanks": 1
             }
@@ -481,8 +481,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rumbling Earth",
-          "icon": "spell_shaman_earthquake",
-          "description": "Shockwave&#39;s range increased by 6 yards and when it strikes at least 3 targets its cooldown is reduced by 15 sec.",
+          "icon": "451165",
+          "description": "Shockwave's range increased by 6 yards and when it strikes at least 3 targets its cooldown is reduced by 15 sec.",
           "choices": null
         },
         {
@@ -492,8 +492,8 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            90331,
-            90375
+            90375,
+            90331
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -505,14 +505,14 @@
             {
               "spellId": 384100,
               "name": "Berserker Shout",
-              "icon": "spell_nature_ancestralguardian",
+              "icon": "136009",
               "description": "Go berserk, removing and granting immunity to Fear, Sap, and Incapacitate effects for 6 sec.\r\n\r\nAlso remove fear effects from group members within 12 yds.",
               "maxRanks": 1
             },
             {
               "spellId": 1271925,
               "name": "Fearless",
-              "icon": "ability_warrior_endlessrage",
+              "icon": "132344",
               "description": "Cooldown of Berserker Rage is reduced by 50% and Berseker Rage removes all movement speed-impairing effects.",
               "maxRanks": 1
             }
@@ -525,8 +525,8 @@
           "posX": 10,
           "posY": 7,
           "connections": [
-            90331,
-            90385
+            90385,
+            90331
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -538,14 +538,14 @@
             {
               "spellId": 5246,
               "name": "Intimidating Shout",
-              "icon": "ability_golemthunderclap",
+              "icon": "132154",
               "description": "Causes the targeted enemy to cower in fear while all enemies within 8 yards flee from you and their movement speed is reduced by 70% for 8 sec.\r\nDamage may cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 12323,
               "name": "Piercing Howl",
-              "icon": "spell_shadow_deathscream",
+              "icon": "136147",
               "description": "Snares all enemies within 12 yards, reducing their movement speed by 70% for 8 sec.\r\n\r\nSpurs all allies within 6 yards, increasing their movement speed by 30% for 4 sec.",
               "maxRanks": 1
             }
@@ -558,14 +558,14 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            90385,
-            108676
+            108676,
+            90385
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Honed Reflexes",
-          "icon": "spell_holy_borrowedtime",
+          "icon": "237538",
           "description": "Cooldown of Die By the Sword, Intervene, Interpose, Spell Reflection, Storm Bolt, and Pummel reduced by 10%.\r\n\r\nSuccessfully interrupting an enemy increases the damage you deal to them by 5% for 10 sec.",
           "choices": null
         },
@@ -583,7 +583,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Armored to the Teeth",
-          "icon": "inv_shoulder_22",
+          "icon": "135053",
           "description": "Gain Strength equal to 5% of your Armor.",
           "choices": null
         },
@@ -601,7 +601,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Double Time",
-          "icon": "inv_misc_horn_04",
+          "icon": "237377",
           "description": "Charge gains 1 additional charge and its cooldown is reduced by 3 sec.",
           "choices": null
         },
@@ -619,7 +619,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Reinforced Plates",
-          "icon": "inv_chest_plate04",
+          "icon": "132739",
           "description": "Stamina increased by 5% and Armor increased by 5%.",
           "choices": null
         },
@@ -636,7 +636,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Barbaric Training",
-          "icon": "ability_garrosh_whirling_corruption",
+          "icon": "892449",
           "description": "Slam, Whirlwind, and Cleave deal 10% more damage and 5% increased critical strike damage.",
           "choices": null
         },
@@ -654,8 +654,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Javelineer",
-          "icon": "inv_spear_01",
-          "description": "Range of your thrown abilities is increased by 5 yards.\r\n\r\nDamage dealt by Champion&#39;s Spear, Shattering Throw, and Wrecking Throw increased by 20%.\r\n\r\nShattering Throw and Wrecking Throw silence non-players for 3 sec.",
+          "icon": "8026700",
+          "description": "Range of your thrown abilities is increased by 5 yards.\r\n\r\nDamage dealt by Champion's Spear, Shattering Throw, and Wrecking Throw increased by 20%.\r\n\r\nShattering Throw and Wrecking Throw silence non-players for 3 sec.",
           "choices": null
         },
         {
@@ -672,7 +672,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Resonant Voice",
-          "icon": "warrior_disruptingshout",
+          "icon": "589118",
           "description": "The effects of your shouts last 20% longer.",
           "choices": null
         },
@@ -689,7 +689,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crushing Force",
-          "icon": "spell_shadow_unholystrength",
+          "icon": "136225",
           "description": "Mortal Strike deals an additional 5% damage and deals 5% increased critical strike damage.",
           "choices": null
         },
@@ -700,14 +700,14 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            110118,
-            90347
+            90347,
+            110118
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Cruel Strikes",
-          "icon": "ability_criticalstrike",
+          "icon": "132109",
           "description": "Critical strike chance increased by 1% and critical strike damage of Execute increased by 5%. ",
           "choices": null
         },
@@ -725,7 +725,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Two-Handed Weapon Specialization",
-          "icon": "inv_axe_09",
+          "icon": "132400",
           "description": "While wielding two-handed weapons your damage is increased by 3% and damage taken from area of effect attacks is reduced by 2%.",
           "choices": null
         },
@@ -736,14 +736,14 @@
           "posX": 12,
           "posY": 10,
           "connections": [
-            108685,
-            108686
+            108686,
+            108685
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Wild Strikes",
-          "icon": "ability_rogue_sprint",
+          "icon": "132307",
           "description": "Haste increased by 1% and your auto-attack critical strikes increase your auto-attack speed by 10% for 10 sec.",
           "choices": null
         },
@@ -760,7 +760,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Anger Management",
-          "icon": "warrior_talent_icon_angermanagement",
+          "icon": "971080",
           "description": "Every 20 Rage you spend on attacks reduces the remaining cooldown on Avatar and Colossus Smash by 1 sec.",
           "choices": null
         },
@@ -778,8 +778,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Champion's Spear",
-          "icon": "inv_ability_warrior_championsspear",
-          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear&#39;s location and dealing 84 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
+          "icon": "6035322",
+          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear's location and dealing 83 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
           "choices": null
         },
         {
@@ -789,14 +789,14 @@
           "posX": 10,
           "posY": 11,
           "connections": [
-            90360,
-            90322
+            90322,
+            90360
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stance Mastery",
-          "icon": "crest_warrior",
+          "icon": "1362372",
           "description": "Your stances have additional effects.\r\n\r\n Battle Stance\r\nIncreases the critical strike damage of your abilities by 3%.\r\n\r\n Defensive Stance\r\nWhen an attack deals 20% or more of your maximum health in damage, that damage is reduced by 15%.",
           "choices": null
         },
@@ -813,7 +813,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Battlefield Commander",
-          "icon": "ability_warrior_commandingshout",
+          "icon": "132339",
           "description": "Your Shout abilities have additional effects.\r\n\r\n Battle Shout:\r\nGrants you an additional 3% attack power.\r\n\r\n Rallying Cry:\r\nGrants an additional 2% health and duration increased by 3 sec.\r\n\r\n Piercing Howl:\r\nRadius increased by 100%\r\n\r\n Berserker Shout:\r\nRadius increased by 100%.\r\n\r\n Intimidating Shout:\r\nCooldown reduced by 15 sec.\r\n",
           "choices": null
         },
@@ -828,8 +828,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mortal Strike",
-          "icon": "ability_warrior_savageblow",
-          "description": "A vicious strike that deals 182 Physical damage and reduces the effectiveness of healing on the target by 50% for 10 sec.",
+          "icon": "132355",
+          "description": "A vicious strike that deals 179 Physical damage and reduces the effectiveness of healing on the target by 50% for 10 sec.",
           "choices": null
         },
         {
@@ -845,8 +845,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overpower",
-          "icon": "ability_meleedamage",
-          "description": "Overpower the enemy, dealing 135 Physical damage. Cannot be blocked, dodged, or parried.\r\n",
+          "icon": "132223",
+          "description": "Overpower the enemy, dealing 134 Physical damage. Cannot be blocked, dodged, or parried.\r\n",
           "choices": null
         },
         {
@@ -862,7 +862,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sudden Death",
-          "icon": "ability_warrior_improveddisciplines",
+          "icon": "132346",
           "description": "Your attacks have a chance to make your next Execute cost no Rage, be usable on any target regardless of their health, and deal damage as if you spent 40 Rage.",
           "choices": null
         },
@@ -885,15 +885,15 @@
             {
               "spellId": 383103,
               "name": "Fueled by Violence",
-              "icon": "ability_demonhunter_bloodlet",
+              "icon": "1450139",
               "description": "You are healed for 85% of the Bleed damage dealt by Rend and Deep Wounds.",
               "maxRanks": 1
             },
             {
               "spellId": 1277297,
               "name": "Ignore Pain",
-              "icon": "ability_warrior_renewedvigor",
-              "description": "Fight through the pain, ignoring 50% of damage taken for 12 sec or until 560 damage has been prevented.",
+              "icon": "1377132",
+              "description": "Fight through the pain, ignoring 50% of damage taken for 12 sec or until 700 damage has been prevented.",
               "maxRanks": 1
             }
           ]
@@ -911,7 +911,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Die by the Sword",
-          "icon": "ability_warrior_challange",
+          "icon": "132336",
           "description": "Increases your parry chance by 100% and reduces all damage you take by 30% for 8 sec.",
           "choices": null
         },
@@ -928,7 +928,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bloodsurge",
-          "icon": "ability_warrior_bloodsurge",
+          "icon": "236306",
           "description": "Damage from Rend has a chance to generate 5 Rage.",
           "choices": null
         },
@@ -945,7 +945,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Overpower",
-          "icon": "ability_meleedamage",
+          "icon": "132223",
           "description": "Overpower has 2 charges and deals 15% more damage.",
           "choices": null
         },
@@ -962,7 +962,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Execute",
-          "icon": "inv_sword_48",
+          "icon": "135358",
           "description": "Execute no longer has a cooldown and if your foe survives, 10% of the Rage spent is refunded.",
           "choices": null
         },
@@ -979,7 +979,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fervor of Battle",
-          "icon": "ability_rogue_waylay",
+          "icon": "236286",
           "description": "If Cleave or Whirlwind hits 3 or more targets you also Slam your primary target. This Slam deals 50% additional damage.",
           "choices": null
         },
@@ -997,8 +997,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tactician",
-          "icon": "ability_warrior_unrelentingassault",
-          "description": "You have a 30% chance to gain a charge of Overpower when you use an attack that has a Rage cost.\r\nThis effect applies even if that ability&#39;s Rage cost has been reduced to zero.",
+          "icon": "236317",
+          "description": "You have a 30% chance to gain a charge of Overpower when you use an attack that has a Rage cost.\r\nThis effect applies even if that ability's Rage cost has been reduced to zero.",
           "choices": null
         },
         {
@@ -1015,8 +1015,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Colossus Smash",
-          "icon": "inv_warbreaker",
-          "description": "Smash the ground and shatter the armor of all enemies within 10 yds, dealing 109 Physical damage and increasing damage you deal to them by 30% for 10 sec. Deals reduced damage beyond 8 targets.\r\n",
+          "icon": "2065633",
+          "description": "Smash the ground and shatter the armor of all enemies within 10 yds, dealing 104 Physical damage and increasing damage you deal to them by 30% for 10 sec. Deals reduced damage beyond 8 targets.\r\n",
           "choices": null
         },
         {
@@ -1033,7 +1033,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Impale",
-          "icon": "ability_searingarrow",
+          "icon": "132312",
           "description": "Critical strike damage of your abilities is increased by 10%.",
           "choices": null
         },
@@ -1056,22 +1056,22 @@
             {
               "spellId": 1261046,
               "name": "Brute Force",
-              "icon": "ability_smash",
+              "icon": "132318",
               "description": "Slam has a 10% increased chance to trigger Tactician.",
               "maxRanks": 1
             },
             {
               "spellId": 1261047,
               "name": "Efficiency",
-              "icon": "ability_warrior_revenge",
-              "description": "Slam&#39;s Rage cost is reduced by 25%.",
+              "icon": "132353",
+              "description": "Slam's Rage cost is reduced by 25%.",
               "maxRanks": 1
             }
           ]
         },
         {
           "id": 92614,
-          "type": "round",
+          "type": "choice",
           "treeType": "spec",
           "posX": 32,
           "posY": 7,
@@ -1081,10 +1081,25 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Overpowering Finish",
-          "icon": "ability_warrior_punishingblow",
-          "description": "Overpower deals 15% additional damage to targets below 35% health.\r\n",
-          "choices": null
+          "name": null,
+          "icon": null,
+          "description": null,
+          "choices": [
+            {
+              "spellId": 400205,
+              "name": "Overpowering Finish",
+              "icon": "132350",
+              "description": "Overpower deals 15% additional damage to targets below 35% health.\r\n",
+              "maxRanks": 1
+            },
+            {
+              "spellId": 1273075,
+              "name": "Mass Execution",
+              "icon": "460959",
+              "description": "Cleave and Whirlwind deal 20% additional damage to targets below 35% health.",
+              "maxRanks": 1
+            }
+          ]
         },
         {
           "id": 109687,
@@ -1100,7 +1115,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Strength of Arms",
-          "icon": "inv_gauntlets_26",
+          "icon": "132960",
           "description": "Overpower and Slam damage increased by 5% and critical strike damage increased by 5%.\r\nCritical strike chance of Slam and Overpower increased by 5%.",
           "choices": null
         },
@@ -1123,15 +1138,15 @@
             {
               "spellId": 1261048,
               "name": "Just Warming Up",
-              "icon": "ability_warrior_endlessrage",
+              "icon": "132344",
               "description": "Colossus Smash generates 15 Rage.",
               "maxRanks": 1
             },
             {
               "spellId": 1261049,
               "name": "Broad Strokes",
-              "icon": "inv_ability_rogue_echoingreprimand",
-              "description": "Colossus Smash grants you Sweeping Strikes.",
+              "icon": "6035317",
+              "description": "Colossus Smash grants 6 stacks of Sweeping Strikes.",
               "maxRanks": 1
             }
           ]
@@ -1150,7 +1165,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Sharpened Blades",
-          "icon": "inv_sword_27",
+          "icon": "135328",
           "description": "Mortal Strike, Cleave, and Execute damage increased by 7% and critical strike damage increased by 7%.",
           "choices": null
         },
@@ -1167,13 +1182,13 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cleave",
-          "icon": "ability_warrior_cleave",
-          "description": "Strikes all enemies in front of you for 90 Physical damage. Deals reduced damage beyond 5 targets.",
+          "icon": "132338",
+          "description": "Strikes all enemies in front of you for 82 Physical damage. Deals reduced damage beyond 5 targets.\r\n\r\nIf you know Rend, inflicts Rend on all targets.",
           "choices": null
         },
         {
           "id": 92536,
-          "type": "choice",
+          "type": "round",
           "treeType": "spec",
           "posX": 42,
           "posY": 7,
@@ -1183,25 +1198,10 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": null,
-          "icon": null,
-          "description": null,
-          "choices": [
-            {
-              "spellId": 383155,
-              "name": "Improved Sweeping Strikes",
-              "icon": "ability_rogue_slicedice",
-              "description": "Sweeping Strikes affects 6 additional damaging single-target abilities.",
-              "maxRanks": 1
-            },
-            {
-              "spellId": 1261050,
-              "name": "Powerful Momentum",
-              "icon": "inv_1115_warrior_crushingblow",
-              "description": "Secondary targets take an additional 25% damage from Sweeping Strikes.",
-              "maxRanks": 1
-            }
-          ]
+          "name": "Powerful Momentum",
+          "icon": "6712966",
+          "description": "Secondary targets take an additional 20% damage from Sweeping Strikes.",
+          "choices": null
         },
         {
           "id": 109680,
@@ -1217,7 +1217,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Martial Prowess",
-          "icon": "warrior_talent_icon_igniteweapon",
+          "icon": "970853",
           "description": "Overpower and Slam increase the damage of your next Mortal Strike by 5%, stacking up to 3 times.",
           "choices": null
         },
@@ -1235,8 +1235,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dreadnaught",
-          "icon": "inv_sword_05",
-          "description": "Overpower causes a seismic wave, dealing 24 damage to all enemies in a 10 yd line. Deals reduced damage beyond 5 targets.",
+          "icon": "135275",
+          "description": "Overpower's impact causes a seismic wave, dealing 48 damage to all enemies in a 10 yd line around your target. Deals reduced damage beyond 5 targets.\r\n\r\nDreadnaught benefits from all effects that modify Overpower's damage.",
           "choices": null
         },
         {
@@ -1252,7 +1252,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deep Wounds",
-          "icon": "ability_backstab",
+          "icon": "132090",
           "description": "Execute inflicts Deep Wounds on the target.\r\n\r\n Deep Wounds\r\nCauses the target to suffer 50 Bleed damage over 6 sec. If this effect is reapplied, any remaining damage will be added to the new Deep Wounds.",
           "choices": null
         },
@@ -1275,14 +1275,14 @@
             {
               "spellId": 1261051,
               "name": "Tactical Edge",
-              "icon": "inv12_ability_warrior_arms",
-              "description": "Colossus Smash causes your next 2 Mortal Strikes to have a 100% chance to trigger Tactician.",
+              "icon": "7439233",
+              "description": "Colossus Smash immediately grants 1 use of Sudden Death.",
               "maxRanks": 1
             },
             {
               "spellId": 1261056,
               "name": "Crushing Combo",
-              "icon": "ability_warrior_cleave",
+              "icon": "132338",
               "description": "Colossus Smash causes your next 2 Cleaves within 20 sec to trigger no cooldown.",
               "maxRanks": 1
             }
@@ -1301,43 +1301,26 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Massacre",
-          "icon": "inv_axe_2h_orcwarrior_c_01",
+          "icon": "800997",
           "description": "Execute is usable on targets below 35% health.\r\n",
-          "choices": null
-        },
-        {
-          "id": 110175,
-          "type": "round",
-          "treeType": "spec",
-          "posX": 40,
-          "posY": 8,
-          "connections": [
-            90447,
-            90293
-          ],
-          "spentRequired": 8,
-          "alreadyGranted": false,
-          "maxRanks": 1,
-          "name": "Mass Execution",
-          "icon": "warrior_talent_icon_mastercleaver",
-          "description": "Cleave and Whirlwind deal 20% additional damage to targets below 35% health.",
           "choices": null
         },
         {
           "id": 109682,
           "type": "round",
           "treeType": "spec",
-          "posX": 42,
+          "posX": 40,
           "posY": 8,
           "connections": [
             92536,
-            90293
+            90293,
+            90447
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Collateral Damage",
-          "icon": "ability_warrior_incite",
+          "icon": "236309",
           "description": "When an ability used during Sweeping Strikes damages a second target, your next Cleave or Whirlwind deals 25% increased damage, stacking up to 3 times.",
           "choices": null
         },
@@ -1356,7 +1339,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Bloodborne",
-          "icon": "inv_artifact_bloodoftheassassinated",
+          "icon": "1394887",
           "description": "Your Bleed effects deal 5% increased damage and 5% increased critical strike damage.",
           "choices": null
         },
@@ -1381,15 +1364,15 @@
             {
               "spellId": 227847,
               "name": "Bladestorm",
-              "icon": "ability_warrior_bladestorm",
-              "description": "Become an unstoppable storm of destructive force, striking all nearby enemies for 663 Physical damage over 5.4 sec. Deals reduced damage beyond 8 targets.\r\n\r\nYou are immune to movement impairing and loss of control effects, but can use defensive abilities and can avoid attacks.\r\n",
+              "icon": "236303",
+              "description": "Become an unstoppable storm of destructive force, striking all nearby enemies for 657 Physical damage over 5.4 sec. Deals reduced damage beyond 8 targets.\r\n\r\nYou are immune to movement impairing and loss of control effects, but can use defensive abilities and can avoid attacks.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 228920,
               "name": "Ravager",
-              "icon": "warrior_talent_icon_ravager",
-              "description": "Throws a whirling weapon at your target that chases nearby enemies, inflicting 246 Physical damage to all enemies over 10.7 sec. Deals reduced damage beyond 8 targets.\r\n\r\nCleave and Whirlwind deal 50% increased damage while Ravager is active",
+              "icon": "970854",
+              "description": "Throws a whirling weapon at your target that chases nearby enemies, inflicting 371 Physical damage to all enemies over 12 sec. Deals reduced damage beyond 8 targets.\r\n\r\nEnemies damaged by Ravager take 50% additional damage from your Bleeds for 12 sec.",
               "maxRanks": 1
             }
           ]
@@ -1401,15 +1384,14 @@
           "posX": 40,
           "posY": 9,
           "connections": [
-            90291,
-            110175,
-            109682
+            109682,
+            90291
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Critical Thinking",
-          "icon": "ability_criticalstrike",
+          "icon": "132109",
           "description": "Execute critical strike chance increased by 5% and Execute immediately refunds an additional 10% of the Rage spent.",
           "choices": null
         },
@@ -1425,9 +1407,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Battlelord",
-          "icon": "ability_pvp_hardiness",
-          "description": "Overpower has a 35% chance to reset the cooldown of Mortal Strike and reduce the cost of your next Mortal Strike by 33%.",
+          "name": "Master Tactician",
+          "icon": "132353",
+          "description": "Tactician has a 5% increased chance to trigger.",
           "choices": null
         },
         {
@@ -1444,8 +1426,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bloodletting",
-          "icon": "ability_skeer_bloodletting",
-          "description": "Rend and Deep Wounds&#39; Bleed effects last 33% longer and have a 5% increased critical strike chance.\r\n\r\nIf you know Rend, Mortal Strike inflicts Rend on targets below 35% health.\r\n",
+          "icon": "878217",
+          "description": "Your abilities have a 5% increased chance to critically strike targets affected by Rend.\r\n\r\nIf you know Rend, Mortal Strike inflicts Rend on targets below 35% health.\r\n\r\nDeep Wounds lasts 33% longer.",
           "choices": null
         },
         {
@@ -1462,7 +1444,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Executioner's Precision",
-          "icon": "ability_revendreth_warrior",
+          "icon": "3565727",
           "description": "Execute increases the damage of your next Mortal Strike by 35%, stacking up to 2 times.",
           "choices": null
         },
@@ -1479,7 +1461,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fatality",
-          "icon": "achievement_bg_killingblow_berserker",
+          "icon": "236364",
           "description": "Mortal Strike has a 50% chance to apply a Fatal Mark to your target, stacking up to 5 times. Your next Execute on a target with a Fatal Mark causes the Fatal Mark to deal 96 additional Physical damage per stack.",
           "choices": null
         },
@@ -1496,9 +1478,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Master Tactician",
-          "icon": "ability_warrior_revenge",
-          "description": "Tactician has a 5% increased chance to trigger.",
+          "name": "Battlelord",
+          "icon": "1322721",
+          "description": "Overpower has a 35% chance to reset the cooldown of Mortal Strike and reduce the cost of your next Mortal Strike by 33%.",
           "choices": null
         },
         {
@@ -1508,14 +1490,14 @@
           "posX": 36,
           "posY": 11,
           "connections": [
-            90445,
-            90438
+            90438,
+            90445
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mortal Wounds",
-          "icon": "ability_warrior_bloodbath",
+          "icon": "236304",
           "description": "Mortal Strike and Slam critical strikes inflict Deep Wounds at 100% effectiveness.\r\n\r\n Deep Wounds\r\nCauses the target to suffer 50 Bleed damage over 6 sec. If this effect is reapplied, any remaining damage will be added to the new Deep Wounds.",
           "choices": null
         },
@@ -1533,7 +1515,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Avatar",
-          "icon": "warrior_talent_icon_avatar",
+          "icon": "613534",
           "description": "Transform into a colossus, increasing all damage you deal by 20% and reducing damage you take from area of effect attacks by 5% for 20 sec.",
           "choices": null
         },
@@ -1548,7 +1530,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Master of Warfare",
-          "icon": "inv12_apextalent_warrior_masterofwarfare",
+          "icon": "7636570",
           "description": null,
           "levels": [
             81,
@@ -1587,7 +1569,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Show No Mercy",
-          "icon": "warrior_talent_icon_lambstotheslaughter",
+          "icon": "458973",
           "description": "Executioner also increases your Execute critical strike chance and critical strike damage by 3% per stack.",
           "choices": null
         },
@@ -1611,14 +1593,14 @@
             {
               "spellId": 444778,
               "name": "Culling Cyclone",
-              "icon": "ability_warrior_bladestorm",
+              "icon": "236303",
               "description": "Each strike of Bladestorm deals an additional 20% damage evenly split across all targets.",
               "maxRanks": 1
             },
             {
               "spellId": 446085,
               "name": "Brutal Finish",
-              "icon": "ability_revendreth_warrior",
+              "icon": "3565727",
               "description": "Your next Mortal Strike after Bladestorm ends deals 50% additional damage.",
               "maxRanks": 1
             }
@@ -1644,15 +1626,15 @@
             {
               "spellId": 444773,
               "name": "Fierce Followthrough",
-              "icon": "spell_deathknight_butcher2",
+              "icon": "237517",
               "description": "Mortal Strike critical strikes increase the damage of your next Mortal Strike by 20%.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 444774,
               "name": "Opportunist",
-              "icon": "ability_warrior_weaponmastery",
-              "description": "When Overpower has its cooldown reset by Tactician, your next Overpower deals 10% additional damage and 10% additional critical damage. Stacking up to 2 times.",
+              "icon": "132367",
+              "description": "When Overpower has its cooldown reset by Tactician, your next Overpower deals 20% additional damage and 20% additional critical damage. Stacking up to 2 times.",
               "maxRanks": 1
             }
           ]
@@ -1671,8 +1653,8 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Imminent Demise",
-          "icon": "ability_warrior_improveddisciplines",
-          "description": "Every 3 Slayer&#39;s Strikes you gain Sudden Death.\r\n\r\nUsing Sudden Death accelerates your next Bladestorm, striking 1 additional time (max 3). Bladestorm&#39;s total duration is unchanged.\r\n\r\nSudden Death has a 100% chance to trigger Reap the Storm at 100% effectiveness.",
+          "icon": "132346",
+          "description": "Every 3 Slayer's Strikes you gain Sudden Death.\r\n\r\nUsing Sudden Death accelerates your next Bladestorm, striking 1 additional time (max 3). Bladestorm's total duration is unchanged.\r\n\r\nSudden Death has a 100% chance to trigger Reap the Storm at 100% effectiveness.",
           "choices": null
         },
         {
@@ -1695,14 +1677,14 @@
             {
               "spellId": 444776,
               "name": "Relentless Pursuit",
-              "icon": "ability_rogue_sprint",
+              "icon": "132307",
               "description": "Charge increases your movement speed by 70% for 3 sec.\r\n\r\nCharge removes all movement impairing effects, this effect cannot occur more than once every 30 sec.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 444777,
               "name": "Vicious Agility",
-              "icon": "ability_paladin_speedoflight",
+              "icon": "571558",
               "description": "Heroic Leap reduces the cooldown of Charge by 5 sec and Charge reduces the cooldown of Heroic Leap by 2 sec.",
               "maxRanks": 1
             }
@@ -1722,7 +1704,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Slayer's Malice",
-          "icon": "ability_warrior_revenge",
+          "icon": "132353",
           "description": "Overpower and Execute damage increased by 15%.",
           "choices": null
         },
@@ -1740,8 +1722,8 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Reap the Storm",
-          "icon": "ability_arakkoa_spinning_blade",
-          "description": "When Cleave hits 3 or more targets you have a 20% chance to unleash a flurry of steel, striking all nearby enemies for 268 Physical damage and applying Overwhelmed. Deals reduced damage beyond 8 targets.\r\n",
+          "icon": "1016243",
+          "description": "When Cleave hits 3 or more targets you have a 20% chance to unleash a flurry of steel, striking all nearby enemies for 267 Physical damage and applying Overwhelmed. Deals reduced damage beyond 8 targets.\r\n",
           "choices": null
         },
         {
@@ -1758,7 +1740,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Overwhelming Blades",
-          "icon": "inv_10_specialization_blacksmithing_blades_color1",
+          "icon": "4624383",
           "description": "Each strike of Bladestorm applies Overwhelmed to all enemies affected, increasing damage you deal to them by 1% for 20 sec, max 5 stacks.",
           "choices": null
         },
@@ -1776,7 +1758,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Death Drive",
-          "icon": "ability_warrior_focusedrage",
+          "icon": "132345",
           "description": "You heal for 15% of damage dealt by Sudden Death.",
           "choices": null
         },
@@ -1792,8 +1774,8 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Slayer's Dominance",
-          "icon": "inv_ability_slayerwarrior_slayersdominance",
-          "description": "Your attacks against your primary target have a 15% chance to overwhelm their defenses and trigger a Slayer&#39;s Strike, dealing 293 Physical damage and granting you a stack of Executioner, increasing your Execute damage by 3% for 12 sec. Multiple stacks of Executioner may overlap.",
+          "icon": "5927649",
+          "description": "Your attacks against your primary target have a 25% chance to overwhelm their defenses and trigger a Slayer's Strike, dealing 294 Physical damage and granting you a stack of Executioner, increasing your Execute damage by 3% for 12 sec. Multiple stacks of Executioner may overlap.",
           "choices": null
         },
         {
@@ -1813,7 +1795,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Unrelenting Onslaught",
-          "icon": "ability_warrior_commandingshout",
+          "icon": "132339",
           "description": "Using Sudden Death causes you to both reduce the cooldown of Bladestorm by 5 sec and apply 1 stack of Overwhelmed to your primary target per stack of Executioner you have.\r\n\r\nYou can use Pummel and Storm Bolt while Bladestorming.\r\n\r\nBladestorm damage increased by 20%.",
           "choices": null
         },
@@ -1831,7 +1813,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Unhinged",
-          "icon": "spell_shadow_spectralsight",
+          "icon": "136215",
           "description": "Every 2 strikes of Bladestorm, you automatically cast a Mortal Strike at your target or random nearby enemy, dealing 100% of normal damage.\r\n",
           "choices": null
         },
@@ -1849,8 +1831,8 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Deadly Focus",
-          "icon": "spell_hunter_focusingshot",
-          "description": "Executioner&#39;s duration is increased by 6 sec.",
+          "icon": "1033497",
+          "description": "Executioner's duration is increased by 6 sec.",
           "choices": null
         },
         {
@@ -1867,7 +1849,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Violent Euphoria",
-          "icon": "ability_butcher_exsanguination",
+          "icon": "999949",
           "description": "Bladestorm puts you into a battle trance, granting you 15% haste for 8 sec after you stop Bladestorming.",
           "choices": null
         },
@@ -1891,14 +1873,14 @@
             {
               "spellId": 429639,
               "name": "Boneshaker",
-              "icon": "ability_deathknight_brittlebones",
-              "description": "Shockwave&#39;s stun duration is increased by 1 sec and reduces the movement speed of affected enemies by 40% for 3 sec after the stun ends.",
+              "icon": "460686",
+              "description": "Shockwave's stun duration is increased by 1 sec and reduces the movement speed of affected enemies by 40% for 3 sec after the stun ends.",
               "maxRanks": 1
             },
             {
               "spellId": 440992,
               "name": "Earthquaker",
-              "icon": "spell_shaman_earthquake",
+              "icon": "451165",
               "description": "Shockwave also knocks enemies into the air and its cooldown is reduced by 5 sec.",
               "maxRanks": 1
             }
@@ -1921,8 +1903,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Dominance of the Colossus",
-          "icon": "ability_warrior_titansgrip",
-          "description": "Colossal Might stacks up to 10 times. If you would gain a stack of Colossal Might and are at max stacks, the cooldown of Demolish is reduced by 5 sec.\r\n\r\nEnemies affected by Demolish take up to 10% more damage from you and deal up to 10% less damage to you for 10 sec based on the number of stacks of Colossal Might consumed by Demolish.",
+          "icon": "236316",
+          "description": "Enemies affected by Demolish take up to 10% more damage from you and deal up to 20% less damage to you for 10 sec based on the number of stacks of Colossal Might consumed by Demolish.\r\n\r\nColossal Might stacks up to 10 times.",
           "choices": null
         },
         {
@@ -1939,7 +1921,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Precise Might",
-          "icon": "spell_hunter_focusingshot",
+          "icon": "1033497",
           "description": "Mortal Strike critical strikes grant an additional stack of Colossal Might.",
           "choices": null
         },
@@ -1957,7 +1939,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Practiced Strikes",
-          "icon": "spell_warrior_sharpenblade",
+          "icon": "1380678",
           "description": "Mortal Strike and Slam damage increased by 25%.\r\n\r\nCleave and Whirlwind damage increased by 15%.",
           "choices": null
         },
@@ -1981,14 +1963,14 @@
             {
               "spellId": 429637,
               "name": "One Against Many",
-              "icon": "ability_warrior_incite",
+              "icon": "236309",
               "description": "Shockwave, Cleave, and Whirlwind deal 5% more damage per target affected up to 5.",
               "maxRanks": 1
             },
             {
               "spellId": 440995,
               "name": "Arterial Bleed",
-              "icon": "ability_butcher_gushingwounds",
+              "icon": "999950",
               "description": "Colossal Might increases the damage of your Rend and Deep Wounds by 3% per stack.\r\n",
               "maxRanks": 1
             }
@@ -2008,7 +1990,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Mountain of Muscle and Scars",
-          "icon": "ability_warrior_intensifyrage",
+          "icon": "236310",
           "description": "You deal 5% more damage and take 5% less damage.\r\n\r\nSize increased by 5%.",
           "choices": null
         },
@@ -2026,8 +2008,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Tide of Battle",
-          "icon": "ability_warrior_weaponmastery",
-          "description": "Colossal Might increases the damage of your Overpower by 3% per stack.",
+          "icon": "132367",
+          "description": "Colossal Might increases the damage of your Overpower and Execute by 3% per stack.",
           "choices": null
         },
         {
@@ -2044,7 +2026,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Martial Expert",
-          "icon": "ability_warrior_stalwartprotector",
+          "icon": "236313",
           "description": "Critical strike damage of your abilities is increased by 10% and the amount of damage blocked by your critical blocks is increased by 20%.",
           "choices": null
         },
@@ -2068,14 +2050,14 @@
             {
               "spellId": 429644,
               "name": "No Stranger to Pain",
-              "icon": "ability_warrior_renewedvigor",
-              "description": "Damage prevented by each use of Ignore Pain is increased by 20%.",
+              "icon": "1377132",
+              "description": "Damage prevented by each use of Ignore Pain is increased by 30%.",
               "maxRanks": 1
             },
             {
               "spellId": 440993,
               "name": "Veteran Vitality",
-              "icon": "ability_hunter_harass",
+              "icon": "132175",
               "description": "When your health is brought below 35%, you gain a Second Wind, healing you for 12% of your max health over 2 sec.\r\n\r\nThis effect cannot occur more than once every 60 sec.",
               "maxRanks": 1
             }
@@ -2093,8 +2075,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Demolish",
-          "icon": "inv_ability_colossuswarrior_demolish",
-          "description": "Unleash a series of precise and powerful strikes against your target, dealing 804 damage to it, and 426 damage to enemies within 10 yds of it. Deals reduced damage beyond 8 targets.\r\n\r\nWhile channeling Demolish, you take 10% less damage and are immune to stuns, knockbacks, and forced movement effects.\r\n\r\nYou can block, parry, dodge, and use certain defensive abilities while channeling Demolish.",
+          "icon": "5927618",
+          "description": "Unleash a series of precise and powerful strikes against your target, dealing 791 damage to it, and 429 damage to enemies within 10 yds of it. Deals reduced damage beyond 8 targets.\r\n\r\nWhile channeling Demolish, you take 10% less damage and are immune to stuns, knockbacks, and forced movement effects.\r\n\r\nYou can block, parry, dodge, and use certain defensive abilities while channeling Demolish.",
           "choices": null
         },
         {
@@ -2111,7 +2093,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Colossal Might",
-          "icon": "ability_warrior_strengthofarms",
+          "icon": "236314",
           "description": "Colossal Might increases damage dealt by your next Demolish by 5%, stacking up to 5 times.\r\n\r\nMortal Strike grants a stack of Colossal Might and Cleave grants a stack of Colossal Might when it strikes 3 or more targets.",
           "choices": null
         },
@@ -2129,8 +2111,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Celeritous Conclusion",
-          "icon": "inv_1115_warrior_fasterreflexes",
-          "description": "Demolish&#39;s final strike grants 10% Haste for 10 sec and increases the critical strike chance of your next Mortal Strike by 100%.",
+          "icon": "6712968",
+          "description": "Demolish's final strike grants 10% Haste for 10 sec and increases the critical strike chance of your next Mortal Strike by 100%.",
           "choices": null
         },
         {
@@ -2147,7 +2129,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Cut to the Bone",
-          "icon": "ability_warrior_deepcuts",
+          "icon": "4067373",
           "description": "Mortal Strike critical strikes increase your Rend and Deep Wounds damage by 15% for 8 sec.",
           "choices": null
         },
@@ -2165,8 +2147,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Decimator",
-          "icon": "inv_10_blacksmithing_craftedbar_bloodyalloy",
-          "description": "Demolish&#39;s final strike applies Deep Wounds to all targets at 100% effectiveness.",
+          "icon": "4622283",
+          "description": "Demolish's final strike applies Deep Wounds to all targets at 100% effectiveness.",
           "choices": null
         }
       ]
@@ -2232,7 +2214,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Berserker Stance",
-          "icon": "ability_racial_avatar",
+          "icon": "132275",
           "description": "An aggressive combat state that increases the damage of your auto-attacks by 15% and reduces the duration of Fear, Sap and Incapacitate effects on you by 10%.\r\n\r\nLasts until canceled.",
           "choices": null
         },
@@ -2247,7 +2229,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Defensive Stance",
-          "icon": "ability_warrior_defensivestance",
+          "icon": "132341",
           "description": "A defensive combat state that reduces all damage you take by 15% and all damage you deal by 10%.\r\n\r\nLasts until canceled.",
           "choices": null
         },
@@ -2264,7 +2246,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fast Footwork",
-          "icon": "ability_hunter_posthaste",
+          "icon": "461119",
           "description": "Movement speed increased by 5%.",
           "choices": null
         },
@@ -2281,7 +2263,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "War Machine",
-          "icon": "ability_hunter_rapidkilling",
+          "icon": "132205",
           "description": "Your auto-attacks generate 10% more Rage.\r\n\r\nKilling an enemy instantly generates 5 Rage and increases your movement speed by 30% for 8 sec.",
           "choices": null
         },
@@ -2298,8 +2280,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thunder Clap",
-          "icon": "spell_nature_thunderclap",
-          "description": "Blasts all enemies within 8 yards for 82 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.\r\n\r\nIf you know Rend, inflicts Rend on all targets.",
+          "icon": "136105",
+          "description": "Blasts all enemies within 8 yards for 83 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -2315,7 +2297,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leeching Strikes",
-          "icon": "inv_artifact_bloodoftheassassinated",
+          "icon": "1394887",
           "description": "Leech increased by 3%.",
           "choices": null
         },
@@ -2333,7 +2315,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Impending Victory",
-          "icon": "spell_impending_victory",
+          "icon": "589768",
           "description": "Instantly attack the target, causing 20 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
           "choices": null
         },
@@ -2344,14 +2326,14 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            90328,
-            90343
+            90343,
+            90328
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Heroic Leap",
-          "icon": "ability_heroicleap",
+          "icon": "236171",
           "description": "Leap through the air toward a target location, slamming down with destructive force to deal 8 Physical damage to all enemies within 8 yards.",
           "choices": null
         },
@@ -2368,8 +2350,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crackling Thunder",
-          "icon": "ability_thunderking_overcharge",
-          "description": "Thunder Clap&#39;s radius is increased by 50% and it reduces affected target&#39;s movement speed by an additional 20%.",
+          "icon": "839979",
+          "description": "Thunder Clap's radius is increased by 50% and it reduces affected target's movement speed by an additional 20%.",
           "choices": null
         },
         {
@@ -2386,26 +2368,26 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Storm Bolt",
-          "icon": "warrior_talent_icon_stormbolt",
-          "description": "Hurls your weapon at an enemy, causing 10 Physical damage and stunning for 4 sec.",
+          "icon": "613535",
+          "description": "Hurls your weapon at an enemy, causing 9 Physical damage and stunning for 4 sec.",
           "choices": null
         },
         {
-          "id": 109391,
-          "type": "square",
+          "id": 110654,
+          "type": "round",
           "treeType": "class",
           "posX": 2,
           "posY": 5,
           "connections": [
-            90344,
-            90326
+            90326,
+            90344
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Rend",
-          "icon": "ability_gouge",
-          "description": "Lash out with your weapon, striking all targets within 10 yds for 91 Physical damage instantly and wounding them for an additional 74 Bleed damage over 15 sec.",
+          "name": "Storm of Blood",
+          "icon": "1035055",
+          "description": "Whirlwind affects all targets with Rend, causing them to Bleed for 74 damage over 15 sec.\r\n",
           "choices": null
         },
         {
@@ -2421,7 +2403,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Second Wind",
-          "icon": "ability_hunter_harass",
+          "icon": "132175",
           "description": "Restores 6% health every 1 sec when you have not taken damage for 5 sec.\r\n\r\nRestores 2% health every 1 sec while you are below 35% health. The amount restored increases the closer you are to death.",
           "choices": null
         },
@@ -2440,7 +2422,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frothing Berserker",
-          "icon": "warrior_talent_icon_furyintheblood",
+          "icon": "458971",
           "description": "Mortal Strike and Cleave have a 20% chance to immediately refund 10% of the Rage spent.",
           "choices": null
         },
@@ -2457,7 +2439,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bounding Stride",
-          "icon": "ability_heroicleap",
+          "icon": "236171",
           "description": "Reduces the cooldown of Heroic Leap by 15 sec and Heroic Leap also increases your movement speed by 70% for 3 sec.",
           "choices": null
         },
@@ -2468,14 +2450,14 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            90346,
-            90337
+            90337,
+            90346
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pain and Gain",
-          "icon": "spell_holy_painsupression",
+          "icon": "135936",
           "description": "When you take any damage, heal for 2.0% of your maximum health. \r\n\r\nThis can only occur once every 10 sec.",
           "choices": null
         },
@@ -2499,14 +2481,14 @@
             {
               "spellId": 3411,
               "name": "Intervene",
-              "icon": "ability_warrior_victoryrush",
+              "icon": "132365",
               "description": "Run at high speed toward an ally, intercepting all melee and ranged attacks against them for 6 sec while they remain within 10 yds.",
               "maxRanks": 1
             },
             {
               "spellId": 1244088,
               "name": "Interpose",
-              "icon": "ability_paladin_speedoflight",
+              "icon": "571558",
               "description": "Run at high speed toward a target location near your allies, taking 30% of all damage dealt to allies within 3 yards for 8 sec or until you take at least 6,110 damage from this effect.",
               "maxRanks": 1
             }
@@ -2519,14 +2501,14 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            109391,
+            110654,
             90352
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shockwave",
-          "icon": "ability_warrior_shockwave",
+          "icon": "236312",
           "description": "Sends a wave of force in a frontal cone, causing 7 damage and stunning all enemies within 10 yards for 2 sec.",
           "choices": null
         },
@@ -2543,7 +2525,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overwhelming Rage",
-          "icon": "racial_orc_berserkerstrength",
+          "icon": "135726",
           "description": "Maximum Rage increased by 30.",
           "choices": null
         },
@@ -2561,7 +2543,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rallying Cry",
-          "icon": "ability_warrior_rallyingcry",
+          "icon": "132351",
           "description": "Lets loose a rallying cry, granting all party or raid members within 40 yards 10% temporary and maximum health for 10 sec.\r\n\r\nHealth granted increased by 50% when not in a raid.",
           "choices": null
         },
@@ -2578,7 +2560,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Field Dressing",
-          "icon": "inv_misc_bandage_08",
+          "icon": "133678",
           "description": "Healing received increased by 3% and all self-healing increased by an additional 10%.",
           "choices": null
         },
@@ -2589,14 +2571,14 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            90353,
-            108674
+            108674,
+            90353
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spell Reflection",
-          "icon": "ability_warrior_shieldreflection",
+          "icon": "132361",
           "description": "Raise your weapon, reflecting the first spell cast on you and reducing magic damage you take by 20% for 5 sec.",
           "choices": null
         },
@@ -2607,8 +2589,8 @@
           "posX": 2,
           "posY": 7,
           "connections": [
-            90375,
-            109391
+            110654,
+            90375
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2620,15 +2602,15 @@
             {
               "spellId": 384110,
               "name": "Wrecking Throw",
-              "icon": "warrior_talent_icon_mastercleaver",
-              "description": "Hurl your weapon at the enemy, causing 210 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
+              "icon": "460959",
+              "description": "Hurl your weapon at the enemy, causing 211 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 64382,
               "name": "Shattering Throw",
-              "icon": "ability_warrior_shatteringthrow",
-              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 213 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
+              "icon": "311430",
+              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 209 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
               "maxRanks": 1
             }
           ]
@@ -2646,8 +2628,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rumbling Earth",
-          "icon": "spell_shaman_earthquake",
-          "description": "Shockwave&#39;s range increased by 6 yards and when it strikes at least 3 targets its cooldown is reduced by 15 sec.",
+          "icon": "451165",
+          "description": "Shockwave's range increased by 6 yards and when it strikes at least 3 targets its cooldown is reduced by 15 sec.",
           "choices": null
         },
         {
@@ -2657,8 +2639,8 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            90331,
-            90375
+            90375,
+            90331
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2670,14 +2652,14 @@
             {
               "spellId": 384100,
               "name": "Berserker Shout",
-              "icon": "spell_nature_ancestralguardian",
+              "icon": "136009",
               "description": "Go berserk, removing and granting immunity to Fear, Sap, and Incapacitate effects for 6 sec.\r\n\r\nAlso remove fear effects from group members within 12 yds.",
               "maxRanks": 1
             },
             {
               "spellId": 1271925,
               "name": "Fearless",
-              "icon": "ability_warrior_endlessrage",
+              "icon": "132344",
               "description": "Cooldown of Berserker Rage is reduced by 50% and Berseker Rage removes all movement speed-impairing effects.",
               "maxRanks": 1
             }
@@ -2690,8 +2672,8 @@
           "posX": 10,
           "posY": 7,
           "connections": [
-            90331,
-            90385
+            90385,
+            90331
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2703,14 +2685,14 @@
             {
               "spellId": 5246,
               "name": "Intimidating Shout",
-              "icon": "ability_golemthunderclap",
+              "icon": "132154",
               "description": "Causes the targeted enemy to cower in fear while all enemies within 8 yards flee from you and their movement speed is reduced by 70% for 8 sec.\r\nDamage may cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 12323,
               "name": "Piercing Howl",
-              "icon": "spell_shadow_deathscream",
+              "icon": "136147",
               "description": "Snares all enemies within 12 yards, reducing their movement speed by 70% for 8 sec.\r\n\r\nSpurs all allies within 6 yards, increasing their movement speed by 30% for 4 sec.",
               "maxRanks": 1
             }
@@ -2723,14 +2705,14 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            90385,
-            108674
+            108674,
+            90385
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Honed Reflexes",
-          "icon": "spell_holy_borrowedtime",
+          "icon": "237538",
           "description": "Cooldown of Die By the Sword, Intervene, Interpose, Spell Reflection, Storm Bolt, and Pummel reduced by 10%.\r\n\r\nSuccessfully interrupting an enemy increases the damage you deal to them by 5% for 10 sec.",
           "choices": null
         },
@@ -2748,7 +2730,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Armored to the Teeth",
-          "icon": "inv_shoulder_22",
+          "icon": "135053",
           "description": "Gain Strength equal to 5% of your Armor.",
           "choices": null
         },
@@ -2766,7 +2748,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Double Time",
-          "icon": "inv_misc_horn_04",
+          "icon": "237377",
           "description": "Charge gains 1 additional charge and its cooldown is reduced by 3 sec.",
           "choices": null
         },
@@ -2784,7 +2766,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Reinforced Plates",
-          "icon": "inv_chest_plate04",
+          "icon": "132739",
           "description": "Stamina increased by 5% and Armor increased by 5%.",
           "choices": null
         },
@@ -2801,7 +2783,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Barbaric Training",
-          "icon": "ability_garrosh_whirling_corruption",
+          "icon": "892449",
           "description": "Slam, Whirlwind, and Cleave deal 10% more damage and 5% increased critical strike damage.",
           "choices": null
         },
@@ -2819,8 +2801,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Javelineer",
-          "icon": "inv_spear_01",
-          "description": "Range of your thrown abilities is increased by 5 yards.\r\n\r\nDamage dealt by Champion&#39;s Spear, Shattering Throw, and Wrecking Throw increased by 20%.\r\n\r\nShattering Throw and Wrecking Throw silence non-players for 3 sec.",
+          "icon": "8026700",
+          "description": "Range of your thrown abilities is increased by 5 yards.\r\n\r\nDamage dealt by Champion's Spear, Shattering Throw, and Wrecking Throw increased by 20%.\r\n\r\nShattering Throw and Wrecking Throw silence non-players for 3 sec.",
           "choices": null
         },
         {
@@ -2837,7 +2819,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Resonant Voice",
-          "icon": "warrior_disruptingshout",
+          "icon": "589118",
           "description": "The effects of your shouts last 20% longer.",
           "choices": null
         },
@@ -2854,7 +2836,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crushing Force",
-          "icon": "spell_shadow_unholystrength",
+          "icon": "136225",
           "description": "Mortal Strike deals an additional 5% damage and deals 5% increased critical strike damage.",
           "choices": null
         },
@@ -2865,14 +2847,14 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            110118,
-            90347
+            90347,
+            110118
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Cruel Strikes",
-          "icon": "ability_criticalstrike",
+          "icon": "132109",
           "description": "Critical strike chance increased by 1% and critical strike damage of Execute increased by 5%. ",
           "choices": null
         },
@@ -2890,7 +2872,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Dual Wield Specialization",
-          "icon": "ability_dualwield",
+          "icon": "132147",
           "description": "While dual wielding your damage is increased by 3% and movement speed is increased by 2%.",
           "choices": null
         },
@@ -2901,14 +2883,14 @@
           "posX": 12,
           "posY": 10,
           "connections": [
-            108685,
-            108686
+            108686,
+            108685
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Wild Strikes",
-          "icon": "ability_rogue_sprint",
+          "icon": "132307",
           "description": "Haste increased by 1% and your auto-attack critical strikes increase your auto-attack speed by 10% for 10 sec.",
           "choices": null
         },
@@ -2925,7 +2907,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Anger Management",
-          "icon": "warrior_talent_icon_angermanagement",
+          "icon": "971080",
           "description": "Every 20 Rage you spend on attacks reduces the remaining cooldown on Avatar and Colossus Smash by 1 sec.",
           "choices": null
         },
@@ -2943,8 +2925,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Champion's Spear",
-          "icon": "inv_ability_warrior_championsspear",
-          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear&#39;s location and dealing 83 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
+          "icon": "6035322",
+          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear's location and dealing 83 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
           "choices": null
         },
         {
@@ -2954,14 +2936,14 @@
           "posX": 10,
           "posY": 11,
           "connections": [
-            90360,
-            90373
+            90373,
+            90360
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stance Mastery",
-          "icon": "crest_warrior",
+          "icon": "1362372",
           "description": "Your stances have additional effects.\r\n\r\n Battle Stance\r\nIncreases the critical strike damage of your abilities by 3%.\r\n\r\n Defensive Stance\r\nWhen an attack deals 20% or more of your maximum health in damage, that damage is reduced by 15%.",
           "choices": null
         },
@@ -2978,7 +2960,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Battlefield Commander",
-          "icon": "ability_warrior_commandingshout",
+          "icon": "132339",
           "description": "Your Shout abilities have additional effects.\r\n\r\n Battle Shout:\r\nGrants you an additional 3% attack power.\r\n\r\n Rallying Cry:\r\nGrants an additional 2% health and duration increased by 3 sec.\r\n\r\n Piercing Howl:\r\nRadius increased by 100%\r\n\r\n Berserker Shout:\r\nRadius increased by 100%.\r\n\r\n Intimidating Shout:\r\nCooldown reduced by 15 sec.\r\n",
           "choices": null
         },
@@ -2993,8 +2975,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bloodthirst",
-          "icon": "spell_nature_bloodlust",
-          "description": "Assault the target in a bloodthirsty craze, dealing 150 Physical damage and restoring 3% of your health.\r\n\r\nGenerates 8 Rage and has a 30% chance to Enrage you.",
+          "icon": "136012",
+          "description": "Assault the target in a bloodthirsty craze, dealing 149 Physical damage and restoring 3% of your health.\r\n\r\nGenerates 8 Rage and has a 30% chance to Enrage you.",
           "choices": null
         },
         {
@@ -3010,7 +2992,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Raging Blow",
-          "icon": "warrior_wild_strike",
+          "icon": "589119",
           "description": "A mighty blow with both weapons that deals a total of 76 Physical damage.\r\n\r\nGenerates 12 Rage.",
           "choices": null
         },
@@ -3027,7 +3009,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sudden Death",
-          "icon": "ability_warrior_improveddisciplines",
+          "icon": "132346",
           "description": "Your attacks have a chance to make your next Execute cost no Rage, be usable on any target regardless of their health, and deal damage as if you spent 40 Rage.",
           "choices": null
         },
@@ -3050,14 +3032,14 @@
             {
               "spellId": 383848,
               "name": "Frenzied Enrage",
-              "icon": "spell_shadow_unholyfrenzy",
+              "icon": "136224",
               "description": "Enrage increases your haste by 15% and your movement speed by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 440277,
               "name": "Powerful Enrage",
-              "icon": "ability_warrior_strengthofarms",
+              "icon": "236314",
               "description": "Enrage increases your mastery by 15% and your Leech by 3%.",
               "maxRanks": 1
             }
@@ -3076,7 +3058,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Execute",
-          "icon": "inv_sword_48",
+          "icon": "135358",
           "description": "Execute no longer costs Rage and now generates 20 Rage.",
           "choices": null
         },
@@ -3093,7 +3075,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focus in Chaos",
-          "icon": "ability_hunter_mastermarksman",
+          "icon": "132177",
           "description": "While Enraged, your auto-attacks can no longer miss.",
           "choices": null
         },
@@ -3111,7 +3093,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Enraged Regeneration",
-          "icon": "ability_warrior_focusedrage",
+          "icon": "132345",
           "description": "Reduces damage taken by 30% and Bloodthirst restores an additional 20% health for 8 sec. Usable while stunned or incapacitated.",
           "choices": null
         },
@@ -3129,7 +3111,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Warpaint",
-          "icon": "ability_rogue_preparation",
+          "icon": "460693",
           "description": "You take 10% reduced damage while Enrage is active.",
           "choices": null
         },
@@ -3146,8 +3128,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Whirlwind",
-          "icon": "ability_whirlwind",
-          "description": "Whirlwind causes your next 4 single-target attacks to strike up to 4 additional targets for 65% damage.\r\n\r\nWhirlwind generates 3 Rage plus an additional 1 per target hit. Maximum 8 Rage.\r\n\r\nIf you know Rend, Whirlwind inflicts Rend on all targets.",
+          "icon": "132369",
+          "description": "Whirlwind causes your next 4 single-target attacks to strike up to 4 additional targets for 65% damage.\r\n\r\nWhirlwind generates an additional 1 Rage per target hit. Maximum 8 Rage.",
           "choices": null
         },
         {
@@ -3163,7 +3145,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Massacre",
-          "icon": "inv_axe_2h_orcwarrior_c_01",
+          "icon": "800997",
           "description": "Execute is usable on targets below 35% health and its cooldown is reduced by 1.5 sec.",
           "choices": null
         },
@@ -3174,14 +3156,14 @@
           "posX": 32,
           "posY": 6,
           "connections": [
-            90395,
-            90403
+            90403,
+            90395
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fresh Meat",
-          "icon": "ability_deathwing_bloodcorruption_death",
+          "icon": "538039",
           "description": "Bloodthirst always Enrages you the first time you strike a target and it has a 15% increased chance to trigger Enrage.",
           "choices": null
         },
@@ -3198,7 +3180,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Invigorating Fury",
-          "icon": "spell_misc_emotionangry",
+          "icon": "237553",
           "description": "Enraged Regeneration lasts 3 sec longer and instantly heals for 10% of your maximum health.",
           "choices": null
         },
@@ -3209,15 +3191,15 @@
           "posX": 36,
           "posY": 6,
           "connections": [
-            90394,
-            90395
+            90395,
+            90394
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rampage",
-          "icon": "ability_warrior_rampage",
-          "description": "Unleash a series of 4 brutal strikes for a total of 104 Physical damage.\r\n\r\nEnrages you.",
+          "icon": "132352",
+          "description": "Unleash a series of 4 brutal strikes for a total of 105 Physical damage.\r\n\r\nEnrages you.",
           "choices": null
         },
         {
@@ -3234,7 +3216,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Raging Blow",
-          "icon": "warrior_wild_strike",
+          "icon": "589119",
           "description": "Raging Blow has 2 charges and has a 25% chance to instantly reset its own cooldown.",
           "choices": null
         },
@@ -3251,8 +3233,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rampaging Ruin",
-          "icon": "ability_warrior_trauma",
-          "description": "While Improved Whirlwind is active Rampage instead strikes all targets in front of you for 69 Physical damage. Deals reduced damage beyond 5 targets.",
+          "icon": "132364",
+          "description": "While Improved Whirlwind is active, Rampage's final strike slams the ground, dealing 7 Physical damage to all enemies within 8 yds of your target. Deals reduced damage beyond 5 targets",
           "choices": null
         },
         {
@@ -3262,14 +3244,14 @@
           "posX": 30,
           "posY": 7,
           "connections": [
-            90399,
-            90410
+            90410,
+            90399
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deep Wounds",
-          "icon": "ability_backstab",
+          "icon": "132090",
           "description": "Execute inflicts Deep Wounds on the target.\r\n\r\n Deep Wounds\r\nCauses the target to suffer 50 Bleed damage over 6 sec. If this effect is reapplied, any remaining damage will be added to the new Deep Wounds.",
           "choices": null
         },
@@ -3286,8 +3268,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Spite",
-          "icon": "warrior_talent_icon_furyintheblood",
-          "description": "Bloodthirst and Raging Blow damage increased by 2.5% and critical strike damage increased by 2.5%.",
+          "icon": "458971",
+          "description": "Bloodthirst and Raging Blow damage increased by 2.5% and critical strike damage increased by a further 2.5%.",
           "choices": null
         },
         {
@@ -3303,7 +3285,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Scent of Blood",
-          "icon": "ability_hunter_harass",
+          "icon": "132175",
           "description": "Rampage increases the damage of your next Bloodthirst by 10%, stacking up to 2 times.",
           "choices": null
         },
@@ -3320,7 +3302,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Kill or Be Killed",
-          "icon": "inv12_ability_warrior_fury",
+          "icon": "7439235",
           "description": "When you would sustain fatal damage, you instead fly into an unstoppable rage, becoming unkillable and immune to movement-impairing effects for 8 sec as you seek revenge on your would-be killer.\r\n\r\nIf you kill your killer in that time, you emerge from your blind rage triumphant, with at least 20% of your max health intact. If you are not victorious, you die.\r\n\r\nThis effect can only occur once every 5 min and if your killer is alive when you sustain fatal damage.",
           "choices": null
         },
@@ -3337,8 +3319,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hack and Slash",
-          "icon": "ability_rogue_rollthebones02",
-          "description": "Rampage has a 100% chance to refund a charge of Raging Blow.",
+          "icon": "1269440",
+          "description": "Rampage has a 75% chance to refund a charge of Raging Blow and increase the damage of your next Raging Blow by 20%.",
           "choices": null
         },
         {
@@ -3354,27 +3336,42 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Cruelty",
-          "icon": "spell_nature_focusedmind",
+          "icon": "136035",
           "description": "While Enraged, Bloodthirst and Raging Blow deal 5% increased damage.",
           "choices": null
         },
         {
           "id": 109967,
-          "type": "round",
+          "type": "choice",
           "treeType": "spec",
           "posX": 42,
           "posY": 7,
           "connections": [
-            90391,
-            90390
+            90390,
+            90391
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Meat Cleaver",
-          "icon": "warrior_talent_icon_mastercleaver",
-          "description": "Whirlwind deals 50% additional damage when it hits 3 or more targets.",
-          "choices": null
+          "name": null,
+          "icon": null,
+          "description": null,
+          "choices": [
+            {
+              "spellId": 280392,
+              "name": "Meat Cleaver",
+              "icon": "460959",
+              "description": "Whirlwind deals 50% additional damage when it hits 3 or more targets.",
+              "maxRanks": 1
+            },
+            {
+              "spellId": 1300463,
+              "name": "Carving Blades",
+              "icon": "840720",
+              "description": "Whirlwind deals 50% additional damage when it hits only a single target.",
+              "maxRanks": 1
+            }
+          ]
         },
         {
           "id": 90402,
@@ -3389,7 +3386,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cold Steel, Hot Blood",
-          "icon": "ability_rogue_hungerforblood",
+          "icon": "236276",
           "description": "Bloodthirst critical strikes generate 4 additional Rage and inflict a Gushing Wound that deals 42 Bleed damage over 6 sec and heals you for the damage dealt.",
           "choices": null
         },
@@ -3407,7 +3404,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ragedrinker",
-          "icon": "spell_nzinsanity_bloodthirst",
+          "icon": "3163621",
           "description": "Bloodthirst critical strikes restore 3% additional health and increase the damage of Raging Blow by 10% for 4 sec.",
           "choices": null
         },
@@ -3419,14 +3416,14 @@
           "posY": 8,
           "connections": [
             90407,
-            109969,
-            109965
+            109965,
+            109969
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Recklessness",
-          "icon": "warrior_talent_icon_innerrage",
+          "icon": "458972",
           "description": "Go berserk, increasing all Rage generation by 50% and granting your abilities 20% increased critical strike chance for 12 sec.",
           "choices": null
         },
@@ -3444,7 +3441,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bloodcraze",
-          "icon": "ability_creature_cursed_02",
+          "icon": "132094",
           "description": "Raging Blow increases the damage of your next Bloodthirst by 5%, stacking up to 5 times.",
           "choices": null
         },
@@ -3461,7 +3458,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wrath and Fury",
-          "icon": "inv_sword_2h_artifactarathor_d_03",
+          "icon": "1260690",
           "description": "Raging Blow deals 15% increased damage and while Enraged, Raging Blow has a 10% increased chance to instantly reset its own cooldown.\r\n",
           "choices": null
         },
@@ -3479,8 +3476,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Deft Experience",
-          "icon": "inv_misc_book_07",
-          "description": "Bloodthirst&#39;s critical strike chance increased by 5% and if you are Enraged, Bloodthirst extends your Enrage by 0.5 sec. This extension is doubled if Bloodthirst critically strikes your primary target.",
+          "icon": "133739",
+          "description": "Bloodthirst's critical strike chance increased by 5% and if you are Enraged, Bloodthirst extends your Enrage by 0.5 sec. This extension is doubled if Bloodthirst critically strikes your primary target.",
           "choices": null
         },
         {
@@ -3490,15 +3487,15 @@
           "posX": 36,
           "posY": 9,
           "connections": [
-            90412,
             90405,
-            109962
+            109962,
+            90412
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frenzy",
-          "icon": "ability_rogue_bloodyeye",
+          "icon": "132284",
           "description": "Rampage increases your haste by 2% for 12 sec. Multiple instances of this effect may overlap.",
           "choices": null
         },
@@ -3509,15 +3506,15 @@
           "posX": 40,
           "posY": 9,
           "connections": [
-            90387,
-            90405
+            90405,
+            90387
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Critical Thinking",
-          "icon": "ability_criticalstrike",
-          "description": "Raging Blow&#39;s critical strike chance increased by 5% and critical strike damage increased by 5%.",
+          "icon": "132109",
+          "description": "Raging Blow's critical strike chance increased by 5% and critical strike damage increased by 5%.",
           "choices": null
         },
         {
@@ -3533,7 +3530,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Vicious Contempt",
-          "icon": "ability_ironmaidens_sorkasprey",
+          "icon": "1035053",
           "description": "Bloodthirst deals 25% increased damage to enemies who are below 35% health.",
           "choices": null
         },
@@ -3551,7 +3548,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Odyn's Fury",
-          "icon": "inv_sword_1h_artifactvigfus_d_01",
+          "icon": "1278409",
           "description": "Unleashes your power, dealing 135 Physical damage and an additional 182 Bleed damage over 4 sec to all enemies within 12 yards. Deals reduced damage beyond 8 targets.\r\n\r\nEnrages you and generates 20 Rage.\r\n",
           "choices": null
         },
@@ -3569,7 +3566,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bloodborne",
-          "icon": "inv_artifact_bloodoftheassassinated",
+          "icon": "1394887",
           "description": "Bloodthirst causes your Bleeds to deal 20% additional damage for 8 sec.",
           "choices": null
         },
@@ -3586,7 +3583,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Surge of Adrenaline",
-          "icon": "inv_1115_warrior_fasterreflexes",
+          "icon": "6712968",
           "description": "When Raging Blow resets its own cooldown, your auto-attack damage and speed is increased by 30% for 6 sec.",
           "choices": null
         },
@@ -3604,7 +3601,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Executioner's Wrath",
-          "icon": "inv_12_nonmasculinecharacter_human",
+          "icon": "7214195",
           "description": "Execute generates 5 additional Rage and increases the damage of Rampage by 10% for 4 sec.",
           "choices": null
         },
@@ -3622,8 +3619,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Reckless Abandon",
-          "icon": "spell_fire_incinerate",
-          "description": "Activating Recklessness generates 50 Rage and while Recklessness is active, Raging Blow and Bloodthirst are upgraded to Crushing Blow and Bloodbath.\r\n\r\n Crushing Blow\r\nDeals increased damage and deals 20% additional critical strike damage.\r\n\r\n Bloodbath\r\nDeals increased damage and wounds the target to suffer 21 Bleed damage over 6 sec. Using Bloodbath on a target affected by Bloodbath extends the bleed by 6 sec.",
+          "icon": "135818",
+          "description": "Activating Recklessness generates 50 Rage and while Recklessness is active, Raging Blow and Bloodthirst are upgraded to Crushing Blow and Bloodbath.\r\n\r\n Crushing Blow\r\nDeals increased damage and deals 20% additional critical strike damage.\r\n\r\n Bloodbath\r\nDeals increased damage and wounds the target to suffer 65 Bleed damage over 6 sec. Using Bloodbath on a target affected by Bloodbath extends the bleed by 6 sec.",
           "choices": null
         },
         {
@@ -3646,15 +3643,15 @@
             {
               "spellId": 107574,
               "name": "Avatar",
-              "icon": "warrior_talent_icon_avatar",
+              "icon": "613534",
               "description": "Transform into a colossus, increasing all damage you deal by 20% and reducing damage you take from area of effect attacks by 5% for 20 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 227847,
               "name": "Bladestorm",
-              "icon": "ability_warrior_bladestorm",
-              "description": "Become an unstoppable storm of destructive force, striking all nearby enemies for 667 Physical damage over 5.4 sec. Deals reduced damage beyond 8 targets.\r\n\r\nYou are immune to movement impairing and loss of control effects, but can use defensive abilities and can avoid attacks.\r\n",
+              "icon": "236303",
+              "description": "Become an unstoppable storm of destructive force, striking all nearby enemies for 669 Physical damage over 5.4 sec. Deals reduced damage beyond 8 targets.\r\n\r\nYou are immune to movement impairing and loss of control effects, but can use defensive abilities and can avoid attacks.\r\n",
               "maxRanks": 1
             }
           ]
@@ -3670,7 +3667,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Rampaging Berserker",
-          "icon": "inv12_apextalent_warrior_rampagingberserker2",
+          "icon": "7658123",
           "description": null,
           "levels": [
             81,
@@ -3685,7 +3682,7 @@
             },
             {
               "spellId": 1269309,
-              "description": "Rampage&#39;s Rage cost is reduced by 15 and damage is increased by a further 5% during Recklessness.",
+              "description": "Rampage's Rage cost is reduced by 15 and damage is increased by a further 5% during Recklessness.",
               "maxRanks": 2
             },
             {
@@ -3709,7 +3706,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Show No Mercy",
-          "icon": "warrior_talent_icon_lambstotheslaughter",
+          "icon": "458973",
           "description": "Executioner also increases your Execute critical strike chance and critical strike damage by 3% per stack.",
           "choices": null
         },
@@ -3733,14 +3730,14 @@
             {
               "spellId": 444778,
               "name": "Culling Cyclone",
-              "icon": "ability_warrior_bladestorm",
+              "icon": "236303",
               "description": "Each strike of Bladestorm deals an additional 20% damage evenly split across all targets.",
               "maxRanks": 1
             },
             {
               "spellId": 446085,
               "name": "Brutal Finish",
-              "icon": "ability_revendreth_warrior",
+              "icon": "3565727",
               "description": "Your next Mortal Strike after Bladestorm ends deals 50% additional damage.",
               "maxRanks": 1
             }
@@ -3766,15 +3763,15 @@
             {
               "spellId": 444773,
               "name": "Fierce Followthrough",
-              "icon": "spell_deathknight_butcher2",
+              "icon": "237517",
               "description": "Mortal Strike critical strikes increase the damage of your next Mortal Strike by 20%.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 444774,
               "name": "Opportunist",
-              "icon": "ability_warrior_weaponmastery",
-              "description": "When Overpower has its cooldown reset by Tactician, your next Overpower deals 10% additional damage and 10% additional critical damage. Stacking up to 2 times.",
+              "icon": "132367",
+              "description": "When Overpower has its cooldown reset by Tactician, your next Overpower deals 20% additional damage and 20% additional critical damage. Stacking up to 2 times.",
               "maxRanks": 1
             }
           ]
@@ -3793,8 +3790,8 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Imminent Demise",
-          "icon": "ability_warrior_improveddisciplines",
-          "description": "Every 3 Slayer&#39;s Strikes you gain Sudden Death.\r\n\r\nUsing Sudden Death accelerates your next Bladestorm, striking 1 additional time (max 3). Bladestorm&#39;s total duration is unchanged.\r\n\r\nSudden Death has a 100% chance to trigger Reap the Storm at 100% effectiveness.",
+          "icon": "132346",
+          "description": "Every 3 Slayer's Strikes you gain Sudden Death.\r\n\r\nUsing Sudden Death accelerates your next Bladestorm, striking 1 additional time (max 3). Bladestorm's total duration is unchanged.\r\n\r\nSudden Death has a 100% chance to trigger Reap the Storm at 100% effectiveness.",
           "choices": null
         },
         {
@@ -3817,14 +3814,14 @@
             {
               "spellId": 444776,
               "name": "Relentless Pursuit",
-              "icon": "ability_rogue_sprint",
+              "icon": "132307",
               "description": "Charge increases your movement speed by 70% for 3 sec.\r\n\r\nCharge removes all movement impairing effects, this effect cannot occur more than once every 30 sec.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 444777,
               "name": "Vicious Agility",
-              "icon": "ability_paladin_speedoflight",
+              "icon": "571558",
               "description": "Heroic Leap reduces the cooldown of Charge by 5 sec and Charge reduces the cooldown of Heroic Leap by 2 sec.",
               "maxRanks": 1
             }
@@ -3844,7 +3841,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Slayer's Malice",
-          "icon": "ability_warrior_revenge",
+          "icon": "132353",
           "description": "Overpower and Execute damage increased by 15%.",
           "choices": null
         },
@@ -3862,8 +3859,8 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Reap the Storm",
-          "icon": "ability_arakkoa_spinning_blade",
-          "description": "When Cleave hits 3 or more targets you have a 20% chance to unleash a flurry of steel, striking all nearby enemies for 266 Physical damage and applying Overwhelmed. Deals reduced damage beyond 8 targets.\r\n",
+          "icon": "1016243",
+          "description": "When Cleave hits 3 or more targets you have a 20% chance to unleash a flurry of steel, striking all nearby enemies for 267 Physical damage and applying Overwhelmed. Deals reduced damage beyond 8 targets.\r\n",
           "choices": null
         },
         {
@@ -3880,7 +3877,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Overwhelming Blades",
-          "icon": "inv_10_specialization_blacksmithing_blades_color1",
+          "icon": "4624383",
           "description": "Each strike of Bladestorm applies Overwhelmed to all enemies affected, increasing damage you deal to them by 1% for 20 sec, max 5 stacks.",
           "choices": null
         },
@@ -3898,7 +3895,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Death Drive",
-          "icon": "ability_warrior_focusedrage",
+          "icon": "132345",
           "description": "You heal for 15% of damage dealt by Sudden Death.",
           "choices": null
         },
@@ -3914,8 +3911,8 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Slayer's Dominance",
-          "icon": "inv_ability_slayerwarrior_slayersdominance",
-          "description": "Your attacks against your primary target have a 15% chance to overwhelm their defenses and trigger a Slayer&#39;s Strike, dealing 296 Physical damage and granting you a stack of Executioner, increasing your Execute damage by 3% for 12 sec. Multiple stacks of Executioner may overlap.",
+          "icon": "5927649",
+          "description": "Your attacks against your primary target have a 25% chance to overwhelm their defenses and trigger a Slayer's Strike, dealing 294 Physical damage and granting you a stack of Executioner, increasing your Execute damage by 3% for 12 sec. Multiple stacks of Executioner may overlap.",
           "choices": null
         },
         {
@@ -3935,7 +3932,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Unrelenting Onslaught",
-          "icon": "ability_warrior_commandingshout",
+          "icon": "132339",
           "description": "Using Sudden Death causes you to both reduce the cooldown of Bladestorm by 5 sec and apply 1 stack of Overwhelmed to your primary target per stack of Executioner you have.\r\n\r\nYou can use Pummel and Storm Bolt while Bladestorming.\r\n\r\nBladestorm damage increased by 20%.",
           "choices": null
         },
@@ -3953,7 +3950,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Unhinged",
-          "icon": "spell_shadow_spectralsight",
+          "icon": "136215",
           "description": "Every 2 strikes of Bladestorm, you automatically cast a Mortal Strike at your target or random nearby enemy, dealing 100% of normal damage.\r\n",
           "choices": null
         },
@@ -3971,8 +3968,8 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Deadly Focus",
-          "icon": "spell_hunter_focusingshot",
-          "description": "Executioner&#39;s duration is increased by 6 sec.",
+          "icon": "1033497",
+          "description": "Executioner's duration is increased by 6 sec.",
           "choices": null
         },
         {
@@ -3989,7 +3986,7 @@
           "heroSubtree": "Slayer",
           "maxRanks": 1,
           "name": "Violent Euphoria",
-          "icon": "ability_butcher_exsanguination",
+          "icon": "999949",
           "description": "Bladestorm puts you into a battle trance, granting you 15% haste for 8 sec after you stop Bladestorming.",
           "choices": null
         },
@@ -4007,8 +4004,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Thunder Blast",
-          "icon": "warrior_talent_icon_bloodandthunder",
-          "description": "Shield Slam and Bloodthirst have a 35% chance to grant you Thunder Blast, stacking up to 2 charges.\r\n\r\nThunder Blast\r\nYour next Thunder Clap becomes a Thunder Blast that deals 69 Stormstrike damage and generates 2 Rage.",
+          "icon": "460957",
+          "description": "Shield Slam and Bloodthirst have a 35% chance to grant you Thunder Blast, stacking up to 2 charges.\r\n\r\nThunder Blast\r\nYour next Thunder Clap becomes a Thunder Blast that deals 81 Stormstrike damage and generates 2 Rage.",
           "choices": null
         },
         {
@@ -4031,14 +4028,14 @@
             {
               "spellId": 436201,
               "name": "Gathering Clouds",
-              "icon": "spell_nature_stormreach",
+              "icon": "136099",
               "description": "Your attacks trigger Lightning Strikes 30% more often.",
               "maxRanks": 1
             },
             {
               "spellId": 436152,
               "name": "Thorim's Might",
-              "icon": "inv_ability_mountainthanewarrior_thorimsmight",
+              "icon": "5927639",
               "description": "Lightning Strikes generate 3 Rage.\r\n\r\nRaging Blow and Execute damage increased by 25%.",
               "maxRanks": 1
             }
@@ -4064,14 +4061,14 @@
             {
               "spellId": 437079,
               "name": "Flashing Skies",
-              "icon": "spell_lightning_lightningbolt01",
+              "icon": "135990",
               "description": "Thunder Blast calls down a Lightning Strike on an enemy it hits.",
               "maxRanks": 1
             },
             {
               "spellId": 456270,
               "name": "Snap Induction",
-              "icon": "ability_thunderking_thunderstruck",
+              "icon": "839983",
               "description": "Activating Recklessness grants a charge of Thunder Blast.",
               "maxRanks": 1
             }
@@ -4097,14 +4094,14 @@
             {
               "spellId": 438590,
               "name": "Keep Your Feet on the Ground",
-              "icon": "ability_thunderking_overcharge",
+              "icon": "839979",
               "description": "Physical damage taken reduced by 2%.\r\n\r\nThunder Blast reduces damage you take by 8% for 5 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 434970,
               "name": "Steadfast as the Peaks",
-              "icon": "ability_warrior_devastate",
+              "icon": "132342",
               "description": "Stamina increased by 5%.\r\n\r\nVictory Rush increases your maximum health by 10% for 5 sec. When this health increase expires, you heal for any amount of the original Victory Rush that healed you in excess of your full health.",
               "maxRanks": 1
             }
@@ -4124,8 +4121,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Ground Current",
-          "icon": "warrior_talent_icon_thunderstruck",
-          "description": "Lightning Strikes also deal 15 Nature damage to enemies near their target. Damage reduced beyond 5 targets.",
+          "icon": "458976",
+          "description": "Lightning Strikes also deal 39 Nature damage to enemies near their target. Damage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -4140,7 +4137,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Lightning Strikes",
-          "icon": "ability_vehicle_electrocharge",
+          "icon": "252174",
           "description": "Damaging enemies with Thunder Clap, Raging Blow, or Execute has a 25% chance to also strike one with a lightning bolt, dealing 54 Nature damage.\r\n\r\nLightning Strikes occur 30% more often during Avatar.",
           "choices": null
         },
@@ -4151,17 +4148,17 @@
           "posX": 46,
           "posY": 5,
           "connections": [
+            109809,
             94797,
             94792,
-            94807,
-            109809
+            94807
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Avatar of the Storm",
-          "icon": "achievement_dungeon_blackrockcaverns_ascendantlordobsidius",
+          "icon": "432002",
           "description": "Casting Avatar grants you 2 charges of Thunder Blast and resets the cooldown of Thunder Clap.\r\n\r\nWhile Avatar is not active, Lightning Strikes have a 10% chance to grant you Avatar for 4 secs.\r\n\r\nThunder Blast\r\nYour next Thunder Clap becomes a Thunder Blast that deals Stormstrike damage.",
           "choices": null
         },
@@ -4179,7 +4176,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Burst of Power",
-          "icon": "shaman_pvp_thundercharge",
+          "icon": "1385916",
           "description": "Lightning Strikes have a 15% chance to make your next 2 Bloodthirsts have no cooldown.",
           "choices": null
         },
@@ -4197,7 +4194,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Strength of the Mountain",
-          "icon": "ability_warrior_titansgrip",
+          "icon": "236316",
           "description": "Shield Slam damage increased by 15%.\r\n\r\nBloodthirst and Rampage damage increased by 25%.",
           "choices": null
         },
@@ -4215,8 +4212,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Crashing Thunder",
-          "icon": "spell_nature_thunderclap",
-          "description": "Stormstrike or Nature damage your abilities deal is increased by 5%. Stormstrike damage ignores Armor.\r\n\r\nThunder Clap damage increased by 30%.",
+          "icon": "136105",
+          "description": "Stormstrike or Nature damage your abilities deal is increased by 5%. Stormstrike damage ignores Armor.\r\n\r\nThunder Clap damage increased by 10%.",
           "choices": null
         },
         {
@@ -4239,14 +4236,14 @@
             {
               "spellId": 436162,
               "name": "Storm Bolts",
-              "icon": "warrior_talent_icon_stormbolt",
+              "icon": "613535",
               "description": "Storm Bolt also hits 2 additional nearby targets, stunning them for 2 sec, but its cooldown is increased by 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 438597,
               "name": "Storm Shield",
-              "icon": "spell_winston_bubble",
+              "icon": "1320371",
               "description": "Intervening a target grants them a shield for 5 sec that absorbs magic damage equal to 3 times your Armor.",
               "maxRanks": 1
             }
@@ -4266,8 +4263,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Capacitance",
-          "icon": "spell_nature_purge",
-          "description": "During Avatar, Thunder Blast extends Avatar&#39;s duration by 2.0 sec.",
+          "icon": "136075",
+          "description": "During Avatar, Thunder Blast extends Avatar's duration by 2.0 sec.",
           "choices": null
         },
         {
@@ -4284,7 +4281,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Conductivity",
-          "icon": "spell_shaman_thunderstorm",
+          "icon": "237589",
           "description": "Lightning Strike damage increased by 10% and critical strike damage increased by 10%.",
           "choices": null
         },
@@ -4302,7 +4299,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Storm Surge",
-          "icon": "ability_racial_avatar",
+          "icon": "132275",
           "description": "Avatar increases the damage of Thunder Clap by 50% and reduces its cooldown by 50%.",
           "choices": null
         }
@@ -4369,7 +4366,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Battle Stance",
-          "icon": "ability_warrior_offensivestance",
+          "icon": "132349",
           "description": "A balanced combat state that increases the critical strike chance of your abilities by 3% and reduces the duration of movement impairing effects by 10%. \r\n\r\nLasts until canceled.",
           "choices": null
         },
@@ -4384,7 +4381,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Defensive Stance",
-          "icon": "ability_warrior_defensivestance",
+          "icon": "132341",
           "description": "A defensive combat state that reduces all damage you take by 15% and all damage you deal by 10%.\r\n\r\nLasts until canceled.",
           "choices": null
         },
@@ -4401,7 +4398,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fast Footwork",
-          "icon": "ability_hunter_posthaste",
+          "icon": "461119",
           "description": "Movement speed increased by 5%.",
           "choices": null
         },
@@ -4418,7 +4415,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "War Machine",
-          "icon": "ability_hunter_rapidkilling",
+          "icon": "132205",
           "description": "Your auto-attacks generate 10% more Rage.\r\n\r\nKilling an enemy instantly generates 5 Rage and increases your movement speed by 30% for 8 sec.",
           "choices": null
         },
@@ -4435,8 +4432,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thunder Clap",
-          "icon": "spell_nature_thunderclap",
-          "description": "Blasts all enemies within 8 yards for 81 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.\r\n\r\nIf you know Rend, inflicts Rend on all targets.",
+          "icon": "136105",
+          "description": "Blasts all enemies within 8 yards for 81 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -4452,7 +4449,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leeching Strikes",
-          "icon": "inv_artifact_bloodoftheassassinated",
+          "icon": "1394887",
           "description": "Leech increased by 3%.",
           "choices": null
         },
@@ -4470,8 +4467,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Impending Victory",
-          "icon": "spell_impending_victory",
-          "description": "Instantly attack the target, causing 21 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
+          "icon": "589768",
+          "description": "Instantly attack the target, causing 20 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
           "choices": null
         },
         {
@@ -4481,14 +4478,14 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            90328,
-            90343
+            90343,
+            90328
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Heroic Leap",
-          "icon": "ability_heroicleap",
+          "icon": "236171",
           "description": "Leap through the air toward a target location, slamming down with destructive force to deal 8 Physical damage to all enemies within 8 yards.",
           "choices": null
         },
@@ -4505,8 +4502,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crackling Thunder",
-          "icon": "ability_thunderking_overcharge",
-          "description": "Thunder Clap&#39;s radius is increased by 50% and it reduces affected target&#39;s movement speed by an additional 20%.",
+          "icon": "839979",
+          "description": "Thunder Clap's radius is increased by 50% and it reduces affected target's movement speed by an additional 20%.",
           "choices": null
         },
         {
@@ -4523,26 +4520,26 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Storm Bolt",
-          "icon": "warrior_talent_icon_stormbolt",
-          "description": "Hurls your weapon at an enemy, causing 10 Physical damage and stunning for 4 sec.",
+          "icon": "613535",
+          "description": "Hurls your weapon at an enemy, causing 9 Physical damage and stunning for 4 sec.",
           "choices": null
         },
         {
-          "id": 109391,
-          "type": "square",
+          "id": 110653,
+          "type": "round",
           "treeType": "class",
           "posX": 2,
           "posY": 5,
           "connections": [
-            90344,
-            90326
+            90326,
+            90344
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Rend",
-          "icon": "ability_gouge",
-          "description": "Lash out with your weapon, striking all targets within 10 yds for 92 Physical damage instantly and wounding them for an additional 74 Bleed damage over 15 sec.",
+          "name": "Blood and Thunder",
+          "icon": "460957",
+          "description": "Thunder Clap affects all targets with Rend, causing them to Bleed for 74 damage over 15 sec.\r\n",
           "choices": null
         },
         {
@@ -4558,7 +4555,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Second Wind",
-          "icon": "ability_hunter_harass",
+          "icon": "132175",
           "description": "Restores 6% health every 1 sec when you have not taken damage for 5 sec.\r\n\r\nRestores 2% health every 1 sec while you are below 35% health. The amount restored increases the closer you are to death.",
           "choices": null
         },
@@ -4577,7 +4574,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Frothing Berserker",
-          "icon": "warrior_talent_icon_furyintheblood",
+          "icon": "458971",
           "description": "Mortal Strike and Cleave have a 20% chance to immediately refund 10% of the Rage spent.",
           "choices": null
         },
@@ -4594,7 +4591,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bounding Stride",
-          "icon": "ability_heroicleap",
+          "icon": "236171",
           "description": "Reduces the cooldown of Heroic Leap by 15 sec and Heroic Leap also increases your movement speed by 70% for 3 sec.",
           "choices": null
         },
@@ -4605,14 +4602,14 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            90346,
-            90337
+            90337,
+            90346
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pain and Gain",
-          "icon": "spell_holy_painsupression",
+          "icon": "135936",
           "description": "When you take any damage, heal for 2.0% of your maximum health. \r\n\r\nThis can only occur once every 10 sec.",
           "choices": null
         },
@@ -4630,7 +4627,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Intervene",
-          "icon": "ability_warrior_victoryrush",
+          "icon": "132365",
           "description": "Run at high speed toward an ally, intercepting all melee and ranged attacks against them for 6 sec while they remain within 10 yds.",
           "choices": null
         },
@@ -4641,15 +4638,15 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            109391,
+            110653,
             90352
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shockwave",
-          "icon": "ability_warrior_shockwave",
-          "description": "Sends a wave of force in a frontal cone, causing 7 damage and stunning all enemies within 10 yards for 2 sec.",
+          "icon": "236312",
+          "description": "Sends a wave of force in a frontal cone, causing 6 damage and stunning all enemies within 10 yards for 2 sec.",
           "choices": null
         },
         {
@@ -4665,7 +4662,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overwhelming Rage",
-          "icon": "racial_orc_berserkerstrength",
+          "icon": "135726",
           "description": "Maximum Rage increased by 30.",
           "choices": null
         },
@@ -4683,7 +4680,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rallying Cry",
-          "icon": "ability_warrior_rallyingcry",
+          "icon": "132351",
           "description": "Lets loose a rallying cry, granting all party or raid members within 40 yards 10% temporary and maximum health for 10 sec.\r\n\r\nHealth granted increased by 50% when not in a raid.",
           "choices": null
         },
@@ -4700,7 +4697,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Field Dressing",
-          "icon": "inv_misc_bandage_08",
+          "icon": "133678",
           "description": "Healing received increased by 3% and all self-healing increased by an additional 10%.",
           "choices": null
         },
@@ -4718,7 +4715,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spell Reflection",
-          "icon": "ability_warrior_shieldreflection",
+          "icon": "132361",
           "description": "Raise your weapon, reflecting the first spell cast on you and reducing magic damage you take by 20% for 5 sec.",
           "choices": null
         },
@@ -4729,8 +4726,8 @@
           "posX": 2,
           "posY": 7,
           "connections": [
-            90375,
-            109391
+            110653,
+            90375
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4742,15 +4739,15 @@
             {
               "spellId": 384110,
               "name": "Wrecking Throw",
-              "icon": "warrior_talent_icon_mastercleaver",
-              "description": "Hurl your weapon at the enemy, causing 206 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
+              "icon": "460959",
+              "description": "Hurl your weapon at the enemy, causing 209 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 64382,
               "name": "Shattering Throw",
-              "icon": "ability_warrior_shatteringthrow",
-              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 213 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
+              "icon": "311430",
+              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 209 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
               "maxRanks": 1
             }
           ]
@@ -4768,8 +4765,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rumbling Earth",
-          "icon": "spell_shaman_earthquake",
-          "description": "Shockwave&#39;s range increased by 6 yards and when it strikes at least 3 targets its cooldown is reduced by 15 sec.",
+          "icon": "451165",
+          "description": "Shockwave's range increased by 6 yards and when it strikes at least 3 targets its cooldown is reduced by 15 sec.",
           "choices": null
         },
         {
@@ -4779,8 +4776,8 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            90331,
-            90375
+            90375,
+            90331
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4792,14 +4789,14 @@
             {
               "spellId": 384100,
               "name": "Berserker Shout",
-              "icon": "spell_nature_ancestralguardian",
+              "icon": "136009",
               "description": "Go berserk, removing and granting immunity to Fear, Sap, and Incapacitate effects for 6 sec.\r\n\r\nAlso remove fear effects from group members within 12 yds.",
               "maxRanks": 1
             },
             {
               "spellId": 1271925,
               "name": "Fearless",
-              "icon": "ability_warrior_endlessrage",
+              "icon": "132344",
               "description": "Cooldown of Berserker Rage is reduced by 50% and Berseker Rage removes all movement speed-impairing effects.",
               "maxRanks": 1
             }
@@ -4812,8 +4809,8 @@
           "posX": 10,
           "posY": 7,
           "connections": [
-            90331,
-            90385
+            90385,
+            90331
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4825,14 +4822,14 @@
             {
               "spellId": 5246,
               "name": "Intimidating Shout",
-              "icon": "ability_golemthunderclap",
+              "icon": "132154",
               "description": "Causes the targeted enemy to cower in fear while all enemies within 8 yards flee from you and their movement speed is reduced by 70% for 8 sec.\r\nDamage may cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 12323,
               "name": "Piercing Howl",
-              "icon": "spell_shadow_deathscream",
+              "icon": "136147",
               "description": "Snares all enemies within 12 yards, reducing their movement speed by 70% for 8 sec.\r\n\r\nSpurs all allies within 6 yards, increasing their movement speed by 30% for 4 sec.",
               "maxRanks": 1
             }
@@ -4852,7 +4849,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Honed Reflexes",
-          "icon": "spell_holy_borrowedtime",
+          "icon": "237538",
           "description": "Cooldown of Die By the Sword, Intervene, Interpose, Spell Reflection, Storm Bolt, and Pummel reduced by 10%.\r\n\r\nSuccessfully interrupting an enemy increases the damage you deal to them by 5% for 10 sec.",
           "choices": null
         },
@@ -4870,7 +4867,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Armored to the Teeth",
-          "icon": "inv_shoulder_22",
+          "icon": "135053",
           "description": "Gain Strength equal to 5% of your Armor.",
           "choices": null
         },
@@ -4888,7 +4885,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Double Time",
-          "icon": "inv_misc_horn_04",
+          "icon": "237377",
           "description": "Charge gains 1 additional charge and its cooldown is reduced by 3 sec.",
           "choices": null
         },
@@ -4906,7 +4903,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Reinforced Plates",
-          "icon": "inv_chest_plate04",
+          "icon": "132739",
           "description": "Stamina increased by 5% and Armor increased by 5%.",
           "choices": null
         },
@@ -4923,7 +4920,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Barbaric Training",
-          "icon": "ability_garrosh_whirling_corruption",
+          "icon": "892449",
           "description": "Slam, Whirlwind, and Cleave deal 10% more damage and 5% increased critical strike damage.",
           "choices": null
         },
@@ -4941,8 +4938,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Javelineer",
-          "icon": "inv_spear_01",
-          "description": "Range of your thrown abilities is increased by 5 yards.\r\n\r\nDamage dealt by Champion&#39;s Spear, Shattering Throw, and Wrecking Throw increased by 20%.\r\n\r\nShattering Throw and Wrecking Throw silence non-players for 3 sec.",
+          "icon": "8026700",
+          "description": "Range of your thrown abilities is increased by 5 yards.\r\n\r\nDamage dealt by Champion's Spear, Shattering Throw, and Wrecking Throw increased by 20%.\r\n\r\nShattering Throw and Wrecking Throw silence non-players for 3 sec.",
           "choices": null
         },
         {
@@ -4959,7 +4956,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Resonant Voice",
-          "icon": "warrior_disruptingshout",
+          "icon": "589118",
           "description": "The effects of your shouts last 20% longer.",
           "choices": null
         },
@@ -4976,7 +4973,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crushing Force",
-          "icon": "spell_shadow_unholystrength",
+          "icon": "136225",
           "description": "Mortal Strike deals an additional 5% damage and deals 5% increased critical strike damage.",
           "choices": null
         },
@@ -4987,14 +4984,14 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            110118,
-            90347
+            90347,
+            110118
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Cruel Strikes",
-          "icon": "ability_criticalstrike",
+          "icon": "132109",
           "description": "Critical strike chance increased by 1% and critical strike damage of Execute increased by 5%. ",
           "choices": null
         },
@@ -5012,7 +5009,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "One-Handed Weapon Specialization",
-          "icon": "inv_sword_20",
+          "icon": "135321",
           "description": "While wielding one-handed weapons your damage is increased by 3% and Leech increased by 2%.",
           "choices": null
         },
@@ -5023,14 +5020,14 @@
           "posX": 12,
           "posY": 10,
           "connections": [
-            108685,
-            108686
+            108686,
+            108685
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Wild Strikes",
-          "icon": "ability_rogue_sprint",
+          "icon": "132307",
           "description": "Haste increased by 1% and your auto-attack critical strikes increase your auto-attack speed by 10% for 10 sec.",
           "choices": null
         },
@@ -5047,7 +5044,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Anger Management",
-          "icon": "warrior_talent_icon_angermanagement",
+          "icon": "971080",
           "description": "Every 20 Rage you spend on attacks reduces the remaining cooldown on Avatar and Colossus Smash by 1 sec.",
           "choices": null
         },
@@ -5065,8 +5062,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Champion's Spear",
-          "icon": "inv_ability_warrior_championsspear",
-          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear&#39;s location and dealing 82 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
+          "icon": "6035322",
+          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear's location and dealing 85 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
           "choices": null
         },
         {
@@ -5076,14 +5073,14 @@
           "posX": 10,
           "posY": 11,
           "connections": [
-            90360,
-            90324
+            90324,
+            90360
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stance Mastery",
-          "icon": "crest_warrior",
+          "icon": "1362372",
           "description": "Your stances have additional effects.\r\n\r\n Battle Stance\r\nIncreases the critical strike damage of your abilities by 3%.\r\n\r\n Defensive Stance\r\nWhen an attack deals 20% or more of your maximum health in damage, that damage is reduced by 15%.",
           "choices": null
         },
@@ -5100,7 +5097,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Battlefield Commander",
-          "icon": "ability_warrior_commandingshout",
+          "icon": "132339",
           "description": "Your Shout abilities have additional effects.\r\n\r\n Battle Shout:\r\nGrants you an additional 3% attack power.\r\n\r\n Rallying Cry:\r\nGrants an additional 2% health and duration increased by 3 sec.\r\n\r\n Piercing Howl:\r\nRadius increased by 100%\r\n\r\n Berserker Shout:\r\nRadius increased by 100%.\r\n\r\n Intimidating Shout:\r\nCooldown reduced by 15 sec.\r\n",
           "choices": null
         },
@@ -5115,8 +5112,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ignore Pain",
-          "icon": "ability_warrior_renewedvigor",
-          "description": "Fight through the pain, ignoring 50% of damage taken for 12 sec sec or until 451 damage has been prevented.",
+          "icon": "1377132",
+          "description": "Fight through the pain, ignoring 50% of damage taken for 12 sec sec or until 564 damage has been prevented.",
           "choices": null
         },
         {
@@ -5132,7 +5129,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demoralizing Shout",
-          "icon": "ability_warrior_warcry",
+          "icon": "132366",
           "description": "Demoralizes all enemies within 10 yards, reducing the damage they deal to you by 20% for 8 sec.",
           "choices": null
         },
@@ -5149,8 +5146,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Revenge",
-          "icon": "ability_warrior_revenge",
-          "description": "Swing in a wide arc, dealing 83 Physical damage to all enemies in front of you. Deals reduced damage beyond 5 targets.\r\n\r\nYour successful dodges and parries have a chance to make your next Revenge cost no Rage.",
+          "icon": "132353",
+          "description": "Swing in a wide arc, dealing 98 Physical damage to all enemies in front of you. Deals reduced damage beyond 5 targets.\r\n\r\nYour successful dodges, parries, and auto-attacks have a chance to make your next Revenge cost no Rage.",
           "choices": null
         },
         {
@@ -5166,7 +5163,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Brace For Impact",
-          "icon": "ability_warrior_shieldguard",
+          "icon": "132359",
           "description": "Using Shield Slam increases the damage of Shield Slam by 10% and the block value of your shield by 5% for 16 sec. Stacking up to 3 times.",
           "choices": null
         },
@@ -5183,7 +5180,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Armor Specialization",
-          "icon": "inv_chest_plate05",
+          "icon": "132740",
           "description": "Armor increased by 6%.",
           "choices": null
         },
@@ -5200,7 +5197,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fight Through the Flames",
-          "icon": "ability_racial_foregedinflames",
+          "icon": "1786407",
           "description": "Defensive Stance additionally reduces magic damage you take by 6%.",
           "choices": null
         },
@@ -5217,8 +5214,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Devastator",
-          "icon": "inv_sword_11",
-          "description": "Your auto-attacks deal an additional 45 Physical damage and have a 25% chance to reset the remaining cooldown on Shield Slam.",
+          "icon": "135291",
+          "description": "Your auto-attacks deal an additional 46 Physical damage and have a 25% chance to reset the remaining cooldown on Shield Slam.",
           "choices": null
         },
         {
@@ -5234,7 +5231,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Disrupting Shout",
-          "icon": "ability_bullrush",
+          "icon": "132091",
           "description": "Taunts all enemies within 14 yds to attack you for 6 sec, interrupts all spellcasting within 14 yds and prevents any spell in that school from being cast for 6 sec. Increases the threat you generate against the target by 800%.\r\n",
           "choices": null
         },
@@ -5252,7 +5249,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Strategist",
-          "icon": "inv_shield_05",
+          "icon": "134951",
           "description": "Devastate, Thunder Clap, Revenge, and Execute have a 25% chance to reset the remaining cooldown on Shield Slam.",
           "choices": null
         },
@@ -5269,8 +5266,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Devastating Focus",
-          "icon": "spell_hunter_focusingshot",
-          "description": "You focus on the target struck by your Devastator, dealing 30% additional Revenge damage to them.\r\n\r\nOnly one target can have your focus at a time.",
+          "icon": "1033497",
+          "description": "You focus on the target struck by your Devastator, dealing 30% additional Revenge and Execute damage to them.\r\n\r\nOnly one target can have your focus at a time.",
           "choices": null
         },
         {
@@ -5286,8 +5283,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Brutal Vitality",
-          "icon": "ability_warrior_renewedvigor",
-          "description": "8% of damage you deal adds to your active Ignore Pain or the next Ignore Pain you activate.\r\n\r\nYour next Ignore Pain can be increased by up to 4,582.",
+          "icon": "1377132",
+          "description": "10% of damage you deal adds to your active Ignore Pain or the next Ignore Pain you activate.\r\n\r\nYour next Ignore Pain can be increased by up to 4,582.",
           "choices": null
         },
         {
@@ -5303,7 +5300,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Instigate",
-          "icon": "ability_rogue_dismantle",
+          "icon": "236272",
           "description": "Devastate deals 20% increased damage and generates 2 Rage.\r\n\r\nDevastator deals 10% increased damage and generates 2 Rage.",
           "choices": null
         },
@@ -5320,7 +5317,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shield Wall",
-          "icon": "ability_warrior_shieldwall",
+          "icon": "132362",
           "description": "Reduces all damage you take by 40% for 8 sec.",
           "choices": null
         },
@@ -5337,7 +5334,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bloodsurge",
-          "icon": "ability_warrior_bloodsurge",
+          "icon": "236306",
           "description": "Damage from Rend has a chance to generate 5 Rage.",
           "choices": null
         },
@@ -5354,8 +5351,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Best Served Cold",
-          "icon": "ability_warrior_revenge",
-          "description": "Your dodges and parries make your Revenge cost no Rage 20% more frequently and increase the damage your free Revenges deal by 15%. Revenge increases the damage of your next Thunder Clap by 8%.",
+          "icon": "132353",
+          "description": "Your dodges, parries, and auto-attacks make your Revenge cost no Rage 20% more frequently and increase the damage your free Revenges deal by 15%. \r\n\r\nRevenge increases the damage of your next Thunder Clap by 8%.",
           "choices": null
         },
         {
@@ -5377,14 +5374,14 @@
             {
               "spellId": 1235023,
               "name": "Spellbreaker",
-              "icon": "inv_helm_armor_bloodelf_d_01",
+              "icon": "2459461",
               "description": "You have a 8% chance to disrupt magic damage dealt to you, reducing the damage it deals by 50%.",
               "maxRanks": 1
             },
             {
               "spellId": 1235022,
               "name": "Hunker Down",
-              "icon": "ability_warrior_shieldreflection",
+              "icon": "132361",
               "description": "Damage you take from area of effect attacks is reduced by 2%. Spell Reflection reduces magic damage taken by an additional 10%.",
               "maxRanks": 1
             }
@@ -5403,7 +5400,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thunderlord",
-          "icon": "ability_vehicle_electrocharge",
+          "icon": "252174",
           "description": "Increases the radius of Demoralizing Shout by 5 yards.\r\n\r\nEach enemy hit by Thunder Clap reduces the remaining cooldown on Demoralizing Shout by 1.5 sec, up to 4.5 sec.",
           "choices": null
         },
@@ -5426,14 +5423,14 @@
             {
               "spellId": 397103,
               "name": "Defender's Aegis",
-              "icon": "ability_warrior_stalwartprotector",
+              "icon": "236313",
               "description": "Shield Wall gains 1 additional charge and its cooldown is reduced by 60 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 384072,
               "name": "Impenetrable Wall",
-              "icon": "ability_warrior_shieldguard",
+              "icon": "132359",
               "description": "Shield Slam reduces the remaining cooldown of Shield Wall by 6 sec.",
               "maxRanks": 1
             }
@@ -5452,7 +5449,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Last Stand",
-          "icon": "spell_holy_ashestoashes",
+          "icon": "135871",
           "description": "Activating Shield Wall increases your maximum health by 30% for 8 sec and instantly heals you for that amount.",
           "choices": null
         },
@@ -5475,14 +5472,14 @@
             {
               "spellId": 385704,
               "name": "Bloodborne",
-              "icon": "inv_artifact_bloodoftheassassinated",
-              "description": "Your Deep Wounds and Rend deal 25% increased damage.",
+              "icon": "1394887",
+              "description": "Your Bleed effects deal 25% increased damage.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 29725,
               "name": "Sudden Death",
-              "icon": "ability_warrior_improveddisciplines",
+              "icon": "132346",
               "description": "Your attacks have a chance to make your next Execute cost no Rage, be usable on any target regardless of their health, and deal damage as if you spent 40 Rage.",
               "maxRanks": 1
             }
@@ -5501,8 +5498,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Punish",
-          "icon": "ability_deathknight_sanguinfortitude",
-          "description": "Shield Slam deals 15% increased damage and reduces enemies&#39; damage against you by 3% for 9 sec. Multiple punishments may overlap.",
+          "icon": "458719",
+          "description": "Shield Slam deals 15% increased damage and reduces enemies' damage against you by 3% for 9 sec. Multiple punishments may overlap.",
           "choices": null
         },
         {
@@ -5518,7 +5515,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tough as Nails",
-          "icon": "inv_titanium_shield_spike",
+          "icon": "237488",
           "description": "Blocking an attack deals 42 Physical damage to the attacker. Critical blocks deal double damage.\r\n\r\nGenerates high threat.",
           "choices": null
         },
@@ -5536,7 +5533,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fueled by Violence",
-          "icon": "ability_demonhunter_bloodlet",
+          "icon": "1450139",
           "description": "You are healed for 85% of the Bleed damage dealt by Rend and Deep Wounds.",
           "choices": null
         },
@@ -5547,14 +5544,14 @@
           "posX": 36,
           "posY": 8,
           "connections": [
-            90264,
-            90318
+            90318,
+            90264
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Enduring Defenses",
-          "icon": "ability_defend",
+          "icon": "132110",
           "description": "Shield Block lasts 1 sec longer.",
           "choices": null
         },
@@ -5572,8 +5569,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unyielding Stance",
-          "icon": "ability_warrior_defensivestance",
-          "description": "Defensive Stance reduces damage taken by an additional 4%.",
+          "icon": "132341",
+          "description": "Defensive Stance reduces damage taken by an additional 6%.",
           "choices": null
         },
         {
@@ -5589,7 +5586,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Deep Wounds",
-          "icon": "ability_backstab",
+          "icon": "132090",
           "description": "Execute inflicts Deep Wounds on the target.\r\n\r\n Deep Wounds\r\nCauses the target to suffer 50 Bleed damage over 6 sec. If this effect is reapplied, any remaining damage will be added to the new Deep Wounds.",
           "choices": null
         },
@@ -5612,14 +5609,14 @@
             {
               "spellId": 203177,
               "name": "Heavy Repercussions",
-              "icon": "inv_shield_32",
+              "icon": "134977",
               "description": "Shield Slam generates 2 more Rage and extends the duration of Shield Block by 1.0 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 202603,
               "name": "Into the Fray",
-              "icon": "ability_warrior_bloodfrenzy",
+              "icon": "132334",
               "description": "You gain 2% Haste for each enemy or ally within 10 yards, up to 8% Haste.",
               "maxRanks": 1
             }
@@ -5638,7 +5635,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Focused Vigor",
-          "icon": "spell_nature_strength",
+          "icon": "136101",
           "description": "Increases Strength by 3% and your critical strike chance by 1%.\r\n",
           "choices": null
         },
@@ -5655,7 +5652,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shield Specialization",
-          "icon": "inv_shield_76",
+          "icon": "331053",
           "description": "Increases Block chance by 8% and your Block value by 16%.",
           "choices": null
         },
@@ -5672,7 +5669,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Enduring Alacrity",
-          "icon": "spell_nature_unyeildingstamina",
+          "icon": "136112",
           "description": "Increases Stamina by 5% and your Haste by 2%.",
           "choices": null
         },
@@ -5689,7 +5686,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Avatar",
-          "icon": "warrior_talent_icon_avatar",
+          "icon": "613534",
           "description": "Transform into a colossus, increasing all damage you deal by 20% and reducing damage you take from area of effect attacks by 5% for 20 sec.",
           "choices": null
         },
@@ -5706,7 +5703,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Massacre",
-          "icon": "inv_axe_2h_orcwarrior_c_01",
+          "icon": "800997",
           "description": "Execute is usable on targets below 35% health.\r\n",
           "choices": null
         },
@@ -5718,14 +5715,13 @@
           "posY": 10,
           "connections": [
             90315,
-            90315,
             90312
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Booming Voice",
-          "icon": "ability_warrior_commandingshout",
+          "icon": "132339",
           "description": "Demoralizing Shout also generates 20 Rage and increases damage you deal to affected targets by 20%.",
           "choices": null
         },
@@ -5742,7 +5738,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Indomitable",
-          "icon": "ability_warrior_intensifyrage",
+          "icon": "236310",
           "description": "Your maximum health is increased by 10% and every 15 Rage you spend heals you for 1% of your maximum health.",
           "choices": null
         },
@@ -5760,7 +5756,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Violent Outburst",
-          "icon": "ability_warrior_furiousresolve",
+          "icon": "236308",
           "description": "Every 250 rage you spend triggers a Violent Outburst, causing your next Shield Slam to deal 200% increased damage, generate 50% more Rage and grant Ignore Pain.",
           "choices": null
         },
@@ -5777,7 +5773,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Heavy Handed",
-          "icon": "inv_1115_warrior_crushingblow",
+          "icon": "6712966",
           "description": "Execute hits up to 2 additional targets for 70% damage.",
           "choices": null
         },
@@ -5794,8 +5790,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shield Charge",
-          "icon": "ability_warrior_shieldcharge",
-          "description": "Charge to an enemy with your shield, granting you Shield Block and dealing 294 Physical damage to it and 93 Physical damage to all enemies within 10 yards.\r\n\r\nAlso stuns the primary target for 4 sec.\r\n\r\nGenerates 20 Rage.",
+          "icon": "4667427",
+          "description": "Charge to an enemy with your shield, granting you Shield Block and dealing 292 Physical damage to it and 94 Physical damage to all enemies within 10 yards.\r\n\r\nAlso stuns the primary target for 4 sec.\r\n\r\nGenerates 20 Rage.",
           "choices": null
         },
         {
@@ -5813,7 +5809,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Battle-Scarred Veteran",
-          "icon": "ability_warrior_endlessrage",
+          "icon": "132344",
           "description": "When your health is brought below 30%, you take 80% less damage for 8 sec and healing you receive is increased by 100%.\r\n\r\nCannot occur more than once every 3 min.",
           "choices": null
         },
@@ -5836,15 +5832,15 @@
             {
               "spellId": 1235113,
               "name": "Whirling Blade",
-              "icon": "warrior_talent_icon_ravager",
+              "icon": "970854",
               "description": "Your attacks have a chance to target a nearby enemy with Ravager for 4 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 228920,
               "name": "Ravager",
-              "icon": "warrior_talent_icon_ravager",
-              "description": "Throws a whirling weapon at your target that chases nearby enemies, inflicting 250 Physical damage to all enemies over 10.7 sec. Deals reduced damage beyond 8 targets.\r\n\r\nCleave and Whirlwind deal 50% increased damage while Ravager is active",
+              "icon": "970854",
+              "description": "Throws a whirling weapon at your target that chases nearby enemies, inflicting 378 Physical damage to all enemies over 12 sec. Deals reduced damage beyond 8 targets.\r\n\r\nEnemies damaged by Ravager take 50% additional damage from your Bleeds for 12 sec.",
               "maxRanks": 1
             }
           ]
@@ -5860,7 +5856,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Phalanx",
-          "icon": "inv12_apextalent_warrior_phalanx",
+          "icon": "7636571",
           "description": null,
           "levels": [
             81,
@@ -5870,17 +5866,17 @@
           "ranks": [
             {
               "spellId": 1269311,
-              "description": "Thunder Clap causes your next Shield Slam to deal 10% additional damage and unleash a wave of force, dealing 69 Physical damage to all enemies in front of you.",
+              "description": "Thunder Clap causes your next Shield Slam to deal 10% additional damage and unleash a wave of force, dealing 68 Physical damage to all enemies in front of you.",
               "maxRanks": 1
             },
             {
               "spellId": 1269312,
-              "description": "Damage dealt by Thunder Clap and Phalanx&#39;s wave of force is increased by 10%.",
+              "description": "Damage dealt by Thunder Clap and Phalanx's wave of force is increased by 10%.",
               "maxRanks": 2
             },
             {
               "spellId": 1269313,
-              "description": "While Shield Block is active, Shield Slam deals 10% additional damage and has a 20% increased chance to critically strike.\r\n\r\nEnemies damaged by Phalanx&#39;s wave of force deal 8.0% reduced damage to you for 8 sec.",
+              "description": "While Shield Block is active, Shield Slam deals 10% additional damage and has a 20% increased chance to critically strike.\r\n\r\nEnemies damaged by Phalanx's wave of force deal 8.0% reduced damage to you for 8 sec.",
               "maxRanks": 1
             }
           ]
@@ -5899,8 +5895,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Thunder Blast",
-          "icon": "warrior_talent_icon_bloodandthunder",
-          "description": "Shield Slam and Bloodthirst have a 35% chance to grant you Thunder Blast, stacking up to 2 charges.\r\n\r\nThunder Blast\r\nYour next Thunder Clap becomes a Thunder Blast that deals 68 Stormstrike damage and generates 2 Rage.",
+          "icon": "460957",
+          "description": "Shield Slam and Bloodthirst have a 35% chance to grant you Thunder Blast, stacking up to 2 charges.\r\n\r\nThunder Blast\r\nYour next Thunder Clap becomes a Thunder Blast that deals 81 Stormstrike damage and generates 2 Rage.",
           "choices": null
         },
         {
@@ -5923,14 +5919,14 @@
             {
               "spellId": 436201,
               "name": "Gathering Clouds",
-              "icon": "spell_nature_stormreach",
+              "icon": "136099",
               "description": "Your attacks trigger Lightning Strikes 30% more often.",
               "maxRanks": 1
             },
             {
               "spellId": 436152,
               "name": "Thorim's Might",
-              "icon": "inv_ability_mountainthanewarrior_thorimsmight",
+              "icon": "5927639",
               "description": "Lightning Strikes generate 3 Rage.\r\n\r\nRaging Blow and Execute damage increased by 25%.",
               "maxRanks": 1
             }
@@ -5956,14 +5952,14 @@
             {
               "spellId": 437079,
               "name": "Flashing Skies",
-              "icon": "spell_lightning_lightningbolt01",
+              "icon": "135990",
               "description": "Thunder Blast calls down a Lightning Strike on an enemy it hits.",
               "maxRanks": 1
             },
             {
               "spellId": 456270,
               "name": "Snap Induction",
-              "icon": "ability_thunderking_thunderstruck",
+              "icon": "839983",
               "description": "Activating Recklessness grants a charge of Thunder Blast.",
               "maxRanks": 1
             }
@@ -5989,14 +5985,14 @@
             {
               "spellId": 438590,
               "name": "Keep Your Feet on the Ground",
-              "icon": "ability_thunderking_overcharge",
+              "icon": "839979",
               "description": "Physical damage taken reduced by 2%.\r\n\r\nThunder Blast reduces damage you take by 8% for 5 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 434970,
               "name": "Steadfast as the Peaks",
-              "icon": "ability_warrior_devastate",
+              "icon": "132342",
               "description": "Stamina increased by 5%.\r\n\r\nVictory Rush increases your maximum health by 10% for 5 sec. When this health increase expires, you heal for any amount of the original Victory Rush that healed you in excess of your full health.",
               "maxRanks": 1
             }
@@ -6016,8 +6012,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Ground Current",
-          "icon": "warrior_talent_icon_thunderstruck",
-          "description": "Lightning Strikes also deal 15 Nature damage to enemies near their target. Damage reduced beyond 5 targets.",
+          "icon": "458976",
+          "description": "Lightning Strikes also deal 39 Nature damage to enemies near their target. Damage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -6032,8 +6028,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Lightning Strikes",
-          "icon": "ability_vehicle_electrocharge",
-          "description": "Damaging enemies with Thunder Clap, Raging Blow, or Execute has a 25% chance to also strike one with a lightning bolt, dealing 54 Nature damage.\r\n\r\nLightning Strikes occur 30% more often during Avatar.",
+          "icon": "252174",
+          "description": "Damaging enemies with Thunder Clap, Raging Blow, or Execute has a 25% chance to also strike one with a lightning bolt, dealing 55 Nature damage.\r\n\r\nLightning Strikes occur 30% more often during Avatar.",
           "choices": null
         },
         {
@@ -6043,17 +6039,17 @@
           "posX": 46,
           "posY": 5,
           "connections": [
+            109809,
             94797,
             94792,
-            94807,
-            109809
+            94807
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Avatar of the Storm",
-          "icon": "achievement_dungeon_blackrockcaverns_ascendantlordobsidius",
+          "icon": "432002",
           "description": "Casting Avatar grants you 2 charges of Thunder Blast and resets the cooldown of Thunder Clap.\r\n\r\nWhile Avatar is not active, Lightning Strikes have a 10% chance to grant you Avatar for 4 secs.\r\n\r\nThunder Blast\r\nYour next Thunder Clap becomes a Thunder Blast that deals Stormstrike damage.",
           "choices": null
         },
@@ -6071,7 +6067,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Burst of Power",
-          "icon": "shaman_pvp_thundercharge",
+          "icon": "1385916",
           "description": "Lightning Strikes have a 15% chance to make your next 2 Bloodthirsts have no cooldown.",
           "choices": null
         },
@@ -6089,7 +6085,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Strength of the Mountain",
-          "icon": "ability_warrior_titansgrip",
+          "icon": "236316",
           "description": "Shield Slam damage increased by 15%.\r\n\r\nBloodthirst and Rampage damage increased by 25%.",
           "choices": null
         },
@@ -6107,8 +6103,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Crashing Thunder",
-          "icon": "spell_nature_thunderclap",
-          "description": "Stormstrike or Nature damage your abilities deal is increased by 5%. Stormstrike damage ignores Armor.\r\n\r\nThunder Clap damage increased by 30%.",
+          "icon": "136105",
+          "description": "Stormstrike or Nature damage your abilities deal is increased by 5%. Stormstrike damage ignores Armor.\r\n\r\nThunder Clap damage increased by 10%.",
           "choices": null
         },
         {
@@ -6131,14 +6127,14 @@
             {
               "spellId": 436162,
               "name": "Storm Bolts",
-              "icon": "warrior_talent_icon_stormbolt",
+              "icon": "613535",
               "description": "Storm Bolt also hits 2 additional nearby targets, stunning them for 2 sec, but its cooldown is increased by 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 438597,
               "name": "Storm Shield",
-              "icon": "spell_winston_bubble",
+              "icon": "1320371",
               "description": "Intervening a target grants them a shield for 5 sec that absorbs magic damage equal to 3 times your Armor.",
               "maxRanks": 1
             }
@@ -6158,8 +6154,8 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Capacitance",
-          "icon": "spell_nature_purge",
-          "description": "During Avatar, Thunder Blast extends Avatar&#39;s duration by 2.0 sec.",
+          "icon": "136075",
+          "description": "During Avatar, Thunder Blast extends Avatar's duration by 2.0 sec.",
           "choices": null
         },
         {
@@ -6176,7 +6172,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Conductivity",
-          "icon": "spell_shaman_thunderstorm",
+          "icon": "237589",
           "description": "Lightning Strike damage increased by 10% and critical strike damage increased by 10%.",
           "choices": null
         },
@@ -6194,7 +6190,7 @@
           "heroSubtree": "Mountain Thane",
           "maxRanks": 1,
           "name": "Storm Surge",
-          "icon": "ability_racial_avatar",
+          "icon": "132275",
           "description": "Avatar increases the damage of Thunder Clap by 50% and reduces its cooldown by 50%.",
           "choices": null
         },
@@ -6218,14 +6214,14 @@
             {
               "spellId": 429639,
               "name": "Boneshaker",
-              "icon": "ability_deathknight_brittlebones",
-              "description": "Shockwave&#39;s stun duration is increased by 1 sec and reduces the movement speed of affected enemies by 40% for 3 sec after the stun ends.",
+              "icon": "460686",
+              "description": "Shockwave's stun duration is increased by 1 sec and reduces the movement speed of affected enemies by 40% for 3 sec after the stun ends.",
               "maxRanks": 1
             },
             {
               "spellId": 440992,
               "name": "Earthquaker",
-              "icon": "spell_shaman_earthquake",
+              "icon": "451165",
               "description": "Shockwave also knocks enemies into the air and its cooldown is reduced by 5 sec.",
               "maxRanks": 1
             }
@@ -6248,8 +6244,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Dominance of the Colossus",
-          "icon": "ability_warrior_titansgrip",
-          "description": "Colossal Might stacks up to 10 times. If you would gain a stack of Colossal Might and are at max stacks, the cooldown of Demolish is reduced by 5 sec.\r\n\r\nEnemies affected by Demolish take up to 10% more damage from you and deal up to 10% less damage to you for 10 sec based on the number of stacks of Colossal Might consumed by Demolish.",
+          "icon": "236316",
+          "description": "Enemies affected by Demolish take up to 10% more damage from you and deal up to 20% less damage to you for 10 sec based on the number of stacks of Colossal Might consumed by Demolish.\r\n\r\nColossal Might stacks up to 10 times.",
           "choices": null
         },
         {
@@ -6266,7 +6262,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Precise Might",
-          "icon": "spell_hunter_focusingshot",
+          "icon": "1033497",
           "description": "Mortal Strike critical strikes grant an additional stack of Colossal Might.",
           "choices": null
         },
@@ -6284,7 +6280,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Practiced Strikes",
-          "icon": "spell_warrior_sharpenblade",
+          "icon": "1380678",
           "description": "Mortal Strike and Slam damage increased by 25%.\r\n\r\nCleave and Whirlwind damage increased by 15%.",
           "choices": null
         },
@@ -6308,14 +6304,14 @@
             {
               "spellId": 429637,
               "name": "One Against Many",
-              "icon": "ability_warrior_incite",
+              "icon": "236309",
               "description": "Shockwave, Cleave, and Whirlwind deal 5% more damage per target affected up to 5.",
               "maxRanks": 1
             },
             {
               "spellId": 440995,
               "name": "Arterial Bleed",
-              "icon": "ability_butcher_gushingwounds",
+              "icon": "999950",
               "description": "Colossal Might increases the damage of your Rend and Deep Wounds by 3% per stack.\r\n",
               "maxRanks": 1
             }
@@ -6335,7 +6331,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Mountain of Muscle and Scars",
-          "icon": "ability_warrior_intensifyrage",
+          "icon": "236310",
           "description": "You deal 5% more damage and take 5% less damage.\r\n\r\nSize increased by 5%.",
           "choices": null
         },
@@ -6353,8 +6349,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Tide of Battle",
-          "icon": "ability_warrior_weaponmastery",
-          "description": "Colossal Might increases the damage of your Overpower by 3% per stack.",
+          "icon": "132367",
+          "description": "Colossal Might increases the damage of your Overpower and Execute by 3% per stack.",
           "choices": null
         },
         {
@@ -6371,7 +6367,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Martial Expert",
-          "icon": "ability_warrior_stalwartprotector",
+          "icon": "236313",
           "description": "Critical strike damage of your abilities is increased by 10% and the amount of damage blocked by your critical blocks is increased by 20%.",
           "choices": null
         },
@@ -6395,14 +6391,14 @@
             {
               "spellId": 429644,
               "name": "No Stranger to Pain",
-              "icon": "ability_warrior_renewedvigor",
-              "description": "Damage prevented by each use of Ignore Pain is increased by 20%.",
+              "icon": "1377132",
+              "description": "Damage prevented by each use of Ignore Pain is increased by 30%.",
               "maxRanks": 1
             },
             {
               "spellId": 440993,
               "name": "Veteran Vitality",
-              "icon": "ability_hunter_harass",
+              "icon": "132175",
               "description": "When your health is brought below 35%, you gain a Second Wind, healing you for 12% of your max health over 2 sec.\r\n\r\nThis effect cannot occur more than once every 60 sec.",
               "maxRanks": 1
             }
@@ -6420,8 +6416,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Demolish",
-          "icon": "inv_ability_colossuswarrior_demolish",
-          "description": "Unleash a series of precise and powerful strikes against your target, dealing 799 damage to it, and 425 damage to enemies within 10 yds of it. Deals reduced damage beyond 8 targets.\r\n\r\nWhile channeling Demolish, you take 10% less damage and are immune to stuns, knockbacks, and forced movement effects.\r\n\r\nYou can block, parry, dodge, and use certain defensive abilities while channeling Demolish.",
+          "icon": "5927618",
+          "description": "Unleash a series of precise and powerful strikes against your target, dealing 794 damage to it, and 429 damage to enemies within 10 yds of it. Deals reduced damage beyond 8 targets.\r\n\r\nWhile channeling Demolish, you take 10% less damage and are immune to stuns, knockbacks, and forced movement effects.\r\n\r\nYou can block, parry, dodge, and use certain defensive abilities while channeling Demolish.",
           "choices": null
         },
         {
@@ -6438,7 +6434,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Colossal Might",
-          "icon": "ability_warrior_strengthofarms",
+          "icon": "236314",
           "description": "Colossal Might increases damage dealt by your next Demolish by 5%, stacking up to 5 times.\r\n\r\nMortal Strike grants a stack of Colossal Might and Cleave grants a stack of Colossal Might when it strikes 3 or more targets.",
           "choices": null
         },
@@ -6456,8 +6452,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Celeritous Conclusion",
-          "icon": "inv_1115_warrior_fasterreflexes",
-          "description": "Demolish&#39;s final strike grants 10% Haste for 10 sec and increases the critical strike chance of your next Mortal Strike by 100%.",
+          "icon": "6712968",
+          "description": "Demolish's final strike grants 10% Haste for 10 sec and increases the critical strike chance of your next Mortal Strike by 100%.",
           "choices": null
         },
         {
@@ -6474,7 +6470,7 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Cut to the Bone",
-          "icon": "ability_warrior_deepcuts",
+          "icon": "4067373",
           "description": "Mortal Strike critical strikes increase your Rend and Deep Wounds damage by 15% for 8 sec.",
           "choices": null
         },
@@ -6492,8 +6488,8 @@
           "heroSubtree": "Colossus",
           "maxRanks": 1,
           "name": "Decimator",
-          "icon": "inv_10_blacksmithing_craftedbar_bloodyalloy",
-          "description": "Demolish&#39;s final strike applies Deep Wounds to all targets at 100% effectiveness.",
+          "icon": "4622283",
+          "description": "Demolish's final strike applies Deep Wounds to all targets at 100% effectiveness.",
           "choices": null
         }
       ]

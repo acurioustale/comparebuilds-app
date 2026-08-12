@@ -67,8 +67,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Improved Flash Heal",
-          "icon": "spell_holy_heal",
-          "description": "Increases healing done by Flash Heal by 15%.",
+          "icon": "135915",
+          "description": "Increases healing done by Flash Heal and Shadow Mend by 15%.",
           "choices": null
         },
         {
@@ -82,7 +82,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angelic Feather",
-          "icon": "ability_priest_angelicfeather",
+          "icon": "642580",
           "description": "Places a feather at the target location, granting the first ally to walk through it 40% increased movement speed for 5 sec. Only 3 feathers can be placed at one time.",
           "choices": null
         },
@@ -97,8 +97,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Mind Blast",
-          "icon": "spell_shadow_unholyfrenzy",
-          "description": "Blast the target&#39;s mind for 296 Shadow damage. Costs a high amount of mana.",
+          "icon": "136224",
+          "description": "Blast the target's mind for 299 Shadow damage. Costs a high amount of mana.",
           "choices": null
         },
         {
@@ -114,8 +114,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Holy Nova",
-          "icon": "spell_holy_holynova",
-          "description": "An explosion of holy light around you deals up to 153 Holy damage to enemies and up to 121 healing to allies within 12 yds, reduced if there are more than 5 targets.",
+          "icon": "135922",
+          "description": "An explosion of holy light around you deals up to 157 Holy damage to enemies and up to 121 healing to allies within 12 yds, reduced if there are more than 5 targets.",
           "choices": null
         },
         {
@@ -132,7 +132,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dispel Magic",
-          "icon": "spell_nature_nullifydisease",
+          "icon": "136066",
           "description": "Dispels Magic on the enemy target, removing 1 beneficial Magic effect.",
           "choices": null
         },
@@ -150,7 +150,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritual Guidance",
-          "icon": "spell_holy_spiritualguidence",
+          "icon": "135977",
           "description": "Increases your Intellect by 3%.",
           "choices": null
         },
@@ -167,7 +167,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Psychic Scream",
-          "icon": "spell_shadow_psychicscream",
+          "icon": "136184",
           "description": "Lets out a psychic scream, causing all enemies within 8 yards to flee, disorienting them for 8 sec. Damage may interrupt the effect.",
           "choices": null
         },
@@ -184,7 +184,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lightburst",
-          "icon": "inv_ability_holyfire_nova",
+          "icon": "5764907",
           "description": "Increases the damage of Holy Nova by 400%, its healing by 500%, and its cooldown by 30 sec.",
           "choices": null
         },
@@ -202,7 +202,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leap of Faith",
-          "icon": "priest_spell_leapoffaith_a",
+          "icon": "463835",
           "description": "Pulls the spirit of a party or raid member, instantly moving them directly in front of you.",
           "choices": null
         },
@@ -219,7 +219,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Purify",
-          "icon": "spell_holy_nullifydisease",
+          "icon": "135935",
           "description": "Purify additionally removes all Disease effects.",
           "choices": null
         },
@@ -237,7 +237,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power Infusion",
-          "icon": "spell_holy_powerinfusion",
+          "icon": "135939",
           "description": "Infuses the target with power for 15 sec, increasing haste by 20%.\r\n\r\nCan only be cast on players.",
           "choices": null
         },
@@ -255,7 +255,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Painful Invocation",
-          "icon": "spell_holy_mindsooth",
+          "icon": "135933",
           "description": "Increases the damage of Shadow Word: Pain by 10%.",
           "choices": null
         },
@@ -278,14 +278,14 @@
             {
               "spellId": 390919,
               "name": "Sheer Terror",
-              "icon": "spell_nzinsanity_fearofdeath",
+              "icon": "3163624",
               "description": "Increases the amount of damage required to break your Psychic Scream by 25%.",
               "maxRanks": 1
             },
             {
               "spellId": 55676,
               "name": "Petrifying Scream",
-              "icon": "spell_shadow_psychichorrors",
+              "icon": "237568",
               "description": "Psychic Scream causes enemies to tremble in place instead of fleeing in fear.",
               "maxRanks": 1
             }
@@ -305,8 +305,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Surge of Light",
-          "icon": "spell_holy_surgeoflight",
-          "description": "Your healing spells and Smite have a 8% chance to make your next Flash Heal instant and cost 50% less mana. Stacks to 2.",
+          "icon": "135981",
+          "description": "Your healing spells and Smite have a 8% chance to make your next Flash Heal or Shadow Mend instant and cost 50% less mana. Stacks to 2.",
           "choices": null
         },
         {
@@ -322,8 +322,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Body and Soul",
-          "icon": "spell_holy_symbolofhope",
-          "description": "Power Word: Shield and Leap of Faith increase your target&#39;s movement speed by 40% for 3 sec.",
+          "icon": "135982",
+          "description": "Power Word: Shield and Leap of Faith increase your target's movement speed by 40% for 3 sec.",
           "choices": null
         },
         {
@@ -341,7 +341,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mass Dispel",
-          "icon": "spell_arcane_massdispel",
+          "icon": "135739",
           "description": "Dispels magic in a 15 yard radius, removing all harmful Magic from 5 friendly targets and 1 beneficial Magic effect from 5 enemy targets. Potent enough to remove Magic that is normally undispellable.",
           "choices": null
         },
@@ -358,7 +358,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twins of the Sun Priestess",
-          "icon": "spell_fire_felflamering_red",
+          "icon": "2175503",
           "description": "Power Infusion also grants you its effect at 100% value when used on an ally. \r\n\r\nIf no ally is targeted, it will grant its effect at 100% value to a nearby ally, preferring damage dealers.",
           "choices": null
         },
@@ -376,7 +376,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Strength of Resolve",
-          "icon": "spell_holy_ashestoashes",
+          "icon": "135871",
           "description": "Increases your Stamina by 6%.",
           "choices": null
         },
@@ -400,14 +400,14 @@
             {
               "spellId": 605,
               "name": "Mind Control",
-              "icon": "spell_shadow_shadowworddominate",
+              "icon": "136206",
               "description": "Controls a mind up to 1 level above yours for 30 sec. Does not work versus Demonic, Undead, or Mechanical beings. Shares diminishing returns with other disorienting effects.",
               "maxRanks": 1
             },
             {
               "spellId": 205364,
               "name": "Dominate Mind",
-              "icon": "spell_priest_voidflay",
+              "icon": "1386549",
               "description": "Controls a mind up to 1 level above yours for 30 sec while still controlling your own mind. Does not work versus Demonic, Mechanical, or Undead beings or players. This spell shares diminishing returns with other disorienting effects.",
               "maxRanks": 1
             }
@@ -432,14 +432,14 @@
             {
               "spellId": 196704,
               "name": "Psychic Voice",
-              "icon": "ability_warrior_commandingshout",
+              "icon": "132339",
               "description": "Reduces the cooldown of Psychic Scream by 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1250691,
               "name": "Void Tendrils",
-              "icon": "spell_priest_voidtendrils",
+              "icon": "537022",
               "description": "Call shadowy tendrils to constrict enemies when Psychic Scream ends, rooting them in place for 4 sec.",
               "maxRanks": 1
             }
@@ -458,7 +458,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Everlasting Light",
-          "icon": "spell_holy_greaterheal",
+          "icon": "135913",
           "description": "Surge of Light occurs up to 50% more often based on your missing mana.",
           "choices": null
         },
@@ -475,7 +475,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Move with Grace",
-          "icon": "ability_priest_savinggrace",
+          "icon": "1022949",
           "description": "Reduces the cooldown of Leap of Faith by 30 sec.",
           "choices": null
         },
@@ -492,7 +492,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mental Agility",
-          "icon": "spell_holy_dispelmagic",
+          "icon": "135894",
           "description": "Reduces the mana cost of Purify and Mass Dispel by 50% and Dispel Magic by 10%.\r\n",
           "choices": null
         },
@@ -503,15 +503,15 @@
           "posX": 10,
           "posY": 6,
           "connections": [
-            82687,
+            109890,
             108731,
-            109890
+            82687
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twin Disciplines",
-          "icon": "ability_priest_innerlightandshadow",
+          "icon": "4226157",
           "description": "Increases the damage and healing of your Holy and Shadow spells by 2%.",
           "choices": null
         },
@@ -529,7 +529,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Enlightenment",
-          "icon": "ability_priest_darkness",
+          "icon": "458226",
           "description": "Increases your haste by 3%.",
           "choices": null
         },
@@ -546,7 +546,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "False Autonomy",
-          "icon": "spell_arcane_mindmastery",
+          "icon": "135740",
           "description": "Increases the duration of Mind Control and Dominate Mind against enemy creatures by 15 sec.",
           "choices": null
         },
@@ -564,7 +564,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shackle Horror",
-          "icon": "spell_nature_slow",
+          "icon": "136091",
           "description": "Shackles an aberration or undead enemy for 50 sec, preventing all actions and movement. Damage will cancel the effect. Limit 1.",
           "choices": null
         },
@@ -582,8 +582,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inspiration",
-          "icon": "spell_holy_layonhands",
-          "description": "Reduces your target&#39;s physical damage taken by 5% for 15 sec after a critical heal with Flash Heal or Penance.",
+          "icon": "135928",
+          "description": "Reduces your target's physical damage taken by 5% for 15 sec after a critical heal with Flash Heal, Shadow Mend, or Penance.",
           "choices": null
         },
         {
@@ -593,16 +593,16 @@
           "posX": 8,
           "posY": 7,
           "connections": [
+            82699,
             109019,
-            82690,
-            82699
+            82690
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Binding Heals",
-          "icon": "spell_holy_blindingheal",
-          "description": "20% of Flash Heal healing on other targets also heals you.",
+          "icon": "135883",
+          "description": "20% of Flash Heal or Shadow Mend healing on other targets also heals you.",
           "choices": null
         },
         {
@@ -612,15 +612,15 @@
           "posX": 12,
           "posY": 7,
           "connections": [
-            82690,
-            109020
+            109020,
+            82690
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Word: Death",
-          "icon": "spell_shadow_demonicfortitude",
-          "description": "A word of dark binding that inflicts 318 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
+          "icon": "136149",
+          "description": "A word of dark binding that inflicts 328 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
           "choices": null
         },
         {
@@ -638,7 +638,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sanguine Teachings",
-          "icon": "inv_archaeology_80_zandalari_sanguinetotem",
+          "icon": "2101983",
           "description": "Increases your Leech by 2%.",
           "choices": null
         },
@@ -656,7 +656,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Desperate Prayer",
-          "icon": "spell_holy_testoffaith",
+          "icon": "237550",
           "description": "Increases maximum health by 25% for 10 sec, and instantly heals you for that amount.",
           "choices": null
         },
@@ -674,7 +674,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Twist of Fate",
-          "icon": "spell_shadow_mindtwisting",
+          "icon": "237566",
           "description": "After damaging or healing a target below 35% health, gain 5% increased damage and healing for 8 sec.",
           "choices": null
         },
@@ -691,7 +691,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tithe Evasion",
-          "icon": "spell_nzinsanity_bloodthirst",
+          "icon": "3163621",
           "description": "Shadow Word: Death deals 50% less damage to you.",
           "choices": null
         },
@@ -709,8 +709,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fade",
-          "icon": "spell_magic_lesserinvisibilty",
-          "description": "Fade out, removing all your threat and reducing enemies&#39; detection range against you for 10 sec.",
+          "icon": "135994",
+          "description": "Fade out, removing all your threat and reducing enemies' detection range against you for 10 sec.",
           "choices": null
         },
         {
@@ -726,7 +726,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angel's Mercy",
-          "icon": "spell_holy_testoffaith",
+          "icon": "237550",
           "description": "Reduces the cooldown of Desperate Prayer by 20 sec.",
           "choices": null
         },
@@ -744,8 +744,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Protective Light",
-          "icon": "spell_holy_holyprotection",
-          "description": "Casting Flash Heal on yourself reduces all damage you take by 10% for 10 sec.",
+          "icon": "135923",
+          "description": "Casting Flash Heal or Shadow Mend on yourself reduces all damage you take by 10% for 10 sec.",
           "choices": null
         },
         {
@@ -763,7 +763,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mindpierce",
-          "icon": "spell_shadow_mindshear",
+          "icon": "237565",
           "description": "Increases the damage of Smite by 15%.",
           "choices": null
         },
@@ -780,7 +780,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spectral Illusion",
-          "icon": "spell_priest_spectralguise",
+          "icon": "775463",
           "description": "Fade creates an illusion of you for 4 sec, tricking enemies to attack it instead.",
           "choices": null
         },
@@ -797,7 +797,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Improved Fade",
-          "icon": "spell_magic_lesserinvisibilty",
+          "icon": "135994",
           "description": "Reduces the cooldown of Fade by 5 sec.",
           "choices": null
         },
@@ -814,7 +814,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Light's Inspiration",
-          "icon": "spell_holy_restoration",
+          "icon": "135954",
           "description": "Increases the maximum health gained from Desperate Prayer by 10%.",
           "choices": null
         },
@@ -832,8 +832,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Unwavering Will",
-          "icon": "ability_warrior_unrelentingassault",
-          "description": "While above 75% health, the cast time of your Flash Heal, Prayer of Healing, and Smite are reduced by 5%.",
+          "icon": "236317",
+          "description": "While above 75% health, the cast time of your Flash Heal, Shadow Mend, and Smite are reduced by 5%.",
           "choices": null
         },
         {
@@ -850,7 +850,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Spell Warding",
-          "icon": "spell_holy_spellwarding",
+          "icon": "135976",
           "description": "Reduces all magic damage taken by 3%.",
           "choices": null
         },
@@ -868,7 +868,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Phantasm",
-          "icon": "ability_priest_phantasm",
+          "icon": "614257",
           "description": "Activating Fade removes all snare effects.",
           "choices": null
         },
@@ -886,7 +886,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angelic Bulwark",
-          "icon": "ability_priest_angelicbulwark",
+          "icon": "633042",
           "description": "When an attack brings you below 30% health, you gain an absorption shield equal to 25% of your maximum health for 20 sec. Cannot occur more than once every 90 sec.",
           "choices": null
         },
@@ -910,14 +910,14 @@
             {
               "spellId": 415416,
               "name": "Benevolence",
-              "icon": "ability_priest_spiritoftheredeemer",
+              "icon": "1445240",
               "description": "Increases the healing of your spells by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 1249230,
               "name": "Focused Power",
-              "icon": "ability_priest_focusedwill",
+              "icon": "458227",
               "description": "Increases the damage of your spells by 3%.",
               "maxRanks": 1
             }
@@ -937,7 +937,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Phantom Reach",
-          "icon": "spell_shadow_chilltouch",
+          "icon": "136130",
           "description": "Increases the range of most spells by 15%.",
           "choices": null
         },
@@ -955,7 +955,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Translucent Image",
-          "icon": "spell_shadow_twistedfaith",
+          "icon": "237570",
           "description": "Fade reduces damage you take by 10%.",
           "choices": null
         },
@@ -970,8 +970,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Atonement",
-          "icon": "ability_priest_atonement",
-          "description": "Power Word: Shield, Flash Heal, Plea, Penance, and Power Word: Radiance apply Atonement to your target for 15 sec.\r\n\r\nYour spell damage heals all targets affected by Atonement for 30% of the damage done. Healing is reduced when healing more than 5 targets.",
+          "icon": "458720",
+          "description": "Power Word: Shield, Flash Heal, Shadow Mend, Plea, and Power Word: Radiance apply Atonement to your target for 15 sec.\r\n\r\nYour spell damage heals all targets affected by Atonement for 32% of the damage done. Healing is reduced when healing more than 5 targets.",
           "choices": null
         },
         {
@@ -987,8 +987,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power Word: Radiance",
-          "icon": "spell_priest_powerword",
-          "description": "A burst of light heals the target and 4 injured allies within 40 yards for 2,141, and applies Atonement for 60% of its normal duration.",
+          "icon": "1386546",
+          "description": "A burst of light heals the target and 4 injured allies within 40 yards for 2,232, and applies Atonement for 60% of its normal duration.",
           "choices": null
         },
         {
@@ -1004,7 +1004,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pain Suppression",
-          "icon": "spell_holy_painsupression",
+          "icon": "135936",
           "description": "Reduces all damage taken by a friendly target by 40% for 8 sec. Castable while stunned.",
           "choices": null
         },
@@ -1021,7 +1021,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power of the Dark Side",
-          "icon": "inv_artifact_powerofthedarkside",
+          "icon": "1394892",
           "description": "Shadow Word: Pain has a chance to empower your next Penance with Shadow, increasing its effectiveness by 30%.",
           "choices": null
         },
@@ -1038,7 +1038,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Light's Promise",
-          "icon": "spell_priest_powerword",
+          "icon": "1386546",
           "description": "Power Word: Radiance gains an additional charge.",
           "choices": null
         },
@@ -1056,7 +1056,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sanctuary",
-          "icon": "spell_holy_holysmite",
+          "icon": "135924",
           "description": "Smite prevents the next 684 damage dealt by the enemy.",
           "choices": null
         },
@@ -1079,14 +1079,14 @@
             {
               "spellId": 372991,
               "name": "Pain Transformation",
-              "icon": "spell_holy_blessedrecovery",
+              "icon": "135877",
               "description": "Pain Suppression also heals your target for 15% of their maximum health and applies Atonement.",
               "maxRanks": 1
             },
             {
               "spellId": 373035,
               "name": "Protector of the Frail",
-              "icon": "ability_racial_forceshield",
+              "icon": "1851463",
               "description": "Pain Suppression gains an additional charge.\r\n\r\nPower Word: Shield reduces the cooldown of Pain Suppression by 3 sec.",
               "maxRanks": 1
             }
@@ -1105,7 +1105,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Indulgence",
-          "icon": "spell_shadow_unholyfrenzy",
+          "icon": "136224",
           "description": "Mind Blast has a 100% chance to grant Power of the Dark Side and deals 20% additional damage.",
           "choices": null
         },
@@ -1122,7 +1122,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Encroaching Shadows",
-          "icon": "spell_shadow_painspike",
+          "icon": "136181",
           "description": "Shadow Word: Pain Spreads to a nearby enemy when you cast Penance on the target.",
           "choices": null
         },
@@ -1145,14 +1145,14 @@
             {
               "spellId": 390684,
               "name": "Bright Pupil",
-              "icon": "spell_holy_surgeoflight",
+              "icon": "135981",
               "description": "Reduces the cooldown of Power Word: Radiance by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 390685,
               "name": "Enduring Luminescence",
-              "icon": "ability_priest_holybolts01",
+              "icon": "1022948",
               "description": "Reduces the cast time of Power Word: Radiance by 30% and causes it to apply Atonement at an additional 10% of its normal duration.",
               "maxRanks": 1
             }
@@ -1172,7 +1172,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shield Discipline",
-          "icon": "spell_holy_divineprotection",
+          "icon": "524353",
           "description": "When your Power Word: Shield is completely absorbed, you restore 0.5% of your maximum mana.",
           "choices": null
         },
@@ -1197,14 +1197,14 @@
             {
               "spellId": 421453,
               "name": "Ultimate Penitence",
-              "icon": "ability_priest_ascendance",
-              "description": "Ascend into the air and unleash a massive barrage of Penance bolts, causing 17,265 Holy damage to enemies or 41,267 healing to allies over 5.4 sec.\r\n\r\nWhile ascended, gain a shield for 100% of your health. In addition, you are unaffected by knockbacks or crowd control effects.",
+              "icon": "1060982",
+              "description": "Ascend into the air and unleash a massive barrage of Penance bolts, causing 22,314 Holy damage to enemies or 52,314 healing to allies over 5.4 sec.\r\n\r\nWhile ascended, gain a shield for 100% of your health. In addition, you are unaffected by knockbacks or crowd control effects.",
               "maxRanks": 1
             },
             {
               "spellId": 62618,
               "name": "Power Word: Barrier",
-              "icon": "spell_holy_powerwordbarrier",
+              "icon": "253400",
               "description": "Summons a holy barrier to protect all allies at the target location for 10 sec, reducing all damage taken by 20% and preventing damage from delaying spellcasting.",
               "maxRanks": 1
             }
@@ -1224,7 +1224,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Painful Punishment",
-          "icon": "ability_priest_clarityofpower",
+          "icon": "1022945",
           "description": "Each Penance bolt extends the duration of Shadow Word: Pain on enemies hit by 1.5 sec.",
           "choices": null
         },
@@ -1241,7 +1241,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Revel in Darkness",
-          "icon": "ability_rogue_envelopingshadows",
+          "icon": "132291",
           "description": "Shadow Word: Pain deals 5% additional damage and spreads to 1 additional target when you cast Penance to its target.",
           "choices": null
         },
@@ -1259,7 +1259,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Holy Ray",
-          "icon": "ability_paladin_infusionoflight",
+          "icon": "236254",
           "description": "Each successive Penance bolt during a channel deals 5% increased damage and healing.",
           "choices": null
         },
@@ -1278,7 +1278,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lenience",
-          "icon": "ability_priest_atonement",
+          "icon": "458720",
           "description": "Atonement reduces damage taken by 2%.",
           "choices": null
         },
@@ -1297,7 +1297,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Tap",
-          "icon": "ability_creature_disease_05",
+          "icon": "132102",
           "description": "Mind Blast deals 150% increased damage, but costs 40% more mana.",
           "choices": null
         },
@@ -1314,7 +1314,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Purge the Wicked",
-          "icon": "ability_mage_firestarter",
+          "icon": "236216",
           "description": "Holy damage increased by 10%.",
           "choices": null
         },
@@ -1332,7 +1332,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Castigation",
-          "icon": "spell_holy_searinglightpriest",
+          "icon": "135973",
           "description": "Penance fires one additional bolt of holy light over its duration.",
           "choices": null
         },
@@ -1349,7 +1349,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Indemnity",
-          "icon": "ability_priest_clarityofwill",
+          "icon": "1022947",
           "description": "Atonements granted by Power Word: Shield last an additional 4 sec.",
           "choices": null
         },
@@ -1367,7 +1367,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Pain and Suffering",
-          "icon": "spell_shadow_shadowwordpain",
+          "icon": "136207",
           "description": "Increases the damage of Shadow Word: Pain by 15% and increases its duration by 2 sec.",
           "choices": null
         },
@@ -1384,7 +1384,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Occultist",
-          "icon": "ability_priest_touchofdecay",
+          "icon": "4067371",
           "description": "Shadow damage and healing done increased by 15%.",
           "choices": null
         },
@@ -1395,14 +1395,14 @@
           "posX": 34,
           "posY": 8,
           "connections": [
-            82575,
-            82566
+            82566,
+            82575
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Harsh Discipline",
-          "icon": "ability_paladin_handoflight",
+          "icon": "1360761",
           "description": "Power Word: Radiance causes your next Penance to fire 1 additional bolt, stacking up to 2 charges.",
           "choices": null
         },
@@ -1413,15 +1413,15 @@
           "posX": 38,
           "posY": 8,
           "connections": [
-            82575,
             82576,
-            82578
+            82578,
+            82575
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Evangelism",
-          "icon": "spell_holy_divineillumination",
+          "icon": "135895",
           "description": "Immediately Power Word: Radiance your target at 150% effectiveness, and causes your next 2 casts of Power Word: Radiance to be instant cast with 40% reduced mana cost.",
           "choices": null
         },
@@ -1439,7 +1439,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Abyssal Reverie",
-          "icon": "ability_priest_surgeofdarkness",
+          "icon": "633004",
           "description": "Atonement heals for 5% more when activated by Shadow spells.",
           "choices": null
         },
@@ -1456,7 +1456,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Divine Procession",
-          "icon": "ability_priest_evangelism",
+          "icon": "458968",
           "description": "Smite extends the duration of an active Atonement by 2.0 sec.",
           "choices": null
         },
@@ -1474,8 +1474,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inner Focus",
-          "icon": "spell_frost_windwalkon",
-          "description": "Flash Heal, Power Word: Shield, Penance, and Power Word: Radiance have a 20% increased chance to critically heal.",
+          "icon": "135863",
+          "description": "Flash Heal, Shadow Mend, Power Word: Shield, Penance, and Power Word: Radiance have a 20% increased chance to critically heal.",
           "choices": null
         },
         {
@@ -1497,14 +1497,14 @@
             {
               "spellId": 197862,
               "name": "Archangel",
-              "icon": "ability_priest_archangel",
+              "icon": "458225",
               "description": "Evangelism increases your healing and absorption effects by 15% for 18 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1280137,
               "name": "Mindbender",
-              "icon": "spell_shadow_soulleech_3",
+              "icon": "136214",
               "description": "Evangelism summons a Mindbender to attack a nearby target for 12 sec.\r\n\r\nGenerates 0.2% Mana each time the Mindbender attacks.",
               "maxRanks": 1
             }
@@ -1524,8 +1524,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Mend",
-          "icon": "spell_shadow_shadowmend",
-          "description": "Shadow Word: Pain damage has a chance to upgrade your next Flash Heal to Shadow Mend. Stacks up to 2 charges.\r\n\r\n Shadow Mend:\r\nWraps an ally in shadows which heal for 6,920, but at a price.\r\n\r\nThe ally will take 338 damage every 1 sec, until they have taken 3,354 total damage from all sources, or leave combat.",
+          "icon": "136202",
+          "description": "Flash Heal is upgraded to Shadow Mend, a stronger heal with a higher mana cost.\r\n\r\n Shadow Mend:\r\nWraps an ally in shadows which heal for 3,279, but at a price.\r\n\r\nThe ally will take 168 damage every 1 sec, until they have taken 1,694 total damage from all sources, or leave combat.",
           "choices": null
         },
         {
@@ -1541,7 +1541,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowfiend",
-          "icon": "spell_shadow_shadowfiend",
+          "icon": "136199",
           "description": "Shadow Word: Death has a 40% chance to summon a Shadowfiend for 5 sec when damaging targets below 20% health.\r\n\r\n Shadowfiend\r\nSummons a Shadowfiend to attack your target for 5 sec.\r\n\r\nGenerates 0.5% mana each time the Shadowfiend attacks.",
           "choices": null
         },
@@ -1556,10 +1556,10 @@
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
-          "maxRanks": 2,
+          "maxRanks": 1,
           "name": "Greater Smite",
-          "icon": "spell_paladin_inquisition",
-          "description": "Casting Smite increases the damage of Smite by 15%, stacking 2 times. Lasts 2 sec.",
+          "icon": "461858",
+          "description": "Casting Smite increases the damage of Smite by 25%, stacking 2 times. Lasts 4 sec.",
           "choices": null
         },
         {
@@ -1576,7 +1576,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Divine Aegis",
-          "icon": "spell_holy_devineaegis",
+          "icon": "237539",
           "description": "Direct critical heals create a protective shield on the target, absorbing 30% of the amount healed. Lasts 15 sec.",
           "choices": null
         },
@@ -1594,7 +1594,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Borrowed Time",
-          "icon": "spell_holy_borrowedtime",
+          "icon": "237538",
           "description": "Casting Power Word: Shield increases your Haste by 5% for 4 sec.",
           "choices": null
         },
@@ -1602,7 +1602,7 @@
           "id": 82568,
           "type": "round",
           "treeType": "spec",
-          "posX": 40,
+          "posX": 38,
           "posY": 10,
           "connections": [
             82571,
@@ -1612,8 +1612,25 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Blaze of Light",
-          "icon": "spell_holy_searinglight",
-          "description": "The damage of Smite and Penance is increased by 8%, and Penance increases or decreases your target&#39;s movement speed by 25% for 2 sec.",
+          "icon": "135972",
+          "description": "The damage of Smite and Penance is increased by 8%, and Penance increases or decreases your target's movement speed by 25% for 2 sec.",
+          "choices": null
+        },
+        {
+          "id": 110648,
+          "type": "round",
+          "treeType": "spec",
+          "posX": 40,
+          "posY": 10,
+          "connections": [
+            82567
+          ],
+          "spentRequired": 20,
+          "alreadyGranted": false,
+          "maxRanks": 1,
+          "name": "Grim Deliverance",
+          "icon": "5852173",
+          "description": "Shadow Mend heals for 40% more and applies Atonement for an additional 4 sec, but its cast time is increased by 0.3 sec.",
           "choices": null
         },
         {
@@ -1630,7 +1647,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Death's Torment",
-          "icon": "spell_shadow_deathsembrace",
+          "icon": "237557",
           "description": "Shadow Word: Death deals damage 2 additional times at 15% effectiveness.",
           "choices": null
         },
@@ -1647,7 +1664,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inescapable Torment",
-          "icon": "spell_shadow_chilltouch",
+          "icon": "136130",
           "description": "Mind Blast and Shadow Word: Death cause your Shadowfiend, Mindbender, and Voidwraith to teleport behind your target, slashing up to 5 nearby enemies for 319 Shadow damage and extending their durations by 0.7 sec.",
           "choices": null
         },
@@ -1658,13 +1675,15 @@
           "posX": 34,
           "posY": 11,
           "connections": [
-            82602
+            82602,
+            82572,
+            82569
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Eternal Barrier",
-          "icon": "spell_holy_powerwordshield",
+          "icon": "135940",
           "description": "Power Word: Shield absorbs 20% additional damage and lasts 5 sec longer.",
           "choices": null
         },
@@ -1681,7 +1700,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Weal and Woe",
-          "icon": "spell_priest_burningwill",
+          "icon": "537078",
           "description": "Your Penance bolts increase the absorb of your next Power Word: Shield by 3%.\r\n\r\nStacks up to 10 times.",
           "choices": null
         },
@@ -1689,16 +1708,17 @@
           "id": 82586,
           "type": "round",
           "treeType": "spec",
-          "posX": 40,
+          "posX": 38,
           "posY": 11,
           "connections": [
+            110648,
             82568
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Searing Light",
-          "icon": "spell_holy_penance",
+          "icon": "237545",
           "description": "Your Penance bolts sear the enemy, dealing 20% of its damage over 8 sec.",
           "choices": null
         },
@@ -1709,13 +1729,15 @@
           "posX": 42,
           "posY": 11,
           "connections": [
+            110278,
+            110648,
             110277
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Expiation",
-          "icon": "spell_shadow_shadowpower",
+          "icon": "136204",
           "description": "Mind Blast and Shadow Word: Death consume 1 sec of Shadow Word: Pain, dealing damage equal to 300% of the amount consumed.",
           "choices": null
         },
@@ -1730,7 +1752,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Master the Darkness",
-          "icon": "inv12_apextalent_priest_voidshield",
+          "icon": "7514191",
           "description": null,
           "levels": [
             81,
@@ -1740,7 +1762,7 @@
           "ranks": [
             {
               "spellId": 1253590,
-              "description": "Penance has a high chance to upgrade Power Word: Shield into Void Shield.\r\n\r\n Void Shield:\r\nShields 3 allies for 15 sec, absorbing 2,652 damage.\r\n\r\n",
+              "description": "Penance has a 25% chance to upgrade Power Word: Shield into Void Shield.\r\n\r\n Void Shield:\r\nShields 3 allies for 15 sec, absorbing 1,722 damage.\r\n\r\n",
               "maxRanks": 1
             },
             {
@@ -1750,7 +1772,7 @@
             },
             {
               "spellId": 1253827,
-              "description": "Void Shield reflects 25% of damage taken to enemies, causing Atonement healing.",
+              "description": "Casting Mind Blast upgrades your next Power Word: Shield to Void Shield.\r\n\r\nVoid Shield now reflects 15% of damage taken to enemies, causing Atonement healing.",
               "maxRanks": 1
             }
           ]
@@ -1769,8 +1791,8 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Devour Matter",
-          "icon": "spell_holy_consumemagic",
-          "description": "Shadow Word: Death consumes absorb shields from your target, dealing 975 extra damage to them and granting you 1% mana if a shield was present.",
+          "icon": "135888",
+          "description": "Shadow Word: Death consumes absorb shields from your target, dealing 978 extra damage to them and granting you 1% mana if a shield was present.",
           "choices": null
         },
         {
@@ -1787,8 +1809,8 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Void Infusion",
-          "icon": "inv_misc_volatileshadow",
-          "description": "While Entropic Rift is active, Atonement healing with Void Blast and Penance is 50% more effective.",
+          "icon": "463569",
+          "description": "While Entropic Rift is active, Atonement healing with Void Blast and Penance is 75% more effective.",
           "choices": null
         },
         {
@@ -1805,7 +1827,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Inner Quietus",
-          "icon": "inv_cosmicvoid_buff",
+          "icon": "4913234",
           "description": "Power Word: Shield absorbs 20% additional damage.",
           "choices": null
         },
@@ -1823,7 +1845,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Quickened Pulse",
-          "icon": "ability_rogue_sanguinaryvein",
+          "icon": "457636",
           "description": "Shadow Word: Pain and Entropic Rift deal damage 25% more often.",
           "choices": null
         },
@@ -1847,14 +1869,14 @@
             {
               "spellId": 451204,
               "name": "No Escape",
-              "icon": "spell_fire_twilighthellfire",
+              "icon": "425956",
               "description": "Entropic Rift slows enemies by up to 70%, increased the closer they are to its center.",
               "maxRanks": 1
             },
             {
               "spellId": 451018,
               "name": "Dark Energy",
-              "icon": "achievement_boss_triumvirate_darknaaru",
+              "icon": "1711336",
               "description": "While Entropic Rift is active, you move 20% faster.",
               "maxRanks": 1
             }
@@ -1877,7 +1899,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Collapsing Void",
-          "icon": "inv_cosmicvoid_groundsate",
+          "icon": "4914667",
           "description": "Each time Penance damages or heals, Entropic Rift is empowered, increasing its damage and size by 10%.\r\n\r\nAfter Entropic Rift ends it collapses, dealing 1,672 Shadow damage split amongst enemy targets within 15 yds.",
           "choices": null
         },
@@ -1901,14 +1923,14 @@
             {
               "spellId": 450138,
               "name": "Void Empowerment",
-              "icon": "inv_cosmicvoid_nova",
+              "icon": "4914669",
               "description": "Summoning an Entropic Rift extends the duration of your 5 shortest Atonements by 1 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 449912,
               "name": "Darkening Horizon",
-              "icon": "inv_misc_83_voidfocus",
+              "icon": "3072251",
               "description": "Void Blast increases the duration of Entropic Rift by 1.0 sec, up to a maximum of 3 sec.",
               "maxRanks": 1
             }
@@ -1934,14 +1956,14 @@
             {
               "spellId": 451311,
               "name": "Void Leech",
-              "icon": "spell_shadow_soulleech_2",
+              "icon": "136213",
               "description": "Every 3 sec siphon an amount equal to 4% of your health from an ally within 40 yds if they are higher health than you.",
               "maxRanks": 1
             },
             {
               "spellId": 451569,
               "name": "Embrace the Shadow",
-              "icon": "spell_shadow_shadesofdarkness",
+              "icon": "136194",
               "description": "You absorb 3% of all magic damage taken. Absorbing Shadow damage heals you for 100% of the amount absorbed.",
               "maxRanks": 1
             }
@@ -1961,8 +1983,8 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Void Blast",
-          "icon": "inv_cosmicvoid_missile",
-          "description": "Entropic Rift upgrades Smite into Void Blast while it is active.\r\n\r\nVoid Blast:\r\nSends a blast of cosmic void energy at the enemy, causing 563 Shadow damage.",
+          "icon": "4914668",
+          "description": "Entropic Rift upgrades Smite into Void Blast while it is active.\r\n\r\nVoid Blast:\r\nSends a blast of cosmic void energy at the enemy, causing 568 Shadow damage.",
           "choices": null
         },
         {
@@ -1979,7 +2001,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Voidwraith",
-          "icon": "warlock_curse_shadow",
+          "icon": "615099",
           "description": "When Entropic Rift ends, a Voidwraith is summoned from the collapsed rift for 5 sec.\r\n\r\nVoidwraith\r\nSummon a Voidwraith that casts Void Flay from afar. Void Flay deals bonus damage to high health enemies, up to a maximum of 50% if they are full health.\r\n\r\nGenerates 0.5% Mana each time the Voidwraith attacks.",
           "choices": null
         },
@@ -1997,7 +2019,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Overwhelming Shadows",
-          "icon": "inv_shadowelementalmount",
+          "icon": "5767152",
           "description": "Mind Blast deals 100% increased damage.",
           "choices": null
         },
@@ -2015,7 +2037,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Touch of the Void",
-          "icon": "inv_112_raidtrinkets_blobofswirlingvoid_purple",
+          "icon": "7137506",
           "description": "Voidheart now persists for 8 sec after Entropic Rift ends.",
           "choices": null
         },
@@ -2033,7 +2055,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Voidheart",
-          "icon": "inv_cosmicvoid_orb",
+          "icon": "4914670",
           "description": "While Entropic Rift is active, your Atonement healing is increased by 20%.",
           "choices": null
         },
@@ -2049,8 +2071,8 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Entropic Rift",
-          "icon": "inv_ability_voidweaverpriest_entropicrift",
-          "description": "Mind Blast tears open an Entropic Rift that follows the enemy for 8 sec. Enemies caught in its path suffer 229 Shadow damage every 0.9 sec while within its reach.",
+          "icon": "5927657",
+          "description": "Mind Blast tears open an Entropic Rift that follows the enemy for 8 sec. Enemies caught in its path suffer 227 Shadow damage every 0.9 sec while within its reach.",
           "choices": null
         },
         {
@@ -2067,8 +2089,8 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Prompt Prognosis",
-          "icon": "spell_holy_blessedlife",
-          "description": "Casting Prayer of Mending heals your target for 3,572.",
+          "icon": "135876",
+          "description": "Casting Prayer of Mending heals your target for 4,643.",
           "choices": null
         },
         {
@@ -2085,7 +2107,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Preemptive Care",
-          "icon": "ability_priest_atonement",
+          "icon": "458720",
           "description": "Increases the duration of your Renew by 40%.\r\n",
           "choices": null
         },
@@ -2109,14 +2131,14 @@
             {
               "spellId": 440670,
               "name": "Divine Feathers",
-              "icon": "ability_priest_angelicfeather",
+              "icon": "642580",
               "description": "Your Angelic Feathers increase movement speed by an additional 10%.\r\n\r\nWhen an ally walks through your Angelic Feather, you are also granted 100% of its effect.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 440669,
               "name": "Save the Day",
-              "icon": "priest_spell_leapoffaith_a",
+              "icon": "463835",
               "description": "For 6 sec after casting Leap of Faith you may cast it a second time for free, ignoring its cooldown.",
               "maxRanks": 1
             }
@@ -2136,7 +2158,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Waste No Time",
-          "icon": "spell_nature_timestop",
+          "icon": "136106",
           "description": "Reduces the cooldown of Prayer of Mending by 1.5 sec.",
           "choices": null
         },
@@ -2152,7 +2174,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Guiding Light",
-          "icon": "ability_priest_holywordlife",
+          "icon": "4667420",
           "description": "Prayer of Mending gains an additional charge.\r\n",
           "choices": null
         },
@@ -2173,7 +2195,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Twinsight",
-          "icon": "inv_ability_oraclepriest_clairvoyance",
+          "icon": "6118849",
           "description": "3 additional Penance bolts are fired at an enemy within 40 yards when healing an ally with Penance, or fired at an ally within 40 yards when damaging an enemy with Penance.",
           "choices": null
         },
@@ -2191,7 +2213,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Foreseen Circumstances",
-          "icon": "spell_holy_guardianspirit",
+          "icon": "237542",
           "description": "Guardian Spirit lasts an additional 2 sec.",
           "choices": null
         },
@@ -2215,15 +2237,15 @@
             {
               "spellId": 433905,
               "name": "Prophet's Will",
-              "icon": "ability_priest_clarityofpurpose",
-              "description": "Your Flash Heal and Holy Word: Serenity are 30% more effective when cast on yourself.",
+              "icon": "1022946",
+              "description": "Your Flash Heal, Shadow Mend, and Power Word: Shield are 30% more effective when cast on yourself.",
               "maxRanks": 1
             },
             {
               "spellId": 458718,
               "name": "Desperate Measures",
-              "icon": "spell_holy_testoffaith",
-              "description": "Desperate Prayer lasts an additional 10 sec.\r\n\r\nAngelic Bulwark&#39;s absorption effect is increased by 15% of your maximum health.",
+              "icon": "237550",
+              "description": "Desperate Prayer lasts an additional 10 sec.\r\n\r\nAngelic Bulwark's absorption effect is increased by 15% of your maximum health.",
               "maxRanks": 1
             }
           ]
@@ -2242,8 +2264,8 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Assured Safety",
-          "icon": "spell_holy_powerwordshield",
-          "description": "Casting Prayer of Mending applies Power Word: Shield to your target.\r\n\r\n Power Word: Shield\r\nShields an ally for 15 sec, absorbing 1,757 damage.",
+          "icon": "135940",
+          "description": "Casting Prayer of Mending applies Power Word: Shield to your target.\r\n\r\n Power Word: Shield\r\nShields an ally for 15 sec, absorbing 1,722 damage.",
           "choices": null
         },
         {
@@ -2260,7 +2282,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Preventive Measures",
-          "icon": "spell_holy_prayerofmendingtga",
+          "icon": "135944",
           "description": "Increases the healing done by Prayer of Mending by 15%.\r\n\r\nAll damage dealt by Smite, Holy Fire and Holy Nova increased by 40%.\r\n",
           "choices": null
         },
@@ -2278,7 +2300,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Piety",
-          "icon": "inv_ability_oraclepriest_premonitionpiety",
+          "icon": "5927641",
           "description": "20% of overhealing done is redistributed to up to 4 nearby injured allies.",
           "choices": null
         },
@@ -2296,8 +2318,8 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Unfolding Vision",
-          "icon": "spell_holy_mindvision",
-          "description": "\r\nWhen Power Word: Shield or Void Shield expires with absorption remaining, it jumps to a nearby injured ally and loses 40% of its maximum absorb instead.\r\n",
+          "icon": "135934",
+          "description": "When Power Word: Shield or Void Shield expires with absorption remaining, it jumps to a nearby injured ally instead. Can only happen once per shield.\r\n",
           "choices": null
         },
         {
@@ -2314,8 +2336,8 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Words of the Wise",
-          "icon": "spell_holy_persuitofjustice",
-          "description": "Flash Heal, Plea, and Power Word: Radiance healing increased by 15%.\r\n",
+          "icon": "135937",
+          "description": "Flash Heal, Shadow Mend, Plea, and Power Word: Radiance healing increased by 15%.\r\n",
           "choices": null
         },
         {
@@ -2332,7 +2354,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Prophet's Insight",
-          "icon": "spell_priest_pontifex",
+          "icon": "1386545",
           "description": "Atonement healing from Holy spells is increased by 15%.\r\n",
           "choices": null
         }
@@ -2399,8 +2421,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Improved Flash Heal",
-          "icon": "spell_holy_heal",
-          "description": "Increases healing done by Flash Heal by 15%.",
+          "icon": "135915",
+          "description": "Increases healing done by Flash Heal and Shadow Mend by 15%.",
           "choices": null
         },
         {
@@ -2414,7 +2436,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angelic Feather",
-          "icon": "ability_priest_angelicfeather",
+          "icon": "642580",
           "description": "Places a feather at the target location, granting the first ally to walk through it 40% increased movement speed for 5 sec. Only 3 feathers can be placed at one time.",
           "choices": null
         },
@@ -2429,8 +2451,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Holy Fire",
-          "icon": "spell_holy_searinglight",
-          "description": "Consumes the enemy in Holy flames that cause 1,183 Holy damage and an additional 421 Holy damage over 7 sec.",
+          "icon": "135972",
+          "description": "Consumes the enemy in Holy flames that cause 1,186 Holy damage and an additional 421 Holy damage over 7 sec.",
           "choices": null
         },
         {
@@ -2446,8 +2468,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Holy Nova",
-          "icon": "spell_holy_holynova",
-          "description": "An explosion of holy light around you deals up to 157 Holy damage to enemies and up to 122 healing to allies within 12 yds, reduced if there are more than 5 targets.",
+          "icon": "135922",
+          "description": "An explosion of holy light around you deals up to 157 Holy damage to enemies and up to 117 healing to allies within 12 yds, reduced if there are more than 5 targets.",
           "choices": null
         },
         {
@@ -2464,7 +2486,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dispel Magic",
-          "icon": "spell_nature_nullifydisease",
+          "icon": "136066",
           "description": "Dispels Magic on the enemy target, removing 1 beneficial Magic effect.",
           "choices": null
         },
@@ -2482,7 +2504,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritual Guidance",
-          "icon": "spell_holy_spiritualguidence",
+          "icon": "135977",
           "description": "Increases your Intellect by 3%.",
           "choices": null
         },
@@ -2499,7 +2521,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Psychic Scream",
-          "icon": "spell_shadow_psychicscream",
+          "icon": "136184",
           "description": "Lets out a psychic scream, causing all enemies within 8 yards to flee, disorienting them for 8 sec. Damage may interrupt the effect.",
           "choices": null
         },
@@ -2516,7 +2538,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lightburst",
-          "icon": "inv_ability_holyfire_nova",
+          "icon": "5764907",
           "description": "Increases the damage of Holy Nova by 400%, its healing by 500%, and its cooldown by 30 sec.",
           "choices": null
         },
@@ -2534,7 +2556,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leap of Faith",
-          "icon": "priest_spell_leapoffaith_a",
+          "icon": "463835",
           "description": "Pulls the spirit of a party or raid member, instantly moving them directly in front of you.",
           "choices": null
         },
@@ -2551,7 +2573,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Purify",
-          "icon": "spell_holy_nullifydisease",
+          "icon": "135935",
           "description": "Purify additionally removes all Disease effects.",
           "choices": null
         },
@@ -2569,7 +2591,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power Infusion",
-          "icon": "spell_holy_powerinfusion",
+          "icon": "135939",
           "description": "Infuses the target with power for 15 sec, increasing haste by 20%.\r\n\r\nCan only be cast on players.",
           "choices": null
         },
@@ -2587,7 +2609,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Painful Invocation",
-          "icon": "spell_holy_mindsooth",
+          "icon": "135933",
           "description": "Increases the damage of Shadow Word: Pain by 10%.",
           "choices": null
         },
@@ -2610,14 +2632,14 @@
             {
               "spellId": 390919,
               "name": "Sheer Terror",
-              "icon": "spell_nzinsanity_fearofdeath",
+              "icon": "3163624",
               "description": "Increases the amount of damage required to break your Psychic Scream by 25%.",
               "maxRanks": 1
             },
             {
               "spellId": 55676,
               "name": "Petrifying Scream",
-              "icon": "spell_shadow_psychichorrors",
+              "icon": "237568",
               "description": "Psychic Scream causes enemies to tremble in place instead of fleeing in fear.",
               "maxRanks": 1
             }
@@ -2637,8 +2659,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Surge of Light",
-          "icon": "spell_holy_surgeoflight",
-          "description": "Your healing spells and Smite have a 8% chance to make your next Flash Heal instant and cost 50% less mana. Stacks to 2.",
+          "icon": "135981",
+          "description": "Your healing spells and Smite have a 8% chance to make your next Flash Heal or Shadow Mend instant and cost 50% less mana. Stacks to 2.",
           "choices": null
         },
         {
@@ -2654,8 +2676,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Body and Soul",
-          "icon": "spell_holy_symbolofhope",
-          "description": "Power Word: Shield and Leap of Faith increase your target&#39;s movement speed by 40% for 3 sec.",
+          "icon": "135982",
+          "description": "Power Word: Shield and Leap of Faith increase your target's movement speed by 40% for 3 sec.",
           "choices": null
         },
         {
@@ -2673,7 +2695,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mass Dispel",
-          "icon": "spell_arcane_massdispel",
+          "icon": "135739",
           "description": "Dispels magic in a 15 yard radius, removing all harmful Magic from 5 friendly targets and 1 beneficial Magic effect from 5 enemy targets. Potent enough to remove Magic that is normally undispellable.",
           "choices": null
         },
@@ -2690,7 +2712,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twins of the Sun Priestess",
-          "icon": "spell_fire_felflamering_red",
+          "icon": "2175503",
           "description": "Power Infusion also grants you its effect at 100% value when used on an ally. \r\n\r\nIf no ally is targeted, it will grant its effect at 100% value to a nearby ally, preferring damage dealers.",
           "choices": null
         },
@@ -2708,7 +2730,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Strength of Resolve",
-          "icon": "spell_holy_ashestoashes",
+          "icon": "135871",
           "description": "Increases your Stamina by 6%.",
           "choices": null
         },
@@ -2732,14 +2754,14 @@
             {
               "spellId": 605,
               "name": "Mind Control",
-              "icon": "spell_shadow_shadowworddominate",
+              "icon": "136206",
               "description": "Controls a mind up to 1 level above yours for 30 sec. Does not work versus Demonic, Undead, or Mechanical beings. Shares diminishing returns with other disorienting effects.",
               "maxRanks": 1
             },
             {
               "spellId": 205364,
               "name": "Dominate Mind",
-              "icon": "spell_priest_voidflay",
+              "icon": "1386549",
               "description": "Controls a mind up to 1 level above yours for 30 sec while still controlling your own mind. Does not work versus Demonic, Mechanical, or Undead beings or players. This spell shares diminishing returns with other disorienting effects.",
               "maxRanks": 1
             }
@@ -2764,14 +2786,14 @@
             {
               "spellId": 196704,
               "name": "Psychic Voice",
-              "icon": "ability_warrior_commandingshout",
+              "icon": "132339",
               "description": "Reduces the cooldown of Psychic Scream by 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1250691,
               "name": "Void Tendrils",
-              "icon": "spell_priest_voidtendrils",
+              "icon": "537022",
               "description": "Call shadowy tendrils to constrict enemies when Psychic Scream ends, rooting them in place for 4 sec.",
               "maxRanks": 1
             }
@@ -2790,7 +2812,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Everlasting Light",
-          "icon": "spell_holy_greaterheal",
+          "icon": "135913",
           "description": "Surge of Light occurs up to 50% more often based on your missing mana.",
           "choices": null
         },
@@ -2807,7 +2829,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Move with Grace",
-          "icon": "ability_priest_savinggrace",
+          "icon": "1022949",
           "description": "Reduces the cooldown of Leap of Faith by 30 sec.",
           "choices": null
         },
@@ -2824,7 +2846,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mental Agility",
-          "icon": "spell_holy_dispelmagic",
+          "icon": "135894",
           "description": "Reduces the mana cost of Purify and Mass Dispel by 50% and Dispel Magic by 10%.\r\n",
           "choices": null
         },
@@ -2835,15 +2857,15 @@
           "posX": 10,
           "posY": 6,
           "connections": [
-            82687,
+            109890,
             108731,
-            109890
+            82687
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twin Disciplines",
-          "icon": "ability_priest_innerlightandshadow",
+          "icon": "4226157",
           "description": "Increases the damage and healing of your Holy and Shadow spells by 2%.",
           "choices": null
         },
@@ -2861,7 +2883,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Enlightenment",
-          "icon": "ability_priest_darkness",
+          "icon": "458226",
           "description": "Increases your haste by 3%.",
           "choices": null
         },
@@ -2878,7 +2900,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "False Autonomy",
-          "icon": "spell_arcane_mindmastery",
+          "icon": "135740",
           "description": "Increases the duration of Mind Control and Dominate Mind against enemy creatures by 15 sec.",
           "choices": null
         },
@@ -2896,7 +2918,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shackle Horror",
-          "icon": "spell_nature_slow",
+          "icon": "136091",
           "description": "Shackles an aberration or undead enemy for 50 sec, preventing all actions and movement. Damage will cancel the effect. Limit 1.",
           "choices": null
         },
@@ -2914,8 +2936,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inspiration",
-          "icon": "spell_holy_layonhands",
-          "description": "Reduces your target&#39;s physical damage taken by 5% for 15 sec after a critical heal with Flash Heal or Penance.",
+          "icon": "135928",
+          "description": "Reduces your target's physical damage taken by 5% for 15 sec after a critical heal with Flash Heal, Shadow Mend, or Penance.",
           "choices": null
         },
         {
@@ -2925,16 +2947,16 @@
           "posX": 8,
           "posY": 7,
           "connections": [
+            82699,
             109019,
-            82690,
-            82699
+            82690
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Binding Heals",
-          "icon": "spell_holy_blindingheal",
-          "description": "20% of Flash Heal healing on other targets also heals you.",
+          "icon": "135883",
+          "description": "20% of Flash Heal or Shadow Mend healing on other targets also heals you.",
           "choices": null
         },
         {
@@ -2944,15 +2966,15 @@
           "posX": 12,
           "posY": 7,
           "connections": [
-            82690,
-            109020
+            109020,
+            82690
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Word: Death",
-          "icon": "spell_shadow_demonicfortitude",
-          "description": "A word of dark binding that inflicts 326 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
+          "icon": "136149",
+          "description": "A word of dark binding that inflicts 320 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
           "choices": null
         },
         {
@@ -2970,7 +2992,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sanguine Teachings",
-          "icon": "inv_archaeology_80_zandalari_sanguinetotem",
+          "icon": "2101983",
           "description": "Increases your Leech by 2%.",
           "choices": null
         },
@@ -2988,7 +3010,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Desperate Prayer",
-          "icon": "spell_holy_testoffaith",
+          "icon": "237550",
           "description": "Increases maximum health by 25% for 10 sec, and instantly heals you for that amount.",
           "choices": null
         },
@@ -3006,7 +3028,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Twist of Fate",
-          "icon": "spell_shadow_mindtwisting",
+          "icon": "237566",
           "description": "After damaging or healing a target below 35% health, gain 5% increased damage and healing for 8 sec.",
           "choices": null
         },
@@ -3023,7 +3045,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tithe Evasion",
-          "icon": "spell_nzinsanity_bloodthirst",
+          "icon": "3163621",
           "description": "Shadow Word: Death deals 50% less damage to you.",
           "choices": null
         },
@@ -3041,8 +3063,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fade",
-          "icon": "spell_magic_lesserinvisibilty",
-          "description": "Fade out, removing all your threat and reducing enemies&#39; detection range against you for 10 sec.",
+          "icon": "135994",
+          "description": "Fade out, removing all your threat and reducing enemies' detection range against you for 10 sec.",
           "choices": null
         },
         {
@@ -3058,7 +3080,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angel's Mercy",
-          "icon": "spell_holy_testoffaith",
+          "icon": "237550",
           "description": "Reduces the cooldown of Desperate Prayer by 20 sec.",
           "choices": null
         },
@@ -3076,8 +3098,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Protective Light",
-          "icon": "spell_holy_holyprotection",
-          "description": "Casting Flash Heal on yourself reduces all damage you take by 10% for 10 sec.",
+          "icon": "135923",
+          "description": "Casting Flash Heal or Shadow Mend on yourself reduces all damage you take by 10% for 10 sec.",
           "choices": null
         },
         {
@@ -3095,7 +3117,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mindpierce",
-          "icon": "spell_shadow_mindshear",
+          "icon": "237565",
           "description": "Increases the damage of Smite by 15%.",
           "choices": null
         },
@@ -3112,7 +3134,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spectral Illusion",
-          "icon": "spell_priest_spectralguise",
+          "icon": "775463",
           "description": "Fade creates an illusion of you for 4 sec, tricking enemies to attack it instead.",
           "choices": null
         },
@@ -3129,7 +3151,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Improved Fade",
-          "icon": "spell_magic_lesserinvisibilty",
+          "icon": "135994",
           "description": "Reduces the cooldown of Fade by 5 sec.",
           "choices": null
         },
@@ -3146,7 +3168,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Light's Inspiration",
-          "icon": "spell_holy_restoration",
+          "icon": "135954",
           "description": "Increases the maximum health gained from Desperate Prayer by 10%.",
           "choices": null
         },
@@ -3164,8 +3186,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Unwavering Will",
-          "icon": "ability_warrior_unrelentingassault",
-          "description": "While above 75% health, the cast time of your Flash Heal, Prayer of Healing, and Smite are reduced by 5%.",
+          "icon": "236317",
+          "description": "While above 75% health, the cast time of your Flash Heal, Shadow Mend, and Smite are reduced by 5%.",
           "choices": null
         },
         {
@@ -3182,7 +3204,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Spell Warding",
-          "icon": "spell_holy_spellwarding",
+          "icon": "135976",
           "description": "Reduces all magic damage taken by 3%.",
           "choices": null
         },
@@ -3200,7 +3222,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Phantasm",
-          "icon": "ability_priest_phantasm",
+          "icon": "614257",
           "description": "Activating Fade removes all snare effects.",
           "choices": null
         },
@@ -3218,7 +3240,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angelic Bulwark",
-          "icon": "ability_priest_angelicbulwark",
+          "icon": "633042",
           "description": "When an attack brings you below 30% health, you gain an absorption shield equal to 25% of your maximum health for 20 sec. Cannot occur more than once every 90 sec.",
           "choices": null
         },
@@ -3242,14 +3264,14 @@
             {
               "spellId": 415416,
               "name": "Benevolence",
-              "icon": "ability_priest_spiritoftheredeemer",
+              "icon": "1445240",
               "description": "Increases the healing of your spells by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 1249230,
               "name": "Focused Power",
-              "icon": "ability_priest_focusedwill",
+              "icon": "458227",
               "description": "Increases the damage of your spells by 3%.",
               "maxRanks": 1
             }
@@ -3269,7 +3291,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Phantom Reach",
-          "icon": "spell_shadow_chilltouch",
+          "icon": "136130",
           "description": "Increases the range of most spells by 15%.",
           "choices": null
         },
@@ -3287,7 +3309,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Translucent Image",
-          "icon": "spell_shadow_twistedfaith",
+          "icon": "237570",
           "description": "Fade reduces damage you take by 10%.",
           "choices": null
         },
@@ -3302,8 +3324,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Holy Word: Serenity",
-          "icon": "spell_holy_persuitofjustice",
-          "description": "Perform a miracle, healing an ally for 6,812.\r\n\r\nCooldown reduced by 6 sec when you cast Flash Heal.",
+          "icon": "135937",
+          "description": "Perform a miracle, healing an ally for 8,100.\r\n\r\nCooldown reduced by 6 sec when you cast Flash Heal.",
           "choices": null
         },
         {
@@ -3319,8 +3341,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Holy Word: Sanctify",
-          "icon": "spell_holy_divineprovidence",
-          "description": "Releases miraculous light at a target location, healing up to 5 allies within 10 yds for 1,937.\r\n\r\nCooldown reduced by 6 sec when you cast Prayer of Healing.",
+          "icon": "237541",
+          "description": "Releases miraculous light at a target location, healing up to 5 allies within 10 yds for 2,235.\r\n\r\nCooldown reduced by 6 sec when you cast Prayer of Healing.",
           "choices": null
         },
         {
@@ -3336,7 +3358,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Guardian Spirit",
-          "icon": "spell_holy_guardianspirit",
+          "icon": "237542",
           "description": "Calls upon a guardian spirit to watch over the friendly target for 10 sec, increasing healing received by 60%. If the target would die, the Spirit sacrifices itself and restores the target to 40% health.\r\n\r\nCastable while stunned. Cannot save the target from massive damage.",
           "choices": null
         },
@@ -3353,8 +3375,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Holy Word: Chastise",
-          "icon": "spell_holy_chastise",
-          "description": "Chastises the target for 1,468 Holy damage and incapacitates them for 4 sec.",
+          "icon": "135886",
+          "description": "Chastises the target for 1,480 Holy damage and incapacitates them for 4 sec.",
           "choices": null
         },
         {
@@ -3370,8 +3392,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Prayer of Healing",
-          "icon": "spell_holy_prayerofhealing02",
-          "description": "A powerful prayer that heals your target and 4 injured allies within 40 yards for 2,172.",
+          "icon": "135943",
+          "description": "A powerful prayer that heals your target and 4 injured allies within 40 yards for 2,221.",
           "choices": null
         },
         {
@@ -3393,14 +3415,14 @@
             {
               "spellId": 391124,
               "name": "Restitution",
-              "icon": "inv_staff_2h_artifactheartofkure_d_03",
+              "icon": "1295528",
               "description": "After Spirit of Redemption expires, you will revive at up to 100% health, based on your healing done during Spirit of Redemption. After reviving, you cannot benefit from Spirit of Redemption for 10 min.",
               "maxRanks": 1
             },
             {
               "spellId": 200209,
               "name": "Guardian Angel",
-              "icon": "ability_priest_pathofthedevout",
+              "icon": "612969",
               "description": "When Guardian Spirit saves the target from death, it does not expire.\r\n\r\nWhen Guardian Spirit expires without saving the target from death, reduce its remaining cooldown to 60 seconds.",
               "maxRanks": 1
             }
@@ -3419,7 +3441,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Censure",
-          "icon": "spell_holy_eyeforaneye",
+          "icon": "135904",
           "description": "Holy Word: Chastise stuns the target for 4 sec and is not broken by damage.",
           "choices": null
         },
@@ -3436,7 +3458,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Empyreal Blaze",
-          "icon": "ability_priest_empyrealblaze",
+          "icon": "4667419",
           "description": "Holy Word: Chastise causes your next 2 casts of Holy Fire to be instant, cost no mana, and incur no cooldown.\r\n\r\nRefreshing Holy Fire on a target now extends its duration by 7 sec.",
           "choices": null
         },
@@ -3453,7 +3475,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Prayerful Litany",
-          "icon": "spell_holy_prayerofhealing02",
+          "icon": "135943",
           "description": "The primary target of Prayer of Healing is healed for 125% more.",
           "choices": null
         },
@@ -3471,8 +3493,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cosmic Ripple",
-          "icon": "inv_ability_holyfire_nova",
-          "description": "When Holy Word: Serenity or Holy Word: Sanctify finish their cooldown, you emit a burst of light that heals up to 5 injured targets within 40 yards for 467.",
+          "icon": "5764907",
+          "description": "When Holy Word: Serenity or Holy Word: Sanctify finish their cooldown, you emit a burst of light that heals up to 5 injured targets within 40 yards for 466.",
           "choices": null
         },
         {
@@ -3488,7 +3510,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Afterlife",
-          "icon": "inv_enchant_essencemagiclarge",
+          "icon": "132866",
           "description": "Increases the duration of Spirit of Redemption by 50% and the range of its spells by 50%.",
           "choices": null
         },
@@ -3499,15 +3521,15 @@
           "posX": 40,
           "posY": 5,
           "connections": [
-            82619,
             82640,
-            82636
+            82636,
+            82619
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voice of Harmony",
-          "icon": "ability_priest_heavanlyvoice",
+          "icon": "458228",
           "description": "Prayer of Mending reduces the cooldown of Holy Word: Serenity by 4 sec.\r\n\r\nHoly Fire reduces the cooldown of Holy Word: Chastise by 4 sec.",
           "choices": null
         },
@@ -3524,7 +3546,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burning Vehemence",
-          "icon": "ability_paladin_sacredcleansing",
+          "icon": "236261",
           "description": "Increases the damage of Holy Fire by 30%.\r\n\r\nHoly Fire deals 75% of its initial damage to all nearby enemies within 12 yards of your target. Damage reduced beyond 5 targets.",
           "choices": null
         },
@@ -3542,7 +3564,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Uplifting Words",
-          "icon": "spell_holy_persecution",
+          "icon": "237546",
           "description": "Increases the critical strike chance of your Holy Word: Serenity and Holy Word: Sanctify by 10%.",
           "choices": null
         },
@@ -3559,7 +3581,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cosmic Wave",
-          "icon": "inv_ability_holyfire_wave",
+          "icon": "5764909",
           "description": "Increases Cosmic Ripple healing by 15%.",
           "choices": null
         },
@@ -3578,8 +3600,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Divine Hymn",
-          "icon": "spell_holy_divinehymn",
-          "description": "Heals all party or raid members within 40 yards for 10,609 over 4.5 sec. Each heal increases all targets&#39; healing taken by 4% for 15 sec, stacking.\r\n\r\nHealing reduced beyond 5 targets.",
+          "icon": "237540",
+          "description": "Heals all party or raid members within 40 yards for 10,669 over 4.5 sec. Each heal increases all targets' healing taken by 4% for 15 sec, stacking.\r\n\r\nYou gain Guardian Spirit while channeling Divine Hymn.\r\n\r\nHealing reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -3595,7 +3617,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Enlightenment",
-          "icon": "spell_arcane_mindmastery",
+          "icon": "135740",
           "description": "You regenerate mana 10% faster.",
           "choices": null
         },
@@ -3613,7 +3635,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Light's Resurgence",
-          "icon": "spell_monk_diffusemagic",
+          "icon": "775460",
           "description": "Your Prayer of Mending has a 12% chance to leave a Renew on each target it heals.\r\n\r\n Renew\r\nFill the target with faith in the light, healing for 1,528 over 15 sec.",
           "choices": null
         },
@@ -3630,7 +3652,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Efficient Prayers",
-          "icon": "spell_priest_finalprayer",
+          "icon": "537227",
           "description": "Reduces the mana cost of Prayer of Healing by 15%.",
           "choices": null
         },
@@ -3649,7 +3671,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Healing Focus",
-          "icon": "spell_holy_healingfocus",
+          "icon": "135918",
           "description": "Reduces the mana cost of Flash Heal by 15%.",
           "choices": null
         },
@@ -3672,14 +3694,14 @@
             {
               "spellId": 419110,
               "name": "Seraphic Crescendo",
-              "icon": "spell_holy_divinehymn",
+              "icon": "237540",
               "description": "Reduces the cooldown of Divine Hymn by 60 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 372370,
               "name": "Gales of Song",
-              "icon": "inv_misc_volatileair",
+              "icon": "463565",
               "description": "While channeling Divine Hymn, place 2 stacks of Prayer of Mending on up to 3 allies within its range every 0.9 sec.",
               "maxRanks": 1
             }
@@ -3700,7 +3722,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Divine Service",
-          "icon": "spell_holy_prayerofspirit",
+          "icon": "135946",
           "description": "Prayer of Mending heals 4% more for each bounce remaining.",
           "choices": null
         },
@@ -3717,7 +3739,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Renewed Faith",
-          "icon": "ability_pvp_innerrenewal",
+          "icon": "1322723",
           "description": "Your healing on allies with your Renew is increased by 10%.",
           "choices": null
         },
@@ -3736,7 +3758,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angelic Touch",
-          "icon": "spell_holy_hopeandgrace",
+          "icon": "237543",
           "description": "Your healing spells critically strike for 220% of healing done instead of the usual 200%.",
           "choices": null
         },
@@ -3755,8 +3777,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Apotheosis",
-          "icon": "ability_priest_ascension",
-          "description": "Reset the cooldown of your Holy Words, and enter a pure Holy form for 20 sec, increasing the cooldown reductions to your Holy Words by 200% and reducing their cost by 50%.",
+          "icon": "1060983",
+          "description": "Reset the cooldown of your Holy Words, and enter a pure Holy form for 20 sec, increasing the cooldown reductions to your Holy Words by 200% and reducing their cost by 70%.",
           "choices": null
         },
         {
@@ -3773,7 +3795,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Prayers of the Virtuous",
-          "icon": "spell_holy_prayerofmendingtga",
+          "icon": "135944",
           "description": "Prayer of Mending jumps 2 additional times.",
           "choices": null
         },
@@ -3797,14 +3819,14 @@
             {
               "spellId": 1215265,
               "name": "Dispersing Light",
-              "icon": "ability_priest_spiritoftheredeemer",
+              "icon": "1445240",
               "description": "5% of healing done with Flash Heal is replicated to 4 injured allies within 40 yards.",
               "maxRanks": 1
             },
             {
               "spellId": 200128,
               "name": "Trail of Light",
-              "icon": "ability_priest_wordsofmeaning",
+              "icon": "1022951",
               "description": "25% of healing done by Flash Heal is replicated to the previous target you healed with those spells.",
               "maxRanks": 1
             }
@@ -3824,7 +3846,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Miracle Worker",
-          "icon": "spell_holy_persuitofjustice",
+          "icon": "135937",
           "description": "Holy Word: Serenity and Holy Word: Sanctify gain an additional charge.",
           "choices": null
         },
@@ -3847,14 +3869,14 @@
             {
               "spellId": 1215245,
               "name": "Eternal Sanctity",
-              "icon": "ability_priest_archangel",
+              "icon": "458225",
               "description": "Increases the duration of Apotheosis by 12 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1215241,
               "name": "Divinity",
-              "icon": "ability_priest_rayofhope",
+              "icon": "1445239",
               "description": "Your healing is increased by 10% while Apotheosis is active.\r\n\r\nCasting Apotheosis causes your next 3 Prayer of Healing casts to be instant and heal for 25% more.",
               "maxRanks": 1
             }
@@ -3874,7 +3896,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Holy Celerity",
-          "icon": "spell_priest_pathofdevout",
+          "icon": "537020",
           "description": "Reduces the cooldown of your Holy Words by 15 sec.",
           "choices": null
         },
@@ -3892,7 +3914,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Say Your Prayers",
-          "icon": "ability_priest_bindingprayers",
+          "icon": "458721",
           "description": "Prayer of Mending has a 15% chance to not consume a charge when it jumps to a new target.",
           "choices": null
         },
@@ -3909,7 +3931,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crisis Management",
-          "icon": "spell_holy_flashheal",
+          "icon": "135907",
           "description": "Increases the critical strike chance of Flash Heal and Prayer of Healing by 15%.",
           "choices": null
         },
@@ -3927,7 +3949,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Light of the Naaru",
-          "icon": "inv_pet_naaru",
+          "icon": "1100172",
           "description": "The cooldowns of your Holy Words are reduced by an additional 10% when you cast the relevant spells.",
           "choices": null
         },
@@ -3944,7 +3966,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Light in the Darkness",
-          "icon": "spell_holy_divineprovidence",
+          "icon": "237541",
           "description": "Increases the healing done by Holy Word: Serenity and Holy Word: Sanctify by 13%.\r\n\r\nIncreases the radius of Holy Word: Sanctify by 15%.",
           "choices": null
         },
@@ -3963,7 +3985,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Prismatic Echoes",
-          "icon": "spell_holy_aspiration",
+          "icon": "237537",
           "description": "Increases the healing done by your Mastery: Echo of Light by 8% and your Renew by 20%.",
           "choices": null
         },
@@ -3981,7 +4003,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Desperate Times",
-          "icon": "ability_pvp_defenderoftheweak",
+          "icon": "1322719",
           "description": "Increases healing by 10% on friendly targets at or below 50% health.",
           "choices": null
         },
@@ -3998,7 +4020,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Radiant Plea",
-          "icon": "spell_priest_pontifex",
+          "icon": "1386545",
           "description": "Increases Prayer of Mending healing by 15%.",
           "choices": null
         },
@@ -4016,7 +4038,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lightweaver",
-          "icon": "spell_holy_greaterheal",
+          "icon": "135913",
           "description": "Flash Heal reduces the cast time of your next Prayer of Healing within 20 sec by 30% and increases its healing done by 18%.\r\n\r\nCan accumulate up to 4 charges.",
           "choices": null
         },
@@ -4034,7 +4056,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ultimate Serenity",
-          "icon": "ability_priest_holywordlife",
+          "icon": "4667420",
           "description": "Increases the healing done by Holy Word: Serenity by 10% and causes it to heal 4 nearby injured allies within 40 yards for 15% of its healing done.\r\n\r\nTalents that affect Holy Word: Sanctify instead affect Holy Word: Serenity.",
           "choices": null
         },
@@ -4052,7 +4074,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Divine Image",
-          "icon": "inv_staff_2h_artifactheartofkure_d_04",
+          "icon": "1295523",
           "description": "Your Holy Words summon an image of a Naaru at your side. For 9 sec, whenever you cast a healing or damaging spell, the Naaru will cast a similar spell.\r\n\r\nIf an image has already been summoned, that image is empowered instead.",
           "choices": null
         },
@@ -4070,7 +4092,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lasting Words",
-          "icon": "spell_holy_renew",
+          "icon": "135953",
           "description": "Holy Word: Serenity applies 12 sec of Renew to its target.\r\n\r\nHoly Word: Sanctify applies 6 sec of Renew to allies it heals.\r\n\r\n Renew\r\nFill the target with faith in the light, healing for 1,223 over 12 sec.",
           "choices": null
         },
@@ -4088,7 +4110,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Epiphany",
-          "icon": "ability_mage_studentofthemind",
+          "icon": "236225",
           "description": "Your Holy Words have a 25% chance to cause your next cast of Prayer of Mending to ignore its cooldown. ",
           "choices": null
         },
@@ -4103,7 +4125,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Benediction",
-          "icon": "inv12_apextalent_priest_benediction",
+          "icon": "7514190",
           "description": null,
           "levels": [
             81,
@@ -4123,7 +4145,7 @@
             },
             {
               "spellId": 1262760,
-              "description": "Each pulse of Divine Hymn emits a Cosmic Ripple at 75% effectiveness.\r\n\r\nDuring Apotheosis, Flash Heal is upgraded to Benediction.",
+              "description": "Each pulse of Divine Hymn emits a Cosmic Ripple at 75% effectiveness.\r\n\r\nHoly Word: Serenity now has a 100% chance to upgrade your next Flash Heal to Benediction.",
               "maxRanks": 1
             }
           ]
@@ -4142,8 +4164,8 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Resonant Energy",
-          "icon": "ability_priest_halo_shadow",
-          "description": "Allies healed by your Halo receive 2% increased healing from you for 8 sec, stacking up to 5 times.",
+          "icon": "7658138",
+          "description": "Creating a Halo increases your healing done by 2% for 10 sec, stacking up to 4 times.",
           "choices": null
         },
         {
@@ -4160,7 +4182,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Perfected Form",
-          "icon": "spell_priest_voidblast",
+          "icon": "1386548",
           "description": "Your damage dealt is increased by 5% while Voidform is active.",
           "choices": null
         },
@@ -4184,14 +4206,14 @@
             {
               "spellId": 449874,
               "name": "Energy Compression",
-              "icon": "spell_holy_circleofrenewal_shadow",
+              "icon": "5852174",
               "description": "Halo damage and healing is increased by 30%.",
               "maxRanks": 1
             },
             {
               "spellId": 454001,
               "name": "Sustained Potency",
-              "icon": "spell_priest_ascendance_shadow",
+              "icon": "5852177",
               "description": "Creating a Halo extends the duration of Voidform by 1 sec. If Voidform is not active, up to 6 seconds is stored.\r\n\r\nWhile out of combat or affected by a loss of control effect, the duration of Voidform is paused for up to 20 sec.",
               "maxRanks": 1
             }
@@ -4211,7 +4233,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Energy Conservation",
-          "icon": "spell_nzinsanity_chasedbyshadows",
+          "icon": "3163618",
           "description": "Power Surge lasts an additional 5 sec.",
           "choices": null
         },
@@ -4229,7 +4251,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Power Surge",
-          "icon": "inv_112_raidtrinkets_blobofswirlingvoid_gold",
+          "icon": "7137505",
           "description": "Casting Halo also causes you to create a Halo around you at 100% effectiveness every 5 sec for 10 sec.",
           "choices": null
         },
@@ -4247,7 +4269,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Energy Cycle",
-          "icon": "spell_priest_burningwill_shadow",
+          "icon": "5852178",
           "description": "Casting Mind Flay: Insanity has a 100% chance to conjure Shadowy Apparitions.",
           "choices": null
         },
@@ -4271,14 +4293,14 @@
             {
               "spellId": 453852,
               "name": "Shock Pulse",
-              "icon": "spell_priest_divinestar_shadow",
+              "icon": "608955",
               "description": "Halo damage reduces enemy movement speed by 5% for 5 sec, stacking up to 5 times.",
               "maxRanks": 1
             },
             {
               "spellId": 453918,
               "name": "Incessant Screams",
-              "icon": "spell_shadow_psychicscream",
+              "icon": "136184",
               "description": "Psychic Scream creates an image of you at your location. After 4 sec, the image will let out a Psychic Scream.",
               "maxRanks": 1
             }
@@ -4298,7 +4320,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Empowered Surges",
-          "icon": "spell_fire_twilightflamebreath",
+          "icon": "425954",
           "description": "Your spells affected by Surge of Light heal for 5% more while Surge of Light is active.",
           "choices": null
         },
@@ -4316,8 +4338,8 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Manifested Power",
-          "icon": "spell_holy_surgeoflight_shadow",
-          "description": "Creating a Halo grants Surge of Light.\r\n\r\n Surge of Light\r\nYour healing spells and Smite have a 8% chance to make your next Flash Heal instant and cost 50% less mana. Stacks to 2.",
+          "icon": "5852176",
+          "description": "Creating a Halo grants Surge of Light.\r\n\r\n Surge of Light\r\nYour healing spells and Smite have a 8% chance to make your next Flash Heal or Shadow Mend instant and cost 50% less mana. Stacks to 2.",
           "choices": null
         },
         {
@@ -4337,7 +4359,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Divine Halo",
-          "icon": "spell_bastion_priest_shadow",
+          "icon": "5852173",
           "description": "Halo now centers around you and returns to you after it reaches its maximum distance, healing allies and damaging enemies each time it passes through them.",
           "choices": null
         },
@@ -4353,8 +4375,8 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Halo",
-          "icon": "ability_priest_halo",
-          "description": "Creates a ring of Holy energy around you that quickly expands to a 40 yd radius, healing allies for 621 and dealing 547 Holy damage to enemies.\r\n\r\nHealing reduced beyond 6 targets.",
+          "icon": "632352",
+          "description": "Creates a ring of Holy energy around you that quickly expands to a 40 yd radius, healing allies for 605 and dealing 559 Holy damage to enemies.\r\n\r\nHealing reduced beyond 6 targets.",
           "choices": null
         },
         {
@@ -4377,14 +4399,14 @@
             {
               "spellId": 1272326,
               "name": "Realized Potential",
-              "icon": "spell_shadow_demonicfortitude",
+              "icon": "136149",
               "description": "Shadow Word: Death damage increased by 25% and its cooldown is reduced by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1247178,
               "name": "Spiritwell",
-              "icon": "ability_priest_shadowyapparition",
+              "icon": "458229",
               "description": "Increases Shadowy Apparition damage by 10%.",
               "maxRanks": 1
             }
@@ -4410,14 +4432,14 @@
             {
               "spellId": 453726,
               "name": "Word of Supremacy",
-              "icon": "spell_holy_wordfortitude",
+              "icon": "135987",
               "description": "Power Word: Fortitude grants you an additional 5% stamina.",
               "maxRanks": 1
             },
             {
               "spellId": 453729,
               "name": "Heightened Alteration",
-              "icon": "spell_shadow_dispersion",
+              "icon": "237563",
               "description": "Increases the duration of Dispersion by 2 sec.",
               "maxRanks": 1
             }
@@ -4437,8 +4459,8 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Focused Outburst",
-          "icon": "inv12_ability_priest_voidvolley",
-          "description": "Void Volley damage increased by 15% and its cooldown is reduced by 4 sec.",
+          "icon": "7439213",
+          "description": "Void Volley deals 5% increased damage and Shadow Word: Madness casts during Voidform unleash a Void Volley at your target at 25% effectiveness.",
           "choices": null
         },
         {
@@ -4455,8 +4477,8 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Prompt Prognosis",
-          "icon": "spell_holy_blessedlife",
-          "description": "Casting Prayer of Mending heals your target for 3,572.",
+          "icon": "135876",
+          "description": "Casting Prayer of Mending heals your target for 4,643.",
           "choices": null
         },
         {
@@ -4473,7 +4495,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Preemptive Care",
-          "icon": "ability_priest_atonement",
+          "icon": "458720",
           "description": "Increases the duration of your Renew by 40%.\r\n",
           "choices": null
         },
@@ -4497,14 +4519,14 @@
             {
               "spellId": 440670,
               "name": "Divine Feathers",
-              "icon": "ability_priest_angelicfeather",
+              "icon": "642580",
               "description": "Your Angelic Feathers increase movement speed by an additional 10%.\r\n\r\nWhen an ally walks through your Angelic Feather, you are also granted 100% of its effect.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 440669,
               "name": "Save the Day",
-              "icon": "priest_spell_leapoffaith_a",
+              "icon": "463835",
               "description": "For 6 sec after casting Leap of Faith you may cast it a second time for free, ignoring its cooldown.",
               "maxRanks": 1
             }
@@ -4524,7 +4546,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Waste No Time",
-          "icon": "spell_nature_timestop",
+          "icon": "136106",
           "description": "Reduces the cooldown of Prayer of Mending by 1.5 sec.",
           "choices": null
         },
@@ -4540,7 +4562,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Guiding Light",
-          "icon": "ability_priest_holywordlife",
+          "icon": "4667420",
           "description": "Prayer of Mending gains an additional charge.\r\n",
           "choices": null
         },
@@ -4561,7 +4583,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Twinsight",
-          "icon": "inv_ability_oraclepriest_clairvoyance",
+          "icon": "6118849",
           "description": "3 additional Penance bolts are fired at an enemy within 40 yards when healing an ally with Penance, or fired at an ally within 40 yards when damaging an enemy with Penance.",
           "choices": null
         },
@@ -4579,7 +4601,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Foreseen Circumstances",
-          "icon": "spell_holy_guardianspirit",
+          "icon": "237542",
           "description": "Guardian Spirit lasts an additional 2 sec.",
           "choices": null
         },
@@ -4603,15 +4625,15 @@
             {
               "spellId": 433905,
               "name": "Prophet's Will",
-              "icon": "ability_priest_clarityofpurpose",
-              "description": "Your Flash Heal and Holy Word: Serenity are 30% more effective when cast on yourself.",
+              "icon": "1022946",
+              "description": "Your Flash Heal, Shadow Mend, and Power Word: Shield are 30% more effective when cast on yourself.",
               "maxRanks": 1
             },
             {
               "spellId": 458718,
               "name": "Desperate Measures",
-              "icon": "spell_holy_testoffaith",
-              "description": "Desperate Prayer lasts an additional 10 sec.\r\n\r\nAngelic Bulwark&#39;s absorption effect is increased by 15% of your maximum health.",
+              "icon": "237550",
+              "description": "Desperate Prayer lasts an additional 10 sec.\r\n\r\nAngelic Bulwark's absorption effect is increased by 15% of your maximum health.",
               "maxRanks": 1
             }
           ]
@@ -4630,8 +4652,8 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Assured Safety",
-          "icon": "spell_holy_powerwordshield",
-          "description": "Casting Prayer of Mending applies Power Word: Shield to your target.\r\n\r\n Power Word: Shield\r\nShields an ally for 15 sec, absorbing 1,794 damage.",
+          "icon": "135940",
+          "description": "Casting Prayer of Mending applies Power Word: Shield to your target.\r\n\r\n Power Word: Shield\r\nShields an ally for 15 sec, absorbing 1,731 damage.",
           "choices": null
         },
         {
@@ -4648,7 +4670,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Preventive Measures",
-          "icon": "spell_holy_prayerofmendingtga",
+          "icon": "135944",
           "description": "Increases the healing done by Prayer of Mending by 15%.\r\n\r\nAll damage dealt by Smite, Holy Fire and Holy Nova increased by 40%.\r\n",
           "choices": null
         },
@@ -4666,7 +4688,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Piety",
-          "icon": "inv_ability_oraclepriest_premonitionpiety",
+          "icon": "5927641",
           "description": "20% of overhealing done is redistributed to up to 4 nearby injured allies.",
           "choices": null
         },
@@ -4684,8 +4706,8 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Unfolding Vision",
-          "icon": "spell_holy_mindvision",
-          "description": "\r\nWhen Power Word: Shield or Void Shield expires with absorption remaining, it jumps to a nearby injured ally and loses 40% of its maximum absorb instead.\r\n",
+          "icon": "135934",
+          "description": "When Power Word: Shield or Void Shield expires with absorption remaining, it jumps to a nearby injured ally instead. Can only happen once per shield.\r\n",
           "choices": null
         },
         {
@@ -4702,8 +4724,8 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Words of the Wise",
-          "icon": "spell_holy_persuitofjustice",
-          "description": "Flash Heal, Plea, and Power Word: Radiance healing increased by 15%.\r\n",
+          "icon": "135937",
+          "description": "Flash Heal, Shadow Mend, Plea, and Power Word: Radiance healing increased by 15%.\r\n",
           "choices": null
         },
         {
@@ -4720,7 +4742,7 @@
           "heroSubtree": "Oracle",
           "maxRanks": 1,
           "name": "Prophet's Insight",
-          "icon": "spell_priest_pontifex",
+          "icon": "1386545",
           "description": "Atonement healing from Holy spells is increased by 15%.\r\n",
           "choices": null
         }
@@ -4787,8 +4809,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Flash Heal",
-          "icon": "spell_holy_heal",
-          "description": "Increases healing done by Flash Heal by 15%.",
+          "icon": "135915",
+          "description": "Increases healing done by Flash Heal and Shadow Mend by 15%.",
           "choices": null
         },
         {
@@ -4802,7 +4824,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angelic Feather",
-          "icon": "ability_priest_angelicfeather",
+          "icon": "642580",
           "description": "Places a feather at the target location, granting the first ally to walk through it 40% increased movement speed for 5 sec. Only 3 feathers can be placed at one time.",
           "choices": null
         },
@@ -4817,8 +4839,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Mind Blast",
-          "icon": "spell_shadow_unholyfrenzy",
-          "description": "Blast the target&#39;s mind for 301 Shadow damage. Costs a high amount of mana.",
+          "icon": "136224",
+          "description": "Blast the target's mind for 298 Shadow damage. Costs a high amount of mana.",
           "choices": null
         },
         {
@@ -4834,8 +4856,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Holy Nova",
-          "icon": "spell_holy_holynova",
-          "description": "An explosion of holy light around you deals up to 155 Holy damage to enemies and up to 118 healing to allies within 12 yds, reduced if there are more than 5 targets.",
+          "icon": "135922",
+          "description": "An explosion of holy light around you deals up to 153 Holy damage to enemies and up to 117 healing to allies within 12 yds, reduced if there are more than 5 targets.",
           "choices": null
         },
         {
@@ -4852,7 +4874,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dispel Magic",
-          "icon": "spell_nature_nullifydisease",
+          "icon": "136066",
           "description": "Dispels Magic on the enemy target, removing 1 beneficial Magic effect.",
           "choices": null
         },
@@ -4870,7 +4892,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spiritual Guidance",
-          "icon": "spell_holy_spiritualguidence",
+          "icon": "135977",
           "description": "Increases your Intellect by 3%.",
           "choices": null
         },
@@ -4887,7 +4909,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Psychic Scream",
-          "icon": "spell_shadow_psychicscream",
+          "icon": "136184",
           "description": "Lets out a psychic scream, causing all enemies within 8 yards to flee, disorienting them for 8 sec. Damage may interrupt the effect.",
           "choices": null
         },
@@ -4904,7 +4926,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lightburst",
-          "icon": "inv_ability_holyfire_nova",
+          "icon": "5764907",
           "description": "Increases the damage of Holy Nova by 400%, its healing by 500%, and its cooldown by 30 sec.",
           "choices": null
         },
@@ -4922,7 +4944,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leap of Faith",
-          "icon": "priest_spell_leapoffaith_a",
+          "icon": "463835",
           "description": "Pulls the spirit of a party or raid member, instantly moving them directly in front of you.",
           "choices": null
         },
@@ -4939,7 +4961,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Purify Disease",
-          "icon": "spell_holy_nullifydisease",
+          "icon": "135935",
           "description": "Removes all Disease effects from a friendly target.",
           "choices": null
         },
@@ -4957,7 +4979,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power Infusion",
-          "icon": "spell_holy_powerinfusion",
+          "icon": "135939",
           "description": "Infuses the target with power for 15 sec, increasing haste by 20%.\r\n\r\nCan only be cast on players.",
           "choices": null
         },
@@ -4975,7 +4997,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Painful Invocation",
-          "icon": "spell_holy_mindsooth",
+          "icon": "135933",
           "description": "Increases the damage of Shadow Word: Pain by 10%.",
           "choices": null
         },
@@ -4998,14 +5020,14 @@
             {
               "spellId": 390919,
               "name": "Sheer Terror",
-              "icon": "spell_nzinsanity_fearofdeath",
+              "icon": "3163624",
               "description": "Increases the amount of damage required to break your Psychic Scream by 25%.",
               "maxRanks": 1
             },
             {
               "spellId": 55676,
               "name": "Petrifying Scream",
-              "icon": "spell_shadow_psychichorrors",
+              "icon": "237568",
               "description": "Psychic Scream causes enemies to tremble in place instead of fleeing in fear.",
               "maxRanks": 1
             }
@@ -5025,8 +5047,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Surge of Light",
-          "icon": "spell_holy_surgeoflight",
-          "description": "Your healing spells and Smite have a 8% chance to make your next Flash Heal instant and cost 50% less mana. Stacks to 2.",
+          "icon": "135981",
+          "description": "Your healing spells and Smite have a 8% chance to make your next Flash Heal or Shadow Mend instant and cost 50% less mana. Stacks to 2.",
           "choices": null
         },
         {
@@ -5042,8 +5064,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Body and Soul",
-          "icon": "spell_holy_symbolofhope",
-          "description": "Power Word: Shield and Leap of Faith increase your target&#39;s movement speed by 40% for 3 sec.",
+          "icon": "135982",
+          "description": "Power Word: Shield and Leap of Faith increase your target's movement speed by 40% for 3 sec.",
           "choices": null
         },
         {
@@ -5061,7 +5083,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mass Dispel",
-          "icon": "spell_arcane_massdispel",
+          "icon": "135739",
           "description": "Dispels magic in a 15 yard radius, removing all harmful Magic from 5 friendly targets and 1 beneficial Magic effect from 5 enemy targets. Potent enough to remove Magic that is normally undispellable.",
           "choices": null
         },
@@ -5078,7 +5100,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twins of the Sun Priestess",
-          "icon": "spell_fire_felflamering_red",
+          "icon": "2175503",
           "description": "Power Infusion also grants you its effect at 100% value when used on an ally. \r\n\r\nIf no ally is targeted, it will grant its effect at 100% value to a nearby ally, preferring damage dealers.",
           "choices": null
         },
@@ -5096,7 +5118,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Strength of Resolve",
-          "icon": "spell_holy_ashestoashes",
+          "icon": "135871",
           "description": "Increases your Stamina by 6%.",
           "choices": null
         },
@@ -5120,14 +5142,14 @@
             {
               "spellId": 605,
               "name": "Mind Control",
-              "icon": "spell_shadow_shadowworddominate",
+              "icon": "136206",
               "description": "Controls a mind up to 1 level above yours for 30 sec. Does not work versus Demonic, Undead, or Mechanical beings. Shares diminishing returns with other disorienting effects.",
               "maxRanks": 1
             },
             {
               "spellId": 205364,
               "name": "Dominate Mind",
-              "icon": "spell_priest_voidflay",
+              "icon": "1386549",
               "description": "Controls a mind up to 1 level above yours for 30 sec while still controlling your own mind. Does not work versus Demonic, Mechanical, or Undead beings or players. This spell shares diminishing returns with other disorienting effects.",
               "maxRanks": 1
             }
@@ -5152,14 +5174,14 @@
             {
               "spellId": 196704,
               "name": "Psychic Voice",
-              "icon": "ability_warrior_commandingshout",
+              "icon": "132339",
               "description": "Reduces the cooldown of Psychic Scream by 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1250691,
               "name": "Void Tendrils",
-              "icon": "spell_priest_voidtendrils",
+              "icon": "537022",
               "description": "Call shadowy tendrils to constrict enemies when Psychic Scream ends, rooting them in place for 4 sec.",
               "maxRanks": 1
             }
@@ -5178,7 +5200,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Everlasting Light",
-          "icon": "spell_holy_greaterheal",
+          "icon": "135913",
           "description": "Surge of Light occurs up to 50% more often based on your missing mana.",
           "choices": null
         },
@@ -5195,7 +5217,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Move with Grace",
-          "icon": "ability_priest_savinggrace",
+          "icon": "1022949",
           "description": "Reduces the cooldown of Leap of Faith by 30 sec.",
           "choices": null
         },
@@ -5212,7 +5234,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mental Agility",
-          "icon": "spell_holy_dispelmagic",
+          "icon": "135894",
           "description": "Reduces the mana cost of Purify and Mass Dispel by 50% and Dispel Magic by 10%.\r\n",
           "choices": null
         },
@@ -5223,15 +5245,15 @@
           "posX": 10,
           "posY": 6,
           "connections": [
-            82687,
+            109890,
             108731,
-            109890
+            82687
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twin Disciplines",
-          "icon": "ability_priest_innerlightandshadow",
+          "icon": "4226157",
           "description": "Increases the damage and healing of your Holy and Shadow spells by 2%.",
           "choices": null
         },
@@ -5249,7 +5271,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Enlightenment",
-          "icon": "ability_priest_darkness",
+          "icon": "458226",
           "description": "Increases your haste by 3%.",
           "choices": null
         },
@@ -5266,7 +5288,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "False Autonomy",
-          "icon": "spell_arcane_mindmastery",
+          "icon": "135740",
           "description": "Increases the duration of Mind Control and Dominate Mind against enemy creatures by 15 sec.",
           "choices": null
         },
@@ -5284,7 +5306,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shackle Horror",
-          "icon": "spell_nature_slow",
+          "icon": "136091",
           "description": "Shackles an aberration or undead enemy for 50 sec, preventing all actions and movement. Damage will cancel the effect. Limit 1.",
           "choices": null
         },
@@ -5302,8 +5324,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inspiration",
-          "icon": "spell_holy_layonhands",
-          "description": "Reduces your target&#39;s physical damage taken by 5% for 15 sec after a critical heal with Flash Heal or Penance.",
+          "icon": "135928",
+          "description": "Reduces your target's physical damage taken by 5% for 15 sec after a critical heal with Flash Heal, Shadow Mend, or Penance.",
           "choices": null
         },
         {
@@ -5313,16 +5335,16 @@
           "posX": 8,
           "posY": 7,
           "connections": [
+            82699,
             109019,
-            82690,
-            82699
+            82690
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Binding Heals",
-          "icon": "spell_holy_blindingheal",
-          "description": "20% of Flash Heal healing on other targets also heals you.",
+          "icon": "135883",
+          "description": "20% of Flash Heal or Shadow Mend healing on other targets also heals you.",
           "choices": null
         },
         {
@@ -5332,15 +5354,15 @@
           "posX": 12,
           "posY": 7,
           "connections": [
-            82690,
-            109020
+            109020,
+            82690
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Word: Death",
-          "icon": "spell_shadow_demonicfortitude",
-          "description": "A word of dark binding that inflicts 321 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
+          "icon": "136149",
+          "description": "A word of dark binding that inflicts 322 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
           "choices": null
         },
         {
@@ -5358,7 +5380,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sanguine Teachings",
-          "icon": "inv_archaeology_80_zandalari_sanguinetotem",
+          "icon": "2101983",
           "description": "Increases your Leech by 2%.",
           "choices": null
         },
@@ -5376,7 +5398,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Desperate Prayer",
-          "icon": "spell_holy_testoffaith",
+          "icon": "237550",
           "description": "Increases maximum health by 25% for 10 sec, and instantly heals you for that amount.",
           "choices": null
         },
@@ -5394,7 +5416,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Twist of Fate",
-          "icon": "spell_shadow_mindtwisting",
+          "icon": "237566",
           "description": "After damaging or healing a target below 35% health, gain 5% increased damage and healing for 8 sec.",
           "choices": null
         },
@@ -5411,7 +5433,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tithe Evasion",
-          "icon": "spell_nzinsanity_bloodthirst",
+          "icon": "3163621",
           "description": "Shadow Word: Death deals 50% less damage to you.",
           "choices": null
         },
@@ -5429,8 +5451,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fade",
-          "icon": "spell_magic_lesserinvisibilty",
-          "description": "Fade out, removing all your threat and reducing enemies&#39; detection range against you for 10 sec.",
+          "icon": "135994",
+          "description": "Fade out, removing all your threat and reducing enemies' detection range against you for 10 sec.",
           "choices": null
         },
         {
@@ -5446,7 +5468,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angel's Mercy",
-          "icon": "spell_holy_testoffaith",
+          "icon": "237550",
           "description": "Reduces the cooldown of Desperate Prayer by 20 sec.",
           "choices": null
         },
@@ -5464,8 +5486,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Protective Light",
-          "icon": "spell_holy_holyprotection",
-          "description": "Casting Flash Heal on yourself reduces all damage you take by 10% for 10 sec.",
+          "icon": "135923",
+          "description": "Casting Flash Heal or Shadow Mend on yourself reduces all damage you take by 10% for 10 sec.",
           "choices": null
         },
         {
@@ -5483,7 +5505,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mindpierce",
-          "icon": "spell_shadow_mindshear",
+          "icon": "237565",
           "description": "Increases the damage of Smite by 15%.",
           "choices": null
         },
@@ -5500,7 +5522,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spectral Illusion",
-          "icon": "spell_priest_spectralguise",
+          "icon": "775463",
           "description": "Fade creates an illusion of you for 4 sec, tricking enemies to attack it instead.",
           "choices": null
         },
@@ -5517,7 +5539,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Improved Fade",
-          "icon": "spell_magic_lesserinvisibilty",
+          "icon": "135994",
           "description": "Reduces the cooldown of Fade by 5 sec.",
           "choices": null
         },
@@ -5534,7 +5556,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Light's Inspiration",
-          "icon": "spell_holy_restoration",
+          "icon": "135954",
           "description": "Increases the maximum health gained from Desperate Prayer by 10%.",
           "choices": null
         },
@@ -5552,8 +5574,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Unwavering Will",
-          "icon": "ability_warrior_unrelentingassault",
-          "description": "While above 75% health, the cast time of your Flash Heal, Prayer of Healing, and Smite are reduced by 5%.",
+          "icon": "236317",
+          "description": "While above 75% health, the cast time of your Flash Heal, Shadow Mend, and Smite are reduced by 5%.",
           "choices": null
         },
         {
@@ -5570,7 +5592,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Spell Warding",
-          "icon": "spell_holy_spellwarding",
+          "icon": "135976",
           "description": "Reduces all magic damage taken by 3%.",
           "choices": null
         },
@@ -5588,7 +5610,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Phantasm",
-          "icon": "ability_priest_phantasm",
+          "icon": "614257",
           "description": "Activating Fade removes all snare effects.",
           "choices": null
         },
@@ -5606,7 +5628,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Angelic Bulwark",
-          "icon": "ability_priest_angelicbulwark",
+          "icon": "633042",
           "description": "When an attack brings you below 30% health, you gain an absorption shield equal to 25% of your maximum health for 20 sec. Cannot occur more than once every 90 sec.",
           "choices": null
         },
@@ -5630,14 +5652,14 @@
             {
               "spellId": 415416,
               "name": "Benevolence",
-              "icon": "ability_priest_spiritoftheredeemer",
+              "icon": "1445240",
               "description": "Increases the healing of your spells by 3%.",
               "maxRanks": 1
             },
             {
               "spellId": 1249230,
               "name": "Focused Power",
-              "icon": "ability_priest_focusedwill",
+              "icon": "458227",
               "description": "Increases the damage of your spells by 3%.",
               "maxRanks": 1
             }
@@ -5657,7 +5679,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Phantom Reach",
-          "icon": "spell_shadow_chilltouch",
+          "icon": "136130",
           "description": "Increases the range of most spells by 15%.",
           "choices": null
         },
@@ -5675,7 +5697,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Translucent Image",
-          "icon": "spell_shadow_twistedfaith",
+          "icon": "237570",
           "description": "Fade reduces damage you take by 10%.",
           "choices": null
         },
@@ -5690,8 +5712,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Word: Madness",
-          "icon": "inv12_ability_priest_powerwordmadness_eye",
-          "description": "A word of madness haunts the target&#39;s mind, dealing 864 Shadow damage instantly plus an additional 2,905 Shadow damage over 6 sec. Heals you for 30% of damage dealt.\r\n\r\nWhen reapplied to a target, all remaining damage is added to the new effect.",
+          "icon": "7569529",
+          "description": "A word of madness haunts the target's mind, dealing 864 Shadow damage instantly plus an additional 2,905 Shadow damage over 6 sec. Heals you for 30% of damage dealt.\r\n\r\nWhen reapplied to a target, all remaining damage is added to the new effect.",
           "choices": null
         },
         {
@@ -5707,7 +5729,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Psychic Link",
-          "icon": "ability_priest_psychiclink",
+          "icon": "1445238",
           "description": "Your direct damage spells inflict 25% of their damage on all other targets afflicted by your Vampiric Touch within 40 yards.\r\n\r\nDoes not apply to damage from Shadowy Apparitions, Shadow Word: Pain, and Vampiric Touch.",
           "choices": null
         },
@@ -5730,14 +5752,14 @@
             {
               "spellId": 238558,
               "name": "Misery",
-              "icon": "ability_rogue_envelopingshadows",
+              "icon": "132291",
               "description": "Vampiric Touch also applies Shadow Word: Pain to the target. Shadow Word: Pain lasts an additional 5 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1279350,
               "name": "Invoked Nightmare",
-              "icon": "inv12_ability_priest_madness_scream",
+              "icon": "7569526",
               "description": "Shadow Word: Pain deals 150% increased damage.",
               "maxRanks": 1
             }
@@ -5762,14 +5784,14 @@
             {
               "spellId": 288733,
               "name": "Intangibility",
-              "icon": "spell_shadow_dispersion",
+              "icon": "237563",
               "description": "Dispersion heals you for an additional 25% of your maximum health over its duration and its cooldown is reduced by 30 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 377065,
               "name": "Mental Fortitude",
-              "icon": "ability_priest_clarityofpower",
+              "icon": "1022945",
               "description": "Healing from Vampiric Touch and Shadow Word: Madness when you are at maximum health will shield you for the same amount. The shield cannot exceed 10% of your maximum health.",
               "maxRanks": 1
             }
@@ -5788,7 +5810,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Thought Harvester",
-          "icon": "spell_shadow_unholyfrenzy",
+          "icon": "136224",
           "description": "Mind Blast gains an additional charge.",
           "choices": null
         },
@@ -5805,8 +5827,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tentacle Slam",
-          "icon": "inv12_ability_priest_tentacleslam",
-          "description": "Summons a massive shadowy appendage to slam the ground, dealing 260 Shadow damage in front of you and 8 yds around your target.\r\n\r\nApplies Vampiric Touch to up to 6 enemies, prioritizing ones without Vampiric Touch.\r\n\r\nGenerates 6 Insanity.",
+          "icon": "7439212",
+          "description": "Summons a massive shadowy appendage to slam the ground, dealing 261 Shadow damage in front of you and 8 yds around your target.\r\n\r\nApplies Vampiric Touch to up to 6 enemies, prioritizing ones without Vampiric Touch.\r\n\r\nGenerates 6 Insanity.",
           "choices": null
         },
         {
@@ -5822,8 +5844,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowy Apparitions",
-          "icon": "ability_priest_shadowyapparition",
-          "description": "Shadow Word: Madness conjures Shadowy Apparitions that float towards all targets afflicted by your Vampiric Touch for 325 Shadow damage.",
+          "icon": "458229",
+          "description": "Shadow Word: Madness conjures Shadowy Apparitions that float towards all targets afflicted by your Vampiric Touch for 324 Shadow damage.",
           "choices": null
         },
         {
@@ -5840,7 +5862,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tormenting Whispers",
-          "icon": "spell_shadow_painandsuffering",
+          "icon": "237567",
           "description": "Increases Shadow Word: Madness damage by 15%.",
           "choices": null
         },
@@ -5857,7 +5879,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Descending Darkness",
-          "icon": "spell_holy_circleofrenewal_shadow",
+          "icon": "5852174",
           "description": "Increases Tentacle Slam damage by 300%.",
           "choices": null
         },
@@ -5874,7 +5896,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Surge of Insanity",
-          "icon": "spell_fire_twilightflamebreath",
+          "icon": "425954",
           "description": "Mind Flay damage increased by 15% and Insanity generation increased by 30%.",
           "choices": null
         },
@@ -5891,7 +5913,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowy Insight",
-          "icon": "spell_shadow_possession",
+          "icon": "136183",
           "description": "Shadow Word: Pain periodic damage has a chance to cause your next Mind Blast to be instant and ignore its cooldown.",
           "choices": null
         },
@@ -5908,7 +5930,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voidtouched",
-          "icon": "inv_enchant_voidsphere",
+          "icon": "132886",
           "description": "Increases your Shadow Word: Madness damage by 6% and increases your maximum Insanity by 50.",
           "choices": null
         },
@@ -5927,8 +5949,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voidform",
-          "icon": "spell_priest_voidblast",
-          "description": "Bombards your target with a Void Volley and twists your Shadowform with void magic, increasing your spell damage by 20% for 20 sec. \r\n\r\nThis spell is replaced with Void Volley while Voidform is active.\r\n\r\n Void Volley\r\nReleases a volley of pure void energy, firing 10 bolts at your target and 1 bolt at all enemies within 10 yards of your target for 402 Shadow damage.\r\n\r\nGenerates 10 Insanity.",
+          "icon": "1386548",
+          "description": "Bombards your target with a Void Volley and twists your Shadowform with void magic, increasing your spell damage by 20% for 20 sec. \r\n\r\nDuring Voidform, Void Volley replaces this spell and can be used up to 3 times.\r\n\r\n Void Volley\r\nReleases a volley of pure void energy, firing 10 bolts at your target and 1 bolt at all enemies within 10 yards of your target for 362 Shadow damage.\r\n\r\nGenerates 10 Insanity.",
           "choices": null
         },
         {
@@ -5944,7 +5966,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Haunting Shadows",
-          "icon": "inv12_ability_priest_madness_wisp",
+          "icon": "7569528",
           "description": "Shadowy Apparition damage increased by 10%.\r\n\r\nWhen Shadowy Apparitions deal damage, they extend the duration of your Shadow Word: Pain and Vampiric Touch on the target by 1.0 sec.",
           "choices": null
         },
@@ -5961,7 +5983,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mental Decay",
-          "icon": "ability_kaztik_dominatemind",
+          "icon": "878214",
           "description": "Increases the damage of Mind Flay by 25%.",
           "choices": null
         },
@@ -5978,7 +6000,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadowfiend",
-          "icon": "spell_shadow_shadowfiend",
+          "icon": "136199",
           "description": "Shadow Word: Death has a 40% chance to summon a Shadowfiend for 5 sec when damaging targets below 20% health.\r\n\r\n Shadowfiend\r\nSummons a Shadowfiend to attack your target for 5 sec.\r\n\r\nGenerates 0.5% mana each time the Shadowfiend attacks.",
           "choices": null
         },
@@ -5995,7 +6017,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Thoughts",
-          "icon": "ability_priest_darkness",
+          "icon": "458226",
           "description": "Increases the chance for Shadowy Insight to occur by 25%. When consuming Shadowy Insight, Mind Blast generates 1 additional Insanity.",
           "choices": null
         },
@@ -6014,7 +6036,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Maddening Touch",
-          "icon": "spell_holy_stoicism",
+          "icon": "135978",
           "description": "Vampiric Touch deals 20% additional damage and has a chance to generate 1 Insanity each time it deals damage.",
           "choices": null
         },
@@ -6037,15 +6059,15 @@
             {
               "spellId": 341240,
               "name": "Improved Voidform",
-              "icon": "spell_priest_voidblast",
-              "description": "Voidform generates 60 Insanity and increases your spell damage by an additonal 5%.",
+              "icon": "1386548",
+              "description": "Voidform increases your spell damage by an additonal 5% and grants 2 additional uses of Void Volley.",
               "maxRanks": 1
             },
             {
               "spellId": 1231346,
               "name": "Ancient Madness",
-              "icon": "spell_priest_voidflay",
-              "description": "Casting Shadow Word: Madness increases the duration of Voidform by 3.0 sec.\r\n\r\nEach time this occurs during Voidform, its effectiveness is reduced by 25%.",
+              "icon": "1386549",
+              "description": "Shadow Word: Madness increases your haste during Voidform by 2% and increases its duration by 1.5 sec, stacking up to 5 times. \r\n\r\nWhen Voidform ends, the haste lingers and decays over 10 sec.",
               "maxRanks": 1
             }
           ]
@@ -6064,9 +6086,9 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Phantom Menace",
-          "icon": "spell_priest_spectralguise",
-          "description": "Increases the critical strike chance of Shadowy Apparitions by 10% and their critical strike damage by 40%.",
+          "name": "Shadeburst",
+          "icon": "4067372",
+          "description": "Shadowy Apparitions that float towards your primary target explode, dealing 532 Shadow damage to all enemies within 8 yds.\r\n\r\nDamage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -6082,7 +6104,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dark Evangelism",
-          "icon": "spell_mage_presenceofmind",
+          "icon": "610679",
           "description": "Increases your periodic spell damage by 6%.",
           "choices": null
         },
@@ -6099,7 +6121,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shattered Psyche",
-          "icon": "inv_ability_priest_mindgames",
+          "icon": "6035316",
           "description": "Mind Flay damage increases the critical strike chance of Mind Blast by 8%, stacking up to 12 times.\r\n\r\nLasts 10 sec.",
           "choices": null
         },
@@ -6116,7 +6138,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Subservient Shadows",
-          "icon": "inv_hivemind",
+          "icon": "2266815",
           "description": "Summoned minions last 20% longer and deal an additional 15% damage.",
           "choices": null
         },
@@ -6135,7 +6157,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Mastermind",
-          "icon": "spell_nzinsanity_chasedbyshadows",
+          "icon": "3163618",
           "description": "Increases the critical strike chance of Mind Blast, Mind Flay, and Shadow Word: Death by 4% and increases their critical strike damage by 20%.",
           "choices": null
         },
@@ -6159,14 +6181,14 @@
             {
               "spellId": 407470,
               "name": "Mind's Eye",
-              "icon": "inv12_ability_priest_powerwordmadness_eye",
+              "icon": "7569529",
               "description": "Reduces the Insanity cost of Shadow Word: Madness by 5.",
               "maxRanks": 1
             },
             {
               "spellId": 409044,
               "name": "Distorted Reality",
-              "icon": "spell_shadow_gathershadows",
+              "icon": "136160",
               "description": "Increases the damage of Shadow Word: Madness by 20% and causes it to deal its damage over 12 sec, but increases its Insanity cost by 5.",
               "maxRanks": 1
             }
@@ -6186,7 +6208,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spectral Horrors",
-          "icon": "ability_priest_phantasm",
+          "icon": "614257",
           "description": "Shadow Apparitions deal 30% increased damage to targets affected by your Shadow Word: Madness.",
           "choices": null
         },
@@ -6205,7 +6227,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Instilled Doubt",
-          "icon": "spell_shadow_shadowwordpain",
+          "icon": "136207",
           "description": "Increases the critical strike chance of Vampiric Touch and Shadow Word: Pain by 8% and their critical strike damage by 20%.",
           "choices": null
         },
@@ -6216,14 +6238,14 @@
           "posX": 32,
           "posY": 9,
           "connections": [
-            82645,
-            82559
+            82559,
+            82645
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mindbender",
-          "icon": "spell_shadow_soulleech_3",
+          "icon": "136214",
           "description": "Casting Voidform summons a Mindbender for 10 sec.\r\n\r\n Mindbender\r\nSummons a shadowy fiend to attack your target.\r\n\r\nGenerates 1 Insanity each time the Mindbender attacks.",
           "choices": null
         },
@@ -6247,14 +6269,14 @@
             {
               "spellId": 392507,
               "name": "Deathspeaker",
-              "icon": "spell_shadow_demonicfortitude",
+              "icon": "136149",
               "description": "Shadow Word: Death damage increased by 25%.\r\n\r\nShadow Word: Death gains its damage and talent bonuses against targets below 35% health instead of 20%.",
               "maxRanks": 1
             },
             {
               "spellId": 321291,
               "name": "Death and Madness",
-              "icon": "ability_priest_thoughtsteal01",
+              "icon": "3718862",
               "description": "If a target dies within 7 sec after being struck by Shadow Word: Death, generate 8 Insanity.\r\n\r\nWhen Shadow Word: Death fails to kill a target below 20% health, its cooldown is reset. Cannot occur more than once every 10 sec.",
               "maxRanks": 1
             }
@@ -6273,7 +6295,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mind Devourer",
-          "icon": "spell_arcane_mindmastery",
+          "icon": "135740",
           "description": "Mind Blast has a 8% chance to make your next Shadow Word: Madness cost no Insanity and deal 20% additional damage.",
           "choices": null
         },
@@ -6292,7 +6314,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Auspicious Spirits",
-          "icon": "ability_priest_auspiciousspirits",
+          "icon": "1022944",
           "description": "Your Shadowy Apparitions deal 15% increased damage and have a chance to generate 1 Insanity.",
           "choices": null
         },
@@ -6310,7 +6332,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Maddening Tentacles",
-          "icon": "inv12_ability_priest_tentacleslam",
+          "icon": "7439212",
           "description": "Tentacle Slam afflicts your target with Shadow Word: Madness at 25% effectiveness.",
           "choices": null
         },
@@ -6327,7 +6349,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inescapable Torment",
-          "icon": "spell_shadow_chilltouch",
+          "icon": "136130",
           "description": "Mind Blast and Shadow Word: Death cause your Shadowfiend, Mindbender, and Voidwraith to teleport behind your target, slashing up to 5 nearby enemies for 319 Shadow damage and extending their durations by 0.7 sec.",
           "choices": null
         },
@@ -6345,7 +6367,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Madness Weaving",
-          "icon": "spell_shadow_spectralsight",
+          "icon": "136215",
           "description": "The damage bonus from your Mastery: Shadow Weaving gains 25% additional benefit from Shadow Word: Madness.",
           "choices": null
         },
@@ -6362,7 +6384,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Death's Torment",
-          "icon": "spell_shadow_deathsembrace",
+          "icon": "237557",
           "description": "Shadow Word: Death deals damage 2 additional times at 15% effectiveness.",
           "choices": null
         },
@@ -6373,15 +6395,15 @@
           "posX": 38,
           "posY": 10,
           "connections": [
-            82558,
             82667,
+            82558,
             108153
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Screams of the Void",
-          "icon": "spell_shadow_lifedrain02_purple",
+          "icon": "3154546",
           "description": "Shadow Word: Madness causes your Shadow Word: Pain and Vampiric Touch to deal damage 40% faster on all targets for 3 sec.",
           "choices": null
         },
@@ -6398,7 +6420,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tormented Spirits",
-          "icon": "spell_shadow_painandsuffering",
+          "icon": "237567",
           "description": "Your Shadow Word: Pain damage has a chance to create Shadowy Apparitions that float towards all targets afflicted by your Vampiric Touch. \r\n\r\nCritical strikes increase the chance by 100%.",
           "choices": null
         },
@@ -6416,7 +6438,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Insidious Ire",
-          "icon": "spell_fire_twilightcano",
+          "icon": "425950",
           "description": "While you have Shadow Word: Pain, Shadow Word: Madness, and Vampiric Touch active on the same target, your Mind Blast, Void Torrent, Mind Flay, and Void Volley deal 13% more damage.\r\n",
           "choices": null
         },
@@ -6433,7 +6455,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Crushing Void",
-          "icon": "inv12_ability_priest_voidvolley",
+          "icon": "7439213",
           "description": "Tentacle Slam deals 50% increased damage and Void Volley deals 15% increased damage.\r\n\r\nWhen Voidform ends, you can cast Void Volley 1 additional time within 30 sec.",
           "choices": null
         },
@@ -6451,7 +6473,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Idol of Y'Shaarj",
-          "icon": "achievement_raid_terraceofendlessspring04",
+          "icon": "627685",
           "description": "While Shadowfiend, Mindbender, or Voidwraith are active, your haste is increased by 10%.",
           "choices": null
         },
@@ -6470,8 +6492,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Idol of N'Zoth",
-          "icon": "inv_eyeofnzothpet",
-          "description": "You create Horrific Visions when casting harmful spells on enemies.\r\n\r\nAt 50 stacks of Horrific Visions, your target sees a nightmare, dealing 691 Shadow damage and granting you 4 Insanity over 3 sec.\r\n\r\nAt 100 stacks, your target witnesses a vision of N&#39;Zoth, dealing 2,618 Shadow damage and granting you 12 Insanity over 3 sec.",
+          "icon": "3004126",
+          "description": "You create Horrific Visions when casting harmful spells on enemies.\r\n\r\nAt 50 stacks of Horrific Visions, your target sees a nightmare, dealing 691 Shadow damage and granting you 2 Insanity over 3 sec.\r\n\r\nAt 100 stacks, your target witnesses a vision of N'Zoth, dealing 2,618 Shadow damage and granting you 6 Insanity over 3 sec.",
           "choices": null
         },
         {
@@ -6489,8 +6511,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Idol of Yogg-Saron",
-          "icon": "achievement_boss_heraldvolazj",
-          "description": "After conjuring Shadowy Apparitions, gain a stack of Idol of Yogg-Saron. At 20 stacks, you summon a Thing from Beyond that casts Void Spike at nearby enemies for 20 sec.\r\n\r\n Void Spike\r\nHurls a bolt of dark magic, dealing 355 Shadow damage and 190 Shadow damage to all enemies within 10 yards of the target. Damage reduced beyond 5 targets.",
+          "icon": "298654",
+          "description": "After conjuring Shadowy Apparitions, gain a stack of Idol of Yogg-Saron. At 20 stacks, you summon a Thing from Beyond that casts Void Spike at nearby enemies for 20 sec.\r\n\r\n Void Spike\r\nHurls a bolt of dark magic, dealing 355 Shadow damage and 192 Shadow damage to all enemies within 10 yards of the target. Damage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -6507,8 +6529,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Idol of C'Thun",
-          "icon": "achievement_boss_cthun",
-          "description": "Mind Flay has a chance to spawn a Void Tendril that channels Mind Flay or Void Lasher that channels Mind Sear at your target.\r\n\r\n Mind Flay\r\nAssaults the target&#39;s mind with Shadow energy, causing 1,212 Shadow damage over 10 sec and slowing their movement speed by 30%.\r\n\r\nGenerates 5 Insanity over the duration.\r\n\r\n Mind Sear\r\nCorrosive shadow energy radiates from the target, dealing 815 Shadow damage over 10 sec to all enemies within 10 yards of the target. Damage reduced beyond 5 targets.\r\n\r\nGenerates 5 Insanity over the duration.",
+          "icon": "236407",
+          "description": "Mind Flay has a chance to spawn a Void Tendril that channels Mind Flay or Void Lasher that channels Mind Sear at your target.\r\n\r\n Mind Flay\r\nAssaults the target's mind with Shadow energy, causing 1,225 Shadow damage over 10 sec and slowing their movement speed by 30%.\r\n\r\nGenerates 5 Insanity over the duration.\r\n\r\n Mind Sear\r\nCorrosive shadow energy radiates from the target, dealing 815 Shadow damage over 10 sec to all enemies within 10 yards of the target. Damage reduced beyond 5 targets.\r\n\r\nGenerates 5 Insanity over the duration.",
           "choices": null
         },
         {
@@ -6522,7 +6544,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Void Apparitions",
-          "icon": "inv12_apextalent_priest_voidapparitions",
+          "icon": "7636560",
           "description": null,
           "levels": [
             81,
@@ -6537,12 +6559,12 @@
             },
             {
               "spellId": 1264104,
-              "description": "Shadowy Apparitions have a 15% chance to spawn as Void Apparitions that release a Void Bolt at their target and deal 50% increased damage.\r\n\r\n Void Bolt\r\nSends a bolt of pure void energy at your target, dealing 582 Shadow damage.",
+              "description": "Shadowy Apparitions have a 15% chance to spawn as Void Apparitions that release a Void Bolt at their target and deal 50% increased damage.\r\n\r\n Void Bolt\r\nSends a bolt of pure void energy at your target, dealing 564 Shadow damage.",
               "maxRanks": 2
             },
             {
               "spellId": 1264107,
-              "description": "Tentacle Slam has a 100% chance to activate an effect from one of your Idols.\r\n\r\n Idol of Y&#39;Shaarj\r\nSummons a Shadowfiend.\r\n\r\n Idol of N&#39;Zoth\r\nYour target witnesses a nightmare or vision of N&#39;Zoth.\r\n\r\n Idol of Yogg-Saron\r\nSummons a Thing From Beyond.\r\n\r\n Idol of C&#39;Thun\r\nSummons a Void Tendril or Void Lasher.",
+              "description": "Tentacle Slam has a 100% chance to activate an effect from one of your Idols.\r\n\r\n Idol of Y'Shaarj\r\nSummons a Shadowfiend.\r\n\r\n Idol of N'Zoth\r\nYour target witnesses a nightmare or vision of N'Zoth.\r\n\r\n Idol of Yogg-Saron\r\nSummons a Thing From Beyond.\r\n\r\n Idol of C'Thun\r\nSummons a Void Tendril or Void Lasher.",
               "maxRanks": 1
             }
           ]
@@ -6561,8 +6583,8 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Devour Matter",
-          "icon": "spell_holy_consumemagic",
-          "description": "Shadow Word: Death consumes absorb shields from your target, dealing 974 extra damage to them and granting you 1% mana if a shield was present.",
+          "icon": "135888",
+          "description": "Shadow Word: Death consumes absorb shields from your target, dealing 962 extra damage to them and granting you 1% mana if a shield was present.",
           "choices": null
         },
         {
@@ -6579,8 +6601,8 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Void Infusion",
-          "icon": "inv_misc_volatileshadow",
-          "description": "While Entropic Rift is active, Atonement healing with Void Blast and Penance is 50% more effective.",
+          "icon": "463569",
+          "description": "While Entropic Rift is active, Atonement healing with Void Blast and Penance is 75% more effective.",
           "choices": null
         },
         {
@@ -6597,7 +6619,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Inner Quietus",
-          "icon": "inv_cosmicvoid_buff",
+          "icon": "4913234",
           "description": "Power Word: Shield absorbs 20% additional damage.",
           "choices": null
         },
@@ -6613,8 +6635,8 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Void Torrent",
-          "icon": "spell_priest_voidsear",
-          "description": "Channel a torrent of void energy into the target, dealing 3,988 Shadow damage over 3 sec and tearing open an Entropic Rift.\r\n\r\n Entropic Rift\r\nMind Blast tears open an Entropic Rift that follows the enemy for 8 sec. Enemies caught in its path suffer 226 Shadow damage every 0.9 sec while within its reach.\r\n\r\nGenerates 24 Insanity over the duration.",
+          "icon": "1386551",
+          "description": "Channel a torrent of void energy into the target, dealing 3,917 Shadow damage over 3 sec and tearing open an Entropic Rift.\r\n\r\n Entropic Rift\r\nMind Blast tears open an Entropic Rift that follows the enemy for 8 sec. Enemies caught in its path suffer 225 Shadow damage every 0.9 sec while within its reach.\r\n\r\nGenerates 24 Insanity over the duration.",
           "choices": null
         },
         {
@@ -6631,7 +6653,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Quickened Pulse",
-          "icon": "ability_rogue_sanguinaryvein",
+          "icon": "457636",
           "description": "Shadow Word: Pain and Entropic Rift deal damage 25% more often.",
           "choices": null
         },
@@ -6655,14 +6677,14 @@
             {
               "spellId": 451204,
               "name": "No Escape",
-              "icon": "spell_fire_twilighthellfire",
+              "icon": "425956",
               "description": "Entropic Rift slows enemies by up to 70%, increased the closer they are to its center.",
               "maxRanks": 1
             },
             {
               "spellId": 451018,
               "name": "Dark Energy",
-              "icon": "achievement_boss_triumvirate_darknaaru",
+              "icon": "1711336",
               "description": "While Entropic Rift is active, you move 20% faster.",
               "maxRanks": 1
             }
@@ -6685,7 +6707,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Collapsing Void",
-          "icon": "inv_cosmicvoid_groundsate",
+          "icon": "4914667",
           "description": "Each time Penance damages or heals, Entropic Rift is empowered, increasing its damage and size by 10%.\r\n\r\nAfter Entropic Rift ends it collapses, dealing 1,672 Shadow damage split amongst enemy targets within 15 yds.",
           "choices": null
         },
@@ -6709,14 +6731,14 @@
             {
               "spellId": 450138,
               "name": "Void Empowerment",
-              "icon": "inv_cosmicvoid_nova",
+              "icon": "4914669",
               "description": "Summoning an Entropic Rift extends the duration of your 5 shortest Atonements by 1 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 449912,
               "name": "Darkening Horizon",
-              "icon": "inv_misc_83_voidfocus",
+              "icon": "3072251",
               "description": "Void Blast increases the duration of Entropic Rift by 1.0 sec, up to a maximum of 3 sec.",
               "maxRanks": 1
             }
@@ -6742,14 +6764,14 @@
             {
               "spellId": 451311,
               "name": "Void Leech",
-              "icon": "spell_shadow_soulleech_2",
+              "icon": "136213",
               "description": "Every 3 sec siphon an amount equal to 4% of your health from an ally within 40 yds if they are higher health than you.",
               "maxRanks": 1
             },
             {
               "spellId": 451569,
               "name": "Embrace the Shadow",
-              "icon": "spell_shadow_shadesofdarkness",
+              "icon": "136194",
               "description": "You absorb 3% of all magic damage taken. Absorbing Shadow damage heals you for 100% of the amount absorbed.",
               "maxRanks": 1
             }
@@ -6769,8 +6791,8 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Void Blast",
-          "icon": "inv_cosmicvoid_missile",
-          "description": "Entropic Rift upgrades Smite into Void Blast while it is active.\r\n\r\nVoid Blast:\r\nSends a blast of cosmic void energy at the enemy, causing 575 Shadow damage.",
+          "icon": "4914668",
+          "description": "Entropic Rift upgrades Smite into Void Blast while it is active.\r\n\r\nVoid Blast:\r\nSends a blast of cosmic void energy at the enemy, causing 577 Shadow damage.",
           "choices": null
         },
         {
@@ -6787,7 +6809,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Voidwraith",
-          "icon": "warlock_curse_shadow",
+          "icon": "615099",
           "description": "When Entropic Rift ends, a Voidwraith is summoned from the collapsed rift for 5 sec.\r\n\r\nVoidwraith\r\nSummon a Voidwraith that casts Void Flay from afar. Void Flay deals bonus damage to high health enemies, up to a maximum of 50% if they are full health.\r\n\r\nGenerates 0.5% Mana each time the Voidwraith attacks.",
           "choices": null
         },
@@ -6805,7 +6827,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Overwhelming Shadows",
-          "icon": "inv_shadowelementalmount",
+          "icon": "5767152",
           "description": "Mind Blast deals 100% increased damage.",
           "choices": null
         },
@@ -6823,7 +6845,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Touch of the Void",
-          "icon": "inv_112_raidtrinkets_blobofswirlingvoid_purple",
+          "icon": "7137506",
           "description": "Voidheart now persists for 8 sec after Entropic Rift ends.",
           "choices": null
         },
@@ -6841,7 +6863,7 @@
           "heroSubtree": "Voidweaver",
           "maxRanks": 1,
           "name": "Voidheart",
-          "icon": "inv_cosmicvoid_orb",
+          "icon": "4914670",
           "description": "While Entropic Rift is active, your Atonement healing is increased by 20%.",
           "choices": null
         },
@@ -6859,8 +6881,8 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Resonant Energy",
-          "icon": "ability_priest_halo_shadow",
-          "description": "Allies healed by your Halo receive 2% increased healing from you for 8 sec, stacking up to 5 times.",
+          "icon": "7658138",
+          "description": "Creating a Halo increases your healing done by 2% for 10 sec, stacking up to 4 times.",
           "choices": null
         },
         {
@@ -6877,7 +6899,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Perfected Form",
-          "icon": "spell_priest_voidblast",
+          "icon": "1386548",
           "description": "Your damage dealt is increased by 5% while Voidform is active.",
           "choices": null
         },
@@ -6901,14 +6923,14 @@
             {
               "spellId": 449874,
               "name": "Energy Compression",
-              "icon": "spell_holy_circleofrenewal_shadow",
+              "icon": "5852174",
               "description": "Halo damage and healing is increased by 30%.",
               "maxRanks": 1
             },
             {
               "spellId": 454001,
               "name": "Sustained Potency",
-              "icon": "spell_priest_ascendance_shadow",
+              "icon": "5852177",
               "description": "Creating a Halo extends the duration of Voidform by 1 sec. If Voidform is not active, up to 6 seconds is stored.\r\n\r\nWhile out of combat or affected by a loss of control effect, the duration of Voidform is paused for up to 20 sec.",
               "maxRanks": 1
             }
@@ -6928,7 +6950,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Energy Conservation",
-          "icon": "spell_nzinsanity_chasedbyshadows",
+          "icon": "3163618",
           "description": "Power Surge lasts an additional 5 sec.",
           "choices": null
         },
@@ -6946,7 +6968,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Power Surge",
-          "icon": "inv_112_raidtrinkets_blobofswirlingvoid_gold",
+          "icon": "7137505",
           "description": "Casting Halo also causes you to create a Halo around you at 100% effectiveness every 5 sec for 10 sec.",
           "choices": null
         },
@@ -6964,7 +6986,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Energy Cycle",
-          "icon": "spell_priest_burningwill_shadow",
+          "icon": "5852178",
           "description": "Casting Mind Flay: Insanity has a 100% chance to conjure Shadowy Apparitions.",
           "choices": null
         },
@@ -6988,14 +7010,14 @@
             {
               "spellId": 453852,
               "name": "Shock Pulse",
-              "icon": "spell_priest_divinestar_shadow",
+              "icon": "608955",
               "description": "Halo damage reduces enemy movement speed by 5% for 5 sec, stacking up to 5 times.",
               "maxRanks": 1
             },
             {
               "spellId": 453918,
               "name": "Incessant Screams",
-              "icon": "spell_shadow_psychicscream",
+              "icon": "136184",
               "description": "Psychic Scream creates an image of you at your location. After 4 sec, the image will let out a Psychic Scream.",
               "maxRanks": 1
             }
@@ -7015,7 +7037,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Empowered Surges",
-          "icon": "spell_fire_twilightflamebreath",
+          "icon": "425954",
           "description": "Your spells affected by Surge of Light heal for 5% more while Surge of Light is active.",
           "choices": null
         },
@@ -7031,8 +7053,8 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Halo",
-          "icon": "ability_priest_halo_shadow",
-          "description": "Creates a ring of Shadow energy around you that quickly expands to a 40 yd radius, healing allies for 620 and dealing 556 Shadow damage to enemies. Healing reduced beyond 6 targets.",
+          "icon": "632353",
+          "description": "Creates a ring of Shadow energy around you that quickly expands to a 40 yd radius, healing allies for 598 and dealing 551 Shadow damage to enemies. Healing reduced beyond 6 targets.",
           "choices": null
         },
         {
@@ -7049,8 +7071,8 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Manifested Power",
-          "icon": "spell_holy_surgeoflight_shadow",
-          "description": "Creating a Halo grants Surge of Light.\r\n\r\n Surge of Light\r\nYour healing spells and Smite have a 8% chance to make your next Flash Heal instant and cost 50% less mana. Stacks to 2.",
+          "icon": "5852176",
+          "description": "Creating a Halo grants Surge of Light.\r\n\r\n Surge of Light\r\nYour healing spells and Smite have a 8% chance to make your next Flash Heal or Shadow Mend instant and cost 50% less mana. Stacks to 2.",
           "choices": null
         },
         {
@@ -7070,7 +7092,7 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Divine Halo",
-          "icon": "spell_bastion_priest_shadow",
+          "icon": "5852173",
           "description": "Halo now centers around you and returns to you after it reaches its maximum distance, healing allies and damaging enemies each time it passes through them.",
           "choices": null
         },
@@ -7094,14 +7116,14 @@
             {
               "spellId": 1272326,
               "name": "Realized Potential",
-              "icon": "spell_shadow_demonicfortitude",
+              "icon": "136149",
               "description": "Shadow Word: Death damage increased by 25% and its cooldown is reduced by 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 1247178,
               "name": "Spiritwell",
-              "icon": "ability_priest_shadowyapparition",
+              "icon": "458229",
               "description": "Increases Shadowy Apparition damage by 10%.",
               "maxRanks": 1
             }
@@ -7127,14 +7149,14 @@
             {
               "spellId": 453726,
               "name": "Word of Supremacy",
-              "icon": "spell_holy_wordfortitude",
+              "icon": "135987",
               "description": "Power Word: Fortitude grants you an additional 5% stamina.",
               "maxRanks": 1
             },
             {
               "spellId": 453729,
               "name": "Heightened Alteration",
-              "icon": "spell_shadow_dispersion",
+              "icon": "237563",
               "description": "Increases the duration of Dispersion by 2 sec.",
               "maxRanks": 1
             }
@@ -7154,8 +7176,8 @@
           "heroSubtree": "Archon",
           "maxRanks": 1,
           "name": "Focused Outburst",
-          "icon": "inv12_ability_priest_voidvolley",
-          "description": "Void Volley damage increased by 15% and its cooldown is reduced by 4 sec.",
+          "icon": "7439213",
+          "description": "Void Volley deals 5% increased damage and Shadow Word: Madness casts during Voidform unleash a Void Volley at your target at 25% effectiveness.",
           "choices": null
         }
       ]

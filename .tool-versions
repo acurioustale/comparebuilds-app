@@ -1,6 +1,6 @@
 nodejs 26
 php 8.4
 shfmt 3.13.1
-php-cs-fixer 3.95.12
-phpunit 13.2.3
+php-cs-fixer 3.95.18
+phpunit 13.2.6
 actionlint 1.7.12

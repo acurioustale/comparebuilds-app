@@ -69,7 +69,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Landslide",
-          "icon": "ability_earthen_pillar",
+          "icon": "1016245",
           "description": "Conjure a path of shifting stone towards the target location, rooting enemies for 15 sec. Damage may cancel the effect.",
           "choices": null
         },
@@ -84,7 +84,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Obsidian Scales",
-          "icon": "inv_artifact_dragonscales",
+          "icon": "1394891",
           "description": "Reinforce your scales, reducing damage taken by 30% . Lasts 12 sec.",
           "choices": null
         },
@@ -99,7 +99,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Expunge",
-          "icon": "ability_evoker_fontofmagic_green",
+          "icon": "4630445",
           "description": "Expunge toxins affecting an ally, removing all Poison effects.",
           "choices": null
         },
@@ -116,7 +116,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Natural Convergence",
-          "icon": "spell_frost_frostblast",
+          "icon": "135844",
           "description": "Disintegrate channels 20% faster.",
           "choices": null
         },
@@ -133,8 +133,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Heavy Wingbeats",
-          "icon": "ability_racial_wingbuffet",
-          "description": "Wing Buffet&#39;s cooldown is reduced by 2 min.",
+          "icon": "4622488",
+          "description": "Wing Buffet's cooldown is reduced by 2 min.",
           "choices": null
         },
         {
@@ -150,8 +150,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Verdant Embrace",
-          "icon": "ability_evoker_rescue",
-          "description": "Fly to an ally and heal them for 4,020, or heal yourself for the same amount.",
+          "icon": "4622471",
+          "description": "Fly to an ally and heal them for 5,226, or heal yourself for the same amount.",
           "choices": null
         },
         {
@@ -167,8 +167,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Forger of Mountains",
-          "icon": "ability_earthen_pillar",
-          "description": "Landslide&#39;s cooldown is reduced by 30 sec, and it can withstand 200% more damage before breaking.",
+          "icon": "1016245",
+          "description": "Landslide's cooldown is reduced by 30 sec, and it can withstand 200% more damage before breaking.",
           "choices": null
         },
         {
@@ -185,7 +185,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Innate Magic",
-          "icon": "ability_evoker_innatemagic4",
+          "icon": "4630457",
           "description": "Essence regenerates 5% faster.",
           "choices": null
         },
@@ -202,7 +202,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Obsidian Bulwark",
-          "icon": "inv_shield_1h_revenantfire_d_01",
+          "icon": "4237659",
           "description": "Obsidian Scales has an additional charge.",
           "choices": null
         },
@@ -220,7 +220,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Enkindled",
-          "icon": "ability_evoker_livingflame",
+          "icon": "4622464",
           "description": "Living Flame deals 3% more damage and healing.",
           "choices": null
         },
@@ -237,7 +237,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Scarlet Adaptation",
-          "icon": "inv_bijou_red",
+          "icon": "132532",
           "description": "Store 20% of your effective healing, up to 857. Your next damaging Living Flame consumes all stored healing to increase its damage dealt.",
           "choices": null
         },
@@ -255,7 +255,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inner Radiance",
-          "icon": "spell_holy_spellwarding",
+          "icon": "135976",
           "description": "Your Living Flame and Emerald Blossom are 30% more effective on yourself.",
           "choices": null
         },
@@ -272,7 +272,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Recall",
-          "icon": "ability_evoker_recall",
+          "icon": "4622470",
           "description": "You may reactivate Deep Breath within 3 sec after landing to travel back in time to your takeoff location.",
           "choices": null
         },
@@ -290,8 +290,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Clobbering Sweep",
-          "icon": "ability_racial_tailswipe",
-          "description": "Tail Swipe&#39;s cooldown is reduced by 2 min.",
+          "icon": "4622486",
+          "description": "Tail Swipe's cooldown is reduced by 2 min.",
           "choices": null
         },
         {
@@ -307,7 +307,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tailwind",
-          "icon": "ability_skyreach_wind",
+          "icon": "1029595",
           "description": "Hover increases your movement speed by 70% for the first 4 sec.",
           "choices": null
         },
@@ -325,8 +325,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cauterizing Flame",
-          "icon": "ability_evoker_fontofmagic_red",
-          "description": "Cauterize an ally&#39;s wounds, removing all Bleed, Poison, Curse, and Disease effects. Heals for 1,330 upon removing any effect.",
+          "icon": "4630446",
+          "description": "Cauterize an ally's wounds, removing all Bleed, Poison, Curse, and Disease effects. Heals for 1,330 upon removing any effect.",
           "choices": null
         },
         {
@@ -342,7 +342,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ancient Flame",
-          "icon": "inv_elemental_mote_fire01",
+          "icon": "132839",
           "description": "Casting Emerald Blossom or Verdant Embrace reduces the cast time of your next Living Flame by 40%.",
           "choices": null
         },
@@ -359,7 +359,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Instinctive Arcana",
-          "icon": "spell_arcane_studentofmagic",
+          "icon": "135754",
           "description": "Your Magic damage done is increased by 2%.",
           "choices": null
         },
@@ -374,7 +374,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tip the Scales",
-          "icon": "ability_evoker_tipthescales",
+          "icon": "4622480",
           "description": "Compress time to make your next empowered spell cast instantly at its maximum empower level.",
           "choices": null
         },
@@ -391,7 +391,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Attuned to the Dream",
-          "icon": "ability_rogue_imrovedrecuperate",
+          "icon": "460692",
           "description": "Your healing done and healing received are increased by 2%.",
           "choices": null
         },
@@ -408,7 +408,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sleep Walk",
-          "icon": "ability_xavius_dreamsimulacrum",
+          "icon": "1396974",
           "description": "Disorient an enemy for 20 sec, causing them to sleep walk towards you. Damage has a chance to awaken them.",
           "choices": null
         },
@@ -425,7 +425,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Protracted Talons",
-          "icon": "ability_evoker_azurestrike",
+          "icon": "4622447",
           "description": "Azure Strike damages 1 additional enemy.",
           "choices": null
         },
@@ -443,7 +443,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Inherent Resistance",
-          "icon": "inv_misc_rubysanctum1",
+          "icon": "377270",
           "description": "Magic damage taken reduced by 2%.",
           "choices": null
         },
@@ -460,7 +460,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Draconic Legacy",
-          "icon": "inv_helm_mail_dracthyrquest_b_02",
+          "icon": "4558458",
           "description": "Your Stamina is increased by 6%.",
           "choices": null
         },
@@ -478,7 +478,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Extended Flight",
-          "icon": "ability_evoker_hover",
+          "icon": "4622463",
           "description": "Hover lasts 2 sec longer.",
           "choices": null
         },
@@ -495,7 +495,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bountiful Bloom",
-          "icon": "ability_evoker_emeraldblossom",
+          "icon": "4622457",
           "description": "Emerald Blossom heals 2 additional allies.",
           "choices": null
         },
@@ -512,7 +512,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Regenerative Magic",
-          "icon": "spell_frost_manarecharge",
+          "icon": "135859",
           "description": "Your Leech is increased by 2%.",
           "choices": null
         },
@@ -523,15 +523,15 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            93355,
-            110064
+            110064,
+            93355
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blast Furnace",
-          "icon": "ability_evoker_firebreath",
-          "description": "Fire Breath&#39;s damage over time lasts 4 sec longer.",
+          "icon": "4622458",
+          "description": "Fire Breath's damage over time lasts 4 sec longer.",
           "choices": null
         },
         {
@@ -547,7 +547,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Exuberance",
-          "icon": "ability_evoker_hover2",
+          "icon": "4630448",
           "description": "While above 75% health, your movement speed is increased by 10%.",
           "choices": null
         },
@@ -564,7 +564,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Renewing Blaze",
-          "icon": "ability_evoker_masterylifebinder_red",
+          "icon": "4630463",
           "description": "Obsidian Scales surrounds you with a Renewing Blaze, causing 100% of the damage it prevented to be healed back over 8 sec.",
           "choices": null
         },
@@ -581,7 +581,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Walloping Blow",
-          "icon": "inv_misc_monsterscales_06",
+          "icon": "134308",
           "description": "Wing Buffet and Tail Swipe knock enemies further and daze them, reducing movement speed by 70% for 4 sec. ",
           "choices": null
         },
@@ -599,8 +599,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Panacea",
-          "icon": "ability_druid_protectionofthegrove",
-          "description": "Emerald Blossom and Verdant Embrace instantly heal you for 760 when cast.",
+          "icon": "4067364",
+          "description": "Emerald Blossom and Verdant Embrace instantly heal you for 950 when cast.",
           "choices": null
         },
         {
@@ -616,7 +616,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stretch Time",
-          "icon": "ability_evoker_timedilation",
+          "icon": "4622478",
           "description": "While flying during Deep Breath, 100% of damage you would take is instead dealt over 10 sec.",
           "choices": null
         },
@@ -633,8 +633,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unravel",
-          "icon": "ability_evoker_unravel",
-          "description": "Direct damage from Fire Breath consumes absorb shields from enemies, dealing 4,561 additional Spellfrost damage to them.",
+          "icon": "4630499",
+          "description": "Direct damage from Fire Breath consumes absorb shields from enemies, dealing 4,624 additional Spellfrost damage to them.",
           "choices": null
         },
         {
@@ -652,7 +652,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Oppressing Roar",
-          "icon": "ability_evoker_oppressingroar",
+          "icon": "4622466",
           "description": "Let out a bone-shaking roar at enemies in a cone in front of you, increasing the duration of crowd controls that affect them by 50% in the next 10 sec.",
           "choices": null
         },
@@ -669,7 +669,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Foci of Life",
-          "icon": "spell_fire_incinerate",
+          "icon": "135818",
           "description": "Renewing Blaze restores you more quickly, causing damage you take to be healed back over 4 sec.",
           "choices": null
         },
@@ -688,7 +688,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rescue",
-          "icon": "ability_evoker_flywithme",
+          "icon": "4622460",
           "description": "Swoop to an ally and fly with them to the target location. Clears movement impairing effects from you and your ally.",
           "choices": null
         },
@@ -705,7 +705,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Lush Growth",
-          "icon": "inv_staff_2h_bloodelf_c_01",
+          "icon": "801010",
           "description": "Green spells restore 5% more health.",
           "choices": null
         },
@@ -722,7 +722,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Source of Magic",
-          "icon": "ability_evoker_blue_01",
+          "icon": "4630412",
           "description": "Redirect your excess magic to a friendly healer for 1 hour. When you cast an empowered spell, you restore 0.25% of their maximum mana per empower level. Limit 1.",
           "choices": null
         },
@@ -739,7 +739,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Strike from Above",
-          "icon": "ability_racial_glide",
+          "icon": "4622484",
           "description": "Glide speed and height increased by 10%.",
           "choices": null
         },
@@ -751,14 +751,14 @@
           "posY": 12,
           "connections": [
             93307,
-            93298,
-            93308
+            93308,
+            93298
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leaping Flames",
-          "icon": "ability_evoker_pupilofalexstraza",
+          "icon": "5199640",
           "description": "Fire Breath causes your next Living Flame to strike 1 additional target per empower level.",
           "choices": null
         },
@@ -775,7 +775,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overawe",
-          "icon": "ability_evoker_oppressingroar2",
+          "icon": "4622467",
           "description": "Oppressing Roar removes 1 Enrage effect from each enemy, and its cooldown is reduced by 30 sec.",
           "choices": null
         },
@@ -794,7 +794,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aerial Mastery",
-          "icon": "ability_evoker_aerialmastery",
+          "icon": "4622446",
           "description": "Hover gains 1 additional charge.",
           "choices": null
         },
@@ -811,7 +811,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twin Guardian",
-          "icon": "inv_misc_volatileair",
+          "icon": "463565",
           "description": "Rescue increases movement speed by 100% and allows spells to be cast while moving for 3 sec.",
           "choices": null
         },
@@ -828,8 +828,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Potent Mana",
-          "icon": "spell_magic_managain",
-          "description": "Source of Magic increases the target&#39;s healing and damage done by 3%.",
+          "icon": "237551",
+          "description": "Source of Magic increases the target's healing and damage done by 3%.",
           "choices": null
         },
         {
@@ -846,7 +846,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Terror of the Skies",
-          "icon": "ability_evoker_terroroftheskies",
+          "icon": "4622477",
           "description": "Deep Breath stuns enemies for 3 sec.",
           "choices": null
         },
@@ -869,14 +869,14 @@
             {
               "spellId": 374968,
               "name": "Time Spiral",
-              "icon": "ability_evoker_timespiral",
+              "icon": "4622479",
               "description": "Bend time, allowing you and your allies within 40 yds to cast their major movement ability once in the next 10 sec, even if it is on cooldown.",
               "maxRanks": 1
             },
             {
               "spellId": 406732,
               "name": "Spatial Paradox",
-              "icon": "ability_evoker_stretchtime",
+              "icon": "5199645",
               "description": "Evoke a paradox for you and a friendly healer, allowing casting while moving and increasing the range of most spells by 100% for 10 sec.\r\n\r\nAffects the nearest healer within 60 yds, if you do not have a healer targeted.",
               "maxRanks": 1
             }
@@ -897,7 +897,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Zephyr",
-          "icon": "ability_evoker_hoverblack",
+          "icon": "4630449",
           "description": "Conjure an updraft to lift you and your 4 nearest allies within 20 yds into the air, reducing damage taken from area-of-effect attacks by 20% and increasing movement speed by 30% for 8 sec.",
           "choices": null
         },
@@ -912,8 +912,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ebon Might",
-          "icon": "spell_sarkareth",
-          "description": "Increase all damage dealing allies&#39; primary stat by 8.0% of your own and increase your own damage by 20% for 10 sec.\r\n\r\nEbon Might will split its effect when applied to more than 2 other allies.\r\n\r\nEruption, Deep Breath, and your empower spells extend the duration of these effects.",
+          "icon": "5061347",
+          "description": "Increase all damage dealing allies' primary stat by 8.0% of your own and increase your own damage by 20% for 10 sec.\r\n\r\nEbon Might will split its effect when applied to more than 2 other allies.\r\n\r\nEruption, Deep Breath, and your empower spells extend the duration of these effects.",
           "choices": null
         },
         {
@@ -929,8 +929,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Eruption",
-          "icon": "ability_evoker_eruption",
-          "description": "Cause a violent eruption beneath an enemy&#39;s feet, dealing 1,064 Volcanic damage split between them and nearby enemies.",
+          "icon": "5199630",
+          "description": "Cause a violent eruption beneath an enemy's feet, dealing 1,064 Volcanic damage split between them and nearby enemies.",
           "choices": null
         },
         {
@@ -946,7 +946,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Essence Burst",
-          "icon": "ability_evoker_essenceburst",
+          "icon": "4630437",
           "description": "Your Living Flame has a 20% chance, and your Azure Strike has a 15% chance, to make your next Eruption cost no Essence.",
           "choices": null
         },
@@ -963,8 +963,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Quell",
-          "icon": "ability_evoker_quell",
-          "description": "Interrupt an enemy&#39;s spellcasting and prevent any spell from that school of magic from being cast for 6 sec.",
+          "icon": "4622469",
+          "description": "Interrupt an enemy's spellcasting and prevent any spell from that school of magic from being cast for 6 sec.",
           "choices": null
         },
         {
@@ -980,7 +980,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ricocheting Pyroclast",
-          "icon": "ability_rhyolith_volcano",
+          "icon": "524305",
           "description": "Eruption deals 30% more damage per enemy struck, up to 150%.",
           "choices": null
         },
@@ -997,7 +997,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Essence Attunement",
-          "icon": "ability_evoker_essenceburststacks",
+          "icon": "4630443",
           "description": "Essence Burst stacks 2 times.",
           "choices": null
         },
@@ -1020,14 +1020,14 @@
             {
               "spellId": 407814,
               "name": "Pupil of Alexstrasza",
-              "icon": "ability_evoker_pupilofalexstraza",
+              "icon": "5199640",
               "description": "When cast at an enemy, Living Flame strikes 1 additional enemy for 100% damage.",
               "maxRanks": 1
             },
             {
               "spellId": 410784,
               "name": "Echoing Strike",
-              "icon": "ability_evoker_echoingstrike",
+              "icon": "5199629",
               "description": "Azure Strike deals 15% increased damage and has a 10% chance per target hit to echo, casting again.",
               "maxRanks": 1
             }
@@ -1047,8 +1047,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Upheaval",
-          "icon": "ability_evoker_upheaval",
-          "description": "Gather earthen power beneath your enemy&#39;s feet and send them hurtling upwards, dealing 1,618 Volcanic damage to the target and nearby enemies.\r\n\r\nEmpowering expands the area of effect.\r\n\r\nI:   3 yd radius.\r\n\r\nII:  6 yd radius.\r\n\r\nIII: 9 yd radius.",
+          "icon": "5199647",
+          "description": "Gather earthen power beneath your enemy's feet and send them hurtling upwards, dealing 1,598 Volcanic damage to the target and nearby enemies.\r\n\r\nEmpowering expands the area of effect.\r\n\r\nI:   3 yd radius.\r\n\r\nII:  6 yd radius.\r\n\r\nIII: 9 yd radius.",
           "choices": null
         },
         {
@@ -1065,7 +1065,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Breath of Eons",
-          "icon": "ability_evoker_breathofeons",
+          "icon": "5199622",
           "description": "Fly to the targeted location, exposing a Temporal Wound on enemies in your path for 10 sec.\r\n\r\nRemoves roots and grants immunity to movement impairing and loss of control effects while flying.\r\n\r\n Temporal Wound\r\n15% of damage dealt by allies affected by Ebon Might is copied as additional Arcane damage to enemies after 10 sec.\r\n\r\nDamage is reduced if Ebon Might affects more than 2 other allies.",
           "choices": null
         },
@@ -1083,8 +1083,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Defy Fate",
-          "icon": "ability_evoker_defyfate",
-          "description": "Fatal attacks are diverted into a nearby timeline, preventing the damage, and your death, in this one.\r\n\r\nThe release of temporal energy restores 9,930 health to you, and 3,359 to 4 nearby allies, over 9 sec. Healing starts high and declines over the duration.\r\n\r\nMay only occur once every 6 min.",
+          "icon": "5199625",
+          "description": "Fatal attacks are diverted into a nearby timeline, preventing the damage, and your death, in this one.\r\n\r\nThe release of temporal energy restores 12,652 health to you, and 4,077 to 4 nearby allies, over 9 sec. Healing starts high and declines over the duration.\r\n\r\nMay only occur once every 6 min.",
           "choices": null
         },
         {
@@ -1100,7 +1100,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ignition Rush",
-          "icon": "spell_fire_immolation",
+          "icon": "135817",
           "description": "Essence Burst reduces the cast time of Eruption by 40% and increases its damage by 20%.",
           "choices": null
         },
@@ -1117,7 +1117,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power Nexus",
-          "icon": "ability_evoker_powernexus",
+          "icon": "4630464",
           "description": "Increases your maximum Essence to 6.",
           "choices": null
         },
@@ -1134,8 +1134,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Volcanism",
-          "icon": "spell_fire_volcano",
-          "description": "Eruption&#39;s Essence cost is reduced by 1.",
+          "icon": "135830",
+          "description": "Eruption's Essence cost is reduced by 1.",
           "choices": null
         },
         {
@@ -1157,14 +1157,14 @@
             {
               "spellId": 410253,
               "name": "Perilous Fate",
-              "icon": "spell_shadow_lastingafflictions",
-              "description": "Breath of Eons reduces enemies&#39; movement speed by 70%, and reduces their attack speed by 50%, for 10 sec.",
+              "icon": "136167",
+              "description": "Breath of Eons reduces enemies' movement speed by 70%, and reduces their attack speed by 50%, for 10 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 409676,
               "name": "Chrono Ward",
-              "icon": "ability_evoker_bronze_01",
+              "icon": "4630413",
               "description": "When allies deal damage with Temporal Wounds, they gain a shield for 100% of the damage dealt. Absorption cannot exceed 30% of your maximum health.",
               "maxRanks": 1
             }
@@ -1184,8 +1184,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bestow Weyrnstone",
-          "icon": "ability_evoker_bestowweyrnstone",
-          "description": "Conjure a pair of Weyrnstones, one for your target ally and one for yourself. Only one ally may bear your Weyrnstone at a time.\r\n\r\nA Weyrnstone can be activated by the bearer to transport them to the other Weyrnstone&#39;s location, if they are within 100 yds.",
+          "icon": "5199618",
+          "description": "Conjure a pair of Weyrnstones, one for your target ally and one for yourself. Only one ally may bear your Weyrnstone at a time.\r\n\r\nA Weyrnstone can be activated by the bearer to transport them to the other Weyrnstone's location, if they are within 100 yds.",
           "choices": null
         },
         {
@@ -1201,7 +1201,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Timelessness",
-          "icon": "ability_evoker_timelessness",
+          "icon": "5199646",
           "description": "Enchant an ally to appear out of sync with the normal flow of time, reducing threat they generate by 30% for 1 hour. Less effective on tank-specialized allies. \r\n\r\nMay only be placed on one target at a time.",
           "choices": null
         },
@@ -1218,7 +1218,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Improved Defy Fate",
-          "icon": "ability_evoker_masterytimewalker",
+          "icon": "5199633",
           "description": "Defy Fate healing increased by 100% and its cooldown is reduced by 1 min.",
           "choices": null
         },
@@ -1237,8 +1237,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blistering Scales",
-          "icon": "ability_evoker_blisteringscales",
-          "description": "Protect an ally with 15 explosive dragonscales, increasing their Armor by 20% of your own.\r\n\r\nMelee attacks against the target cause 1 scale to explode, dealing 114 Volcanic damage to enemies near them. This damage can only occur every few sec.\r\n\r\nBlistering Scales can only be placed on one target at a time. Casts on your enemy&#39;s target if they have one.",
+          "icon": "5199621",
+          "description": "Protect an ally with 15 explosive dragonscales, increasing their Armor by 20% of your own.\r\n\r\nMelee attacks against the target cause 1 scale to explode, dealing 114 Volcanic damage to enemies near them. This damage can only occur every few sec.\r\n\r\nBlistering Scales can only be placed on one target at a time. Casts on your enemy's target if they have one.",
           "choices": null
         },
         {
@@ -1256,7 +1256,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Draconic Attunements",
-          "icon": "ability_evoker_draconicattunements",
+          "icon": "5199626",
           "description": "Learn to attune yourself to the essence of the Black or Bronze Dragonflights:\r\n\r\nBlack Attunement: You and your 4 nearest allies have 2% increased maximum health.\r\n\r\nBronze Attunement:You and your 4 nearest allies have 10% increased movement speed.",
           "choices": null
         },
@@ -1275,7 +1275,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Prescience",
-          "icon": "ability_evoker_prescience",
+          "icon": "5199639",
           "description": "Grant an ally the gift of foresight, increasing their critical strike chance by 3% for 18 sec.\r\n\r\nAffects the nearest ally within 25 yds, preferring damage dealers with their cooldowns active, if you do not have an ally targeted.",
           "choices": null
         },
@@ -1299,14 +1299,14 @@
             {
               "spellId": 412733,
               "name": "Unyielding Domain",
-              "icon": "spell_shaman_stormearthfire",
+              "icon": "237588",
               "description": "Upheaval cannot be interrupted, and has an additional 10% chance to critically strike.",
               "maxRanks": 1
             },
             {
               "spellId": 408002,
               "name": "Tectonic Locus",
-              "icon": "6bf_explosive_shard",
+              "icon": "1044088",
               "description": "Upheaval deals 50% increased damage to the primary target, and launches them higher.",
               "maxRanks": 1
             }
@@ -1331,15 +1331,15 @@
             {
               "spellId": 406907,
               "name": "Regenerative Chitin",
-              "icon": "inv12_ability_evoker_blisteringscalesinfinite",
+              "icon": "7439197",
               "description": "Blistering Scales no longer loses charges and deals 20% more damage.",
               "maxRanks": 1
             },
             {
               "spellId": 410643,
               "name": "Molten Blood",
-              "icon": "spell_shaman_spewlava",
-              "description": "When cast, Blistering Scales grants the target a shield that absorbs up to 4,560 damage for 30 sec based on their missing health. Lower health targets gain a larger shield.",
+              "icon": "971079",
+              "description": "When cast, Blistering Scales grants the target a shield that absorbs up to 5,700 damage for 30 sec based on their missing health. Lower health targets gain a larger shield.",
               "maxRanks": 1
             }
           ]
@@ -1358,7 +1358,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Momentum Shift",
-          "icon": "ability_priest_voidshift",
+          "icon": "612099",
           "description": "Consuming Essence Burst grants you 5% Intellect for 6 sec. Stacks up to 2 times.",
           "choices": null
         },
@@ -1375,7 +1375,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Aspects' Favor",
-          "icon": "ability_evoker_aspectsfavor",
+          "icon": "5199615",
           "description": "Obsidian Scales activates Black Attunement, and amplifies it to increase maximum health by 3.0% for 12 sec.\r\n\r\nHover activates Bronze Attunement, and amplifies it to increase movement speed by 25% for 4 sec.",
           "choices": null
         },
@@ -1393,7 +1393,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Arcane Reach",
-          "icon": "classicon_evoker",
+          "icon": "4574311",
           "description": "The range of your helpful magics is increased by 5 yards.",
           "choices": null
         },
@@ -1410,7 +1410,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Fate Mirror",
-          "icon": "trade_archaeology_highbornesoulmirror",
+          "icon": "458243",
           "description": "Prescience grants the ally a chance for their spells and abilities to echo their damage or healing, dealing 15% of the amount again.",
           "choices": null
         },
@@ -1427,8 +1427,8 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Symbiotic Bloom",
-          "icon": "inv_10_herb_seed_magiccolor5",
-          "description": "Emerald Blossom increases targets&#39; healing received by 3% for 10 sec.",
+          "icon": "4554354",
+          "description": "Emerald Blossom increases targets' healing received by 3% for 10 sec.",
           "choices": null
         },
         {
@@ -1444,7 +1444,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Reactive Hide",
-          "icon": "ability_evoker_reactivehide",
+          "icon": "5199641",
           "description": "Each time Blistering Scales explodes it deals 15% more damage for 12 sec, stacking 10 times.",
           "choices": null
         },
@@ -1461,8 +1461,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Font of Magic",
-          "icon": "ability_evoker_fontofmagic",
-          "description": "Your empower spells&#39; maximum level is increased by 1, and they reach maximum empower level 20% faster.",
+          "icon": "4622461",
+          "description": "Your empower spells' maximum level is increased by 1, and they reach maximum empower level 20% faster.",
           "choices": null
         },
         {
@@ -1480,7 +1480,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Hoarded Power",
-          "icon": "ability_evoker_innatemagic2",
+          "icon": "4630455",
           "description": "Essence Burst has a 20% chance to not be consumed.",
           "choices": null
         },
@@ -1499,7 +1499,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Motes of Possibility",
-          "icon": "ability_evoker_motesofpossibility",
+          "icon": "5199634",
           "description": "Eruption has a 25% chance to form a mote of diverted essence near you. Allies who comes in contact with the mote gain a random buff from your arsenal.",
           "choices": null
         },
@@ -1516,7 +1516,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Anachronism",
-          "icon": "ability_evoker_essenceburst6",
+          "icon": "4630442",
           "description": "Prescience has a 35% chance to grant Essence Burst.",
           "choices": null
         },
@@ -1539,14 +1539,14 @@
             {
               "spellId": 410687,
               "name": "Prolong Life",
-              "icon": "ability_evoker_reversion_green",
+              "icon": "4630468",
               "description": "Your effects that extend Ebon Might also extend Symbiotic Bloom.",
               "maxRanks": 1
             },
             {
               "spellId": 414969,
               "name": "Dream of Spring",
-              "icon": "ability_evoker_masterylifebinder",
+              "icon": "4630459",
               "description": "Emerald Blossom no longer has a cooldown, deals 35% increased healing, and increases the duration of your active Ebon Might effects by 1 sec, but costs 3 Essence.",
               "maxRanks": 1
             }
@@ -1567,7 +1567,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Accretion",
-          "icon": "ability_evoker_accretion",
+          "icon": "5199614",
           "description": "Eruption reduces the remaining cooldown of Upheaval by 1.0 sec.",
           "choices": null
         },
@@ -1584,7 +1584,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Imminent Destruction",
-          "icon": "spell_burningbladeshaman_blazing_radiance",
+          "icon": "1032475",
           "description": "Deep Breath reduces the Essence cost of your next 6 Eruptions by 1.",
           "choices": null
         },
@@ -1602,7 +1602,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Time Skip",
-          "icon": "ability_evoker_timeskip",
+          "icon": "5201905",
           "description": "Surge forward in time, causing your cooldowns to recover 1,000% faster for 2 sec.",
           "choices": null
         },
@@ -1619,7 +1619,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Clairvoyant",
-          "icon": "ability_evoker_masterylifebinder_bronze",
+          "icon": "4630462",
           "description": "Motes of Possibility may now grant Prescience to allies and have a 10% increased chance to activate.",
           "choices": null
         },
@@ -1637,8 +1637,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inferno's Blessing",
-          "icon": "ability_evoker_infernosblessing",
-          "description": "Fire Breath grants the inferno&#39;s blessing for 8 sec to you and a nearby ally, giving their damaging attacks and spells a high chance to deal an additional 1,022 Fire damage.",
+          "icon": "5199632",
+          "description": "Fire Breath grants the inferno's blessing for 8 sec to you and a nearby ally, giving their damaging attacks and spells a high chance to deal an additional 1,022 Fire damage.",
           "choices": null
         },
         {
@@ -1654,7 +1654,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rumbling Earth",
-          "icon": "ability_evoker_geomancy",
+          "icon": "5199631",
           "description": "Upheaval causes an aftershock at its location, dealing 30% of its damage 2 additional times.",
           "choices": null
         },
@@ -1671,7 +1671,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Plot the Future",
-          "icon": "ability_evoker_plotthefuture",
+          "icon": "5199638",
           "description": "Deep Breath grants you Fury of the Aspects for 15 sec after you land, without causing Exhaustion.",
           "choices": null
         },
@@ -1694,14 +1694,14 @@
             {
               "spellId": 412723,
               "name": "Tomorrow, Today",
-              "icon": "ability_evoker_rewind2",
+              "icon": "4630470",
               "description": "Time Skip channels for 1 sec longer.",
               "maxRanks": 1
             },
             {
               "spellId": 412713,
               "name": "Interwoven Threads",
-              "icon": "inv_enchant_optionalreagent_01",
+              "icon": "4224731",
               "description": "The cooldowns of your spells are reduced by 10%.",
               "maxRanks": 1
             }
@@ -1720,7 +1720,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overlord",
-          "icon": "ability_evoker_overlord",
+          "icon": "5199637",
           "description": "Deep Breath casts an Eruption at the first 3 enemies struck. These Eruptions have a 100% chance to create a Mote of Possibility.",
           "choices": null
         },
@@ -1737,8 +1737,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Mighty Inferno",
-          "icon": "ability_warlock_burningembers",
-          "description": "Inferno&#39;s Blessing&#39;s damage is increased by 40%, and your effects that extend Ebon Might also extend Inferno&#39;s Blessing.",
+          "icon": "460952",
+          "description": "Inferno's Blessing's damage is increased by 40%, and your effects that extend Ebon Might also extend Inferno's Blessing.",
           "choices": null
         },
         {
@@ -1752,7 +1752,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Duplicate",
-          "icon": "inv12_apextalent_evoker_duplicate",
+          "icon": "7514181",
           "description": null,
           "levels": [
             81,
@@ -1791,7 +1791,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Melt Armor",
-          "icon": "inv_10_gearupgrade_drakesshadowflameenhancedcrest",
+          "icon": "5062614",
           "description": "Deep Breath causes enemies to take 20% increased damage from Bombardments and Essence abilities for 12 sec.\r\n\r\nThe duration of this effect is extended when Deep Breath is cast multiple times.",
           "choices": null
         },
@@ -1815,14 +1815,14 @@
             {
               "spellId": 441212,
               "name": "Extended Battle",
-              "icon": "ability_evoker_divideandconquer",
+              "icon": "5152257",
               "description": "Essence abilities extend Bombardments by 1 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 441219,
               "name": "Diverted Power",
-              "icon": "ability_evoker_powerswell",
+              "icon": "4630466",
               "description": "Bombardments have a chance to generate Essence Burst.",
               "maxRanks": 1
             }
@@ -1848,14 +1848,14 @@
             {
               "spellId": 441180,
               "name": "Hardened Scales",
-              "icon": "inv_10_skinning_scales_black",
+              "icon": "4631327",
               "description": "Obsidian Scales reduces damage taken by an additional 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 441181,
               "name": "Menacing Presence",
-              "icon": "ability_racial_wingbuffet",
+              "icon": "4622488",
               "description": "Knocking enemies up or backwards reduces their damage done to you by 15% for 8 sec.",
               "maxRanks": 1
             }
@@ -1875,7 +1875,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Unrelenting Siege",
-          "icon": "ability_siege_engineer_superheated",
+          "icon": "892834",
           "description": "For each second you are in combat, Azure Strike, Living Flame, and Disintegrate deal 1% increased damage, up to 15%.",
           "choices": null
         },
@@ -1893,7 +1893,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Bombardments",
-          "icon": "inv_ability_scalecommanderevoker_bombardments",
+          "icon": "5927646",
           "description": "Mass Disintegrate marks your primary target for destruction for the next 6 sec.\r\n\r\nYou and your allies have a chance to trigger a Bombardment when attacking marked targets, dealing 1,805 Volcanic damage split amongst all nearby enemies.",
           "choices": null
         },
@@ -1907,7 +1907,6 @@
             94928,
             94933,
             94943,
-            109793,
             109793
           ],
           "spentRequired": 0,
@@ -1915,8 +1914,8 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Maneuverability",
-          "icon": "ability_evoker_deepbreath",
-          "description": "Deep Breath can now be steered in your desired direction.\r\n\r\nIn addition, Deep Breath burns targets for 2,554 Volcanic damage over 12 sec.\r\n\r\nThe duration of this effect is extended when Deep Breath is cast multiple times.",
+          "icon": "4622450",
+          "description": "Deep Breath can now be steered in your desired direction.\r\n\r\nIn addition, Deep Breath burns targets for 3,576 Volcanic damage over 12 sec.\r\n\r\nThe duration of this effect is extended when Deep Breath is cast multiple times.",
           "choices": null
         },
         {
@@ -1939,14 +1938,14 @@
             {
               "spellId": 441253,
               "name": "Nimble Flyer",
-              "icon": "ability_evoker_hover",
+              "icon": "4622463",
               "description": "While Hovering, damage taken from area of effect attacks is reduced by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 441257,
               "name": "Slipstream",
-              "icon": "ability_dragonriding_barrelroll01",
+              "icon": "4640477",
               "description": "Deep Breath resets a charge of Hover.",
               "maxRanks": 1
             }
@@ -1966,7 +1965,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Onslaught",
-          "icon": "spell_fire_soulburn",
+          "icon": "135827",
           "description": "Entering combat grants a charge of Burnout, causing your next Living Flame to cast instantly.",
           "choices": null
         },
@@ -1984,7 +1983,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Might of the Black Dragonflight",
-          "icon": "ability_evoker_blackattunementalt",
+          "icon": "5199620",
           "description": "Black spells deal 20% increased damage.",
           "choices": null
         },
@@ -2002,8 +2001,8 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Wingleader",
-          "icon": "ability_racial_soar",
-          "description": "Bombardments reduce the cooldown of Deep Breath by 0.5 sec for each target struck, up to 1.5 sec.",
+          "icon": "4622485",
+          "description": "Mass Disintegrate reduces the remaining cooldown of Deep Breath by 1.0 sec for each target struck.",
           "choices": null
         },
         {
@@ -2018,7 +2017,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Mass Eruption",
-          "icon": "ability_evoker_eruption",
+          "icon": "5199630",
           "description": "Empower spells cause your next Eruption to strike up to 3 targets. When striking less than 3 targets, Eruption damage is increased by 10% for each missing target.",
           "choices": null
         },
@@ -2029,7 +2028,6 @@
           "posX": 48,
           "posY": 5,
           "connections": [
-            109794,
             109794
           ],
           "spentRequired": 0,
@@ -2037,7 +2035,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Refined Essence",
-          "icon": "ability_evoker_essenceburststacks",
+          "icon": "4630443",
           "description": "Essence abilities deal 15% additional damage.",
           "choices": null
         },
@@ -2048,7 +2046,6 @@
           "posX": 48,
           "posY": 4,
           "connections": [
-            109795,
             109795
           ],
           "spentRequired": 0,
@@ -2056,7 +2053,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Concentrated Power",
-          "icon": "inv_10_dungeonjewelry_dragon_trinket_1arcanemagical_blue",
+          "icon": "4638528",
           "description": "Mass Disintegrate strikes 1 additional target.",
           "choices": null
         },
@@ -2074,8 +2071,8 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Command Squadron",
-          "icon": "ability_dragonriding_dynamicflight01",
-          "description": "While flying during Deep Breath you are assisted by a squadron of Dracthyr who assault enemies with Pyre, dealing 688 Fire damage to nearby enemies up to 8 times.",
+          "icon": "5142725",
+          "description": "While flying during Deep Breath you are assisted by a squadron of Dracthyr who assault enemies with Pyre, dealing 951 Fire damage to nearby enemies up to 8 times.",
           "choices": null
         },
         {
@@ -2092,7 +2089,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Reverberations",
-          "icon": "ability_evoker_giftoftheaspects",
+          "icon": "4622462",
           "description": "Upheaval deals 50% additional damage over 8 sec.",
           "choices": null
         },
@@ -2103,17 +2100,17 @@
           "posX": 20,
           "posY": 12,
           "connections": [
+            109508,
             94930,
             94932,
-            94942,
-            109508
+            94942
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Afterimage",
-          "icon": "ability_evoker_livingflame",
+          "icon": "4622464",
           "description": "Empower spells send up to 3 Chrono Flames to your targets.",
           "choices": null
         },
@@ -2131,7 +2128,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Instability Matrix",
-          "icon": "ability_dragonriding_bronzerewind01",
+          "icon": "4640479",
           "description": "Each time you cast an empower spell, unstable time magic reduces its cooldown by up to 6 sec.",
           "choices": null
         },
@@ -2155,14 +2152,14 @@
             {
               "spellId": 431874,
               "name": "Double-time",
-              "icon": "spell_holy_borrowedtime",
-              "description": "Ebon Might and Prescience gain a chance equal to your critical strike chance to grant 50% additional stats.",
+              "icon": "237538",
+              "description": "Ebon Might and Prescience gain a chance equal to your critical strike chance to grant 50% additional stats. For Ebon Might, this increase lasts 15.0 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 431984,
               "name": "Time Convergence",
-              "icon": "ability_evoker_plotthefuture",
+              "icon": "5199638",
               "description": "Non-defensive abilities with a 45 second or longer cooldown grant 5% Intellect for 15 sec.\r\n\r\nEssence spells extend the duration by 1 sec.",
               "maxRanks": 1
             }
@@ -2188,14 +2185,14 @@
             {
               "spellId": 431873,
               "name": "Temporality",
-              "icon": "ability_evoker_return",
+              "icon": "4622472",
               "description": "Warp reduces damage taken by 20%, starting high and reducing over 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 432008,
               "name": "Motes of Acceleration",
-              "icon": "item_timemote_icon",
+              "icon": "5228749",
               "description": "Warp leaves a trail of Motes of Acceleration. Allies who come in contact with a mote gain 20% increased movement speed for 30 sec.",
               "maxRanks": 1
             }
@@ -2215,7 +2212,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Golden Opportunity",
-          "icon": "achievement_faction_goldenlotus",
+          "icon": "643910",
           "description": "Prescience lasts 15% longer.",
           "choices": null
         },
@@ -2233,7 +2230,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Nozdormu Adept",
-          "icon": "ability_evoker_aspectsfavorbronze",
+          "icon": "5199617",
           "description": "Prescience cooldown reduced by 2 sec and it grants 1% additional critical strike chance.",
           "choices": null
         },
@@ -2251,8 +2248,8 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Warp",
-          "icon": "ability_evoker_spatialparadox",
-          "description": "Hover now causes you to briefly warp out of existence and appear at your destination. Hover&#39;s cooldown is also reduced by 5 sec.\r\n\r\nHover continues to allow Evoker spells to be cast while moving.",
+          "icon": "5199644",
+          "description": "Hover now causes you to briefly warp out of existence and appear at your destination. Hover's cooldown is also reduced by 5 sec.\r\n\r\nHover continues to allow Evoker spells to be cast while moving.",
           "choices": null
         },
         {
@@ -2269,7 +2266,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Primacy",
-          "icon": "inv_misc_pocketwatch_01",
+          "icon": "134376",
           "description": "For each damage over time effect from Upheaval, gain 3% haste, up to 9%.",
           "choices": null
         },
@@ -2285,7 +2282,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Chrono Flame",
-          "icon": "inv_ability_chronowardenevoker_chronoflame",
+          "icon": "5927617",
           "description": "Living Flame is enhanced with Bronze magic, repeating 25% of the damage or healing you dealt to the target in the last 5 sec as Arcane, up to 950.",
           "choices": null
         },
@@ -2303,7 +2300,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Temporal Burst",
-          "icon": "ability_evoker_essenceburst5",
+          "icon": "4630441",
           "description": "Tip the Scales overloads you with temporal energy, increasing your haste, movement speed, and cooldown recovery rate by 30%, decreasing over 30 sec.",
           "choices": null
         },
@@ -2321,8 +2318,8 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Overclock",
-          "icon": "spell_holy_borrowedtime",
-          "description": "Chrono Flames&#39; maximum damage or healing is increased by 40%, up to 1,330 Arcane.",
+          "icon": "237538",
+          "description": "Chrono Flames' maximum damage or healing is increased by 40%, up to 1,330 Arcane.",
           "choices": null
         },
         {
@@ -2339,8 +2336,8 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Chronal Dynamo",
-          "icon": "inv_10_dungeonjewelry_dragon_trinket_1arcanemagical_red",
-          "description": "Living Flame&#39;s cast time is reduced by 0.2 sec, and it deals 50% increased damage or healing when it is a non-instant cast.",
+          "icon": "4638531",
+          "description": "Living Flame's cast time is reduced by 0.2 sec, and it deals 50% increased damage or healing when it is a non-instant cast.",
           "choices": null
         },
         {
@@ -2357,8 +2354,8 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Chronoboon",
-          "icon": "ability_evoker_tipthescales",
-          "description": "Tip the Scales&#39; cooldown is reduced by 30 sec.",
+          "icon": "4622480",
+          "description": "Tip the Scales' cooldown is reduced by 30 sec.",
           "choices": null
         }
       ]
@@ -2424,7 +2421,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Landslide",
-          "icon": "ability_earthen_pillar",
+          "icon": "1016245",
           "description": "Conjure a path of shifting stone towards the target location, rooting enemies for 15 sec. Damage may cancel the effect.",
           "choices": null
         },
@@ -2439,7 +2436,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Obsidian Scales",
-          "icon": "inv_artifact_dragonscales",
+          "icon": "1394891",
           "description": "Reinforce your scales, reducing damage taken by 30% . Lasts 12 sec.",
           "choices": null
         },
@@ -2454,7 +2451,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Expunge",
-          "icon": "ability_evoker_fontofmagic_green",
+          "icon": "4630445",
           "description": "Expunge toxins affecting an ally, removing all Poison effects.",
           "choices": null
         },
@@ -2471,7 +2468,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Natural Convergence",
-          "icon": "spell_frost_frostblast",
+          "icon": "135844",
           "description": "Disintegrate channels 20% faster.",
           "choices": null
         },
@@ -2488,8 +2485,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Heavy Wingbeats",
-          "icon": "ability_racial_wingbuffet",
-          "description": "Wing Buffet&#39;s cooldown is reduced by 2 min.",
+          "icon": "4622488",
+          "description": "Wing Buffet's cooldown is reduced by 2 min.",
           "choices": null
         },
         {
@@ -2505,8 +2502,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Verdant Embrace",
-          "icon": "ability_evoker_rescue",
-          "description": "Fly to an ally and heal them for 4,020, or heal yourself for the same amount.",
+          "icon": "4622471",
+          "description": "Fly to an ally and heal them for 5,226, or heal yourself for the same amount.",
           "choices": null
         },
         {
@@ -2522,8 +2519,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Forger of Mountains",
-          "icon": "ability_earthen_pillar",
-          "description": "Landslide&#39;s cooldown is reduced by 30 sec, and it can withstand 200% more damage before breaking.",
+          "icon": "1016245",
+          "description": "Landslide's cooldown is reduced by 30 sec, and it can withstand 200% more damage before breaking.",
           "choices": null
         },
         {
@@ -2540,7 +2537,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Innate Magic",
-          "icon": "ability_evoker_innatemagic4",
+          "icon": "4630457",
           "description": "Essence regenerates 5% faster.",
           "choices": null
         },
@@ -2557,7 +2554,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Obsidian Bulwark",
-          "icon": "inv_shield_1h_revenantfire_d_01",
+          "icon": "4237659",
           "description": "Obsidian Scales has an additional charge.",
           "choices": null
         },
@@ -2575,7 +2572,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Enkindled",
-          "icon": "ability_evoker_livingflame",
+          "icon": "4622464",
           "description": "Living Flame deals 3% more damage and healing.",
           "choices": null
         },
@@ -2592,7 +2589,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Scarlet Adaptation",
-          "icon": "inv_bijou_red",
+          "icon": "132532",
           "description": "Store 20% of your effective healing, up to 857. Your next damaging Living Flame consumes all stored healing to increase its damage dealt.",
           "choices": null
         },
@@ -2610,7 +2607,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inner Radiance",
-          "icon": "spell_holy_spellwarding",
+          "icon": "135976",
           "description": "Your Living Flame and Emerald Blossom are 30% more effective on yourself.",
           "choices": null
         },
@@ -2627,7 +2624,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Recall",
-          "icon": "ability_evoker_recall",
+          "icon": "4622470",
           "description": "You may reactivate Deep Breath within 3 sec after landing to travel back in time to your takeoff location.",
           "choices": null
         },
@@ -2645,8 +2642,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Clobbering Sweep",
-          "icon": "ability_racial_tailswipe",
-          "description": "Tail Swipe&#39;s cooldown is reduced by 2 min.",
+          "icon": "4622486",
+          "description": "Tail Swipe's cooldown is reduced by 2 min.",
           "choices": null
         },
         {
@@ -2662,7 +2659,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tailwind",
-          "icon": "ability_skyreach_wind",
+          "icon": "1029595",
           "description": "Hover increases your movement speed by 70% for the first 4 sec.",
           "choices": null
         },
@@ -2680,8 +2677,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cauterizing Flame",
-          "icon": "ability_evoker_fontofmagic_red",
-          "description": "Cauterize an ally&#39;s wounds, removing all Bleed, Poison, Curse, and Disease effects. Heals for 1,330 upon removing any effect.",
+          "icon": "4630446",
+          "description": "Cauterize an ally's wounds, removing all Bleed, Poison, Curse, and Disease effects. Heals for 1,330 upon removing any effect.",
           "choices": null
         },
         {
@@ -2697,7 +2694,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ancient Flame",
-          "icon": "inv_elemental_mote_fire01",
+          "icon": "132839",
           "description": "Casting Emerald Blossom or Verdant Embrace reduces the cast time of your next Living Flame by 40%.",
           "choices": null
         },
@@ -2714,7 +2711,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Instinctive Arcana",
-          "icon": "spell_arcane_studentofmagic",
+          "icon": "135754",
           "description": "Your Magic damage done is increased by 2%.",
           "choices": null
         },
@@ -2729,7 +2726,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tip the Scales",
-          "icon": "ability_evoker_tipthescales",
+          "icon": "4622480",
           "description": "Compress time to make your next empowered spell cast instantly at its maximum empower level.",
           "choices": null
         },
@@ -2746,7 +2743,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Attuned to the Dream",
-          "icon": "ability_rogue_imrovedrecuperate",
+          "icon": "460692",
           "description": "Your healing done and healing received are increased by 2%.",
           "choices": null
         },
@@ -2763,7 +2760,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sleep Walk",
-          "icon": "ability_xavius_dreamsimulacrum",
+          "icon": "1396974",
           "description": "Disorient an enemy for 20 sec, causing them to sleep walk towards you. Damage has a chance to awaken them.",
           "choices": null
         },
@@ -2780,7 +2777,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Protracted Talons",
-          "icon": "ability_evoker_azurestrike",
+          "icon": "4622447",
           "description": "Azure Strike damages 1 additional enemy.",
           "choices": null
         },
@@ -2798,7 +2795,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Inherent Resistance",
-          "icon": "inv_misc_rubysanctum1",
+          "icon": "377270",
           "description": "Magic damage taken reduced by 2%.",
           "choices": null
         },
@@ -2815,7 +2812,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Draconic Legacy",
-          "icon": "inv_helm_mail_dracthyrquest_b_02",
+          "icon": "4558458",
           "description": "Your Stamina is increased by 6%.",
           "choices": null
         },
@@ -2833,7 +2830,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Extended Flight",
-          "icon": "ability_evoker_hover",
+          "icon": "4622463",
           "description": "Hover lasts 2 sec longer.",
           "choices": null
         },
@@ -2850,7 +2847,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bountiful Bloom",
-          "icon": "ability_evoker_emeraldblossom",
+          "icon": "4622457",
           "description": "Emerald Blossom heals 2 additional allies.",
           "choices": null
         },
@@ -2867,7 +2864,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Regenerative Magic",
-          "icon": "spell_frost_manarecharge",
+          "icon": "135859",
           "description": "Your Leech is increased by 2%.",
           "choices": null
         },
@@ -2878,15 +2875,15 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            93355,
-            110064
+            110064,
+            93355
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blast Furnace",
-          "icon": "ability_evoker_firebreath",
-          "description": "Fire Breath&#39;s damage over time lasts 4 sec longer.",
+          "icon": "4622458",
+          "description": "Fire Breath's damage over time lasts 4 sec longer.",
           "choices": null
         },
         {
@@ -2902,7 +2899,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Exuberance",
-          "icon": "ability_evoker_hover2",
+          "icon": "4630448",
           "description": "While above 75% health, your movement speed is increased by 10%.",
           "choices": null
         },
@@ -2919,7 +2916,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Renewing Blaze",
-          "icon": "ability_evoker_masterylifebinder_red",
+          "icon": "4630463",
           "description": "Obsidian Scales surrounds you with a Renewing Blaze, causing 100% of the damage it prevented to be healed back over 8 sec.",
           "choices": null
         },
@@ -2936,7 +2933,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Walloping Blow",
-          "icon": "inv_misc_monsterscales_06",
+          "icon": "134308",
           "description": "Wing Buffet and Tail Swipe knock enemies further and daze them, reducing movement speed by 70% for 4 sec. ",
           "choices": null
         },
@@ -2954,8 +2951,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Panacea",
-          "icon": "ability_druid_protectionofthegrove",
-          "description": "Emerald Blossom and Verdant Embrace instantly heal you for 760 when cast.",
+          "icon": "4067364",
+          "description": "Emerald Blossom and Verdant Embrace instantly heal you for 950 when cast.",
           "choices": null
         },
         {
@@ -2971,7 +2968,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stretch Time",
-          "icon": "ability_evoker_timedilation",
+          "icon": "4622478",
           "description": "While flying during Deep Breath, 100% of damage you would take is instead dealt over 10 sec.",
           "choices": null
         },
@@ -2988,8 +2985,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unravel",
-          "icon": "ability_evoker_unravel",
-          "description": "Direct damage from Fire Breath consumes absorb shields from enemies, dealing 4,599 additional Spellfrost damage to them.",
+          "icon": "4630499",
+          "description": "Direct damage from Fire Breath consumes absorb shields from enemies, dealing 4,546 additional Spellfrost damage to them.",
           "choices": null
         },
         {
@@ -3007,7 +3004,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Oppressing Roar",
-          "icon": "ability_evoker_oppressingroar",
+          "icon": "4622466",
           "description": "Let out a bone-shaking roar at enemies in a cone in front of you, increasing the duration of crowd controls that affect them by 50% in the next 10 sec.",
           "choices": null
         },
@@ -3024,7 +3021,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Foci of Life",
-          "icon": "spell_fire_incinerate",
+          "icon": "135818",
           "description": "Renewing Blaze restores you more quickly, causing damage you take to be healed back over 4 sec.",
           "choices": null
         },
@@ -3043,7 +3040,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rescue",
-          "icon": "ability_evoker_flywithme",
+          "icon": "4622460",
           "description": "Swoop to an ally and fly with them to the target location. Clears movement impairing effects from you and your ally.",
           "choices": null
         },
@@ -3060,7 +3057,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Lush Growth",
-          "icon": "inv_staff_2h_bloodelf_c_01",
+          "icon": "801010",
           "description": "Green spells restore 5% more health.",
           "choices": null
         },
@@ -3077,7 +3074,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Source of Magic",
-          "icon": "ability_evoker_blue_01",
+          "icon": "4630412",
           "description": "Redirect your excess magic to a friendly healer for 1 hour. When you cast an empowered spell, you restore 0.25% of their maximum mana per empower level. Limit 1.",
           "choices": null
         },
@@ -3094,7 +3091,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Strike from Above",
-          "icon": "ability_racial_glide",
+          "icon": "4622484",
           "description": "Glide speed and height increased by 10%.",
           "choices": null
         },
@@ -3106,14 +3103,14 @@
           "posY": 12,
           "connections": [
             93307,
-            93298,
-            93308
+            93308,
+            93298
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leaping Flames",
-          "icon": "ability_evoker_pupilofalexstraza",
+          "icon": "5199640",
           "description": "Fire Breath causes your next Living Flame to strike 1 additional target per empower level.",
           "choices": null
         },
@@ -3130,7 +3127,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overawe",
-          "icon": "ability_evoker_oppressingroar2",
+          "icon": "4622467",
           "description": "Oppressing Roar removes 1 Enrage effect from each enemy, and its cooldown is reduced by 30 sec.",
           "choices": null
         },
@@ -3149,7 +3146,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aerial Mastery",
-          "icon": "ability_evoker_aerialmastery",
+          "icon": "4622446",
           "description": "Hover gains 1 additional charge.",
           "choices": null
         },
@@ -3166,7 +3163,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twin Guardian",
-          "icon": "inv_misc_volatileair",
+          "icon": "463565",
           "description": "Rescue increases movement speed by 100% and allows spells to be cast while moving for 3 sec.",
           "choices": null
         },
@@ -3183,8 +3180,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Potent Mana",
-          "icon": "spell_magic_managain",
-          "description": "Source of Magic increases the target&#39;s healing and damage done by 3%.",
+          "icon": "237551",
+          "description": "Source of Magic increases the target's healing and damage done by 3%.",
           "choices": null
         },
         {
@@ -3201,7 +3198,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Terror of the Skies",
-          "icon": "ability_evoker_terroroftheskies",
+          "icon": "4622477",
           "description": "Deep Breath stuns enemies for 3 sec.",
           "choices": null
         },
@@ -3224,14 +3221,14 @@
             {
               "spellId": 374968,
               "name": "Time Spiral",
-              "icon": "ability_evoker_timespiral",
+              "icon": "4622479",
               "description": "Bend time, allowing you and your allies within 40 yds to cast their major movement ability once in the next 10 sec, even if it is on cooldown.",
               "maxRanks": 1
             },
             {
               "spellId": 406732,
               "name": "Spatial Paradox",
-              "icon": "ability_evoker_stretchtime",
+              "icon": "5199645",
               "description": "Evoke a paradox for you and a friendly healer, allowing casting while moving and increasing the range of most spells by 100% for 10 sec.\r\n\r\nAffects the nearest healer within 60 yds, if you do not have a healer targeted.",
               "maxRanks": 1
             }
@@ -3252,7 +3249,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Zephyr",
-          "icon": "ability_evoker_hoverblack",
+          "icon": "4630449",
           "description": "Conjure an updraft to lift you and your 4 nearest allies within 20 yds into the air, reducing damage taken from area-of-effect attacks by 20% and increasing movement speed by 30% for 8 sec.",
           "choices": null
         },
@@ -3267,8 +3264,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pyre",
-          "icon": "ability_evoker_pyre",
-          "description": "Lob a ball of flame, dealing 1,511 Fire damage to your target and all enemies within 8 yds.",
+          "icon": "4622468",
+          "description": "Lob a ball of flame, dealing 1,687 Fire damage to your target and all enemies within 8 yds.",
           "choices": null
         },
         {
@@ -3284,7 +3281,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ruby Essence Burst",
-          "icon": "ability_evoker_essenceburst4",
+          "icon": "4630440",
           "description": "Your Living Flame has a 20% chance to cause an Essence Burst, making your next Disintegrate or Pyre cost no Essence.",
           "choices": null
         },
@@ -3301,7 +3298,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Azure Essence Burst",
-          "icon": "ability_evoker_essenceburst2",
+          "icon": "4630438",
           "description": "Azure Strike has a 15% chance to cause an Essence Burst, making your next Disintegrate or Pyre cost no Essence.",
           "choices": null
         },
@@ -3318,8 +3315,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lay Waste",
-          "icon": "ability_evoker_deepbreath",
-          "description": "Deep Breath&#39;s damage is increased by 20%.",
+          "icon": "4622450",
+          "description": "Deep Breath's damage is increased by 20%.",
           "choices": null
         },
         {
@@ -3336,8 +3333,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Quell",
-          "icon": "ability_evoker_quell",
-          "description": "Interrupt an enemy&#39;s spellcasting and prevent any spell from that school of magic from being cast for 6 sec.",
+          "icon": "4622469",
+          "description": "Interrupt an enemy's spellcasting and prevent any spell from that school of magic from being cast for 6 sec.",
           "choices": null
         },
         {
@@ -3353,8 +3350,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Eternity Surge",
-          "icon": "ability_evoker_eternitysurge",
-          "description": "Focus your energies to release a salvo of pure magic, dealing 4,084 Spellfrost damage to an enemy. Damages additional enemies within 25 yds when empowered.\r\n\r\nI:   Damages 1 enemy.\r\n\r\nII:  Damages 2 enemies.\r\n\r\nIII: Damages 3 enemies.",
+          "icon": "4630444",
+          "description": "Focus your energies to release a salvo of pure magic, dealing 4,097 Spellfrost damage to an enemy. Damages additional enemies within 25 yds when empowered.\r\n\r\nI:   Damages 1 enemy.\r\n\r\nII:  Damages 2 enemies.\r\n\r\nIII: Damages 3 enemies.",
           "choices": null
         },
         {
@@ -3370,7 +3367,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Volatility",
-          "icon": "spell_fire_ragnaros_lavabolt",
+          "icon": "525023",
           "description": "Pyre has a 15% chance to flare up and explode again on a nearby target.",
           "choices": null
         },
@@ -3387,7 +3384,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power Nexus",
-          "icon": "ability_evoker_powernexus",
+          "icon": "4630464",
           "description": "Increases your maximum Essence to 6.",
           "choices": null
         },
@@ -3404,8 +3401,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dragonrage",
-          "icon": "ability_evoker_dragonrage",
-          "description": "Erupt with draconic fury and exhale Pyres at 3 enemies within 25 yds.\r\n\r\nFor 18 sec, Essence Burst&#39;s chance to occur is increased to 100%.",
+          "icon": "4622452",
+          "description": "Erupt with draconic fury and exhale Pyres at 3 enemies within 25 yds.\r\n\r\nFor 18 sec, Essence Burst's chance to occur is increased to 100%.",
           "choices": null
         },
         {
@@ -3421,8 +3418,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Azure Sweep",
-          "icon": "inv_10_skinning_dragonscales_blue",
-          "description": "Eternity Surge upgrades your next Azure Strike to Azure Sweep, damaging all nearby enemies and dealing 75% additional damage.\r\n\r\n Azure Sweep\r\nConcentrate azure energy into your tail and sweep to release pure magic upon an enemy and nearby targets for 615 Spellfrost damage. Damage reduced beyond 8 targets.",
+          "icon": "4559237",
+          "description": "Eternity Surge upgrades your next Azure Strike to Azure Sweep, damaging all nearby enemies and dealing 75% additional damage.\r\n\r\n Azure Sweep\r\nConcentrate azure energy into your tail and sweep to release pure magic upon an enemy and nearby targets for 621 Spellfrost damage. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -3438,7 +3435,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Arcane Intensity",
-          "icon": "ability_evoker_disintegrate",
+          "icon": "4622451",
           "description": "Disintegrate and Azure Strike deal 8% more damage.",
           "choices": null
         },
@@ -3456,8 +3453,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ruby Embers",
-          "icon": "inv_tradeskillitem_lessersorcerersfire",
-          "description": "Living Flame deals 115 damage over 12 sec to enemies, or restores 221 health to allies over 12 sec. Stacks 3 times.",
+          "icon": "1020348",
+          "description": "Living Flame deals 114 damage over 12 sec to enemies, or restores 221 health to allies over 12 sec. Stacks 3 times.",
           "choices": null
         },
         {
@@ -3473,7 +3470,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Animosity",
-          "icon": "spell_nature_shamanrage",
+          "icon": "136088",
           "description": "Casting an empower spell extends the duration of Dragonrage by 5 sec.\r\n\r\nEach time this occurs during Dragonrage, its effectiveness is reduced by 25%.",
           "choices": null
         },
@@ -3491,7 +3488,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Essence Attunement",
-          "icon": "ability_evoker_essenceburststacks",
+          "icon": "4630443",
           "description": "Essence Burst stacks 2 times.",
           "choices": null
         },
@@ -3508,7 +3505,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Engulfing Blaze",
-          "icon": "inv_inscription_pigment_ruby",
+          "icon": "237156",
           "description": "Living Flame deals 10% increased damage and healing and its cast time is reduced by 0.3 sec.",
           "choices": null
         },
@@ -3526,7 +3523,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Heat Wave",
-          "icon": "spell_fire_moltenblood",
+          "icon": "135822",
           "description": "Fire Breath deals 15% more damage.",
           "choices": null
         },
@@ -3544,7 +3541,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Honed Aggression",
-          "icon": "spell_fire_blueimmolation",
+          "icon": "135785",
           "description": "The critical strike chance of your spells is increased by 2%.",
           "choices": null
         },
@@ -3561,7 +3558,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Eternity's Span",
-          "icon": "spell_arcane_arcanetorrent",
+          "icon": "135734",
           "description": "Eternity Surge hits twice as many targets.",
           "choices": null
         },
@@ -3584,15 +3581,15 @@
             {
               "spellId": 411165,
               "name": "Eye of Infinity",
-              "icon": "ability_evoker_dragonrage2_blue",
+              "icon": "4630418",
               "description": "Eternity Surge deals 15% increased damage to your primary target.",
               "maxRanks": 1
             },
             {
               "spellId": 411164,
               "name": "Event Horizon",
-              "icon": "ability_priest_cascade_shadow",
-              "description": "Eternity Surge&#39;s cooldown is reduced by 3 sec.",
+              "icon": "631503",
+              "description": "Eternity Surge's cooldown is reduced by 3 sec.",
               "maxRanks": 1
             }
           ]
@@ -3611,7 +3608,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Catalyze",
-          "icon": "spell_fire_masterofelements",
+          "icon": "135820",
           "description": "While channeling Disintegrate your Fire Breath on the target deals damage 100% more often.",
           "choices": null
         },
@@ -3629,8 +3626,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tyranny",
-          "icon": "ability_evoker_dragonrage2",
-          "description": "During Deep Breath and Dragonrage you gain the maximum benefit of Mastery: Giantkiller regardless of targets&#39; health.",
+          "icon": "4622453",
+          "description": "During Deep Breath and Dragonrage you gain the maximum benefit of Mastery: Giantkiller regardless of targets' health.\r\n\r\nUnbound Flame always gains the maximum benefit.",
           "choices": null
         },
         {
@@ -3647,7 +3644,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Charged Blast",
-          "icon": "spell_arcane_arcanepotency",
+          "icon": "135732",
           "description": "Your Blue damage increases the damage of your next Pyre by 2%, stacking 20 times.",
           "choices": null
         },
@@ -3664,8 +3661,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shattering Stars",
-          "icon": "ability_evoker_chargedblast",
-          "description": "Eternity Surge additionally releases a Shattering Star at your target that deals 50% more damage per empower level reached.\r\n\r\n Shattering Star\r\nExhale a bolt of concentrated power from your mouth at the target for 669 Spellfrost damage.",
+          "icon": "4622449",
+          "description": "Eternity Surge additionally releases a Shattering Star at your target that deals 50% more damage per empower level reached.\r\n\r\n Shattering Star\r\nExhale a bolt of concentrated power from your mouth at the target for 666 Spellfrost damage.",
           "choices": null
         },
         {
@@ -3681,8 +3678,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Feed the Flames",
-          "icon": "mace_1h_blacksmithing_d_04_icon",
-          "description": "After casting 6 Pyres, your next Pyre will explode into a Firestorm.\r\n\r\n Firestorm\r\nAn explosion bombards the target area with white-hot embers, dealing 5,470 Fire damage to enemies over 10 sec.",
+          "icon": "519892",
+          "description": "After casting 6 Pyres, your next Pyre will explode into a Firestorm.\r\n\r\n Firestorm\r\nAn explosion bombards the target area with white-hot embers, dealing 5,511 Fire damage to enemies over 10 sec.",
           "choices": null
         },
         {
@@ -3699,7 +3696,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Burnout",
-          "icon": "spell_fire_soulburn",
+          "icon": "135827",
           "description": "Fire Breath damage has 16% chance to cause your next Living Flame to be instant cast, stacking 2 times.",
           "choices": null
         },
@@ -3716,8 +3713,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Onyx Legacy",
-          "icon": "inv_misc_head_dragon_black",
-          "description": "Deep Breath&#39;s cooldown is reduced by 1 min.",
+          "icon": "134154",
+          "description": "Deep Breath's cooldown is reduced by 1 min.",
           "choices": null
         },
         {
@@ -3734,7 +3731,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spellweaver's Dominance",
-          "icon": "spell_shaman_shockinglava",
+          "icon": "1020305",
           "description": "Your damaging critical strikes deal 230% damage instead of the usual 200%.",
           "choices": null
         },
@@ -3751,7 +3748,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Star Salvo",
-          "icon": "inv12_ability_mage_arcanesalvo",
+          "icon": "7439202",
           "description": "Increases Shattering Star damage by 35%.\r\n\r\nShattering Stars are exhaled at all of your Eternity Surge targets.",
           "choices": null
         },
@@ -3769,7 +3766,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Imminent Destruction",
-          "icon": "spell_burningbladeshaman_blazing_radiance",
+          "icon": "1032475",
           "description": "Deep Breath reduces the Essence costs of your next 4 Disintegrates and Pyres by 1. Stacks up to 8 times.",
           "choices": null
         },
@@ -3786,8 +3783,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Font of Magic",
-          "icon": "ability_evoker_fontofmagic",
-          "description": "Your empower spells&#39; maximum level is increased by 1, and they reach maximum empower level 20% faster.",
+          "icon": "4622461",
+          "description": "Your empower spells' maximum level is increased by 1, and they reach maximum empower level 20% faster.",
           "choices": null
         },
         {
@@ -3804,7 +3801,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Titanic Wrath",
-          "icon": "spell_fireresistancetotem_01",
+          "icon": "135832",
           "description": "Essence Burst increases the damage of affected spells by 15.0%.",
           "choices": null
         },
@@ -3821,7 +3818,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Azure Celerity",
-          "icon": "ability_evoker_masterylifebinder_blue",
+          "icon": "4630461",
           "description": "Disintegrate deals damage 25% more often, but deals 10% less damage.",
           "choices": null
         },
@@ -3839,7 +3836,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power Swell",
-          "icon": "ability_evoker_powernexus2",
+          "icon": "4630465",
           "description": "Casting an empower spell increases your Essence regeneration rate by 100% for 4 sec.",
           "choices": null
         },
@@ -3856,7 +3853,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Strafing Run",
-          "icon": "ability_evoker_blackattunementalt",
+          "icon": "5199620",
           "description": "Deep Breath deals 20% increased damage and can be cast again within 18 sec of being used.\r\n\r\nRecall will be available after the second cast if talented.",
           "choices": null
         },
@@ -3873,8 +3870,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Scorching Embers",
-          "icon": "spell_fire_burnout",
-          "description": "Enemies affected by Fire Breath&#39;s damage over time effect take 25% increased damage from your Red spells.",
+          "icon": "135789",
+          "description": "Enemies affected by Fire Breath's damage over time effect take 25% increased damage from your Red spells.",
           "choices": null
         },
         {
@@ -3890,7 +3887,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Causality",
-          "icon": "spell_azerite_essence_16",
+          "icon": "3015741",
           "description": "Disintegrate reduces the remaining cooldown of your empower spells by 0.50 sec each time it deals damage.\r\n\r\nPyre reduces the remaining cooldown of your empower spells by 0.40 sec per enemy struck, up to 2.0 sec.",
           "choices": null
         },
@@ -3907,7 +3904,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Scintillation",
-          "icon": "spell_arcane_arcane03",
+          "icon": "135730",
           "description": "Disintegrate has a 15% chance each time it deals damage to launch a level 1 Eternity Surge at 40% power.",
           "choices": null
         },
@@ -3924,7 +3921,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Iridescence",
-          "icon": "ability_evoker_powerswell",
+          "icon": "4630466",
           "description": "Casting an empower spell increases the damage of your next 2 spells of the same color by 20% within 10 sec.",
           "choices": null
         },
@@ -3939,7 +3936,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Rising Fury",
-          "icon": "inv12_apextalent_evoker_risingfury",
+          "icon": "7636530",
           "description": null,
           "levels": [
             81,
@@ -3959,7 +3956,7 @@
             },
             {
               "spellId": 1271788,
-              "description": "When Dragonrage ends, gain Risen Fury for 4 sec for each stack of Rising Fury.\r\n\r\nRisen Fury grants the damage and haste bonuses accumulated from Rising Fury and generates Essence Burst every 4 sec.",
+              "description": "When Dragonrage ends, Rising Fury persists for 4 sec per stack, and Dragonrage becomes Unbound Flame. Unbound Flame may be cast 4 times before Dragonrage finishes its cooldown.\r\n\r\n Unbound Flame\r\nExhale destructive flame, critically striking for 5,946 Fire damage to your target and nearby enemies, reduced beyond 5 targets.\r\n\r\nCauses 1 Essence Burst.",
               "maxRanks": 1
             }
           ]
@@ -3978,7 +3975,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Melt Armor",
-          "icon": "inv_10_gearupgrade_drakesshadowflameenhancedcrest",
+          "icon": "5062614",
           "description": "Deep Breath causes enemies to take 20% increased damage from Bombardments and Essence abilities for 12 sec.\r\n\r\nThe duration of this effect is extended when Deep Breath is cast multiple times.",
           "choices": null
         },
@@ -4002,14 +3999,14 @@
             {
               "spellId": 441212,
               "name": "Extended Battle",
-              "icon": "ability_evoker_divideandconquer",
+              "icon": "5152257",
               "description": "Essence abilities extend Bombardments by 1 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 441219,
               "name": "Diverted Power",
-              "icon": "ability_evoker_powerswell",
+              "icon": "4630466",
               "description": "Bombardments have a chance to generate Essence Burst.",
               "maxRanks": 1
             }
@@ -4035,14 +4032,14 @@
             {
               "spellId": 441180,
               "name": "Hardened Scales",
-              "icon": "inv_10_skinning_scales_black",
+              "icon": "4631327",
               "description": "Obsidian Scales reduces damage taken by an additional 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 441181,
               "name": "Menacing Presence",
-              "icon": "ability_racial_wingbuffet",
+              "icon": "4622488",
               "description": "Knocking enemies up or backwards reduces their damage done to you by 15% for 8 sec.",
               "maxRanks": 1
             }
@@ -4062,7 +4059,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Unrelenting Siege",
-          "icon": "ability_siege_engineer_superheated",
+          "icon": "892834",
           "description": "For each second you are in combat, Azure Strike, Living Flame, and Disintegrate deal 1% increased damage, up to 15%.",
           "choices": null
         },
@@ -4080,7 +4077,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Bombardments",
-          "icon": "inv_ability_scalecommanderevoker_bombardments",
+          "icon": "5927646",
           "description": "Mass Disintegrate marks your primary target for destruction for the next 6 sec.\r\n\r\nYou and your allies have a chance to trigger a Bombardment when attacking marked targets, dealing 1,805 Volcanic damage split amongst all nearby enemies.",
           "choices": null
         },
@@ -4096,7 +4093,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Mass Disintegrate",
-          "icon": "inv_1205_ability_evoker_massdisintegration",
+          "icon": "7670589",
           "description": "Empower spells cause your next Disintegrate to strike up to 3 targets. When striking fewer than 3 targets, Disintegrate damage is increased by 10% for each missing target.",
           "choices": null
         },
@@ -4110,7 +4107,6 @@
             94928,
             94933,
             94943,
-            109793,
             109793
           ],
           "spentRequired": 0,
@@ -4118,8 +4114,8 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Maneuverability",
-          "icon": "ability_evoker_deepbreath",
-          "description": "Deep Breath can now be steered in your desired direction.\r\n\r\nIn addition, Deep Breath burns targets for 2,554 Volcanic damage over 12 sec.\r\n\r\nThe duration of this effect is extended when Deep Breath is cast multiple times.",
+          "icon": "4622450",
+          "description": "Deep Breath can now be steered in your desired direction.\r\n\r\nIn addition, Deep Breath burns targets for 3,576 Volcanic damage over 12 sec.\r\n\r\nThe duration of this effect is extended when Deep Breath is cast multiple times.",
           "choices": null
         },
         {
@@ -4142,14 +4138,14 @@
             {
               "spellId": 441253,
               "name": "Nimble Flyer",
-              "icon": "ability_evoker_hover",
+              "icon": "4622463",
               "description": "While Hovering, damage taken from area of effect attacks is reduced by 10%.",
               "maxRanks": 1
             },
             {
               "spellId": 441257,
               "name": "Slipstream",
-              "icon": "ability_dragonriding_barrelroll01",
+              "icon": "4640477",
               "description": "Deep Breath resets a charge of Hover.",
               "maxRanks": 1
             }
@@ -4169,7 +4165,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Onslaught",
-          "icon": "spell_fire_soulburn",
+          "icon": "135827",
           "description": "Entering combat grants a charge of Burnout, causing your next Living Flame to cast instantly.",
           "choices": null
         },
@@ -4187,7 +4183,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Might of the Black Dragonflight",
-          "icon": "ability_evoker_blackattunementalt",
+          "icon": "5199620",
           "description": "Black spells deal 20% increased damage.",
           "choices": null
         },
@@ -4205,8 +4201,8 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Wingleader",
-          "icon": "ability_racial_soar",
-          "description": "Bombardments reduce the cooldown of Deep Breath by 0.5 sec for each target struck, up to 1.5 sec.",
+          "icon": "4622485",
+          "description": "Mass Disintegrate reduces the remaining cooldown of Deep Breath by 1.0 sec for each target struck.",
           "choices": null
         },
         {
@@ -4216,7 +4212,6 @@
           "posX": 48,
           "posY": 5,
           "connections": [
-            109794,
             109794
           ],
           "spentRequired": 0,
@@ -4224,7 +4219,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Refined Essence",
-          "icon": "ability_evoker_essenceburststacks",
+          "icon": "4630443",
           "description": "Essence abilities deal 15% additional damage.",
           "choices": null
         },
@@ -4235,7 +4230,6 @@
           "posX": 48,
           "posY": 4,
           "connections": [
-            109795,
             109795
           ],
           "spentRequired": 0,
@@ -4243,7 +4237,7 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Concentrated Power",
-          "icon": "inv_10_dungeonjewelry_dragon_trinket_1arcanemagical_blue",
+          "icon": "4638528",
           "description": "Mass Disintegrate strikes 1 additional target.",
           "choices": null
         },
@@ -4261,8 +4255,8 @@
           "heroSubtree": "Scalecommander",
           "maxRanks": 1,
           "name": "Command Squadron",
-          "icon": "ability_dragonriding_dynamicflight01",
-          "description": "While flying during Deep Breath you are assisted by a squadron of Dracthyr who assault enemies with Pyre, dealing 685 Fire damage to nearby enemies up to 8 times.",
+          "icon": "5142725",
+          "description": "While flying during Deep Breath you are assisted by a squadron of Dracthyr who assault enemies with Pyre, dealing 945 Fire damage to nearby enemies up to 8 times.",
           "choices": null
         },
         {
@@ -4279,7 +4273,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Titanic Precision",
-          "icon": "inv_10_misc_titansspark_shadowflame",
+          "icon": "5088829",
           "description": "Living Flame and Azure Strike have 1 extra chance to trigger Essence Burst when they critically strike.",
           "choices": null
         },
@@ -4300,8 +4294,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Consume Flame",
-          "icon": "inv_shadowflames_wave",
-          "description": "Disintegrate damage consumes 1.0 sec of Fire Breath from enemies it damages, detonating it for 150% of the amount consumed.\r\n\r\nPyre damage consumes 4 sec of Fire Breath from enemies it damages, detonating it for 115% of the amount consumed.",
+          "icon": "4914680",
+          "description": "Disintegrate consumes 1.0 sec of Fire Breath from enemies it damages, detonating it for 150% of the amount consumed.\r\n\r\nPyre consumes 4 sec of Fire Breath from enemies it damages, detonating it for 115% of the amount consumed.",
           "choices": null
         },
         {
@@ -4318,8 +4312,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Fulminous Roar",
-          "icon": "ability_evoker_oppressingroar2",
-          "description": "Fire Breath deals its damage 20% more often.",
+          "icon": "4622467",
+          "description": "Fire Breath deals its damage 15% more often.",
           "choices": null
         },
         {
@@ -4342,14 +4336,14 @@
             {
               "spellId": 444322,
               "name": "Lifecinders",
-              "icon": "inv_misc_herb_cinderbloom_petal",
+              "icon": "960675",
               "description": "Obsidian Scales also applies to your target or 1 nearby injured ally at 50% value.",
               "maxRanks": 1
             },
             {
               "spellId": 445958,
               "name": "Draconic Instincts",
-              "icon": "inv_misc_scales_basilliskorange",
+              "icon": "1526594",
               "description": "Your wounds have a small chance to cauterize, healing you for 30% of damage taken. Occurs more often from attacks that deal high damage.",
               "maxRanks": 1
             }
@@ -4375,14 +4369,14 @@
             {
               "spellId": 444849,
               "name": "Trailblazer",
-              "icon": "ability_deathwing_fierygrip",
+              "icon": "538041",
               "description": "Hover and Deep Breath travel 40% faster, and Hover travels 40% further.",
               "maxRanks": 1
             },
             {
               "spellId": 445074,
               "name": "Shape of Flame",
-              "icon": "ability_mage_flamecannon",
+              "icon": "1387353",
               "description": "Tail Swipe and Wing Buffet scorch enemies and blind them with ash, causing their next attack within 4 sec to miss.",
               "maxRanks": 1
             }
@@ -4402,8 +4396,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Deep Exhalation",
-          "icon": "ability_evoker_firebreath",
-          "description": "Fire Breath&#39;s damage over time lasts 4 sec longer.",
+          "icon": "4622458",
+          "description": "Fire Breath's damage over time lasts 4 sec longer.",
           "choices": null
         },
         {
@@ -4420,7 +4414,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Burning Adrenaline",
-          "icon": "inv_gauntlets_03",
+          "icon": "132937",
           "description": "Fire Breath reaches its maximum empower level 20% faster.",
           "choices": null
         },
@@ -4438,8 +4432,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Conduit of Flame",
-          "icon": "ability_evoker_innatemagic5",
-          "description": "Critical strike chance against targets above 50% health increased by 15%.",
+          "icon": "4630458",
+          "description": "Critical strike chance against targets above 50% health increased by 10%.",
           "choices": null
         },
         {
@@ -4454,7 +4448,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Legacy of the Lifebinder",
-          "icon": "ability_evoker_dragonrage2",
+          "icon": "4622453",
           "description": "Fire Breath gains an additional charge.",
           "choices": null
         },
@@ -4478,15 +4472,15 @@
             {
               "spellId": 444016,
               "name": "Enkindle",
-              "icon": "inv_10_elementalcombinedfoozles_purifiedshadowflame",
+              "icon": "5088830",
               "description": "Essence abilities are enhanced with Flame, dealing 20% of healing or damage done as Fire over 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 444845,
               "name": "Expanded Lungs",
-              "icon": "inv_fyrakk_dragonbreath",
-              "description": "Fire Breath&#39;s damage over time is increased by 30%. Dream Breath&#39;s heal over time is increased by 30%.",
+              "icon": "4914672",
+              "description": "Fire Breath's damage over time is increased by 30%. Dream Breath's heal over time is increased by 20%.",
               "maxRanks": 1
             }
           ]
@@ -4505,8 +4499,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Ashes in Motion",
-          "icon": "inv_ability_flameshaperevoker_engulf",
-          "description": "Fire Breath&#39;s cooldown is reduced by 5 sec.",
+          "icon": "5927629",
+          "description": "Fire Breath's cooldown is reduced by 5 sec.",
           "choices": null
         },
         {
@@ -4523,7 +4517,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Fire Torrent",
-          "icon": "spell_shaman_stormearthfire",
+          "icon": "237588",
           "description": "Twin Flame bounces to up to 2 additional targets.",
           "choices": null
         },
@@ -4541,7 +4535,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Essence Well",
-          "icon": "ability_evoker_essenceburst4",
+          "icon": "4630440",
           "description": "Fire Breath has a 50% chance to generate Essence Burst.",
           "choices": null
         },
@@ -4559,8 +4553,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Twin Flame",
-          "icon": "ability_evoker_infernosblessing",
-          "description": "Consuming Essence Burst fires a twin flame, striking your target for 684 Fire damage.",
+          "icon": "5199632",
+          "description": "Consuming Essence Burst fires a twin flame, striking your target for 547 Fire damage.",
           "choices": null
         }
       ]
@@ -4626,7 +4620,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Landslide",
-          "icon": "ability_earthen_pillar",
+          "icon": "1016245",
           "description": "Conjure a path of shifting stone towards the target location, rooting enemies for 15 sec. Damage may cancel the effect.",
           "choices": null
         },
@@ -4641,7 +4635,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Obsidian Scales",
-          "icon": "inv_artifact_dragonscales",
+          "icon": "1394891",
           "description": "Reinforce your scales, reducing damage taken by 30% . Lasts 12 sec.",
           "choices": null
         },
@@ -4656,7 +4650,7 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Expunge",
-          "icon": "ability_evoker_fontofmagic_green",
+          "icon": "4630445",
           "description": "Expunge toxins affecting an ally, removing all Poison effects.",
           "choices": null
         },
@@ -4673,7 +4667,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Natural Convergence",
-          "icon": "spell_frost_frostblast",
+          "icon": "135844",
           "description": "Disintegrate channels 20% faster.",
           "choices": null
         },
@@ -4690,8 +4684,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Heavy Wingbeats",
-          "icon": "ability_racial_wingbuffet",
-          "description": "Wing Buffet&#39;s cooldown is reduced by 2 min.",
+          "icon": "4622488",
+          "description": "Wing Buffet's cooldown is reduced by 2 min.",
           "choices": null
         },
         {
@@ -4707,8 +4701,8 @@
           "alreadyGranted": true,
           "maxRanks": 1,
           "name": "Verdant Embrace",
-          "icon": "ability_evoker_rescue",
-          "description": "Fly to an ally and heal them for 4,020, or heal yourself for the same amount.",
+          "icon": "4622471",
+          "description": "Fly to an ally and heal them for 5,226, or heal yourself for the same amount.",
           "choices": null
         },
         {
@@ -4724,8 +4718,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Forger of Mountains",
-          "icon": "ability_earthen_pillar",
-          "description": "Landslide&#39;s cooldown is reduced by 30 sec, and it can withstand 200% more damage before breaking.",
+          "icon": "1016245",
+          "description": "Landslide's cooldown is reduced by 30 sec, and it can withstand 200% more damage before breaking.",
           "choices": null
         },
         {
@@ -4742,7 +4736,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Innate Magic",
-          "icon": "ability_evoker_innatemagic4",
+          "icon": "4630457",
           "description": "Essence regenerates 5% faster.",
           "choices": null
         },
@@ -4759,7 +4753,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Obsidian Bulwark",
-          "icon": "inv_shield_1h_revenantfire_d_01",
+          "icon": "4237659",
           "description": "Obsidian Scales has an additional charge.",
           "choices": null
         },
@@ -4777,7 +4771,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Enkindled",
-          "icon": "ability_evoker_livingflame",
+          "icon": "4622464",
           "description": "Living Flame deals 3% more damage and healing.",
           "choices": null
         },
@@ -4794,7 +4788,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Scarlet Adaptation",
-          "icon": "inv_bijou_red",
+          "icon": "132532",
           "description": "Store 20% of your effective healing, up to 857. Your next damaging Living Flame consumes all stored healing to increase its damage dealt.",
           "choices": null
         },
@@ -4812,7 +4806,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inner Radiance",
-          "icon": "spell_holy_spellwarding",
+          "icon": "135976",
           "description": "Your Living Flame and Emerald Blossom are 30% more effective on yourself.",
           "choices": null
         },
@@ -4829,7 +4823,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Recall",
-          "icon": "ability_evoker_recall",
+          "icon": "4622470",
           "description": "You may reactivate Deep Breath within 3 sec after landing to travel back in time to your takeoff location.",
           "choices": null
         },
@@ -4847,8 +4841,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Clobbering Sweep",
-          "icon": "ability_racial_tailswipe",
-          "description": "Tail Swipe&#39;s cooldown is reduced by 2 min.",
+          "icon": "4622486",
+          "description": "Tail Swipe's cooldown is reduced by 2 min.",
           "choices": null
         },
         {
@@ -4864,7 +4858,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tailwind",
-          "icon": "ability_skyreach_wind",
+          "icon": "1029595",
           "description": "Hover increases your movement speed by 70% for the first 4 sec.",
           "choices": null
         },
@@ -4882,8 +4876,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Cauterizing Flame",
-          "icon": "ability_evoker_fontofmagic_red",
-          "description": "Cauterize an ally&#39;s wounds, removing all Bleed, Poison, Curse, and Disease effects. Heals for 1,330 upon removing any effect.",
+          "icon": "4630446",
+          "description": "Cauterize an ally's wounds, removing all Bleed, Poison, Curse, and Disease effects. Heals for 1,330 upon removing any effect.",
           "choices": null
         },
         {
@@ -4899,7 +4893,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ancient Flame",
-          "icon": "inv_elemental_mote_fire01",
+          "icon": "132839",
           "description": "Casting Emerald Blossom or Verdant Embrace reduces the cast time of your next Living Flame by 40%.",
           "choices": null
         },
@@ -4916,7 +4910,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Instinctive Arcana",
-          "icon": "spell_arcane_studentofmagic",
+          "icon": "135754",
           "description": "Your Magic damage done is increased by 2%.",
           "choices": null
         },
@@ -4931,7 +4925,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tip the Scales",
-          "icon": "ability_evoker_tipthescales",
+          "icon": "4622480",
           "description": "Compress time to make your next empowered spell cast instantly at its maximum empower level.",
           "choices": null
         },
@@ -4948,7 +4942,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Attuned to the Dream",
-          "icon": "ability_rogue_imrovedrecuperate",
+          "icon": "460692",
           "description": "Your healing done and healing received are increased by 2%.",
           "choices": null
         },
@@ -4965,7 +4959,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Sleep Walk",
-          "icon": "ability_xavius_dreamsimulacrum",
+          "icon": "1396974",
           "description": "Disorient an enemy for 20 sec, causing them to sleep walk towards you. Damage has a chance to awaken them.",
           "choices": null
         },
@@ -4982,7 +4976,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Protracted Talons",
-          "icon": "ability_evoker_azurestrike",
+          "icon": "4622447",
           "description": "Azure Strike damages 1 additional enemy.",
           "choices": null
         },
@@ -5000,7 +4994,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Inherent Resistance",
-          "icon": "inv_misc_rubysanctum1",
+          "icon": "377270",
           "description": "Magic damage taken reduced by 2%.",
           "choices": null
         },
@@ -5017,7 +5011,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Draconic Legacy",
-          "icon": "inv_helm_mail_dracthyrquest_b_02",
+          "icon": "4558458",
           "description": "Your Stamina is increased by 6%.",
           "choices": null
         },
@@ -5035,7 +5029,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Extended Flight",
-          "icon": "ability_evoker_hover",
+          "icon": "4622463",
           "description": "Hover lasts 2 sec longer.",
           "choices": null
         },
@@ -5052,7 +5046,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Bountiful Bloom",
-          "icon": "ability_evoker_emeraldblossom",
+          "icon": "4622457",
           "description": "Emerald Blossom heals 2 additional allies.",
           "choices": null
         },
@@ -5069,7 +5063,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Regenerative Magic",
-          "icon": "spell_frost_manarecharge",
+          "icon": "135859",
           "description": "Your Leech is increased by 2%.",
           "choices": null
         },
@@ -5080,15 +5074,15 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            93355,
-            110064
+            110064,
+            93355
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Blast Furnace",
-          "icon": "ability_evoker_firebreath",
-          "description": "Fire Breath&#39;s damage over time lasts 4 sec longer.",
+          "icon": "4622458",
+          "description": "Fire Breath's damage over time lasts 4 sec longer.",
           "choices": null
         },
         {
@@ -5104,7 +5098,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Exuberance",
-          "icon": "ability_evoker_hover2",
+          "icon": "4630448",
           "description": "While above 75% health, your movement speed is increased by 10%.",
           "choices": null
         },
@@ -5121,7 +5115,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Renewing Blaze",
-          "icon": "ability_evoker_masterylifebinder_red",
+          "icon": "4630463",
           "description": "Obsidian Scales surrounds you with a Renewing Blaze, causing 100% of the damage it prevented to be healed back over 8 sec.",
           "choices": null
         },
@@ -5138,7 +5132,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Walloping Blow",
-          "icon": "inv_misc_monsterscales_06",
+          "icon": "134308",
           "description": "Wing Buffet and Tail Swipe knock enemies further and daze them, reducing movement speed by 70% for 4 sec. ",
           "choices": null
         },
@@ -5156,8 +5150,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Panacea",
-          "icon": "ability_druid_protectionofthegrove",
-          "description": "Emerald Blossom and Verdant Embrace instantly heal you for 760 when cast.",
+          "icon": "4067364",
+          "description": "Emerald Blossom and Verdant Embrace instantly heal you for 950 when cast.",
           "choices": null
         },
         {
@@ -5173,7 +5167,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Stretch Time",
-          "icon": "ability_evoker_timedilation",
+          "icon": "4622478",
           "description": "While flying during Deep Breath, 100% of damage you would take is instead dealt over 10 sec.",
           "choices": null
         },
@@ -5190,8 +5184,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unravel",
-          "icon": "ability_evoker_unravel",
-          "description": "Direct damage from Fire Breath consumes absorb shields from enemies, dealing 4,505 additional Spellfrost damage to them.",
+          "icon": "4630499",
+          "description": "Direct damage from Fire Breath consumes absorb shields from enemies, dealing 4,529 additional Spellfrost damage to them.",
           "choices": null
         },
         {
@@ -5209,7 +5203,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Oppressing Roar",
-          "icon": "ability_evoker_oppressingroar",
+          "icon": "4622466",
           "description": "Let out a bone-shaking roar at enemies in a cone in front of you, increasing the duration of crowd controls that affect them by 50% in the next 10 sec.",
           "choices": null
         },
@@ -5226,7 +5220,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Foci of Life",
-          "icon": "spell_fire_incinerate",
+          "icon": "135818",
           "description": "Renewing Blaze restores you more quickly, causing damage you take to be healed back over 4 sec.",
           "choices": null
         },
@@ -5245,7 +5239,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rescue",
-          "icon": "ability_evoker_flywithme",
+          "icon": "4622460",
           "description": "Swoop to an ally and fly with them to the target location. Clears movement impairing effects from you and your ally.",
           "choices": null
         },
@@ -5262,7 +5256,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Lush Growth",
-          "icon": "inv_staff_2h_bloodelf_c_01",
+          "icon": "801010",
           "description": "Green spells restore 5% more health.",
           "choices": null
         },
@@ -5279,7 +5273,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Source of Magic",
-          "icon": "ability_evoker_blue_01",
+          "icon": "4630412",
           "description": "Redirect your excess magic to a friendly healer for 1 hour. When you cast an empowered spell, you restore 0.25% of their maximum mana per empower level. Limit 1.",
           "choices": null
         },
@@ -5296,7 +5290,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Strike from Above",
-          "icon": "ability_racial_glide",
+          "icon": "4622484",
           "description": "Glide speed and height increased by 10%.",
           "choices": null
         },
@@ -5308,14 +5302,14 @@
           "posY": 12,
           "connections": [
             93307,
-            93298,
-            93308
+            93308,
+            93298
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Leaping Flames",
-          "icon": "ability_evoker_pupilofalexstraza",
+          "icon": "5199640",
           "description": "Fire Breath causes your next Living Flame to strike 1 additional target per empower level.",
           "choices": null
         },
@@ -5332,7 +5326,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Overawe",
-          "icon": "ability_evoker_oppressingroar2",
+          "icon": "4622467",
           "description": "Oppressing Roar removes 1 Enrage effect from each enemy, and its cooldown is reduced by 30 sec.",
           "choices": null
         },
@@ -5351,7 +5345,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Aerial Mastery",
-          "icon": "ability_evoker_aerialmastery",
+          "icon": "4622446",
           "description": "Hover gains 1 additional charge.",
           "choices": null
         },
@@ -5368,7 +5362,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twin Guardian",
-          "icon": "inv_misc_volatileair",
+          "icon": "463565",
           "description": "Rescue increases movement speed by 100% and allows spells to be cast while moving for 3 sec.",
           "choices": null
         },
@@ -5385,8 +5379,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Potent Mana",
-          "icon": "spell_magic_managain",
-          "description": "Source of Magic increases the target&#39;s healing and damage done by 3%.",
+          "icon": "237551",
+          "description": "Source of Magic increases the target's healing and damage done by 3%.",
           "choices": null
         },
         {
@@ -5403,7 +5397,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Terror of the Skies",
-          "icon": "ability_evoker_terroroftheskies",
+          "icon": "4622477",
           "description": "Deep Breath stuns enemies for 3 sec.",
           "choices": null
         },
@@ -5426,14 +5420,14 @@
             {
               "spellId": 374968,
               "name": "Time Spiral",
-              "icon": "ability_evoker_timespiral",
+              "icon": "4622479",
               "description": "Bend time, allowing you and your allies within 40 yds to cast their major movement ability once in the next 10 sec, even if it is on cooldown.",
               "maxRanks": 1
             },
             {
               "spellId": 406732,
               "name": "Spatial Paradox",
-              "icon": "ability_evoker_stretchtime",
+              "icon": "5199645",
               "description": "Evoke a paradox for you and a friendly healer, allowing casting while moving and increasing the range of most spells by 100% for 10 sec.\r\n\r\nAffects the nearest healer within 60 yds, if you do not have a healer targeted.",
               "maxRanks": 1
             }
@@ -5454,7 +5448,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Zephyr",
-          "icon": "ability_evoker_hoverblack",
+          "icon": "4630449",
           "description": "Conjure an updraft to lift you and your 4 nearest allies within 20 yds into the air, reducing damage taken from area-of-effect attacks by 20% and increasing movement speed by 30% for 8 sec.",
           "choices": null
         },
@@ -5469,7 +5463,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Echo",
-          "icon": "ability_evoker_echo",
+          "icon": "4622456",
           "description": "Wrap an ally with temporal energy, healing them for 912 and causing your next healing spell to cast an additional time on that ally at 70% of normal healing. Essence spells cannot be Echoed.",
           "choices": null
         },
@@ -5486,8 +5480,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Dream Breath",
-          "icon": "ability_evoker_dreambreath",
-          "description": "Inhale, gathering the power of the Dream. Release to exhale, healing yourself and 5 injured allies in a 40 yd cone in front of you for 1,634.\r\n\r\nI:   Heals 700 instantly and 934 over 16 sec.\r\n\r\nII:  Heals 934 instantly and 700 over 12 sec.\r\n\r\nIII: Heals 1,167 instantly and 467 over 8 sec.",
+          "icon": "4622454",
+          "description": "Inhale, gathering the power of the Dream. Release to exhale, healing yourself and 5 injured allies in a 40 yd cone in front of you for 1,977.\r\n\r\nI:   Heals 350 instantly and 1,627 over 16 sec.\r\n\r\nII:  Heals 757 instantly and 1,220 over 12 sec.\r\n\r\nIII: Heals 1,163 instantly and 814 over 8 sec.",
           "choices": null
         },
         {
@@ -5503,8 +5497,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Reversion",
-          "icon": "ability_evoker_reversion",
-          "description": "Reverse an ally&#39;s injuries, healing them for 1,092 over 12 sec.\r\n\r\nWhen Reversion critically heals, its duration is extended by 2 sec, up to a maximum of 12 sec.",
+          "icon": "4630467",
+          "description": "Reverse an ally's injuries, healing them for 1,092 over 12 sec.\r\n\r\nWhen Reversion critically heals, its duration is extended by 2 sec, up to a maximum of 12 sec.",
           "choices": null
         },
         {
@@ -5520,7 +5514,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Temporal Compression",
-          "icon": "ability_evoker_rewind2",
+          "icon": "4630470",
           "description": "Each cast of a Bronze spell causes your next empower spell to reach maximum level in 10% less time, stacking up to 4 times.",
           "choices": null
         },
@@ -5538,7 +5532,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Essence Burst",
-          "icon": "ability_evoker_essenceburst",
+          "icon": "4630437",
           "description": "Living Flame has a 20% chance, and Reversion has a 15% chance to make your next Essence ability free.",
           "choices": null
         },
@@ -5555,7 +5549,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rewind",
-          "icon": "ability_evoker_rewind",
+          "icon": "4622474",
           "description": "Rewind 30% of damage taken in the last 5 seconds by all allies within 40 yds. Always heals for at least 760.\r\n\r\nHealing increased by 200% when not in a raid.",
           "choices": null
         },
@@ -5572,7 +5566,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lifebind",
-          "icon": "ability_evoker_hoverred",
+          "icon": "4630453",
           "description": "Verdant Embrace temporarily bonds your life with an ally, causing your healing on either partner to heal the other for 60% of the amount. Lasts 8 sec.",
           "choices": null
         },
@@ -5589,7 +5583,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Essence Attunement",
-          "icon": "ability_evoker_essenceburststacks",
+          "icon": "4630443",
           "description": "Essence Burst stacks 2 times.",
           "choices": null
         },
@@ -5606,7 +5600,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Time Dilation",
-          "icon": "ability_evoker_timedilation",
+          "icon": "4622478",
           "description": "Stretch time around an ally for the next 8 sec, causing 50% of damage they would take to instead be dealt over 8 sec.",
           "choices": null
         },
@@ -5623,7 +5617,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Unshakable",
-          "icon": "ability_evoker_masterygiantkiller",
+          "icon": "4622465",
           "description": "Your empower spells are 10% more effective. While charging a healing empower spell, you cannot be knocked back.",
           "choices": null
         },
@@ -5641,7 +5635,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Fluttering Seedlings",
-          "icon": "inv_herbalism_70_yserallineseed",
+          "icon": "1416160",
           "description": "Emerald Blossom sends out 1 flying seedling when it bursts, plus up to 2 additional seedlings if Emerald Blossom heals fewer than 3 allies.\r\n\r\nSeedlings each heal an ally up to 40 yds away for 988.",
           "choices": null
         },
@@ -5658,8 +5652,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Font of Magic",
-          "icon": "ability_evoker_fontofmagic",
-          "description": "Your empower spells&#39; maximum level is increased by 1.",
+          "icon": "4622461",
+          "description": "Your empower spells' maximum level is increased by 1, and they reach maximum empower level 20% faster.",
           "choices": null
         },
         {
@@ -5676,7 +5670,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Golden Hour",
-          "icon": "inv_belt_armor_waistoftime_d_01",
+          "icon": "2026009",
           "description": "Reversion instantly heals the target for 15% of damage taken in the last 5 sec.",
           "choices": null
         },
@@ -5699,14 +5693,14 @@
             {
               "spellId": 376207,
               "name": "Delay Harm",
-              "icon": "ability_racial_magicalresistance",
+              "icon": "1723997",
               "description": "15% of delayed damage from Time Dilation is absorbed.",
               "maxRanks": 1
             },
             {
               "spellId": 376204,
               "name": "Just in Time",
-              "icon": "inv_offhand_1h_artifactsilverhand_d_01",
+              "icon": "1126486",
               "description": "Time Dilation gains an additional charge, and its cooldown is reduced by 10 sec.",
               "maxRanks": 1
             }
@@ -5725,7 +5719,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Temporal Anomaly",
-          "icon": "ability_evoker_temporalanomaly",
+          "icon": "4630480",
           "description": "Send forward a vortex of temporal energy, absorbing 2,280 damage on you and any allies in its path. Absorption is reduced beyond 5 targets.\r\n\r\nApplies Echo at 30% effectiveness on the first 5 allies it passes through.",
           "choices": null
         },
@@ -5748,15 +5742,15 @@
             {
               "spellId": 376138,
               "name": "Empath",
-              "icon": "ability_evoker_powernexus2",
+              "icon": "4630465",
               "description": "Empower spells increase your Essence regeneration rate by 100% for 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 376150,
               "name": "Spiritual Clarity",
-              "icon": "ability_evoker_spiritbloom",
-              "description": "Dream Breath&#39;s cooldown is reduced by 10 sec.",
+              "icon": "4622475",
+              "description": "Dream Breath's cooldown is reduced by 6 sec.",
               "maxRanks": 1
             }
           ]
@@ -5775,7 +5769,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Exhilarating Burst",
-          "icon": "ability_evoker_essenceburst3",
+          "icon": "4630439",
           "description": "Each time you gain Essence Burst, your critical heals are 230% effective instead of the usual 200% for 10 sec.",
           "choices": null
         },
@@ -5792,7 +5786,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Field of Dreams",
-          "icon": "inv_misc_herb_chamlotus",
+          "icon": "959795",
           "description": "Every other Emerald Blossom has a 100% chance for one of your Fluttering Seedlings to grow into a new Emerald Blossom.",
           "choices": null
         },
@@ -5809,7 +5803,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Power Nexus",
-          "icon": "ability_evoker_powernexus",
+          "icon": "4630464",
           "description": "Increases your maximum Essence to 6.",
           "choices": null
         },
@@ -5826,7 +5820,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Time Lord",
-          "icon": "ability_evoker_innatemagic4",
+          "icon": "4630457",
           "description": "Echo replicates 25% more healing.",
           "choices": null
         },
@@ -5844,7 +5838,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Flow State",
-          "icon": "ability_evoker_timespiral",
+          "icon": "4622479",
           "description": "Empower spells cause time to flow 5% faster for you, increasing movement speed, cooldown recharge rate, and cast speed. Lasts 10 sec.",
           "choices": null
         },
@@ -5867,14 +5861,14 @@
             {
               "spellId": 1291636,
               "name": "Temporal Barrier",
-              "icon": "ability_evoker_bronze_01",
-              "description": "Send out a ripple of temporal energy, absorbing 3,420 damage and applying Echo at 30% effectiveness on your target and up to 4 allies within 40 yds.",
+              "icon": "4630413",
+              "description": "Send out a ripple of temporal energy, absorbing 4,446 damage and applying Echo at 30% effectiveness on your target and up to 4 allies within 40 yds.",
               "maxRanks": 1
             },
             {
               "spellId": 376237,
               "name": "Nozdormu's Teachings",
-              "icon": "inv_misc_head_dragon_bronze",
+              "icon": "134156",
               "description": "Temporal Anomaly reduces the cooldowns of your empower spells by 5 sec.",
               "maxRanks": 1
             }
@@ -5894,7 +5888,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Call of Ysera",
-          "icon": "inv_drakemountemerald",
+          "icon": "4096390",
           "description": "Dream Breath healing increased by 20%, and Living Flame healing increased by 30%.",
           "choices": null
         },
@@ -5919,14 +5913,14 @@
             {
               "spellId": 359816,
               "name": "Dream Flight",
-              "icon": "ability_evoker_dreamflight",
-              "description": "Take in a deep breath and fly to the targeted location, healing all allies in your path for 1,900 immediately, and 4,284 over 15 sec, reduced beyond 5 targets.\r\n\r\nRemoves all root effects. You are immune to movement impairing and loss of control effects.\r\n\r\nDamage taken while you are flying is absorbed, up to 100% of your maximum health.",
+              "icon": "4622455",
+              "description": "Take in a deep breath and fly to the targeted location, healing all allies in your path for 1,900 immediately, and 4,305 over 15 sec, reduced beyond 5 targets.\r\n\r\nRemoves all root effects. You are immune to movement impairing and loss of control effects.\r\n\r\nDamage taken while you are flying is absorbed, up to 100% of your maximum health.",
               "maxRanks": 1
             },
             {
               "spellId": 370537,
               "name": "Stasis",
-              "icon": "ability_evoker_stasis",
+              "icon": "4630476",
               "description": "Causes your next 3 helpful spells to be duplicated and stored in a time lock. You may reactivate Stasis any time within 30 sec to quickly unleash their magic.",
               "maxRanks": 1
             }
@@ -5946,7 +5940,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Grace Period",
-          "icon": "ability_evoker_reversion_green",
+          "icon": "4630468",
           "description": "Your healing is increased by 10% on targets with your Reversion.",
           "choices": null
         },
@@ -5963,7 +5957,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Spark of Insight",
-          "icon": "ability_evoker_essenceburst5",
+          "icon": "4630441",
           "description": "Consuming a full Temporal Compression grants you Essence Burst.",
           "choices": null
         },
@@ -5980,7 +5974,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Ouroboros",
-          "icon": "ability_evoker_ouroboros",
+          "icon": "5199636",
           "description": "Casting Echo grants one stack of Ouroboros, increasing the healing of your next Emerald Blossom by 30%, stacking up to 5 times.",
           "choices": null
         },
@@ -5998,7 +5992,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Life-Giver's Flame",
-          "icon": "item_sparkofragnoros",
+          "icon": "348560",
           "description": "Fire Breath and Deep Breath heal 5 nearby injured allies for 80% of damage done to up to 5 targets, split evenly among them.",
           "choices": null
         },
@@ -6015,8 +6009,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Inner Flame",
-          "icon": "ability_evoker_infernosblessing",
-          "description": "Casting Dream Flight or Stasis increases your healing over time by 60% and causes Living Flame and Reversion to have a 100% increased chance to grant Essence Burst. Lasts 15 sec.\r\n",
+          "icon": "5199632",
+          "description": "Casting Dream Flight or Stasis increases your healing over time by 50% and causes Living Flame and Reversion to have a 100% increased chance to grant Essence Burst. Lasts 15 sec.\r\n",
           "choices": null
         },
         {
@@ -6033,8 +6027,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Temporal Artificer",
-          "icon": "ability_evoker_rewind",
-          "description": "Rewind&#39;s cooldown is reduced by 60 sec.",
+          "icon": "4622474",
+          "description": "Rewind's cooldown is reduced by 60 sec.",
           "choices": null
         },
         {
@@ -6050,7 +6044,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Energy Loop",
-          "icon": "inv_elemental_mote_mana",
+          "icon": "132841",
           "description": "Disintegrate deals 35% more damage and generates 1,080 mana over its duration.",
           "choices": null
         },
@@ -6067,8 +6061,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Time of Need",
-          "icon": "ability_evoker_masterylifebinder_bronze",
-          "description": "When you or an ally fall below 30% health, a version of yourself enters your timeline and heals them for 12,061. Your alternate self continues healing for 8 sec before returning to their timeline.\r\n\r\nMay only occur once every 60 sec.",
+          "icon": "4630462",
+          "description": "When you or an ally fall below 30% health, a version of yourself enters your timeline and heals them for 15,679. Your alternate self continues healing for 8 sec before returning to their timeline.\r\n\r\nMay only occur once every 60 sec.",
           "choices": null
         },
         {
@@ -6086,7 +6080,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Renewing Breath",
-          "icon": "ability_evoker_dreambreath",
+          "icon": "4622454",
           "description": "Dream Breath healing is increased by 15%.",
           "choices": null
         },
@@ -6105,7 +6099,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Lifeforce Mender",
-          "icon": "ability_evoker_dragonrage2",
+          "icon": "4622453",
           "description": "Red spells deal 20% additional damage and healing.",
           "choices": null
         },
@@ -6124,7 +6118,7 @@
           "alreadyGranted": false,
           "maxRanks": 2,
           "name": "Timeless Magic",
-          "icon": "inv_artifact_xp05",
+          "icon": "1411839",
           "description": "Reversion, Time Dilation, Echo, and Temporal Anomaly last 15% longer and cost 15% less mana.",
           "choices": null
         },
@@ -6147,14 +6141,14 @@
             {
               "spellId": 1241669,
               "name": "Dream Simulacrum",
-              "icon": "ability_evoker_dragonrage2_green",
+              "icon": "4630421",
               "description": "Verdant Embrace healing is increased by 30%. In addition, it no longer causes you to leap to your target, instead sending forth a Dream Simulacrum.",
               "maxRanks": 1
             },
             {
               "spellId": 1241704,
               "name": "Wings of Liberty",
-              "icon": "ability_evoker_masterylifebinder",
+              "icon": "4630459",
               "description": "Verdant Embrace gains an additional charge.",
               "maxRanks": 1
             }
@@ -6173,7 +6167,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Titan's Gift",
-          "icon": "spell_fireresistancetotem_01",
+          "icon": "135832",
           "description": "Essence Burst increases the effectiveness of your next Essence ability by 35%.",
           "choices": null
         },
@@ -6190,8 +6184,8 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lifespark",
-          "icon": "ability_evoker_masterylifebinder_red",
-          "description": "Reversion healing has a chance to cause your next Living Flame to cast instantly and deal 50% increased healing or damage. Stacks up to 2 charges.",
+          "icon": "4630463",
+          "description": "Reversion healing has a chance to cause your next Living Flame to cast instantly and deal 100% increased healing or damage. Stacks up to 2 charges.",
           "choices": null
         },
         {
@@ -6207,7 +6201,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Twin Echoes",
-          "icon": "inv_ability_evoker_greaterecho",
+          "icon": "6118850",
           "description": "Casting Emerald Blossom causes your next Echo to cast on an additional ally within 25 yards at 100% effectiveness. Stacks up to 2 charges.",
           "choices": null
         },
@@ -6224,7 +6218,7 @@
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Tempo Charged",
-          "icon": "classicon_evoker_preservation",
+          "icon": "4511812",
           "description": "Bronze healing and absorption increased by 15%.",
           "choices": null
         },
@@ -6239,7 +6233,7 @@
           "alreadyGranted": false,
           "maxRanks": 4,
           "name": "Merithra's Blessing",
-          "icon": "inv12_apextalent_evoker_merithrasblessing",
+          "icon": "7514182",
           "description": null,
           "levels": [
             81,
@@ -6249,7 +6243,7 @@
           "ranks": [
             {
               "spellId": 1256577,
-              "description": "Essence abilities have a chance to infuse your next Reversion with the power of the Green Dragonflight, upgrading it to Merithra&#39;s Blessing:\r\n\r\n Merithra&#39;s Blessing\r\nSpring a bloom of life from your target, healing them and up to 4 other allies within 30 yards for 950. Blooms may heal your primary target multiple times if no nearby injured allies are present.",
+              "description": "Essence abilities have a chance to infuse your next Reversion with the power of the Green Dragonflight, upgrading it to Merithra's Blessing:\r\n\r\n Merithra's Blessing\r\nSpring a bloom of life from your target, healing them and up to 4 other allies within 30 yards for 855. Blooms may heal your primary target multiple times if no nearby injured allies are present.",
               "maxRanks": 1
             },
             {
@@ -6259,7 +6253,7 @@
             },
             {
               "spellId": 1256689,
-              "description": "Dream Breath&#39;s instant healing is increased by 250% and Dream Breath has a 100% chance to grant Merithra&#39;s Blessing.",
+              "description": "Dream Breath's healing is increased by 60% and Dream Breath has a 100% chance to grant Merithra's Blessing.",
               "maxRanks": 1
             }
           ]
@@ -6278,7 +6272,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Titanic Precision",
-          "icon": "inv_10_misc_titansspark_shadowflame",
+          "icon": "5088829",
           "description": "Living Flame and Azure Strike have 1 extra chance to trigger Essence Burst when they critically strike.",
           "choices": null
         },
@@ -6299,8 +6293,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Consume Flame",
-          "icon": "inv_shadowflames_wave",
-          "description": "Disintegrate damage consumes 1.0 sec of Fire Breath from enemies it damages, detonating it for 150% of the amount consumed.\r\n\r\nPyre damage consumes 4 sec of Fire Breath from enemies it damages, detonating it for 115% of the amount consumed.",
+          "icon": "4914680",
+          "description": "Disintegrate consumes 1.0 sec of Fire Breath from enemies it damages, detonating it for 150% of the amount consumed.\r\n\r\nPyre consumes 4 sec of Fire Breath from enemies it damages, detonating it for 115% of the amount consumed.",
           "choices": null
         },
         {
@@ -6317,8 +6311,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Fulminous Roar",
-          "icon": "ability_evoker_oppressingroar2",
-          "description": "Fire Breath deals its damage 20% more often.",
+          "icon": "4622467",
+          "description": "Fire Breath deals its damage 15% more often.",
           "choices": null
         },
         {
@@ -6341,14 +6335,14 @@
             {
               "spellId": 444322,
               "name": "Lifecinders",
-              "icon": "inv_misc_herb_cinderbloom_petal",
+              "icon": "960675",
               "description": "Obsidian Scales also applies to your target or 1 nearby injured ally at 50% value.",
               "maxRanks": 1
             },
             {
               "spellId": 445958,
               "name": "Draconic Instincts",
-              "icon": "inv_misc_scales_basilliskorange",
+              "icon": "1526594",
               "description": "Your wounds have a small chance to cauterize, healing you for 30% of damage taken. Occurs more often from attacks that deal high damage.",
               "maxRanks": 1
             }
@@ -6374,14 +6368,14 @@
             {
               "spellId": 444849,
               "name": "Trailblazer",
-              "icon": "ability_deathwing_fierygrip",
+              "icon": "538041",
               "description": "Hover and Deep Breath travel 40% faster, and Hover travels 40% further.",
               "maxRanks": 1
             },
             {
               "spellId": 445074,
               "name": "Shape of Flame",
-              "icon": "ability_mage_flamecannon",
+              "icon": "1387353",
               "description": "Tail Swipe and Wing Buffet scorch enemies and blind them with ash, causing their next attack within 4 sec to miss.",
               "maxRanks": 1
             }
@@ -6401,8 +6395,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Deep Exhalation",
-          "icon": "ability_evoker_firebreath",
-          "description": "Fire Breath&#39;s damage over time lasts 4 sec longer.",
+          "icon": "4622458",
+          "description": "Fire Breath's damage over time lasts 4 sec longer.",
           "choices": null
         },
         {
@@ -6419,7 +6413,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Burning Adrenaline",
-          "icon": "inv_gauntlets_03",
+          "icon": "132937",
           "description": "Fire Breath reaches its maximum empower level 20% faster.",
           "choices": null
         },
@@ -6437,8 +6431,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Conduit of Flame",
-          "icon": "ability_evoker_innatemagic5",
-          "description": "Critical strike chance against targets above 50% health increased by 15%.",
+          "icon": "4630458",
+          "description": "Critical strike chance against targets above 50% health increased by 10%.",
           "choices": null
         },
         {
@@ -6453,7 +6447,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Legacy of the Lifebinder",
-          "icon": "ability_evoker_dragonrage2",
+          "icon": "4622453",
           "description": "Fire Breath gains an additional charge.",
           "choices": null
         },
@@ -6477,15 +6471,15 @@
             {
               "spellId": 444016,
               "name": "Enkindle",
-              "icon": "inv_10_elementalcombinedfoozles_purifiedshadowflame",
+              "icon": "5088830",
               "description": "Essence abilities are enhanced with Flame, dealing 20% of healing or damage done as Fire over 8 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 444845,
               "name": "Expanded Lungs",
-              "icon": "inv_fyrakk_dragonbreath",
-              "description": "Fire Breath&#39;s damage over time is increased by 30%. Dream Breath&#39;s heal over time is increased by 30%.",
+              "icon": "4914672",
+              "description": "Fire Breath's damage over time is increased by 30%. Dream Breath's heal over time is increased by 20%.",
               "maxRanks": 1
             }
           ]
@@ -6504,8 +6498,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Ashes in Motion",
-          "icon": "inv_ability_flameshaperevoker_engulf",
-          "description": "Fire Breath&#39;s cooldown is reduced by 5 sec.",
+          "icon": "5927629",
+          "description": "Fire Breath's cooldown is reduced by 5 sec.",
           "choices": null
         },
         {
@@ -6522,7 +6516,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Fire Torrent",
-          "icon": "spell_shaman_stormearthfire",
+          "icon": "237588",
           "description": "Twin Flame bounces to up to 2 additional targets.",
           "choices": null
         },
@@ -6540,7 +6534,7 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Essence Well",
-          "icon": "ability_evoker_essenceburst4",
+          "icon": "4630440",
           "description": "Fire Breath has a 50% chance to generate Essence Burst.",
           "choices": null
         },
@@ -6558,8 +6552,8 @@
           "heroSubtree": "Flameshaper",
           "maxRanks": 1,
           "name": "Twin Flame",
-          "icon": "ability_evoker_infernosblessing",
-          "description": "Consuming Essence Burst fires a twin flame, striking your target for 684 Fire damage.",
+          "icon": "5199632",
+          "description": "Consuming Essence Burst fires a twin flame, striking your target for 547 Fire damage.",
           "choices": null
         },
         {
@@ -6576,7 +6570,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Reverberations",
-          "icon": "ability_evoker_giftoftheaspects",
+          "icon": "4622462",
           "description": "Upheaval deals 50% additional damage over 8 sec.",
           "choices": null
         },
@@ -6587,17 +6581,17 @@
           "posX": 20,
           "posY": 12,
           "connections": [
+            109508,
             94930,
             94932,
-            94942,
-            109508
+            94942
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Afterimage",
-          "icon": "ability_evoker_livingflame",
+          "icon": "4622464",
           "description": "Empower spells send up to 3 Chrono Flames to your targets.",
           "choices": null
         },
@@ -6615,7 +6609,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Instability Matrix",
-          "icon": "ability_dragonriding_bronzerewind01",
+          "icon": "4640479",
           "description": "Each time you cast an empower spell, unstable time magic reduces its cooldown by up to 6 sec.",
           "choices": null
         },
@@ -6639,14 +6633,14 @@
             {
               "spellId": 431874,
               "name": "Double-time",
-              "icon": "spell_holy_borrowedtime",
-              "description": "Ebon Might and Prescience gain a chance equal to your critical strike chance to grant 50% additional stats.",
+              "icon": "237538",
+              "description": "Ebon Might and Prescience gain a chance equal to your critical strike chance to grant 50% additional stats. For Ebon Might, this increase lasts 15.0 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 431984,
               "name": "Time Convergence",
-              "icon": "ability_evoker_plotthefuture",
+              "icon": "5199638",
               "description": "Non-defensive abilities with a 45 second or longer cooldown grant 5% Intellect for 15 sec.\r\n\r\nEssence spells extend the duration by 1 sec.",
               "maxRanks": 1
             }
@@ -6672,14 +6666,14 @@
             {
               "spellId": 431873,
               "name": "Temporality",
-              "icon": "ability_evoker_return",
+              "icon": "4622472",
               "description": "Warp reduces damage taken by 20%, starting high and reducing over 3 sec.",
               "maxRanks": 1
             },
             {
               "spellId": 432008,
               "name": "Motes of Acceleration",
-              "icon": "item_timemote_icon",
+              "icon": "5228749",
               "description": "Warp leaves a trail of Motes of Acceleration. Allies who come in contact with a mote gain 20% increased movement speed for 30 sec.",
               "maxRanks": 1
             }
@@ -6699,7 +6693,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Golden Opportunity",
-          "icon": "achievement_faction_goldenlotus",
+          "icon": "643910",
           "description": "Prescience lasts 15% longer.",
           "choices": null
         },
@@ -6717,7 +6711,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Nozdormu Adept",
-          "icon": "ability_evoker_aspectsfavorbronze",
+          "icon": "5199617",
           "description": "Prescience cooldown reduced by 2 sec and it grants 1% additional critical strike chance.",
           "choices": null
         },
@@ -6735,8 +6729,8 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Warp",
-          "icon": "ability_evoker_spatialparadox",
-          "description": "Hover now causes you to briefly warp out of existence and appear at your destination. Hover&#39;s cooldown is also reduced by 5 sec.\r\n\r\nHover continues to allow Evoker spells to be cast while moving.",
+          "icon": "5199644",
+          "description": "Hover now causes you to briefly warp out of existence and appear at your destination. Hover's cooldown is also reduced by 5 sec.\r\n\r\nHover continues to allow Evoker spells to be cast while moving.",
           "choices": null
         },
         {
@@ -6753,7 +6747,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Primacy",
-          "icon": "inv_misc_pocketwatch_01",
+          "icon": "134376",
           "description": "For each damage over time effect from Upheaval, gain 3% haste, up to 9%.",
           "choices": null
         },
@@ -6769,7 +6763,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Chrono Flame",
-          "icon": "inv_ability_chronowardenevoker_chronoflame",
+          "icon": "5927617",
           "description": "Living Flame is enhanced with Bronze magic, repeating 25% of the damage or healing you dealt to the target in the last 5 sec as Arcane, up to 950.",
           "choices": null
         },
@@ -6787,7 +6781,7 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Temporal Burst",
-          "icon": "ability_evoker_essenceburst5",
+          "icon": "4630441",
           "description": "Tip the Scales overloads you with temporal energy, increasing your haste, movement speed, and cooldown recovery rate by 30%, decreasing over 30 sec.",
           "choices": null
         },
@@ -6805,8 +6799,8 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Overclock",
-          "icon": "spell_holy_borrowedtime",
-          "description": "Chrono Flames&#39; maximum damage or healing is increased by 40%, up to 1,330 Arcane.",
+          "icon": "237538",
+          "description": "Chrono Flames' maximum damage or healing is increased by 40%, up to 1,330 Arcane.",
           "choices": null
         },
         {
@@ -6823,8 +6817,8 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Chronal Dynamo",
-          "icon": "inv_10_dungeonjewelry_dragon_trinket_1arcanemagical_red",
-          "description": "Living Flame&#39;s cast time is reduced by 0.2 sec, and it deals 50% increased damage or healing when it is a non-instant cast.",
+          "icon": "4638531",
+          "description": "Living Flame's cast time is reduced by 0.2 sec, and it deals 50% increased damage or healing when it is a non-instant cast.",
           "choices": null
         },
         {
@@ -6841,8 +6835,8 @@
           "heroSubtree": "Chronowarden",
           "maxRanks": 1,
           "name": "Chronoboon",
-          "icon": "ability_evoker_tipthescales",
-          "description": "Tip the Scales&#39; cooldown is reduced by 30 sec.",
+          "icon": "4622480",
+          "description": "Tip the Scales' cooldown is reduced by 30 sec.",
           "choices": null
         }
       ]
