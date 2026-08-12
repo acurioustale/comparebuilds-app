@@ -109,13 +109,31 @@ const FIXTURES = [
       "CIQAAAAAAAAAAAAAAAAAAAAAAMMjZGAAAAAAAAAAAghZxMGLzMmZWmZYmx2MGzMzYDZGLmpBYGgZ2MDzmBgMGLAYGIjZmZMbjZ2WGgZiB",
   },
   {
-    name: "Marksmanship Hunter (Wowhead raid)",
+    name: "Beast Mastery Hunter (in-game Retail)",
+    classSlug: "hunter",
+    specSlug: "beast-mastery",
+    specId: 253,
+    heroSubtree: "Pack Leader",
+    string:
+      "C0PAD57yiELKEty14ekTDtZEqAMmxwCsBzwQDbAAYGzMzsYGzMzMjZGMzYmhZGzMzYbmZYMDLDNDAAAAAAAAmHYMzAmZjAmFw2AwA",
+  },
+  {
+    name: "Marksmanship Hunter (in-game Retail)",
     classSlug: "hunter",
     specSlug: "marksmanship",
     specId: 254,
     heroSubtree: "Sentinel",
     string:
-      "C4PAAAAAAAAAAAAAAAAAAAAAAwCMwMGNWGAzgNAAAAAAAAgZMjZYGzMjZwYaGDzstxMzsMzMmZmFMLDmBAAMmZmZAMz0GziBYjZGD",
+      "C4PAD57yiELKEty14ekTDtZEqwGMwMGNWGQmBbAAAAAAAAgZMzMjtZMzMmhlx0MGMLbLzMzMzMzMzCzsMMDAAgHYMGAmxGYA2YmtZMA",
+  },
+  {
+    name: "Survival Hunter (in-game Retail)",
+    classSlug: "hunter",
+    specSlug: "survival",
+    specId: 255,
+    heroSubtree: "Sentinel",
+    string:
+      "C8PAD57yiELKEty14ekTDtZEqMWgBmxoxyAYmgtZmZmZmZ2mBAAAAAwMmZmhZMmxMYMNDAAAwAAssNzYZYmxYMzAwM2wixwMLGAA",
   },
 ];
 
