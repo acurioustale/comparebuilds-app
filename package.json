@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.19",
-    "dompurify": "^3.4.11",
+    "dompurify": "^3.4.13",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "zustand": "^5.0.13"
