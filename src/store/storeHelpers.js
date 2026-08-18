@@ -1,5 +1,6 @@
 import classesIndex from "../data/classes.json";
 import { parseBuildString, parseSpecId } from "../lib/buildString";
+import { pruneInactiveHeroNodes } from "../lib/treeLogic";
 import { activeHeroSubtree } from "../lib/treeLogic";
 
 // Vite creates a lazy chunk per matched file. The glob must be a string literal.
@@ -148,14 +149,45 @@ export async function importClassData(classSlug) {
 // builds aren't repeatedly unpacked by BitReader during store updates.
 const parseCache = new WeakMap();
 
+// Pruned results memoised per (treeData, raw parsed) so a re-parse keeps object
+// identity for downstream useMemo. Only ever populated for the builds that
+// actually carry an inactive subtree; pruneInactiveHeroNodes returns its input
+// untouched otherwise, and that identity flows straight through.
+const pruneCache = new WeakMap();
+
+function withActiveHeroOnly(parsed, treeData) {
+  if (!parsed || !treeData) return parsed;
+  let perTree = pruneCache.get(treeData);
+  if (!perTree) {
+    perTree = new WeakMap();
+    pruneCache.set(treeData, perTree);
+  }
+  const hit = perTree.get(parsed);
+  if (hit) return hit;
+
+  const nodes = pruneInactiveHeroNodes(treeData, parsed.nodes);
+  const out = nodes === parsed.nodes ? parsed : { ...parsed, nodes };
+  perTree.set(parsed, out);
+  return out;
+}
+
 /**
  * Parses every build string against the loaded node list, returning null for
  * strings that fail (so the array stays parallel to buildStrings).
+ *
+ * With `treeData` supplied, each build is reduced to the hero subtree it
+ * actually activated. The game exports BOTH hero subtrees' saved choices, so
+ * without this a player who has filled both imports with a whole inactive
+ * subtree set — invalid nodes in every view, and phantom differences against a
+ * build whose owner filled only one. Doing it here rather than in the three
+ * views keeps the single-build, diff and heatmap paths from drifting apart.
+ *
  * @param {string[]} strings
  * @param {object[]} classNodes
+ * @param {object} [treeData] Spec tree data; omit to skip hero pruning
  * @returns {(object|null)[]}
  */
-export function parseAll(strings, classNodes) {
+export function parseAll(strings, classNodes, treeData) {
   let cache = parseCache.get(classNodes);
   if (!cache) {
     cache = new Map();
@@ -164,7 +196,7 @@ export function parseAll(strings, classNodes) {
 
   return strings.map((s) => {
     if (cache.has(s)) {
-      return cache.get(s);
+      return withActiveHeroOnly(cache.get(s), treeData);
     }
     let result = null;
     try {
@@ -173,6 +205,6 @@ export function parseAll(strings, classNodes) {
       console.error(`Failed to parse build string: ${err.message}`, err);
     }
     cache.set(s, result);
-    return result;
+    return withActiveHeroOnly(result, treeData);
   });
 }

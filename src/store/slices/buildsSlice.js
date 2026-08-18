@@ -162,7 +162,7 @@ export const createBuildsSlice = (set, get) => ({
       // Tree data already available — parse the new string immediately
       set({
         buildStrings: newStrings,
-        parsedBuilds: parseAll(newStrings, classNodes),
+        parsedBuilds: parseAll(newStrings, classNodes, get().treeData),
         buildNames: newNames,
       });
     } else if (isLoading) {
@@ -383,7 +383,7 @@ export const createBuildsSlice = (set, get) => ({
       // Tree data already available — re-parse the whole slot list immediately.
       set({
         buildStrings: newStrings,
-        parsedBuilds: parseAll(newStrings, classNodes),
+        parsedBuilds: parseAll(newStrings, classNodes, get().treeData),
       });
     } else if (isLoading) {
       // Tree data is mid-load — store the string now; the in-flight load's

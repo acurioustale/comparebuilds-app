@@ -228,6 +228,72 @@ export function activeHeroSubtree(allNodes, selected) {
   return null;
 }
 
+/**
+ * The hero subtree an imported BUILD STRING actually commits to.
+ *
+ * The game keeps talent choices in both hero subtrees and exports both in a
+ * loadout string; only the hero gate node records which one is live. So a build
+ * from a player who has filled both trees carries two complete 13-point
+ * subtrees, and reading the gate is the only reliable way to tell them apart.
+ * activeHeroSubtree() infers from spent points instead, which is correct for an
+ * interactive selection (where only one subtree can ever hold points) but
+ * ambiguous here — it would return whichever subtree happens to come first in
+ * node order. Falls back to it when there is no gate selection to read, which is
+ * the interactive case and the pre-hero-talent strings.
+ *
+ * @param {object} treeData Spec tree data (needs heroGateNodeId + heroSubtrees)
+ * @param {Record<number, {pointsInvested:number, entryChosen:number|null}>} selected
+ * @returns {string|null} Active hero subtree name, or null when there is none
+ */
+export function selectedHeroSubtree(treeData, selected) {
+  const gateId = treeData?.heroGateNodeId;
+  const chosen =
+    gateId != null ? (selected?.[gateId]?.entryChosen ?? null) : null;
+  if (chosen === 0 || chosen === 1) {
+    // The gate's two entries are the left/right subtree slots, in that order.
+    const slot =
+      chosen === 0 ? treeData.heroSubtrees?.left : treeData.heroSubtrees?.right;
+    if (slot?.name) return slot.name;
+  }
+  return activeHeroSubtree(treeData?.nodes ?? [], selected ?? {});
+}
+
+/**
+ * Drop the selections belonging to the hero subtree the build did NOT activate,
+ * so an imported build reads as the loadout the player is actually running.
+ *
+ * Without this, a build exported after filling both hero trees imports with the
+ * inactive subtree's nodes still set: they fail the prerequisite cascade (their
+ * gate was never chosen) and surface as a panel of invalid nodes, and they show
+ * up as differences against a build whose owner only ever filled one tree.
+ * buildExportString already prunes the inactive subtree when writing a string;
+ * this is the same rule applied when reading one.
+ *
+ * Returns `selected` unchanged when there is nothing to drop, so the common
+ * single-subtree build keeps its object identity and downstream memoisation.
+ *
+ * @param {object} treeData Spec tree data
+ * @param {Record<number, object>} selected Parsed node selections
+ * @returns {Record<number, object>} Selections limited to the active subtree
+ */
+export function pruneInactiveHeroNodes(treeData, selected) {
+  if (!treeData?.nodes || !selected) return selected;
+  const active = selectedHeroSubtree(treeData, selected);
+  if (!active) return selected;
+
+  const drop = new Set(
+    treeData.nodes
+      .filter((n) => n.treeType === "hero" && n.heroSubtree !== active)
+      .map((n) => n.id),
+  );
+  const doomed = Object.keys(selected).filter((id) => drop.has(Number(id)));
+  if (doomed.length === 0) return selected;
+
+  const out = { ...selected };
+  for (const id of doomed) delete out[id];
+  return out;
+}
+
 // ─── Exports used by both interactive and import contexts ─────────────────────
 
 /**
