@@ -447,3 +447,34 @@ describe("in-game export carrying both hero subtrees", () => {
     });
   }
 });
+
+// Pruning must never cost a build the hero talents it actually has. A gate that
+// names the subtree the build did NOT invest in is real - Wowhead writes one -
+// and an earlier version of the pruning believed it, emptying the hero panel of
+// every third-party-sourced build. Runs over every fixture, whatever its source.
+describe("hero pruning preserves each fixture's own hero investment", () => {
+  for (const fx of FIXTURES) {
+    test(fx.name, () => {
+      const data = require(`../data/${fx.classSlug}.json`);
+      const sd = data.specs[fx.specSlug];
+      const classNodes = collectClassNodes(data);
+      const nodeById = Object.fromEntries(sd.nodes.map((n) => [n.id, n]));
+      const parsed = parseBuildString(fx.string, classNodes);
+      const pruned = pruneInactiveHeroNodes(sd, parsed.nodes);
+
+      const heroPoints = (selected) => {
+        let total = 0;
+        for (const [id, s] of Object.entries(selected)) {
+          const n = nodeById[id];
+          if (n?.treeType === "hero" && !n.alreadyGranted)
+            total += s.pointsInvested;
+        }
+        return total;
+      };
+
+      expect(selectedHeroSubtree(sd, parsed.nodes)).toBe(fx.heroSubtree);
+      expect(heroPoints(pruned)).toBe(sd.pointBudget.hero);
+      expect(heroPoints(pruned)).toBe(heroPoints(parsed.nodes));
+    });
+  }
+});

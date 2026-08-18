@@ -1080,3 +1080,46 @@ test("pruneInactiveHeroNodes passes through unusable input untouched", () => {
   const classOnly = { 1: sel(1) };
   assert.equal(pruneInactiveHeroNodes(heroTree(), classOnly), classOnly);
 });
+
+test("a gate contradicting the only spent subtree does not win", () => {
+  const t = heroTree();
+  // Wowhead writes a gate entry naming the subtree it did NOT invest in.
+  // Trusting it would prune away the build's only hero talents.
+  const wowheadish = {
+    1: sel(1),
+    20: sel(1),
+    21: sel(1),
+    900: { pointsInvested: 1, entryChosen: 0 }, // says "Left Tree"
+  };
+  assert.equal(selectedHeroSubtree(t, wowheadish), "Right Tree");
+  const pruned = pruneInactiveHeroNodes(t, wowheadish);
+  assert.deepEqual(Object.keys(pruned).sort(), ["1", "20", "21", "900"]);
+});
+
+test("pruning never empties a build that spent in exactly one subtree", () => {
+  const t = heroTree();
+  for (const entryChosen of [0, 1, null]) {
+    for (const ids of [
+      [10, 11],
+      [20, 21],
+    ]) {
+      const selected = Object.fromEntries([
+        ...ids.map((id) => [id, sel(1)]),
+        [900, { pointsInvested: 1, entryChosen }],
+      ]);
+      const pruned = pruneInactiveHeroNodes(t, selected);
+      const kept = ids.filter((id) => pruned[id]);
+      assert.deepEqual(kept, ids, `entryChosen=${entryChosen} ids=${ids}`);
+    }
+  }
+});
+
+test("a tie with unnamed gate slots falls back to the first spent subtree", () => {
+  // Both subtrees spent, so the gate must break the tie - but its slots carry
+  // no name to resolve to. Degrade to the spent-points scan rather than
+  // returning null, which would prune nothing and leave both subtrees in.
+  const nameless = { ...heroTree(), heroSubtrees: { left: {}, right: {} } };
+  assert.equal(selectedHeroSubtree(nameless, bothSubtrees(0)), "Left Tree");
+  const noSlots = { ...heroTree(), heroSubtrees: undefined };
+  assert.equal(selectedHeroSubtree(noSlots, bothSubtrees(1)), "Left Tree");
+});
