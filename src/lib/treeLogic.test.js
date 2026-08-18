@@ -17,6 +17,8 @@ import {
   gatedPoints,
   isFullySelected,
   hasUpperPrereq,
+  selectedHeroSubtree,
+  pruneInactiveHeroNodes,
 } from "./treeLogic.js";
 
 const require = createRequire(import.meta.url);
@@ -957,4 +959,124 @@ describe("renderOrder", () => {
       [1, 5, 2, 3],
     );
   });
+});
+
+// ─── Hero subtree resolution on an imported build ─────────────────────────────
+// The game persists choices in BOTH hero subtrees and exports both, so a build
+// string can carry two complete subtrees. Only the gate says which is live.
+
+const heroTree = () => ({
+  heroGateNodeId: 900,
+  heroSubtrees: { left: { name: "Left Tree" }, right: { name: "Right Tree" } },
+  nodes: [
+    { id: 1, posX: 1, posY: 1, treeType: "class", maxRanks: 1 },
+    {
+      id: 10,
+      posX: 1,
+      posY: 2,
+      treeType: "hero",
+      heroSubtree: "Left Tree",
+      maxRanks: 1,
+    },
+    {
+      id: 11,
+      posX: 2,
+      posY: 2,
+      treeType: "hero",
+      heroSubtree: "Left Tree",
+      maxRanks: 1,
+    },
+    {
+      id: 20,
+      posX: 3,
+      posY: 2,
+      treeType: "hero",
+      heroSubtree: "Right Tree",
+      maxRanks: 1,
+    },
+    {
+      id: 21,
+      posX: 4,
+      posY: 2,
+      treeType: "hero",
+      heroSubtree: "Right Tree",
+      maxRanks: 1,
+    },
+  ],
+});
+
+const bothSubtrees = (entryChosen) => ({
+  1: sel(1),
+  10: sel(1),
+  11: sel(1),
+  20: sel(1),
+  21: sel(1),
+  900: { pointsInvested: 1, entryChosen },
+});
+
+test("selectedHeroSubtree reads the gate, not the spent points", () => {
+  const t = heroTree();
+  assert.equal(selectedHeroSubtree(t, bothSubtrees(0)), "Left Tree");
+  assert.equal(selectedHeroSubtree(t, bothSubtrees(1)), "Right Tree");
+});
+
+test("selectedHeroSubtree falls back to spent points with no gate selection", () => {
+  const t = heroTree();
+  // Interactive selections carry no gate entry; only one subtree can hold points.
+  assert.equal(selectedHeroSubtree(t, { 20: sel(1) }), "Right Tree");
+  assert.equal(selectedHeroSubtree(t, {}), null);
+});
+
+test("pruneInactiveHeroNodes keeps only the gate-selected subtree", () => {
+  const t = heroTree();
+  const pruned = pruneInactiveHeroNodes(t, bothSubtrees(0));
+  assert.deepEqual(Object.keys(pruned).sort(), ["1", "10", "11", "900"]);
+
+  const other = pruneInactiveHeroNodes(t, bothSubtrees(1));
+  assert.deepEqual(Object.keys(other).sort(), ["1", "20", "21", "900"]);
+});
+
+test("pruneInactiveHeroNodes returns the same object when nothing is inactive", () => {
+  const t = heroTree();
+  const single = {
+    1: sel(1),
+    10: sel(1),
+    900: { pointsInvested: 1, entryChosen: 0 },
+  };
+  // Identity matters: an untouched build must not invalidate downstream memos.
+  assert.equal(pruneInactiveHeroNodes(t, single), single);
+});
+
+test("selectedHeroSubtree survives missing tree data and gate slots", () => {
+  assert.equal(selectedHeroSubtree(null, {}), null);
+  assert.equal(selectedHeroSubtree(undefined, undefined), null);
+  // No gate node id at all (pre-hero-talent specs).
+  const noGate = { nodes: heroTree().nodes };
+  assert.equal(selectedHeroSubtree(noGate, { 10: sel(1) }), "Left Tree");
+  // Gate chosen but the slot has no name: fall back to the spent-points scan.
+  const nameless = { ...heroTree(), heroSubtrees: { left: {}, right: {} } };
+  assert.equal(
+    selectedHeroSubtree(nameless, {
+      20: sel(1),
+      900: { pointsInvested: 1, entryChosen: 0 },
+    }),
+    "Right Tree",
+  );
+  // Gate present but never chosen.
+  assert.equal(
+    selectedHeroSubtree(heroTree(), {
+      900: { pointsInvested: 1, entryChosen: null },
+    }),
+    null,
+  );
+});
+
+test("pruneInactiveHeroNodes passes through unusable input untouched", () => {
+  const sel1 = { 10: sel(1) };
+  assert.equal(pruneInactiveHeroNodes(null, sel1), sel1);
+  assert.equal(pruneInactiveHeroNodes({}, sel1), sel1);
+  assert.equal(pruneInactiveHeroNodes(heroTree(), null), null);
+  // Nothing active -> nothing to prune against, so hand the input back.
+  const classOnly = { 1: sel(1) };
+  assert.equal(pruneInactiveHeroNodes(heroTree(), classOnly), classOnly);
 });

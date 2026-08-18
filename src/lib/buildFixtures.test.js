@@ -6,9 +6,13 @@
  * in-game talent UI, so decoding it correctly confirms our node IDs, ordering,
  * budgets, and hero model all match what the game actually emits.
  *
- * Invariant note: a legitimate single-loadout build invests in exactly ONE hero
- * subtree. (That invariant is what flagged the over-budget, both-subtree strings
- * pulled from a third-party "top builds" list as non-standard.)
+ * Invariant note: a build string can legitimately carry BOTH hero subtrees. The
+ * game persists talent choices in each hero tree and exports both, so a player
+ * who has filled the second tree exports two complete subtrees with only the
+ * gate node saying which is live. An earlier note here claimed the opposite and
+ * treated such strings as non-standard; that was wrong, and the fixtures below
+ * marked "both subtrees" are real exports proving it. The single-subtree
+ * fixtures come from characters that never filled their second tree.
  *
  * To add a fixture: export a build in-game (copy talent string) and append an
  * entry with the class/spec it belongs to and the hero subtree it invests in.
@@ -26,6 +30,8 @@ import {
   computeInvalidNodeIds,
   buildGrantedSeed,
   spentPoints,
+  selectedHeroSubtree,
+  pruneInactiveHeroNodes,
 } from "./treeLogic.js";
 import { buildExportString } from "./exportBuild.js";
 import { computeStats } from "./heatmap.js";
@@ -92,13 +98,13 @@ const FIXTURES = [
       "CoPAAAAAAAAAAAAAAAAAAAAAAwYWmZmxMmZmhZZmZmmZxYMmxAAAAAzMzMzMzMDzYMAgZmZGAAADMwMW0YZDklBsBYGmBAAmZghB",
   },
   {
-    name: "Mistweaver Monk (Wowhead delves)",
+    name: "Mistweaver Monk (in-game Retail)",
     classSlug: "monk",
     specSlug: "mistweaver",
     specId: 270,
     heroSubtree: "Conduit of the Celestials",
     string:
-      "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMWmZZML2mxMjNDYMzmZ222mZswQzYGLYwAGzMzMMbDzwsMTAAAAAEgFbzsNbzMAAAwAMDYMMDZMDA",
+      "C4QAQnG51S19isUJoJoTeJ/IKDAAAAAAAgxMWmZZMbWMjZsNzsgxgZWsMzYhZ0MmBMYWMYZMzMMLjxwsMTAAAAAEgFbzsMbzMgAgBMAzAGgtJMDA",
   },
   {
     name: "Shadow Priest (Wowhead M+)",
@@ -354,4 +360,90 @@ describe("tool-built string marking a granted hero root as purchased", () => {
       undefined,
     );
   });
+});
+
+// Real in-game exports from characters who have filled BOTH hero trees. The game
+// keeps the choices in each tree and writes both into the loadout string, so the
+// inactive subtree arrives fully selected even though the player is not running
+// it. Left alone it fails the prerequisite cascade (its gate was never chosen)
+// and paints a whole panel invalid, and it reads as a difference against a build
+// whose owner only ever filled one tree. The store prunes it away on import, the
+// mirror of what buildExportString already does when writing a string.
+describe("in-game export carrying both hero subtrees", () => {
+  const CASES = [
+    {
+      name: "Guardian Druid (M+, both subtrees)",
+      classSlug: "druid",
+      specSlug: "guardian",
+      active: "Elune's Chosen",
+      inactive: "Druid of the Claw",
+      string:
+        "CgGADBD3hSPCL9Y9gz68WcKvMAAAAAAAAAAAAgZmxsMPwMjZWMLGmZZZgZzwoJamZWmZmZmlxMAAAAAAMjlZALbzMYMLDgpmZZWmZmBAwGmZAWMDGwmFAmZmZDG",
+    },
+    {
+      name: "Mistweaver Monk (second tree filled, then swapped back)",
+      classSlug: "monk",
+      specSlug: "mistweaver",
+      active: "Conduit of the Celestials",
+      inactive: "Master of Harmony",
+      string:
+        "C4QAQnG51S19isUJoJoTeJ/IKDAAAAAAAgxMWmZZMbWMjZsNzsgxgZWsMzYhZ0MmBMYWMYZMzMMLjxwsMTAAAAgZZaZ2mZbWsNzysNzACAGwMzgZADw2EmBA",
+    },
+  ];
+
+  for (const fx of CASES) {
+    describe(fx.name, () => {
+      const data = require(`../data/${fx.classSlug}.json`);
+      const sd = data.specs[fx.specSlug];
+      const classNodes = collectClassNodes(data);
+      const nodeById = Object.fromEntries(sd.nodes.map((n) => [n.id, n]));
+      const raw = parseBuildString(fx.string, classNodes);
+      const pruned = pruneInactiveHeroNodes(sd, raw.nodes);
+
+      const heroPoints = (selected) => {
+        const out = {};
+        for (const [id, s] of Object.entries(selected)) {
+          const n = nodeById[id];
+          if (!n || n.alreadyGranted || n.treeType !== "hero") continue;
+          out[n.heroSubtree] = (out[n.heroSubtree] ?? 0) + s.pointsInvested;
+        }
+        return out;
+      };
+
+      test("the raw string really carries both subtrees, fully spent", () => {
+        expect(heroPoints(raw.nodes)).toEqual({
+          [fx.active]: sd.pointBudget.hero,
+          [fx.inactive]: sd.pointBudget.hero,
+        });
+      });
+
+      test("the gate identifies the subtree the player is running", () => {
+        expect(selectedHeroSubtree(sd, raw.nodes)).toBe(fx.active);
+      });
+
+      test("untouched, the inactive subtree reads as invalid", () => {
+        const selected = { ...buildGrantedSeed(sd), ...raw.nodes };
+        const invalid = computeInvalidNodeIds(sd.nodes, selected, nodeById);
+        expect(invalid.size).toBe(sd.pointBudget.hero);
+      });
+
+      test("pruned, it is the single-subtree build the player is running", () => {
+        expect(heroPoints(pruned)).toEqual({
+          [fx.active]: sd.pointBudget.hero,
+        });
+        const selected = { ...buildGrantedSeed(sd), ...pruned };
+        expect(computeInvalidNodeIds(sd.nodes, selected, nodeById).size).toBe(
+          0,
+        );
+      });
+
+      test("class and spec sections are untouched by pruning", () => {
+        for (const type of ["class", "spec"]) {
+          expect(spentPoints(sd.nodes, pruned, type)).toBe(
+            spentPoints(sd.nodes, raw.nodes, type),
+          );
+        }
+      });
+    });
+  }
 });

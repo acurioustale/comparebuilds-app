@@ -70,7 +70,7 @@ export async function loadTreeData(
       layoutHash,
       isLoading: false,
       // Re-parse every string that may have arrived while we were loading
-      parsedBuilds: storeHelpers.parseAll(currentStrings, classNodes),
+      parsedBuilds: storeHelpers.parseAll(currentStrings, classNodes, treeData),
       // In interactive mode (no imported builds at load start), seed pre-granted
       // nodes so prerequisite checks evaluate against the full effective
       // selection set. Keyed off the load-start snapshot, not a fresh post-await
