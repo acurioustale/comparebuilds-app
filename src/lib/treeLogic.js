@@ -246,16 +246,33 @@ export function activeHeroSubtree(allNodes, selected) {
  * @returns {string|null} Active hero subtree name, or null when there is none
  */
 export function selectedHeroSubtree(treeData, selected) {
+  const nodes = treeData?.nodes ?? [];
+  const sel = selected ?? {};
+
+  const spent = new Map();
+  for (const n of nodes) {
+    if (n.treeType !== "hero" || n.alreadyGranted) continue;
+    const pts = sel[n.id]?.pointsInvested ?? 0;
+    if (pts > 0)
+      spent.set(n.heroSubtree, (spent.get(n.heroSubtree) ?? 0) + pts);
+  }
+
+  // One subtree spent is unambiguous, and is trusted OVER the gate. Some
+  // exporters (Wowhead among them) write a gate entry naming the other subtree
+  // entirely; believing it there would prune away the only hero talents the
+  // build has. The gate is only needed to break a genuine tie, so it is only
+  // consulted for one.
+  if (spent.size === 1) return [...spent.keys()][0];
+
   const gateId = treeData?.heroGateNodeId;
-  const chosen =
-    gateId != null ? (selected?.[gateId]?.entryChosen ?? null) : null;
+  const chosen = gateId != null ? (sel[gateId]?.entryChosen ?? null) : null;
   if (chosen === 0 || chosen === 1) {
     // The gate's two entries are the left/right subtree slots, in that order.
     const slot =
       chosen === 0 ? treeData.heroSubtrees?.left : treeData.heroSubtrees?.right;
     if (slot?.name) return slot.name;
   }
-  return activeHeroSubtree(treeData?.nodes ?? [], selected ?? {});
+  return spent.size ? [...spent.keys()][0] : null;
 }
 
 /**
