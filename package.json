@@ -36,6 +36,7 @@
     "@types/dompurify": "^3.0.5",
     "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "^4.1.9",
+    "dompurify": "^3.4.13",
     "eslint": "^10.5.0",
     "eslint-plugin-html": "^8.1.4",
     "eslint-plugin-react-hooks": "^7.1.1",
@@ -54,7 +55,6 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.19",
-    "dompurify": "^3.4.13",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "zustand": "^5.0.13"
