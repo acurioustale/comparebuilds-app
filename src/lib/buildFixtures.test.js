@@ -92,13 +92,13 @@ const FIXTURES = [
       "CoPAAAAAAAAAAAAAAAAAAAAAAwYWmZmxMmZmhZZmZmmZxYMmxAAAAAzMzMzMzMDzYMAgZmZGAAADMwMW0YZDklBsBYGmBAAmZghB",
   },
   {
-    name: "Mistweaver Monk (Wowhead delves)",
+    name: "Mistweaver Monk (in-game Retail)",
     classSlug: "monk",
     specSlug: "mistweaver",
     specId: 270,
     heroSubtree: "Conduit of the Celestials",
     string:
-      "C4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMWmZZML2mxMjNDYMzmZ222mZswQzYGLYwAGzMzMMbDzwsMTAAAAAEgFbzsNbzMAAAwAMDYMMDZMDA",
+      "C4QAQnG51S19isUJoJoTeJ/IKDAAAAAAAgxMWmZZMbWMjZsNzsgxgZWsMzYhZ0MmBMYWMYZMzMMLjxwsMTAAAAAEgFbzsMbzMgAgBMAzAGgtJMDA",
   },
   {
     name: "Shadow Priest (Wowhead M+)",
