@@ -2,9 +2,16 @@
  * Ground-truth fixtures: real build strings exported from the actual game.
  *
  * Round-trip tests prove our codec is self-consistent; they cannot prove our
- * node set matches reality. These do — each string here was produced by the
- * in-game talent UI, so decoding it correctly confirms our node IDs, ordering,
- * budgets, and hero model all match what the game actually emits.
+ * node set matches reality. These do — decoding a string the game itself
+ * produced confirms our node IDs, ordering, budgets, and hero model match what
+ * it actually emits.
+ *
+ * Source matters, so each fixture names its own: "(in-game Retail)" strings came
+ * from the talent UI's copy button and are the real ground truth. The remaining
+ * "(Wowhead …)" ones are placeholders for specs no character was available to
+ * export, and are weaker evidence — Wowhead writes a hero gate naming the
+ * subtree it did NOT invest in, which is exactly the kind of divergence these
+ * fixtures exist to catch. Replace them with in-game exports when you can.
  *
  * Invariant note: a build string can legitimately carry BOTH hero subtrees. The
  * game persists talent choices in each hero tree and exports both, so a player
