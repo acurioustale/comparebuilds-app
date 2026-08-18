@@ -54,6 +54,91 @@ require_version() {
 	fi
 }
 
+# ─── Pinned tools ───────────────────────────────────────────────────────────
+# CI never takes these from a package manager: it downloads the exact pinned
+# release on every run. Mirror that locally into .tools/ (gitignored, cached per
+# version) so a routine `brew upgrade` can't drift a tool out from under its pin
+# - the pins belong to the project, not to the machine. Falls back to the PATH
+# copy, still version-asserted, when the download is unavailable, so an offline
+# machine degrades to the old behaviour instead of blocking. Bounded and
+# fail-fast: a stalled release host costs seconds and a fallback, not the run.
+TOOLS_DIR=.tools
+
+# pinned_fetch <dest> <url> [tar-member]. With a member the asset is a .tar.gz
+# and that entry is extracted; without one it is the executable itself.
+pinned_fetch() {
+	local dest="$1" url="$2" member="${3:-}" tmp
+	[[ -x "$dest" ]] && return 0
+	have curl || return 1
+	tmp="$(mktemp -d)" || return 1
+	if ! curl -sSfL --retry 2 --retry-delay 1 --retry-all-errors --max-time 60 "$url" -o "$tmp/dl"; then
+		rm -rf "$tmp"
+		return 1
+	fi
+	if [[ -n "$member" ]]; then
+		if ! tar xzf "$tmp/dl" -C "$tmp" "$member"; then
+			rm -rf "$tmp"
+			return 1
+		fi
+		mv "$tmp/$member" "$tmp/dl"
+	fi
+	mkdir -p "$TOOLS_DIR"
+	chmod +x "$tmp/dl"
+	mv "$tmp/dl" "$dest"
+	rm -rf "$tmp"
+}
+
+# Release-asset naming for this machine. The phars are platform-independent; the
+# two Go binaries are not. An unrecognised CPU leaves the slug empty, the URL
+# 404s, and the PATH fallback takes over.
+tools_os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+case "$(uname -m)" in
+x86_64) tools_cpu=amd64 ;;
+arm64 | aarch64) tools_cpu=arm64 ;;
+*) tools_cpu="" ;;
+esac
+
+# Resolve each pinned tool to a command array: the cached pinned copy when we can
+# get it, else the PATH copy, else empty so the stage skips as it always has.
+shfmt_cmd=()
+if pinned_fetch "$TOOLS_DIR/shfmt-$SHFMT_VERSION" \
+	"https://github.com/mvdan/sh/releases/download/v$SHFMT_VERSION/shfmt_v${SHFMT_VERSION}_${tools_os}_${tools_cpu}"; then
+	shfmt_cmd=("$TOOLS_DIR/shfmt-$SHFMT_VERSION")
+elif have shfmt; then
+	require_version shfmt "$SHFMT_VERSION" "$(shfmt --version)"
+	shfmt_cmd=(shfmt)
+fi
+
+actionlint_cmd=()
+if pinned_fetch "$TOOLS_DIR/actionlint-$ACTIONLINT_VERSION" \
+	"https://github.com/rhysd/actionlint/releases/download/v$ACTIONLINT_VERSION/actionlint_${ACTIONLINT_VERSION}_${tools_os}_${tools_cpu}.tar.gz" actionlint; then
+	actionlint_cmd=("$TOOLS_DIR/actionlint-$ACTIONLINT_VERSION")
+elif have actionlint; then
+	require_version actionlint "$ACTIONLINT_VERSION" "$(actionlint --version | head -1)"
+	actionlint_cmd=(actionlint)
+fi
+
+# The phars are run as `php <phar>`, exactly as CI invokes them - a shell wrapper
+# on PATH breaks php-cs-fixer's parallel runner, which re-execs itself and cannot
+# resolve its own path through the wrapper.
+phpcsfixer_cmd=()
+if have php && pinned_fetch "$TOOLS_DIR/php-cs-fixer-$PHPCSFIXER_VERSION.phar" \
+	"https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v$PHPCSFIXER_VERSION/php-cs-fixer.phar"; then
+	phpcsfixer_cmd=(php "$TOOLS_DIR/php-cs-fixer-$PHPCSFIXER_VERSION.phar")
+elif have php-cs-fixer; then
+	require_version php-cs-fixer "$PHPCSFIXER_VERSION" "$(php-cs-fixer --version)"
+	phpcsfixer_cmd=(php-cs-fixer)
+fi
+
+phpunit_cmd=()
+if have php && pinned_fetch "$TOOLS_DIR/phpunit-$PHPUNIT_VERSION.phar" \
+	"https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar"; then
+	phpunit_cmd=(php "$TOOLS_DIR/phpunit-$PHPUNIT_VERSION.phar")
+elif have phpunit; then
+	require_version phpunit "$PHPUNIT_VERSION" "$(phpunit --version | head -1)"
+	phpunit_cmd=(phpunit)
+fi
+
 # CI pins Node through this same file, so a local mismatch means the JS stages
 # below prove nothing about CI. Block on it, as every other pin does - a warning
 # scrolls past on a script this long. Only the major is compared: setup-node
@@ -92,15 +177,14 @@ fi
 # Skipped with a notice when the tools aren't installed locally so validate.sh
 # stays runnable everywhere; CI always enforces them. When present, either tool's
 # findings fail the run via set -e.
-if have shellcheck && have shfmt; then
+if have shellcheck && [[ ${#shfmt_cmd[@]} -gt 0 ]]; then
 	step "Shell scripts (shellcheck + shfmt)"
-	require_version shfmt "$SHFMT_VERSION" "$(shfmt --version)"
 	sh_files=()
 	while IFS= read -r file; do
 		sh_files+=("$file")
 	done < <(git ls-files '*.sh')
 	shellcheck "${sh_files[@]}"
-	shfmt -d "${sh_files[@]}"
+	"${shfmt_cmd[@]}" -d "${sh_files[@]}"
 else
 	skip shellcheck/shfmt "shell checks"
 fi
@@ -114,26 +198,23 @@ else
 	skip php "PHP checks"
 fi
 
-if have php-cs-fixer; then
+if [[ ${#phpcsfixer_cmd[@]} -gt 0 ]]; then
 	step "PHP format (php-cs-fixer)"
-	require_version php-cs-fixer "$PHPCSFIXER_VERSION" "$(php-cs-fixer --version)"
-	php-cs-fixer fix --dry-run --config .php-cs-fixer.dist.php
+	"${phpcsfixer_cmd[@]}" fix --dry-run --config .php-cs-fixer.dist.php
 else
 	skip php-cs-fixer "php-cs-fixer"
 fi
 
-if have phpunit; then
+if [[ ${#phpunit_cmd[@]} -gt 0 ]]; then
 	step "PHP tests (phpunit)"
-	require_version phpunit "$PHPUNIT_VERSION" "$(phpunit --version | head -1)"
-	phpunit
+	"${phpunit_cmd[@]}"
 else
 	skip phpunit "phpunit"
 fi
 
-if have actionlint; then
+if [[ ${#actionlint_cmd[@]} -gt 0 ]]; then
 	step "Workflows (actionlint)"
-	require_version actionlint "$ACTIONLINT_VERSION" "$(actionlint --version | head -1)"
-	actionlint
+	"${actionlint_cmd[@]}"
 else
 	skip actionlint "actionlint"
 fi

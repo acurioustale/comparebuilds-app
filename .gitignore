@@ -69,3 +69,6 @@ desktop.ini
 # ─── Claude Code ────────────────────────────────────────────────────────────────
 # Commit shared run config (launch.json); keep personal/local settings out.
 .claude/settings.local.json
+
+# Pinned CI tools cached locally by validate.sh (see .tool-versions).
+.tools/
