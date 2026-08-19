@@ -6,12 +6,11 @@
  * produced confirms our node IDs, ordering, budgets, and hero model match what
  * it actually emits.
  *
- * Source matters, so each fixture names its own: "(in-game Retail)" strings came
- * from the talent UI's copy button and are the real ground truth. The remaining
- * "(Wowhead …)" ones are placeholders for specs no character was available to
- * export, and are weaker evidence — Wowhead writes a hero gate naming the
- * subtree it did NOT invest in, which is exactly the kind of divergence these
- * fixtures exist to catch. Replace them with in-game exports when you can.
+ * Source matters, so each fixture names its own: every entry below is "(in-game
+ * Retail)" — from the talent UI's copy button, the real ground truth. Strings
+ * from third-party calculators are weaker evidence (Wowhead writes a hero gate
+ * naming the subtree it did NOT invest in) and are kept only in the dedicated
+ * tool-built cases further down, never as a spec's fixture.
  *
  * Invariant note: a build string can legitimately carry BOTH hero subtrees. The
  * game persists talent choices in each hero tree and exports both, so a player
@@ -96,13 +95,13 @@ const FIXTURES = [
       "CgGA8cL7tpvige+kkmGM9zUPWDAAAAAAAAAAAgZmZmFzMjZWMLm5BmZZZgZbGGNRmZWMzMzsMzMMAAAAAGYsYGYZbmBjZZAMFAAAYDzAYxYYgZxyGgZGAA",
   },
   {
-    name: "Blood Death Knight (Wowhead raid)",
+    name: "Blood Death Knight (in-game Retail)",
     classSlug: "death_knight",
     specSlug: "blood",
     specId: 250,
-    heroSubtree: "San'layn",
+    heroSubtree: "Deathbringer",
     string:
-      "CoPAAAAAAAAAAAAAAAAAAAAAAwYWmZmxMmZmhZZmZmmZxYMmxAAAAAzMzMzMzMDzYMAgZmZGAAADMwMW0YZDklBsBYGmBAAmZghB",
+      "CoPAkXBWxkyfx9CbGaHonEAhLxMzyMzMmxMzMMLzMz0MLGjxMGAAAAwMmZmZmZYGDAYmZmZGAAgxsNwAWC2GmADLAmxMAAMzAYYA",
   },
   {
     name: "Mistweaver Monk (in-game Retail)",
@@ -114,13 +113,13 @@ const FIXTURES = [
       "C4QAQnG51S19isUJoJoTeJ/IKDAAAAAAAgxMWmZZMbWMjZsNzsgxgZWsMzYhZ0MmBMYWMYZMzMMLjxwsMTAAAAAEgFbzsMbzMgAgBMAzAGgtJMDA",
   },
   {
-    name: "Shadow Priest (Wowhead M+)",
+    name: "Shadow Priest (in-game Retail)",
     classSlug: "priest",
     specSlug: "shadow",
     specId: 258,
     heroSubtree: "Archon",
     string:
-      "CIQAAAAAAAAAAAAAAAAAAAAAAMMjZGAAAAAAAAAAAghZxMGLzMmZWmZYmx2MGzMzYDZGLmpBYGgZ2MDzmBgMGLAYGIjZmZMbjZ2WGgZiB",
+      "CIQAR03Gt7xPmcDNOjs2Zlb3yOMDzAAAAAAAAAAAAMMLmxYZmhZ2mZYG2mZGzMzYDZGLmpBYGgZ2MjmNDAZMWAwMjBjZmZMbMz2yAMDGA",
   },
   {
     name: "Beast Mastery Hunter (in-game Retail)",

@@ -40,4 +40,4 @@ export function genStrings(classSlug, specSlug, n) {
  * when cut.
  */
 export const UNPARSEABLE_BLOOD =
-  "CoPAAAAAAAAAAAAAAAAAAAAAAwYWmZmxMmZmhZZmZmmZxYMmxAAAAAzMzMzMzMDzYMAgZmZGAAADMwMW";
+  "CoPAkXBWxkyfx9CbGaHonEAhLxMzyMzMmxMzMMLzMz0MLGjxMGAAAAwMmZmZmZYGDAYmZmZGAAgxsNw";
