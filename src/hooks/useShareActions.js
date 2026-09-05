@@ -56,6 +56,8 @@ export function useShareActions({
   // Why the last share attempt failed, or null. Survives the copyState reset.
   const [copyError, setCopyError] = useState(null);
   const [simcState, setSimcState] = useState("idle"); // 'idle' | 'copying' | 'copied' | 'error'
+  // Why the last SimC export failed, or null. Mirrors copyError.
+  const [simcError, setSimcError] = useState(null);
 
   // Reset timers, cleared on unmount so they can't fire setState on a removed
   // share-controls component (e.g. clearing all builds within the 2s window).
@@ -126,6 +128,7 @@ export function useShareActions({
   const handleCopySimc = useCallback(async () => {
     if (simcState !== "idle") return;
     setSimcState("copying");
+    setSimcError(null);
     try {
       const profileset = generateSimcProfileset(
         buildStrings,
@@ -137,7 +140,12 @@ export function useShareActions({
       );
       await copyToClipboard(profileset);
       setSimcState("copied");
-    } catch {
+    } catch (err) {
+      // Same reasoning as handleCopyLink: nothing here reaches a server, but the
+      // two failures it can produce still want telling apart — a rejected
+      // clipboard write, and generateSimcProfileset throwing on build data it
+      // cannot turn into a profileset. "Failed" alone distinguishes neither.
+      setSimcError(err?.message || "Something went wrong.");
       setSimcState("error");
     } finally {
       if (mounted.current) {
@@ -154,5 +162,12 @@ export function useShareActions({
     parsedBuilds,
   ]);
 
-  return { copyState, copyError, simcState, handleCopyLink, handleCopySimc };
+  return {
+    copyState,
+    copyError,
+    simcState,
+    simcError,
+    handleCopyLink,
+    handleCopySimc,
+  };
 }

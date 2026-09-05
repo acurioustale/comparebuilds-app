@@ -18,6 +18,7 @@ import BuildManager, { ClassIcon } from "./BuildManager.jsx";
 import { useBuildsStore } from "../store/buildsStore.js";
 import { genStrings, UNPARSEABLE_BLOOD } from "../test/buildStrings.js";
 import * as shareLink from "../lib/shareLink.js";
+import * as simcProfile from "../lib/simcProfile.js";
 
 const require = createRequire(import.meta.url);
 
@@ -424,5 +425,33 @@ describe("share-link failure reporting", () => {
     await screen.findByRole("button", { name: "Share link" });
 
     expect(screen.queryByRole("alert")).toBeNull();
+  });
+});
+
+describe("simc-export failure reporting", () => {
+  // The SimC button shared the share button's bare "Failed". Both now render
+  // through ActionError, and each must name its own action — a single generic
+  // line would leave the user guessing which of the two adjacent buttons broke.
+  test("names the SimC export rather than the share", async () => {
+    vi.spyOn(simcProfile, "generateSimcProfileset").mockImplementation(() => {
+      throw new Error("No parsed builds to export.");
+    });
+
+    render(<BuildManager />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+
+    const simcBtn = await screen.findByRole("button", {
+      name: "Copy simc profileset",
+    });
+    fireEvent.click(simcBtn);
+
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent(
+      "SimC export failed: No parsed builds to export.",
+    );
+    expect(alert).not.toHaveTextContent("Share failed");
   });
 });

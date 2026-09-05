@@ -10,8 +10,10 @@ import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useShareActions } from "./useShareActions.js";
 import { createServerShare } from "../lib/shareLink.js";
+import { generateSimcProfileset } from "../lib/simcProfile.js";
 
 vi.mock("../lib/shareLink.js", () => ({ createServerShare: vi.fn() }));
+vi.mock("../lib/simcProfile.js", () => ({ generateSimcProfileset: vi.fn() }));
 
 const baseProps = {
   classId: 6,
@@ -156,5 +158,80 @@ describe("useShareActions copy-link error reporting", () => {
 
     expect(result.current.copyState).toBe("copied");
     expect(result.current.copyError).toBeNull();
+  });
+});
+
+describe("useShareActions simc-export error reporting", () => {
+  test("keeps the reason a profileset could not be generated", async () => {
+    generateSimcProfileset.mockImplementation(() => {
+      throw new Error("No parsed builds to export.");
+    });
+
+    const { result } = renderHook(() => useShareActions(baseProps));
+
+    await act(async () => {
+      result.current.handleCopySimc();
+      await flush();
+    });
+
+    expect(result.current.simcState).toBe("error");
+    expect(result.current.simcError).toBe("No parsed builds to export.");
+  });
+
+  test("reports a rejected clipboard write distinctly from a generation failure", async () => {
+    generateSimcProfileset.mockReturnValue("profileset text");
+    navigator.clipboard.writeText.mockRejectedValue(
+      new Error("Write permission denied."),
+    );
+
+    const { result } = renderHook(() => useShareActions(baseProps));
+
+    await act(async () => {
+      result.current.handleCopySimc();
+      await flush();
+    });
+
+    expect(result.current.simcError).toBe("Write permission denied.");
+  });
+
+  test("clears the previous error when a later export is started", async () => {
+    generateSimcProfileset.mockImplementation(() => {
+      throw new Error("boom");
+    });
+    const { result } = renderHook(() => useShareActions(baseProps));
+
+    await act(async () => {
+      result.current.handleCopySimc();
+      await flush();
+    });
+    expect(result.current.simcError).toBe("boom");
+
+    // The guard only lets a retry through once the 2s label reset has fired.
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 2100));
+    });
+    generateSimcProfileset.mockReturnValue("profileset text");
+
+    await act(async () => {
+      result.current.handleCopySimc();
+      await flush();
+    });
+
+    expect(result.current.simcState).toBe("copied");
+    expect(result.current.simcError).toBeNull();
+  });
+
+  test("a share failure does not present itself as a simc failure", async () => {
+    createServerShare.mockRejectedValue(new Error("server said no"));
+
+    const { result } = renderHook(() => useShareActions(baseProps));
+
+    await act(async () => {
+      result.current.handleCopyLink();
+      await flush();
+    });
+
+    expect(result.current.copyError).toBe("server said no");
+    expect(result.current.simcError).toBeNull();
   });
 });
