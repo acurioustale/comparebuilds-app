@@ -215,18 +215,24 @@ export default function BuildManager() {
     activeClass?.specs.find((s) => s.id === specId)?.displayName ?? "";
   const classDisplayName = activeClass?.displayName ?? "";
 
-  const { copyState, copyError, simcState, handleCopyLink, handleCopySimc } =
-    useShareActions({
-      classId,
-      specId,
-      buildStrings,
-      buildNames,
-      classDisplayName,
-      specDisplayName,
-      treeData,
-      parsedBuilds,
-      layoutHash,
-    });
+  const {
+    copyState,
+    copyError,
+    simcState,
+    simcError,
+    handleCopyLink,
+    handleCopySimc,
+  } = useShareActions({
+    classId,
+    specId,
+    buildStrings,
+    buildNames,
+    classDisplayName,
+    specDisplayName,
+    treeData,
+    parsedBuilds,
+    layoutHash,
+  });
 
   // Per-slot ordinals: the slot number, or "A"/"B" when exactly two builds
   // parse — the same rule the comparison panels label their builds by, so a
@@ -422,16 +428,8 @@ export default function BuildManager() {
       {/* ── Action buttons ─────────────────────────── */}
       {allParsed && (
         <section className="pt-3 border-t border-wow-dim">
-          {/* Mirrors the slot-level error line in EmptySlot: same red, same
-              placement under the control that failed. */}
-          {copyError && (
-            <p
-              role="alert"
-              className="mb-2 text-right text-red-400 text-xs leading-snug"
-            >
-              Share failed: {copyError}
-            </p>
-          )}
+          <ActionError label="Share" message={copyError} />
+          <ActionError label="SimC export" message={simcError} />
           <div className="flex justify-end items-center gap-2">
             <button
               type="button"
@@ -453,6 +451,22 @@ export default function BuildManager() {
         </section>
       )}
     </div>
+  );
+}
+
+// One failure line for an action button. Both actions render through it so the
+// share link and the SimC export can't describe a failure differently, and both
+// match the slot-level parse error in EmptySlot — same red, same placement under
+// the control that failed. Renders nothing while `message` is null.
+function ActionError({ label, message }) {
+  if (!message) return null;
+  return (
+    <p
+      role="alert"
+      className="mb-2 text-right text-red-400 text-xs leading-snug"
+    >
+      {label} failed: {message}
+    </p>
   );
 }
 
