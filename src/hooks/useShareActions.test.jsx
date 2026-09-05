@@ -83,3 +83,78 @@ describe("useShareActions copy-link reset timer", () => {
     expect(resetTimers).toHaveLength(1);
   });
 });
+
+describe("useShareActions copy-link error reporting", () => {
+  test("keeps the API's own message so the UI can show more than 'Failed'", async () => {
+    createServerShare.mockRejectedValue(
+      new Error("Could not generate a unique share ID"),
+    );
+
+    const { result } = renderHook(() => useShareActions(baseProps));
+
+    await act(async () => {
+      result.current.handleCopyLink();
+      await flush();
+    });
+
+    expect(result.current.copyState).toBe("error");
+    expect(result.current.copyError).toBe(
+      "Could not generate a unique share ID",
+    );
+  });
+
+  test("reports a rejected clipboard write distinctly from a server refusal", async () => {
+    createServerShare.mockResolvedValue({ id: "abcdefgh" });
+    navigator.clipboard.writeText.mockRejectedValue(
+      new Error("Write permission denied."),
+    );
+
+    const { result } = renderHook(() => useShareActions(baseProps));
+
+    await act(async () => {
+      result.current.handleCopyLink();
+      await flush();
+    });
+
+    expect(result.current.copyError).toBe("Write permission denied.");
+  });
+
+  test("falls back to a generic message when the failure carries none", async () => {
+    createServerShare.mockRejectedValue(new Error(""));
+
+    const { result } = renderHook(() => useShareActions(baseProps));
+
+    await act(async () => {
+      result.current.handleCopyLink();
+      await flush();
+    });
+
+    expect(result.current.copyError).toBe("Something went wrong.");
+  });
+
+  test("clears the previous error when a later attempt is started", async () => {
+    createServerShare.mockRejectedValue(new Error("boom"));
+    const { result } = renderHook(() => useShareActions(baseProps));
+
+    await act(async () => {
+      result.current.handleCopyLink();
+      await flush();
+    });
+    expect(result.current.copyError).toBe("boom");
+
+    // The label resets to idle after 2s; only then does the guard let a retry
+    // through. Advance past it, then succeed.
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 2100));
+    });
+    createServerShare.mockResolvedValue({ id: "abcdefgh" });
+
+    await act(async () => {
+      result.current.handleCopyLink();
+      await flush();
+    });
+
+    expect(result.current.copyState).toBe("copied");
+    expect(result.current.copyError).toBeNull();
+  });
+});

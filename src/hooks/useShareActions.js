@@ -53,6 +53,8 @@ export function useShareActions({
   layoutHash,
 }) {
   const [copyState, setCopyState] = useState("idle"); // 'idle' | 'copying' | 'copied' | 'error'
+  // Why the last share attempt failed, or null. Survives the copyState reset.
+  const [copyError, setCopyError] = useState(null);
   const [simcState, setSimcState] = useState("idle"); // 'idle' | 'copying' | 'copied' | 'error'
 
   // Reset timers, cleared on unmount so they can't fire setState on a removed
@@ -77,6 +79,7 @@ export function useShareActions({
   const handleCopyLink = useCallback(async () => {
     if (copyState !== "idle") return;
     setCopyState("copying");
+    setCopyError(null);
     try {
       const labels = buildNames.some(Boolean) ? buildNames : undefined;
       const { id } = await createServerShare({
@@ -95,7 +98,14 @@ export function useShareActions({
       const url = `${window.location.origin}/s/${id}`;
       await copyToClipboard(url);
       setCopyState("copied");
-    } catch {
+    } catch (err) {
+      // Keep the reason, not just the fact. "Failed" alone is indistinguishable
+      // between a rejected clipboard write and a server refusal, and
+      // createServerShare puts the API's own error text on the message — the
+      // difference between guessing and reading "Could not generate a unique
+      // share ID". Outlives the 2s label reset below (cleared on the next
+      // attempt instead) so there is time to read it.
+      setCopyError(err?.message || "Something went wrong.");
       setCopyState("error");
     } finally {
       if (mounted.current) {
@@ -144,5 +154,5 @@ export function useShareActions({
     parsedBuilds,
   ]);
 
-  return { copyState, simcState, handleCopyLink, handleCopySimc };
+  return { copyState, copyError, simcState, handleCopyLink, handleCopySimc };
 }
