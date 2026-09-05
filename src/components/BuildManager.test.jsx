@@ -5,7 +5,7 @@
  * UI, and clear-all, end to end (paste → store → rendered result).
  */
 
-import { describe, test, expect, beforeEach, afterEach } from "vitest";
+import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 import {
   render,
   screen,
@@ -17,6 +17,7 @@ import { createRequire } from "node:module";
 import BuildManager, { ClassIcon } from "./BuildManager.jsx";
 import { useBuildsStore } from "../store/buildsStore.js";
 import { genStrings, UNPARSEABLE_BLOOD } from "../test/buildStrings.js";
+import * as shareLink from "../lib/shareLink.js";
 
 const require = createRequire(import.meta.url);
 
@@ -30,6 +31,7 @@ beforeEach(() => {
 });
 afterEach(() => {
   cleanup();
+  vi.restoreAllMocks();
 });
 
 describe("BuildManager import flow", () => {
@@ -385,5 +387,42 @@ describe("ClassIcon", () => {
     const img = document.querySelector("img");
     expect(img).not.toBeNull();
     expect(img.getAttribute("src")).toContain("classicon_");
+  });
+});
+
+describe("share-link failure reporting", () => {
+  // The share button collapses every failure to "Failed", which is why a live
+  // 500 ("Could not generate a unique share ID") once took a full API
+  // investigation to identify. The reason has to reach the page.
+  test("renders the API's error text alongside the Failed label", async () => {
+    const spy = vi
+      .spyOn(shareLink, "createServerShare")
+      .mockRejectedValue(new Error("Could not generate a unique share ID"));
+
+    render(<BuildManager />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+
+    const shareBtn = await screen.findByRole("button", { name: "Share link" });
+    fireEvent.click(shareBtn);
+
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent(
+      "Share failed: Could not generate a unique share ID",
+    );
+    expect(spy).toHaveBeenCalled();
+  });
+
+  test("shows no alert while nothing has failed", async () => {
+    render(<BuildManager />);
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    paste(screen.getAllByPlaceholderText("Paste build string…")[0], a);
+    await screen.findByPlaceholderText(/Build 1 — Blood Death Knight/);
+    paste(screen.getByPlaceholderText("Paste build string…"), b);
+    await screen.findByRole("button", { name: "Share link" });
+
+    expect(screen.queryByRole("alert")).toBeNull();
   });
 });

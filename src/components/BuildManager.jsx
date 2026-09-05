@@ -215,7 +215,7 @@ export default function BuildManager() {
     activeClass?.specs.find((s) => s.id === specId)?.displayName ?? "";
   const classDisplayName = activeClass?.displayName ?? "";
 
-  const { copyState, simcState, handleCopyLink, handleCopySimc } =
+  const { copyState, copyError, simcState, handleCopyLink, handleCopySimc } =
     useShareActions({
       classId,
       specId,
@@ -421,23 +421,35 @@ export default function BuildManager() {
 
       {/* ── Action buttons ─────────────────────────── */}
       {allParsed && (
-        <section className="flex justify-end items-center gap-2 pt-3 border-t border-wow-dim">
-          <button
-            type="button"
-            onClick={handleCopySimc}
-            className="wow-btn px-4 py-2 text-xs rounded select-none"
-            style={{ color: actionColor(simcState) }}
-          >
-            {actionLabel(simcState, "Copy simc profileset", "Copying…")}
-          </button>
-          <button
-            type="button"
-            onClick={handleCopyLink}
-            className="wow-btn px-4 py-2 text-xs rounded select-none"
-            style={{ color: actionColor(copyState) }}
-          >
-            {actionLabel(copyState, "Share link", "Saving…")}
-          </button>
+        <section className="pt-3 border-t border-wow-dim">
+          {/* Mirrors the slot-level error line in EmptySlot: same red, same
+              placement under the control that failed. */}
+          {copyError && (
+            <p
+              role="alert"
+              className="mb-2 text-right text-red-400 text-xs leading-snug"
+            >
+              Share failed: {copyError}
+            </p>
+          )}
+          <div className="flex justify-end items-center gap-2">
+            <button
+              type="button"
+              onClick={handleCopySimc}
+              className="wow-btn px-4 py-2 text-xs rounded select-none"
+              style={{ color: actionColor(simcState) }}
+            >
+              {actionLabel(simcState, "Copy simc profileset", "Copying…")}
+            </button>
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="wow-btn px-4 py-2 text-xs rounded select-none"
+              style={{ color: actionColor(copyState) }}
+            >
+              {actionLabel(copyState, "Share link", "Saving…")}
+            </button>
+          </div>
         </section>
       )}
     </div>

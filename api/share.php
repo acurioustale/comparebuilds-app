@@ -610,6 +610,36 @@ function ensure_share_schema(PDO $pdo): void
             INDEX idx_ip_created (ip_hash, created_at)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     ");
+    // Widen `id` on deployments created before content-addressing. The CREATE
+    // above is a no-op against an existing table, so a database first built in
+    // the random-6-char-id era kept `id CHAR(6)` with the table's default
+    // (case-insensitive) collation — and both halves of that silently break
+    // sharing. The width truncates every 8-char content address to 6 on insert,
+    // so store_share hands the client an id no lookup can ever match: every link
+    // 404s, the dedup fast-path misses its own row, and because all five rungs of
+    // the claim ladder (8, 10, … 16) truncate to the SAME 6 chars, a re-share of
+    // one build hits duplicate-key on each rung and dies as a 500 "Could not
+    // generate a unique share ID". The collation then collapses base62's 62
+    // symbols to 36, colliding ids that differ only in case. Gate the repair on
+    // the column's actual definition, for the reason the layout_hash repair below
+    // is gated: MODIFY rebuilds the table and its indexes, and the fix is needed
+    // at most once. A failed lookup repairs anyway — a needless rebuild is
+    // recoverable, a truncating id column is not.
+    $idColumn = $pdo->query(
+        "SELECT DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, COLLATION_NAME
+           FROM information_schema.COLUMNS
+          WHERE TABLE_SCHEMA = DATABASE()
+            AND TABLE_NAME = 'comparebuilds_shares'
+            AND COLUMN_NAME = 'id'"
+    )->fetch(PDO::FETCH_ASSOC);
+    if (
+        !$idColumn
+        || $idColumn['DATA_TYPE'] !== 'varchar'
+        || (int) $idColumn['CHARACTER_MAXIMUM_LENGTH'] < MAX_ID_LEN
+        || $idColumn['COLLATION_NAME'] !== 'utf8mb4_bin'
+    ) {
+        $pdo->exec('ALTER TABLE comparebuilds_shares MODIFY COLUMN id VARCHAR(32) COLLATE utf8mb4_bin NOT NULL');
+    }
     // Supersession-gated retention (see prune_shares.php): a share is deleted
     // only once its talent layout is superseded AND it has gone unused for the
     // retention window. `last_accessed` drives the "unused" clock (touched on
