@@ -15,6 +15,7 @@
     "lint:md": "markdownlint-cli2",
     "check:csp": "node tools/check-csp.mjs",
     "check:og": "node tools/check-og-image.mjs",
+    "check:wire-layout": "node scripts/checkWireLayout.js",
     "links": "lychee --config lychee.toml --root-dir public README.md CLAUDE.md SECURITY.md index.html",
     "test": "vitest run",
     "test:watch": "vitest",

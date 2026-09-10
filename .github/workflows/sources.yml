@@ -18,6 +18,7 @@ on:
     paths:
       - "scripts/ingestBlizzard.js"
       - "scripts/compareSources.js"
+      - "scripts/checkWireLayout.js"
       - "scripts/lib/**"
       - "src/data/**"
       - "src/lib/wireLayout.snapshot.json"
@@ -55,3 +56,36 @@ jobs:
           BLIZZARD_CLIENT_ID: ${{ secrets.BLIZZARD_CLIENT_ID }}
           BLIZZARD_CLIENT_SECRET: ${{ secrets.BLIZZARD_CLIENT_SECRET }}
         run: node scripts/compareSources.js
+
+  # A second, narrower freshness check with different reach. compareSources needs
+  # the Blizzard secrets, so it is skipped entirely on fork PRs; this one is a
+  # plain public GET and therefore runs everywhere, including forks. It confirms
+  # only the build-string node ordering, but against an INDEPENDENT derivation of
+  # the game client (Raidbots, via SimC's casc/dbc tools) rather than against our
+  # own committed snapshot — see scripts/checkWireLayout.js.
+  wire-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".tool-versions"
+          cache: npm
+
+      # The check imports src/lib/buildString.js only, which has no runtime
+      # dependencies — but vitest and the repo's other tooling are not needed
+      # here at all, so skip the install and run it straight from the checkout.
+      - name: Confirm the live wire layout against Raidbots
+        run: node scripts/checkWireLayout.js
+
+      # PTR and beta carry the NEXT patch's node set. A divergence there is the
+      # point of the check rather than a fault, so these steps always exit zero
+      # (the script warns instead of failing off-live) and are informational in
+      # the log. They are what turns a wire-layout break from a post-patch
+      # incident into advance notice that a re-ingest is due.
+      - name: Look ahead at the test channels
+        run: |
+          node scripts/checkWireLayout.js --env=ptr
+          node scripts/checkWireLayout.js --env=beta
