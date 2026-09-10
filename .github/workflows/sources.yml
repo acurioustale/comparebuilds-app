@@ -19,12 +19,20 @@ on:
       - "scripts/ingestBlizzard.js"
       - "scripts/compareSources.js"
       - "scripts/checkWireLayout.js"
+      - "scripts/checkGameBuild.js"
+      - "scripts/gameBuild.json"
       - "scripts/lib/**"
       - "src/data/**"
       - "src/lib/wireLayout.snapshot.json"
   workflow_dispatch:
   schedule:
+    # Weekly: the full run, including the credentialed compareSources job.
     - cron: "0 7 * * 1"
+    # Daily: the cheap credential-free probe only. The `upstream` job costs two
+    # small public GETs and a few megabytes, so it can ask "has the game moved?"
+    # every morning; compareSources re-derives every class against a rate-limited
+    # API and stays weekly. The `compare` job below opts out of this cron.
+    - cron: "0 6 * * *"
 
 permissions:
   contents: read
@@ -32,6 +40,10 @@ permissions:
 jobs:
   compare:
     runs-on: ubuntu-latest
+    # Skipped on the daily cron — that one exists for the cheap `upstream` job.
+    # Guarding the job (not the step) keeps the daily run from spending an
+    # otherwise-idle runner and a Blizzard token on a full re-derivation.
+    if: ${{ github.event.schedule != '0 6 * * *' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -57,13 +69,14 @@ jobs:
           BLIZZARD_CLIENT_SECRET: ${{ secrets.BLIZZARD_CLIENT_SECRET }}
         run: node scripts/compareSources.js
 
-  # A second, narrower freshness check with different reach. compareSources needs
+  # The credential-free half of the freshness checks. compareSources needs
   # the Blizzard secrets, so it is skipped entirely on fork PRs; this one is a
   # plain public GET and therefore runs everywhere, including forks. It confirms
   # only the build-string node ordering, but against an INDEPENDENT derivation of
   # the game client (Raidbots, via SimC's casc/dbc tools) rather than against our
-  # own committed snapshot — see scripts/checkWireLayout.js.
-  wire-layout:
+  # own committed snapshot — plus a cheap probe of which build each channel is on.
+  # See scripts/checkWireLayout.js and scripts/checkGameBuild.js.
+  upstream:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -73,6 +86,10 @@ jobs:
         with:
           node-version-file: ".tool-versions"
           cache: npm
+
+      # No `npm ci`: both scripts import only node builtins and local files
+      # (src/lib/buildString.js pulls in nothing else), so they run straight from
+      # the checkout.
 
       # Raidbots asks callers to cache their files locally, and a fresh runner
       # has no disk cache at all — without this the job re-pulls ~3 MB per
@@ -86,10 +103,16 @@ jobs:
           key: raidbots-${{ github.run_id }}
           restore-keys: raidbots-
 
-      # The check imports src/lib/buildString.js only, which has no runtime
-      # dependencies — but vitest and the repo's other tooling are not needed
-      # here at all, so skip the install and run it straight from the checkout.
+      # Cheap probe first — a ~1 KB metadata.json per channel. It fails when live
+      # has moved past the acknowledged patch version.
+      - name: Probe the live game build
+        run: node scripts/checkGameBuild.js
+
+      # Every later step runs even when the probe above failed: a moved build is
+      # exactly when the layout answer matters most, so it must not be hidden by
+      # the thing that prompted the question.
       - name: Confirm the live wire layout against Raidbots
+        if: ${{ !cancelled() }}
         run: node scripts/checkWireLayout.js
 
       # The test channels carry whatever build they are currently on, which is
@@ -100,6 +123,7 @@ jobs:
       # ahead: a wire-layout break becomes advance notice rather than a
       # post-patch incident.
       - name: Look ahead at the test channels
+        if: ${{ !cancelled() }}
         run: |
           node scripts/checkWireLayout.js --env=ptr
           node scripts/checkWireLayout.js --env=beta
