@@ -8,6 +8,8 @@ import { sectionPoints } from "../lib/spendRules";
 import { defaultBuildLabel, buildOrdinal } from "../lib/buildLabel";
 import { FilledSlot, EmptySlot } from "./BuildManagerSlots";
 import { useShareActions } from "../hooks/useShareActions";
+import { useTopBuilds, useAddTopBuilds } from "../hooks/useTopBuilds";
+import { TOP_BUILDS_SOURCE_URL } from "../lib/topBuilds";
 
 // Action-button label for a copy state. Both actions await the clipboard write,
 // so both pass a real busy label ("Saving…" / "Copying…") — the "copying" state
@@ -173,6 +175,7 @@ export default function BuildManager() {
     preloadSpec,
     setBuildName,
     editBuild,
+    addTopBuilds,
   } = useBuildsStore(
     useShallow((s) => ({
       buildStrings: s.buildStrings,
@@ -190,6 +193,7 @@ export default function BuildManager() {
       preloadSpec: s.preloadSpec,
       setBuildName: s.setBuildName,
       editBuild: s.editBuild,
+      addTopBuilds: s.addTopBuilds,
     })),
   );
 
@@ -300,6 +304,16 @@ export default function BuildManager() {
     preloadSpec(spec.id);
   }, [activeClass, specId, preloadSpec]);
 
+  // ── Reference builds ───────────────────────────────────────────────────────
+  // Raidbots' top-sim builds for this spec. Availability is resolved as soon as
+  // a spec is picked so the control can be hidden where there is no data,
+  // rather than offering a click that goes nowhere — the sample is DPS-sim
+  // data, so healing and tanking specs are routinely empty.
+  const { count: topBuildCount, generatedAt: topBuildsDate } =
+    useTopBuilds(specId);
+  const { busy: addingTopBuilds, run: handleAddTopBuilds } =
+    useAddTopBuilds(addTopBuilds);
+
   // ── Slot layout ────────────────────────────────────────────────────────────
   const filledCount = buildStrings.length;
   const canAdd = filledCount < MAX_BUILDS;
@@ -407,6 +421,53 @@ export default function BuildManager() {
             );
           })}
         </div>
+
+        {/* Reference builds: the most-repeated talent strings among Raidbots'
+            top sims for this spec. Only rendered when the spec actually has
+            data and a slot is free. The wording is deliberately narrow — these
+            are mostly optimiser output on a single target, so calling them
+            "popular" or "best" would claim something the data does not say. */}
+        {canAdd && topBuildCount > 0 && (
+          <div className="mt-3 pt-3 border-t border-wow-dim">
+            <div className="flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={handleAddTopBuilds}
+                disabled={addingTopBuilds || isLoading}
+                className="wow-btn px-3 py-1.5 text-xs rounded select-none disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {addingTopBuilds
+                  ? "Loading…"
+                  : `Add top simmed builds (${Math.min(
+                      topBuildCount,
+                      MAX_BUILDS - filledCount,
+                    )})`}
+              </button>
+              <Tooltip
+                content={
+                  `The most frequently repeated talent strings among the highest ` +
+                  `sims Raidbots saw in the last 30 days (single target). Mostly ` +
+                  `optimiser output rather than player choices — a starting point ` +
+                  `to compare against, not a recommendation.`
+                }
+                placement="top"
+              >
+                <span className="text-wow-dim text-[11px] leading-tight text-right">
+                  from{" "}
+                  <a
+                    href={TOP_BUILDS_SOURCE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-wow-gold"
+                  >
+                    Raidbots
+                  </a>
+                  {topBuildsDate ? ` · ${topBuildsDate}` : ""}
+                </span>
+              </Tooltip>
+            </div>
+          </div>
+        )}
 
         {/* Cold-start escape hatch: with nothing pasted yet, jump straight into
             the interactive calculator instead of requiring a build string.
