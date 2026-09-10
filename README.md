@@ -404,6 +404,7 @@ See [develop.battle.net](https://develop.battle.net/access/clients).
 node scripts/ingestBlizzard.js                # verify vs the snapshot + schema (writes nothing)
 node scripts/ingestBlizzard.js --promote      # regenerate src/data/ from Blizzard
 node scripts/compareSources.js                # re-derive from Blizzard live and diff vs committed
+node scripts/checkWireLayout.js               # confirm the wire layout against Raidbots (no credentials)
 node scripts/fetchIcons.js                    # download any newly-referenced icons (commit the result)
 ```
 
@@ -419,6 +420,20 @@ release. Icons come first-party from Blizzard's render CDN; re-run
 exits non-zero if any icon came back `403`, which usually means the CDN
 throttled the run rather than that the art is missing — re-run to retry just
 those, since the download is incremental. Only a `404` is treated as "no art".
+
+`checkWireLayout.js` is a second, narrower freshness check with different reach.
+It confirms only the build-string node ordering, but against Raidbots'
+[published `talents.json`](https://www.raidbots.com/developers) — an independent
+derivation of the same game client, via SimC's casc/dbc tools. That matters
+because the committed wire-layout snapshot pins the ordering against _itself_: it
+catches an accidental change, but not our derivation being wrong, nor the game's
+own ordering moving. Two further properties earn it a place alongside
+`compareSources.js`: it needs no credentials, so it also runs on fork pull
+requests where the secrets are unavailable, and `--env=ptr` / `--env=beta` read
+the _next_ patch's node set, turning a wire-layout break from a post-patch
+incident into advance notice that a re-ingest is due. A `live` mismatch exits
+non-zero (committed data and the shipped game disagree now); a `ptr`/`beta` one
+only warns, since divergence there is expected while a patch is in test.
 
 The pipeline is source-agnostic: a new source can be added by writing a sibling
 importer that emits the same schema and reuses `ingestCore.js` — the validator,
