@@ -80,11 +80,13 @@ jobs:
       - name: Confirm the live wire layout against Raidbots
         run: node scripts/checkWireLayout.js
 
-      # PTR and beta carry the NEXT patch's node set. A divergence there is the
-      # point of the check rather than a fault, so these steps always exit zero
-      # (the script warns instead of failing off-live) and are informational in
-      # the log. They are what turns a wire-layout break from a post-patch
-      # incident into advance notice that a re-ingest is due.
+      # The test channels carry whatever build they are currently on, which is
+      # not always AHEAD of live — between patches a channel can sit on an older
+      # build, in which case a divergence says nothing about committed data. So
+      # these steps are informational and always exit zero (the script warns
+      # instead of failing off-live). Their value is the case where a channel IS
+      # ahead: a wire-layout break becomes advance notice rather than a
+      # post-patch incident.
       - name: Look ahead at the test channels
         run: |
           node scripts/checkWireLayout.js --env=ptr

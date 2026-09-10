@@ -430,10 +430,13 @@ catches an accidental change, but not our derivation being wrong, nor the game's
 own ordering moving. Two further properties earn it a place alongside
 `compareSources.js`: it needs no credentials, so it also runs on fork pull
 requests where the secrets are unavailable, and `--env=ptr` / `--env=beta` read
-the _next_ patch's node set, turning a wire-layout break from a post-patch
-incident into advance notice that a re-ingest is due. A `live` mismatch exits
-non-zero (committed data and the shipped game disagree now); a `ptr`/`beta` one
-only warns, since divergence there is expected while a patch is in test.
+a test channel's node set, so when that channel is ahead of live a wire-layout
+break becomes advance notice rather than a post-patch incident. A `live`
+mismatch exits non-zero (committed data and the shipped game disagree now); a
+`ptr`/`beta` one only warns, because a test channel is not always ahead —
+between patches it can sit on an older build than live (each channel's
+`metadata.json` reports its `wowBuild`), and a divergence then says nothing
+about the committed data.
 
 The pipeline is source-agnostic: a new source can be added by writing a sibling
 importer that emits the same schema and reuses `ingestCore.js` — the validator,

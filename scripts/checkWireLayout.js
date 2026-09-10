@@ -18,16 +18,22 @@
  * source of record; this is narrow and credential-free, so it can run where
  * compareSources can't:
  *   - no Blizzard API secrets, so it works on fork PRs;
- *   - `--env=ptr` / `--env=beta` reads the NEXT patch's node set, turning a
- *     wire-layout break into advance warning instead of a post-patch incident.
+ *   - `--env=ptr` / `--env=beta` reads a test channel's node set. When that
+ *     channel is ahead of live, a wire-layout break becomes advance warning
+ *     instead of a post-patch incident. Note a test channel is not always
+ *     ahead — between patches it can sit on an OLDER build than live (each
+ *     channel's metadata.json reports its wowBuild) — so a divergence there is
+ *     a prompt to look, never a verdict on committed data.
  *
  * Failure semantics differ by channel, deliberately:
  *   - live  — a mismatch means committed data and the shipped game disagree
  *             RIGHT NOW: every existing build string and share link for that
  *             class parses wrong. Exits non-zero.
- *   - ptr/beta — a mismatch is EXPECTED whenever a patch is in test; it is
- *             notice that a re-ingest is due before that patch goes live. Always
- *             exits zero, so a routine PTR build never reads as a broken repo.
+ *   - ptr/beta — a mismatch is EXPECTED whenever a test channel is on a
+ *             different build from live, in EITHER direction: ahead (a patch in
+ *             test, so a re-ingest is due before it ships) or behind (a stale
+ *             channel left on an older build, which says nothing at all). Always
+ *             exits zero, so neither case reads as a broken repo.
  *
  * Run:
  *   node scripts/checkWireLayout.js                  # live, all classes
@@ -246,8 +252,10 @@ async function main() {
     );
   } else {
     console.log(
-      `\n⚠ ${mismatches} class(es) differ on ${args.env}. Expected while a patch is ` +
-        `in test: it means a re-ingest is due before that patch goes live.`,
+      `\n⚠ ${mismatches} class(es) differ on ${args.env}. Expected whenever that ` +
+        `channel is on a different build from live — ahead (a re-ingest is due ` +
+        `before it ships) or stale (nothing to do) — the channel's ` +
+        `metadata.json reports which.`,
     );
   }
   process.exit(mismatches === 0 || !fatal ? 0 : 1);
