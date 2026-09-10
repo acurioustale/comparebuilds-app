@@ -406,6 +406,7 @@ node scripts/ingestBlizzard.js --promote      # regenerate src/data/ from Blizza
 node scripts/compareSources.js                # re-derive from Blizzard live and diff vs committed
 node scripts/checkWireLayout.js               # confirm the wire layout against Raidbots (no credentials)
 node scripts/checkGameBuild.js                # has the game moved past scripts/gameBuild.json? (--accept to record)
+node scripts/fetchTopBuilds.js                # refresh the top-sims reference builds (--write to commit)
 node scripts/fetchIcons.js                    # download any newly-referenced icons (commit the result)
 ```
 
@@ -450,6 +451,19 @@ against; nothing in `src/data` records its own build, so update it with
 `--accept` _after_ re-ingesting or after confirming a patch changed nothing that
 matters, never to silence the check. It runs daily in `sources.yml`, while the
 credentialed `compareSources.js` job stays weekly.
+
+`fetchTopBuilds.js` regenerates `src/data/topBuilds.json`, the reference builds
+the build manager offers per spec, from Raidbots'
+[daily top-sims summary](https://www.raidbots.com/developers). Its `talents`
+column is a raw Blizzard loadout string, so it decodes with the app's own parser
+and needs no translation layer. Every shipped string is decoded against the
+committed class data before it is written, and a high drop rate fails the run —
+the app loads these strings directly, so one that no longer parses is a broken
+slot. Be careful with the framing when touching the UI: the sample is mostly
+Raidbots' _optimiser_ output on a single target, so it is "what sims well", not
+"what the community plays", and being DPS-sim data it has no entries at all for
+healing specs. The generated file is committed, so the app still never talks to
+an external source at runtime.
 
 The pipeline is source-agnostic: a new source can be added by writing a sibling
 importer that emits the same schema and reuses `ingestCore.js` — the validator,
