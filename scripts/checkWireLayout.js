@@ -205,7 +205,23 @@ async function main() {
       throw new Error(`no implemented class named "${args.classSlug}"`);
   }
 
-  const talents = await fetchTalents({ env: args.env, cache: args.cache });
+  let talents;
+  try {
+    talents = await fetchTalents({ env: args.env, cache: args.cache });
+  } catch (err) {
+    // Between patches there is often no PTR or beta build published at all, and
+    // the file simply 404s. That is the absence of a test realm, not a failure
+    // of this check — treat it as nothing to compare rather than letting a
+    // scheduled run go red every quiet week. A missing `live` file IS a real
+    // failure (it always exists), so only the warn-only channels get this pass.
+    if (args.env !== "live" && /HTTP 404/.test(err.message)) {
+      console.log(
+        `\n⚠ no ${args.env} data published right now (404) — nothing to compare.`,
+      );
+      process.exit(0);
+    }
+    throw err;
+  }
 
   console.log(`\n── Wire layout vs Raidbots talents.json (${args.env}) ──`);
   const { rows, mismatches } = compareAll({
