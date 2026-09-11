@@ -144,3 +144,21 @@ export async function fetchTalents(opts = {}) {
     version: meta.contentHash ?? meta.wowBuild ?? null,
   });
 }
+
+/**
+ * Split a WoW build string ("12.1.0.69587") into its patch version and build
+ * number.
+ *
+ * The split matters because the two carry very different signals. Talent trees
+ * change with a PATCH (12.1.0 → 12.1.5), whereas the build number alone moves
+ * for every hotfix and test build, many times a patch. Comparing whole build
+ * strings therefore produces a constant trickle of alerts that mean nothing for
+ * this repo, which is the fastest way to teach everyone to ignore the check.
+ *
+ * @returns {{version: string, build: string|null}}
+ */
+export function splitBuild(wowBuild) {
+  const parts = String(wowBuild ?? "").split(".");
+  if (parts.length < 4) return { version: String(wowBuild ?? ""), build: null };
+  return { version: parts.slice(0, 3).join("."), build: parts[3] };
+}
