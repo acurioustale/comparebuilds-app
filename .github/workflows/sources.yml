@@ -18,6 +18,7 @@ on:
     paths:
       - "scripts/ingestBlizzard.js"
       - "scripts/compareSources.js"
+      - "scripts/checkWireLayout.js"
       - "scripts/lib/**"
       - "src/data/**"
       - "src/lib/wireLayout.snapshot.json"
@@ -55,3 +56,50 @@ jobs:
           BLIZZARD_CLIENT_ID: ${{ secrets.BLIZZARD_CLIENT_ID }}
           BLIZZARD_CLIENT_SECRET: ${{ secrets.BLIZZARD_CLIENT_SECRET }}
         run: node scripts/compareSources.js
+
+  # A second, narrower freshness check with different reach. compareSources needs
+  # the Blizzard secrets, so it is skipped entirely on fork PRs; this one is a
+  # plain public GET and therefore runs everywhere, including forks. It confirms
+  # only the build-string node ordering, but against an INDEPENDENT derivation of
+  # the game client (Raidbots, via SimC's casc/dbc tools) rather than against our
+  # own committed snapshot — see scripts/checkWireLayout.js.
+  wire-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".tool-versions"
+          cache: npm
+
+      # Raidbots asks callers to cache their files locally, and a fresh runner
+      # has no disk cache at all — without this the job re-pulls ~3 MB per
+      # channel on every run. The cache directory is keyed by content hash
+      # internally, so restoring a stale one is safe: a new upload changes the
+      # hash and misses it.
+      - name: Restore the Raidbots file cache
+        uses: actions/cache@v4
+        with:
+          path: scripts/.cache/raidbots
+          key: raidbots-${{ github.run_id }}
+          restore-keys: raidbots-
+
+      # The check imports src/lib/buildString.js only, which has no runtime
+      # dependencies — but vitest and the repo's other tooling are not needed
+      # here at all, so skip the install and run it straight from the checkout.
+      - name: Confirm the live wire layout against Raidbots
+        run: node scripts/checkWireLayout.js
+
+      # The test channels carry whatever build they are currently on, which is
+      # not always AHEAD of live — between patches a channel can sit on an older
+      # build, in which case a divergence says nothing about committed data. So
+      # these steps are informational and always exit zero (the script warns
+      # instead of failing off-live). Their value is the case where a channel IS
+      # ahead: a wire-layout break becomes advance notice rather than a
+      # post-patch incident.
+      - name: Look ahead at the test channels
+        run: |
+          node scripts/checkWireLayout.js --env=ptr
+          node scripts/checkWireLayout.js --env=beta
