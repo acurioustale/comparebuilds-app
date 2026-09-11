@@ -49,6 +49,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const CACHE_ROOT = join(__dirname, "..", ".cache", "raidbots");
 
 const STATIC_BASE = "https://www.raidbots.com/static/data";
+// The "data analysis" summaries live outside the per-environment tree: they are
+// aggregates of sims that ran, not game data, so they have no game version.
+export const TOP_SUMMARY_URL =
+  "https://www.raidbots.com/static/analysis/top/summary.csv";
 
 // The game-version channels Raidbots publishes. `live` is what committed data
 // must agree with; `ptr`/`beta` are the early-warning channels.
@@ -161,4 +165,24 @@ export function splitBuild(wowBuild) {
   const parts = String(wowBuild ?? "").split(".");
   if (parts.length < 4) return { version: String(wowBuild ?? ""), build: null };
   return { version: parts.slice(0, 3).join("."), build: parts[3] };
+}
+
+/**
+ * GET the daily "top sims" summary CSV as text.
+ *
+ * Raidbots regenerates this at about 10:30 UTC from the highest sims it saw in
+ * the last 30 days: the top 100 actors per spec, from Quick Sims and the best
+ * actors of Top Gear sims. It is a few hundred kilobytes, so callers should hold
+ * onto the result rather than re-fetching.
+ *
+ * Not cached on disk: unlike the game data, this changes every day and is only
+ * ever read by a deliberate regeneration run.
+ */
+export async function fetchTopSummaryCsv({ fetchImpl = fetch } = {}) {
+  const res = await fetchImpl(TOP_SUMMARY_URL, {
+    signal: AbortSignal.timeout(60000),
+  });
+  if (!res.ok)
+    throw new Error(`HTTP ${res.status} fetching ${TOP_SUMMARY_URL}`);
+  return res.text();
 }

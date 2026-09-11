@@ -10,7 +10,9 @@ name: sources
 # reported only.
 #
 # The weekly schedule catches the committed data drifting from a new game patch;
-# the PR trigger catches a data change that breaks parity. A red run here is a
+# the PR trigger catches a data change that breaks parity. The weekly run also
+# refreshes src/data/topBuilds.json and proposes the result as a pull request —
+# the one job here that writes anything. A red run here is a
 # signal to investigate, not a blocked release. It needs the BLIZZARD_CLIENT_ID/
 # SECRET repo secrets and is skipped on fork PRs (which don't receive secrets).
 on:
@@ -21,6 +23,7 @@ on:
       - "scripts/checkWireLayout.js"
       - "scripts/checkGameBuild.js"
       - "scripts/gameBuild.json"
+      - "scripts/fetchTopBuilds.js"
       - "scripts/lib/**"
       - "src/data/**"
       - "src/lib/wireLayout.snapshot.json"
@@ -127,3 +130,106 @@ jobs:
         run: |
           node scripts/checkWireLayout.js --env=ptr
           node scripts/checkWireLayout.js --env=beta
+
+  # Keeps src/data/topBuilds.json from going stale. The table is a dated snapshot
+  # of Raidbots' top sims that the app ships to users, and nothing else would
+  # ever prompt a refresh — a generated file with no owner quietly rots.
+  #
+  # Weekly, not daily, and on the same cron as the full compare: the underlying
+  # sample is a rolling 30-day window, so its counts drift a little every day
+  # while the builds it recommends move far more slowly. A daily refresh would
+  # trade a stale file for a stream of near-identical pull requests.
+  #
+  # Opens a PR rather than pushing to main. The file is app data — a bad refresh
+  # ships broken build strings to every user — so a human confirms it, and the
+  # diff itself is the most readable summary of what moved upstream.
+  top-builds:
+    runs-on: ubuntu-latest
+    # Scoped at the JOB level so the workflow-wide read-only default still covers
+    # every other job here; only this one may write, and only to a branch + PR.
+    permissions:
+      contents: write
+      pull-requests: write
+    # Never on a pull_request trigger: a PR from a fork would run with write
+    # permissions on this repository.
+    if: ${{ github.event_name != 'pull_request' && github.event.schedule != '0 6 * * *' }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".tool-versions"
+          cache: npm
+
+      # Unlike the checks above this one needs node_modules: it runs the test
+      # suite over the regenerated table before proposing it.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Regenerate the top-sims table
+        run: node scripts/fetchTopBuilds.js --write
+
+      - name: Stop here when nothing moved upstream
+        id: changed
+        run: |
+          if git diff --quiet -- src/data/topBuilds.json; then
+            echo "changed=false" >>"$GITHUB_OUTPUT"
+            echo "No change in the top-sims table."
+          else
+            echo "changed=true" >>"$GITHUB_OUTPUT"
+          fi
+
+      # The safety property of the whole feature: every shipped string must
+      # decode against the committed class data, or the app renders a broken
+      # slot the user cannot act on. Run it HERE, because a PR opened with
+      # GITHUB_TOKEN deliberately does not trigger other workflows — the
+      # `validate` gate will NOT run on the PR this job creates, so this is the
+      # only place the new table gets checked.
+      - name: Verify every regenerated build string still decodes
+        if: steps.changed.outputs.changed == 'true'
+        run: npx vitest run scripts/fetchTopBuilds.test.js
+
+      - name: Open or update the refresh PR
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          branch=chore/top-builds-refresh
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # One reusable branch, force-pushed. A weekly job that opened a fresh
+          # branch each time would leave a drift of stale PRs behind it. The
+          # trade-off is that this branch is not a place to add commits: the
+          # next run overwrites it. Take the refresh, or close it.
+          git checkout -B "$branch"
+          git add src/data/topBuilds.json
+          git commit -m "chore(data): refresh the top-sims reference builds"
+          git push --force origin "$branch"
+
+          if gh pr list --head "$branch" --state open --json number --jq '.[].number' | grep -q .; then
+            echo "Existing PR updated by the force-push."
+            exit 0
+          fi
+
+          # Written to a file rather than a variable: a quoted heredoc inside a
+          # $(...) substitution fails to parse in bash once the text contains an
+          # apostrophe, and this body has one.
+          cat >/tmp/pr-body.md <<'MARKDOWN'
+          Automated weekly refresh of `src/data/topBuilds.json` from
+          [Raidbots' top-sims summary](https://www.raidbots.com/developers).
+
+          Every build string in this table was re-decoded against the committed
+          class data before this PR was opened. That check is the gate here:
+          `validate` does **not** run on PRs created by `GITHUB_TOKEN`.
+
+          Reviewing: skim the diff for plausibility. A whole spec emptying out,
+          or every entry changing at once, points at something moving upstream
+          rather than at the sims themselves.
+          MARKDOWN
+
+          gh pr create --head "$branch" --base main \
+            --title "chore(data): refresh the top-sims reference builds" \
+            --body-file /tmp/pr-body.md

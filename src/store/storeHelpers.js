@@ -4,12 +4,15 @@ import { pruneInactiveHeroNodes } from "../lib/treeLogic";
 import { activeHeroSubtree } from "../lib/treeLogic";
 
 // Vite creates a lazy chunk per matched file. The glob must be a string literal.
-// Paths are relative to this file (src/store/ → src/data/). classes.json is the
-// statically-imported index, so it's excluded to keep it out of the lazy chunks
-// (and to silence Vite's mixed static/dynamic import warning).
+// Paths are relative to this file (src/store/ → src/data/). Two files in that
+// directory are not class data and are excluded so they don't become phantom
+// "class" chunks: classes.json is the statically-imported index (excluding it
+// also silences Vite's mixed static/dynamic import warning), and topBuilds.json
+// is the generated top-sims table, loaded on demand by its own module.
 const CLASS_MODULES = import.meta.glob([
   "../data/*.json",
   "!../data/classes.json",
+  "!../data/topBuilds.json",
 ]);
 
 // ─── Hero subtree sanitisation ────────────────────────────────────────────────

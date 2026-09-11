@@ -17,6 +17,7 @@
     "check:og": "node tools/check-og-image.mjs",
     "check:wire-layout": "node scripts/checkWireLayout.js",
     "check:game-build": "node scripts/checkGameBuild.js",
+    "data:top-builds": "node scripts/fetchTopBuilds.js --write",
     "links": "lychee --config lychee.toml --root-dir public README.md CLAUDE.md SECURITY.md index.html",
     "test": "vitest run",
     "test:watch": "vitest",

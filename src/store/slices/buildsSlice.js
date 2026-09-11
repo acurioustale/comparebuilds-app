@@ -11,6 +11,12 @@ import {
   EMPTY,
 } from "./constants";
 import { loadTreeData } from "./loadTreeData";
+import {
+  entriesForSpec,
+  loadTopBuilds,
+  selectTopBuilds,
+  topBuildLabel,
+} from "../../lib/topBuilds";
 
 export const createBuildsSlice = (set, get) => ({
   addBuildQueue: Promise.resolve(),
@@ -433,6 +439,64 @@ export const createBuildsSlice = (set, get) => ({
     const next = [...buildNames];
     next[index] = String(name ?? "").slice(0, MAX_BUILD_NAME_LEN);
     set({ buildNames: next });
+  },
+
+  /**
+   * Fills the free slots with the most-repeated talent strings among Raidbots'
+   * top sims for the loaded spec (see src/lib/topBuilds.js).
+   *
+   * Adds through the ordinary addBuild path rather than writing slots directly,
+   * so these builds are validated, spec-checked, deduplicated and parsed on
+   * exactly the same terms as a pasted one — a reference build is not a
+   * privileged kind of build, and a second code path into the slot list is how
+   * the two would drift.
+   *
+   * Adds are sequential and deliberately so: addBuild is serialised on its own
+   * queue and the FIRST one triggers the class-data import that the rest need.
+   * Stops early if any add is rejected, leaving that slot's error in place
+   * rather than piling further failures on top of it.
+   *
+   * @returns {Promise<number>} how many builds were actually added
+   */
+  addTopBuilds: async () => {
+    set({ error: null });
+    const { specId, buildStrings } = get();
+    if (specId == null) {
+      set({ error: "Pick a class and spec first." });
+      return 0;
+    }
+
+    let table;
+    try {
+      table = await loadTopBuilds();
+    } catch (err) {
+      console.error(`Failed to load the top-sims table: ${err.message}`, err);
+      set({ error: "Could not load the reference builds." });
+      return 0;
+    }
+
+    const picks = selectTopBuilds({
+      entries: entriesForSpec(table, specId),
+      existing: buildStrings,
+      limit: MAX_BUILDS - buildStrings.length,
+    });
+    if (picks.length === 0) {
+      // Nothing to add is not a failure. It means either the spec has no sim
+      // data (routine — the sample is DPS-heavy, so healers and tanks are thin)
+      // or every entry is already loaded.
+      return 0;
+    }
+
+    let added = 0;
+    for (const pick of picks) {
+      if (!(await get().addBuild(pick.talents))) break;
+      // Name the slot by its position in the table, not by the slot index, so
+      // the label keeps meaning what it says when these sit beside pasted
+      // builds.
+      get().setBuildName(get().buildStrings.length - 1, topBuildLabel(pick));
+      added++;
+    }
+    return added;
   },
 
   /**
