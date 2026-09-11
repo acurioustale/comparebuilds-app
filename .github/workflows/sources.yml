@@ -74,6 +74,18 @@ jobs:
           node-version-file: ".tool-versions"
           cache: npm
 
+      # Raidbots asks callers to cache their files locally, and a fresh runner
+      # has no disk cache at all — without this the job re-pulls ~3 MB per
+      # channel on every run. The cache directory is keyed by content hash
+      # internally, so restoring a stale one is safe: a new upload changes the
+      # hash and misses it.
+      - name: Restore the Raidbots file cache
+        uses: actions/cache@v4
+        with:
+          path: scripts/.cache/raidbots
+          key: raidbots-${{ github.run_id }}
+          restore-keys: raidbots-
+
       # The check imports src/lib/buildString.js only, which has no runtime
       # dependencies — but vitest and the repo's other tooling are not needed
       # here at all, so skip the install and run it straight from the checkout.

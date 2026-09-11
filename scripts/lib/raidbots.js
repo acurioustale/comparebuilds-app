@@ -20,8 +20,19 @@
  *     every committed build string.
  *
  * Raidbots asks that these files be cached locally, and they are large (talents
- * is ~3 MB), so responses land in scripts/.cache/raidbots/<env>/ (gitignored),
- * alongside the Blizzard caches. Delete the directory to force a refetch.
+ * is ~3 MB), so responses land in scripts/.cache/raidbots/<env>/<contentHash>/
+ * (gitignored), alongside the Blizzard caches.
+ *
+ * The cache is keyed by the channel's CONTENT HASH, not just by channel, and
+ * that is load-bearing rather than tidy: a cache keyed by channel alone never
+ * expires, so the moment Raidbots publishes a new build every consumer keeps
+ * reading yesterday's copy and reports agreement it never actually checked —
+ * a false green in exactly the case the checks exist for. metadata.json carries
+ * the hash, is about a kilobyte, and is fetched uncached; a new upload changes
+ * the hash and therefore misses the cache, while an unchanged one is served
+ * from disk. That also keeps the daily job's traffic at ~1 KB instead of
+ * re-pulling megabytes, which is what "please cache these files locally" is
+ * asking for.
  *
  * The data is published as-is with no guarantee of accuracy — which is why it
  * only ever feeds a REPORT, never a write.
@@ -32,7 +43,7 @@
 import { existsSync, mkdirSync, readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { writeFileAtomic } from "./blizzardApi.js";
+import { pruneSiblingDirs, writeFileAtomic } from "./blizzardApi.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CACHE_ROOT = join(__dirname, "..", ".cache", "raidbots");
@@ -70,12 +81,22 @@ export function assertEnvironment(env) {
  */
 export async function fetchRaidbotsJson(
   file,
-  { env = "live", cache = true, fetchImpl = fetch } = {},
+  {
+    env = "live",
+    cache = true,
+    version = null,
+    cacheRoot = CACHE_ROOT,
+    fetchImpl = fetch,
+  } = {},
 ) {
   assertEnvironment(env);
-  const cacheDir = join(CACHE_ROOT, env);
+  // Without a version to key on there is nothing that can invalidate the entry,
+  // so don't write one at all — a permanently stale file is worse than a refetch.
+  const useCache = cache && Boolean(version);
+  const envDir = join(cacheRoot, env);
+  const cacheDir = join(envDir, String(version));
   const cacheFile = join(cacheDir, file);
-  if (cache && existsSync(cacheFile))
+  if (useCache && existsSync(cacheFile))
     return JSON.parse(readFileSync(cacheFile, "utf8"));
 
   const url = `${STATIC_BASE}/${env}/${file}`;
@@ -86,7 +107,10 @@ export async function fetchRaidbotsJson(
   // the cache, or every later run would read the corrupt copy back and never
   // retry the fetch.
   const data = JSON.parse(text);
-  if (cache) {
+  if (useCache) {
+    // Drop the previous build's directory: these are multi-megabyte files and
+    // an superseded copy will never be read again.
+    pruneSiblingDirs(envDir, String(version));
     mkdirSync(cacheDir, { recursive: true });
     writeFileAtomic(cacheFile, text);
   }
@@ -94,9 +118,29 @@ export async function fetchRaidbotsJson(
 }
 
 /**
+ * Fetch metadata.json — "data about the data" for a channel: which game build it
+ * was generated from (`wowBuild`), a content hash, and when it was generated.
+ *
+ * Never cached. It is the freshness probe every other fetch keys off, so a
+ * cached copy would answer with the version we already knew about — the one
+ * question it exists to move past.
+ */
+export async function fetchMetadata(opts = {}) {
+  return fetchRaidbotsJson("metadata.json", { ...opts, cache: false });
+}
+
+/**
  * Fetch talents.json — one entry per spec, each carrying `fullNodeOrder`:
  * Raidbots' own ordered node-id list for the class's build-string serialisation.
+ *
+ * Resolves the channel's content hash first (a ~1 KB request) and keys the cache
+ * on it, so an unchanged upload costs that kilobyte instead of ~3 MB, and a
+ * changed one can never be served from a stale entry.
  */
-export async function fetchTalents(opts) {
-  return fetchRaidbotsJson("talents.json", opts);
+export async function fetchTalents(opts = {}) {
+  const meta = await fetchMetadata(opts);
+  return fetchRaidbotsJson("talents.json", {
+    ...opts,
+    version: meta.contentHash ?? meta.wowBuild ?? null,
+  });
 }
