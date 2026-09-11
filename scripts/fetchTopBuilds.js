@@ -31,7 +31,7 @@
  * the same rule the class data follows.
  */
 
-import { readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { collectClassNodes, parseBuildString } from "../src/lib/buildString.js";
@@ -41,6 +41,7 @@ import {
   aggregateBySpec,
   assertColumns,
   assertHomogeneous,
+  sameContent,
 } from "./lib/topBuildsCore.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -55,6 +56,11 @@ const DEFAULT_PER_SPEC = 5;
 // normal (a hand-edited profile, a string from a newer build); a large fraction
 // means the node set moved under us and the whole file would be wrong.
 const MAX_DROP_RATIO = 0.1;
+
+// Dry-run exit code meaning "the upstream table differs from the committed one".
+// Distinct from 1, which stays a genuine failure, so the refresh workflow can
+// tell "there is work to do" from "something broke".
+export const EXIT_CHANGED = 2;
 
 export function parseArgs(argv) {
   const args = { write: false, perSpec: DEFAULT_PER_SPEC };
@@ -194,8 +200,29 @@ async function main() {
       `(${file.fightStyle}, ${file.enemyCount} target)`,
   );
 
+  // Compare against what is already committed BEFORE deciding to write. The
+  // upstream summary is regenerated daily, but its substance often is not: an
+  // unconditional write would bump generatedAt every run and, via the scheduled
+  // refresh, open a pull request whose entire diff is a date.
+  const existing = existsSync(OUT_PATH)
+    ? JSON.parse(readFileSync(OUT_PATH, "utf8"))
+    : null;
+  const unchanged = sameContent(existing, file);
+  console.log(
+    unchanged
+      ? "  unchanged from the committed table"
+      : `  differs from the committed table${existing ? "" : " (no committed table yet)"}`,
+  );
+
   if (!args.write) {
     console.log(`\n✓ dry run — pass --write to update ${OUT_PATH}`);
+    // Report the comparison in the exit code so a caller (the scheduled refresh)
+    // can ask "is there anything to do?" without writing or parsing stdout.
+    process.exitCode = unchanged ? 0 : EXIT_CHANGED;
+    return;
+  }
+  if (unchanged) {
+    console.log(`\n✓ no change — left ${OUT_PATH} untouched`);
     return;
   }
   writeFileSync(OUT_PATH, JSON.stringify(file, null, 2) + "\n", "utf8");

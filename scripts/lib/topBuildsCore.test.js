@@ -3,6 +3,7 @@ import {
   aggregateBySpec,
   assertColumns,
   assertHomogeneous,
+  sameContent,
   REQUIRED_COLUMNS,
 } from "./topBuildsCore.js";
 
@@ -112,5 +113,59 @@ describe("aggregateBySpec", () => {
     );
     expect(forward[71].map((e) => e.talents)).toEqual(["a", "b"]);
     expect(reverse[71].map((e) => e.talents)).toEqual(["a", "b"]);
+  });
+});
+
+describe("sameContent", () => {
+  const file = {
+    _comment: "prose",
+    source: "https://example.test/summary.csv",
+    generatedAt: "2026-01-01",
+    fightStyle: "Patchwerk",
+    enemyCount: 1,
+    specs: { 71: [{ talents: "a", count: 2, topDps: 1, topItemLevel: 300 }] },
+  };
+
+  it("ignores the generation date", () => {
+    // The scheduled refresh opens a PR whenever the file changes. Comparing the
+    // whole object would open a date-only PR on every run, and a review queue
+    // of no-op diffs is one nobody reads.
+    expect(sameContent(file, { ...file, generatedAt: "2026-06-30" })).toBe(
+      true,
+    );
+  });
+
+  it("ignores the explanatory comment", () => {
+    expect(sameContent(file, { ...file, _comment: "reworded" })).toBe(true);
+  });
+
+  it("notices a changed talent string", () => {
+    const moved = {
+      ...file,
+      specs: { 71: [{ ...file.specs[71][0], talents: "b" }] },
+    };
+    expect(sameContent(file, moved)).toBe(false);
+  });
+
+  it("notices a changed sim count", () => {
+    // Counts are user-visible in the slot label, so a stale one would display a
+    // number the data no longer supports.
+    const recounted = {
+      ...file,
+      specs: { 71: [{ ...file.specs[71][0], count: 3 }] },
+    };
+    expect(sameContent(file, recounted)).toBe(false);
+  });
+
+  it("notices a changed sample shape", () => {
+    expect(sameContent(file, { ...file, enemyCount: 5 })).toBe(false);
+    expect(sameContent(file, { ...file, fightStyle: "DungeonSlice" })).toBe(
+      false,
+    );
+  });
+
+  it("treats a missing side as different, so a first run always writes", () => {
+    expect(sameContent(null, file)).toBe(false);
+    expect(sameContent(file, null)).toBe(false);
   });
 });

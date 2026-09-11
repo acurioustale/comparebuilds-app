@@ -116,3 +116,26 @@ export function assertHomogeneous(rows) {
     enemyCount: Number([...counts][0]),
   };
 }
+
+/**
+ * Do two generated tables carry the same substance?
+ *
+ * `generatedAt` moves on every run and `_comment` is prose, so a plain
+ * comparison would call every regeneration a change. That matters because the
+ * scheduled refresh opens a pull request whenever the file changes: comparing
+ * the whole object would open a date-only PR every single run, and a review
+ * queue full of no-op diffs is one nobody reads — the same failure the
+ * game-build probe avoids by comparing patch versions rather than build numbers.
+ *
+ * Everything else is compared, including the per-entry counts, so the committed
+ * table never displays a sim count that the data no longer supports.
+ *
+ * @param {object|null} a
+ * @param {object|null} b
+ * @returns {boolean}
+ */
+export function sameContent(a, b) {
+  if (!a || !b) return false;
+  const substance = ({ generatedAt, _comment, ...rest }) => rest; // eslint-disable-line no-unused-vars
+  return JSON.stringify(substance(a)) === JSON.stringify(substance(b));
+}
