@@ -1,0 +1,5 @@
+{
+  "_comment": "Acknowledgement stamp for scripts/checkGameBuild.js: the game build the committed src/data was last confirmed against. Not derived from the data (nothing in src/data records its build) — it is a human acknowledgement. Update with `node scripts/checkGameBuild.js --accept` AFTER re-ingesting or after confirming a patch changed nothing that matters, never to silence the check.",
+  "acknowledgedBuild": "12.1.0.69587",
+  "acknowledgedAt": "2026-09-10"
+}

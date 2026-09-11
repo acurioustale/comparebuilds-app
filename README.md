@@ -405,6 +405,7 @@ node scripts/ingestBlizzard.js                # verify vs the snapshot + schema 
 node scripts/ingestBlizzard.js --promote      # regenerate src/data/ from Blizzard
 node scripts/compareSources.js                # re-derive from Blizzard live and diff vs committed
 node scripts/checkWireLayout.js               # confirm the wire layout against Raidbots (no credentials)
+node scripts/checkGameBuild.js                # has the game moved past scripts/gameBuild.json? (--accept to record)
 node scripts/fetchIcons.js                    # download any newly-referenced icons (commit the result)
 ```
 
@@ -437,6 +438,18 @@ mismatch exits non-zero (committed data and the shipped game disagree now); a
 between patches it can sit on an older build than live (each channel's
 `metadata.json` reports its `wowBuild`), and a divergence then says nothing
 about the committed data.
+
+`checkGameBuild.js` is the cheap probe in front of both: it reads the `wowBuild`
+each channel reports in its `metadata.json` (about a kilobyte, no credentials)
+and compares live against the acknowledgement stamp in `scripts/gameBuild.json`.
+It compares the **patch version**, not the whole build string — talent trees
+change with a patch, whereas the build number moves for every hotfix, so
+comparing whole strings would alert constantly about nothing (`--exact` opts back
+in). The stamp records the build a human last confirmed the committed data
+against; nothing in `src/data` records its own build, so update it with
+`--accept` _after_ re-ingesting or after confirming a patch changed nothing that
+matters, never to silence the check. It runs daily in `sources.yml`, while the
+credentialed `compareSources.js` job stays weekly.
 
 The pipeline is source-agnostic: a new source can be added by writing a sibling
 importer that emits the same schema and reuses `ingestCore.js` — the validator,
