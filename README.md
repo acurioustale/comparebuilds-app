@@ -459,7 +459,12 @@ column is a raw Blizzard loadout string, so it decodes with the app's own parser
 and needs no translation layer. Every shipped string is decoded against the
 committed class data before it is written, and a high drop rate fails the run —
 the app loads these strings directly, so one that no longer parses is a broken
-slot. Be careful with the framing when touching the UI: the sample is mostly
+slot. A weekly job in `sources.yml` re-runs it and opens a pull request when the
+table actually moves, so the snapshot cannot quietly rot; the script leaves the
+file alone when only its date would change, so a no-op refresh never opens a PR.
+Note that `validate` does not run on a PR opened by `GITHUB_TOKEN`, so that job
+runs the decode test itself before proposing the change. Be careful with the
+framing when touching the UI: the sample is mostly
 Raidbots' _optimiser_ output on a single target, so it is "what sims well", not
 "what the community plays", and being DPS-sim data it has no entries at all for
 healing specs. The generated file is committed, so the app still never talks to
