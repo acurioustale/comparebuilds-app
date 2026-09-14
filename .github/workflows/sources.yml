@@ -145,16 +145,41 @@ jobs:
   # diff itself is the most readable summary of what moved upstream.
   top-builds:
     runs-on: ubuntu-latest
-    # Scoped at the JOB level so the workflow-wide read-only default still covers
-    # every other job here; only this one may write, and only to a branch + PR.
+    # No GITHUB_TOKEN write scope at all: every write this job makes (the branch
+    # push and the PR) is authenticated with TOP_BUILDS_PAT, a fine-grained token
+    # scoped to this repository with `contents: write` + `pull requests: write`.
+    # That is deliberate over the repo-wide "Allow GitHub Actions to create and
+    # approve pull requests" toggle, which would also let any workflow here
+    # APPROVE a pull request. The PAT has no approval power on its own PRs.
     permissions:
-      contents: write
-      pull-requests: write
-    # Never on a pull_request trigger: a PR from a fork would run with write
-    # permissions on this repository.
+      contents: read
+    # Never on a pull_request trigger: a PR from a fork would run with the PAT in
+    # scope on this repository.
     if: ${{ github.event_name != 'pull_request' && github.event.schedule != '0 6 * * *' }}
     steps:
+      # Check the token before doing any work, so a missing or expired secret
+      # fails with this sentence rather than an opaque 403 from git or gh.
+      - name: Require the refresh token
+        env:
+          TOP_BUILDS_PAT: ${{ secrets.TOP_BUILDS_PAT }}
+        run: |
+          if [ -z "$TOP_BUILDS_PAT" ]; then
+            echo "::error::TOP_BUILDS_PAT is not set. Create a fine-grained PAT" \
+              "scoped to this repository with contents:write and" \
+              "pull-requests:write, and add it as a repository secret."
+            exit 1
+          fi
+
+      # Checking out WITH the PAT persists it as the credential for the later
+      # push, so the branch is pushed by the token's identity too. A push
+      # authenticated with GITHUB_TOKEN raises its `synchronize` event as
+      # github-actions[bot], and GitHub parks bot-actored runs at
+      # `action_required` — they wait for a human to press "Approve and run"
+      # and otherwise never execute, so `validate` would sit unrun on every
+      # weekly force-push while the PR looked merely pending.
       - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.TOP_BUILDS_PAT }}
 
       - name: Set up Node
         uses: actions/setup-node@v6
@@ -182,10 +207,10 @@ jobs:
 
       # The safety property of the whole feature: every shipped string must
       # decode against the committed class data, or the app renders a broken
-      # slot the user cannot act on. Run it HERE, because a PR opened with
-      # GITHUB_TOKEN deliberately does not trigger other workflows — the
-      # `validate` gate will NOT run on the PR this job creates, so this is the
-      # only place the new table gets checked.
+      # slot the user cannot act on. `validate` re-runs this on the PR (the PAT's
+      # identity triggers workflows, unlike GITHUB_TOKEN), so this step is no
+      # longer the only gate — it is the fast one, failing before a branch is
+      # pushed and a PR opened over a table that cannot decode.
       - name: Verify every regenerated build string still decodes
         if: steps.changed.outputs.changed == 'true'
         run: npx vitest run scripts/fetchTopBuilds.test.js
@@ -193,7 +218,7 @@ jobs:
       - name: Open or update the refresh PR
         if: steps.changed.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TOP_BUILDS_PAT }}
         run: |
           set -euo pipefail
           branch=chore/top-builds-refresh
@@ -222,8 +247,8 @@ jobs:
           [Raidbots' top-sims summary](https://www.raidbots.com/developers).
 
           Every build string in this table was re-decoded against the committed
-          class data before this PR was opened. That check is the gate here:
-          `validate` does **not** run on PRs created by `GITHUB_TOKEN`.
+          class data before this PR was opened, and the `validate` gate runs on
+          this PR as it would on any other.
 
           Reviewing: skim the diff for plausibility. A whole spec emptying out,
           or every entry changing at once, points at something moving upstream
