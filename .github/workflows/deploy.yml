@@ -44,20 +44,65 @@ jobs:
             echo "actionlint=$(awk '$1 == "actionlint" { print $2; exit }' .tool-versions)"
           } >> "$GITHUB_OUTPUT"
 
+      # The four pinned tools come from third-party release hosts, so a fault
+      # there reddens the gate on code that is perfectly fine — a 504 window on
+      # GitHub's release CDN did exactly that, and --retry-all-errors below
+      # rides out a blip but not an outage. Cache them under the same .tools/
+      # directory and file names validate.sh keeps locally, so a normal run
+      # never touches those hosts and only a pin change or a cache eviction
+      # re-downloads. The key hashes the whole .tool-versions, so bumping node
+      # or php re-fetches all four needlessly — that is the safe direction to
+      # err in, and the alternative is four keys to keep in step by hand.
+      - name: Restore the pinned tool cache
+        uses: actions/cache@v4
+        with:
+          path: .tools
+          key: pinned-tools-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.tool-versions') }}
+
+      # Only whatever the cache did not supply. Each fetch is skipped when the
+      # file is already present, exactly as validate.sh's pinned_fetch does, so
+      # a cache hit makes this step a no-op rather than a re-download.
+      - name: Fetch any pinned tool the cache did not supply
+        env:
+          SHFMT_VERSION: ${{ steps.versions.outputs.shfmt }}
+          PHPCSFIXER_VERSION: ${{ steps.versions.outputs.phpcsfixer }}
+          PHPUNIT_VERSION: ${{ steps.versions.outputs.phpunit }}
+          ACTIONLINT_VERSION: ${{ steps.versions.outputs.actionlint }}
+        run: |
+          mkdir -p .tools
+          # fetch <dest> <url> [tar-member]. --retry-all-errors covers the
+          # transport faults a plain --retry ignores, notably the mid-transfer
+          # "connection died" a bare retry count won't catch. Downloaded to a
+          # file rather than piped into tar: a retried transfer restarts from
+          # zero, but tar has already eaten the bytes from the failed attempt,
+          # so the pipe would corrupt what the retry repairs.
+          fetch() {
+            local dest="$1" url="$2" member="${3:-}"
+            [ -e "$dest" ] && return 0
+            curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "$url" -o "$RUNNER_TEMP/dl"
+            if [ -n "$member" ]; then
+              tar xzf "$RUNNER_TEMP/dl" -C "$RUNNER_TEMP" "$member"
+              mv "$RUNNER_TEMP/$member" "$RUNNER_TEMP/dl"
+            fi
+            chmod +x "$RUNNER_TEMP/dl"
+            mv "$RUNNER_TEMP/dl" "$dest"
+          }
+          fetch ".tools/shfmt-${SHFMT_VERSION}" \
+            "https://github.com/mvdan/sh/releases/download/v${SHFMT_VERSION}/shfmt_v${SHFMT_VERSION}_linux_amd64"
+          fetch ".tools/php-cs-fixer-${PHPCSFIXER_VERSION}.phar" \
+            "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v${PHPCSFIXER_VERSION}/php-cs-fixer.phar"
+          fetch ".tools/phpunit-${PHPUNIT_VERSION}.phar" \
+            "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar"
+          fetch ".tools/actionlint-${ACTIONLINT_VERSION}" \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" actionlint
+
       - name: Shell scripts (shellcheck + shfmt)
         env:
           SHFMT_VERSION: ${{ steps.versions.outputs.shfmt }}
         run: |
           mapfile -t sh_files < <(git ls-files '*.sh')
           shellcheck "${sh_files[@]}"
-          # Every tool below is fetched from a third-party host, so a transient
-          # network fault there fails the gate on code that is perfectly fine
-          # (a truncated actionlint tarball did exactly that). --retry-all-errors
-          # covers the transport faults plain --retry ignores, notably the
-          # mid-transfer "connection died" that a bare retry count won't catch.
-          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "https://github.com/mvdan/sh/releases/download/v${SHFMT_VERSION}/shfmt_v${SHFMT_VERSION}_linux_amd64" -o /tmp/shfmt
-          chmod +x /tmp/shfmt
-          /tmp/shfmt -d "${sh_files[@]}"
+          ".tools/shfmt-${SHFMT_VERSION}" -d "${sh_files[@]}"
 
       # The runner's default PHP (8.3) is older than PHPUnit 13 needs (>= 8.4.1),
       # so pin it. This also makes php-cs-fixer and php -l run on a fixed version.
@@ -72,21 +117,14 @@ jobs:
           PHPUNIT_VERSION: ${{ steps.versions.outputs.phpunit }}
         run: |
           for f in $(git ls-files '*.php' '*.php.example'); do php -l "$f"; done
-          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v${PHPCSFIXER_VERSION}/php-cs-fixer.phar" -o /tmp/php-cs-fixer
-          php /tmp/php-cs-fixer fix --dry-run --config .php-cs-fixer.dist.php
-          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar" -o /tmp/phpunit
-          php /tmp/phpunit
+          php ".tools/php-cs-fixer-${PHPCSFIXER_VERSION}.phar" fix --dry-run --config .php-cs-fixer.dist.php
+          php ".tools/phpunit-${PHPUNIT_VERSION}.phar"
 
       - name: Workflows (actionlint)
         env:
           ACTIONLINT_VERSION: ${{ steps.versions.outputs.actionlint }}
         run: |
-          # Downloaded to a file rather than piped into tar: a retried transfer
-          # restarts from zero, but tar has already eaten the bytes from the
-          # failed attempt, so the pipe would corrupt what the retry repairs.
-          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" -o /tmp/actionlint.tar.gz
-          tar xzf /tmp/actionlint.tar.gz actionlint
-          ./actionlint
+          ".tools/actionlint-${ACTIONLINT_VERSION}"
 
       - name: Set up Node
         uses: actions/setup-node@v6
