@@ -171,10 +171,12 @@ jobs:
           fi
 
       # Checking out WITH the PAT persists it as the credential for the later
-      # push, so the branch is pushed by the token's identity too. A branch
-      # pushed by GITHUB_TOKEN would not raise `synchronize` events, so the
-      # `validate` gate would run on the PR's first commit and then go quiet for
-      # every weekly force-push after it.
+      # push, so the branch is pushed by the token's identity too. A push
+      # authenticated with GITHUB_TOKEN raises its `synchronize` event as
+      # github-actions[bot], and GitHub parks bot-actored runs at
+      # `action_required` — they wait for a human to press "Approve and run"
+      # and otherwise never execute, so `validate` would sit unrun on every
+      # weekly force-push while the PR looked merely pending.
       - uses: actions/checkout@v7
         with:
           token: ${{ secrets.TOP_BUILDS_PAT }}
