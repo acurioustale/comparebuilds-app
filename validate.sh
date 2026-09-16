@@ -156,16 +156,26 @@ elif have phpunit; then
 fi
 
 # CI pins Node through this same file, so a local mismatch means the JS stages
-# below prove nothing about CI. Block on it, as every other pin does - a warning
-# scrolls past on a script this long. Only the major is compared: setup-node
-# resolves the pin to the latest matching release, so an exact match is not
-# something a local install can be held to.
+# below prove nothing about CI. The pin names an exact release, which is what
+# setup-node then installs - a bare major would let CI silently follow whatever
+# the newest 26.x happened to be that week, so "the same Node as CI" would be a
+# different engine from one run to the next.
+#
+# Two bars, because Node is the one pin validate.sh cannot fetch for you (every
+# other pinned tool lands in .tools/ on its own; a Node engine has to be
+# installed). A different MAJOR blocks: the JS stages would prove nothing about
+# CI. A minor or patch difference warns: worth fixing so local matches CI
+# exactly, not worth refusing to run over. `mise install` applies the pin.
+local_node_version="$(node -v | sed 's/^v//')"
 ci_node_major="${ci_node_version%%.*}"
-local_node_major="$(node -v | sed 's/^v//; s/\..*//')"
+local_node_major="${local_node_version%%.*}"
 if [[ "$local_node_major" != "$ci_node_major" ]]; then
-	echo "  Node version mismatch: want v$ci_node_major, got: $(node -v)" >&2
+	echo "  Node version mismatch: want v$ci_node_version, got: $(node -v)" >&2
 	echo "  install the pinned version (see .tool-versions) so local matches CI" >&2
 	exit 1
+elif [[ "$local_node_version" != "$ci_node_version" ]]; then
+	echo "note: Node v$local_node_version is not the pinned v$ci_node_version" \
+		"(same major, so the gate still runs; \`mise install\` applies the pin)." >&2
 fi
 
 # PHP is the one runtime that also serves production, so the pin tracks the live
