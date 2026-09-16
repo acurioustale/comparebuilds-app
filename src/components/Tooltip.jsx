@@ -22,6 +22,7 @@ import {
   FloatingPortal,
   FloatingArrow,
 } from "@floating-ui/react";
+import { ownTouchLifted, ownTouches, touchById } from "../lib/touchIdentity";
 
 // Themed tooltip wrapper over Floating UI, replacing @tippyjs/react. Floating UI
 // is headless: it owns positioning (flip/shift/offset/arrow) and the interaction
@@ -133,23 +134,33 @@ export default function Tooltip({
     touch === "hold"
       ? {
           onTouchStart: (e) => {
-            // Clear any hold already pending before overwriting the ref. A
-            // second touchpoint on the same node — an accidental two-finger tap,
-            // or starting a pinch-zoom on a talent — would otherwise orphan the
-            // first timer: nothing else holds it, so neither touchend/touchcancel
-            // nor the unmount cleanup below could ever reach it, and it would
-            // fire setOpen(true) with no finger down, leaving the tooltip
-            // covering the tree until an unrelated outside press dismissed it
-            // (or setting state on an unmounted component, if the tree had gone).
+            // A second touchpoint on the same node — an accidental two-finger
+            // tap, or starting a pinch-zoom on a talent — leaves the first
+            // finger's hold alone. It used to restart the timer from
+            // e.touches[0], which is the FIRST finger's current position, so a
+            // peek the user was already holding open was pushed back another
+            // HOLD_MS and flickered. Scoped to this node's own touches, since
+            // e.touches counts every touch on the document.
+            const own = ownTouches(e);
+            if (own.length > 1) return;
+            // Clear any hold still pending before overwriting the ref. Nothing
+            // else holds that timer, so neither touchend/touchcancel nor the
+            // unmount cleanup below could reach it, and it would fire
+            // setOpen(true) with no finger down — leaving the tooltip covering
+            // the tree until an unrelated outside press dismissed it (or setting
+            // state on an unmounted component, if the tree had gone).
             clearTimeout(holdTimer.current);
-            const t = e.touches[0];
-            holdAt.current = { x: t.clientX, y: t.clientY };
+            const t = own[0];
+            holdAt.current = { id: t.identifier, x: t.clientX, y: t.clientY };
             holdTimer.current = setTimeout(() => setOpen(true), HOLD_MS);
           },
           onTouchMove: (e) => {
             const s = holdAt.current;
             if (!s) return;
-            const t = e.touches[0];
+            // Follow the finger doing the holding; another finger's movement
+            // says nothing about whether THIS press has turned into a drag.
+            const t = touchById(e.touches, s.id) ?? e.touches[0];
+            if (!t) return;
             if (
               Math.abs(t.clientX - s.x) > MOVE_TOL ||
               Math.abs(t.clientY - s.y) > MOVE_TOL
@@ -157,11 +168,18 @@ export default function Tooltip({
               clearTimeout(holdTimer.current);
             }
           },
-          onTouchEnd: () => {
+          // Only the holding finger's lift ends the peek. Any touchend used to
+          // close it, so a second finger tapping the screen dismissed a tooltip
+          // the user was still holding open.
+          onTouchEnd: (e) => {
+            if (!ownTouchLifted(e, holdAt.current)) return;
+            holdAt.current = null;
             clearTimeout(holdTimer.current);
             setOpen(false);
           },
-          onTouchCancel: () => {
+          onTouchCancel: (e) => {
+            if (!ownTouchLifted(e, holdAt.current)) return;
+            holdAt.current = null;
             clearTimeout(holdTimer.current);
             setOpen(false);
           },
