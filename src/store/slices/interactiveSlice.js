@@ -33,7 +33,19 @@ export const createInteractiveSlice = (set, get) => ({
     const match = findClassForSpec(specId);
     if (!match) return;
 
-    set({ specId, classId: null, interactiveNodes: {}, error: null });
+    // sharedLayoutHash is cleared with the rest: this starts a build that came
+    // from no share, so a hash left over from one (a share route that cleared
+    // the store and then failed to load anything, leaving "Start from scratch"
+    // on screen) would compare against the freshly loaded layout and raise an
+    // undismissable "saved for an earlier talent revision" warning on a build
+    // that is brand new and empty.
+    set({
+      specId,
+      classId: null,
+      interactiveNodes: {},
+      error: null,
+      sharedLayoutHash: null,
+    });
     await loadTreeData(set, get, match.cls.name, match.spec.name, specId);
   },
 
