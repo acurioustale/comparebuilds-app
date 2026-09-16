@@ -268,6 +268,12 @@ npm run check:csp
 step "OG image guard"
 npm run check:og
 
+# Verify deploy.sh's API_ASSETS still covers every tracked api/ file and every
+# require the shipped PHP makes. Runs after the build, because the array names
+# api/current_layouts.json, which the build generates.
+step "Deploy set guard"
+npm run check:deploy-assets
+
 # Validate the freshly built sitemap is well-formed XML — the surest guard against
 # a templating bug in prerenderSpecs (e.g. an unescaped character in a URL). Plain
 # --noout is well-formedness only (no network). xmllint comes from libxml2-utils:

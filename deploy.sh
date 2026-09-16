@@ -20,6 +20,16 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+# Every api/ path the served tree needs. dist/ ships whole, but api/ is picked
+# from a working tree that also holds files the site must NOT serve, so this list
+# is hand-maintained — and `rsync --delete` then removes server-side whatever is
+# missing from it, which either fatals every share/OG request or silently breaks
+# a cron job. tools/check-deploy-assets.mjs binds this array to the tracked api/
+# tree (every file classified ship-or-not) and to each PHP file's own requires,
+# so a forgotten runtime dependency fails the gate instead of the deploy. Keep it
+# a single one-line array literal: that guard parses it.
+API_ASSETS=(api/share.php api/og.php api/lib api/fonts api/cron api/current_layouts.json)
+
 REMOTE="web4186@http2.core-networks.de"
 TARGET="html/comparebuilds.app/"
 
@@ -39,7 +49,7 @@ trap 'rm -rf "$stage"' EXIT
 
 cp -a dist/. "$stage/"
 mkdir -p "$stage/api"
-cp -a api/share.php api/og.php api/lib api/fonts api/cron api/current_layouts.json "$stage/api/"
+cp -a "${API_ASSETS[@]}" "$stage/api/"
 
 rsync_args=()
 is_dry_run=0

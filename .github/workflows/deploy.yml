@@ -175,11 +175,13 @@ jobs:
         run: npm run build
 
       # Verify the CSP hash for the inline anti-flash theme script still matches
-      # the built script's bytes — runs against dist/ so it checks what ships.
-      - name: Check CSP and og-image
+      # the built script's bytes — runs against dist/ so it checks what ships —
+      # and that deploy.sh still stages every api/ file the server needs.
+      - name: Check CSP, og-image and deploy set
         run: |
           npm run check:csp
           npm run check:og
+          npm run check:deploy-assets
 
       # Well-formedness check on the generated sitemap — catches a templating bug
       # in prerenderSpecs before deploy. xmllint isn't on the runner image by
