@@ -1,4 +1,4 @@
-import { useMemo, useId, useState } from "react";
+import { useMemo, useId, useState, useEffect } from "react";
 import { TalentNode } from "./TalentNode";
 import { activeHeroSubtree } from "../lib/spendRules";
 import { spentPoints } from "../lib/treeLogic";
@@ -154,16 +154,26 @@ export function TreePanel({
   // connecting edges. The dependents adjacency is precomputed once per panel so a
   // hover is a single map read rather than a full rescan of every node.
   const [hoveredId, setHoveredId] = useState(null);
+  // A panel that becomes heroLocked drops its onHover (below), so a node hovered
+  // at that moment can never deliver the onMouseLeave that would clear this —
+  // and the lock overlay swallows pointer events, so nothing else can either.
+  // The gold chain ring and brightened edges would stay drawn on a locked panel
+  // until the hero subtree was unlocked again. Ignore the hover while locked so
+  // the render can't show a stale chain, and drop it so unlocking starts clean.
+  const activeHoveredId = heroLocked ? null : hoveredId;
+  useEffect(() => {
+    if (heroLocked) setHoveredId(null);
+  }, [heroLocked]);
   const dependentsMap = useMemo(
     () => buildDependentsMap(nodes, nodeById),
     [nodes, nodeById],
   );
   const chainIds = useMemo(
     () =>
-      hoveredId == null
+      activeHoveredId == null
         ? null
-        : prereqChain(hoveredId, nodeById, dependentsMap),
-    [hoveredId, nodeById, dependentsMap],
+        : prereqChain(activeHoveredId, nodeById, dependentsMap),
+    [activeHoveredId, nodeById, dependentsMap],
   );
 
   return (
