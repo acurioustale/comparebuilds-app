@@ -949,3 +949,95 @@ describe("captureSession / restoreSession", () => {
     assert.strictEqual(get().error, null);
   });
 });
+
+// ── removeBuild vs. an in-progress interactive build ──────────────────────────
+
+describe("removeBuild and the interactive session", () => {
+  /** Adds one build, then starts an interactive build and spends a point. */
+  async function withInteractiveSession() {
+    const [a] = genStrings("death_knight", "blood", 1);
+    await get().addBuild(a);
+    get().startAddingBuild();
+    const node = get().treeData.nodes.find((n) => !n.alreadyGranted);
+    get().setInteractiveNodes({
+      ...get().interactiveNodes,
+      [node.id]: { pointsInvested: 1, entryChosen: null },
+    });
+    return node.id;
+  }
+
+  test("keeps a half-finished build when the last imported slot goes", async () => {
+    // Regression: this branch reset the store to EMPTY wholesale, so removing
+    // an unrelated imported build discarded an interactive build the user had
+    // on screen beside it — spent points, spec and all — dropping them back to
+    // the class grid. The non-empty branch is careful to preserve exactly this.
+    const nodeId = await withInteractiveSession();
+
+    get().removeBuild(0);
+
+    assert.deepStrictEqual(get().buildStrings, [], "the slot is gone");
+    assert.strictEqual(get().addingBuild, true, "still building");
+    assert.strictEqual(get().specId, DK_BLOOD);
+    assert.ok(get().treeData, "the tree stays loaded to render it");
+    assert.ok(get().classNodes);
+    assert.deepStrictEqual(get().interactiveNodes[nodeId], {
+      pointsInvested: 1,
+      entryChosen: null,
+    });
+    assert.strictEqual(get().editingIndex, null, "no slot left to edit");
+  });
+
+  test("does not let a share's layout hash outlive the builds it came with", async () => {
+    await withInteractiveSession();
+    get().setSharedLayoutHash("deadbeef");
+
+    get().removeBuild(0);
+
+    // What survives came from the calculator, not the share.
+    assert.strictEqual(get().sharedLayoutHash, null);
+  });
+
+  test("drops the selections of the build being edited", async () => {
+    // Editing seeds the calculator FROM that build, so those selections are the
+    // removed build's and go with it — matching the non-empty branch, which
+    // exits edit mode when the edited slot is removed.
+    const [a] = genStrings("death_knight", "blood", 1);
+    await get().addBuild(a);
+    get().editBuild(0);
+    assert.strictEqual(get().editingIndex, 0);
+
+    get().removeBuild(0);
+
+    assert.strictEqual(get().addingBuild, false);
+    assert.strictEqual(get().editingIndex, null);
+    assert.strictEqual(get().specId, null, "back to the class grid");
+    assert.strictEqual(get().treeData, null);
+    assert.deepStrictEqual(get().interactiveNodes, {});
+  });
+
+  test("still resets fully with no interactive session open", async () => {
+    const [a] = genStrings("death_knight", "blood", 1);
+    await get().addBuild(a);
+
+    get().removeBuild(0);
+
+    assert.strictEqual(get().specId, null);
+    assert.strictEqual(get().classId, null);
+    assert.strictEqual(get().treeData, null);
+    assert.strictEqual(get().addingBuild, false);
+    assert.deepStrictEqual(get().interactiveNodes, {});
+  });
+
+  test("removing one of several builds is unaffected", async () => {
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    await get().addBuild(a);
+    await get().addBuild(b);
+    get().startAddingBuild();
+
+    get().removeBuild(0);
+
+    assert.deepStrictEqual(get().buildStrings, [b]);
+    assert.strictEqual(get().addingBuild, true);
+    assert.ok(get().treeData);
+  });
+});
