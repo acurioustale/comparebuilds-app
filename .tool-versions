@@ -1,4 +1,4 @@
-nodejs 26
+nodejs 26.9.0
 php 8.4
 shellcheck 0.11.0
 shfmt 3.13.1
