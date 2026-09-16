@@ -1,0 +1,28 @@
+# mise reads .tool-versions, which is the gate's single source of truth for every
+# pinned tool — including three mise must not try to supply here.
+#
+#   php-cs-fixer, phpunit  PHP phars, not tools any version manager installs.
+#                          validate.sh and CI download each at its pinned version
+#                          into .tools/. mise has neither in its registry and
+#                          warns ("Did you mean? php") on every command run in
+#                          this directory.
+#   php                    comes from Homebrew's keg-only php@8.4 (see CLAUDE.md:
+#                          put its bin first on PATH). Left enabled, mise treats
+#                          the pin as an uninstalled tool and a bare `mise
+#                          install` or `mise exec` starts compiling PHP from
+#                          source — which then fails on missing bison/re2c/
+#                          pkg-config anyway.
+#
+# The pins themselves do not move: validate.sh's tool_version helper and
+# deploy.yml's "Read tool versions" step both parse .tool-versions and neither
+# knows this file exists. This only stops mise reaching for what it was never
+# going to provide.
+#
+# What is left is mise's to manage — node, shellcheck, shfmt, actionlint — so
+# `mise install` in this directory is a no-op once they are present. validate.sh
+# still fetches its own pinned copies of the latter three into .tools/, so mise
+# supplying them is a convenience (editor integration, PATH), never the gate's
+# source of truth. Node is the one it genuinely provides: nothing else installs
+# the pinned engine for you.
+[settings]
+disable_tools = ["php", "php-cs-fixer", "phpunit"]

@@ -165,7 +165,8 @@ fi
 # other pinned tool lands in .tools/ on its own; a Node engine has to be
 # installed). A different MAJOR blocks: the JS stages would prove nothing about
 # CI. A minor or patch difference warns: worth fixing so local matches CI
-# exactly, not worth refusing to run over. `mise install` applies the pin.
+# exactly, not worth refusing to run over. `mise install node` applies the pin
+# (see .mise.toml for why mise supplies node here but not php or the phars).
 local_node_version="$(node -v | sed 's/^v//')"
 ci_node_major="${ci_node_version%%.*}"
 local_node_major="${local_node_version%%.*}"
@@ -175,7 +176,7 @@ if [[ "$local_node_major" != "$ci_node_major" ]]; then
 	exit 1
 elif [[ "$local_node_version" != "$ci_node_version" ]]; then
 	echo "note: Node v$local_node_version is not the pinned v$ci_node_version" \
-		"(same major, so the gate still runs; \`mise install\` applies the pin)." >&2
+		"(same major, so the gate still runs; \`mise install node\` applies the pin)." >&2
 fi
 
 # PHP is the one runtime that also serves production, so the pin tracks the live
