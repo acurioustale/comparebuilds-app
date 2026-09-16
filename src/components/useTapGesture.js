@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { ownTouchLifted, ownTouches, touchById } from "../lib/touchIdentity";
 
 // Touch gesture thresholds (interactive tree). A press held ≥ TAP_HOLD_MS is a
 // tooltip peek (the Tooltip shows it) rather than a tap; a tap moved more than
@@ -10,17 +11,6 @@ const TAP_MOVE_TOL = 10;
 // mouse click (e.g. on a hybrid device, after a synthetic click was suppressed
 // by a re-render) is never consumed.
 const SYNTHETIC_CLICK_MS = 700;
-
-// Finds the touch that owns the current gesture in one of an event's touch
-// lists. Identifiers are per-finger and stable for the life of a touch, so this
-// is how a handler tells "my finger" from any other finger on the screen. A
-// synthetic call with no identifier (or a test double) yields undefined, and
-// every caller falls back to the single-touch behaviour in that case.
-const touchById = (list, id) => {
-  if (!list || id == null) return undefined;
-  for (const t of list) if (t.identifier === id) return t;
-  return undefined;
-};
 
 export function useTapGesture() {
   const tapStart = useRef(null);
@@ -48,7 +38,7 @@ export function useTapGesture() {
             // target IS this element — so an empty list means a synthetic event
             // that didn't populate one, and we fall back rather than drop the
             // gesture.)
-            const own = e.targetTouches?.length ? e.targetTouches : e.touches;
+            const own = ownTouches(e);
             if (own.length > 1) return;
             tapFired.current = false;
             const t = own[0];
@@ -82,12 +72,7 @@ export function useTapGesture() {
             // leave the gesture pending rather than consuming it, or a second
             // finger touching down and lifting on the same node would fire the
             // first finger's tap and spend a point unasked.
-            if (
-              s.id != null &&
-              e?.changedTouches &&
-              !touchById(e.changedTouches, s.id)
-            )
-              return;
+            if (!ownTouchLifted(e, s)) return;
             tapStart.current = null;
             // A scroll (moved) or a hold (a tooltip peek, not a tap) does nothing.
             if (s.moved || Date.now() - s.time >= TAP_HOLD_MS) return;
@@ -96,14 +81,7 @@ export function useTapGesture() {
             onTap();
           },
           onTouchCancel: (e) => {
-            const s = tapStart.current;
-            if (!s) return;
-            if (
-              s.id != null &&
-              e?.changedTouches &&
-              !touchById(e.changedTouches, s.id)
-            )
-              return;
+            if (!ownTouchLifted(e, tapStart.current)) return;
             tapStart.current = null;
           },
         }

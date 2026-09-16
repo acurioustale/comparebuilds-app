@@ -11,6 +11,8 @@ export function useShareRehydration() {
     setBuildNames,
     preloadSpec,
     setSharedLayoutHash,
+    captureSession,
+    restoreSession,
   } = useBuildsStore(
     useShallow((s) => ({
       addBuild: s.addBuild,
@@ -19,6 +21,8 @@ export function useShareRehydration() {
       setBuildNames: s.setBuildNames,
       preloadSpec: s.preloadSpec,
       setSharedLayoutHash: s.setSharedLayoutHash,
+      captureSession: s.captureSession,
+      restoreSession: s.restoreSession,
     })),
   );
   const [shareError, setShareError] = useState(null);
@@ -63,7 +67,11 @@ export function useShareRehydration() {
     // happens only after the share payload has been fetched and validated, so
     // an expired/pruned link or a network failure can't destroy the previous
     // session (persist would overwrite localStorage the moment the store is
-    // emptied). Until then the persisted state simply keeps rendering.
+    // emptied). Until then the persisted state simply keeps rendering. A valid
+    // payload whose builds all turn out to be unloadable is the remaining case,
+    // and it is covered by capturing the session across the clear and putting
+    // it back (captureSession / restoreSession below) — so no share route,
+    // whatever it fails on, costs the user their own saved builds.
     //
     // Restores the persisted session's derived state (tree data, parsed
     // builds) after a failed share load, exactly like the plain-local route —
@@ -98,9 +106,17 @@ export function useShareRehydration() {
           restoreLocalSession();
           return;
         }
-        // The payload is valid — only now is replacing the previous session
-        // justified. clearAllBuilds resets sharedLayoutHash too, so the hash
-        // must be stamped after it.
+        // The payload is structurally valid, but "valid shape" is not yet
+        // "loads" — every build in it can still be rejected (a spec dropped
+        // from the index, a layout the strings no longer parse against, a
+        // class-data chunk that 404s right after a deploy). Hold the session
+        // so the total-failure path below can put it back: persist writes
+        // localStorage the moment the store is emptied, so without this the
+        // user's own saved builds are destroyed by opening someone else's
+        // dead link.
+        const session = captureSession();
+        // Only now is replacing the previous session justified. clearAllBuilds
+        // resets sharedLayoutHash too, so the hash must be stamped after it.
         clearAllBuilds();
         if (data.layoutHash) setSharedLayoutHash(data.layoutHash);
         // Drop duplicate build strings, keeping the first occurrence's label.
@@ -130,15 +146,33 @@ export function useShareRehydration() {
         // gone for good — surfacing fewer builds than the link encoded without a
         // word would be silent data loss.
         //
-        // A total failure needs its own message: addBuild rejects by returning
+        // A total failure needs its own handling: addBuild rejects by returning
         // false rather than throwing, so nothing reaches the catch below, and
-        // with no build committed the app falls back to the empty interactive
-        // tree — a blank page where a comparison was asked for. The hash is
-        // deliberately kept in that case (see below), so a reload retries.
+        // with no build committed the app would otherwise fall back to the
+        // empty interactive tree — a blank page where a comparison was asked
+        // for, over the top of a session that had been emptied for it. The hash
+        // is deliberately kept in that case (see below), so a reload retries.
         if (landed === 0) {
+          // Nothing from the link survived, so the session we cleared for it
+          // was cleared for nothing — put it back before saying so, and drop
+          // the share's layout hash with it, or a hash belonging to a share
+          // that never loaded would outlive it and mark the restored session
+          // as being from an older talent revision.
+          const loadFailure = useBuildsStore.getState().error;
+          restoreSession(session);
+          setSharedLayoutHash(null);
+          restoreLocalSession();
+          // Distinguish the two ways every build can fail. A tree-data load
+          // failure is transient and retryable (a stale chunk after a deploy, a
+          // dropped connection); blaming an outdated layout there contradicts
+          // the store's own error on the slot and points away from the reload
+          // that would fix it.
           setShareError(
-            "None of the builds in this link could be loaded. The link may be " +
-              "for an older version of the talent trees.",
+            loadFailure
+              ? "Couldn't load the talent data for this link. Check your " +
+                  "connection and reload to try again."
+              : "None of the builds in this link could be loaded. The link " +
+                  "may be for an older version of the talent trees.",
           );
         } else if (landed < builds.length) {
           const dropped = builds.length - landed;
@@ -174,6 +208,8 @@ export function useShareRehydration() {
     setBuildNames,
     preloadSpec,
     setSharedLayoutHash,
+    captureSession,
+    restoreSession,
   ]);
 
   const dismissShareError = useCallback(() => setShareError(null), []);
