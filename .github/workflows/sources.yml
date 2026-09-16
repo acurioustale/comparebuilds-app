@@ -100,7 +100,7 @@ jobs:
       # internally, so restoring a stale one is safe: a new upload changes the
       # hash and misses it.
       - name: Restore the Raidbots file cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: scripts/.cache/raidbots
           key: raidbots-${{ github.run_id }}
