@@ -54,7 +54,7 @@ jobs:
       # or php re-fetches all four needlessly — that is the safe direction to
       # err in, and the alternative is four keys to keep in step by hand.
       - name: Restore the pinned tool cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .tools
           key: pinned-tools-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.tool-versions') }}
