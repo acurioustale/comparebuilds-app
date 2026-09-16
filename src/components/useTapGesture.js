@@ -11,6 +11,17 @@ const TAP_MOVE_TOL = 10;
 // by a re-render) is never consumed.
 const SYNTHETIC_CLICK_MS = 700;
 
+// Finds the touch that owns the current gesture in one of an event's touch
+// lists. Identifiers are per-finger and stable for the life of a touch, so this
+// is how a handler tells "my finger" from any other finger on the screen. A
+// synthetic call with no identifier (or a test double) yields undefined, and
+// every caller falls back to the single-touch behaviour in that case.
+const touchById = (list, id) => {
+  if (!list || id == null) return undefined;
+  for (const t of list) if (t.identifier === id) return t;
+  return undefined;
+};
+
 export function useTapGesture() {
   const tapStart = useRef(null);
   const tapFired = useRef(false);
@@ -20,19 +31,29 @@ export function useTapGesture() {
     onTap
       ? {
           onTouchStart: (e) => {
-            // Only the first finger down starts a gesture. A later touchpoint
-            // landing on the same node would otherwise overwrite tapStart, and
-            // the FIRST touchend to fire would then evaluate the hold check
-            // against the wrong start time: press and hold a node to read its
-            // tooltip, tap it with a second finger, and lifting the first finger
-            // looks like a fresh short tap — firing onTap and spending (or, at
-            // max ranks, refunding) a point the user never asked for. Keyed on
+            // Only the first finger down ON THIS NODE starts a gesture. A later
+            // touchpoint landing on the same node would otherwise overwrite
+            // tapStart, and the FIRST touchend to fire would then evaluate the
+            // hold check against the wrong start time: press and hold a node to
+            // read its tooltip, tap it with a second finger, and lifting the
+            // first finger looks like a fresh short tap — firing onTap and
+            // spending (or, at max ranks, refunding) a point the user never
+            // asked for. Scoped to targetTouches, not touches: the latter counts
+            // every touch on the document, so a finger resting anywhere on
+            // screen (the thumb holding the phone, a tooltip held open on
+            // another talent) would make every tap here a silent no-op. Keyed on
             // the live touch count rather than "tapStart is already set" so a
-            // dropped touchend can't wedge the gesture permanently.
-            if (e.touches.length > 1) return;
+            // dropped touchend can't wedge the gesture permanently. (A real
+            // touchstart always lists the started finger in targetTouches — its
+            // target IS this element — so an empty list means a synthetic event
+            // that didn't populate one, and we fall back rather than drop the
+            // gesture.)
+            const own = e.targetTouches?.length ? e.targetTouches : e.touches;
+            if (own.length > 1) return;
             tapFired.current = false;
-            const t = e.touches[0];
+            const t = own[0];
             tapStart.current = {
+              id: t.identifier,
               time: Date.now(),
               x: t.clientX,
               y: t.clientY,
@@ -42,7 +63,10 @@ export function useTapGesture() {
           onTouchMove: (e) => {
             const s = tapStart.current;
             if (!s) return;
-            const t = e.touches[0];
+            // Follow the gesture's own finger; another finger's movement says
+            // nothing about whether THIS press turned into a scroll.
+            const t = touchById(e.touches, s.id) ?? e.touches[0];
+            if (!t) return;
             if (
               Math.abs(t.clientX - s.x) > TAP_MOVE_TOL ||
               Math.abs(t.clientY - s.y) > TAP_MOVE_TOL
@@ -50,16 +74,36 @@ export function useTapGesture() {
               s.moved = true;
             }
           },
-          onTouchEnd: () => {
+          onTouchEnd: (e) => {
             const s = tapStart.current;
+            if (!s) return;
+            // changedTouches holds exactly the fingers this event lifted. If the
+            // gesture's own finger isn't among them, some other finger lifted —
+            // leave the gesture pending rather than consuming it, or a second
+            // finger touching down and lifting on the same node would fire the
+            // first finger's tap and spend a point unasked.
+            if (
+              s.id != null &&
+              e?.changedTouches &&
+              !touchById(e.changedTouches, s.id)
+            )
+              return;
             tapStart.current = null;
             // A scroll (moved) or a hold (a tooltip peek, not a tap) does nothing.
-            if (!s || s.moved || Date.now() - s.time >= TAP_HOLD_MS) return;
+            if (s.moved || Date.now() - s.time >= TAP_HOLD_MS) return;
             tapFired.current = true;
             tapFiredAt.current = Date.now();
             onTap();
           },
-          onTouchCancel: () => {
+          onTouchCancel: (e) => {
+            const s = tapStart.current;
+            if (!s) return;
+            if (
+              s.id != null &&
+              e?.changedTouches &&
+              !touchById(e.changedTouches, s.id)
+            )
+              return;
             tapStart.current = null;
           },
         }
