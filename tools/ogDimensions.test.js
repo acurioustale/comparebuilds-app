@@ -4,11 +4,7 @@ import assert from "node:assert/strict";
 
 import { declaredOgDimensions, pngDimensions } from "./og-dimensions.mjs";
 
-const read = (path) =>
-  readFileSync(
-    new URL(path, import.meta.url),
-    path.endsWith(".png") ? undefined : "utf8",
-  );
+const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 
 // --- declaredOgDimensions ---------------------------------------------------
 
