@@ -16,14 +16,21 @@ import { THEME_STORAGE_KEY } from "../lib/theme.js";
 // warning). The bfcache path re-reads real storage, so give this suite a working
 // in-memory store; setItem/getItem must actually round-trip for that test to mean
 // anything.
+// Defined rather than assigned: jsdom exposes localStorage as a getter-only
+// accessor, so a plain `window.localStorage = ...` throws. The stub itself is
+// unchanged.
 beforeEach(() => {
   const store = new Map();
-  window.localStorage = {
-    getItem: (k) => (store.has(k) ? store.get(k) : null),
-    setItem: (k, v) => store.set(k, String(v)),
-    removeItem: (k) => store.delete(k),
-    clear: () => store.clear(),
-  };
+  Object.defineProperty(window, "localStorage", {
+    configurable: true,
+    writable: true,
+    value: {
+      getItem: (k) => (store.has(k) ? store.get(k) : null),
+      setItem: (k, v) => store.set(k, String(v)),
+      removeItem: (k) => store.delete(k),
+      clear: () => store.clear(),
+    },
+  });
 });
 
 function fireStorage({ key, newValue }) {
