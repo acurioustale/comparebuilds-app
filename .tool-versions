@@ -1,5 +1,6 @@
 nodejs 26
 php 8.4
+shellcheck 0.11.0
 shfmt 3.13.1
 php-cs-fixer 3.95.18
 phpunit 13.2.6

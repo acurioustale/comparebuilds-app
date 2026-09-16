@@ -303,12 +303,15 @@ npm run format         # auto-fix formatting (Prettier)
 ```
 
 The npm-based tools (ESLint, Prettier, stylelint, markdownlint, svgo, Vitest)
-come with `npm install`. The standalone CLIs are optional locally — `validate.sh`
-skips any that are missing with a notice, and CI pins them — but to run the whole
-gate, install them too:
+come with `npm install`. The pinned CLIs (shellcheck, shfmt, php-cs-fixer,
+phpunit, actionlint) need no install at all: `validate.sh` downloads each at its
+`.tool-versions` version into a gitignored `.tools/`, exactly as CI does, so no
+package manager can drift one out from under its pin. The rest are optional
+locally — `validate.sh` skips any that are missing with a notice, and CI enforces
+them — but to run the whole gate, install them too:
 
 ```bash
-brew install shellcheck shfmt php-cs-fixer phpunit actionlint lychee xmllint vnu
+brew install lychee xmllint vnu
 ```
 
 Link checking (lychee) runs in its own GitHub workflow, separate from the

@@ -29,6 +29,7 @@ esac
 tool_version() { awk -v tool="$1" '$1 == tool {print $2}' .tool-versions; }
 ci_node_version="$(tool_version nodejs)"
 ci_php_version="$(tool_version php)"
+SHELLCHECK_VERSION="$(tool_version shellcheck)"
 SHFMT_VERSION="$(tool_version shfmt)"
 PHPCSFIXER_VERSION="$(tool_version php-cs-fixer)"
 PHPUNIT_VERSION="$(tool_version phpunit)"
@@ -76,7 +77,10 @@ pinned_fetch() {
 		return 1
 	fi
 	if [[ -n "$member" ]]; then
-		if ! tar xzf "$tmp/dl" -C "$tmp" "$member"; then
+		# `xf` without a compression flag, so one helper covers both the .tar.gz
+		# assets and shellcheck's .tar.xz; both bsdtar (macOS) and GNU tar sniff
+		# the format from the file.
+		if ! tar xf "$tmp/dl" -C "$tmp" "$member"; then
 			rm -rf "$tmp"
 			return 1
 		fi
@@ -89,17 +93,29 @@ pinned_fetch() {
 }
 
 # Release-asset naming for this machine. The phars are platform-independent; the
-# two Go binaries are not. An unrecognised CPU leaves the slug empty, the URL
-# 404s, and the PATH fallback takes over.
+# binaries are not, and the two projects disagree on how to spell a CPU: the Go
+# tools use Go's own GOARCH (amd64/arm64), shellcheck uses the uname spelling
+# (x86_64/aarch64). An unrecognised CPU leaves both slugs empty, the URL 404s,
+# and the PATH fallback takes over.
 tools_os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 case "$(uname -m)" in
-x86_64) tools_cpu=amd64 ;;
-arm64 | aarch64) tools_cpu=arm64 ;;
-*) tools_cpu="" ;;
+x86_64) tools_cpu=amd64 tools_arch=x86_64 ;;
+arm64 | aarch64) tools_cpu=arm64 tools_arch=aarch64 ;;
+*) tools_cpu="" tools_arch="" ;;
 esac
 
 # Resolve each pinned tool to a command array: the cached pinned copy when we can
 # get it, else the PATH copy, else empty so the stage skips as it always has.
+shellcheck_cmd=()
+if pinned_fetch "$TOOLS_DIR/shellcheck-$SHELLCHECK_VERSION" \
+	"https://github.com/koalaman/shellcheck/releases/download/v$SHELLCHECK_VERSION/shellcheck-v$SHELLCHECK_VERSION.${tools_os}.${tools_arch}.tar.xz" \
+	"shellcheck-v$SHELLCHECK_VERSION/shellcheck"; then
+	shellcheck_cmd=("$TOOLS_DIR/shellcheck-$SHELLCHECK_VERSION")
+elif have shellcheck; then
+	require_version shellcheck "$SHELLCHECK_VERSION" "$(shellcheck --version | grep -i '^version:')"
+	shellcheck_cmd=(shellcheck)
+fi
+
 shfmt_cmd=()
 if pinned_fetch "$TOOLS_DIR/shfmt-$SHFMT_VERSION" \
 	"https://github.com/mvdan/sh/releases/download/v$SHFMT_VERSION/shfmt_v${SHFMT_VERSION}_${tools_os}_${tools_cpu}"; then
@@ -174,19 +190,28 @@ if [[ "$do_clean" -eq 1 ]]; then
 fi
 
 # Shell scripts: shellcheck for correctness, shfmt (defaults) for formatting.
-# Skipped with a notice when the tools aren't installed locally so validate.sh
-# stays runnable everywhere; CI always enforces them. When present, either tool's
+# Each is resolved and skipped on its own: they are separate tools, and gating
+# one on the other meant a machine missing shellcheck also skipped the pinned
+# shfmt it had already downloaded. Skipped with a notice so validate.sh stays
+# runnable everywhere; CI always enforces both. When present, either tool's
 # findings fail the run via set -e.
-if have shellcheck && [[ ${#shfmt_cmd[@]} -gt 0 ]]; then
-	step "Shell scripts (shellcheck + shfmt)"
-	sh_files=()
-	while IFS= read -r file; do
-		sh_files+=("$file")
-	done < <(git ls-files '*.sh')
-	shellcheck "${sh_files[@]}"
+sh_files=()
+while IFS= read -r file; do
+	sh_files+=("$file")
+done < <(git ls-files '*.sh')
+
+if [[ ${#shellcheck_cmd[@]} -gt 0 ]]; then
+	step "Shell scripts (shellcheck)"
+	"${shellcheck_cmd[@]}" "${sh_files[@]}"
+else
+	skip shellcheck "shellcheck"
+fi
+
+if [[ ${#shfmt_cmd[@]} -gt 0 ]]; then
+	step "Shell scripts (shfmt)"
 	"${shfmt_cmd[@]}" -d "${sh_files[@]}"
 else
-	skip shellcheck/shfmt "shell checks"
+	skip shfmt "shfmt formatting check"
 fi
 
 # PHP: syntax check the share API + OG renderer (and the config template). Guarded

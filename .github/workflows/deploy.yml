@@ -38,6 +38,7 @@ jobs:
         run: |
           {
             echo "php=$(awk '$1 == "php" { print $2; exit }' .tool-versions)"
+            echo "shellcheck=$(awk '$1 == "shellcheck" { print $2; exit }' .tool-versions)"
             echo "shfmt=$(awk '$1 == "shfmt" { print $2; exit }' .tool-versions)"
             echo "phpcsfixer=$(awk '$1 == "php-cs-fixer" { print $2; exit }' .tool-versions)"
             echo "phpunit=$(awk '$1 == "phpunit" { print $2; exit }' .tool-versions)"
@@ -64,6 +65,7 @@ jobs:
       # a cache hit makes this step a no-op rather than a re-download.
       - name: Fetch any pinned tool the cache did not supply
         env:
+          SHELLCHECK_VERSION: ${{ steps.versions.outputs.shellcheck }}
           SHFMT_VERSION: ${{ steps.versions.outputs.shfmt }}
           PHPCSFIXER_VERSION: ${{ steps.versions.outputs.phpcsfixer }}
           PHPUNIT_VERSION: ${{ steps.versions.outputs.phpunit }}
@@ -81,12 +83,17 @@ jobs:
             [ -e "$dest" ] && return 0
             curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors "$url" -o "$RUNNER_TEMP/dl"
             if [ -n "$member" ]; then
-              tar xzf "$RUNNER_TEMP/dl" -C "$RUNNER_TEMP" "$member"
+              # `xf` with no compression flag, so the same helper handles both
+              # the .tar.gz assets and the .tar.xz one (tar sniffs the format).
+              tar xf "$RUNNER_TEMP/dl" -C "$RUNNER_TEMP" "$member"
               mv "$RUNNER_TEMP/$member" "$RUNNER_TEMP/dl"
             fi
             chmod +x "$RUNNER_TEMP/dl"
             mv "$RUNNER_TEMP/dl" "$dest"
           }
+          fetch ".tools/shellcheck-${SHELLCHECK_VERSION}" \
+            "https://github.com/koalaman/shellcheck/releases/download/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
+            "shellcheck-v${SHELLCHECK_VERSION}/shellcheck"
           fetch ".tools/shfmt-${SHFMT_VERSION}" \
             "https://github.com/mvdan/sh/releases/download/v${SHFMT_VERSION}/shfmt_v${SHFMT_VERSION}_linux_amd64"
           fetch ".tools/php-cs-fixer-${PHPCSFIXER_VERSION}.phar" \
@@ -96,12 +103,16 @@ jobs:
           fetch ".tools/actionlint-${ACTIONLINT_VERSION}" \
             "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" actionlint
 
+      # Both tools come from .tools/ at their pinned versions, never from the
+      # runner image: an image bump would otherwise move shellcheck under us and
+      # redden or green the gate on unchanged code.
       - name: Shell scripts (shellcheck + shfmt)
         env:
+          SHELLCHECK_VERSION: ${{ steps.versions.outputs.shellcheck }}
           SHFMT_VERSION: ${{ steps.versions.outputs.shfmt }}
         run: |
           mapfile -t sh_files < <(git ls-files '*.sh')
-          shellcheck "${sh_files[@]}"
+          ".tools/shellcheck-${SHELLCHECK_VERSION}" "${sh_files[@]}"
           ".tools/shfmt-${SHFMT_VERSION}" -d "${sh_files[@]}"
 
       # The runner's default PHP (8.3) is older than PHPUnit 13 needs (>= 8.4.1),
