@@ -256,7 +256,19 @@ export const createBuildsSlice = (set, get) => ({
    * @returns {void}
    */
   removeBuild: (index) => {
-    const { buildStrings, parsedBuilds, buildNames, editingIndex } = get();
+    const {
+      buildStrings,
+      parsedBuilds,
+      buildNames,
+      editingIndex,
+      addingBuild,
+      specId,
+      classId,
+      treeData,
+      classNodes,
+      layoutHash,
+      interactiveNodes,
+    } = get();
     if (index < 0 || index >= buildStrings.length) return;
 
     // Reindexing the slots invalidates any positional index captured by a
@@ -269,8 +281,41 @@ export const createBuildsSlice = (set, get) => ({
     const newNames = buildNames.filter((_, i) => i !== index);
 
     if (newStrings.length === 0) {
-      // Invalidate any in-flight load so its commit is a no-op
-      set({ ...EMPTY, loadGen: get().loadGen + 1 });
+      // Removing the last build normally resets to the class grid. But an
+      // interactive session can be on screen at the same time — MainView
+      // renders the calculator alongside the comparison whenever addingBuild is
+      // set — and that selection belongs to the user, not to the slot they just
+      // removed. Discarding a half-finished build because an unrelated imported
+      // one was deleted is data loss, and this branch was the only place that
+      // did it: the sibling below is careful to preserve editingIndex and
+      // addingBuild.
+      //
+      // Removing the slot being EDITED is the exception: those selections are
+      // that build's, seeded from it by editBuild, so they go with it — the
+      // same call the sibling's editShift makes.
+      //
+      // The keep list deliberately omits sharedLayoutHash. What survives here
+      // came from the calculator, not from a share, so a share's hash must not
+      // outlive it and flag it as an earlier talent revision.
+      const keepInteractive = addingBuild && editingIndex !== index;
+      set({
+        ...EMPTY,
+        // Invalidate any in-flight load so its commit is a no-op
+        loadGen: get().loadGen + 1,
+        ...(keepInteractive
+          ? {
+              specId,
+              classId,
+              treeData,
+              classNodes,
+              layoutHash,
+              interactiveNodes,
+              addingBuild: true,
+              // Only one slot existed, so any surviving index is stale.
+              editingIndex: null,
+            }
+          : {}),
+      });
     } else {
       // Keep editingIndex pointing at the build it referenced, same as
       // swapBuilds. Removing the edited slot exits edit mode (its selections no
