@@ -29,6 +29,48 @@ export const createBuildsSlice = (set, get) => ({
   setSharedLayoutHash: (hash) => set({ sharedLayoutHash: hash ?? null }),
 
   /**
+   * Copies the persisted session slices — exactly the fields `partialize` in
+   * buildsStore.js writes to localStorage — so a caller that is about to clear
+   * the store speculatively can put the session back if the thing it cleared
+   * for never arrives. The share route is the one such caller: it must empty
+   * the store before it knows whether any build in the link will load.
+   *
+   * @returns {object} An opaque snapshot for restoreSession.
+   */
+  captureSession: () => {
+    const s = get();
+    return {
+      buildStrings: [...s.buildStrings],
+      buildNames: [...s.buildNames],
+      specId: s.specId,
+      classId: s.classId,
+      interactiveNodes: { ...s.interactiveNodes },
+      addingBuild: s.addingBuild,
+      editingIndex: s.editingIndex,
+    };
+  },
+
+  /**
+   * Puts back a snapshot from captureSession, resetting everything else to its
+   * initial value. Derived state (treeData, classNodes, parsedBuilds) is NOT
+   * rebuilt here — the caller follows with rehydrateTreeData, exactly as the
+   * plain-local route does after persist restores these same slices.
+   *
+   * @param {object} snapshot
+   * @returns {void}
+   */
+  restoreSession: (snapshot) => {
+    set({
+      ...EMPTY,
+      ...snapshot,
+      // Cancel any load the abandoned attempt started, and invalidate anything
+      // it queued against the slot indices we are replacing.
+      loadGen: get().loadGen + 1,
+      slotGen: get().slotGen + 1,
+    });
+  },
+
+  /**
    * Validates and appends a build string. Async because the first build
    * triggers a dynamic import of the class JSON.
    *

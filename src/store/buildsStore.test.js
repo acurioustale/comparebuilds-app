@@ -349,6 +349,19 @@ describe("preloadSpec", () => {
     assert.strictEqual(typeof st.interactiveNodes, "object");
   });
 
+  test("clears a layout hash left behind by a failed share", async () => {
+    // Regression: preloadSpec reset specId/classId/interactiveNodes but left
+    // sharedLayoutHash alone. After a share route cleared the store and then
+    // failed to load anything, "Start from scratch" went through here, the
+    // fresh load stamped the current layoutHash, and the stale share hash still
+    // sitting in the store raised an undismissable "saved for an earlier talent
+    // revision" warning on a brand-new, empty build.
+    get().setSharedLayoutHash("deadbeef");
+    await get().preloadSpec(DK_BLOOD);
+    assert.strictEqual(get().sharedLayoutHash, null);
+    assert.ok(get().layoutHash, "the fresh load still stamps its own hash");
+  });
+
   test("is a no-op once builds exist", async () => {
     const [a] = genStrings("death_knight", "blood", 1);
     await get().addBuild(a);
@@ -858,5 +871,81 @@ describe("loadTreeData error handling", () => {
     void okA;
 
     spy.mockRestore();
+  });
+});
+
+// ── captureSession / restoreSession ───────────────────────────────────────────
+
+describe("captureSession / restoreSession", () => {
+  test("puts back the builds a speculative clear removed", async () => {
+    // The share route must empty the store before it knows whether any build in
+    // the link will load, and persist writes localStorage the moment it does.
+    // Without a capture/restore pair, a link whose builds all fail destroys the
+    // user's own saved session for good.
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    await get().addBuild(a);
+    await get().addBuild(b);
+    get().setBuildNames(["First", "Second"]);
+
+    const snap = get().captureSession();
+    get().clearAllBuilds();
+    assert.deepStrictEqual(get().buildStrings, [], "cleared as the share does");
+    assert.strictEqual(get().specId, null);
+
+    get().restoreSession(snap);
+    assert.deepStrictEqual(get().buildStrings, [a, b]);
+    assert.deepStrictEqual(get().buildNames, ["First", "Second"]);
+    assert.strictEqual(get().specId, DK_BLOOD);
+  });
+
+  test("the snapshot is a copy, unaffected by later edits", async () => {
+    const [a, b] = genStrings("death_knight", "blood", 2);
+    await get().addBuild(a);
+
+    const snap = get().captureSession();
+    await get().addBuild(b);
+    get().clearAllBuilds();
+    get().restoreSession(snap);
+
+    assert.deepStrictEqual(
+      get().buildStrings,
+      [a],
+      "restores the session as it was at capture time",
+    );
+  });
+
+  test("restores the in-progress interactive selection too", async () => {
+    await get().preloadSpec(DK_BLOOD);
+    const node = get().treeData.nodes.find((n) => !n.alreadyGranted);
+    get().setInteractiveNodes({
+      ...get().interactiveNodes,
+      [node.id]: { pointsInvested: 1, entryChosen: null },
+    });
+    const spent = get().interactiveNodes[node.id];
+    assert.ok(spent, "fixture: a point is spent");
+
+    const snap = get().captureSession();
+    get().clearAllBuilds();
+    get().restoreSession(snap);
+
+    assert.deepStrictEqual(get().interactiveNodes[node.id], spent);
+    assert.strictEqual(get().specId, DK_BLOOD);
+  });
+
+  test("resets non-persisted state and cancels in-flight work", async () => {
+    const [a] = genStrings("death_knight", "blood", 1);
+    await get().addBuild(a);
+    const snap = get().captureSession();
+    const gen = get().loadGen;
+    const slot = get().slotGen;
+
+    get().restoreSession(snap);
+
+    assert.ok(get().loadGen > gen, "an in-flight load is cancelled");
+    assert.ok(get().slotGen > slot, "queued slot edits are invalidated");
+    // Derived state is deliberately left for rehydrateTreeData to rebuild,
+    // exactly as on the plain-local route.
+    assert.strictEqual(get().treeData, null);
+    assert.strictEqual(get().error, null);
   });
 });
