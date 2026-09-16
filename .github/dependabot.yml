@@ -23,6 +23,16 @@ updates:
         patterns:
           - vitest
           - "@vitest/*"
+      # The bundler is a development dependency by classification and a
+      # runtime concern by consequence: it generates the assets every visitor
+      # is served, so a regression here reaches users even though vite is
+      # never itself bundled. It gets the same treatment as the runtime
+      # dependencies — its own PR, its own e2e run — rather than arriving
+      # inside a sixteen-package lockfile diff nobody can bisect.
+      bundler:
+        patterns:
+          - vite
+          - "@vitejs/*"
       # Dev tooling churns constantly and the gate catches breakage, so a
       # single batched PR keeps the noise down. Majors stay separate.
       dev-tooling:
