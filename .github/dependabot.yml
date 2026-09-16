@@ -1,0 +1,36 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: chore(deps)
+      prefix-development: chore(deps-dev)
+    open-pull-requests-limit: 5
+    groups:
+      # Dev tooling churns constantly and the gate catches breakage, so a
+      # single batched PR keeps the noise down. Majors stay separate.
+      dev-tooling:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+    # Runtime dependencies are deliberately left ungrouped: they ship to the
+    # browser bundle and each one deserves its own PR and e2e run.
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: chore(ci)
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        update-types:
+          - minor
+          - patch
