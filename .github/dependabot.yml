@@ -11,6 +11,18 @@ updates:
       prefix-development: chore(deps-dev)
     open-pull-requests-limit: 5
     groups:
+      # Lockstep pairs. These packages assert on each other's exact version
+      # at install or at runtime, so a PR bumping one alone can never go
+      # green. They are grouped ahead of everything else and carry no
+      # update-types filter, so majors stay together too.
+      react:
+        patterns:
+          - react
+          - react-dom
+      vitest:
+        patterns:
+          - vitest
+          - "@vitest/*"
       # Dev tooling churns constantly and the gate catches breakage, so a
       # single batched PR keeps the noise down. Majors stay separate.
       dev-tooling:
