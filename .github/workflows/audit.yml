@@ -1,0 +1,89 @@
+name: audit
+
+# Dependency advisories live in their own workflow ON PURPOSE, like `links` and
+# `sources`: the deploy workflow's `validate` gate is what blocks a release, and
+# an advisory published against a lint tool at 3am must never be what stops a
+# fix from shipping. A red run here is a signal to investigate, not a blocked
+# release.
+#
+# This does not replace Dependabot, which still opens the fixing PR. It adds the
+# two things Dependabot alerts don't give you: a check on the pull request that
+# introduces a dependency, and a result visible in the Actions tab rather than
+# only in email and the Security tab.
+#
+# `npm audit` is deliberately absent from validate.sh and the `validate` job.
+# Gating on it would mean an upstream advisory — published on someone else's
+# schedule, against a package that may never touch a user — could redden a green
+# tree and block an unrelated deploy.
+on:
+  pull_request:
+    # Only what changes the dependency tree, so unrelated PRs don't hit the
+    # registry. The weekly schedule still catches advisories published against
+    # a tree that nobody touched.
+    paths:
+      - package.json
+      - package-lock.json
+      - .github/workflows/audit.yml
+  workflow_dispatch:
+  schedule:
+    # Weekly, an hour before `links`, so the three non-gating Monday workflows
+    # don't all contend for runners at once.
+    - cron: "0 5 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: ".tool-versions"
+          cache: npm
+
+      # No `npm ci`: npm audit resolves the tree from package-lock.json and
+      # queries the registry, so the install would be a minute spent to learn
+      # nothing. The lockfile is the thing under audit.
+
+      # The hard/soft split, mirroring the one in `sources`. Runtime
+      # dependencies are hard: they are bundled and served to every visitor, so
+      # ANY severity fails the job and wants a look the same day.
+      - name: Runtime dependencies
+        run: npm audit --omit=dev
+
+      # Dev dependencies are soft: they are build and test tooling that never
+      # reaches the browser, and the only input they parse is what this repo
+      # commits. Reported, never fatal — continue-on-error marks the step
+      # without failing the run, so a lint-tool advisory reads as the low-stakes
+      # thing it is instead of training everyone to ignore a red workflow.
+      #
+      # This is not hypothetical: every advisory in the September 2026 batch
+      # (svgo, js-yaml, smol-toml, vitest) was dev-only. A flat threshold across
+      # both trees would have failed on all of them.
+      - name: Dev dependencies (report only)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: npm audit --include=dev
+
+      # A one-line verdict in the run summary, so the result is legible from the
+      # Actions list without opening the log.
+      - name: Summarise
+        if: ${{ !cancelled() }}
+        run: |
+          {
+            echo "## Dependency audit"
+            echo
+            if npm audit --omit=dev >/dev/null 2>&1; then
+              echo "Runtime dependencies: clean."
+            else
+              echo "Runtime dependencies: **advisories found** — these ship to the browser."
+            fi
+            echo
+            echo '```'
+            npm audit --include=dev 2>&1 | tail -20 || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
