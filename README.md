@@ -288,7 +288,8 @@ the two policies disagree on any other directive (it reads the policy Apache
 actually serves: comments skipped, continuations rejoined, request-scoped and
 conditional forms refused, and the last of repeated headers taken), an OG image
 guard
-(`npm run check:og`) that verifies `public/og-image.png` is 1200×630, a deploy
+(`npm run check:og`) that verifies `public/og-image.png` is the size
+`index.html` advertises to link unfurlers, a deploy
 set guard (`npm run check:deploy-assets`) that binds `deploy.sh`'s `API_ASSETS`
 array to the tracked `api/` tree and to what the shipped PHP requires, a
 sitemap well-formedness check (`xmllint --noout dist/sitemap.xml`), and HTML
