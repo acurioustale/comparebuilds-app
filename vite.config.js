@@ -58,7 +58,15 @@ export default defineConfig({
     environment: "node",
     globals: true,
     setupFiles: ["./src/test/setup.js"],
-    include: ["src/**/*.test.{js,jsx}", "scripts/**/*.test.js"],
+    // tools/ carries the gate guards and the shared parsing helpers they are
+    // built on; each helper has a test of its own (a guard regex that was subtly
+    // wrong on real input is the failure mode those exist to prevent), so the
+    // suite must pick them up alongside src/ and scripts/.
+    include: [
+      "src/**/*.test.{js,jsx}",
+      "scripts/**/*.test.js",
+      "tools/**/*.test.js",
+    ],
     // Vitest defaults to availableParallelism() - 1 workers. On a many-core dev
     // machine that oversubscribes the box rather than using it: every fork
     // carries its own V8 heap, and the 20+ jsdom suites each build a full DOM on
