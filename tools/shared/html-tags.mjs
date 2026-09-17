@@ -1,15 +1,15 @@
-// Shared HTML tag/attribute scanner. Several guards need to find a tag by name
-// and read an attribute off it — the CSP guard reads the <meta> policy and each
-// inline script's type; the og-image guard reads the declared og:image
-// dimensions. Each would otherwise re-derive its own `<tag …>` regex plus a
-// per-attribute `attr=["']…["']` extraction, so the quoting, comment and
-// attribute-boundary rules would live in many places and drift (a `>` inside a
-// value truncating a tag, `data-src` satisfying a query for `src`, a `<meta`
-// boundary matching `<metadata>`). This parses each tag's attributes once,
-// correctly, so those rules have one home.
+// Shared HTML tag/attribute scanner. Anything that validates markup needs to
+// find a tag by name and read an attribute off it — a policy out of a <meta>, a
+// declared image dimension, an inline script's type, a theme colour. Written
+// once per caller, each grows its own `<tag …>` regex plus a per-attribute
+// `attr=["']…["']` extraction, so the quoting, comment and attribute-boundary
+// rules end up in many places and drift (a `>` inside a value truncating a tag,
+// `data-name` satisfying a query for `name`, a `<meta` boundary matching
+// `<metadata>`). This parses each tag's attributes once, correctly, so those
+// rules have one home.
 //
 // Dependency-free on purpose: a small scan over our own well-formed markup, not
-// a general HTML parser. Comment-skipping is shared with tools/html-comments.mjs.
+// a general HTML parser. Comment-skipping is shared with ./html-comments.mjs.
 import { isCommented } from "./html-comments.mjs";
 
 // A tag's attribute text as Map(lower-cased name → value). A value is unwrapped

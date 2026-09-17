@@ -182,17 +182,25 @@ jobs:
       - name: Run tests with coverage thresholds
         run: npm run coverage
 
+      # The mirrored tools/shared/ bundle is stdlib-only (node:test), which
+      # vitest cannot collect, so its tests are excluded from the vitest include
+      # and run here under Node's own runner instead.
+      - name: Run the shared bundle tests
+        run: npm run test:shared
+
       - name: Build
         run: npm run build
 
       # Verify the CSP hash for the inline anti-flash theme script still matches
       # the built script's bytes — runs against dist/ so it checks what ships —
-      # and that deploy.sh still stages every api/ file the server needs.
+      # that deploy.sh still stages every api/ file the server needs, and that
+      # the mirrored tools/shared/ bundle still matches its manifest.
       - name: Check CSP, og-image and deploy set
         run: |
           npm run check:csp
           npm run check:og
           npm run check:deploy-assets
+          npm run check:shared
 
       # Well-formedness check on the generated sitemap — catches a templating bug
       # in prerenderSpecs before deploy. xmllint isn't on the runner image by

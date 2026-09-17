@@ -23,10 +23,10 @@
 // rather than silently validating something other than what ships.
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { isInlineScript, scriptElements } from "./inline-scripts.mjs";
-import { findTags, countRawTextOpeners } from "./html-tags.mjs";
-import { readHeaderCsp } from "./htaccess-csp.mjs";
-import { parseCsp, comparePolicies } from "./csp-directives.mjs";
+import { isInlineScript, scriptElements } from "./shared/inline-scripts.mjs";
+import { findTags, countRawTextOpeners } from "./shared/html-tags.mjs";
+import { readHeaderCsp } from "./shared/htaccess-csp.mjs";
+import { parseCsp, comparePolicies } from "./shared/csp-directives.mjs";
 
 const distHtml = new URL("../dist/index.html", import.meta.url);
 const distHtaccess = new URL("../dist/.htaccess", import.meta.url);
@@ -42,7 +42,7 @@ try {
 }
 const htaccess = await readFile(distHtaccess, "utf8");
 
-// The <meta> CSP, read through the shared tools/html-tags.mjs scanner: it finds
+// The <meta> CSP, read through the shared tools/shared/html-tags.mjs scanner: it finds
 // the <meta> tags (quote-aware, and tag-name anchored so a different element
 // like <metadata> can't be read as the policy source) and skips any inside an
 // HTML comment, so a documented sample or an old policy kept for reference is
@@ -57,7 +57,7 @@ const [cspMeta] = findTags(html, "meta", {
 const metaCsp = cspMeta?.attrs.get("content");
 
 // The header CSP: the `Header [always] set Content-Security-Policy "..."`
-// directive in dist/.htaccess, read through tools/htaccess-csp.mjs. It skips
+// directive in dist/.htaccess, read through tools/shared/htaccess-csp.mjs. It skips
 // Apache comments and commented-out examples, reassembles a backslash-continued
 // directive, requires the `Header set` form, takes the LAST live match (Apache's
 // `Header set` replaces, so the browser is served the last of repeated headers),
