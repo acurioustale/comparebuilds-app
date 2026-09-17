@@ -11,6 +11,11 @@
 #                                        generated current-layouts manifest that
 #                                        ensure_schema.php reconciles into the DB
 #
+# The two halves are staged differently on purpose: dist/ is a build product and
+# untracked, so disk is its only source; api/ is tracked source and is read out
+# of HEAD, so a hand-run deploy from a dirty checkout cannot publish uncommitted
+# PHP to the internet-facing half of the site.
+#
 # Staging keeps --delete from wiping the live api/ folder (which is not part of
 # dist/). config.php (the DB credentials) lives one level ABOVE the web root and
 # is left untouched. The CI key is confined to TARGET server-side by a forced-
@@ -27,8 +32,16 @@ cd "$(dirname "$0")"
 # a cron job. tools/check-deploy-assets.mjs binds this array to the tracked api/
 # tree (every file classified ship-or-not) and to each PHP file's own requires,
 # so a forgotten runtime dependency fails the gate instead of the deploy. Keep it
-# a single one-line array literal: that guard parses it.
+# a single one-line array literal: that guard parses it. Entries are `git archive`
+# pathspecs (see below), so keep them plain literal paths - no glob or pathspec
+# magic, which would resolve differently there than the guard resolves it here.
 API_ASSETS=(api/share.php api/og.php api/lib api/fonts api/cron api/current_layouts.json)
+# The subset of API_ASSETS the BUILD writes rather than git tracking. Those are
+# gitignored, so they are absent from HEAD and must be staged from disk — passing
+# one to `git archive` as a pathspec would match nothing and abort the whole
+# archive. Keep this a single one-line array literal too: the guard parses it as
+# well, so the split it reasons about is the split the deploy performs.
+API_GENERATED=(api/current_layouts.json)
 
 REMOTE="web4186@http2.core-networks.de"
 TARGET="html/comparebuilds.app/"
@@ -47,9 +60,48 @@ stage="$(mktemp -d)"
 chmod 755 "$stage"
 trap 'rm -rf "$stage"' EXIT
 
+# dist/ is a build product and untracked, so it can only be staged from disk —
+# `npm run build` above is what makes it authoritative.
 cp -a dist/. "$stage/"
-mkdir -p "$stage/api"
-cp -a "${API_ASSETS[@]}" "$stage/api/"
+
+# api/ is tracked source, so it is staged from the COMMIT, not the working tree.
+# Reading each path off disk meant a hand-run deploy from a dirty checkout
+# published uncommitted PHP to a public endpoint; `git archive` reads the blobs
+# out of HEAD instead, so what ships is exactly what is committed, matching what
+# CI deploys from a clean checkout. API_ASSETS entries are already api/-prefixed,
+# so they extract straight to $stage/api/... (which is why no mkdir is needed).
+# A pathspec matching nothing in HEAD (a typo'd or renamed entry) aborts the
+# archive, keeping that a loud failure rather than a silently empty ship.
+archive_paths=()
+for asset in "${API_ASSETS[@]}"; do
+	generated=0
+	for gen in "${API_GENERATED[@]}"; do
+		if [[ "$asset" == "$gen" ]]; then
+			generated=1
+			break
+		fi
+	done
+	if [[ "$generated" -eq 0 ]]; then
+		archive_paths+=("$asset")
+	fi
+done
+if [[ "${#archive_paths[@]}" -eq 0 ]]; then
+	# git archive with no pathspec would archive the WHOLE repo into the web root.
+	echo "error: no tracked api/ paths to stage - check API_ASSETS/API_GENERATED." >&2
+	exit 1
+fi
+git archive --format=tar HEAD -- "${archive_paths[@]}" | tar -x -C "$stage"
+
+# The generated half is not in HEAD by design, so it comes off disk like dist/.
+if [[ "${#API_GENERATED[@]}" -gt 0 ]]; then
+	cp -a "${API_GENERATED[@]}" "$stage/api/"
+fi
+
+# Publishing HEAD means local edits to api/ are ignored; say so, or a hand-run
+# deploy from a dirty tree looks like it shipped what is on screen.
+if ! git diff --quiet HEAD -- "${API_ASSETS[@]}"; then
+	echo "==> Note: uncommitted changes to api/ are NOT deployed (shipping HEAD)" >&2
+fi
 
 rsync_args=()
 is_dry_run=0

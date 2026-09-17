@@ -18,60 +18,86 @@
 //      ship-or-not rather than silently defaulting to "not shipped".
 //   2. Existence — every API_ASSETS entry resolves to something real (a tracked
 //      path, or a declared build-generated one), so a rename or typo fails here
-//      instead of aborting the deploy's `cp -a` mid-flight.
+//      instead of aborting the deploy's staging mid-flight.
 //   3. Requires — every `__DIR__`-relative require reachable from a shipped PHP
 //      file resolves either to another shipped path or to a location outside the
 //      web root entirely (config.php lives one level above it, deliberately).
 //      This is the check that catches the api/lib/RateLimiter.php class of
 //      mistake at its source rather than by having remembered to list it.
 //
-// Dependency-free on purpose: it parses the array straight out of deploy.sh (the
+// Two things about HOW deploy.sh stages that list shape what these checks can
+// mean. It reads the api/ half out of HEAD (`git archive`) rather than off disk,
+// so that a hand-run deploy from a dirty checkout cannot publish uncommitted PHP:
+//
+//   - Entries are git PATHSPECS there, not `cp` arguments. A glob or pathspec
+//     magic prefix would resolve against HEAD by rules the plain-path matching
+//     below does not reproduce, so the guard would be checking a different set
+//     than the deploy stages. Entries are required to be literal paths instead
+//     (isLiteralPath), which is the one form where the two agree.
+//   - The tracked set read here is the INDEX (`git ls-files`), while the deploy
+//     resolves against HEAD. At any committed state those are the same set, and
+//     the drifts this check exists to catch — a renamed or typo'd entry — are
+//     absent from both. The gap is only the transient "added but not yet
+//     committed", where failing would just be noise on work in progress; CI runs
+//     on a commit, where there is no gap. Completeness wants the index anyway:
+//     the point is to make someone classify a file when they add it.
+//
+// Entries the BUILD writes are the exception to all of it: they are gitignored,
+// so they are absent from HEAD and deploy.sh stages them from disk — passing one
+// to `git archive` would match nothing and abort the archive. That split is
+// deploy.sh's API_GENERATED array, read here rather than restated, so the set the
+// guard treats as legitimately-untracked is the set the deploy copies off disk.
+//
+// Dependency-free on purpose: it parses the arrays straight out of deploy.sh (the
 // one source of truth the deploy itself reads) and lists tracked files via git,
 // rather than keeping a second copy of the set here. The require scanning lives
-// in tools/php-requires.mjs with a test of its own.
+// in tools/php-requires.mjs with a test of its own, and the array parsing in
+// tools/shell-arrays.mjs with one of its own.
 import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { phpRequires, resolveRequire } from "./php-requires.mjs";
+import { readShellArray, isLiteralPath } from "./shell-arrays.mjs";
 
 const root = new URL("../", import.meta.url);
 const rootDir = fileURLToPath(root);
 
 const deploySh = await readFile(new URL("deploy.sh", root), "utf8");
 
-// This parser reads exactly one `API_ASSETS=( ... )` literal. If deploy.sh ever
-// grows a second assignment or an append (`API_ASSETS+=( ... )`), the single
-// match below would cover only part of the shipped set and the completeness
-// check would then pass on a partial list — silently. Assert the single-array
-// assumption up front so any such refactor is a loud failure that sends the
-// maintainer here to extend the parser, rather than under-verifying.
-const mutations = deploySh.match(/^\s*API_ASSETS\s*\+?=\(/gm) ?? [];
-if (mutations.length > 1 || mutations.some((m) => m.includes("+="))) {
-  console.error(
-    "check-deploy-assets: expected exactly one `API_ASSETS=( ... )` array in\n" +
+// Both arrays come out of deploy.sh itself. readShellArray refuses any shape it
+// cannot read WHOLE — a second assignment, a `+=` append, a multi-line literal —
+// because a partially-read list would leave this guard reporting success while
+// classifying fewer files than actually ship.
+const readArray = (name) => {
+  const result = readShellArray(deploySh, name);
+  if (result.ok) return result.entries;
+  const why = {
+    missing: `check-deploy-assets: could not find a ${name}=( ... ) array in deploy.sh`,
+    multiple:
+      `check-deploy-assets: expected exactly one \`${name}=( ... )\` array in\n` +
       "  deploy.sh, but found a second assignment or a `+=` append this parser\n" +
-      "  does not read. Extend the parser so it covers the whole shipped set.",
-  );
+      "  does not read. Extend tools/shell-arrays.mjs so it covers the whole set.",
+    multiline:
+      `check-deploy-assets: deploy.sh's ${name} array does not close on its own\n` +
+      "  line. Keep it a single one-line literal - reading a multi-line one would\n" +
+      "  risk classifying against a partial set. Or extend tools/shell-arrays.mjs.",
+  };
+  console.error(why[result.reason]);
   process.exit(1);
-}
+};
 
-// Pull the entries out of the `API_ASSETS=( ... )` array: whitespace-separated
-// tokens (the array spans a single line in deploy.sh) with any inline comment
-// stripped, so this reads the same list the deploy stages. Anchored to the start
-// of a line, so an `# API_ASSETS=(…)` example in the comment above the real
-// array is not grabbed as the list.
-const arrayMatch = deploySh.match(/^\s*API_ASSETS=\(([^)]*)\)/m);
-if (!arrayMatch) {
-  console.error(
-    "check-deploy-assets: could not find an API_ASSETS=( ... ) array in deploy.sh",
-  );
-  process.exit(1);
-}
-const entries = arrayMatch[1]
-  .replace(/#.*$/gm, "")
-  .split(/\s+/)
-  .filter(Boolean);
+const entries = readArray("API_ASSETS");
+
+// Paths the build writes rather than git tracking, so the existence check knows
+// they are legitimately absent from `git ls-files` — and so does deploy.sh, which
+// keeps them out of the `git archive` pathspecs and copies them off disk. Read
+// from deploy.sh rather than restated here: a second copy could disagree, and the
+// disagreement that matters (a generated path handed to `git archive`) aborts the
+// deploy rather than failing the gate. An entry that is neither tracked nor listed
+// there is a typo, and treating every missing path as "probably generated" would
+// defeat the check.
+const GENERATED = new Set(readArray("API_GENERATED"));
 
 // Tracked files under api/, straight from git. NUL-delimited (`-z`): without it
 // git C-quotes any path with a space or non-ASCII byte, which would then match
@@ -83,12 +109,6 @@ const tracked = execFileSync("git", ["ls-files", "-z", "api"], {
   .split("\0")
   .filter(Boolean);
 
-// Paths the build writes rather than git tracking, so the existence check knows
-// they are legitimately absent from `git ls-files`. Kept explicit: an entry that
-// is neither tracked nor listed here is a typo, and treating every missing path
-// as "probably generated" would defeat the check.
-const GENERATED = new Set(["api/current_layouts.json"]);
-
 // Tracked api/ files the server must NOT serve. An explicit list, so a new one
 // trips the completeness check and forces the decision. config.php.example is
 // the annotated template for the real config that lives above the web root;
@@ -97,11 +117,45 @@ const GENERATED = new Set(["api/current_layouts.json"]);
 const NOT_SHIPPED = new Set(["api/config.php.example"]);
 
 // A path ships when it equals an API_ASSETS entry or lives under one of the
-// directory entries (deploy.sh copies those whole with `cp -a`).
+// directory entries (a directory pathspec archives the whole subtree). Plain
+// prefix matching is only equivalent to what git does because entries are
+// required to be literal paths — checked first, below.
 const isShipped = (path) =>
   entries.some((entry) => path === entry || path.startsWith(entry + "/"));
 
 let failed = false;
+
+// 0. Pathspec safety: deploy.sh hands these entries to `git archive` as
+// pathspecs, while everything below treats them as literal path prefixes. Those
+// two readings only coincide for a plain path, so anything with glob or pathspec
+// magic is refused rather than checked under a meaning the deploy does not use.
+const magicEntries = entries.filter((entry) => !isLiteralPath(entry));
+if (magicEntries.length) {
+  failed = true;
+  console.error(
+    "check-deploy-assets: API_ASSETS entries must be plain literal paths. These\n" +
+      "  carry glob or pathspec magic, which `git archive` would resolve against\n" +
+      "  HEAD by rules this guard's prefix matching does not reproduce - so the\n" +
+      "  set checked here would stop being the set deployed:",
+  );
+  for (const entry of magicEntries) console.error(`  ${entry}`);
+}
+
+// A generated entry that is not also in API_ASSETS is staged by nothing; one that
+// IS tracked is misclassified, and deploy.sh would then skip it when archiving
+// HEAD and ship whatever uncommitted copy happens to be on disk instead — exactly
+// the hole staging from HEAD closes.
+const strayGenerated = [...GENERATED].filter(
+  (entry) => !entries.includes(entry),
+);
+if (strayGenerated.length) {
+  failed = true;
+  console.error(
+    "check-deploy-assets: API_GENERATED lists paths that are not in API_ASSETS,\n" +
+      "  so nothing stages them:",
+  );
+  for (const entry of strayGenerated) console.error(`  ${entry}`);
+}
 
 // 2. Existence: every entry resolves to a tracked path, a tracked directory, or
 // a declared generated file.
@@ -117,6 +171,19 @@ if (missingEntries.length) {
       "  declared build-generated (a rename or a typo would abort the deploy):",
   );
   for (const entry of missingEntries) console.error(`  ${entry}`);
+}
+
+const trackedGenerated = [...GENERATED].filter((entry) =>
+  tracked.some((f) => f === entry || f.startsWith(entry + "/")),
+);
+if (trackedGenerated.length) {
+  failed = true;
+  console.error(
+    "check-deploy-assets: API_GENERATED lists tracked paths. deploy.sh withholds\n" +
+      "  those from `git archive` and copies them off disk, so a tracked one would\n" +
+      "  ship from the working tree - uncommitted edits and all:",
+  );
+  for (const entry of trackedGenerated) console.error(`  ${entry}`);
 }
 
 // A generated entry still has to exist by the time the deploy runs; the gate

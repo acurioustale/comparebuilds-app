@@ -33,6 +33,18 @@ superseded ones).
 After a successful rsync, `deploy.sh` runs `api/cron/ensure_schema.php` over SSH
 to apply any pending schema migrations.
 
+The two halves are staged from different places. `dist/` is a build product and
+untracked, so it is copied off disk. `api/` is tracked source facing the public
+internet, so it is extracted from `HEAD` with `git archive` — a hand-run deploy
+from a dirty checkout publishes what is committed, not what happens to be on
+disk, and prints a note saying so. The one exception is the build-generated
+`api/current_layouts.json`: it is gitignored, so it is absent from `HEAD` and is
+copied off disk like `dist/` (`deploy.sh` keeps it out of the archive pathspecs
+in its `API_GENERATED` array — handing a gitignored path to `git archive` would
+match nothing and abort the whole archive). An entry that matches nothing in
+`HEAD` aborts the deploy, so a typo'd or renamed one fails loudly instead of
+quietly shipping less than the API needs.
+
 CI authenticates with a dedicated SSH deploy key, stored as the repository
 secrets `DEPLOY_SSH_KEY` and `DEPLOY_KNOWN_HOSTS`. The key is harmless if leaked:
 on the host it's pinned to a forced command
