@@ -25,6 +25,19 @@
 //      This is the check that catches the api/lib/RateLimiter.php class of
 //      mistake at its source rather than by having remembered to list it.
 //
+// A fourth check binds a second list to the same question. deploy.yml skips the
+// redeploy when a push to main touches only files that cannot change what the
+// deploy publishes, via an `on.push.paths-ignore` denylist. That YAML list cannot
+// be computed from the workflow, so it drifts — and it drifts dangerously: a
+// dev-only file missing from it merely redeploys for nothing, but a
+// deploy-affecting file wrongly listed there makes a real change merge to main
+// and never reach the server, with nothing red to notice. So every tracked file
+// is classified and the two must agree exactly. The classification itself lives
+// in tools/deploy-classification.mjs (with tests), because it is the genuinely
+// hard half here: dist/ is a BUILD PRODUCT, so src/, index.html, public/, the
+// Vite config and the bundled dependencies are deploy-affecting despite never
+// being uploaded themselves.
+//
 // Two things about HOW deploy.sh stages that list shape what these checks can
 // mean. It reads the api/ half out of HEAD (`git archive`) rather than off disk,
 // so that a hand-run deploy from a dirty checkout cannot publish uncommitted PHP:
@@ -59,6 +72,12 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { phpRequires, resolveRequire } from "./php-requires.mjs";
 import { readShellArray, isLiteralPath } from "./shell-arrays.mjs";
+import {
+  classifyNonApi,
+  ignoreMatcher,
+  pathsIgnoreDrift,
+  readPathsIgnore,
+} from "./deploy-classification.mjs";
 
 const root = new URL("../", import.meta.url);
 const rootDir = fileURLToPath(root);
@@ -99,15 +118,21 @@ const entries = readArray("API_ASSETS");
 // defeat the check.
 const GENERATED = new Set(readArray("API_GENERATED"));
 
-// Tracked files under api/, straight from git. NUL-delimited (`-z`): without it
-// git C-quotes any path with a space or non-ASCII byte, which would then match
+// Tracked files, straight from git. NUL-delimited (`-z`): without it git
+// C-quotes any path with a space or non-ASCII byte, which would then match
 // neither a ship rule nor a not-shipped rule and fail the build spuriously.
-const tracked = execFileSync("git", ["ls-files", "-z", "api"], {
-  cwd: rootDir,
-  encoding: "utf8",
-})
-  .split("\0")
-  .filter(Boolean);
+// `tracked` is the api/ half the three API_ASSETS checks below reason about;
+// `trackedAll` is the whole repo, which the paths-ignore binding needs.
+const gitFiles = (...pathspecs) =>
+  execFileSync("git", ["ls-files", "-z", ...pathspecs], {
+    cwd: rootDir,
+    encoding: "utf8",
+  })
+    .split("\0")
+    .filter(Boolean);
+
+const tracked = gitFiles("api");
+const trackedAll = gitFiles();
 
 // Tracked api/ files the server must NOT serve. An explicit list, so a new one
 // trips the completeness check and forces the decision. config.php.example is
@@ -257,11 +282,111 @@ for (const file of shippedPhp) {
   }
 }
 
+// ── 4. Bind deploy.yml's paths-ignore to the same question ────────────────────
+// Classify every tracked file as dev-only or deploy-affecting, then require the
+// workflow to ignore it exactly when it is dev-only.
+//
+// The api/ half is classified against API_ASSETS rather than by a second list
+// here: what the API ships is already stated in deploy.sh, and a file it does not
+// ship (config.php.example) cannot change what the deploy publishes, so
+// "not shipped" IS "dev-only" for that half. Everything else goes through
+// classifyNonApi, where the build makes the answer less obvious.
+const isApiPath = (path) => path === "api" || path.startsWith("api/");
+const classify = (path) =>
+  isApiPath(path)
+    ? isShipped(path)
+      ? "deploy-affecting"
+      : "dev-only"
+    : classifyNonApi(path);
+
+const unclassifiedAll = trackedAll.filter(
+  (f) => classify(f) === "unclassified",
+);
+if (unclassifiedAll.length) {
+  failed = true;
+  console.error(
+    "check-deploy-assets: tracked files are classified neither dev-only nor\n" +
+      "  deploy-affecting, so deploy.yml's paths-ignore cannot be checked against\n" +
+      "  them. Decide for each whether `npm run build` (or the API deploy) can see\n" +
+      "  it, then add it to the matching list in tools/deploy-classification.mjs.\n" +
+      "  When in doubt it is deploy-affecting: a wrong dev-only answer silently\n" +
+      "  stops publishing real changes.",
+  );
+  for (const f of unclassifiedAll) console.error(`  ${f}`);
+}
+
+const workflowPath = ".github/workflows/deploy.yml";
+const workflow = await readFile(new URL(workflowPath, root), "utf8");
+const ignoreBlock = readPathsIgnore(workflow);
+if (!ignoreBlock.ok) {
+  console.error(
+    `check-deploy-assets: expected exactly one \`paths-ignore:\` block in\n` +
+      `  ${workflowPath}, found ${ignoreBlock.count}. Extend\n` +
+      "  tools/deploy-classification.mjs to read them all before trusting this\n" +
+      "  check - reading one of several would verify only part of the list.",
+  );
+  process.exit(1);
+}
+
+const matchers = [];
+for (const pattern of ignoreBlock.patterns) {
+  const matcher = ignoreMatcher(pattern);
+  if (!matcher) {
+    console.error(
+      `check-deploy-assets: unsupported paths-ignore pattern "${pattern}" in\n` +
+        `  ${workflowPath} - extend ignoreMatcher in\n` +
+        "  tools/deploy-classification.mjs to translate it. Guessing at its\n" +
+        "  meaning would compare the workflow against a set it does not ignore.",
+    );
+    process.exit(1);
+  }
+  matchers.push(matcher);
+}
+const ignoredByWorkflow = (path) => matchers.some((m) => m(path));
+
+// A pattern matching nothing tracked is dead weight at best and a typo at worst
+// (`e2e/**` mistyped still passes the agreement check below, because the files it
+// meant to cover are then reported as unignored - but say plainly which entry is
+// inert, since that is the actual repair).
+const inertPatterns = ignoreBlock.patterns.filter(
+  (pattern) => !trackedAll.some(ignoreMatcher(pattern)),
+);
+if (inertPatterns.length) {
+  failed = true;
+  console.error(
+    `check-deploy-assets: ${workflowPath} paths-ignore entries match no tracked\n` +
+      "  file (a typo, or a leftover from a deleted path):",
+  );
+  for (const pattern of inertPatterns) console.error(`  ${pattern}`);
+}
+
+const drift = pathsIgnoreDrift(
+  trackedAll,
+  ignoredByWorkflow,
+  (f) => classify(f) === "dev-only",
+);
+if (drift.length) {
+  failed = true;
+  console.error(
+    `check-deploy-assets: ${workflowPath} paths-ignore has drifted from the\n` +
+      "  dev-only classification. A deploy-affecting file listed there would SKIP\n" +
+      "  a real deploy; a dev-only file missing there redeploys for nothing:",
+  );
+  for (const { path, devOnly } of drift) {
+    console.error(
+      devOnly
+        ? `  ${path}: dev-only but NOT ignored - add it to paths-ignore`
+        : `  ${path}: deploy-affecting but IGNORED - remove it from paths-ignore`,
+    );
+  }
+}
+
 if (failed) {
   process.exitCode = 1;
 } else {
   console.log(
     `check-deploy-assets: API_ASSETS covers the tracked api/ tree ` +
-      `(${tracked.length} files classified, ${shippedPhp.length} PHP files' requires resolved)`,
+      `(${tracked.length} files classified, ${shippedPhp.length} PHP files' requires resolved); ` +
+      `deploy.yml paths-ignore matches the dev-only split (${trackedAll.length} tracked files classified)`,
   );
 }
