@@ -25,7 +25,7 @@
     "check:game-build": "node scripts/checkGameBuild.js",
     "data:top-builds": "node scripts/fetchTopBuilds.js --write",
     "links": "lychee --config lychee.toml --root-dir public README.md CLAUDE.md SECURITY.md public/.well-known/security.txt index.html",
-    "test": "vitest run",
+    "test": "vitest run && npm run test:shared",
     "test:shared": "node --test tools/shared/",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
