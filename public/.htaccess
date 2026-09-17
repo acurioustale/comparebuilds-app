@@ -59,7 +59,13 @@
   Header always set Cross-Origin-Opener-Policy "same-origin"
   Header always set Cross-Origin-Resource-Policy "same-origin"
 
-  Header always unset Server
+  # No `Header unset Server` here: mod_headers runs before Apache's core writes
+  # the Server banner, so it can't remove it (verified 2026-09-17 — the live
+  # response still carried `Server: Apache` while that directive was in place).
+  # Trimming the banner needs ServerTokens/ServerSignature, which are
+  # server-config context and not permitted in .htaccess on this shared host.
+  # The host already sets `ServerTokens Prod`, so only the bare `Apache` token
+  # (no version) is exposed; nothing further is actionable at this layer.
 
   # Long-cache static images. The self-hosted icons under /talent-icons are keyed
   # by a stable game slug (fetchIcons.js only ever adds files, never mutates one),
