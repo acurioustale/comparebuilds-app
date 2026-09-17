@@ -2,12 +2,18 @@ import { describe, test, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { findTags } from "../../tools/html-tags.mjs";
+import { parseSecurityTxt } from "../../tools/security-txt.mjs";
 
 // public/.well-known/security.txt is the machine-readable half of SECURITY.md:
 // the same contacts, published where a researcher's tooling looks first. Nothing
 // else binds the two, so a contact address, policy URL or origin can drift on one
 // side and leave the other pointing somewhere nobody reads. This pins them by
 // reading the files, mirroring shareIdParity.test.js / limitsParity.test.js.
+//
+// Only edit-driven drift is asserted here, because this suite is in the gate.
+// The one property that changes on its own — whether Expires has passed — is
+// checked by tools/check-security-txt-expiry.mjs in the non-gating links
+// workflow, so the calendar can never redden an unrelated deploy.
 
 const read = (rel) =>
   readFileSync(fileURLToPath(new URL(rel, import.meta.url)), "utf8");
@@ -16,28 +22,10 @@ const securityTxt = read("../../public/.well-known/security.txt");
 const securityMd = read("../../SECURITY.md");
 const html = read("../../index.html");
 
-// The fields of an RFC 9116 file: `Name: value` lines, with `#` comments and
-// blank lines ignored. A name may repeat (two Contact lines here), so collect
-// every value per name rather than keeping the last.
-function fields(text) {
-  const found = new Map();
-  for (const line of text.split("\n")) {
-    const trimmed = line.trim();
-    if (trimmed === "" || trimmed.startsWith("#")) continue;
-    const match = trimmed.match(/^([A-Za-z-]+):\s*(.+)$/);
-    // Parsed at module scope, so a malformed line has to throw rather than
-    // assert — it fails the whole suite, which is the right blast radius for a
-    // file no consumer will parse leniently.
-    if (!match)
-      throw new Error(
-        `security.txt line is not a "Name: value" field: ${line}`,
-      );
-    found.set(match[1], [...(found.get(match[1]) ?? []), match[2]]);
-  }
-  return found;
-}
-
-const declared = fields(securityTxt);
+// Parsed at module scope by the shared reader, so a malformed line throws and
+// fails the whole suite — the right blast radius for a file no consumer will
+// parse leniently. The parser itself is tested in tools/securityTxt.test.js.
+const declared = parseSecurityTxt(securityTxt);
 
 describe("public/.well-known/security.txt", () => {
   test("carries every field RFC 9116 requires or expects", () => {
@@ -64,21 +52,6 @@ describe("public/.well-known/security.txt", () => {
       contacts.some((value) =>
         /^https:\/\/github\.com\/.+\/security\/advisories\/new$/.test(value),
       ),
-    ).toBe(true);
-  });
-
-  test("has not expired", () => {
-    // An expired file is invalid per RFC 9116, so this is a real failure rather
-    // than a reminder — and the fix is to edit the one line and push.
-    const [expires] = declared.get("Expires");
-    const when = new Date(expires);
-    expect(
-      Number.isNaN(when.getTime()),
-      `Expires is not a valid timestamp: ${expires}`,
-    ).toBe(false);
-    expect(
-      when > new Date(),
-      `security.txt expired on ${expires} — set a new Expires no more than a year out`,
     ).toBe(true);
   });
 

@@ -1,20 +1,25 @@
 name: links
 
-# Link checking lives in its own workflow ON PURPOSE: the deploy workflow's
-# `validate` gate is what blocks a release, so a dead external link or a momentary
-# rate-limit surfaces here without ever blocking deploy. The weekly schedule
-# catches link rot; the PR trigger catches links broken by a change.
+# Two non-gating checks over the same published surfaces, sharing one workflow
+# because they share one schedule and one reason to live outside the gate: both
+# fail on someone else's clock rather than on a change. The deploy workflow's
+# `validate` gate is what blocks a release, so a dead external link, a momentary
+# rate-limit, or a security.txt lapsing on its own date surfaces here without
+# ever blocking deploy. The weekly schedule catches link rot and the approaching
+# expiry; the PR trigger catches either broken by a change.
 on:
   pull_request:
-    # Only the files lychee actually scans (plus its config and this workflow),
-    # so unrelated PRs don't hit external hosts. The weekly schedule still catches
-    # link rot in everything on a cadence.
+    # Only the files these steps actually read (plus their config and this
+    # workflow), so unrelated PRs don't hit external hosts. The weekly schedule
+    # still catches rot in everything on a cadence.
     paths:
       - index.html
       - README.md
       - CLAUDE.md
       - SECURITY.md
       - public/.well-known/security.txt
+      - tools/check-security-txt-expiry.mjs
+      - tools/security-txt.mjs
       - lychee.toml
       - .github/workflows/links.yml
   workflow_dispatch:
@@ -29,6 +34,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+
+      # No `cache: npm` and no install: the guard is dependency-free, so the job
+      # never builds a node_modules tree to cache.
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: ".tool-versions"
+
+      # Before the link check, not after: this step needs no network and cannot
+      # flake, so running it first means a rate-limited external host can never
+      # skip it and hide an expired security contact. The guard is
+      # dependency-free, so there is nothing to install first.
+      - name: security.txt expiry
+        run: npm run check:security-txt
 
       - name: Link check
         uses: lycheeverse/lychee-action@v2
