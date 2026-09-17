@@ -33,6 +33,24 @@ updates:
         patterns:
           - vite
           - "@vitejs/*"
+      # The linters and the configs that pin them. Each config declares a
+      # peerDependency on its linter's major (`@eslint/js` on `eslint ^10`,
+      # `stylelint-config-standard` on `stylelint ^17`), so a PR bumping one
+      # across a major without the other can never go green. Neither group
+      # carries an update-types filter, and that is the point: majors are
+      # exactly the case that has to move together.
+      #
+      # The patterns are exact names, not prefixes. `@eslint/json` and
+      # `eslint-plugin-html` declare no such constraint, so they stay in the
+      # batch below where the gate catches a bad bump.
+      eslint:
+        patterns:
+          - eslint
+          - "@eslint/js"
+      stylelint:
+        patterns:
+          - stylelint
+          - stylelint-config-standard
       # Dev tooling churns constantly and the gate catches breakage, so a
       # single batched PR keeps the noise down. Majors stay separate.
       dev-tooling:
