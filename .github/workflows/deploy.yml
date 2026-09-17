@@ -195,10 +195,11 @@ jobs:
       # the built script's bytes — runs against dist/ so it checks what ships —
       # that deploy.sh still stages every api/ file the server needs, and that
       # the mirrored tools/shared/ bundle still matches its manifest.
-      - name: Check CSP, og-image and deploy set
+      - name: Check CSP, og-image, asset refs and deploy set
         run: |
           npm run check:csp
           npm run check:og
+          npm run check:asset-refs
           npm run check:deploy-assets
           npm run check:shared
 
