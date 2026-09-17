@@ -21,6 +21,9 @@ channel so the report isn't visible before a fix ships:
   _Security → Report a vulnerability_ on this repository.
 - **Email:** <me@acurioustale.de>
 
+The same contacts are published in machine-readable form at
+<https://comparebuilds.app/.well-known/security.txt> (RFC 9116).
+
 Please include:
 
 - a description of the issue and its impact,
