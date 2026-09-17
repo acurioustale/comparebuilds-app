@@ -15,7 +15,7 @@
 // Exit codes: 0 while the file is valid (a warning inside the window still exits
 // 0 — notice, not failure), 1 once it has lapsed or Expires cannot be read.
 import { readFile } from "node:fs/promises";
-import { parseSecurityTxt, expiryStatus } from "./security-txt.mjs";
+import { parseSecurityTxt, expiryStatus } from "./shared/security-txt.mjs";
 
 const FILE = "public/.well-known/security.txt";
 const WARN_WITHIN_DAYS = 60;

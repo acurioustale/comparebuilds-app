@@ -19,7 +19,7 @@ on:
       - SECURITY.md
       - public/.well-known/security.txt
       - tools/check-security-txt-expiry.mjs
-      - tools/security-txt.mjs
+      - tools/shared/security-txt.mjs
       - lychee.toml
       - .github/workflows/links.yml
   workflow_dispatch:

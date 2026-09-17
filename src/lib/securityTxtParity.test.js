@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { findTags } from "../../tools/shared/html-tags.mjs";
-import { parseSecurityTxt } from "../../tools/security-txt.mjs";
+import { parseSecurityTxt } from "../../tools/shared/security-txt.mjs";
 
 // public/.well-known/security.txt is the machine-readable half of SECURITY.md:
 // the same contacts, published where a researcher's tooling looks first. Nothing
@@ -24,7 +24,7 @@ const html = read("../../index.html");
 
 // Parsed at module scope by the shared reader, so a malformed line throws and
 // fails the whole suite — the right blast radius for a file no consumer will
-// parse leniently. The parser itself is tested in tools/securityTxt.test.js.
+// parse leniently. The parser itself is tested in tools/shared/securityTxt.test.js.
 const declared = parseSecurityTxt(securityTxt);
 
 describe("public/.well-known/security.txt", () => {
