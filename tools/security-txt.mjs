@@ -1,8 +1,8 @@
 // Shared reader for public/.well-known/security.txt (RFC 9116).
 //
 // Two things read this file and must agree on what it says: the parity suite
-// (src/lib/securityTxt.test.js), which binds its contacts and Canonical to
-// SECURITY.md and index.html, and the expiry guard (check-security-txt-expiry
+// (src/lib/securityTxtParity.test.js), which binds its contacts and Canonical
+// to SECURITY.md and index.html, and the expiry guard (check-security-txt-expiry
 // .mjs), which runs outside the gate. A guard regex that is subtly wrong on real
 // input fails in the fail-open direction, so the field parsing lives here with a
 // test of its own rather than being written twice.

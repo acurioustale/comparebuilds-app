@@ -9,8 +9,8 @@
 //
 // The parity assertions that DO belong in the gate — the contact address
 // matching SECURITY.md, the Canonical matching index.html, the required fields
-// being present — live in src/lib/securityTxt.test.js, because only an edit can
-// break those.
+// being present — live in src/lib/securityTxtParity.test.js, because only an
+// edit can break those.
 //
 // Exit codes: 0 while the file is valid (a warning inside the window still exits
 // 0 — notice, not failure), 1 once it has lapsed or Expires cannot be read.

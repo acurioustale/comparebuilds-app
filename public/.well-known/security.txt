@@ -1,7 +1,7 @@
 # Machine-readable security contact for comparebuilds.app (RFC 9116).
 # The prose policy this points at is SECURITY.md in the repository; keep the
-# contact address here and the one there the same — src/lib/securityTxt.test.js
-# binds them so they can't drift apart.
+# contact address here and the one there the same —
+# src/lib/securityTxtParity.test.js binds them so they can't drift apart.
 
 Contact: mailto:me@acurioustale.de
 Contact: https://github.com/acurioustale/comparebuilds-app/security/advisories/new
