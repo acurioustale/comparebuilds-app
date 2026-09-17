@@ -7,6 +7,66 @@ name: deploy
 on:
   push:
     branches: [main]
+    # Skip the redeploy when a push to main touches only files that cannot change
+    # what the deploy puts on the server. Every push otherwise runs a full
+    # `npm ci` + build + `rsync --delete` to production, even for a README typo.
+    #
+    # paths-ignore (a denylist) rather than paths (an allowlist), because it fails
+    # SAFE: a push that also touches a deployed file still runs, so a real change
+    # can never be silently dropped. An allowlist drifting behind the deploy set
+    # would do exactly that — quietly stop publishing a whole class of change,
+    # with nothing red to notice. The change was already linted, tested and built
+    # by the pull_request trigger below before it merged.
+    #
+    # `pull_request` stays UNFILTERED on purpose: the gate must run on everything.
+    # Skipping a deploy is cheap to get wrong in one direction only; skipping the
+    # quality gate is not.
+    #
+    # Careful — most of what feeds this site is not itself uploaded. dist/ is a
+    # build product, so src/, index.html, public/, vite.config.js and the two
+    # build-time scripts are all deploy-affecting despite never being copied to
+    # the host, and package.json/package-lock.json are too because our runtime
+    # deps are BUNDLED into dist/. tools/check-deploy-assets.mjs binds this list
+    # to that classification: every tracked file must be listed here exactly when
+    # it is dev-only, so a deploy-affecting file can never be listed (which would
+    # silently skip a real deploy) and a new dev-only file cannot be forgotten.
+    # Keep the entries in step with tools/deploy-classification.mjs.
+    paths-ignore:
+      - "**.md"
+      - "**.test.js"
+      - "**.test.jsx"
+      - ".claude/**"
+      - ".github/**"
+      - "e2e/**"
+      - "ops/**"
+      - "scripts/lib/**"
+      - "src/test/**"
+      - "tests/**"
+      - "tools/**"
+      - ".editorconfig"
+      - ".env.example"
+      - ".git-blame-ignore-revs"
+      - ".gitignore"
+      - ".markdownlint-cli2.jsonc"
+      - ".mise.toml"
+      - ".php-cs-fixer.dist.php"
+      - ".prettierignore"
+      - ".stylelintrc.json"
+      - ".tool-versions"
+      - "LICENSE"
+      - "api/config.php.example"
+      - "eslint.config.js"
+      - "lychee.toml"
+      - "phpunit.xml"
+      - "playwright.config.js"
+      - "scripts/checkGameBuild.js"
+      - "scripts/checkWireLayout.js"
+      - "scripts/compareSources.js"
+      - "scripts/fetchIcons.js"
+      - "scripts/fetchTopBuilds.js"
+      - "scripts/gameBuild.json"
+      - "scripts/ingestBlizzard.js"
+      - "validate.sh"
   pull_request:
   workflow_dispatch:
     inputs:
