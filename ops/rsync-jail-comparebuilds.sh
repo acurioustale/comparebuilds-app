@@ -106,10 +106,14 @@ rsync\ --server\ *)
 	# bundle); refuse any other long option (--rsync-path, --files-from,
 	# --remove-source-files, extra --delete-* modes, …) so a key holder can't
 	# smuggle a dangerous receiver option past the destination check above.
-	# --chmod is deliberately NOT allow-listed: this deploy sends none, and on
-	# this shared host a smuggled --chmod=D777,F666 would make the web root
-	# world-writable. If deploy.sh ever starts sending one, pin the exact literal
-	# here rather than --chmod=*.
+	# --chmod is deliberately NOT allow-listed, and deploy.sh's --chmod=D755,F644
+	# does not need it to be: rsync's server_options() never forwards --chmod on
+	# a push (it is applied to the file list on the sending side), so it never
+	# appears in the server command vetted here. What the allow-list refuses is
+	# therefore only a smuggled one — on this shared host a --chmod=D777,F666
+	# would make the web root world-writable. Do not add an entry to "match"
+	# deploy.sh; if some future deploy really does send one, pin the exact
+	# literal rather than --chmod=*.
 	#
 	# A short-flag bundle (single dash) can express one dangerous receiver option
 	# the long-option allow-list never sees: -s (--secluded-args, formerly

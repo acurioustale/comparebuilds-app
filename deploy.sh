@@ -52,12 +52,13 @@ if [[ ! -f dist/index.html ]]; then
 fi
 
 stage="$(mktemp -d)"
-# mktemp -d makes the staging dir 0700. The rsync below mirrors this directory
-# with -a (which preserves permissions), so that mode would be copied onto the
-# web root and lock Apache out (403, "unable to read .htaccess file"). Make the
-# staging root web-readable so the deploy keeps the web root at 0755 (and heals
-# a root previously left at 0700).
-chmod 755 "$stage"
+# mktemp -d makes the staging dir 0700, and the rsync below mirrors this
+# directory with -a (which preserves permissions) — so that mode used to be
+# copied onto the web root and lock Apache out (403, "unable to read .htaccess
+# file"). The fix was to `chmod 755` the staging root; --chmod=D755,F644 on the
+# rsync now sets the remote modes explicitly instead, which covers the web root
+# itself (the transfer's own "." entry) as well as everything under it. So the
+# local dir stays 0700 and no temporary directory of ours is world-readable.
 trap 'rm -rf "$stage"' EXIT
 
 # dist/ is a build product and untracked, so it can only be staged from disk —
@@ -118,21 +119,53 @@ for arg in "$@"; do
 	esac
 done
 
-if [[ "${#rsync_args[@]}" -gt 0 ]]; then
-	rsync -avz --delete "${rsync_args[@]}" \
-		--exclude '.git' \
-		--exclude '.claude' \
-		--exclude 'deploy.sh' \
-		"$stage/" \
-		"${REMOTE}:${TARGET}"
-else
-	rsync -avz --delete \
-		--exclude '.git' \
-		--exclude '.claude' \
-		--exclude 'deploy.sh' \
-		"$stage/" \
-		"${REMOTE}:${TARGET}"
-fi
+# Local cruft that can ride along inside the copied tree but must never reach
+# the web root: macOS metadata and AppleDouble forks (public/ picks up a
+# .DS_Store on a mounted volume or a Finder visit, and Vite copies public/
+# wholesale into dist/), plus editor backups and swapfiles. These replace three
+# earlier excludes for .git, .claude and deploy.sh, which protected nothing: the
+# stage only ever holds `dist/.` plus the API_ASSETS list, so none of the three
+# could appear in it in the first place.
+rsync_excludes=(
+	--exclude='.DS_Store'
+	--exclude='._*'
+	--exclude='*.bak'
+	--exclude='*.swp'
+	--exclude='*~'
+)
+
+# The staged tree is the whole source, so --delete mirrors it exactly and prunes
+# everything else in the web root. That is what we want for anything this repo
+# owns, but `.well-known/` is shared: we ship security.txt into it, while the
+# HOST owns the ACME (Let's Encrypt) challenge files that appear there during a
+# cert renewal. Without a guard the next deploy deletes them — a latent
+# cert-renewal break. `protect` is a delete-time filter only, so our own
+# security.txt still transfers and updates normally.
+#
+# TWO rules, not one. A bare `protect /.well-known/` (enough for a host-owned
+# directory that is absent from the deploy set) does NOT cover ours: because we
+# ship a file inside it, the directory is part of the transfer, so rsync
+# descends into it and deletes extraneous entries there — acme-challenge/
+# included. `/.well-known/**` protects the entries under it; the directory rule
+# is kept alongside so the directory itself also survives should we ever stop
+# shipping security.txt. Both are anchored with a leading slash to the transfer
+# root, so only the web root's own `.well-known/` is meant, not a nested one.
+#
+# Like the excludes, these are client-side rules: they never appear in the
+# server-side rsync command the deploy key's forced jail vets, so no jail change
+# is needed. Nor does --chmod below — rsync's server_options() never forwards it
+# on a push (it is applied to the file list on the sending side), which is why
+# the jail's option allow-list can keep refusing --chmod outright.
+rsync_protect=(
+	--filter='protect /.well-known/'
+	--filter='protect /.well-known/**'
+)
+
+# One invocation for both the dry-run and real deploys so their flags and
+# endpoints can't drift. ${rsync_args[@]+"..."} expands to nothing when the
+# array is empty, staying safe under `set -u` on bash 3.2 (macOS default).
+rsync -avz --delete "${rsync_excludes[@]}" "${rsync_protect[@]}" --chmod=D755,F644 \
+	${rsync_args[@]+"${rsync_args[@]}"} "$stage/" "${REMOTE}:${TARGET}"
 
 if [[ "$is_dry_run" -eq 0 ]]; then
 	echo "Running schema migration..."
