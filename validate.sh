@@ -311,6 +311,14 @@ npm run check:csp
 step "OG image guard"
 npm run check:og
 
+# Verify every local asset the built markup, stylesheets and manifest reference
+# actually exists. Runs against dist/ like the CSP guard, because Vite rewrites
+# the source URLs (the font preload and the module script become hashed emits)
+# and injects the stylesheet link, while the public/ references it does NOT
+# rewrite are exactly the unchecked ones.
+step "Asset reference guard"
+npm run check:asset-refs
+
 # Verify deploy.sh's API_ASSETS still covers every tracked api/ file and every
 # require the shipped PHP makes. Runs after the build, because the array names
 # api/current_layouts.json, which the build generates.
