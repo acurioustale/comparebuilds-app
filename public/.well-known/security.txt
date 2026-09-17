@@ -1,4 +1,11 @@
-Contact: mailto:security@comparebuilds.app
-Expires: 2028-01-01T00:00:00.000Z
-Preferred-Languages: en
+# Machine-readable security contact for comparebuilds.app (RFC 9116).
+# The prose policy this points at is SECURITY.md in the repository; keep the
+# contact address here and the one there the same — src/lib/securityTxt.test.js
+# binds them so they can't drift apart.
+
+Contact: mailto:me@acurioustale.de
+Contact: https://github.com/acurioustale/comparebuilds-app/security/advisories/new
+Expires: 2027-09-01T00:00:00.000Z
+Preferred-Languages: en, de
 Canonical: https://comparebuilds.app/.well-known/security.txt
+Policy: https://github.com/acurioustale/comparebuilds-app/blob/main/SECURITY.md
