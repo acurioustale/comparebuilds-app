@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { findTags } from "../../tools/html-tags.mjs";
+import { findTags } from "../../tools/shared/html-tags.mjs";
 import { parseSecurityTxt } from "../../tools/security-txt.mjs";
 
 // public/.well-known/security.txt is the machine-readable half of SECURITY.md:

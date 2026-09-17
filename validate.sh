@@ -293,6 +293,13 @@ done
 step "Tests + coverage thresholds"
 npm run coverage
 
+# The mirrored tools/shared/ bundle is stdlib-only (node:test + node:assert), so
+# vitest cannot collect it — it reports "No test suite found" and fails the file
+# while Node's runner executes the assertions unseen. vite.config.js excludes it
+# from the vitest include; this is where those tests actually run.
+step "Shared bundle tests"
+npm run test:shared
+
 step "Build"
 npm run build
 
@@ -309,6 +316,13 @@ npm run check:og
 # api/current_layouts.json, which the build generates.
 step "Deploy set guard"
 npm run check:deploy-assets
+
+# Verify tools/shared/ still matches its manifest, so a shared parser cannot be
+# edited here without consciously re-hashing — and so being told to mirror the
+# change into acurioustale/acurioustale-de. The cross-repo half is the weekly,
+# non-gating shared-sync workflow.
+step "Shared bundle guard"
+npm run check:shared
 
 # Validate the freshly built sitemap is well-formed XML — the surest guard against
 # a templating bug in prerenderSpecs (e.g. an unescaped character in a URL). Plain

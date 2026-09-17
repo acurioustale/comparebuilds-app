@@ -1,4 +1,4 @@
-import { test } from "vitest";
+import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { scriptElements, inlineScripts } from "./inline-scripts.mjs";
@@ -7,7 +7,7 @@ import { scriptElements, inlineScripts } from "./inline-scripts.mjs";
 // ships unhashed and would slip past the guard. So the end-tag match must accept
 // every form a browser treats as a close, and a real `src` must be told apart
 // from a `src` that only looks like one. The quote/close-tag mechanics live in
-// tools/html-tags.mjs (test/htmlTags.test.js); these tests cover the script
+// ./html-tags.mjs (htmlTags.test.js); these tests cover the script
 // selection built on it: attrs as a parsed Map, and the inline/external split.
 
 test("scriptElements yields { attrs, body } with parsed attributes", () => {

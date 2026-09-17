@@ -1,6 +1,7 @@
 /// <reference types="vitest/config" />
 import { availableParallelism } from "node:os";
 import { defineConfig } from "vite";
+import { configDefaults } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -62,11 +63,20 @@ export default defineConfig({
     // built on; each helper has a test of its own (a guard regex that was subtly
     // wrong on real input is the failure mode those exist to prevent), so the
     // suite must pick them up alongside src/ and scripts/.
+    //
+    // tools/shared/ is the one exception. That bundle is mirrored byte-for-byte
+    // in the sibling repo, which does not run vitest, so its tests are
+    // stdlib-only (node:test + node:assert/strict) — and vitest cannot collect a
+    // node:test file at all: it reports "No test suite found" and fails the
+    // suite while Node's own runner happily executes the assertions where vitest
+    // cannot see them. `npm run test:shared` (node --test tools/shared/) is what
+    // runs them, wired into validate.sh beside this suite.
     include: [
       "src/**/*.test.{js,jsx}",
       "scripts/**/*.test.js",
       "tools/**/*.test.js",
     ],
+    exclude: [...configDefaults.exclude, "tools/shared/**/*.test.js"],
     // Vitest defaults to availableParallelism() - 1 workers. On a many-core dev
     // machine that oversubscribes the box rather than using it: every fork
     // carries its own V8 heap, and the 20+ jsdom suites each build a full DOM on

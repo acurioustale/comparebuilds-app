@@ -1,7 +1,7 @@
-// Parse and compare Content-Security-Policy directives. Kept out of check-csp.mjs
-// so the parsing (first-wins over a repeated directive) and the two-policy
-// lock-step comparison are a testable unit instead of top-level code in the
-// guard.
+// Parse and compare Content-Security-Policy directives. Kept out of the guard
+// that consumes it so the parsing (first-wins over a repeated directive) and the
+// two-policy lock-step comparison are a testable unit instead of top-level code
+// in a guard.
 //
 // Dependency-free on purpose: small string work over our own two policies, not a
 // general CSP parser.

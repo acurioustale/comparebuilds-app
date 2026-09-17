@@ -1,7 +1,7 @@
-// Read the live Content-Security-Policy the .htaccess header sets. Kept out of
-// check-csp.mjs so the scanning rules — Apache line-continuation, comment
-// skipping, request-scope tracking and the last-wins over repeated headers —
-// are one testable unit instead of inline top-level code in the guard.
+// Read the live Content-Security-Policy an .htaccess header sets. Kept out of
+// the guard that consumes it so the scanning rules — Apache line-continuation,
+// comment skipping, request-scope tracking and the last-wins over repeated
+// headers — are one testable unit instead of inline top-level code in a guard.
 //
 // Dependency-free on purpose: a small scan over our own well-formatted config,
 // not a general Apache parser.

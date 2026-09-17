@@ -1,0 +1,129 @@
+name: shared-sync
+
+# The five parsers in tools/shared/ are duplicated byte-for-byte in the sibling
+# repo acurioustale/acurioustale-de. tools/check-shared.mjs (on the gate) pins
+# what this repo ships via tools/shared/MANIFEST.sha256, but a manifest can only
+# see one repo: it cannot tell that a fix landed here and never reached there.
+# This workflow is the other half — it diffs the two bundles and reports.
+#
+# NON-GATING, on purpose, like `links`, `audit`, `sources`, `semgrep` and `e2e`:
+# the deploy workflow's `validate` job is what blocks a release, and a sibling
+# that has not yet mirrored a change must never be what stops a fix from shipping
+# here. A red run here is a signal to go mirror the change, not a blocked
+# release.
+on:
+  push:
+    branches: [main]
+    # Only when the bundle itself moves — that is the moment the sibling is known
+    # to be behind. The weekly schedule catches the reverse case, a change made
+    # over there and never brought back, which no push here would notice.
+    paths:
+      - tools/shared/**
+      - .github/workflows/shared-sync.yml
+  workflow_dispatch:
+  schedule:
+    # Mondays, 09:00 UTC. Every earlier hour is taken by another non-gating
+    # weekly — `audit` (05:00), `links` (06:00), `sources` (07:00, which also
+    # runs a daily 06:00 probe) and `semgrep` (08:00) — and the sibling runs its
+    # own half of this pair at 07:00, so 09:00 is the first slot that contends
+    # with nothing.
+    - cron: "0 9 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Shallow and sparse: only tools/shared/ at only the tip commit, so this
+      # costs a few kilobytes rather than the sibling's whole history.
+      #
+      # comparebuilds-app is public, so this needs no credentials. It could go
+      # private, though, and an unauthenticated clone then fails with a bare
+      # "repository not found" that reads like a rename or a deletion — so a
+      # token is used when one is set, and a failure without one says plainly
+      # that a credential is what is missing. What this must NOT do is gate the
+      # clone on the secret existing: that leaves the job skipping green forever
+      # against a repo it can already read, which is precisely the quiet failure
+      # this workflow exists to prevent. A fine-grained PAT with read-only
+      # Contents, stored as SHARED_SYNC_TOKEN, is all the private case needs.
+      - name: Fetch the sibling bundle
+        id: fetch
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+          SHARED_SYNC_TOKEN: ${{ secrets.SHARED_SYNC_TOKEN }}
+        run: |
+          if [[ -n "$SHARED_SYNC_TOKEN" ]]; then
+            remote="https://x-access-token:$SHARED_SYNC_TOKEN@github.com/acurioustale/acurioustale-de.git"
+            authed=true
+          else
+            remote="https://github.com/acurioustale/acurioustale-de.git"
+            authed=false
+          fi
+
+          if git clone --depth 1 --filter=blob:none --sparse "$remote" sibling; then
+            git -C sibling sparse-checkout set tools/shared
+            echo "fetched=true" >>"$GITHUB_OUTPUT"
+          elif [[ "$authed" == "false" ]]; then
+            # The private case, and the one worth naming: nothing is wrong with
+            # the workflow, it simply cannot see the repo without a credential.
+            echo "fetched=false" >>"$GITHUB_OUTPUT"
+            echo "::notice title=shared-sync skipped::Could not read acurioustale/acurioustale-de without credentials. If it is now private, add a fine-grained read-only PAT as the SHARED_SYNC_TOKEN secret."
+          else
+            # A token was supplied and the clone still failed: expired, revoked,
+            # or scoped to the wrong repository. That is a broken configuration
+            # rather than an absent one, so fail instead of skipping.
+            echo "fetched=false" >>"$GITHUB_OUTPUT"
+            echo "::error title=shared-sync clone failed::SHARED_SYNC_TOKEN is set but the clone failed — the token is likely expired, revoked, or not scoped to acurioustale/acurioustale-de."
+            exit 1
+          fi
+
+      # The verdict. `diff -ru` over the two directories catches a changed file,
+      # a file present on one side only, and a file added to one bundle and not
+      # the other — which is the whole question being asked. Printed in full, so
+      # the log is enough to mirror the change without cloning anything by hand.
+      - name: Diff the bundles
+        if: steps.fetch.outputs.fetched == 'true'
+        id: diff
+        run: |
+          if diff -ru tools/shared sibling/tools/shared >drift.txt; then
+            echo "drift=false" >>"$GITHUB_OUTPUT"
+            echo "The two bundles are identical."
+          else
+            echo "drift=true" >>"$GITHUB_OUTPUT"
+            echo "The two bundles have DRIFTED:"
+            cat drift.txt
+          fi
+
+      # A one-line verdict in the run summary, like `audit`, so the result is
+      # legible from the Actions list without opening the log.
+      - name: Summarise
+        if: ${{ !cancelled() }}
+        run: |
+          {
+            echo "## Shared bundle sync"
+            echo
+            if [[ "${{ steps.fetch.outputs.fetched }}" != "true" ]]; then
+              echo "Skipped: acurioustale/acurioustale-de could not be read. If it is now private, add a \`SHARED_SYNC_TOKEN\` secret."
+            elif [[ "${{ steps.diff.outputs.drift }}" == "false" ]]; then
+              echo "\`tools/shared/\` is identical in acurioustale/acurioustale-de."
+            else
+              echo "\`tools/shared/\` has **drifted** from acurioustale/acurioustale-de — mirror the change."
+              echo
+              echo '```diff'
+              cat drift.txt
+              echo '```'
+            fi
+          } >>"$GITHUB_STEP_SUMMARY"
+
+      # Fail last, after the summary is written, so the verdict is recorded even
+      # on a red run. Non-gating: this reddens only this workflow.
+      - name: Fail on drift
+        if: steps.diff.outputs.drift == 'true'
+        run: |
+          echo "::error title=Shared bundle drift::tools/shared/ differs from acurioustale/acurioustale-de. A fix to a shared parser has to land in BOTH repos."
+          exit 1

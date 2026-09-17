@@ -8,7 +8,7 @@
 //
 // Dependency-free on purpose: the shared tag scanner over our own markup, and a
 // direct read of the PNG header — no image library.
-import { findTags } from "./html-tags.mjs";
+import { findTags } from "./shared/html-tags.mjs";
 
 /**
  * The image dimensions a document advertises through its og:image:width /
