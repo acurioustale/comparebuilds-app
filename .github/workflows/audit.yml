@@ -77,7 +77,7 @@ jobs:
       - name: Overrides still earning their place
         if: ${{ !cancelled() }}
         continue-on-error: true
-        run: node scripts/checkStaleOverrides.js
+        run: npm run check:stale-overrides
 
       # A one-line verdict in the run summary, so the result is legible from the
       # Actions list without opening the log.
