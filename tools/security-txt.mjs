@@ -1,0 +1,89 @@
+// Shared reader for public/.well-known/security.txt (RFC 9116).
+//
+// Two things read this file and must agree on what it says: the parity suite
+// (src/lib/securityTxt.test.js), which binds its contacts and Canonical to
+// SECURITY.md and index.html, and the expiry guard (check-security-txt-expiry
+// .mjs), which runs outside the gate. A guard regex that is subtly wrong on real
+// input fails in the fail-open direction, so the field parsing lives here with a
+// test of its own rather than being written twice.
+//
+// Dependency-free on purpose: RFC 9116 is a flat `Name: value` field format over
+// UTF-8, not something needing a parser library.
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * The fields of an RFC 9116 file, as Map(name → values in file order).
+ *
+ * Comment lines (`#`) and blank lines are ignored, per the grammar. A field name
+ * MAY repeat — two Contact lines is the normal case, and the RFC says a reporter
+ * should read them as an ordered preference list — so every value is collected
+ * rather than the last one winning. Names are kept verbatim: the RFC defines
+ * them case-insensitively, but every file we write uses the canonical casing,
+ * and a caller asking for "Contact" should not silently match "CONTACT" written
+ * by mistake.
+ *
+ * @param {string} text File contents
+ * @returns {Map<string, string[]>}
+ * @throws {Error} on a line that is neither blank, a comment, nor `Name: value`
+ */
+export function parseSecurityTxt(text) {
+  const found = new Map();
+  for (const line of text.split("\n")) {
+    const trimmed = line.trim();
+    if (trimmed === "" || trimmed.startsWith("#")) continue;
+    const match = trimmed.match(/^([A-Za-z-]+):\s*(.+)$/);
+    // Throwing rather than skipping is deliberate. A line this does not
+    // recognise is a line a consumer's parser may also reject, which can
+    // invalidate the whole file — so it must be loud, not quietly dropped.
+    if (!match) {
+      throw new Error(
+        `security.txt line is not a "Name: value" field: ${line}`,
+      );
+    }
+    found.set(match[1], [...(found.get(match[1]) ?? []), match[2]]);
+  }
+  return found;
+}
+
+/**
+ * What the file's `Expires` field says about its remaining life.
+ *
+ * RFC 9116 requires exactly one Expires, and a file past it is invalid — a
+ * conforming consumer is told to ignore it — so a lapse silently un-publishes
+ * the contact. `warnWithinDays` exists to make that arrive as notice rather than
+ * as a cliff: the date is a human commitment nothing can derive, so the only
+ * useful automation is telling the owner it is coming.
+ *
+ * @param {Map<string, string[]>} fields Parsed fields
+ * @param {{ now?: Date, warnWithinDays?: number }} [options]
+ * @returns {{ state: "missing"|"repeated"|"unparseable"|"lapsed"|"warn"|"ok",
+ *             expires: string | undefined, daysLeft: number | undefined }}
+ */
+export function expiryStatus(fields, options = {}) {
+  const { now = new Date(), warnWithinDays = 60 } = options;
+  const values = fields.get("Expires");
+  if (values === undefined) {
+    return { state: "missing", expires: undefined, daysLeft: undefined };
+  }
+  // "The Expires field MUST NOT appear more than once" — with two, which one
+  // binds is undefined, so it is a defect in its own right rather than a case to
+  // resolve by picking one.
+  if (values.length > 1) {
+    return { state: "repeated", expires: undefined, daysLeft: undefined };
+  }
+  const [expires] = values;
+  const when = new Date(expires);
+  if (Number.isNaN(when.getTime())) {
+    return { state: "unparseable", expires, daysLeft: undefined };
+  }
+  const daysLeft = Math.floor((when.getTime() - now.getTime()) / DAY_MS);
+  if (when.getTime() <= now.getTime()) {
+    return { state: "lapsed", expires, daysLeft };
+  }
+  return {
+    state: daysLeft <= warnWithinDays ? "warn" : "ok",
+    expires,
+    daysLeft,
+  };
+}
