@@ -222,20 +222,20 @@ jobs:
 
       # Validate the built markup against dist/ — the entry page plus every
       # prerendered spec landing page, and the SVG favicon — so a markup or
-      # prerender-template bug is caught before deploy. Mirrors validate.sh. We
-      # download the jar rather than a packaged wrapper: wrappers ship an older
-      # bundled vnu that rejects valid modern features. Two benign infos are
-      # filtered: the void-element trailing slash (Vite/Prettier house style) and
+      # prerender-template bug is caught before deploy. Mirrors validate.sh. The
+      # jar comes from the `vnu-jar` devDependency, so package-lock.json pins the
+      # exact bytes: upstream publishes only a rolling `latest` release with no
+      # versioned jar URL, so downloading from GitHub would silently change the
+      # validator under us between two runs on identical code. Two benign infos
+      # are filtered: the void-element trailing slash (Vite/Prettier house style) and
       # the CSP meta check (a file:// false positive where script-src 'self' plus
       # the inline-script hashes can't resolve without an origin; over https the
       # policy allows them, verified in-browser). The generated Tailwind CSS is not
       # checked — vnu rejects modern properties it doesn't yet recognise.
       - name: Validate built HTML + SVG (vnu)
         run: |
-          curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors -o "$RUNNER_TEMP/vnu.jar" \
-            https://github.com/validator/validator/releases/download/latest/vnu.jar
           mapfile -t html_files < <(find dist -name '*.html')
-          java -jar "$RUNNER_TEMP/vnu.jar" \
+          java -jar node_modules/vnu-jar/build/dist/vnu.jar \
             --filterpattern '.*(Trailing slash on void elements|Content Security Policy).*' \
             --also-check-svg "${html_files[@]}" dist/favicon.svg
 

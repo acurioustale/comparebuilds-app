@@ -60,7 +60,8 @@
     "svgo": "^4.1.0",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.0",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.1",
+    "vnu-jar": "^26.9.16"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.19",

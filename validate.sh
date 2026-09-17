@@ -39,6 +39,28 @@ have() { command -v "$1" >/dev/null 2>&1; }
 skip() { echo "note: $1 not installed - skipping $2 (CI enforces it)." >&2; }
 step() { printf '\n\033[1m==> %s\033[0m\n' "$1"; }
 
+# vnu ships as an npm devDependency (package `vnu-jar`), so package-lock.json
+# pins the exact jar - no rolling `latest` download that can change the
+# validator under us between two runs on identical code. It still needs a JVM,
+# which npm can't provide: prefer one on PATH, else JAVA_HOME (Homebrew's
+# openjdk is keg-only, so it usually isn't on PATH). The package's postinstall
+# would fetch its own Temurin; npm's allow-scripts gate denies it by default and
+# it must stay denied - that download sits outside the lockfile's integrity
+# checks, and CI (setup-java) and local (brew install openjdk) both supply a JVM.
+#
+# Probe each candidate by RUNNING it rather than trusting `command -v`: macOS
+# ships a /usr/bin/java stub that is always on PATH and exits 1 with "Unable to
+# locate a Java Runtime" when no JDK is installed, so a presence check would
+# select it and fail the vnu step instead of falling through to JAVA_HOME.
+VNU_JAR="node_modules/vnu-jar/build/dist/vnu.jar"
+java_bin=""
+for candidate in java "${JAVA_HOME:-}/bin/java"; do
+	if "$candidate" -version >/dev/null 2>&1; then
+		java_bin="$candidate"
+		break
+	fi
+done
+
 # Assert a tool reports the pinned version. Pull the dotted version token out of
 # the --version line (so a leading "v" or trailing extra output doesn't matter)
 # and require it to equal the pin exactly. A substring test would wrongly accept
@@ -348,23 +370,26 @@ fi
 # Validate the built markup with the Nu Html Checker. Runs against dist/ so it
 # checks exactly what ships — the entry page plus every prerendered spec landing
 # page, and the SVG favicon — catching a markup or prerender-template bug before
-# deploy. Guarded like the other non-npm CLIs: skipped with a notice when vnu is
-# absent so validate.sh stays runnable everywhere; CI always enforces it. Two
+# deploy. The jar comes from the lockfile (see the VNU_JAR probe above), so this
+# is the same validator CI runs; only the JVM has to be present locally. Two
 # benign infos are filtered: the void-element trailing slash (Vite/Prettier house
 # style) and the CSP meta check (a file:// false positive where script-src 'self'
 # plus the inline-script hashes can't resolve without an origin; served over https
 # the policy allows them, verified in-browser). The generated Tailwind CSS is not
 # checked — vnu rejects modern properties it doesn't yet recognise.
-if have vnu; then
+if [[ -n "$java_bin" && -f "$VNU_JAR" ]]; then
 	step "Built HTML + SVG (vnu)"
 	html_files=()
 	while IFS= read -r file; do
 		html_files+=("$file")
 	done < <(find dist -name '*.html')
-	vnu --filterpattern '.*(Trailing slash on void elements|Content Security Policy).*' \
+	"$java_bin" -jar "$VNU_JAR" \
+		--filterpattern '.*(Trailing slash on void elements|Content Security Policy).*' \
 		--also-check-svg "${html_files[@]}" dist/favicon.svg
+elif [[ ! -f "$VNU_JAR" ]]; then
+	skip "vnu-jar (run npm install)" "built HTML/SVG validation"
 else
-	skip vnu "built HTML/SVG validation"
+	skip "a Java runtime (brew install openjdk, or set JAVA_HOME)" "built HTML/SVG validation"
 fi
 
 step "All CI checks passed."
