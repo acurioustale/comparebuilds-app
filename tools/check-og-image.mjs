@@ -1,59 +1,95 @@
 // Guard the Open Graph share image against the most common drift: a wrong-size
-// or missing public/og-image.png. The page advertises the card's size to link
-// unfurlers through its og:image:width/height metas, and an unfurler lays the
-// card out from those numbers — so the file must be exactly what the metas
-// claim, or previews crop or letterbox.
+// or missing share image. Both the file AND its expected dimensions come from
+// the markup — the path from the og:image URL, the size from the
+// og:image:width/height metas — so the guard always checks the image the page
+// actually advertises, with no hardcoded copy of the name or the size to drift
+// from. A guard holding its own 1200x630, or its own filename, is a second
+// declaration: repoint the meta and it passes while asserting the old one.
 //
-// The expected size is READ FROM index.html rather than restated here. A guard
-// holding its own copy of 1200×630 is a third place the number lives: changing
-// the metas would leave it asserting the old size, passing while the served
-// image and the declaration disagreed. Binding the two surfaces means there is
-// only one declaration, and the guard checks the file against it.
+// The reading is in tools/shared/og-dimensions.mjs (tested there, and mirrored
+// to the sibling repo) rather than inline here, PNG header included — a binary
+// header parse earns a test at least as much as a regex does.
+//
+// Checks the SOURCE tree, not dist/: the share image is a public/ asset Vite
+// copies through unhashed, so index.html and public/ already hold the two
+// surfaces being bound, and the guard needs no build to run. og:image names a
+// site-absolute path, which in the source tree is a path under public/.
 //
 // This does NOT catch content drift — that stays a manual step. The dynamic
-// share card (api/og.php, advertised by api/share.php) is a separate pair, bound
-// by tools/ogDimensions.test.js.
+// share card (api/og.php, advertised by api/share.php) is a separate pair,
+// bound by tools/ogSharePhpParity.test.js.
 import { readFile } from "node:fs/promises";
-import { declaredOgDimensions, pngDimensions } from "./og-dimensions.mjs";
+import {
+  declaredOgDimension,
+  ogImagePath,
+  pngDimensions,
+} from "./shared/og-dimensions.mjs";
 
 const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
-const imagePath = new URL("../public/og-image.png", import.meta.url);
 
-const { width: declaredWidth, height: declaredHeight } =
-  declaredOgDimensions(html);
-if (declaredWidth === undefined || declaredHeight === undefined) {
+// The dimension the page declares, read from the meta so the guard and the
+// markup can't disagree about the intended size. Returns the parsed integer, or
+// undefined after reporting a specific failure: a missing tag and a present-but-
+// unparseable value (e.g. content="1200px") are distinct errors, so the message
+// points at the real problem instead of always blaming a missing tag when the
+// tag is actually there.
+function ogDimension(property) {
+  const { present, raw, value } = declaredOgDimension(html, property);
+  if (value !== undefined) return value;
   console.error(
-    "check-og-image: index.html declares no readable og:image:width /\n" +
-      "  og:image:height metas, so there is nothing to check the file against.\n" +
-      "  An unfurler needs both; restore them rather than dropping the check.",
+    present
+      ? `check-og-image: index.html ${property} is "${raw}", not a bare integer`
+      : `check-og-image: index.html declares no ${property} to check against`,
   );
-  process.exit(1);
+  process.exitCode = 1;
+  return undefined;
 }
 
-let buf;
-try {
-  buf = await readFile(imagePath);
-} catch {
-  console.error("check-og-image: public/og-image.png not found");
-  process.exit(1);
+const width = ogDimension("og:image:width");
+const height = ogDimension("og:image:height");
+
+// The file og:image points at. The meta names the served path; the source of
+// that path is public/, which is what Vite copies to the site root.
+const rel = ogImagePath(html);
+if (rel === undefined) {
+  console.error("check-og-image: index.html declares no og:image to check");
+  process.exitCode = 1;
 }
 
-let actual;
-try {
-  actual = pngDimensions(buf);
-} catch (err) {
-  console.error(`check-og-image: public/og-image.png is ${err.message}`);
-  process.exit(1);
-}
+if (width !== undefined && height !== undefined && rel !== undefined) {
+  const source = `public/${rel}`;
+  // A repointed og:image whose file does not exist reports a clean error rather
+  // than crashing on the read (the guard exists to catch exactly this drift).
+  let buf;
+  try {
+    buf = await readFile(new URL(`../${source}`, import.meta.url));
+  } catch {
+    console.error(
+      `check-og-image: og:image points to /${rel}, so ${source} must exist — it does not`,
+    );
+    process.exitCode = 1;
+  }
 
-if (actual.width !== declaredWidth || actual.height !== declaredHeight) {
-  console.error(
-    `check-og-image: public/og-image.png is ${actual.width}x${actual.height}, but index.html\n` +
-      `  advertises ${declaredWidth}x${declaredHeight} to link unfurlers`,
-  );
-  process.exit(1);
-}
+  if (buf) {
+    let actual;
+    try {
+      actual = pngDimensions(buf);
+    } catch (err) {
+      console.error(`check-og-image: ${source} is ${err.message}`);
+      process.exitCode = 1;
+    }
 
-console.log(
-  `check-og-image: public/og-image.png is ${actual.width}x${actual.height}, as index.html advertises`,
-);
+    if (actual) {
+      if (actual.width !== width || actual.height !== height) {
+        console.error(
+          `check-og-image: ${source} is ${actual.width}x${actual.height}, but index.html declares ${width}x${height}`,
+        );
+        process.exitCode = 1;
+      } else {
+        console.log(
+          `check-og-image: ${source} matches the declared ${width}x${height}`,
+        );
+      }
+    }
+  }
+}
