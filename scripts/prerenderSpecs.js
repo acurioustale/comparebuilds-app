@@ -87,27 +87,32 @@ function setMeta(html, attr, key, value) {
     `(<meta\\b[^>]*?\\b${attr}="${key}"[^>]*?\\bcontent=")[^"]*(")`,
     "",
   );
+  // Function form, not a replacement string: escAttr escapes &, < and ", but a
+  // "$&" / "$`" / "$'" / "$1" in the value is special to String.replace and would
+  // expand to the matched text, nesting tags in the <head> of every page it
+  // reaches. A display name is ordinary prose today; nothing stops it carrying a
+  // "$" tomorrow. Same reason the #root swap below takes a function.
   return replaceOnce(
     html,
     re,
-    `$1${escAttr(value)}$2`,
+    (_match, open, close) => `${open}${escAttr(value)}${close}`,
     `<meta ${attr}="${key}">`,
   );
 }
 
-function buildPage(template, { title, description, url, summary }) {
+export function buildPage(template, { title, description, url, summary }) {
   let html = template;
   html = replaceOnce(
     html,
     /<title>[\s\S]*?<\/title>/,
-    `<title>${escHtml(title)}</title>`,
+    () => `<title>${escHtml(title)}</title>`,
     "<title>",
   );
   // Point the template's canonical (homepage URL) at this spec's URL.
   html = replaceOnce(
     html,
     /(<link\b[^>]*\brel="canonical"[^>]*\bhref=")[^"]*(")/,
-    `$1${escAttr(url)}$2`,
+    (_match, open, close) => `${open}${escAttr(url)}${close}`,
     'rel="canonical"',
   );
   html = setMeta(html, "name", "description", description);
@@ -133,7 +138,7 @@ function buildPage(template, { title, description, url, summary }) {
   return html;
 }
 
-function summaryHtml(cls, spec) {
+export function summaryHtml(cls, spec) {
   const others = cls.specs
     .filter((s) => s.id !== spec.id)
     .map(
@@ -155,66 +160,75 @@ function summaryHtml(cls, spec) {
 }
 
 // ── Run ──────────────────────────────────────────────────────────────────────
-const templatePath = path.join(DIST, "index.html");
-if (!fs.existsSync(templatePath)) {
-  console.error(
-    "prerenderSpecs: dist/index.html not found — run `vite build` first.",
-  );
-  process.exit(1);
-}
-const template = fs.readFileSync(templatePath, "utf8");
-
-// The home page lists every class/spec, so it's as fresh as the newest data file.
-const urls = [{ loc: `${ORIGIN}/`, lastmod: lastModified("src/data") }];
-
-// Every field these pages render — the class and spec display names, the spec
-// slug and description — comes from classes.json, the only data file this
-// script opens. The per-class talent file has no influence on the emitted HTML,
-// so keying <lastmod> to it reported the wrong date in both directions: editing
-// a spec description changed the visible copy and the meta description while
-// lastmod stayed put, so crawlers skipped the refresh; and a pure talent-data
-// re-ingest bumped lastmod on pages whose bytes were identical.
-const specLastmod = lastModified("src/data/classes.json");
-
-let count = 0;
-for (const cls of classes) {
-  if (!cls.implemented) continue;
-  for (const spec of cls.specs) {
-    const url = `${ORIGIN}/${seg(cls.name)}/${seg(spec.name)}/`;
-    const title = `${spec.displayName} ${cls.displayName} Talent Build Calculator — Compare Builds`;
-    const description = `Build, import and compare ${spec.displayName} ${cls.displayName} talent loadouts side by side, then share them with a short link.`;
-    const page = buildPage(template, {
-      title,
-      description,
-      url,
-      summary: summaryHtml(cls, spec),
-    });
-
-    const dir = path.join(DIST, seg(cls.name), seg(spec.name));
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, "index.html"), page);
-    urls.push({ loc: url, lastmod: specLastmod });
-    count++;
+// Guarded so the page-building helpers above can be imported by a test without
+// the script running its build and exiting, exactly as the other scripts/ tools
+// are structured.
+function main() {
+  const templatePath = path.join(DIST, "index.html");
+  if (!fs.existsSync(templatePath)) {
+    console.error(
+      "prerenderSpecs: dist/index.html not found — run `vite build` first.",
+    );
+    process.exit(1);
   }
+  const template = fs.readFileSync(templatePath, "utf8");
+
+  // The home page lists every class/spec, so it's as fresh as the newest data file.
+  const urls = [{ loc: `${ORIGIN}/`, lastmod: lastModified("src/data") }];
+
+  // Every field these pages render — the class and spec display names, the spec
+  // slug and description — comes from classes.json, the only data file this
+  // script opens. The per-class talent file has no influence on the emitted HTML,
+  // so keying <lastmod> to it reported the wrong date in both directions: editing
+  // a spec description changed the visible copy and the meta description while
+  // lastmod stayed put, so crawlers skipped the refresh; and a pure talent-data
+  // re-ingest bumped lastmod on pages whose bytes were identical.
+  const specLastmod = lastModified("src/data/classes.json");
+
+  let count = 0;
+  for (const cls of classes) {
+    if (!cls.implemented) continue;
+    for (const spec of cls.specs) {
+      const url = `${ORIGIN}/${seg(cls.name)}/${seg(spec.name)}/`;
+      const title = `${spec.displayName} ${cls.displayName} Talent Build Calculator — Compare Builds`;
+      const description = `Build, import and compare ${spec.displayName} ${cls.displayName} talent loadouts side by side, then share them with a short link.`;
+      const page = buildPage(template, {
+        title,
+        description,
+        url,
+        summary: summaryHtml(cls, spec),
+      });
+
+      const dir = path.join(DIST, seg(cls.name), seg(spec.name));
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, "index.html"), page);
+      urls.push({ loc: url, lastmod: specLastmod });
+      count++;
+    }
+  }
+
+  // Sitemap + robots. Emit <lastmod> only when we have a real commit date.
+  const sitemap =
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls
+      .map(({ loc, lastmod }) =>
+        lastmod
+          ? `  <url><loc>${escXml(loc)}</loc><lastmod>${lastmod}</lastmod></url>`
+          : `  <url><loc>${escXml(loc)}</loc></url>`,
+      )
+      .join("\n") +
+    "\n</urlset>\n";
+  fs.writeFileSync(path.join(DIST, "sitemap.xml"), sitemap);
+  fs.writeFileSync(
+    path.join(DIST, "robots.txt"),
+    `User-agent: *\nAllow: /\nSitemap: ${ORIGIN}/sitemap.xml\n`,
+  );
+
+  console.log(
+    `prerenderSpecs: wrote ${count} spec pages + sitemap.xml + robots.txt`,
+  );
 }
 
-// Sitemap + robots. Emit <lastmod> only when we have a real commit date.
-const sitemap =
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  urls
-    .map(({ loc, lastmod }) =>
-      lastmod
-        ? `  <url><loc>${escXml(loc)}</loc><lastmod>${lastmod}</lastmod></url>`
-        : `  <url><loc>${escXml(loc)}</loc></url>`,
-    )
-    .join("\n") +
-  "\n</urlset>\n";
-fs.writeFileSync(path.join(DIST, "sitemap.xml"), sitemap);
-fs.writeFileSync(
-  path.join(DIST, "robots.txt"),
-  `User-agent: *\nAllow: /\nSitemap: ${ORIGIN}/sitemap.xml\n`,
-);
-
-console.log(
-  `prerenderSpecs: wrote ${count} spec pages + sitemap.xml + robots.txt`,
-);
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main();
+}
