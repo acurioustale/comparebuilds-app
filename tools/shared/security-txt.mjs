@@ -1,11 +1,14 @@
-// Shared reader for public/.well-known/security.txt (RFC 9116).
+// Shared reader for a site's security.txt (RFC 9116): the published contact
+// route a researcher is meant to find, and the date it stops being valid.
 //
-// Two things read this file and must agree on what it says: the parity suite
-// (src/lib/securityTxtParity.test.js), which binds its contacts and Canonical
-// to SECURITY.md and index.html, and the expiry guard (check-security-txt-expiry
-// .mjs), which runs outside the gate. A guard regex that is subtly wrong on real
-// input fails in the fail-open direction, so the field parsing lives here with a
-// test of its own rather than being written twice.
+// Two kinds of check read that file and have to agree on what it says. A parity
+// suite binds the contacts and Canonical it declares to the prose policy and the
+// canonical origin the markup declares, and fails on an edit. An expiry guard
+// reads the same fields to watch the clock on `Expires`, and fails on a date.
+// Neither owns the reading: a field regex that is subtly wrong on real input
+// fails in the fail-open direction — the check passes while the published file
+// is invalid — so the parsing lives here once, with a test, rather than being
+// written twice and got wrong in one of them.
 //
 // Dependency-free on purpose: RFC 9116 is a flat `Name: value` field format over
 // UTF-8, not something needing a parser library.

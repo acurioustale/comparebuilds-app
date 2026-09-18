@@ -1,6 +1,6 @@
 name: shared-sync
 
-# The five parsers in tools/shared/ are duplicated byte-for-byte in the sibling
+# The parsers in tools/shared/ are duplicated byte-for-byte in the sibling
 # repo acurioustale/acurioustale-de. tools/check-shared.mjs (on the gate) pins
 # what this repo ships via tools/shared/MANIFEST.sha256, but a manifest can only
 # see one repo: it cannot tell that a fix landed here and never reached there.
@@ -65,6 +65,11 @@ jobs:
             authed=false
           fi
 
+          # Published so the summary can tell the two failure cases apart: an
+          # absent credential and a broken one need opposite advice, and a
+          # summary that can only see `fetched=false` gives the wrong one.
+          echo "authed=$authed" >>"$GITHUB_OUTPUT"
+
           if git clone --depth 1 --filter=blob:none --sparse "$remote" sibling; then
             git -C sibling sparse-checkout set tools/shared
             echo "fetched=true" >>"$GITHUB_OUTPUT"
@@ -86,21 +91,62 @@ jobs:
       # a file present on one side only, and a file added to one bundle and not
       # the other — which is the whole question being asked. Printed in full, so
       # the log is enough to mirror the change without cloning anything by hand.
+      #
+      # Two things this must not collapse, because both have been reported as
+      # "DRIFTED" with an empty diff underneath, which is an alarm that cannot
+      # say why it fired:
+      #
+      #   - A sibling with no tools/shared/ at all has never mirrored the bundle.
+      #     That is a real failure and a different one from drift; there is
+      #     nothing to diff, so it is answered before diffing rather than by it.
+      #   - diff's exit 1 means "differences found" and is the signal being asked
+      #     for. Anything >=2 means diff itself failed — an unreadable file, a
+      #     full disk — and says nothing about whether the bundles agree. So the
+      #     exit code is captured and branched on, never treated as a boolean,
+      #     and stderr is captured alongside stdout so that case has diff's own
+      #     complaint to show instead of an empty block.
       - name: Diff the bundles
         if: steps.fetch.outputs.fetched == 'true'
         id: diff
         run: |
-          if diff -ru tools/shared sibling/tools/shared >drift.txt; then
-            echo "drift=false" >>"$GITHUB_OUTPUT"
+          if [[ ! -d sibling/tools/shared ]]; then
+            echo "outcome=missing" >>"$GITHUB_OUTPUT"
+            echo "The sibling repo has no tools/shared/ — it has never mirrored the bundle."
+            exit 0
+          fi
+
+          status=0
+          diff -ru tools/shared sibling/tools/shared >drift.txt 2>&1 || status=$?
+
+          if [[ "$status" -eq 0 ]]; then
+            echo "outcome=identical" >>"$GITHUB_OUTPUT"
             echo "The two bundles are identical."
-          else
-            echo "drift=true" >>"$GITHUB_OUTPUT"
+          elif [[ "$status" -eq 1 ]]; then
+            echo "outcome=drifted" >>"$GITHUB_OUTPUT"
             echo "The two bundles have DRIFTED:"
+            cat drift.txt
+          else
+            echo "outcome=failed" >>"$GITHUB_OUTPUT"
+            echo "status=$status" >>"$GITHUB_OUTPUT"
+            echo "The comparison did not complete (diff exited $status), so nothing is known about whether the bundles agree:"
             cat drift.txt
           fi
 
       # A one-line verdict in the run summary, like `audit`, so the result is
-      # legible from the Actions list without opening the log.
+      # legible from the Actions list without opening the log. One line per
+      # outcome, and every outcome has one of its own: a summary that lands in an
+      # `else` meant for something else is how the empty drift block got rendered
+      # in the first place, so nothing here is left to a catch-all it does not
+      # name. That applies twice over —
+      #
+      #   - The fetch step fails in two ways that want opposite advice. Telling a
+      #     reader to add a secret that is already set, right below an annotation
+      #     saying that secret is broken, is worse than saying nothing, so the
+      #     summary reads `authed` and answers the case that actually happened.
+      #   - `failed` is tested for by name rather than assumed. Should the diff
+      #     step ever die before recording an outcome, the old `else` claimed
+      #     "diff exited " with no code and then ran `cat drift.txt`, which under
+      #     the runner's `bash -e` aborts the step with a code fence left open.
       - name: Summarise
         if: ${{ !cancelled() }}
         run: |
@@ -108,22 +154,49 @@ jobs:
             echo "## Shared bundle sync"
             echo
             if [[ "${{ steps.fetch.outputs.fetched }}" != "true" ]]; then
-              echo "Skipped: acurioustale/acurioustale-de could not be read. If it is now private, add a \`SHARED_SYNC_TOKEN\` secret."
-            elif [[ "${{ steps.diff.outputs.drift }}" == "false" ]]; then
+              if [[ "${{ steps.fetch.outputs.authed }}" == "true" ]]; then
+                echo "Failed: acurioustale/acurioustale-de could not be read even though \`SHARED_SYNC_TOKEN\` is set — the token is likely expired, revoked, or not scoped to that repository."
+              else
+                echo "Skipped: acurioustale/acurioustale-de could not be read. If it is now private, add a \`SHARED_SYNC_TOKEN\` secret."
+              fi
+            elif [[ "${{ steps.diff.outputs.outcome }}" == "missing" ]]; then
+              echo "acurioustale/acurioustale-de has no \`tools/shared/\` — it has **never mirrored** the bundle."
+            elif [[ "${{ steps.diff.outputs.outcome }}" == "identical" ]]; then
               echo "\`tools/shared/\` is identical in acurioustale/acurioustale-de."
-            else
+            elif [[ "${{ steps.diff.outputs.outcome }}" == "drifted" ]]; then
               echo "\`tools/shared/\` has **drifted** from acurioustale/acurioustale-de — mirror the change."
               echo
               echo '```diff'
               cat drift.txt
               echo '```'
+            elif [[ "${{ steps.diff.outputs.outcome }}" == "failed" ]]; then
+              echo "The comparison **did not complete** (\`diff\` exited ${{ steps.diff.outputs.status }}) — this says nothing about whether the bundles agree."
+              echo
+              echo '```'
+              cat drift.txt
+              echo '```'
+            else
+              echo "The comparison reached **no verdict** — the \`Diff the bundles\` step did not run to completion, so it recorded no outcome. Read the job log."
             fi
           } >>"$GITHUB_STEP_SUMMARY"
 
       # Fail last, after the summary is written, so the verdict is recorded even
-      # on a red run. Non-gating: this reddens only this workflow.
-      - name: Fail on drift
-        if: steps.diff.outputs.drift == 'true'
+      # on a red run. Non-gating: this reddens only this workflow. Each outcome
+      # fails in its own words — an annotation claiming drift when the sibling
+      # has no bundle, or when diff never ran to completion, sends the reader
+      # looking for a change that does not exist.
+      - name: Fail with the reason
+        if: steps.diff.outputs.outcome == 'drifted' || steps.diff.outputs.outcome == 'missing' || steps.diff.outputs.outcome == 'failed'
         run: |
-          echo "::error title=Shared bundle drift::tools/shared/ differs from acurioustale/acurioustale-de. A fix to a shared parser has to land in BOTH repos."
+          case "${{ steps.diff.outputs.outcome }}" in
+            drifted)
+              echo "::error title=Shared bundle drift::tools/shared/ differs from acurioustale/acurioustale-de. A fix to a shared parser has to land in BOTH repos."
+              ;;
+            missing)
+              echo "::error title=Sibling bundle missing::acurioustale/acurioustale-de has no tools/shared/ at all — the bundle has never been mirrored there. This is not drift; there is nothing to compare."
+              ;;
+            failed)
+              echo "::error title=Bundle comparison failed::diff exited ${{ steps.diff.outputs.status }} rather than 0 or 1, so the comparison itself failed. Whether the two bundles agree is unknown — read diff's own output in the log."
+              ;;
+          esac
           exit 1
