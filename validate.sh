@@ -108,10 +108,15 @@ pinned_fetch() {
 		fi
 		mv "$tmp/$member" "$tmp/dl"
 	fi
-	mkdir -p "$TOOLS_DIR"
-	chmod +x "$tmp/dl"
-	mv "$tmp/dl" "$dest"
+	# The install status has to outlive the cleanup: ending on `rm -rf` would
+	# return rm's status, reporting a failed mkdir/chmod/mv as a success. Each
+	# call site is an `if` condition, so set -e is suppressed too — the
+	# version-asserted PATH fallback would be skipped and the run would die later
+	# invoking a binary that was never installed.
+	local status=0
+	mkdir -p "$TOOLS_DIR" && chmod +x "$tmp/dl" && mv "$tmp/dl" "$dest" || status=1
 	rm -rf "$tmp"
+	return "$status"
 }
 
 # Release-asset naming for this machine. The phars are platform-independent; the
