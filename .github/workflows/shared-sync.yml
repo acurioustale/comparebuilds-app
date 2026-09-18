@@ -65,6 +65,11 @@ jobs:
             authed=false
           fi
 
+          # Published so the summary can tell the two failure cases apart: an
+          # absent credential and a broken one need opposite advice, and a
+          # summary that can only see `fetched=false` gives the wrong one.
+          echo "authed=$authed" >>"$GITHUB_OUTPUT"
+
           if git clone --depth 1 --filter=blob:none --sparse "$remote" sibling; then
             git -C sibling sparse-checkout set tools/shared
             echo "fetched=true" >>"$GITHUB_OUTPUT"
@@ -129,9 +134,19 @@ jobs:
 
       # A one-line verdict in the run summary, like `audit`, so the result is
       # legible from the Actions list without opening the log. One line per
-      # outcome, and every outcome the diff step can reach has one: a summary
-      # that lands in an `else` meant for something else is how the empty drift
-      # block got rendered in the first place.
+      # outcome, and every outcome has one of its own: a summary that lands in an
+      # `else` meant for something else is how the empty drift block got rendered
+      # in the first place, so nothing here is left to a catch-all it does not
+      # name. That applies twice over —
+      #
+      #   - The fetch step fails in two ways that want opposite advice. Telling a
+      #     reader to add a secret that is already set, right below an annotation
+      #     saying that secret is broken, is worse than saying nothing, so the
+      #     summary reads `authed` and answers the case that actually happened.
+      #   - `failed` is tested for by name rather than assumed. Should the diff
+      #     step ever die before recording an outcome, the old `else` claimed
+      #     "diff exited " with no code and then ran `cat drift.txt`, which under
+      #     the runner's `bash -e` aborts the step with a code fence left open.
       - name: Summarise
         if: ${{ !cancelled() }}
         run: |
@@ -139,7 +154,11 @@ jobs:
             echo "## Shared bundle sync"
             echo
             if [[ "${{ steps.fetch.outputs.fetched }}" != "true" ]]; then
-              echo "Skipped: acurioustale/acurioustale-de could not be read. If it is now private, add a \`SHARED_SYNC_TOKEN\` secret."
+              if [[ "${{ steps.fetch.outputs.authed }}" == "true" ]]; then
+                echo "Failed: acurioustale/acurioustale-de could not be read even though \`SHARED_SYNC_TOKEN\` is set — the token is likely expired, revoked, or not scoped to that repository."
+              else
+                echo "Skipped: acurioustale/acurioustale-de could not be read. If it is now private, add a \`SHARED_SYNC_TOKEN\` secret."
+              fi
             elif [[ "${{ steps.diff.outputs.outcome }}" == "missing" ]]; then
               echo "acurioustale/acurioustale-de has no \`tools/shared/\` — it has **never mirrored** the bundle."
             elif [[ "${{ steps.diff.outputs.outcome }}" == "identical" ]]; then
@@ -150,12 +169,14 @@ jobs:
               echo '```diff'
               cat drift.txt
               echo '```'
-            else
+            elif [[ "${{ steps.diff.outputs.outcome }}" == "failed" ]]; then
               echo "The comparison **did not complete** (\`diff\` exited ${{ steps.diff.outputs.status }}) — this says nothing about whether the bundles agree."
               echo
               echo '```'
               cat drift.txt
               echo '```'
+            else
+              echo "The comparison reached **no verdict** — the \`Diff the bundles\` step did not run to completion, so it recorded no outcome. Read the job log."
             fi
           } >>"$GITHUB_STEP_SUMMARY"
 
