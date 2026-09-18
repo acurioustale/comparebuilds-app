@@ -49,7 +49,9 @@ export function declaredOrigins(html) {
 // resolves to a listing, not a file. A root-relative "/" path is taken from the
 // web root, anything else from `base` — the directory the referencing file sits
 // in, so a url() inside a stylesheet resolves beside that stylesheet. Percent
-// escapes are decoded, since a filesystem and git both hold the decoded name.
+// escapes are decoded, since a filesystem and git both hold the decoded name,
+// and the "." / ".." segments are then resolved away: the caller compares what
+// comes back against tracked paths, which carry neither.
 export function localPath(ref, { origins = new Set(), base = "" } = {}) {
   if (!ref) return undefined;
   let value = ref.trim();
@@ -65,12 +67,28 @@ export function localPath(ref, { origins = new Set(), base = "" } = {}) {
     value = url.pathname;
   }
   const [raw] = value.split(/[?#]/);
-  const path = raw.startsWith("/")
-    ? raw.slice(1)
-    : `${base}${raw.replace(/^(?:\.\/)+/, "")}`;
-  const normalised = decode(path).replace(/^\/+/, "");
-  if (normalised === "" || normalised.endsWith("/")) return undefined;
-  return normalised;
+  const path = raw.startsWith("/") ? raw.slice(1) : `${base}${raw}`;
+  const resolved = resolve(decode(path).replace(/^\/+/, ""));
+  if (!resolved || resolved.endsWith("/")) return undefined;
+  return resolved;
+}
+
+// A path with its "." and ".." segments resolved away, or undefined when a ".."
+// climbs past the root. Both matter because the result is compared against a
+// tracked path: "css/../assets/bg.png" names a file that exists but matches no
+// entry, and a reference that escapes the root names no file of ours at all.
+function resolve(path) {
+  const segments = [];
+  for (const segment of path.split("/")) {
+    if (segment === ".") continue;
+    if (segment === "..") {
+      if (segments.length === 0) return undefined;
+      segments.pop();
+      continue;
+    }
+    segments.push(segment);
+  }
+  return segments.join("/");
 }
 
 // A percent-decoded path, or the path verbatim when it carries an escape that is
