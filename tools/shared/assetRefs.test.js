@@ -52,11 +52,41 @@ test("localPath strips a query and a fragment", () => {
 test("localPath resolves a relative reference against its base directory", () => {
   assert.equal(
     localPath("../assets/bg.png", { base: "css/" }),
-    "css/../assets/bg.png",
+    "assets/bg.png",
   );
   assert.equal(localPath("bg.png", { base: "css/" }), "css/bg.png");
   // A root-relative path ignores the base: it comes from the web root.
   assert.equal(localPath("/assets/bg.png", { base: "css/" }), "assets/bg.png");
+});
+
+// The result is compared against `git ls-files` output, which carries no dot
+// segment, so an unresolved "css/../assets/bg.png" reads as an untracked file.
+test("localPath resolves dot segments away", () => {
+  assert.equal(
+    localPath("../assets/bg.png", { base: "css/themes/" }),
+    "css/assets/bg.png",
+  );
+  assert.equal(
+    localPath("../../assets/bg.png", { base: "css/themes/" }),
+    "assets/bg.png",
+  );
+  assert.equal(
+    localPath("./fonts/./sans.woff2", { base: "css/" }),
+    "css/fonts/sans.woff2",
+  );
+  assert.equal(localPath("/css/../assets/bg.png"), "assets/bg.png");
+});
+
+test("localPath rejects a reference that climbs past the root", () => {
+  assert.equal(
+    localPath("../assets/bg.png", { base: "css/" }),
+    "assets/bg.png",
+  );
+  assert.equal(localPath("../../assets/bg.png", { base: "css/" }), undefined);
+  assert.equal(localPath("../secrets.env"), undefined);
+  assert.equal(localPath("/../secrets.env"), undefined);
+  // Everything climbed back out again names the root listing, not a file.
+  assert.equal(localPath("css/..", { base: "" }), undefined);
 });
 
 test("localPath accepts a same-origin absolute URL and rejects a foreign one", () => {
