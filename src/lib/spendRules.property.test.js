@@ -20,6 +20,14 @@ const nodeById = Object.fromEntries(allNodes.map((n) => [n.id, n]));
 const budget = treeData.pointBudget;
 const purchasable = allNodes.filter((n) => !n.alreadyGranted);
 const realIds = new Set(allNodes.map((n) => n.id));
+// Derived from the data, not a hand-picked range: real feral node ids reach
+// into six figures, so a fixed window overlaps them and the "junk" id is
+// sometimes a real node that legitimately survives pruning.
+const maxRealId = Math.max(...realIds);
+const junkIdArb = fc.integer({
+  min: maxRealId + 1,
+  max: maxRealId + 100000,
+});
 const grantedSeed = buildGrantedSeed(treeData);
 
 const selectionArb = fc
@@ -42,41 +50,35 @@ const selectionArb = fc
 describe("prunedExportSelection — property-based", () => {
   it("keeps only real nodes, drops the inactive hero subtree's roots, and is idempotent", () => {
     fc.assert(
-      fc.property(
-        selectionArb,
-        fc.integer({ min: 100000, max: 200000 }),
-        (selected, junkId) => {
-          // Seed a bit for an id that isn't a node in this spec (a collapsed
-          // duplicate or the hero-gate placeholder) to prove it's dropped.
-          const withJunk = {
-            ...selected,
-            [junkId]: { pointsInvested: 1, entryChosen: null },
-          };
-          const active = activeHeroSubtree(allNodes, withJunk);
-          const pruned = prunedExportSelection(allNodes, withJunk, active);
+      fc.property(selectionArb, junkIdArb, (selected, junkId) => {
+        // Seed a bit for an id that isn't a node in this spec (a collapsed
+        // duplicate or the hero-gate placeholder) to prove it's dropped.
+        const withJunk = {
+          ...selected,
+          [junkId]: { pointsInvested: 1, entryChosen: null },
+        };
+        const active = activeHeroSubtree(allNodes, withJunk);
+        const pruned = prunedExportSelection(allNodes, withJunk, active);
 
-          for (const id of Object.keys(pruned)) {
-            expect(realIds.has(Number(id))).toBe(true); // real nodes only
-            expect(withJunk[id]).toBeTruthy(); // subset of the input
+        for (const id of Object.keys(pruned)) {
+          expect(realIds.has(Number(id))).toBe(true); // real nodes only
+          expect(withJunk[id]).toBeTruthy(); // subset of the input
+        }
+        expect(pruned[junkId]).toBeUndefined();
+
+        for (const n of allNodes) {
+          if (
+            n.alreadyGranted &&
+            n.treeType === "hero" &&
+            n.heroSubtree !== active
+          ) {
+            expect(pruned[n.id]).toBeUndefined();
           }
-          expect(pruned[junkId]).toBeUndefined();
+        }
 
-          for (const n of allNodes) {
-            if (
-              n.alreadyGranted &&
-              n.treeType === "hero" &&
-              n.heroSubtree !== active
-            ) {
-              expect(pruned[n.id]).toBeUndefined();
-            }
-          }
-
-          // Pruning an already-pruned selection changes nothing.
-          expect(prunedExportSelection(allNodes, pruned, active)).toEqual(
-            pruned,
-          );
-        },
-      ),
+        // Pruning an already-pruned selection changes nothing.
+        expect(prunedExportSelection(allNodes, pruned, active)).toEqual(pruned);
+      }),
       { numRuns: 50 },
     );
   });
