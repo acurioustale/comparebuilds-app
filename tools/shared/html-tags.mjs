@@ -56,16 +56,31 @@ export function parseAttrs(attrText) {
 const NAME_BOUNDARY = "(?=[\\s/>])";
 
 // The open-tag pattern for `name`: `<name` at a name boundary, through the closing
-// `>`, consuming quoted spans whole so a `>` inside a quoted value doesn't end the
-// tag. A balanced span is tried before the trailing `["']` fallback, so an
-// unbalanced stray quote in an unquoted value (`content=12"00`) is taken as a
-// literal char — as a browser tokenizes it — instead of opening a span that hunts
-// for its close past the tag's own `>` and swallows the following tag. Balanced
-// markup never reaches the fallback, so real (fully-quoted) tags are unaffected.
+// `>`. Every quote is one of two things and never both: it opens a span that
+// closes before this tag's `>`, or it is a stray with no partner before that `>`
+// and counts as a literal char — as a browser tokenizes an unbalanced quote in an
+// unquoted value (`content=12"00`). Both branches stop at `>`, so they are exactly
+// complementary, which is what keeps the scan linear: no quote is a fork the
+// engine can revisit, and a start tag that never closes fails fast instead of
+// hanging the guard. With an overlapping fallback (a bare `["']`) every quote is
+// such a fork, and a truncated file or an unterminated attribute backtracks
+// exponentially — quadrupling per four added quotes, 32 quotes already costing
+// 64ms and 40 costing seconds — so the guard hangs instead of failing closed.
+//
+// The trade both bounds buy: a `>` inside a quoted value now ends the tag. That
+// is deliberate. Unbounded, one stray quote pairs with a quote in a LATER tag and
+// quietly swallows everything between them — the whole rest of a document's
+// <meta> tags, with the guard reading what survives and still exiting 0. Bounded,
+// a `>` in a value truncates exactly one tag and surfaces loudly as a missing
+// attribute ("declares no og:image"). No quoted value in either repo's markup
+// contains a `>`. Revisit when a real attribute value needs one — prose like
+// `A > B` in a meta description is the plausible way that happens — and the
+// answer then is tokenising, not a longer regex.
 // Capture group 1 is the attribute text. `name` is always a literal element name
 // from our own callers, so it needs no regex escaping.
 function openTag(name) {
-  return `<${name}${NAME_BOUNDARY}((?:[^>"']|"[^"]*"|'[^']*'|["'])*)>`;
+  const attrChar = `[^>"']|"[^">]*"|'[^'>]*'|"(?![^">]*")|'(?![^'>]*')`;
+  return `<${name}${NAME_BOUNDARY}((?:${attrChar})*)>`;
 }
 
 // The close tag for a raw-text element: `</name`, name-boundary anchored, then
