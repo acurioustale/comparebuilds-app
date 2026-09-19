@@ -106,6 +106,23 @@ test("htmlTags treats a stray quote in an unquoted value as a literal, not a spa
   assert.equal(sq[1].attrs.get("name"), "b");
 });
 
+test("htmlTags scans an unterminated start tag in linear time", () => {
+  // The open-tag pattern's quote branches must be mutually exclusive: a quote is
+  // either the start of a balanced span or a stray literal, never both. When they
+  // overlap, every quote becomes a fork the engine can revisit, and a start tag
+  // that never closes — a truncated file, an unterminated attribute — backtracks
+  // exponentially: the guard hangs instead of failing closed. 40 quotes cost
+  // microseconds here and seconds with an overlapping fallback, so the budget
+  // below separates the two by orders of magnitude rather than measuring
+  // performance. The count is deliberately not higher: `node --test` has no
+  // default timeout and the regex blocks the event loop, so a fixture big enough
+  // to be unambiguous is also big enough to hang the run instead of failing it.
+  const truncated = `<meta ${'"a'.repeat(40)}`;
+  const started = Date.now();
+  assert.deepEqual([...htmlTags(truncated, "meta")], []);
+  assert.ok(Date.now() - started < 1000);
+});
+
 test("htmlTags rejects a hyphenated custom element like <meta-data>", () => {
   // `-` is a word boundary, so a `\b` after the name wrongly accepted this; the
   // name must be followed by whitespace, `/` or `>` to count as a <meta>.

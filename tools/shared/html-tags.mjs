@@ -57,15 +57,35 @@ const NAME_BOUNDARY = "(?=[\\s/>])";
 
 // The open-tag pattern for `name`: `<name` at a name boundary, through the closing
 // `>`, consuming quoted spans whole so a `>` inside a quoted value doesn't end the
-// tag. A balanced span is tried before the trailing `["']` fallback, so an
-// unbalanced stray quote in an unquoted value (`content=12"00`) is taken as a
-// literal char — as a browser tokenizes it — instead of opening a span that hunts
-// for its close past the tag's own `>` and swallows the following tag. Balanced
-// markup never reaches the fallback, so real (fully-quoted) tags are unaffected.
+// tag. A balanced span is tried before the stray-quote fallback, so an unbalanced
+// quote in an unquoted value (`content=12"00`) is taken as a literal char — as a
+// browser tokenizes it — instead of opening a span that hunts for its close past
+// the tag's own `>` and swallows the following tag. Balanced markup never reaches
+// the fallback, so real (fully-quoted) tags are unaffected.
+//
+// The fallback is a quote with no partner *inside this tag* — the lookahead
+// stops at `>`. That bound is what keeps the two quote branches mutually
+// exclusive where it matters for backtracking, and mutual exclusivity is what
+// keeps the scan linear: a quote can be both a span opener and a stray only when
+// its partner lies past a `>`, and a `>` ahead is where the star can stop and the
+// match succeed. With an overlapping fallback (a bare `["']`) every quote is a
+// fork the engine can revisit, so a start tag that never closes — a truncated
+// file, an unterminated attribute — backtracks exponentially and the guard hangs
+// instead of failing closed (quadrupling per four added quotes: 32 quotes already
+// cost 64ms, 40 cost seconds). The bound is chosen to change nothing else: an
+// exhaustive comparison against the unbounded form over every input up to length
+// 7 in `{" ' > a space <meta }` agrees on every match.
+//
+// What this does NOT fix, and never did: the span branch is tried first and is
+// not `>`-bounded, so a stray quote in one tag can still pair with a quote in a
+// LATER tag and swallow everything between them. Bounding the span too would end
+// that, at the cost of a `>` inside a quoted value — which is legal, supported
+// here, and tested. Closing the gap properly means tokenising, not a longer regex.
 // Capture group 1 is the attribute text. `name` is always a literal element name
 // from our own callers, so it needs no regex escaping.
 function openTag(name) {
-  return `<${name}${NAME_BOUNDARY}((?:[^>"']|"[^"]*"|'[^']*'|["'])*)>`;
+  const attrChar = `[^>"']|"[^"]*"|'[^']*'|"(?![^">]*")|'(?![^'>]*')`;
+  return `<${name}${NAME_BOUNDARY}((?:${attrChar})*)>`;
 }
 
 // The close tag for a raw-text element: `</name`, name-boundary anchored, then
