@@ -1,6 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { withoutOverride, advisorySummary, report } from "./overrides.mjs";
+import {
+  withoutOverride,
+  advisorySummary,
+  report,
+  isAdvisoryFailure,
+} from "./overrides.mjs";
 
 test("withoutOverride drops the named entry and keeps the rest", () => {
   const pkg = {
@@ -172,4 +177,45 @@ test("report pluralises the removal line for more than one stale override", () =
 
 test("report says so when there is nothing to remove", () => {
   assert.match(report([]), /Every override is still earning its place\./);
+});
+
+test("an audit failure with a report on stdout is a verdict", () => {
+  assert.equal(
+    isAdvisoryFailure({ status: 1, stdout: Buffer.from("1 high severity\n") }),
+    true,
+  );
+  // A string stdout reads the same way, so the helper does not depend on the
+  // caller's stdio encoding.
+  assert.equal(
+    isAdvisoryFailure({ status: 1, stdout: "1 high severity\n" }),
+    true,
+  );
+});
+
+test("a failure that never audited anything is not a verdict", () => {
+  // The regression: under `stdio: "pipe"` an empty stdout is a zero-length
+  // Buffer, which is truthy — so a bare `err.stdout` check read a run that
+  // failed before auditing as "no advisories", marking a live pin stale.
+  assert.equal(
+    isAdvisoryFailure({ status: 1, stdout: Buffer.alloc(0) }),
+    false,
+  );
+  assert.equal(isAdvisoryFailure({ status: 1, stdout: "" }), false);
+  // A resolution error exits with something other than 1 ...
+  assert.equal(
+    isAdvisoryFailure({ status: 254, stdout: Buffer.from("ERESOLVE") }),
+    false,
+  );
+  // ... and a process killed by a signal carries no status at all.
+  assert.equal(
+    isAdvisoryFailure({
+      status: null,
+      signal: "SIGKILL",
+      stdout: Buffer.from("x"),
+    }),
+    false,
+  );
+  // npm missing throws a spawn error with neither field.
+  assert.equal(isAdvisoryFailure({ code: "ENOENT" }), false);
+  assert.equal(isAdvisoryFailure(undefined), false);
 });

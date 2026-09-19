@@ -83,3 +83,22 @@ export function report(results) {
   );
   return lines.join("\n");
 }
+
+// Whether a thrown `npm audit` failure is a verdict on the tree or a broken run.
+//
+// `npm audit` exits non-zero both when it found advisories and when it could not
+// look — a resolution error, a registry outage, npm missing — and the caller
+// runs it through execFileSync, so both arrive as a thrown error. Only the first
+// is an answer. Reading any failure as advisories would report a pin as still
+// load-bearing on the strength of a run that never audited anything, which is
+// the one way this check can lie in the direction of doing nothing.
+//
+// Both halves of the test earn their place. `status === 1` is the exit code npm
+// reserves for advisories found; a failure before the audit runs reports a
+// different one, or none at all when the process was killed by a signal. The
+// length test covers the rest: such a failure leaves stdout empty, and under
+// `stdio: "pipe"` an empty stdout is a zero-length Buffer — truthy, so a bare
+// `err.stdout` check would pass it through as a report of no advisories at all.
+export function isAdvisoryFailure(err) {
+  return err?.status === 1 && err?.stdout?.length > 0;
+}
