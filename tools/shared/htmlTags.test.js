@@ -82,25 +82,33 @@ test("htmlTags yields each tag as { raw, attrs } in document order", () => {
   assert.match(tags[1].raw, /theme-color/);
 });
 
-test("htmlTags is quote-aware and anchors the tag name to a boundary", () => {
-  // `>` inside a value must not end the tag; <metadata> is not a <meta>.
+test("htmlTags ends a tag at a `>` inside a quoted value, and anchors the tag name to a boundary", () => {
+  // A quoted span is bounded to its tag, so a `>` in a value ends the tag early
+  // and the rest of it reads as attribute-less junk. That is the trade: bounded,
+  // a `>` in a value costs one truncated tag and surfaces loudly as a missing
+  // attribute; unbounded, a stray quote pairs with a quote in a later tag and
+  // quietly swallows the span between them while the guard still exits 0. No
+  // quoted value in this repo's markup contains a `>`. <metadata> is not a <meta>.
   const html = `<metadata name="x"><meta data-note="a>b" content="1200">`;
   const tags = [...htmlTags(html, "meta")];
   assert.equal(tags.length, 1);
-  assert.equal(tags[0].attrs.get("data-note"), "a>b");
-  assert.equal(tags[0].attrs.get("content"), "1200");
+  assert.equal(tags[0].raw, `<meta data-note="a>`);
+  assert.equal(tags[0].attrs.get("data-note"), `"a`);
+  assert.equal(tags[0].attrs.get("content"), undefined);
 });
 
 test("htmlTags treats a stray quote in an unquoted value as a literal, not a span", () => {
   // An unbalanced `"` (or `'`) inside an unquoted value must not open a quoted
   // span that hunts past the tag's own `>` and swallows the following tag; a
   // browser treats the stray quote as a literal char and sees two tags.
-  const dq = [...htmlTags(`<meta name=a content=12"00><meta name=b>`, "meta")];
+  const dq = [
+    ...htmlTags(`<meta name=a content=12"00><meta name="b">`, "meta"),
+  ];
   assert.equal(dq.length, 2);
   assert.equal(dq[0].attrs.get("content"), `12"00`);
   assert.equal(dq[1].attrs.get("name"), "b");
 
-  const sq = [...htmlTags(`<meta name=a content=it's><meta name=b>`, "meta")];
+  const sq = [...htmlTags(`<meta name=a content=it's><meta name='b'>`, "meta")];
   assert.equal(sq.length, 2);
   assert.equal(sq[0].attrs.get("content"), "it's");
   assert.equal(sq[1].attrs.get("name"), "b");
