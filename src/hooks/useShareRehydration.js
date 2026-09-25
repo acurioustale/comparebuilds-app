@@ -158,7 +158,14 @@ export function useShareRehydration() {
           // the share's layout hash with it, or a hash belonging to a share
           // that never loaded would outlive it and mark the restored session
           // as being from an older talent revision.
-          const loadFailure = useBuildsStore.getState().error;
+          //
+          // Which way they failed is read from the slots, not the error: every
+          // rejection sets the store's error, so its mere presence says nothing.
+          // A deterministic rejection (bad header, unknown spec, mismatch)
+          // returns before committing, while a build whose tree data failed to
+          // load is committed as an unparsed slot. So a committed slot with
+          // nothing landed means the talent data never arrived.
+          const loadFailure = useBuildsStore.getState().buildStrings.length > 0;
           restoreSession(session);
           setSharedLayoutHash(null);
           restoreLocalSession();
