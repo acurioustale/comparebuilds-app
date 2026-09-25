@@ -151,14 +151,23 @@ export function useShareRehydration() {
         // with no build committed the app would otherwise fall back to the
         // empty interactive tree — a blank page where a comparison was asked
         // for, over the top of a session that had been emptied for it. The hash
-        // is deliberately kept in that case (see below), so a reload retries.
+        // is kept only if that failure was the retryable kind (see below).
+        let retryable = false;
         if (landed === 0) {
           // Nothing from the link survived, so the session we cleared for it
           // was cleared for nothing — put it back before saying so, and drop
           // the share's layout hash with it, or a hash belonging to a share
           // that never loaded would outlive it and mark the restored session
           // as being from an older talent revision.
-          const loadFailure = useBuildsStore.getState().error;
+          //
+          // Which way they failed is read from the slots, not the error: every
+          // rejection sets the store's error, so its mere presence says nothing.
+          // A deterministic rejection (bad header, unknown spec, mismatch)
+          // returns before committing, while a build whose tree data failed to
+          // load is committed as an unparsed slot. So a committed slot with
+          // nothing landed means the talent data never arrived.
+          const loadFailure = useBuildsStore.getState().buildStrings.length > 0;
+          retryable = loadFailure;
           restoreSession(session);
           setSharedLayoutHash(null);
           restoreLocalSession();
@@ -181,14 +190,19 @@ export function useShareRehydration() {
               `loaded and were left out (they may not match the others' spec).`,
           );
         }
-        // Strip the share id from the URL once at least one build has rendered.
-        // addBuild fails *deterministically* — a duplicate, spec mismatch, corrupt
-        // header, or over-cap slot never succeeds on retry — so keying the strip
-        // off "every build committed" would loop forever: each reload re-fetches
-        // the same share and re-fails, never stripping the hash. A transient
-        // tree-data load failure instead leaves every slot unparsed, so keep the
-        // hash only then, letting a reload retry the load.
-        if (useBuildsStore.getState().parsedBuilds.some(Boolean)) {
+        // Strip the share id from the URL once at least one build has rendered,
+        // or once every build was rejected outright. addBuild fails
+        // *deterministically* — a duplicate, spec mismatch, corrupt header, or
+        // over-cap slot never succeeds on retry — so keeping the hash for those
+        // would loop forever: each reload re-fetches the same share and
+        // re-fails. A transient tree-data load failure instead leaves every
+        // slot unparsed, so keep the hash only then, letting a reload retry the
+        // load.
+        if (
+          landed === 0
+            ? !retryable
+            : useBuildsStore.getState().parsedBuilds.some(Boolean)
+        ) {
           history.replaceState(null, "", window.location.pathname);
         }
       } catch {

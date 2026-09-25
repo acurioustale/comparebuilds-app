@@ -35,6 +35,18 @@ vi.mock("../store/buildsStore", () => {
 
 const payload = { builds: ["aaa", "bbb"], labels: ["A", "B"] };
 
+// The store's two ways of rejecting a build, as addBuild really behaves: both
+// set the error, but only a tree-data load failure commits the string first.
+const rejectBuild = async () => {
+  state.error = "Spec ID 9999 was not found in the local class index.";
+  return false;
+};
+const failTreeLoad = async (buildString) => {
+  state.buildStrings = [...state.buildStrings, buildString];
+  state.error = "Failed to load tree data: fetch failed";
+  return false;
+};
+
 const mockFetch = (body) =>
   vi.fn().mockResolvedValue({ ok: true, json: async () => body });
 
@@ -51,16 +63,20 @@ afterEach(() => {
 });
 
 describe("useShareRehydration share failures", () => {
-  test("reports a link whose builds all fail to load, and keeps the hash", async () => {
-    state.addBuild.mockResolvedValue(false);
+  test("reports a link whose builds are all rejected", async () => {
+    // Regression: the message keyed off the store's error being set, which
+    // every rejection does, so a link of unloadable builds was blamed on the
+    // connection.
+    state.addBuild.mockImplementation(rejectBuild);
     vi.stubGlobal("fetch", mockFetch(payload));
 
     const { result } = renderHook(() => useShareRehydration());
 
     await waitFor(() => expect(result.current.shareError).toBeTruthy());
     expect(result.current.shareError).toMatch(/None of the builds/);
-    // Nothing parsed, so the id stays for a reload to retry.
-    expect(window.location.hash).toBe("#abcd1234");
+    expect(result.current.shareError).not.toMatch(/connection/);
+    // A reload would only re-fetch the link and fail the same way again.
+    expect(window.location.hash).toBe("");
   });
 
   test("puts the local session back when no build in the link loads", async () => {
@@ -69,7 +85,7 @@ describe("useShareRehydration share failures", () => {
     // moment the store emptied. A link whose builds all failed therefore
     // destroyed the user's own saved builds for good — restoreLocalSession was
     // unreachable on this path.
-    state.addBuild.mockResolvedValue(false);
+    state.addBuild.mockImplementation(rejectBuild);
     vi.stubGlobal("fetch", mockFetch(payload));
 
     const { result } = renderHook(() => useShareRehydration());
@@ -96,8 +112,7 @@ describe("useShareRehydration share failures", () => {
     // deploy, or a dropped connection) also lands zero builds. Reporting it as
     // an outdated layout contradicts the store's own error on the slot and
     // points the user away from the reload that would actually fix it.
-    state.addBuild.mockResolvedValue(false);
-    state.error = "Failed to load tree data: fetch failed";
+    state.addBuild.mockImplementation(failTreeLoad);
     vi.stubGlobal("fetch", mockFetch(payload));
 
     const { result } = renderHook(() => useShareRehydration());
@@ -105,6 +120,8 @@ describe("useShareRehydration share failures", () => {
     await waitFor(() => expect(result.current.shareError).toBeTruthy());
     expect(result.current.shareError).toMatch(/reload to try again/);
     expect(result.current.shareError).not.toMatch(/older version/);
+    // Nothing parsed, so the id stays for a reload to retry.
+    expect(window.location.hash).toBe("#abcd1234");
   });
 
   test("reports a partial load", async () => {
