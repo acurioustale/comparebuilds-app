@@ -75,6 +75,8 @@ describe("useShareRehydration share failures", () => {
     await waitFor(() => expect(result.current.shareError).toBeTruthy());
     expect(result.current.shareError).toMatch(/None of the builds/);
     expect(result.current.shareError).not.toMatch(/connection/);
+    // A reload would only re-fetch the link and fail the same way again.
+    expect(window.location.hash).toBe("");
   });
 
   test("puts the local session back when no build in the link loads", async () => {
