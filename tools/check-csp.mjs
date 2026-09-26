@@ -61,13 +61,15 @@ const metaCsp = cspMeta?.attrs.get("content");
 // Apache comments and commented-out examples, reassembles a backslash-continued
 // directive, requires the `Header set` form, takes the LAST live match (Apache's
 // `Header set` replaces, so the browser is served the last of repeated headers),
-// and ignores any directive inside a request-scoping container while flagging an
-// unbalanced structure — or an unsupported CSP-touching Header form (append,
-// edit, or a conditional set) that would serve a policy other than the single
-// value read here — so we fail closed rather than trust a mis-read policy. This
-// file carries several <FilesMatch> blocks, so the scope tracking is load-
-// bearing: a CSP added inside one would be served for those requests only.
-const { headerCsp, scopesUnbalanced, unsupportedHeaders } =
+// and never reads a directive inside a request-scoping container as the global
+// one, while flagging an unbalanced structure, an unsupported CSP-touching Header
+// form (append, edit, or a conditional set) that would serve a policy other than
+// the single value read here, or any CSP-touching line inside a request scope —
+// so we fail closed rather than trust a mis-read policy. This file carries
+// several <FilesMatch> blocks, so the scope tracking is load-bearing: a CSP set,
+// appended or unset inside one would change what those requests are served
+// while the global value still validates clean.
+const { headerCsp, scopesUnbalanced, unsupportedHeaders, scopedHeaders } =
   readHeaderCsp(htaccess);
 
 const policies = [
@@ -128,6 +130,15 @@ for (const line of unsupportedHeaders) {
   console.error(
     "check-csp: dist/.htaccess has a CSP-touching Header directive this guard " +
       `can't validate (only an unconditional \`set "…"\` is supported):\n  ${line}`,
+  );
+}
+for (const line of scopedHeaders) {
+  failed = true;
+  console.error(
+    "check-csp: dist/.htaccess has a CSP-touching Header directive inside a " +
+      "request scope (<Files>, <FilesMatch>, <If>, <Limit>, ...), which changes " +
+      "the policy the requests it matches are served - keep the CSP a single " +
+      `top-level \`set "…"\`:\n  ${line}`,
   );
 }
 for (const { name, csp } of policies) {
