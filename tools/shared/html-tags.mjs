@@ -10,7 +10,7 @@
 //
 // Dependency-free on purpose: a small scan over our own well-formed markup, not
 // a general HTML parser. Comment-skipping is shared with ./html-comments.mjs.
-import { isCommented } from "./html-comments.mjs";
+import { COMMENT, isCommented } from "./html-comments.mjs";
 
 // A tag's attribute text as Map(lower-cased name → value). A value is unwrapped
 // from its quotes (single or double, and may span newlines); an unquoted value
@@ -139,9 +139,13 @@ export function* rawTextElements(html, name) {
 // value, or in a `<!-- … -->`) is walked past, not read as an opener. It omits
 // openTag's lone-`["']` fallback on purpose: a start tag with an unbalanced
 // quote fails to match here, so it falls to the opener/stray branches rather
-// than being consumed as a well-formed tag.
-const TAG_OR_COMMENT =
-  /<!--[\s\S]*?-->|<\/?[a-zA-Z][^>"']*(?:(?:"[^"]*"|'[^']*')[^>"']*)*>/y;
+// than being consumed as a well-formed tag. The comment half is ./html-comments.mjs's
+// rule, so a comment ends here where it ends there — at `--!>` and at an empty
+// `<!-->` as well as at `-->`.
+const TAG_OR_COMMENT = new RegExp(
+  `${COMMENT}|<\\/?[a-zA-Z][^>"']*(?:(?:"[^"]*"|'[^']*')[^>"']*)*>`,
+  "y",
+);
 
 // How many `<name` start-tag openers `html` contains, counted on the same basis
 // rawTextElements consumes them. The scan walks the document `<` by `<`: an

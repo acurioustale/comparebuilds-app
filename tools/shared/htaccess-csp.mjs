@@ -35,18 +35,26 @@ const SUPPORTED_CSP_SET =
   /^Header\s+(?:always\s+)?set\s+Content-Security-Policy\s+"[^"]*"\s*$/i;
 
 // The `Header [always] set Content-Security-Policy "…"` value from `htaccess`,
-// plus whether its scoping containers balance and whether any unsupported
-// CSP-touching Header form is present. Returns
+// plus whether its scoping containers balance, whether any unsupported
+// CSP-touching Header form is present, and which CSP-touching Header lines sit
+// inside a request scope. Returns
 // { headerCsp: string | undefined, scopesUnbalanced: boolean,
-//   unsupportedHeaders: string[] }.
+//   unsupportedHeaders: string[], scopedHeaders: string[] }.
 //
 // Takes the LAST live match, not the first: `Header set` replaces any earlier
 // header of the same name, so when two are present Apache serves the last —
 // breaking on the first would validate a strict policy while the browser is
 // served a looser one added below it. Only a TOP-LEVEL directive is the global
-// policy; anything inside a request-scoping container is ignored, and an
+// policy; anything inside a request-scoping container is not read as it, and an
 // unbalanced container (a stray close, or an unclosed open) is reported so the
 // caller can fail closed rather than trust a possibly-mis-scoped read.
+//
+// A CSP-touching line inside a scope is not read, but it is not ignored either:
+// it still reaches the browser for every request the scope matches, so a
+// `<FilesMatch "\.html$">` that sets a looser policy, appends to it or unsets
+// it would weaken what index.html is served while the global value validates
+// clean. Every such line, of any form, is returned in `scopedHeaders` so the
+// caller can fail closed on a policy it cannot see the whole of.
 export function readHeaderCsp(htaccess) {
   // Apache joins a directive split with a trailing backslash onto the next line
   // (the backslash must immediately precede the newline). Reassemble those first
@@ -58,6 +66,7 @@ export function readHeaderCsp(htaccess) {
   let scopeDepth = 0;
   let scopesUnbalanced = false;
   const unsupportedHeaders = [];
+  const scopedHeaders = [];
   for (const rawLine of lines) {
     const line = rawLine.trim();
     if (line.startsWith("#")) continue;
@@ -73,7 +82,10 @@ export function readHeaderCsp(htaccess) {
       } else scopeDepth += 1;
       continue;
     }
-    if (scopeDepth > 0) continue;
+    if (scopeDepth > 0) {
+      if (CSP_HEADER_LINE.test(line)) scopedHeaders.push(line);
+      continue;
+    }
     // A CSP-touching Header line that is not the plain `set "…"` form serves a
     // policy this guard can't read from a single value — flag it to fail closed.
     if (CSP_HEADER_LINE.test(line) && !SUPPORTED_CSP_SET.test(line)) {
@@ -90,5 +102,5 @@ export function readHeaderCsp(htaccess) {
   // An unclosed container leaves the depth above zero, having swallowed every
   // directive below it as nested — the global CSP among them included.
   if (scopeDepth !== 0) scopesUnbalanced = true;
-  return { headerCsp, scopesUnbalanced, unsupportedHeaders };
+  return { headerCsp, scopesUnbalanced, unsupportedHeaders, scopedHeaders };
 }

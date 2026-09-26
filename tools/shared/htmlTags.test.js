@@ -149,6 +149,17 @@ test("htmlTags skips a tag inside an HTML comment", () => {
   assert.equal(tags[0].attrs.get("content"), "#live");
 });
 
+test("htmlTags keeps live tags after a <!-- inside an attribute value", () => {
+  // The literal in the description must not pair with the later comment's
+  // `-->` and hide the canonical link between them.
+  const html =
+    `<meta name="description" content="a <!-- b">` +
+    `<link rel="canonical" href="/">` +
+    `<!-- note -->`;
+  const tags = [...findTags(html, "link", { rel: "canonical" })];
+  assert.equal(tags.length, 1);
+});
+
 // --- findTags ---------------------------------------------------------------
 
 test("findTags narrows to tags matching every query pair, case-insensitively", () => {
@@ -248,6 +259,15 @@ test("countRawTextOpeners ignores a <script literal in another tag's attribute v
 test("countRawTextOpeners ignores a <script literal inside an HTML comment", () => {
   const html = `<script>ok()</script><!-- <script> keep for reference -->`;
   assert.equal(countRawTextOpeners(html, "script"), 1);
+});
+
+test("countRawTextOpeners ends a comment at --!> and at an empty <!-->", () => {
+  // Knowing only `-->`, the scan ran each comment on to the later one's close
+  // and stepped over the live script between them uncounted.
+  for (const open of [`<!-- a --!>`, `<!-->`, `<!--->`]) {
+    const html = `${open}<script>x()</script><!-- b -->`;
+    assert.equal(countRawTextOpeners(html, "script"), 1, open);
+  }
 });
 
 test("countRawTextOpeners still counts an unclosed opener with attributes", () => {
