@@ -56,8 +56,8 @@ test("readHeaderCsp treats <IfModule> as transparent, not a request scope", () =
   assert.equal(scopesUnbalanced, false);
 });
 
-test("readHeaderCsp ignores a CSP inside a request-scoping container", () => {
-  const { headerCsp } = readHeaderCsp(
+test("readHeaderCsp does not read a CSP inside a request-scoping container as global", () => {
+  const { headerCsp, scopedHeaders } = readHeaderCsp(
     [
       `Header set Content-Security-Policy "global"`,
       `<Files "admin">`,
@@ -66,12 +66,17 @@ test("readHeaderCsp ignores a CSP inside a request-scoping container", () => {
     ].join("\n"),
   );
   assert.equal(headerCsp, "global");
+  // Not read as the global policy, but still reported: it is served for every
+  // request the container matches.
+  assert.deepEqual(scopedHeaders, [
+    `Header set Content-Security-Policy "scoped"`,
+  ]);
 });
 
-test("readHeaderCsp ignores a CSP inside a method-scoped <Limit> container", () => {
+test("readHeaderCsp does not read a CSP inside a method-scoped <Limit> container as global", () => {
   // A CSP inside <Limit GET> is served only for GET; it must not be read as the
   // global policy, or a weaker method-scoped CSP would validate as unconditional.
-  const { headerCsp } = readHeaderCsp(
+  const { headerCsp, scopedHeaders } = readHeaderCsp(
     [
       `Header set Content-Security-Policy "global"`,
       `<Limit GET POST>`,
@@ -80,6 +85,54 @@ test("readHeaderCsp ignores a CSP inside a method-scoped <Limit> container", () 
     ].join("\n"),
   );
   assert.equal(headerCsp, "global");
+  assert.deepEqual(scopedHeaders, [
+    `Header set Content-Security-Policy "scoped"`,
+  ]);
+});
+
+test("readHeaderCsp reports every CSP-touching form inside a scope", () => {
+  // A scoped unset, append or conditional set weakens what matching requests are
+  // served just as a scoped set does, so each is reported, nested scopes too.
+  const lines = [
+    `Header unset Content-Security-Policy`,
+    `Header append Content-Security-Policy "script-src 'unsafe-inline'"`,
+    `Header set Content-Security-Policy "x" env=foo`,
+    `Header always set Content-Security-Policy "default-src *"`,
+  ];
+  const { headerCsp, unsupportedHeaders, scopedHeaders } = readHeaderCsp(
+    [
+      `<IfModule mod_headers.c>`,
+      `  Header always set Content-Security-Policy "global"`,
+      `  <FilesMatch "\\.html$">`,
+      `    ${lines[0]}`,
+      `    <If "%{QUERY_STRING} =~ /x/">`,
+      `      ${lines[1]}`,
+      `    </If>`,
+      `  </FilesMatch>`,
+      `  <Files "index.html">`,
+      `    ${lines[2]}`,
+      `    ${lines[3]}`,
+      `  </Files>`,
+      `</IfModule>`,
+    ].join("\n"),
+  );
+  assert.equal(headerCsp, "global");
+  // Scoped lines are reported as scoped, not also as unsupported top-level forms.
+  assert.deepEqual(unsupportedHeaders, []);
+  assert.deepEqual(scopedHeaders, lines);
+});
+
+test("readHeaderCsp leaves a scoped non-CSP header and Report-Only header unreported", () => {
+  const { scopedHeaders } = readHeaderCsp(
+    [
+      `Header set Content-Security-Policy "global"`,
+      `<FilesMatch "\\.(png|svg)$">`,
+      `  Header set Cache-Control "max-age=31536000, immutable"`,
+      `  Header set Content-Security-Policy-Report-Only "default-src 'none'"`,
+      `</FilesMatch>`,
+    ].join("\n"),
+  );
+  assert.deepEqual(scopedHeaders, []);
 });
 
 test("readHeaderCsp flags a stray close as unbalanced", () => {
@@ -97,11 +150,12 @@ test("readHeaderCsp flags an unclosed container as unbalanced", () => {
 });
 
 test("readHeaderCsp returns undefined when no directive is present", () => {
-  const { headerCsp, scopesUnbalanced, unsupportedHeaders } =
+  const { headerCsp, scopesUnbalanced, unsupportedHeaders, scopedHeaders } =
     readHeaderCsp(`# nothing here`);
   assert.equal(headerCsp, undefined);
   assert.equal(scopesUnbalanced, false);
   assert.deepEqual(unsupportedHeaders, []);
+  assert.deepEqual(scopedHeaders, []);
 });
 
 test("readHeaderCsp flags a Header append that combines with the served CSP", () => {
