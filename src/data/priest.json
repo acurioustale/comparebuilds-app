@@ -98,7 +98,7 @@
           "maxRanks": 1,
           "name": "Mind Blast",
           "icon": "136224",
-          "description": "Blast the target's mind for 299 Shadow damage. Costs a high amount of mana.",
+          "description": "Blast the target's mind for 292 Shadow damage. Costs a high amount of mana.",
           "choices": null
         },
         {
@@ -115,7 +115,7 @@
           "maxRanks": 1,
           "name": "Holy Nova",
           "icon": "135922",
-          "description": "An explosion of holy light around you deals up to 157 Holy damage to enemies and up to 121 healing to allies within 12 yds, reduced if there are more than 5 targets.",
+          "description": "An explosion of holy light around you deals up to 157 Holy damage to enemies and up to 122 healing to allies within 12 yds, reduced if there are more than 5 targets.",
           "choices": null
         },
         {
@@ -504,8 +504,8 @@
           "posY": 6,
           "connections": [
             109890,
-            108731,
-            82687
+            82687,
+            108731
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -593,9 +593,9 @@
           "posX": 8,
           "posY": 7,
           "connections": [
-            82699,
             109019,
-            82690
+            82690,
+            82699
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -612,15 +612,15 @@
           "posX": 12,
           "posY": 7,
           "connections": [
-            109020,
-            82690
+            82690,
+            109020
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Word: Death",
           "icon": "136149",
-          "description": "A word of dark binding that inflicts 328 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
+          "description": "A word of dark binding that inflicts 319 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
           "choices": null
         },
         {
@@ -971,7 +971,7 @@
           "maxRanks": 1,
           "name": "Atonement",
           "icon": "458720",
-          "description": "Power Word: Shield, Flash Heal, Shadow Mend, Plea, and Power Word: Radiance apply Atonement to your target for 15 sec.\r\n\r\nYour spell damage heals all targets affected by Atonement for 32% of the damage done. Healing is reduced when healing more than 5 targets.",
+          "description": "Power Word: Shield, Flash Heal, Shadow Mend, Plea, and Power Word: Radiance apply Atonement to your target for 15 sec.\r\n\r\nYour spell damage heals all targets affected by Atonement for 46% of the damage done. Healing is reduced when healing more than 5 targets.\r\n\r\nHealing increased by 40% when not in a raid.",
           "choices": null
         },
         {
@@ -988,7 +988,7 @@
           "maxRanks": 1,
           "name": "Power Word: Radiance",
           "icon": "1386546",
-          "description": "A burst of light heals the target and 4 injured allies within 40 yards for 2,232, and applies Atonement for 60% of its normal duration.",
+          "description": "A burst of light heals the target and 4 injured allies within 40 yards for 2,153, and applies Atonement for 60% of its normal duration.",
           "choices": null
         },
         {
@@ -1198,7 +1198,7 @@
               "spellId": 421453,
               "name": "Ultimate Penitence",
               "icon": "1060982",
-              "description": "Ascend into the air and unleash a massive barrage of Penance bolts, causing 22,314 Holy damage to enemies or 52,314 healing to allies over 5.4 sec.\r\n\r\nWhile ascended, gain a shield for 100% of your health. In addition, you are unaffected by knockbacks or crowd control effects.",
+              "description": "Ascend into the air and unleash a massive barrage of Penance bolts, causing 22,766 Holy damage to enemies or 52,987 healing to allies over 5.4 sec.\r\n\r\nWhile ascended, gain a shield for 100% of your health. In addition, you are unaffected by knockbacks or crowd control effects.",
               "maxRanks": 1
             },
             {
@@ -1395,8 +1395,8 @@
           "posX": 34,
           "posY": 8,
           "connections": [
-            82566,
-            82575
+            82575,
+            82566
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1413,9 +1413,9 @@
           "posX": 38,
           "posY": 8,
           "connections": [
+            82575,
             82576,
-            82578,
-            82575
+            82578
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1452,7 +1452,7 @@
           "connections": [
             82600
           ],
-          "spentRequired": 8,
+          "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Divine Procession",
@@ -1525,7 +1525,7 @@
           "maxRanks": 1,
           "name": "Shadow Mend",
           "icon": "136202",
-          "description": "Flash Heal is upgraded to Shadow Mend, a stronger heal with a higher mana cost.\r\n\r\n Shadow Mend:\r\nWraps an ally in shadows which heal for 3,279, but at a price.\r\n\r\nThe ally will take 168 damage every 1 sec, until they have taken 1,694 total damage from all sources, or leave combat.",
+          "description": "Flash Heal is upgraded to Shadow Mend, a stronger heal with a higher mana cost.\r\n\r\n Shadow Mend:\r\nWraps an ally in shadows which heal for 3,397, but at a price.\r\n\r\nThe ally will take 168 damage every 1 sec, until they have taken 1,634 total damage from all sources, or leave combat.",
           "choices": null
         },
         {
@@ -1762,7 +1762,7 @@
           "ranks": [
             {
               "spellId": 1253590,
-              "description": "Penance has a 25% chance to upgrade Power Word: Shield into Void Shield.\r\n\r\n Void Shield:\r\nShields 3 allies for 15 sec, absorbing 1,722 damage.\r\n\r\n",
+              "description": "Penance has a 25% chance to upgrade Power Word: Shield into Void Shield.\r\n\r\n Void Shield:\r\nShields 3 allies for 15 sec, absorbing 1,783 damage.\r\n\r\n",
               "maxRanks": 1
             },
             {
@@ -1772,7 +1772,7 @@
             },
             {
               "spellId": 1253827,
-              "description": "Casting Mind Blast upgrades your next Power Word: Shield to Void Shield.\r\n\r\nVoid Shield now reflects 15% of damage taken to enemies, causing Atonement healing.",
+              "description": "Casting Mind Blast upgrades your next Power Word: Shield to Void Shield.\r\n\r\nVoid Shield now reflects 10% of damage taken to enemies, causing Atonement healing.",
               "maxRanks": 1
             }
           ]
@@ -1792,7 +1792,7 @@
           "maxRanks": 1,
           "name": "Devour Matter",
           "icon": "135888",
-          "description": "Shadow Word: Death consumes absorb shields from your target, dealing 978 extra damage to them and granting you 1% mana if a shield was present.",
+          "description": "Shadow Word: Death consumes absorb shields from your target, dealing 967 extra damage to them and granting you 1% mana if a shield was present.",
           "choices": null
         },
         {
@@ -1984,7 +1984,7 @@
           "maxRanks": 1,
           "name": "Void Blast",
           "icon": "4914668",
-          "description": "Entropic Rift upgrades Smite into Void Blast while it is active.\r\n\r\nVoid Blast:\r\nSends a blast of cosmic void energy at the enemy, causing 568 Shadow damage.",
+          "description": "Entropic Rift upgrades Smite into Void Blast while it is active.\r\n\r\nVoid Blast:\r\nSends a blast of cosmic void energy at the enemy, causing 569 Shadow damage.",
           "choices": null
         },
         {
@@ -2072,7 +2072,7 @@
           "maxRanks": 1,
           "name": "Entropic Rift",
           "icon": "5927657",
-          "description": "Mind Blast tears open an Entropic Rift that follows the enemy for 8 sec. Enemies caught in its path suffer 227 Shadow damage every 0.9 sec while within its reach.",
+          "description": "Mind Blast tears open an Entropic Rift that follows the enemy for 8 sec. Enemies caught in its path suffer 231 Shadow damage every 0.9 sec while within its reach.",
           "choices": null
         },
         {
@@ -2265,7 +2265,7 @@
           "maxRanks": 1,
           "name": "Assured Safety",
           "icon": "135940",
-          "description": "Casting Prayer of Mending applies Power Word: Shield to your target.\r\n\r\n Power Word: Shield\r\nShields an ally for 15 sec, absorbing 1,722 damage.",
+          "description": "Casting Prayer of Mending applies Power Word: Shield to your target.\r\n\r\n Power Word: Shield\r\nShields an ally for 15 sec, absorbing 1,730 damage.",
           "choices": null
         },
         {
@@ -2452,7 +2452,7 @@
           "maxRanks": 1,
           "name": "Holy Fire",
           "icon": "135972",
-          "description": "Consumes the enemy in Holy flames that cause 1,186 Holy damage and an additional 421 Holy damage over 7 sec.",
+          "description": "Consumes the enemy in Holy flames that cause 1,184 Holy damage and an additional 421 Holy damage over 7 sec.",
           "choices": null
         },
         {
@@ -2469,7 +2469,7 @@
           "maxRanks": 1,
           "name": "Holy Nova",
           "icon": "135922",
-          "description": "An explosion of holy light around you deals up to 157 Holy damage to enemies and up to 117 healing to allies within 12 yds, reduced if there are more than 5 targets.",
+          "description": "An explosion of holy light around you deals up to 156 Holy damage to enemies and up to 117 healing to allies within 12 yds, reduced if there are more than 5 targets.",
           "choices": null
         },
         {
@@ -2858,8 +2858,8 @@
           "posY": 6,
           "connections": [
             109890,
-            108731,
-            82687
+            82687,
+            108731
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2947,9 +2947,9 @@
           "posX": 8,
           "posY": 7,
           "connections": [
-            82699,
             109019,
-            82690
+            82690,
+            82699
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2966,15 +2966,15 @@
           "posX": 12,
           "posY": 7,
           "connections": [
-            109020,
-            82690
+            82690,
+            109020
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shadow Word: Death",
           "icon": "136149",
-          "description": "A word of dark binding that inflicts 320 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
+          "description": "A word of dark binding that inflicts 328 Shadow damage to your target. If your target is not killed by Shadow Word: Death, you take backlash damage equal to 5% of your maximum health.\r\n\r\nDamage increased by 150% to targets below 20% health.",
           "choices": null
         },
         {
@@ -3325,7 +3325,7 @@
           "maxRanks": 1,
           "name": "Holy Word: Serenity",
           "icon": "135937",
-          "description": "Perform a miracle, healing an ally for 8,100.\r\n\r\nCooldown reduced by 6 sec when you cast Flash Heal.",
+          "description": "Perform a miracle, healing an ally for 8,143.\r\n\r\nCooldown reduced by 6 sec when you cast Flash Heal.",
           "choices": null
         },
         {
@@ -3342,7 +3342,7 @@
           "maxRanks": 1,
           "name": "Holy Word: Sanctify",
           "icon": "237541",
-          "description": "Releases miraculous light at a target location, healing up to 5 allies within 10 yds for 2,235.\r\n\r\nCooldown reduced by 6 sec when you cast Prayer of Healing.",
+          "description": "Releases miraculous light at a target location, healing up to 5 allies within 10 yds for 2,264.\r\n\r\nCooldown reduced by 6 sec when you cast Prayer of Healing.",
           "choices": null
         },
         {
@@ -3376,7 +3376,7 @@
           "maxRanks": 1,
           "name": "Holy Word: Chastise",
           "icon": "135886",
-          "description": "Chastises the target for 1,480 Holy damage and incapacitates them for 4 sec.",
+          "description": "Chastises the target for 1,466 Holy damage and incapacitates them for 4 sec.",
           "choices": null
         },
         {
@@ -3393,7 +3393,7 @@
           "maxRanks": 1,
           "name": "Prayer of Healing",
           "icon": "135943",
-          "description": "A powerful prayer that heals your target and 4 injured allies within 40 yards for 2,221.",
+          "description": "A powerful prayer that heals your target and 4 injured allies within 40 yards for 2,183.",
           "choices": null
         },
         {
@@ -3494,7 +3494,7 @@
           "maxRanks": 1,
           "name": "Cosmic Ripple",
           "icon": "5764907",
-          "description": "When Holy Word: Serenity or Holy Word: Sanctify finish their cooldown, you emit a burst of light that heals up to 5 injured targets within 40 yards for 466.",
+          "description": "When Holy Word: Serenity or Holy Word: Sanctify finish their cooldown, you emit a burst of light that heals up to 5 injured targets within 40 yards for 477.",
           "choices": null
         },
         {
@@ -3521,9 +3521,9 @@
           "posX": 40,
           "posY": 5,
           "connections": [
-            82640,
+            82619,
             82636,
-            82619
+            82640
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -3601,7 +3601,7 @@
           "maxRanks": 1,
           "name": "Divine Hymn",
           "icon": "237540",
-          "description": "Heals all party or raid members within 40 yards for 10,669 over 4.5 sec. Each heal increases all targets' healing taken by 4% for 15 sec, stacking.\r\n\r\nYou gain Guardian Spirit while channeling Divine Hymn.\r\n\r\nHealing reduced beyond 5 targets.",
+          "description": "Heals all party or raid members within 40 yards for 10,662 over 4.5 sec. Each heal increases all targets' healing taken by 4% for 15 sec, stacking.\r\n\r\nYou gain Guardian Spirit while channeling Divine Hymn.\r\n\r\nHealing reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -3618,7 +3618,7 @@
           "maxRanks": 1,
           "name": "Enlightenment",
           "icon": "135740",
-          "description": "You regenerate mana 10% faster.",
+          "description": "You regenerate mana 25% faster.",
           "choices": null
         },
         {
@@ -3895,9 +3895,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Holy Celerity",
-          "icon": "537020",
-          "description": "Reduces the cooldown of your Holy Words by 15 sec.",
+          "name": "Ultimate Serenity",
+          "icon": "4667420",
+          "description": "Increases the healing done by Holy Word: Serenity by 10% and causes it to heal 4 nearby injured allies within 40 yards for 15% of its healing done.\r\n\r\nTalents that affect Holy Word: Sanctify instead affect Holy Word: Serenity.",
           "choices": null
         },
         {
@@ -3942,8 +3942,8 @@
           "posX": 34,
           "posY": 10,
           "connections": [
-            82604,
-            82610
+            82610,
+            82604
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -4055,9 +4055,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Ultimate Serenity",
-          "icon": "4667420",
-          "description": "Increases the healing done by Holy Word: Serenity by 10% and causes it to heal 4 nearby injured allies within 40 yards for 15% of its healing done.\r\n\r\nTalents that affect Holy Word: Sanctify instead affect Holy Word: Serenity.",
+          "name": "Holy Celerity",
+          "icon": "537020",
+          "description": "Reduces the cooldown of your Holy Words by 15 sec.",
           "choices": null
         },
         {
@@ -4376,7 +4376,7 @@
           "maxRanks": 1,
           "name": "Halo",
           "icon": "632352",
-          "description": "Creates a ring of Holy energy around you that quickly expands to a 40 yd radius, healing allies for 605 and dealing 559 Holy damage to enemies.\r\n\r\nHealing reduced beyond 6 targets.",
+          "description": "Creates a ring of Holy energy around you that quickly expands to a 40 yd radius, healing allies for 615 and dealing 549 Holy damage to enemies.\r\n\r\nHealing reduced beyond 6 targets.",
           "choices": null
         },
         {
@@ -4653,7 +4653,7 @@
           "maxRanks": 1,
           "name": "Assured Safety",
           "icon": "135940",
-          "description": "Casting Prayer of Mending applies Power Word: Shield to your target.\r\n\r\n Power Word: Shield\r\nShields an ally for 15 sec, absorbing 1,731 damage.",
+          "description": "Casting Prayer of Mending applies Power Word: Shield to your target.\r\n\r\n Power Word: Shield\r\nShields an ally for 15 sec, absorbing 1,745 damage.",
           "choices": null
         },
         {
@@ -4840,7 +4840,7 @@
           "maxRanks": 1,
           "name": "Mind Blast",
           "icon": "136224",
-          "description": "Blast the target's mind for 298 Shadow damage. Costs a high amount of mana.",
+          "description": "Blast the target's mind for 296 Shadow damage. Costs a high amount of mana.",
           "choices": null
         },
         {
@@ -4857,7 +4857,7 @@
           "maxRanks": 1,
           "name": "Holy Nova",
           "icon": "135922",
-          "description": "An explosion of holy light around you deals up to 153 Holy damage to enemies and up to 117 healing to allies within 12 yds, reduced if there are more than 5 targets.",
+          "description": "An explosion of holy light around you deals up to 152 Holy damage to enemies and up to 121 healing to allies within 12 yds, reduced if there are more than 5 targets.",
           "choices": null
         },
         {
@@ -5246,8 +5246,8 @@
           "posY": 6,
           "connections": [
             109890,
-            108731,
-            82687
+            82687,
+            108731
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5335,9 +5335,9 @@
           "posX": 8,
           "posY": 7,
           "connections": [
-            82699,
             109019,
-            82690
+            82690,
+            82699
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5354,8 +5354,8 @@
           "posX": 12,
           "posY": 7,
           "connections": [
-            109020,
-            82690
+            82690,
+            109020
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5713,7 +5713,7 @@
           "maxRanks": 1,
           "name": "Shadow Word: Madness",
           "icon": "7569529",
-          "description": "A word of madness haunts the target's mind, dealing 864 Shadow damage instantly plus an additional 2,905 Shadow damage over 6 sec. Heals you for 30% of damage dealt.\r\n\r\nWhen reapplied to a target, all remaining damage is added to the new effect.",
+          "description": "A word of madness haunts the target's mind, dealing 994 Shadow damage instantly plus an additional 3,341 Shadow damage over 6 sec. Heals you for 30% of damage dealt.\r\n\r\nWhen reapplied to a target, all remaining damage is added to the new effect.",
           "choices": null
         },
         {
@@ -5730,7 +5730,7 @@
           "maxRanks": 1,
           "name": "Psychic Link",
           "icon": "1445238",
-          "description": "Your direct damage spells inflict 25% of their damage on all other targets afflicted by your Vampiric Touch within 40 yards.\r\n\r\nDoes not apply to damage from Shadowy Apparitions, Shadow Word: Pain, and Vampiric Touch.",
+          "description": "Your direct damage spells inflict 20% of their damage on all other targets afflicted by your Vampiric Touch within 40 yards.\r\n\r\nDoes not apply to damage from Shadowy Apparitions, Shadow Word: Pain, and Vampiric Touch.",
           "choices": null
         },
         {
@@ -5828,7 +5828,7 @@
           "maxRanks": 1,
           "name": "Tentacle Slam",
           "icon": "7439212",
-          "description": "Summons a massive shadowy appendage to slam the ground, dealing 261 Shadow damage in front of you and 8 yds around your target.\r\n\r\nApplies Vampiric Touch to up to 6 enemies, prioritizing ones without Vampiric Touch.\r\n\r\nGenerates 6 Insanity.",
+          "description": "Summons a massive shadowy appendage to slam the ground, dealing 266 Shadow damage in front of you and 8 yds around your target.\r\n\r\nApplies Vampiric Touch to up to 6 enemies, prioritizing ones without Vampiric Touch.\r\n\r\nGenerates 6 Insanity.",
           "choices": null
         },
         {
@@ -5845,7 +5845,7 @@
           "maxRanks": 1,
           "name": "Shadowy Apparitions",
           "icon": "458229",
-          "description": "Shadow Word: Madness conjures Shadowy Apparitions that float towards all targets afflicted by your Vampiric Touch for 324 Shadow damage.",
+          "description": "Shadow Word: Madness conjures Shadowy Apparitions that float towards all targets afflicted by your Vampiric Touch for 318 Shadow damage.",
           "choices": null
         },
         {
@@ -6088,7 +6088,7 @@
           "maxRanks": 1,
           "name": "Shadeburst",
           "icon": "4067372",
-          "description": "Shadowy Apparitions that float towards your primary target explode, dealing 532 Shadow damage to all enemies within 8 yds.\r\n\r\nDamage reduced beyond 5 targets.",
+          "description": "Shadowy Apparitions that float towards your primary target explode, dealing 505 Shadow damage to all enemies within 8 yds.\r\n\r\nDamage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -6150,8 +6150,8 @@
           "posY": 8,
           "connections": [
             82662,
-            109018,
-            82660
+            82660,
+            109018
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6238,8 +6238,8 @@
           "posX": 32,
           "posY": 9,
           "connections": [
-            82559,
-            82645
+            82645,
+            82559
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -6395,9 +6395,9 @@
           "posX": 38,
           "posY": 10,
           "connections": [
-            82667,
             82558,
-            108153
+            108153,
+            82667
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -6512,7 +6512,7 @@
           "maxRanks": 1,
           "name": "Idol of Yogg-Saron",
           "icon": "298654",
-          "description": "After conjuring Shadowy Apparitions, gain a stack of Idol of Yogg-Saron. At 20 stacks, you summon a Thing from Beyond that casts Void Spike at nearby enemies for 20 sec.\r\n\r\n Void Spike\r\nHurls a bolt of dark magic, dealing 355 Shadow damage and 192 Shadow damage to all enemies within 10 yards of the target. Damage reduced beyond 5 targets.",
+          "description": "After conjuring Shadowy Apparitions, gain a stack of Idol of Yogg-Saron. At 20 stacks, you summon a Thing from Beyond that casts Void Spike at nearby enemies for 20 sec.\r\n\r\n Void Spike\r\nHurls a bolt of dark magic, dealing 358 Shadow damage and 190 Shadow damage to all enemies within 10 yards of the target. Damage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -6530,7 +6530,7 @@
           "maxRanks": 1,
           "name": "Idol of C'Thun",
           "icon": "236407",
-          "description": "Mind Flay has a chance to spawn a Void Tendril that channels Mind Flay or Void Lasher that channels Mind Sear at your target.\r\n\r\n Mind Flay\r\nAssaults the target's mind with Shadow energy, causing 1,225 Shadow damage over 10 sec and slowing their movement speed by 30%.\r\n\r\nGenerates 5 Insanity over the duration.\r\n\r\n Mind Sear\r\nCorrosive shadow energy radiates from the target, dealing 815 Shadow damage over 10 sec to all enemies within 10 yards of the target. Damage reduced beyond 5 targets.\r\n\r\nGenerates 5 Insanity over the duration.",
+          "description": "Mind Flay has a chance to spawn a Void Tendril that channels Mind Flay or Void Lasher that channels Mind Sear at your target.\r\n\r\n Mind Flay\r\nAssaults the target's mind with Shadow energy, causing 1,227 Shadow damage over 10 sec and slowing their movement speed by 30%.\r\n\r\nGenerates 5 Insanity over the duration.\r\n\r\n Mind Sear\r\nCorrosive shadow energy radiates from the target, dealing 823 Shadow damage over 10 sec to all enemies within 10 yards of the target. Damage reduced beyond 5 targets.\r\n\r\nGenerates 5 Insanity over the duration.",
           "choices": null
         },
         {
@@ -6559,7 +6559,7 @@
             },
             {
               "spellId": 1264104,
-              "description": "Shadowy Apparitions have a 15% chance to spawn as Void Apparitions that release a Void Bolt at their target and deal 50% increased damage.\r\n\r\n Void Bolt\r\nSends a bolt of pure void energy at your target, dealing 564 Shadow damage.",
+              "description": "Shadowy Apparitions have a 15% chance to spawn as Void Apparitions that release a Void Bolt at their target and deal 50% increased damage.\r\n\r\n Void Bolt\r\nSends a bolt of pure void energy at your target, dealing 571 Shadow damage.",
               "maxRanks": 2
             },
             {
@@ -6584,7 +6584,7 @@
           "maxRanks": 1,
           "name": "Devour Matter",
           "icon": "135888",
-          "description": "Shadow Word: Death consumes absorb shields from your target, dealing 962 extra damage to them and granting you 1% mana if a shield was present.",
+          "description": "Shadow Word: Death consumes absorb shields from your target, dealing 963 extra damage to them and granting you 1% mana if a shield was present.",
           "choices": null
         },
         {
@@ -6636,7 +6636,7 @@
           "maxRanks": 1,
           "name": "Void Torrent",
           "icon": "1386551",
-          "description": "Channel a torrent of void energy into the target, dealing 3,917 Shadow damage over 3 sec and tearing open an Entropic Rift.\r\n\r\n Entropic Rift\r\nMind Blast tears open an Entropic Rift that follows the enemy for 8 sec. Enemies caught in its path suffer 225 Shadow damage every 0.9 sec while within its reach.\r\n\r\nGenerates 24 Insanity over the duration.",
+          "description": "Channel a torrent of void energy into the target, dealing 3,967 Shadow damage over 3 sec and tearing open an Entropic Rift.\r\n\r\n Entropic Rift\r\nMind Blast tears open an Entropic Rift that follows the enemy for 8 sec. Enemies caught in its path suffer 227 Shadow damage every 0.9 sec while within its reach.\r\n\r\nGenerates 24 Insanity over the duration.",
           "choices": null
         },
         {
@@ -6792,7 +6792,7 @@
           "maxRanks": 1,
           "name": "Void Blast",
           "icon": "4914668",
-          "description": "Entropic Rift upgrades Smite into Void Blast while it is active.\r\n\r\nVoid Blast:\r\nSends a blast of cosmic void energy at the enemy, causing 577 Shadow damage.",
+          "description": "Entropic Rift upgrades Smite into Void Blast while it is active.\r\n\r\nVoid Blast:\r\nSends a blast of cosmic void energy at the enemy, causing 570 Shadow damage.",
           "choices": null
         },
         {
@@ -7054,7 +7054,7 @@
           "maxRanks": 1,
           "name": "Halo",
           "icon": "632353",
-          "description": "Creates a ring of Shadow energy around you that quickly expands to a 40 yd radius, healing allies for 598 and dealing 551 Shadow damage to enemies. Healing reduced beyond 6 targets.",
+          "description": "Creates a ring of Shadow energy around you that quickly expands to a 40 yd radius, healing allies for 617 and dealing 547 Shadow damage to enemies. Healing reduced beyond 6 targets.",
           "choices": null
         },
         {

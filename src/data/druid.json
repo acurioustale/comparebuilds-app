@@ -101,7 +101,7 @@
           "maxRanks": 1,
           "name": "Rejuvenation",
           "icon": "7195165",
-          "description": "Heals the target for 1,672 over 12 sec.",
+          "description": "Heals the target for 1,925 over 12 sec.",
           "choices": null
         },
         {
@@ -116,7 +116,7 @@
           "maxRanks": 1,
           "name": "Starfire",
           "icon": "135753",
-          "description": "Call down a burst of energy, causing 460 Arcane damage to the target, and 324 Arcane damage to all other enemies within 10 yards. Deals reduced damage beyond 8 targets.\r\n\r\nGenerates 8 Astral Power.",
+          "description": "Call down a burst of energy, causing 463 Arcane damage to the target, and 328 Arcane damage to all other enemies within 10 yards. Deals reduced damage beyond 8 targets.\r\n\r\nGenerates 8 Astral Power.",
           "choices": null
         },
         {
@@ -186,7 +186,7 @@
           "maxRanks": 1,
           "name": "Wild Growth",
           "icon": "236153",
-          "description": "Heals up to 5 injured allies within 30 yards of the target for 1,303 over 7 sec. Healing starts high and declines over the duration.",
+          "description": "Heals up to 5 injured allies within 30 yards of the target for 1,434 over 7 sec. Healing starts high and declines over the duration.",
           "choices": null
         },
         {
@@ -203,7 +203,7 @@
           "maxRanks": 1,
           "name": "Starsurge",
           "icon": "135730",
-          "description": "Launch a surge of stellar energies at the target, dealing 1,407 Astral damage.",
+          "description": "Launch a surge of stellar energies at the target, dealing 1,375 Astral damage.",
           "choices": null
         },
         {
@@ -399,7 +399,7 @@
           "maxRanks": 1,
           "name": "Sunfire",
           "icon": "236216",
-          "description": "A quick beam of solar light burns the enemy for 80 Nature damage and then an additional 705 Nature damage over 18 sec.",
+          "description": "A quick beam of solar light burns the enemy for 79 Nature damage and then an additional 705 Nature damage over 18 sec.",
           "choices": null
         },
         {
@@ -1046,7 +1046,7 @@
           "maxRanks": 1,
           "name": "Heart of the Wild",
           "icon": "135879",
-          "description": "Perform a powerful off-role ability depending on your currently active shapeshift form.\r\n\r\nNon-shapeshifted:\r\nEmpowered Wild Growth that heals up to 5 injured allies within 30 yards of the target for 9,773 over 7 sec.\r\n\r\nBear Form:\r\nIncrease your maximum health by 30% for 20 sec.",
+          "description": "Perform a powerful off-role ability depending on your currently active shapeshift form.\r\n\r\nNon-shapeshifted:\r\nEmpowered Wild Growth that heals up to 5 injured allies within 30 yards of the target for 10,757 over 7 sec.\r\n\r\nBear Form:\r\nIncrease your maximum health by 30% for 20 sec.",
           "choices": null
         },
         {
@@ -1095,7 +1095,7 @@
           "maxRanks": 1,
           "name": "Shooting Stars",
           "icon": "631519",
-          "description": "Moonfire and Sunfire damage over time has a chance to call down a falling star, dealing 256 Astral damage and generating 2 Astral Power.",
+          "description": "Moonfire and Sunfire damage over time has a chance to call down a falling star, dealing 253 Astral damage and generating 2 Astral Power.",
           "choices": null
         },
         {
@@ -1417,7 +1417,7 @@
               "spellId": 390378,
               "name": "Orbital Strike",
               "icon": "1408832",
-              "description": "Celestial Alignment blasts all enemies in a targeted area for 1,040 Astral damage and applies Stellar Flare to them.\r\n\r\nReduces the cooldown of Celestial Alignment by 60 sec.\r\n\r\n Stellar Flare\r\nBurns the target for 136 Astral damage, and then an additional 894 damage over 24 sec. If dispelled, causes 803 damage to the dispeller and blasts them upwards.\r\n\r\nGenerates 12 Astral Power.",
+              "description": "Celestial Alignment blasts all enemies in a targeted area for 1,015 Astral damage and applies Stellar Flare to them.\r\n\r\nReduces the cooldown of Celestial Alignment by 60 sec.\r\n\r\n Stellar Flare\r\nBurns the target for 136 Astral damage, and then an additional 894 damage over 24 sec. If dispelled, causes 803 damage to the dispeller and blasts them upwards.\r\n\r\nGenerates 12 Astral Power.",
               "maxRanks": 1
             }
           ]
@@ -1739,14 +1739,14 @@
               "spellId": 202770,
               "name": "Fury of Elune",
               "icon": "132123",
-              "description": "Calls down a beam of pure celestial energy that follows the enemy, dealing up to 1,119 Astral damage over 8 sec within its area. Damage reduced on secondary targets.\r\n\r\nGenerates 40 Astral Power over its duration.",
+              "description": "Calls down a beam of pure celestial energy that follows the enemy, dealing up to 1,121 Astral damage over 8 sec within its area. Damage reduced on secondary targets.\r\n\r\nGenerates 40 Astral Power over its duration.",
               "maxRanks": 1
             },
             {
               "spellId": 274281,
               "name": "New Moon",
               "icon": "1392545",
-              "description": "Deals 969 Astral damage to the target and empowers New Moon to become Half Moon. \r\n\r\nGenerates 10 Astral Power.",
+              "description": "Deals 984 Astral damage to the target and empowers New Moon to become Half Moon. \r\n\r\nGenerates 10 Astral Power.",
               "maxRanks": 1
             }
           ]
@@ -2022,7 +2022,7 @@
           "maxRanks": 1,
           "name": "Dream Surge",
           "icon": "5927634",
-          "description": "When Grove Guardians are summoned, they grow Dream Petals on your target, healing up to 3 nearby allies for 569.",
+          "description": "When Grove Guardians are summoned, they grow Dream Petals on your target, healing up to 3 nearby allies for 561.",
           "choices": null
         },
         {
@@ -2208,7 +2208,7 @@
               "spellId": 428655,
               "name": "The Light of Elune",
               "icon": "132123",
-              "description": "Moonfire damage has a chance to call down a Fury of Elune to follow your target for 3 sec.\r\n\r\n Fury of Elune\r\nCalls down a beam of pure celestial energy, dealing 417 Astral damage over 3 sec within its area.\r\n\r\nGenerates 15 Astral Power over its duration.",
+              "description": "Moonfire damage has a chance to call down a Fury of Elune to follow your target for 3 sec.\r\n\r\n Fury of Elune\r\nCalls down a beam of pure celestial energy, dealing 425 Astral damage over 3 sec within its area.\r\n\r\nGenerates 15 Astral Power over its duration.",
               "maxRanks": 1
             },
             {
@@ -2428,7 +2428,7 @@
           "maxRanks": 1,
           "name": "Boundless Moonlight",
           "icon": "5927624",
-          "description": " Fury of Elune\r\nFury of Elune now ends with a flash of energy, blasting nearby enemies for 822 Astral damage.\r\n\r\n Full Moon\r\nFull Moon calls down 2 Minor Moons that deal 723 Astral damage and generate 3 Astral Power.",
+          "description": " Fury of Elune\r\nFury of Elune now ends with a flash of energy, blasting nearby enemies for 822 Astral damage.\r\n\r\n Full Moon\r\nFull Moon calls down 2 Minor Moons that deal 720 Astral damage and generate 3 Astral Power.",
           "choices": null
         },
         {
@@ -2579,7 +2579,7 @@
           "maxRanks": 1,
           "name": "Rejuvenation",
           "icon": "7195165",
-          "description": "Heals the target for 1,672 over 12 sec.",
+          "description": "Heals the target for 1,925 over 12 sec.",
           "choices": null
         },
         {
@@ -2594,7 +2594,7 @@
           "maxRanks": 1,
           "name": "Starfire",
           "icon": "135753",
-          "description": "Call down a burst of energy, causing 351 Arcane damage to the target, and 247 Arcane damage to all other enemies within 5 yards. Deals reduced damage beyond 8 targets.",
+          "description": "Call down a burst of energy, causing 352 Arcane damage to the target, and 250 Arcane damage to all other enemies within 5 yards. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -2664,7 +2664,7 @@
           "maxRanks": 1,
           "name": "Wild Growth",
           "icon": "236153",
-          "description": "Heals up to 5 injured allies within 30 yards of the target for 1,303 over 7 sec. Healing starts high and declines over the duration.",
+          "description": "Heals up to 5 injured allies within 30 yards of the target for 1,434 over 7 sec. Healing starts high and declines over the duration.",
           "choices": null
         },
         {
@@ -2681,7 +2681,7 @@
           "maxRanks": 1,
           "name": "Starsurge",
           "icon": "135730",
-          "description": "Launch a surge of stellar energies at the target, dealing 813 Astral damage.",
+          "description": "Launch a surge of stellar energies at the target, dealing 803 Astral damage.",
           "choices": null
         },
         {
@@ -2877,7 +2877,7 @@
           "maxRanks": 1,
           "name": "Sunfire",
           "icon": "236216",
-          "description": "A quick beam of solar light burns the enemy for 80 Nature damage and then an additional 705 Nature damage over 18 sec.",
+          "description": "A quick beam of solar light burns the enemy for 81 Nature damage and then an additional 705 Nature damage over 18 sec.",
           "choices": null
         },
         {
@@ -3524,7 +3524,7 @@
           "maxRanks": 1,
           "name": "Heart of the Wild",
           "icon": "135879",
-          "description": "Perform a powerful off-role ability depending on your currently active shapeshift form.\r\n\r\nNon-shapeshifted:\r\nEmpowered Wild Growth that heals up to 5 injured allies within 30 yards of the target for 9,773 over 7 sec.\r\n\r\nBear Form:\r\nIncrease your maximum health by 30% for 20 sec.",
+          "description": "Perform a powerful off-role ability depending on your currently active shapeshift form.\r\n\r\nNon-shapeshifted:\r\nEmpowered Wild Growth that heals up to 5 injured allies within 30 yards of the target for 10,757 over 7 sec.\r\n\r\nBear Form:\r\nIncrease your maximum health by 30% for 20 sec.",
           "choices": null
         },
         {
@@ -3607,7 +3607,7 @@
           "maxRanks": 1,
           "name": "Primal Wrath",
           "icon": "1392547",
-          "description": "Finishing move that deals instant damage and applies Rip to all enemies within 10 yards. Lasts longer per combo point.\r\n\r\n   1 point  : 11 plus Rip for 4 sec\r\n   2 points: 16 plus Rip for 6 sec\r\n   3 points: 22 plus Rip for 8 sec\r\n   4 points: 27 plus Rip for 10 sec\r\n   5 points: 32 plus Rip for 12 sec",
+          "description": "Finishing move that deals instant damage and applies Rip to all enemies within 10 yards. Lasts longer per combo point.\r\n\r\n   1 point  : 11 plus Rip for 4 sec\r\n   2 points: 16 plus Rip for 6 sec\r\n   3 points: 22 plus Rip for 8 sec\r\n   4 points: 27 plus Rip for 10 sec\r\n   5 points: 33 plus Rip for 12 sec",
           "choices": null
         },
         {
@@ -4197,7 +4197,7 @@
               "spellId": 1244258,
               "name": "Chomp",
               "icon": "6712958",
-              "description": "Chomp your target, causing 409 Physical damage. Chomp critical strikes deal 3 times normal damage.\r\n\r\nChomp can only be used when you fall below 30% Energy or for 2 seconds afterward.",
+              "description": "Chomp your target, causing 411 Physical damage. Chomp critical strikes deal 3 times normal damage.\r\n\r\nChomp can only be used when you fall below 30% Energy or for 2 seconds afterward.",
               "maxRanks": 1
             }
           ]
@@ -4308,7 +4308,7 @@
           "ranks": [
             {
               "spellId": 1263657,
-              "description": "When you Ferocious Bite, you have a 15% chance per combo point spent to flicker to an enemy within 30 yds and deliver an Unseen Attack. Unseen Attack damage is reduced if less than 5 combo points and 50 Energy are spent on Ferocious Bite.\r\n\r\n Unseen Slash\r\nSlash the target, dealing 23 Physical damage and an additional 48 Bleed damage over 6 sec. If this effect is reapplied, any remaining damage is added to the new Bleed.\r\n\r\n Unseen Swipe\r\nSwipe nearby targets, dealing 65 Physical damage. Damage reduced beyond 5 targets.\r\n\r\n\r\n",
+              "description": "When you Ferocious Bite, you have a 15% chance per combo point spent to flicker to an enemy within 30 yds and deliver an Unseen Attack. Unseen Attack damage is reduced if less than 5 combo points and 50 Energy are spent on Ferocious Bite.\r\n\r\n Unseen Slash\r\nSlash the target, dealing 23 Physical damage and an additional 48 Bleed damage over 6 sec. If this effect is reapplied, any remaining damage is added to the new Bleed.\r\n\r\n Unseen Swipe\r\nSwipe nearby targets, dealing 66 Physical damage. Damage reduced beyond 5 targets.\r\n\r\n\r\n",
               "maxRanks": 1
             },
             {
@@ -4336,7 +4336,7 @@
           "maxRanks": 1,
           "name": "Ravage",
           "icon": "5927623",
-          "description": "Your auto-attacks have a chance to make your next Ferocious Bite become Ravage.\r\n\r\nRavage\r\nFinishing move that slashes through your target in a wide arc, dealing Physical damage per combo point to your target and consuming up to 25 additional Energy to increase that damage by up to 100%. Hits all other enemies in front of you for reduced damage per combo point spent. \r\n\r\n1 point: 13 damage, 6 in an arc\r\n2 points: 25 damage, 12 in an arc\r\n3 points: 40 damage, 17 in an arc\r\n4 points: 52 damage, 24 in an arc\r\n5 points: 64 damage, 29 in an arc",
+          "description": "Your auto-attacks have a chance to make your next Ferocious Bite become Ravage.\r\n\r\nRavage\r\nFinishing move that slashes through your target in a wide arc, dealing Physical damage per combo point to your target and consuming up to 25 additional Energy to increase that damage by up to 100%. Hits all other enemies in front of you for reduced damage per combo point spent. \r\n\r\n1 point: 14 damage, 6 in an arc\r\n2 points: 28 damage, 12 in an arc\r\n3 points: 44 damage, 18 in an arc\r\n4 points: 58 damage, 24 in an arc\r\n5 points: 73 damage, 30 in an arc",
           "choices": null
         },
         {
@@ -4567,7 +4567,7 @@
           "maxRanks": 1,
           "name": "Twin Claw",
           "icon": "132143",
-          "description": "You have a 18% chance to follow up any single target melee ability with a Twin Claw, dealing 121 Physical damage and generating 5 Rage.\r\n\r\n",
+          "description": "You have a 18% chance to follow up any single target melee ability with a Twin Claw, dealing 118 Physical damage and generating 5 Rage.\r\n\r\n",
           "choices": null
         },
         {
@@ -4913,7 +4913,7 @@
           "maxRanks": 1,
           "name": "Bursting Growth",
           "icon": "4573082",
-          "description": "When Bloodseeker Vines expire or you use Ferocious Bite on their target they explode in thorns, dealing 30 physical damage to nearby enemies. Damage reduced above 5 targets.\r\n\r\nWhen Symbiotic Blooms expire or you cast Rejuvenation on their target flowers grow around their target, healing them and up to 3 nearby allies for 155.",
+          "description": "When Bloodseeker Vines expire or you use Ferocious Bite on their target they explode in thorns, dealing 35 physical damage to nearby enemies. Damage reduced above 5 targets.\r\n\r\nWhen Symbiotic Blooms expire or you cast Rejuvenation on their target flowers grow around their target, healing them and up to 3 nearby allies for 161.",
           "choices": null
         },
         {
@@ -5028,7 +5028,7 @@
           "maxRanks": 1,
           "name": "Rejuvenation",
           "icon": "7195165",
-          "description": "Heals the target for 1,672 over 12 sec.",
+          "description": "Heals the target for 1,925 over 12 sec.",
           "choices": null
         },
         {
@@ -5043,7 +5043,7 @@
           "maxRanks": 1,
           "name": "Starfire",
           "icon": "135753",
-          "description": "Call down a burst of energy, causing 351 Arcane damage to the target, and 246 Arcane damage to all other enemies within 5 yards. Deals reduced damage beyond 8 targets.",
+          "description": "Call down a burst of energy, causing 352 Arcane damage to the target, and 250 Arcane damage to all other enemies within 5 yards. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -5113,7 +5113,7 @@
           "maxRanks": 1,
           "name": "Wild Growth",
           "icon": "236153",
-          "description": "Heals up to 5 injured allies within 30 yards of the target for 1,303 over 7 sec. Healing starts high and declines over the duration.",
+          "description": "Heals up to 5 injured allies within 30 yards of the target for 1,434 over 7 sec. Healing starts high and declines over the duration.",
           "choices": null
         },
         {
@@ -5130,7 +5130,7 @@
           "maxRanks": 1,
           "name": "Starsurge",
           "icon": "135730",
-          "description": "Launch a surge of stellar energies at the target, dealing 811 Astral damage.",
+          "description": "Launch a surge of stellar energies at the target, dealing 790 Astral damage.",
           "choices": null
         },
         {
@@ -5218,7 +5218,7 @@
           "maxRanks": 1,
           "name": "Maim",
           "icon": "132134",
-          "description": "Finishing move that causes Physical damage and stuns the target. Damage and duration increased per combo point:\r\n\r\n   1 point  : 5 damage, 1 sec\r\n   2 points: 10 damage, 2 sec\r\n   3 points: 15 damage, 3 sec\r\n   4 points: 20 damage, 4 sec\r\n   5 points: 25 damage, 5 sec",
+          "description": "Finishing move that causes Physical damage and stuns the target. Damage and duration increased per combo point:\r\n\r\n   1 point  : 5 damage, 1 sec\r\n   2 points: 10 damage, 2 sec\r\n   3 points: 15 damage, 3 sec\r\n   4 points: 20 damage, 4 sec\r\n   5 points: 26 damage, 5 sec",
           "choices": null
         },
         {
@@ -5973,7 +5973,7 @@
           "maxRanks": 1,
           "name": "Heart of the Wild",
           "icon": "135879",
-          "description": "Perform a powerful off-role ability depending on your currently active shapeshift form.\r\n\r\nNon-shapeshifted:\r\nEmpowered Wild Growth that heals up to 5 injured allies within 30 yards of the target for 9,773 over 7 sec.\r\n\r\nBear Form:\r\nIncrease your maximum health by 30% for 20 sec.",
+          "description": "Perform a powerful off-role ability depending on your currently active shapeshift form.\r\n\r\nNon-shapeshifted:\r\nEmpowered Wild Growth that heals up to 5 injured allies within 30 yards of the target for 10,757 over 7 sec.\r\n\r\nBear Form:\r\nIncrease your maximum health by 30% for 20 sec.",
           "choices": null
         },
         {
@@ -6456,9 +6456,9 @@
           "posX": 36,
           "posY": 8,
           "connections": [
-            92226,
             82156,
-            109378
+            109378,
+            92226
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6499,7 +6499,7 @@
           "maxRanks": 1,
           "name": "Raze",
           "icon": "132131",
-          "description": "Strike with the might of Ursoc, dealing 74 Physical damage to your target and 39 to all other enemies in front of you. Damage reduced beyond 5 targets.",
+          "description": "Strike with the might of Ursoc, dealing 74 Physical damage to your target and 41 to all other enemies in front of you. Damage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -6509,16 +6509,16 @@
           "posX": 44,
           "posY": 8,
           "connections": [
-            82148,
             109377,
-            109375
+            109375,
+            82148
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Lunar Beam",
           "icon": "136057",
-          "description": "Summons a beam of lunar light at your target's location, dealing 13 Arcane damage each second to your target and 14 to up to 5 other enemies within 8 yd. \r\n\r\nLunar Beam also increases your mastery by 18%, and heals you for 993 over 8 sec.",
+          "description": "Summons a beam of lunar light at your target's location, dealing 14 Arcane damage each second to your target and 14 to up to 5 other enemies within 8 yd. \r\n\r\nLunar Beam also increases your mastery by 18%, and heals you for 988 over 8 sec.",
           "choices": null
         },
         {
@@ -6528,8 +6528,8 @@
           "posX": 34,
           "posY": 9,
           "connections": [
-            82152,
-            109378
+            109378,
+            82152
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -6747,7 +6747,7 @@
           "maxRanks": 1,
           "name": "Sundering Roar",
           "icon": "1392548",
-          "description": "Roar with earthshattering ferocity, dealing 98 Physical damage, and resetting the cooldown of Thrash and allowing it to stack 5 additional times for 12 sec. \r\n\r\nWhen Sundering Roar ends, any excess stacks of Thrash immediately deal their remaining damage.",
+          "description": "Roar with earthshattering ferocity, dealing 99 Physical damage, and resetting the cooldown of Thrash and allowing it to stack 5 additional times for 12 sec. \r\n\r\nWhen Sundering Roar ends, any excess stacks of Thrash immediately deal their remaining damage.",
           "choices": null
         },
         {
@@ -6824,7 +6824,7 @@
           "ranks": [
             {
               "spellId": 1269614,
-              "description": "Spending Rage has a 10% chance to awaken a guardian spirit for 8 sec, which attacks a nearby enemy for 105 when you cast Thrash or Mangle.",
+              "description": "Spending Rage has a 10% chance to awaken a guardian spirit for 8 sec, which attacks a nearby enemy for 106 when you cast Thrash or Mangle.",
               "maxRanks": 1
             },
             {
@@ -6852,7 +6852,7 @@
           "maxRanks": 1,
           "name": "Ravage",
           "icon": "5927623",
-          "description": "Your auto-attacks have a chance to make your next Ferocious Bite become Ravage.\r\n\r\nRavage\r\nFinishing move that slashes through your target in a wide arc, dealing Physical damage per combo point to your target and consuming up to 25 additional Energy to increase that damage by up to 100%. Hits all other enemies in front of you for reduced damage per combo point spent. \r\n\r\n1 point: 13 damage, 6 in an arc\r\n2 points: 26 damage, 12 in an arc\r\n3 points: 38 damage, 18 in an arc\r\n4 points: 52 damage, 24 in an arc\r\n5 points: 66 damage, 29 in an arc",
+          "description": "Your auto-attacks have a chance to make your next Ferocious Bite become Ravage.\r\n\r\nRavage\r\nFinishing move that slashes through your target in a wide arc, dealing Physical damage per combo point to your target and consuming up to 25 additional Energy to increase that damage by up to 100%. Hits all other enemies in front of you for reduced damage per combo point spent. \r\n\r\n1 point: 14 damage, 6 in an arc\r\n2 points: 28 damage, 12 in an arc\r\n3 points: 43 damage, 18 in an arc\r\n4 points: 58 damage, 24 in an arc\r\n5 points: 72 damage, 30 in an arc",
           "choices": null
         },
         {
@@ -7158,7 +7158,7 @@
               "spellId": 428655,
               "name": "The Light of Elune",
               "icon": "132123",
-              "description": "Moonfire damage has a chance to call down a Fury of Elune to follow your target for 3 sec.\r\n\r\n Fury of Elune\r\nCalls down a beam of pure celestial energy, dealing 414 Astral damage over 3 sec within its area.\r\n\r\nGenerates 15 Astral Power over its duration.",
+              "description": "Moonfire damage has a chance to call down a Fury of Elune to follow your target for 3 sec.\r\n\r\n Fury of Elune\r\nCalls down a beam of pure celestial energy, dealing 425 Astral damage over 3 sec within its area.\r\n\r\nGenerates 15 Astral Power over its duration.",
               "maxRanks": 1
             },
             {
@@ -7378,7 +7378,7 @@
           "maxRanks": 1,
           "name": "Boundless Moonlight",
           "icon": "5927624",
-          "description": " Fury of Elune\r\nFury of Elune now ends with a flash of energy, blasting nearby enemies for 822 Astral damage.\r\n\r\n Full Moon\r\nFull Moon calls down 2 Minor Moons that deal 717 Astral damage and generate 3 Astral Power.",
+          "description": " Fury of Elune\r\nFury of Elune now ends with a flash of energy, blasting nearby enemies for 822 Astral damage.\r\n\r\n Full Moon\r\nFull Moon calls down 2 Minor Moons that deal 712 Astral damage and generate 3 Astral Power.",
           "choices": null
         },
         {
@@ -7529,7 +7529,7 @@
           "maxRanks": 1,
           "name": "Rejuvenation",
           "icon": "7195165",
-          "description": "Heals the target for 1,672 over 12 sec.",
+          "description": "Heals the target for 1,925 over 12 sec.",
           "choices": null
         },
         {
@@ -7544,7 +7544,7 @@
           "maxRanks": 1,
           "name": "Starfire",
           "icon": "135753",
-          "description": "Call down a burst of energy, causing 354 Arcane damage to the target, and 253 Arcane damage to all other enemies within 5 yards. Deals reduced damage beyond 8 targets.",
+          "description": "Call down a burst of energy, causing 353 Arcane damage to the target, and 249 Arcane damage to all other enemies within 5 yards. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -7614,7 +7614,7 @@
           "maxRanks": 1,
           "name": "Wild Growth",
           "icon": "236153",
-          "description": "Heals up to 5 injured allies within 30 yards of the target for 1,303 over 7 sec. Healing starts high and declines over the duration.",
+          "description": "Heals up to 5 injured allies within 30 yards of the target for 1,434 over 7 sec. Healing starts high and declines over the duration.",
           "choices": null
         },
         {
@@ -7631,7 +7631,7 @@
           "maxRanks": 1,
           "name": "Starsurge",
           "icon": "135730",
-          "description": "Launch a surge of stellar energies at the target, dealing 805 Astral damage.",
+          "description": "Launch a surge of stellar energies at the target, dealing 798 Astral damage.",
           "choices": null
         },
         {
@@ -7827,7 +7827,7 @@
           "maxRanks": 1,
           "name": "Sunfire",
           "icon": "236216",
-          "description": "A quick beam of solar light burns the enemy for 81 Nature damage and then an additional 705 Nature damage over 18 sec.",
+          "description": "A quick beam of solar light burns the enemy for 80 Nature damage and then an additional 705 Nature damage over 18 sec.",
           "choices": null
         },
         {
@@ -8457,7 +8457,7 @@
           "maxRanks": 1,
           "name": "Heart of the Wild",
           "icon": "135879",
-          "description": "Perform a powerful off-role ability depending on your currently active shapeshift form.\r\n\r\nNon-shapeshifted:\r\nEmpowered Wild Growth that heals up to 5 injured allies within 30 yards of the target for 9,773 over 7 sec.\r\n\r\nBear Form:\r\nIncrease your maximum health by 30% for 20 sec.",
+          "description": "Perform a powerful off-role ability depending on your currently active shapeshift form.\r\n\r\nNon-shapeshifted:\r\nEmpowered Wild Growth that heals up to 5 injured allies within 30 yards of the target for 10,757 over 7 sec.\r\n\r\nBear Form:\r\nIncrease your maximum health by 30% for 20 sec.",
           "choices": null
         },
         {
@@ -8489,7 +8489,7 @@
           "maxRanks": 1,
           "name": "Lifebloom",
           "icon": "134206",
-          "description": "Heals the target for 1,715 over 15 sec. When Lifebloom expires, is dispelled, or is refreshed near expiration the target is instantly healed for 812.\r\n\r\nMay be active on one target at a time.",
+          "description": "Heals the target for 1,715 over 15 sec. When Lifebloom expires, is dispelled, or is refreshed near expiration the target is instantly healed for 818.\r\n\r\nMay be active on one target at a time.",
           "choices": null
         },
         {
@@ -8506,7 +8506,7 @@
           "maxRanks": 1,
           "name": "Swiftmend",
           "icon": "134914",
-          "description": "Consume a Regrowth, Wild Growth, or Rejuvenation effect to instantly heal an ally for 3,938. Healing is increased by 40% of the consumed heal over time effect.",
+          "description": "Consume a Regrowth, Wild Growth, or Rejuvenation effect to instantly heal an ally for 3,914. Healing is increased by 40% of the consumed heal over time effect.",
           "choices": null
         },
         {
@@ -8675,7 +8675,7 @@
           "maxRanks": 1,
           "name": "Efflorescence",
           "icon": "134222",
-          "description": "Grows a healing blossom at the target location, restoring 218 health to three injured allies within 10 yards every 1.8 sec for 30 sec. Limit 1.",
+          "description": "Grows a healing blossom at the target location, restoring 217 health to three injured allies within 10 yards every 1.8 sec for 30 sec. Limit 1.",
           "choices": null
         },
         {
@@ -8693,7 +8693,7 @@
           "maxRanks": 1,
           "name": "Tranquility",
           "icon": "136107",
-          "description": "Heals all allies within 40 yards for 19,477 over 5.4 sec. Healing decreased beyond 5 targets.\r\n\r\nRoots form around you while channeling, absorbing up to 60% of your health in damage and preventing knockbacks.",
+          "description": "Heals all allies within 40 yards for 18,986 over 5.4 sec. Healing decreased beyond 5 targets.\r\n\r\nRoots form around you while channeling, absorbing up to 60% of your health in damage and preventing knockbacks.",
           "choices": null
         },
         {
@@ -8762,7 +8762,7 @@
           "maxRanks": 1,
           "name": "Grove Guardians",
           "icon": "132129",
-          "description": "Casting Swiftmend or Wild Growth summons a Treant that casts Nourish on that target or a nearby ally periodically, healing for 235. Lasts 8 sec.",
+          "description": "Casting Swiftmend or Wild Growth summons a Treant that casts Nourish on that target or a nearby ally periodically, healing for 237. Lasts 8 sec.",
           "choices": null
         },
         {
@@ -9067,9 +9067,9 @@
           "posX": 42,
           "posY": 9,
           "connections": [
-            110694,
             82080,
-            82065
+            82065,
+            110694
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -9198,7 +9198,7 @@
           "maxRanks": 1,
           "name": "Nature's Bounty",
           "icon": "611426",
-          "description": "Regrowth heals all other allies with Regrowth for 20% of its healing.",
+          "description": "Regrowth heals up to 3 allies with Rejuvenation active for 15% of its healing, prioritizing allies with the lowest health.",
           "choices": null
         },
         {
@@ -9373,7 +9373,7 @@
             },
             {
               "spellId": 1244331,
-              "description": "20% of Lifebloom's final bloom heals up to 6 injured allies within 40 yds.",
+              "description": "24% of Lifebloom's final bloom heals up to 5 injured allies within 40 yds.",
               "maxRanks": 2
             },
             {
@@ -9675,7 +9675,7 @@
           "maxRanks": 1,
           "name": "Bursting Growth",
           "icon": "4573082",
-          "description": "When Bloodseeker Vines expire or you use Ferocious Bite on their target they explode in thorns, dealing 30 physical damage to nearby enemies. Damage reduced above 5 targets.\r\n\r\nWhen Symbiotic Blooms expire or you cast Rejuvenation on their target flowers grow around their target, healing them and up to 3 nearby allies for 157.",
+          "description": "When Bloodseeker Vines expire or you use Ferocious Bite on their target they explode in thorns, dealing 35 physical damage to nearby enemies. Damage reduced above 5 targets.\r\n\r\nWhen Symbiotic Blooms expire or you cast Rejuvenation on their target flowers grow around their target, healing them and up to 3 nearby allies for 162.",
           "choices": null
         },
         {
@@ -9844,7 +9844,7 @@
           "maxRanks": 1,
           "name": "Dream Surge",
           "icon": "5927634",
-          "description": "When Grove Guardians are summoned, they grow Dream Petals on your target, healing up to 3 nearby allies for 554.",
+          "description": "When Grove Guardians are summoned, they grow Dream Petals on your target, healing up to 3 nearby allies for 556.",
           "choices": null
         },
         {
@@ -10006,7 +10006,7 @@
           "maxRanks": 1,
           "name": "Sylvan Beckoning",
           "icon": "2403539",
-          "description": "Entering an Eclipse summons a Dryad to assist you for 8 sec, casting Starsurge dealing 581 Astral damage and Starfall at 250% effectiveness.",
+          "description": "Entering an Eclipse summons a Dryad to assist you for 8 sec, casting Starsurge dealing 564 Astral damage and Starfall at 250% effectiveness.",
           "choices": null
         }
       ]
