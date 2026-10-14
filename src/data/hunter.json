@@ -229,8 +229,8 @@
           "posX": 4,
           "posY": 5,
           "connections": [
-            110157,
-            102383
+            102383,
+            110157
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -247,8 +247,8 @@
           "posX": 8,
           "posY": 5,
           "connections": [
-            110157,
-            109485
+            109485,
+            110157
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -300,8 +300,8 @@
           "posX": 6,
           "posY": 6,
           "connections": [
-            102292,
-            102380
+            102380,
+            102292
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -523,9 +523,9 @@
           "posX": 4,
           "posY": 8,
           "connections": [
-            102396,
             102425,
-            102415
+            102415,
+            102396
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -561,9 +561,9 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            110156,
             109487,
-            102412
+            102412,
+            110156
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -836,8 +836,8 @@
           "posX": 14,
           "posY": 10,
           "connections": [
-            110155,
-            109488
+            109488,
+            110155
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -854,8 +854,8 @@
           "posX": 4,
           "posY": 11,
           "connections": [
-            110153,
-            102416
+            102416,
+            110153
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -905,8 +905,8 @@
           "posX": 12,
           "posY": 11,
           "connections": [
-            102409,
-            102418
+            102418,
+            102409
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -1028,7 +1028,7 @@
           "maxRanks": 1,
           "name": "Stomp",
           "icon": "458976",
-          "description": "When you cast Barbed Shot, your pet stomps the ground, dealing 49 Physical damage to all nearby enemies.",
+          "description": "When you cast Barbed Shot, your pet stomps the ground, dealing 51 Physical damage to all nearby enemies.",
           "choices": null
         },
         {
@@ -1055,15 +1055,15 @@
           "posX": 32,
           "posY": 5,
           "connections": [
-            102376,
-            102368
+            102368,
+            102376
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Wild Thrash",
           "icon": "461121",
-          "description": "Command your pet to thrash all enemies within 10 yds, dealing 66 Physical damage to them. Damage is increased by 200% if Wild Thrash hits 2 or more enemies.\r\n\r\nDeals reduced damage beyond 8 targets.",
+          "description": "Command your pet to thrash all enemies within 10 yds, dealing 66 Physical damage to them. Damage is increased by 300% if Wild Thrash hits 2 or more enemies.\r\n\r\nDeals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -1073,8 +1073,8 @@
           "posX": 36,
           "posY": 5,
           "connections": [
-            102376,
-            102347
+            102347,
+            102376
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -1099,7 +1099,7 @@
           "maxRanks": 1,
           "name": "Cobra Shot",
           "icon": "461114",
-          "description": "A quick shot causing 136 Physical damage.\r\n\r\nReduces the cooldown of Kill Command by 1 sec.",
+          "description": "A quick shot causing 133 Physical damage.\r\n\r\nReduces the cooldown of Kill Command by 1 sec.",
           "choices": null
         },
         {
@@ -1116,7 +1116,7 @@
           "maxRanks": 1,
           "name": "Beast Cleave",
           "icon": "461121",
-          "description": "After you Wild Thrash, your pet's melee attacks also strike all nearby enemies for 55% of the damage for the next 10.0 sec. Deals reduced damage beyond 8 targets.",
+          "description": "After you Wild Thrash, your pet's melee attacks also strike all nearby enemies for 70% of the damage for the next 10.0 sec. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -1706,10 +1706,10 @@
           "posX": 20,
           "posY": 11,
           "connections": [
-            109804,
-            109802,
             94967,
-            94969
+            94969,
+            109804,
+            109802
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -1717,7 +1717,7 @@
           "maxRanks": 1,
           "name": "Stampede!",
           "icon": "461112",
-          "description": "Casting Bestial Wrath grants Howl of the Pack Leader and causes your next Kill Command to rouse the nearby wildlife into a Stampede, charging your target and dealing 482 Physical damage over 7 sec.",
+          "description": "Casting Bestial Wrath grants Howl of the Pack Leader and causes your next Kill Command to rouse the nearby wildlife into a Stampede, charging your target and dealing 469 Physical damage over 7 sec.",
           "choices": null
         },
         {
@@ -2114,7 +2114,7 @@
           "maxRanks": 1,
           "name": "Bleak Powder",
           "icon": "134389",
-          "description": "Black Arrow now explodes in a cloud of shadow and sulfur on impact, dealing 87 Shadow damage to all enemies within an 8 yd cone behind the target. Damage reduced beyond 8 targets.",
+          "description": "Black Arrow now explodes in a cloud of shadow and sulfur on impact, dealing 88 Shadow damage to all enemies within an 8 yd cone behind the target. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -2181,7 +2181,7 @@
               "spellId": 1277565,
               "name": "Through the Eyes",
               "icon": "132092",
-              "description": "Kill Shot damage increased by 10%.",
+              "description": "Black Arrow damage increased by 10%.",
               "maxRanks": 1
             }
           ]
@@ -2194,9 +2194,9 @@
           "posY": 6,
           "connections": [
             94982,
+            109799,
             94957,
-            94983,
-            109799
+            94983
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2240,7 +2240,7 @@
           "maxRanks": 1,
           "name": "Wailing Dead",
           "icon": "458967",
-          "description": "Bestial Wrath summons a Dark Hound.\r\n\r\nFor 15 sec after casting Bestial Wrath, Bestial Wrath is replaced with Wailing Arrow.\r\n\r\n Wailing Arrow\r\nFire an enchanted arrow, dealing 495 Shadow damage to your target and an additional 245 Shadow damage to all enemies within 8 yds of your target. Non-Player targets struck by a Wailing Arrow have their spellcasting interrupted and are silenced for 1 sec.\r\n\r\nGrants Deathblow.",
+          "description": "Bestial Wrath summons a Dark Hound.\r\n\r\nFor 15 sec after casting Bestial Wrath, Bestial Wrath is replaced with Wailing Arrow.\r\n\r\n Wailing Arrow\r\nFire an enchanted arrow, dealing 486 Shadow damage to your target and an additional 245 Shadow damage to all enemies within 8 yds of your target. Non-Player targets struck by a Wailing Arrow have their spellcasting interrupted and are silenced for 1 sec.\r\n\r\nGrants Deathblow.",
           "choices": null
         },
         {
@@ -2502,8 +2502,8 @@
           "posX": 4,
           "posY": 5,
           "connections": [
-            110157,
-            102383
+            102383,
+            110157
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2608,8 +2608,8 @@
           "posX": 10,
           "posY": 6,
           "connections": [
-            102402,
-            102384
+            102384,
+            102402
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2796,9 +2796,9 @@
           "posX": 4,
           "posY": 8,
           "connections": [
-            102396,
             102425,
-            102415
+            102415,
+            102396
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2834,9 +2834,9 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            110156,
             109487,
-            102412
+            102412,
+            110156
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2989,8 +2989,8 @@
           "posX": 2,
           "posY": 10,
           "connections": [
-            110154,
-            103990
+            103990,
+            110154
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -3109,8 +3109,8 @@
           "posX": 14,
           "posY": 10,
           "connections": [
-            110155,
-            109488
+            109488,
+            110155
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -3127,8 +3127,8 @@
           "posX": 4,
           "posY": 11,
           "connections": [
-            110153,
-            102416
+            102416,
+            110153
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -3178,8 +3178,8 @@
           "posX": 12,
           "posY": 11,
           "connections": [
-            102409,
-            102418
+            102418,
+            102409
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -3201,7 +3201,7 @@
           "maxRanks": 1,
           "name": "Aimed Shot",
           "icon": "8026692",
-          "description": "A powerful aimed shot that deals 339 Physical damage.",
+          "description": "A powerful aimed shot that deals 341 Physical damage.",
           "choices": null
         },
         {
@@ -3218,7 +3218,7 @@
           "maxRanks": 1,
           "name": "Rapid Fire",
           "icon": "461115",
-          "description": "Shoot a stream of 7 shots at your target over 1.8 sec, dealing a total of 258 Physical damage. Usable while moving.\r\n\r\nEach shot generates 3 Focus.",
+          "description": "Shoot a stream of 7 shots at your target over 1.8 sec, dealing a total of 253 Physical damage. Usable while moving.\r\n\r\nEach shot generates 3 Focus.",
           "choices": null
         },
         {
@@ -3392,7 +3392,7 @@
               "spellId": 257621,
               "name": "Trick Shots",
               "icon": "2065591",
-              "description": "When Multi-Shot hits 3 or more targets, your next Aimed Shot or Rapid Fire will ricochet and hit up to 5 additional targets for 60% of normal damage.",
+              "description": "When Multi-Shot hits 3 or more targets, your next Aimed Shot or Rapid Fire will ricochet and hit up to 5 additional targets for 75% of normal damage.",
               "maxRanks": 1
             },
             {
@@ -3470,7 +3470,7 @@
           "maxRanks": 1,
           "name": "Explosive Shot",
           "icon": "236178",
-          "description": "Fires an explosive shot at your target that lasts for 3 sec. Every 1 sec the target burns for 106 Fire damage and explode, dealing 50% of the damage to all enemies within 8 yds. Deals reduced damage beyond 5 targets.",
+          "description": "Fires an explosive shot at your target that lasts for 3 sec. Every 1 sec the target burns for 107 Fire damage and explode, dealing 50% of the damage to all enemies within 8 yds. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -3497,15 +3497,15 @@
           "posX": 32,
           "posY": 7,
           "connections": [
-            103959,
-            110572
+            110572,
+            103959
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Kill Shot",
           "icon": "236174",
-          "description": "You attempt to finish off a wounded target, dealing 372 Physical damage. Only usable on enemies with less than 20% health.",
+          "description": "You attempt to finish off a wounded target, dealing 368 Physical damage. Only usable on enemies with less than 20% health.",
           "choices": null
         },
         {
@@ -3515,9 +3515,9 @@
           "posX": 36,
           "posY": 7,
           "connections": [
-            110575,
             103964,
-            110572
+            110572,
+            110575
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3707,9 +3707,9 @@
           "posX": 32,
           "posY": 9,
           "connections": [
+            110688,
             103985,
-            109491,
-            110688
+            109491
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3794,8 +3794,8 @@
           "posX": 34,
           "posY": 10,
           "connections": [
-            103950,
-            103958
+            103958,
+            103950
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3829,15 +3829,15 @@
           "posX": 38,
           "posY": 10,
           "connections": [
-            103978,
-            103958
+            103958,
+            103978
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Volley",
           "icon": "132205",
-          "description": "Rain a volley of arrows down over 6 sec, dealing up to 706 Physical damage to any enemy in the area, and gain the effects of Trick Shots for as long as Volley is active.",
+          "description": "Rain a volley of arrows down over 6 sec, dealing up to 780 Physical damage to any enemy in the area, and gain the effects of Trick Shots for as long as Volley is active.",
           "choices": null
         },
         {
@@ -3905,7 +3905,7 @@
           "maxRanks": 1,
           "name": "Salvo",
           "icon": "1033904",
-          "description": "Volley now also applies Explosive Shot to up to 2 targets hit.\r\n\r\n Explosive Shot\r\nFires an explosive shot at your target that lasts for 3 sec. Every 1 sec the target burns for 108 Fire damage and explode, dealing 50% of the damage to all enemies within 8 yds. Deals reduced damage beyond 5 targets.",
+          "description": "Volley now also applies Explosive Shot to up to 2 targets hit.\r\n\r\n Explosive Shot\r\nFires an explosive shot at your target that lasts for 3 sec. Every 1 sec the target burns for 107 Fire damage and explode, dealing 50% of the damage to all enemies within 8 yds. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -3920,9 +3920,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Unload",
-          "icon": "461116",
-          "description": "When Rapid Fire begins and finishes channeling, it releases an Arcane Shot at 100% effectiveness.\r\n\r\nIf your target is below 20% health, Rapid Fire instead releases Kill Shots.",
+          "name": "Blood Fletching",
+          "icon": "3565719",
+          "description": "Aimed Shot critical strikes now cause the Master Marksman bleed effect at 20% of damage dealt. For 4 sec after a critical Aimed Shot, the target will take an additional 15 bleed damage any time your abilities damage that target.",
           "choices": null
         },
         {
@@ -4100,7 +4100,7 @@
           "maxRanks": 1,
           "name": "Lunar Storm",
           "icon": "1392544",
-          "description": "When Sentinel's Mark is consumed, it summons a barrage of 4 lunar missiles, each dealing 69 Arcane damage to enemies within 10 yds.",
+          "description": "When Sentinel's Mark is consumed, it summons a barrage of 4 lunar missiles, each dealing 70 Arcane damage to enemies within 10 yds.",
           "choices": null
         },
         {
@@ -4223,7 +4223,7 @@
           "maxRanks": 1,
           "name": "Moonlight Chakram",
           "icon": "6035310",
-          "description": "For 15 sec after casting Takedown, Takedown is replaced with Moonlight Chakram.\r\n\r\n Moonlight Chakram\r\nThrow a chakram blessed with moonlight at your current target that will rapidly deal 100 Physical damage 7 times, bouncing to other targets if they are nearby.",
+          "description": "For 15 sec after casting Takedown, Takedown is replaced with Moonlight Chakram.\r\n\r\n Moonlight Chakram\r\nThrow a chakram blessed with moonlight at your current target that will rapidly deal 99 Physical damage 7 times, bouncing to other targets if they are nearby.",
           "choices": null
         },
         {
@@ -4394,7 +4394,7 @@
           "maxRanks": 1,
           "name": "Bleak Powder",
           "icon": "134389",
-          "description": "Black Arrow now explodes in a cloud of shadow and sulfur on impact, dealing 86 Shadow damage to all enemies within an 8 yd cone behind the target. Damage reduced beyond 8 targets.",
+          "description": "Black Arrow now explodes in a cloud of shadow and sulfur on impact, dealing 88 Shadow damage to all enemies within an 8 yd cone behind the target. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -4461,7 +4461,7 @@
               "spellId": 1277565,
               "name": "Through the Eyes",
               "icon": "132092",
-              "description": "Kill Shot damage increased by 10%.",
+              "description": "Black Arrow damage increased by 10%.",
               "maxRanks": 1
             }
           ]
@@ -4490,9 +4490,9 @@
           "posY": 6,
           "connections": [
             94982,
+            109799,
             94957,
-            94983,
-            109799
+            94983
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4536,7 +4536,7 @@
           "maxRanks": 1,
           "name": "Wailing Dead",
           "icon": "458967",
-          "description": "Bestial Wrath summons a Dark Hound.\r\n\r\nFor 15 sec after casting Bestial Wrath, Bestial Wrath is replaced with Wailing Arrow.\r\n\r\n Wailing Arrow\r\nFire an enchanted arrow, dealing 492 Shadow damage to your target and an additional 245 Shadow damage to all enemies within 8 yds of your target. Non-Player targets struck by a Wailing Arrow have their spellcasting interrupted and are silenced for 1 sec.\r\n\r\nGrants Deathblow.",
+          "description": "Bestial Wrath summons a Dark Hound.\r\n\r\nFor 15 sec after casting Bestial Wrath, Bestial Wrath is replaced with Wailing Arrow.\r\n\r\n Wailing Arrow\r\nFire an enchanted arrow, dealing 497 Shadow damage to your target and an additional 245 Shadow damage to all enemies within 8 yds of your target. Non-Player targets struck by a Wailing Arrow have their spellcasting interrupted and are silenced for 1 sec.\r\n\r\nGrants Deathblow.",
           "choices": null
         },
         {
@@ -4782,8 +4782,8 @@
           "posX": 4,
           "posY": 5,
           "connections": [
-            110157,
-            102383
+            102383,
+            110157
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5076,9 +5076,9 @@
           "posX": 4,
           "posY": 8,
           "connections": [
-            102396,
             102425,
-            102415
+            102415,
+            102396
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5114,9 +5114,9 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            110156,
             109487,
-            102412
+            102412,
+            110156
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5269,8 +5269,8 @@
           "posX": 2,
           "posY": 10,
           "connections": [
-            110154,
-            103989
+            103989,
+            110154
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5389,8 +5389,8 @@
           "posX": 14,
           "posY": 10,
           "connections": [
-            110155,
-            109488
+            109488,
+            110155
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5407,8 +5407,8 @@
           "posX": 4,
           "posY": 11,
           "connections": [
-            110153,
-            102416
+            102416,
+            110153
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5458,8 +5458,8 @@
           "posX": 12,
           "posY": 11,
           "connections": [
-            102409,
-            102418
+            102418,
+            102409
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5498,7 +5498,7 @@
           "maxRanks": 1,
           "name": "Wildfire Bomb",
           "icon": "2065634",
-          "description": "Hurl a bomb at the target, exploding for 56 Fire damage in a cone and coating enemies in wildfire, scorching them for 44 Fire damage over 6 sec. Deals reduced damage beyond 8 targets.\r\n\r\nDeals 80% increased damage to your primary target.",
+          "description": "Hurl a bomb at the target, exploding for 66 Fire damage in a cone and coating enemies in wildfire, scorching them for 52 Fire damage over 6 sec. Deals reduced damage beyond 8 targets.\r\n\r\nDeals 50% increased damage to your primary target.",
           "choices": null
         },
         {
@@ -5515,7 +5515,7 @@
           "maxRanks": 1,
           "name": "Raptor Strike",
           "icon": "1376046",
-          "description": "A vicious slash dealing 140 Physical damage.",
+          "description": "A vicious slash dealing 136 Physical damage.",
           "choices": null
         },
         {
@@ -5901,8 +5901,8 @@
           "posX": 38,
           "posY": 8,
           "connections": [
-            110159,
-            109319
+            109319,
+            110159
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5979,7 +5979,7 @@
           "maxRanks": 1,
           "name": "Takedown",
           "icon": "7439201",
-          "description": "You and your pet leap to your target and strike as one, dealing 630 Physical damage. Your pet frees itself from roots when it leaps.\r\n\r\nFor the next 8 sec, the damage dealt by you and your pet is increased by 20%.\r\n\r\nGenerates 50 Focus.",
+          "description": "You and your pet leap to your target and strike as one, dealing 626 Physical damage. Your pet frees itself from roots when it leaps.\r\n\r\nFor the next 8 sec, the damage dealt by you and your pet is increased by 20%.\r\n\r\nGenerates 50 Focus.",
           "choices": null
         },
         {
@@ -6175,7 +6175,7 @@
           "ranks": [
             {
               "spellId": 1259003,
-              "description": "Raptor Strike has a 25% chance to upgrade itself to a Raptor Swipe, dealing 100 Physical damage to all enemies within 15 yds in front of you. Damage reduced beyond 5 targets.",
+              "description": "Raptor Strike has a 25% chance to upgrade itself to a Raptor Swipe, dealing 96 Physical damage to all enemies within 15 yds in front of you. Damage reduced beyond 5 targets.",
               "maxRanks": 1
             },
             {
@@ -6329,7 +6329,7 @@
           "maxRanks": 1,
           "name": "Lunar Storm",
           "icon": "1392544",
-          "description": "When Sentinel's Mark is consumed, it summons a barrage of 4 lunar missiles, each dealing 70 Arcane damage to enemies within 10 yds.",
+          "description": "When Sentinel's Mark is consumed, it summons a barrage of 4 lunar missiles, each dealing 69 Arcane damage to enemies within 10 yds.",
           "choices": null
         },
         {
@@ -6452,7 +6452,7 @@
           "maxRanks": 1,
           "name": "Moonlight Chakram",
           "icon": "6035310",
-          "description": "For 15 sec after casting Takedown, Takedown is replaced with Moonlight Chakram.\r\n\r\n Moonlight Chakram\r\nThrow a chakram blessed with moonlight at your current target that will rapidly deal 101 Physical damage 7 times, bouncing to other targets if they are nearby.",
+          "description": "For 15 sec after casting Takedown, Takedown is replaced with Moonlight Chakram.\r\n\r\n Moonlight Chakram\r\nThrow a chakram blessed with moonlight at your current target that will rapidly deal 99 Physical damage 7 times, bouncing to other targets if they are nearby.",
           "choices": null
         },
         {
@@ -6476,7 +6476,7 @@
               "spellId": 1264904,
               "name": "Twilight Requiem",
               "icon": "136057",
-              "description": "When your Moonlight Chakram expires, it summons an explosion of moonlight, dealing 69 Arcane damage to nearby enemies. Damage reduced beyond 8 targets.",
+              "description": "When your Moonlight Chakram expires, it summons an explosion of moonlight, dealing 70 Arcane damage to nearby enemies. Damage reduced beyond 8 targets.",
               "maxRanks": 1
             },
             {
@@ -6513,10 +6513,10 @@
           "posX": 20,
           "posY": 11,
           "connections": [
-            109804,
-            109802,
             94967,
-            94969
+            94969,
+            109804,
+            109802
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -6524,7 +6524,7 @@
           "maxRanks": 1,
           "name": "Stampede!",
           "icon": "461112",
-          "description": "Casting Bestial Wrath grants Howl of the Pack Leader and causes your next Kill Command to rouse the nearby wildlife into a Stampede, charging your target and dealing 471 Physical damage over 7 sec.",
+          "description": "Casting Bestial Wrath grants Howl of the Pack Leader and causes your next Kill Command to rouse the nearby wildlife into a Stampede, charging your target and dealing 476 Physical damage over 7 sec.",
           "choices": null
         },
         {

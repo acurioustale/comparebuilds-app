@@ -83,7 +83,7 @@
           "maxRanks": 1,
           "name": "Death Strike",
           "icon": "237517",
-          "description": "Focuses dark power into a strike that deals 53 Physical damage and heals you for 20.00% of all damage taken in the last 5 sec, minimum 7.0% of maximum health.",
+          "description": "Focuses dark power into a strike that deals 60 Physical damage and heals you for 20.00% of all damage taken in the last 5 sec, minimum 7.0% of maximum health.",
           "choices": null
         },
         {
@@ -312,9 +312,9 @@
           "posX": 4,
           "posY": 5,
           "connections": [
-            76052,
             76084,
-            76044
+            76044,
+            76052
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -349,8 +349,8 @@
           "posY": 5,
           "connections": [
             76069,
-            76052,
-            76074
+            76074,
+            76052
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -384,9 +384,9 @@
           "posX": 12,
           "posY": 5,
           "connections": [
-            110029,
             76069,
-            76059
+            76059,
+            110029
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -492,9 +492,9 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            76060,
             76075,
-            76061
+            76061,
+            76060
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -528,9 +528,9 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            110030,
             76085,
-            76065
+            76065,
+            110030
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -869,7 +869,7 @@
           "maxRanks": 1,
           "name": "Heart Strike",
           "icon": "135675",
-          "description": "Instantly strike the target and 1 other nearby enemy, causing 69 Physical damage, and reducing enemies' movement speed by 20% for 8 sec.",
+          "description": "Instantly strike the target and 1 other nearby enemy, causing 70 Physical damage, and reducing enemies' movement speed by 20% for 8 sec.",
           "choices": null
         },
         {
@@ -886,7 +886,7 @@
           "maxRanks": 1,
           "name": "Marrowrend",
           "icon": "1376745",
-          "description": "Smash the target, dealing 79 Physical damage and generating 3 charges of Bone Shield.\r\n\r\n Bone Shield\r\nSurrounds you with a barrier of whirling bones, increasing Armor by 110. Each melee attack against you consumes a charge. Lasts 30 sec or until all charges are consumed.",
+          "description": "Smash the target, dealing 78 Physical damage and generating 3 charges of Bone Shield.\r\n\r\n Bone Shield\r\nSurrounds you with a barrier of whirling bones, increasing Armor by 110. Each melee attack against you consumes a charge. Lasts 30 sec or until all charges are consumed.",
           "choices": null
         },
         {
@@ -1214,7 +1214,7 @@
           "maxRanks": 1,
           "name": "Deadly Reach",
           "icon": "7439187",
-          "description": "Death Strike hits an additional 2 enemies at 75% effectiveness.",
+          "description": "Death Strike hits an additional 2 enemies at 60% effectiveness.",
           "choices": null
         },
         {
@@ -1359,7 +1359,7 @@
           "maxRanks": 1,
           "name": "Bloody Reflection",
           "icon": "236304",
-          "description": "While Blood Shield is active, taking direct damage reflects 38 Shadow damage back to the attacker. Blood Shield can now absorb up to 65% of your maximum health.",
+          "description": "While Blood Shield is active, taking direct damage reflects 39 Shadow damage back to the attacker. Blood Shield can now absorb up to 65% of your maximum health.",
           "choices": null
         },
         {
@@ -1440,8 +1440,8 @@
           "posX": 34,
           "posY": 10,
           "connections": [
-            76172,
-            76139
+            76139,
+            76172
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1517,7 +1517,7 @@
           "maxRanks": 1,
           "name": "Sanguinary Burst",
           "icon": "3528309",
-          "description": "When Blood Mist ends it deals 96 Shadow damage to 8 nearby enemies, healing you for 18% of the damage dealt. The damage is increased by 2% for every 1 Runic Power spent while Blood Mist was active.",
+          "description": "When Blood Mist ends it deals 97 Shadow damage to 8 nearby enemies, healing you for 18% of the damage dealt. The damage is increased by 2% for every 1 Runic Power spent while Blood Mist was active.",
           "choices": null
         },
         {
@@ -1935,7 +1935,7 @@
           "maxRanks": 1,
           "name": "Swift and Painful",
           "icon": "4005151",
-          "description": "If no enemies are struck by Soul Rupture, you gain 10% Strength for 8 sec.\r\n\r\nWave of Souls is 100% more effective on the main target of your Reaper's Mark.",
+          "description": "If no enemies are struck by Soul Rupture, you gain 15% Strength for 8 sec.\r\n\r\nWave of Souls is 100% more effective on the main target of your Reaper's Mark.",
           "choices": null
         },
         {
@@ -2004,7 +2004,7 @@
           "maxRanks": 1,
           "name": "Wave of Souls",
           "icon": "3528305",
-          "description": "Reaper's Mark sends forth bursts of Shadowfrost energy and back, dealing 34 Shadowfrost damage both ways to all enemies caught in its path.\r\n\r\nWave of Souls critical strikes cause enemies to take 5% increased Shadowfrost damage for 15 sec, stacking up to 2 times, and it is always a critical strike on its way back.",
+          "description": "Reaper's Mark sends forth bursts of Shadowfrost energy and back, dealing 33 Shadowfrost damage both ways to all enemies caught in its path.\r\n\r\nWave of Souls critical strikes cause enemies to take 5% increased Shadowfrost damage for 15 sec, stacking up to 2 times, and it is always a critical strike on its way back.",
           "choices": null
         },
         {
@@ -2161,7 +2161,7 @@
           "maxRanks": 1,
           "name": "Exterminate",
           "icon": "1692685",
-          "description": "After Reaper's Mark explodes, your next 2 Obliterates or Frostscythes cost 1 Rune and summon 2 scythes to strike your enemies.\r\n\r\nThe first scythe strikes your target for 153 Shadowfrost damage and the second scythe strikes all enemies around your target for 62 Shadowfrost damage. Deals reduced damage beyond 8 targets.",
+          "description": "After Reaper's Mark explodes, your next 2 Obliterates or Frostscythes cost 1 Rune and summon 2 scythes to strike your enemies.\r\n\r\nThe first scythe strikes your target for 154 Shadowfrost damage and the second scythe strikes all enemies around your target for 63 Shadowfrost damage. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -2197,7 +2197,7 @@
           "maxRanks": 1,
           "name": "Deathly Blows",
           "icon": "4056194",
-          "description": "Death Strike damage increased by 12%.",
+          "description": "Death Strike damage increased by 20%.",
           "choices": null
         },
         {
@@ -2297,7 +2297,7 @@
           "maxRanks": 1,
           "name": "Death Strike",
           "icon": "237517",
-          "description": "Focuses dark power into a strike that deals 54 Physical damage and heals you for 20.00% of all damage taken in the last 5 sec, minimum 7.0% of maximum health.",
+          "description": "Focuses dark power into a strike that deals 62 Physical damage and heals you for 20.00% of all damage taken in the last 5 sec, minimum 7.0% of maximum health.",
           "choices": null
         },
         {
@@ -2526,9 +2526,9 @@
           "posX": 4,
           "posY": 5,
           "connections": [
-            76052,
             76084,
-            76044
+            76044,
+            76052
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2563,8 +2563,8 @@
           "posY": 5,
           "connections": [
             76069,
-            76052,
-            76074
+            76074,
+            76052
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2598,9 +2598,9 @@
           "posX": 12,
           "posY": 5,
           "connections": [
-            110029,
             76069,
-            76059
+            76059,
+            110029
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2706,9 +2706,9 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            76060,
             76075,
-            76061
+            76061,
+            76060
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2742,9 +2742,9 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            110030,
             76085,
-            76065
+            76065,
+            110030
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3083,7 +3083,7 @@
           "maxRanks": 1,
           "name": "Frost Strike",
           "icon": "237520",
-          "description": "Chill your weapon with icy power and quickly strike the enemy, dealing 59 Frost damage.",
+          "description": "Chill your weapon with icy power and quickly strike the enemy, dealing 69 Frost damage.",
           "choices": null
         },
         {
@@ -3100,7 +3100,7 @@
           "maxRanks": 1,
           "name": "Obliterate",
           "icon": "135771",
-          "description": "A brutal attack that deals 28 Physical and 28 Frost damage.",
+          "description": "A brutal attack that deals 41 Physical and 40 Frost damage.",
           "choices": null
         },
         {
@@ -3117,7 +3117,7 @@
           "maxRanks": 1,
           "name": "Howling Blast",
           "icon": "135833",
-          "description": "Blast the target with a frigid wind, dealing 15 Frost damage to that foe, and reduced damage to all other enemies within 10 yards, infecting all targets with Frost Fever.\r\n\r\n Frost Fever\r\nA disease that deals 117 Frost damage over 24 sec and has a chance to grant the Death Knight 4 Runic Power each time it deals damage.",
+          "description": "Blast the target with a frigid wind, dealing 17 Frost damage to that foe, and reduced damage to all other enemies within 10 yards, infecting all targets with Frost Fever.\r\n\r\n Frost Fever\r\nA disease that deals 117 Frost damage over 24 sec and has a chance to grant the Death Knight 4 Runic Power each time it deals damage.",
           "choices": null
         },
         {
@@ -3169,7 +3169,7 @@
           "maxRanks": 1,
           "name": "Frostscythe",
           "icon": "7439190",
-          "description": "A sweeping attack that strikes all enemies in front of you for 17 Frost damage. Deals reduced damage beyond 5 targets. \r\n\r\nConsumes Killing Machine to have its critical strikes deal 4 times the normal damage.",
+          "description": "A sweeping attack that strikes all enemies in front of you for 16 Frost damage. Deals reduced damage beyond 5 targets. \r\n\r\nConsumes Killing Machine to have its critical strikes deal 4 times the normal damage.",
           "choices": null
         },
         {
@@ -3292,7 +3292,7 @@
           "maxRanks": 1,
           "name": "Frostreaper",
           "icon": "1061270",
-          "description": "Obliterate deals 10% increased damage and has a chance to tether the souls of its target and a nearby enemy to yours.\r\n\r\nFrost Strike severs the tethers, dealing 72 Shadowfrost damage to both foes.",
+          "description": "Obliterate deals 10% increased damage and has a chance to tether the souls of its target and a nearby enemy to yours.\r\n\r\nFrost Strike severs the tethers, dealing 144 Shadowfrost damage to both foes.",
           "choices": null
         },
         {
@@ -3489,7 +3489,7 @@
           "maxRanks": 1,
           "name": "Frostwyrm's Fury",
           "icon": "341980",
-          "description": "Summons a frostwyrm who breathes on all enemies within 40 yd in front of you, dealing 106 Frost damage, stunning enemies for 3 sec, and slowing movement speed by 50% for 10 sec.",
+          "description": "Summons a frostwyrm who breathes on all enemies within 40 yd in front of you, dealing 103 Frost damage, stunning enemies for 3 sec, and slowing movement speed by 50% for 10 sec.",
           "choices": null
         },
         {
@@ -3581,7 +3581,7 @@
           "maxRanks": 1,
           "name": "Avalanche",
           "icon": "135857",
-          "description": "Casting Howling Blast with Rime active causes jagged icicles to fall on enemies nearby your target, applying Razorice and dealing 8 Frost damage.",
+          "description": "Casting Howling Blast with Rime active causes jagged icicles to fall on enemies nearby your target, applying Razorice and dealing 7 Frost damage.",
           "choices": null
         },
         {
@@ -3720,7 +3720,7 @@
           "maxRanks": 1,
           "name": "Frostbane",
           "icon": "1125284",
-          "description": "Each foe struck with Glacial Advance has a chance to transform your next Frost Strike into Frostbane. The chance increases with the number of Razorice stacks on the target.\r\n\r\nFrostbane\r\nStart a frozen onslaught that strikes twice, unleashing the chilling essence of winter, dealing 21 Frost damage to all enemies caught in its wake with each strike.\r\n\r\nEach enemy struck reduces the damage dealt to the next foe by 5%, down to 40%.",
+          "description": "Each foe struck with Glacial Advance has a chance to transform your next Frost Strike into Frostbane. The chance increases with the number of Razorice stacks on the target.\r\n\r\nFrostbane\r\nStart a frozen onslaught that strikes twice, unleashing the chilling essence of winter, dealing 25 Frost damage to all enemies caught in its wake with each strike.\r\n\r\nEach enemy struck reduces the damage dealt to the next foe by 5%, down to 40%.",
           "choices": null
         },
         {
@@ -3737,7 +3737,7 @@
           "maxRanks": 1,
           "name": "Breath of Sindragosa",
           "icon": "1029007",
-          "description": "Call upon Sindragosa's aid in battle for 8 sec, continuously dealing 38 Frost damage every 1 sec to enemies in a cone in front of you. Consuming Killing Machine or Rime increases the duration by 0.8 sec. Deals reduced damage to secondary targets.\r\n\r\nGrants a charge of Empower Rune Weapon at the start and 2 Runes at the end.",
+          "description": "Call upon Sindragosa's aid in battle for 8 sec, continuously dealing 39 Frost damage every 1 sec to enemies in a cone in front of you. Consuming Killing Machine or Rime increases the duration by 0.8 sec. Deals reduced damage to secondary targets.\r\n\r\nGrants a charge of Empower Rune Weapon at the start and 2 Runes at the end.",
           "choices": null
         },
         {
@@ -4089,7 +4089,7 @@
           "maxRanks": 1,
           "name": "Swift and Painful",
           "icon": "4005151",
-          "description": "If no enemies are struck by Soul Rupture, you gain 10% Strength for 8 sec.\r\n\r\nWave of Souls is 100% more effective on the main target of your Reaper's Mark.",
+          "description": "If no enemies are struck by Soul Rupture, you gain 15% Strength for 8 sec.\r\n\r\nWave of Souls is 100% more effective on the main target of your Reaper's Mark.",
           "choices": null
         },
         {
@@ -4315,7 +4315,7 @@
           "maxRanks": 1,
           "name": "Exterminate",
           "icon": "1692685",
-          "description": "After Reaper's Mark explodes, your next 2 Obliterates or Frostscythes cost 1 Rune and summon 2 scythes to strike your enemies.\r\n\r\nThe first scythe strikes your target for 155 Shadowfrost damage and the second scythe strikes all enemies around your target for 61 Shadowfrost damage. Deals reduced damage beyond 8 targets.",
+          "description": "After Reaper's Mark explodes, your next 2 Obliterates or Frostscythes cost 1 Rune and summon 2 scythes to strike your enemies.\r\n\r\nThe first scythe strikes your target for 153 Shadowfrost damage and the second scythe strikes all enemies around your target for 62 Shadowfrost damage. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -4351,7 +4351,7 @@
           "maxRanks": 1,
           "name": "Deathly Blows",
           "icon": "4056194",
-          "description": "Death Strike damage increased by 12%.",
+          "description": "Death Strike damage increased by 20%.",
           "choices": null
         },
         {
@@ -4451,7 +4451,7 @@
           "maxRanks": 1,
           "name": "Death Strike",
           "icon": "237517",
-          "description": "Focuses dark power into a strike that deals 53 Physical damage and heals you for 20.00% of all damage taken in the last 5 sec, minimum 7.0% of maximum health.",
+          "description": "Focuses dark power into a strike that deals 61 Physical damage and heals you for 20.00% of all damage taken in the last 5 sec, minimum 7.0% of maximum health.",
           "choices": null
         },
         {
@@ -4680,9 +4680,9 @@
           "posX": 4,
           "posY": 5,
           "connections": [
-            76052,
             76084,
-            76044
+            76044,
+            76052
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4717,8 +4717,8 @@
           "posY": 5,
           "connections": [
             76069,
-            76052,
-            76074
+            76074,
+            76052
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4752,9 +4752,9 @@
           "posX": 12,
           "posY": 5,
           "connections": [
-            110029,
             76069,
-            76059
+            76059,
+            110029
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4860,9 +4860,9 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            76060,
             76075,
-            76061
+            76061,
+            76060
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4896,9 +4896,9 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            110030,
             76085,
-            76065
+            76065,
+            110030
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5423,7 +5423,7 @@
           "maxRanks": 1,
           "name": "Festering Scythe",
           "icon": "3997563",
-          "description": "Festering Strike now follows up with a Festering Scythe that costs no Runes.\r\n\r\nFestering Scythe\r\nSlashes through all enemies within 14 yds in front of you, dealing 34 Shadow damage and hastening all of your plagues on targets hit to deal damage 35% faster for 25 sec.",
+          "description": "Festering Strike now follows up with a Festering Scythe that costs no Runes.\r\n\r\nFestering Scythe\r\nSlashes through all enemies within 14 yds in front of you, dealing 36 Shadow damage and hastening all of your plagues on targets hit to deal damage 35% faster for 25 sec.",
           "choices": null
         },
         {
@@ -5459,7 +5459,7 @@
           "maxRanks": 1,
           "name": "Soul Reaper",
           "icon": "636333",
-          "description": "Rupture the soul of your enemy, dealing 155 Shadowfrost damage and causing the foe to take 20% increased damage from your diseases and minions for 8 sec.\r\n\r\nOnly usable on enemies below 35% maximum health.\r\n\r\nConsumes up to 3 Lesser Ghoul stacks to summon them instantly.",
+          "description": "Rupture the soul of your enemy, dealing 159 Shadowfrost damage and causing the foe to take 20% increased damage from your diseases and minions for 8 sec.\r\n\r\nOnly usable on enemies below 35% maximum health.\r\n\r\nConsumes up to 3 Lesser Ghoul stacks to summon them instantly.",
           "choices": null
         },
         {
@@ -5503,8 +5503,8 @@
           "posX": 32,
           "posY": 7,
           "connections": [
-            76197,
-            76193
+            76193,
+            76197
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5539,9 +5539,9 @@
           "posX": 36,
           "posY": 7,
           "connections": [
+            76192,
             76186,
-            76179,
-            76192
+            76179
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5611,8 +5611,8 @@
           "posX": 30,
           "posY": 8,
           "connections": [
-            76155,
-            76197
+            76197,
+            76155
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5717,9 +5717,9 @@
           "posX": 32,
           "posY": 9,
           "connections": [
-            76160,
+            76178,
             76155,
-            76178
+            76160
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -5781,7 +5781,7 @@
           "maxRanks": 2,
           "name": "Scourging",
           "icon": "135772",
-          "description": "Scourge Strike now causes your Plagues to erupt at 50% effectiveness.\r\n\r\nClawing Shadows can now stack 1 additional times.",
+          "description": "Scourge Strike now causes your Plagues to erupt at 65% effectiveness.\r\n\r\nClawing Shadows can now stack 1 additional times.",
           "choices": null
         },
         {
@@ -5791,8 +5791,8 @@
           "posX": 34,
           "posY": 10,
           "connections": [
-            108151,
-            108126
+            108126,
+            108151
           ],
           "spentRequired": 20,
           "alreadyGranted": false,

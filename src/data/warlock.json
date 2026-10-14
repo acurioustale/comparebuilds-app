@@ -633,8 +633,8 @@
           "posX": 4,
           "posY": 9,
           "connections": [
-            109843,
-            71937
+            71937,
+            109843
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -880,7 +880,7 @@
           "maxRanks": 1,
           "name": "Agony",
           "icon": "136139",
-          "description": "Inflicts increasing agony on the target, causing up to 2,379 Shadow damage over 18 sec. Damage starts low and increases over the duration. Refreshing Agony maintains its current damage level.\r\n\r\nAgony damage sometimes generates 1 Soul Shard.",
+          "description": "Inflicts increasing agony on the target, causing up to 2,854 Shadow damage over 18 sec. Damage starts low and increases over the duration. Refreshing Agony maintains its current damage level.\r\n\r\nAgony damage sometimes generates 1 Soul Shard.",
           "choices": null
         },
         {
@@ -897,7 +897,7 @@
           "maxRanks": 1,
           "name": "Unstable Affliction",
           "icon": "136228",
-          "description": "Afflicts the target with 1,287 Shadow damage over 8 sec. Multiple uses of this ability may overlap.\r\n\r\nIf dispelled, deals 14,850 damage to the dispeller and silences them for 4 sec. This damage is increased by 15% per stack on the target.\r\n\r\nGenerates 1 Soul Shard if the target dies while afflicted.",
+          "description": "Afflicts the target with 1,480 Shadow damage over 8 sec. Multiple uses of this ability may overlap.\r\n\r\nIf dispelled, deals 20,493 damage to the dispeller and silences them for 4 sec. This damage is increased by 15% per stack on the target.\r\n\r\nGenerates 1 Soul Shard if the target dies while afflicted.",
           "choices": null
         },
         {
@@ -914,7 +914,7 @@
           "maxRanks": 1,
           "name": "Seed of Corruption",
           "icon": "136193",
-          "description": "Embeds a demon seed in the enemy target that will explode after 10.7 sec, dealing 907 Shadow damage to all enemies within 10 yards and applying Corruption to them. Damage reduced beyond 8 targets.\r\n\r\nThe seed will detonate early if the target is hit by other detonations, or takes 190 damage from your spells.",
+          "description": "Embeds a demon seed in the enemy target that will explode after 10.7 sec, dealing 900 Shadow damage to all enemies within 10 yards and applying Corruption to them. Damage reduced beyond 8 targets.\r\n\r\nThe seed will detonate early if the target is hit by other detonations, or takes 190 damage from your spells.",
           "choices": null
         },
         {
@@ -949,7 +949,7 @@
           "maxRanks": 1,
           "name": "Haunt",
           "icon": "236298",
-          "description": "A ghostly soul haunts a single target, dealing 2,719 Shadow damage and increasing your damage dealt to the target by 16% for 18 sec.\r\n\r\nIf the target dies, Haunt's cooldown is reset.",
+          "description": "A ghostly soul haunts a single target, dealing 2,704 Shadow damage and increasing your damage dealt to the target by 16% for 18 sec.\r\n\r\nIf the target dies, Haunt's cooldown is reset.",
           "choices": null
         },
         {
@@ -1064,7 +1064,7 @@
           "maxRanks": 1,
           "name": "Cunning Cruelty",
           "icon": "133792",
-          "description": "Shadow Bolt and Drain Soul have a chance to trigger a Shadow Bolt Volley, dealing 444 Shadow damage to 5 enemies within 10 yards of your current target.",
+          "description": "Shadow Bolt and Drain Soul have a chance to trigger a Shadow Bolt Volley, dealing 492 Shadow damage to 5 enemies within 10 yards of your current target.",
           "choices": null
         },
         {
@@ -1153,7 +1153,7 @@
           "maxRanks": 1,
           "name": "Summon Darkglare",
           "icon": "1416161",
-          "description": "Summons a Darkglare from the Twisting Nether that increases the damage of your Agony, Corruption, and Unstable Affliction by 20% while active.\r\n\r\nThe Darkglare will serve you for 20 sec, blasting its target for 1,853 Shadow damage, increased by 10% for every damage over time effect you have active on their current target.",
+          "description": "Summons a Darkglare from the Twisting Nether that increases the damage of your Agony, Corruption, and Unstable Affliction by 20% while active.\r\n\r\nThe Darkglare will serve you for 20 sec, blasting its target for 1,876 Shadow damage, increased by 10% for every damage over time effect you have active on their current target.",
           "choices": null
         },
         {
@@ -1184,7 +1184,7 @@
               "spellId": 108503,
               "name": "Grimoire of Sacrifice",
               "icon": "538443",
-              "description": "Sacrifices your demon pet for power, gaining its command demon ability, and causing your spells to sometimes also deal 141 additional Shadow damage.\r\n\r\nLasts until canceled or until you summon a demon pet.",
+              "description": "Sacrifices your demon pet for power, gaining its command demon ability, and causing your spells to sometimes also deal 139 additional Shadow damage.\r\n\r\nLasts until canceled or until you summon a demon pet.",
               "maxRanks": 1
             }
           ]
@@ -1560,7 +1560,7 @@
           "ranks": [
             {
               "spellId": 1261984,
-              "description": "Haunt now calls upon a demonic soul from within the Twisting Nether to haunt your target.\r\n\r\nThe soul is unstable and ravenous, dealing 2,474 Shadow damage to its host and 3 enemies within 10 yards suffering from your Corruption over its duration.",
+              "description": "Haunt now calls upon a demonic soul from within the Twisting Nether to haunt your target.\r\n\r\nThe soul is unstable and ravenous, dealing 3,093 Shadow damage to its host and 3 enemies within 10 yards suffering from your Corruption over its duration.",
               "maxRanks": 1
             },
             {
@@ -1570,7 +1570,7 @@
             },
             {
               "spellId": 1261992,
-              "description": "Damage dealt by Haunt has a chance to release the demonic soul haunting its target. When released, it unleashes a devastating attack before being banished back to Nathreza.\r\n\r\n Wrath of Nathreza\r\nCalls down a meteor formed from the ruins of Nathreza that explodes upon impact, dealing 6,401 Shadow damage to all enemies within 10 yds.\r\n\r\nDamage reduced beyond 8 targets.",
+              "description": "Damage dealt by Haunt has a chance to release the demonic soul haunting its target. When released, it unleashes a devastating attack before being banished back to Nathreza.\r\n\r\n Wrath of Nathreza\r\nCalls down a meteor formed from the ruins of Nathreza that explodes upon impact, dealing 8,641 Shadow damage to all enemies within 10 yds.\r\n\r\nDamage reduced beyond 8 targets.",
               "maxRanks": 1
             }
           ]
@@ -1614,7 +1614,7 @@
               "spellId": 449704,
               "name": "Shared Fate",
               "icon": "607854",
-              "description": "When you kill a target, its tortured soul is flung into a nearby enemy for 3 sec. This effect inflicts 190 Shadow damage to enemies within 10 yds every 0.9 sec.\r\n\r\nDeals reduced damage beyond 8 targets.",
+              "description": "When you kill a target, its tortured soul is flung into a nearby enemy for 3 sec. This effect inflicts 192 Shadow damage to enemies within 10 yds every 0.9 sec.\r\n\r\nDeals reduced damage beyond 8 targets.",
               "maxRanks": 1
             },
             {
@@ -2006,7 +2006,7 @@
           "maxRanks": 1,
           "name": "Wither",
           "icon": "5927632",
-          "description": "Bestows a vile malediction upon the target, burning the sinew and muscle of its host, dealing 95 Shadowflame damage immediately and an additional 1,564 Shadowflame damage over 18 sec.\r\n\r\nReplaces Corruption.",
+          "description": "Bestows a vile malediction upon the target, burning the sinew and muscle of its host, dealing 95 Shadowflame damage immediately and an additional 1,557 Shadowflame damage over 18 sec.\r\n\r\nReplaces Corruption.",
           "choices": null
         },
         {
@@ -2800,8 +2800,8 @@
           "posX": 4,
           "posY": 9,
           "connections": [
-            109843,
-            71937
+            71937,
+            109843
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -3047,7 +3047,7 @@
           "maxRanks": 1,
           "name": "Hand of Gul'dan",
           "icon": "535592",
-          "description": "Calls down a demonic meteor full of Wild Imps which burst forth to attack the target.\r\n\r\nDeals up to 579 Shadowflame damage on impact to all enemies within 8 yds of the target and summons 3 Wild Imps.",
+          "description": "Calls down a demonic meteor full of Wild Imps which burst forth to attack the target.\r\n\r\nDeals up to 568 Shadowflame damage on impact to all enemies within 8 yds of the target and summons 3 Wild Imps.",
           "choices": null
         },
         {
@@ -3064,7 +3064,7 @@
           "maxRanks": 1,
           "name": "Demoniac",
           "icon": "2065566",
-          "description": "Grants access to the following abilities:\r\n\r\n Demonbolt\r\nSend the fiery soul of a fallen demon at the enemy, causing 2,353 Shadowflame damage.\r\n\r\n Demonic Core\r\nWhen your Wild Imps fade or are imploded, you have a 10% chance to absorb their life essence, granting you a stack of Demonic Core. \r\n\r\nWhen your summoned Dreadstalkers fade away, you have a 100% chance to absorb their life essence, granting you a stack of Demonic Core.\r\n\r\nDemonic Core reduces the cast time of Demonbolt by 100%. Maximum 4 stacks.",
+          "description": "Grants access to the following abilities:\r\n\r\n Demonbolt\r\nSend the fiery soul of a fallen demon at the enemy, causing 3,048 Shadowflame damage.\r\n\r\n Demonic Core\r\nWhen your Wild Imps fade or are imploded, you have a 10% chance to absorb their life essence, granting you a stack of Demonic Core. \r\n\r\nWhen your summoned Dreadstalkers fade away, you have a 100% chance to absorb their life essence, granting you a stack of Demonic Core.\r\n\r\nDemonic Core reduces the cast time of Demonbolt by 100%. Maximum 4 stacks.",
           "choices": null
         },
         {
@@ -3191,7 +3191,7 @@
               "spellId": 196277,
               "name": "Implosion",
               "icon": "2065588",
-              "description": "Demonic forces suck 6 of your Wild Imps toward the target, and then cause them to violently explode, dealing 507 Shadowflame damage to all enemies within 8 yards.",
+              "description": "Demonic forces suck 6 of your Wild Imps toward the target, and then cause them to violently explode, dealing 508 Shadowflame damage to all enemies within 8 yards.",
               "maxRanks": 1
             },
             {
@@ -3463,7 +3463,7 @@
           "maxRanks": 1,
           "name": "Antoran Armaments",
           "icon": "1604396",
-          "description": "Your Demonic Tyrant is equipped with armor forged within Antorus, increasing their armor by 10%. While summoned, your Demonic Tyrant now assaults enemies with powerful melee attacks.\r\n\r\n Burning Cleave\r\nCleaves the area in front of the caster, inflicting 364 Shadowflame damage. Damage reduced beyond 8 targets.",
+          "description": "Your Demonic Tyrant is equipped with armor forged within Antorus, increasing their armor by 10%. While summoned, your Demonic Tyrant now assaults enemies with powerful melee attacks.\r\n\r\n Burning Cleave\r\nCleaves the area around the caster, inflicting 365 Shadowflame damage to targets within 8 yds. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -3674,7 +3674,7 @@
           "maxRanks": 1,
           "name": "Summon Doomguard",
           "icon": "615103",
-          "description": "Summons a Doomguard to assist you in combat for 12 sec. Consuming a Demonic Core reduces the cooldown of Summon Doomguard by 3 sec.\r\n\r\n Doom Bolt Volley\r\nSends a volley of malefic bolts at 5 enemies within 40 yds, inflicting 1,571 Shadow damage to each target.",
+          "description": "Summons a Doomguard to assist you in combat for 12 sec. Consuming a Demonic Core reduces the cooldown of Summon Doomguard by 3 sec.\r\n\r\n Doom Bolt Volley\r\nSends a volley of malefic bolts at 5 enemies within 40 yds, inflicting 1,569 Shadow damage to each target.",
           "choices": null
         },
         {
@@ -3818,7 +3818,7 @@
               "spellId": 449704,
               "name": "Shared Fate",
               "icon": "607854",
-              "description": "When you kill a target, its tortured soul is flung into a nearby enemy for 3 sec. This effect inflicts 194 Shadow damage to enemies within 10 yds every 0.9 sec.\r\n\r\nDeals reduced damage beyond 8 targets.",
+              "description": "When you kill a target, its tortured soul is flung into a nearby enemy for 3 sec. This effect inflicts 191 Shadow damage to enemies within 10 yds every 0.9 sec.\r\n\r\nDeals reduced damage beyond 8 targets.",
               "maxRanks": 1
             },
             {
@@ -5004,8 +5004,8 @@
           "posX": 4,
           "posY": 9,
           "connections": [
-            109843,
-            71937
+            71937,
+            109843
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5251,7 +5251,7 @@
           "maxRanks": 1,
           "name": "Chaos Bolt",
           "icon": "236291",
-          "description": "Unleashes a devastating blast of chaos, dealing a critical strike for 3,282 Chaos damage. Damage is further increased by your critical strike chance.",
+          "description": "Unleashes a devastating blast of chaos, dealing a critical strike for 3,249 Chaos damage. Damage is further increased by your critical strike chance.",
           "choices": null
         },
         {
@@ -5268,7 +5268,7 @@
           "maxRanks": 1,
           "name": "Conflagrate",
           "icon": "135807",
-          "description": "Triggers an explosion on the target, dealing 1,349 Fire damage.\r\n\r\nGenerates 5 Soul Shard Fragments.",
+          "description": "Triggers an explosion on the target, dealing 1,373 Fire damage.\r\n\r\nGenerates 5 Soul Shard Fragments.",
           "choices": null
         },
         {
@@ -5291,14 +5291,14 @@
               "spellId": 5740,
               "name": "Rain of Fire",
               "icon": "136186",
-              "description": "Calls down a rain of hellfire the target location, dealing 1,395 Fire damage over 7.1 sec to enemies in the area.\r\n\r\nThis spell is cast at a selected location.",
+              "description": "Calls down a rain of hellfire the target location, dealing 1,814 Fire damage over 7.1 sec to enemies in the area.\r\n\r\nThis spell is cast at a selected location.",
               "maxRanks": 1
             },
             {
               "spellId": 1214467,
               "name": "Rain of Fire",
               "icon": "136186",
-              "description": "Calls down a rain of hellfire upon your target, dealing 1,395 Fire damage over 7.1 sec to enemies in the area.\r\n\r\nThis spell is cast at your target.",
+              "description": "Calls down a rain of hellfire upon your target, dealing 1,814 Fire damage over 7.1 sec to enemies in the area.\r\n\r\nThis spell is cast at your target.",
               "maxRanks": 1
             }
           ]
@@ -5454,7 +5454,7 @@
           "maxRanks": 1,
           "name": "Shadowburn",
           "icon": "136191",
-          "description": "Blasts a target for 1,865 Shadowflame damage. Only usable on enemies that have less than 20% health.\r\n\r\nRestores 1 Soul Shard and removes its cooldown if the target dies within until canceled.",
+          "description": "Blasts a target for 1,899 Shadowflame damage. Only usable on enemies that have less than 20% health.\r\n\r\nRestores 1 Soul Shard and removes its cooldown if the target dies within 5 sec.",
           "choices": null
         },
         {
@@ -5464,8 +5464,8 @@
           "posX": 34,
           "posY": 6,
           "connections": [
-            72059,
-            71979
+            71979,
+            72059
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5524,7 +5524,7 @@
           "maxRanks": 1,
           "name": "Cataclysm",
           "icon": "409545",
-          "description": "Calls forth a cataclysm at the target location, dealing 1,382 Shadowflame damage to all enemies within 8 yards and afflicting them with Immolate.",
+          "description": "Calls forth a cataclysm at the target location, dealing 1,376 Shadowflame damage to all enemies within 8 yards and afflicting them with Immolate.",
           "choices": null
         },
         {
@@ -5595,7 +5595,7 @@
           "maxRanks": 1,
           "name": "Summon Infernal",
           "icon": "136219",
-          "description": "Summons an Infernal from the Twisting Nether, impacting for 226 Fire damage and stunning all enemies in the area for 2 sec.\r\n\r\nThe Infernal will serve you for 30 sec, dealing 218 damage to all nearby enemies every 1.8 sec and generating 1 Soul Shard Fragment every 1 sec.",
+          "description": "Summons an Infernal from the Twisting Nether, impacting for 227 Fire damage and stunning all enemies in the area for 2 sec.\r\n\r\nThe Infernal will serve you for 30 sec, dealing 218 damage to all nearby enemies every 1.8 sec and generating 1 Soul Shard Fragment every 1 sec.",
           "choices": null
         },
         {
@@ -5774,8 +5774,8 @@
           "posX": 34,
           "posY": 9,
           "connections": [
-            71960,
-            71980
+            71980,
+            71960
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -5792,8 +5792,8 @@
           "posX": 38,
           "posY": 9,
           "connections": [
-            71960,
-            71971
+            71971,
+            71960
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -5847,7 +5847,7 @@
               "spellId": 6353,
               "name": "Soul Fire",
               "icon": "135809",
-              "description": "Burns the enemy's soul, dealing 14,510 Fire damage and applying Immolate.\r\n\r\nGenerates 1 Soul Shard.",
+              "description": "Burns the enemy's soul, dealing 14,800 Fire damage and applying Immolate.\r\n\r\nGenerates 1 Soul Shard.",
               "maxRanks": 1
             }
           ]
@@ -5885,7 +5885,7 @@
           "maxRanks": 1,
           "name": "Conflagration of Chaos",
           "icon": "4914674",
-          "description": "Conflagrate and Shadowburn have a 100% chance to critical strike and their damage is increased by your critical strike chance.",
+          "description": "Conflagrate and Shadowburn have a 100% chance to critically strike and their damage is increased by your critical strike chance.",
           "choices": null
         },
         {
@@ -5933,7 +5933,7 @@
               "spellId": 196447,
               "name": "Channel Demonfire",
               "icon": "840407",
-              "description": "Launches 15 bolts of felfire over 2.7 sec at random targets afflicted by your Immolate within 40 yds. Each bolt deals 150 Fire damage to the target and 74 Fire damage to nearby enemies.",
+              "description": "Launches 15 bolts of felfire over 2.7 sec at random targets afflicted by your Immolate within 40 yds. Each bolt deals 150 Fire damage to the target and 73 Fire damage to nearby enemies.",
               "maxRanks": 1
             }
           ]
@@ -6175,7 +6175,7 @@
           "maxRanks": 1,
           "name": "Wither",
           "icon": "5927632",
-          "description": "Bestows a vile malediction upon the target, burning the sinew and muscle of its host, dealing 94 Shadowflame damage immediately and an additional 1,569 Shadowflame damage over 18 sec.\r\n\r\nReplaces Corruption.",
+          "description": "Bestows a vile malediction upon the target, burning the sinew and muscle of its host, dealing 96 Shadowflame damage immediately and an additional 1,605 Shadowflame damage over 18 sec.\r\n\r\nReplaces Corruption.",
           "choices": null
         },
         {

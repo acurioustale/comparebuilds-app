@@ -132,7 +132,7 @@
               "spellId": 1244090,
               "name": "Temporal Realignment",
               "icon": "4622478",
-              "description": "Upon dropping below 25% health, your past self corrects your timeline, casting Alter Time and instantly returning 20% of your maximum health and healing you for an additional 30% over 6 sec.",
+              "description": "When your health is brought below 25%, your past self corrects your timeline if Alter Time is not on cooldown, instantly restoring 20% of your maximum health and healing you for an additional 30% over 6 sec.\r\n\r\nThis effect places Alter Time on cooldown as if it had been cast.",
               "maxRanks": 1
             }
           ]
@@ -151,7 +151,7 @@
           "maxRanks": 2,
           "name": "Master of Time",
           "icon": "2026009",
-          "description": "Reduces the cooldown of Alter Time by 5 sec. ",
+          "description": "Alter Time's cooldown is reduced by 5 sec. ",
           "choices": null
         },
         {
@@ -168,7 +168,7 @@
           "maxRanks": 2,
           "name": "Winter's Protection",
           "icon": "252270",
-          "description": "The cooldown of Ice Block is reduced by 30 sec.",
+          "description": "Ice Block's cooldown is reduced by 30 sec.",
           "choices": null
         },
         {
@@ -203,7 +203,7 @@
           "maxRanks": 2,
           "name": "Arcane Warding",
           "icon": "135733",
-          "description": "Reduces magic damage taken by 4%.",
+          "description": "Magic damage taken reduced by 4%.",
           "choices": null
         },
         {
@@ -213,8 +213,8 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            62102,
-            62123
+            62123,
+            62102
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -297,14 +297,14 @@
               "spellId": 31661,
               "name": "Dragon's Breath",
               "icon": "134153",
-              "description": "Enemies in a 12 yd cone in front of you take 278 Fire damage and are disoriented for 4 sec. Damage will cancel the effect.",
+              "description": "Enemies in a 12 yd cone in front of you take 281 Fire damage and are disoriented for 4 sec. Damage will cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 157980,
               "name": "Supernova",
               "icon": "1033912",
-              "description": "Pulses arcane energy around the target enemy or ally, dealing 170 Arcane damage to all enemies within 8 yds, and knocking them upward. A primary enemy target will take 100% increased damage.",
+              "description": "Pulses arcane energy around the target enemy or ally, dealing 176 Arcane damage to all enemies within 8 yds, and knocking them upward. A primary enemy target will take 100% increased damage.",
               "maxRanks": 1
             }
           ]
@@ -316,8 +316,8 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            62124,
-            108660
+            108660,
+            62124
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -454,8 +454,8 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            108662,
-            62116
+            62116,
+            108662
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -493,7 +493,7 @@
               "spellId": 205036,
               "name": "Ice Ward",
               "icon": "135850",
-              "description": "Frost Nova now has 2 charges.",
+              "description": "Frost Nova gains an additional charge.",
               "maxRanks": 1
             }
           ]
@@ -531,7 +531,7 @@
           "maxRanks": 1,
           "name": "Tome of Rhonin",
           "icon": "133736",
-          "description": "Increases critical strike chance by 2%.",
+          "description": "Critical strike chance by 2%.",
           "choices": null
         },
         {
@@ -567,7 +567,7 @@
           "maxRanks": 1,
           "name": "Tome of Antonidas",
           "icon": "355498",
-          "description": "Increases Haste by 2%. ",
+          "description": "Haste increased by 2%. ",
           "choices": null
         },
         {
@@ -601,7 +601,7 @@
           "maxRanks": 1,
           "name": "Master of Escape",
           "icon": "132220",
-          "description": "Reduces the cooldown of Invisibility by 60 sec.",
+          "description": "Invisibility's cooldown is reduced by 60 sec.",
           "choices": null
         },
         {
@@ -647,16 +647,16 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            110597,
             62098,
-            62127
+            62127,
+            110597
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flow of Time",
           "icon": "135736",
-          "description": "The cooldowns of Blink and Shimmer are reduced by 3 sec.",
+          "description": "Blink's cooldown is reduced by 3 sec.",
           "choices": null
         },
         {
@@ -683,16 +683,16 @@
           "posX": 12,
           "posY": 8,
           "connections": [
+            62112,
             108659,
-            62098,
-            62112
+            62098
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Charm of Medivh",
           "icon": "5948160",
-          "description": "Your Mastery is increased by 3%.",
+          "description": "Mastery increased by 3%.",
           "choices": null
         },
         {
@@ -709,7 +709,7 @@
           "maxRanks": 1,
           "name": "Permafrost Bauble",
           "icon": "4638564",
-          "description": "The cooldown of Ice Block and Ice Cold are reduced by 30 sec.",
+          "description": "Ice Block's cooldown is reduced by 30 sec.",
           "choices": null
         },
         {
@@ -739,7 +739,7 @@
               "spellId": 157997,
               "name": "Ice Nova",
               "icon": "1033909",
-              "description": "Causes a whirl of icy wind around the enemy, dealing 564 Frost damage to the target and all other enemies within 8 yds, freezing them in place for 2 sec. Damage reduced beyond 8 targets.",
+              "description": "Causes a whirl of icy wind around the enemy, dealing 582 Frost damage to the target and all other enemies within 8 yds, freezing them in place for 2 sec. Damage reduced beyond 8 targets.",
               "maxRanks": 1
             }
           ]
@@ -790,7 +790,7 @@
               "spellId": 383121,
               "name": "Mass Polymorph",
               "icon": "575585",
-              "description": "Transforms all enemies within 10 yards into sheep, wandering around incapacitated for 15 sec. While affected, the victims cannot take actions but will regenerate health very quickly. Damage will cancel the effect.\r\n\r\nOnly works on Beasts, Humanoids and Critters.",
+              "description": "Transforms all enemies within 10 yds into sheep, wandering around incapacitated for 15 sec. While affected, the victims cannot take actions but will regenerate health very quickly. Damage will cancel the effect.\r\n\r\nOnly works on Beasts, Humanoids and Critters.",
               "maxRanks": 1
             }
           ]
@@ -811,7 +811,7 @@
           "maxRanks": 1,
           "name": "Energized Barriers",
           "icon": "610472",
-          "description": "Casting your barrier removes all snare effects.",
+          "description": "Casting Prismatic Barrier removes all snare effects.",
           "choices": null
         },
         {
@@ -845,7 +845,7 @@
           "maxRanks": 1,
           "name": "Barrier Diffusion",
           "icon": "1045852",
-          "description": "When your Barrier is removed, reduce its cooldown by 5 sec.",
+          "description": "When Prismatic Barrier is removed, its remaining cooldown is reduced by 5 sec.",
           "choices": null
         },
         {
@@ -864,7 +864,7 @@
           "maxRanks": 1,
           "name": "Ice Cold",
           "icon": "135777",
-          "description": "Ice Block now reduces all damage taken by 70% for 6 sec but no longer grants Immunity, prevents movement, attacks, or casting spells. Does not incur the Global Cooldown.",
+          "description": "Your blood runs cold, reducing all damage you take by 70% for 6 sec.\r\n\r\nDoes not incur the Global Cooldown.\r\n\r\nCauses Hypothermia, preventing you from recasting Ice Cold for 30 sec.",
           "choices": null
         },
         {
@@ -908,9 +908,9 @@
           "posX": 12,
           "posY": 10,
           "connections": [
+            62091,
             62092,
-            62100,
-            62091
+            62100
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -932,7 +932,7 @@
           "maxRanks": 1,
           "name": "Arcane Missiles",
           "icon": "136096",
-          "description": "Requires Clearcasting\r\nLaunches 5 waves of Arcane Missiles at the enemy over 2.2 sec, causing a total of 2,193 Arcane damage.",
+          "description": "Requires Clearcasting\r\nLaunches 5 waves of Arcane Missiles at the enemy over 2.2 sec, causing a total of 2,217 Arcane damage.",
           "choices": null
         },
         {
@@ -1035,7 +1035,7 @@
           "maxRanks": 1,
           "name": "Arcane Pulse",
           "icon": "135734",
-          "description": "A pulse of Arcane magic erupts from underneath your target, dealing 2,464 Arcane damage to all enemies within 8 yds. Damage reduced beyond 5 targets.\r\n\r\nGenerates 1 Arcane Charge for each enemy struck.",
+          "description": "A pulse of Arcane magic erupts from underneath your target, dealing 2,490 Arcane damage to all enemies within 8 yds. Damage reduced beyond 5 targets.\r\n\r\nGenerates 1 Arcane Charge for each enemy struck.",
           "choices": null
         },
         {
@@ -1052,7 +1052,7 @@
           "maxRanks": 1,
           "name": "Arcane Surge",
           "icon": "4667417",
-          "description": "Expend all of your current mana to annihilate your enemy target and nearby enemies for up to 3,740 Arcane damage based on Mana spent. Deals reduced damage beyond 8 targets.\r\n\r\nFor the next 15 sec, your Mana regeneration is increased by 425% and spell damage is increased by 35%.\r\n\r\nGenerates Clearcasting.",
+          "description": "Expend all of your current mana to annihilate your enemy target and nearby enemies for up to 3,844 Arcane damage based on Mana spent. Deals reduced damage beyond 8 targets.\r\n\r\nFor the next 15 sec, your Mana regeneration is increased by 425% and spell damage is increased by 35%.\r\n\r\nGenerates Clearcasting.",
           "choices": null
         },
         {
@@ -1069,7 +1069,7 @@
           "maxRanks": 1,
           "name": "Arcane Orb",
           "icon": "1033906",
-          "description": "Launches an Arcane Orb forward from your position, traveling up to 40 yds, dealing 1,242 Arcane damage to enemies it passes through.\r\n\r\nGrants 1 Arcane Charge when cast and every time it deals damage.",
+          "description": "Launches an Arcane Orb forward from your position, traveling up to 40 yds, dealing 1,250 Arcane damage to enemies it passes through.\r\n\r\nGrants 1 Arcane Charge when cast and every time it deals damage.",
           "choices": null
         },
         {
@@ -1293,7 +1293,7 @@
           "maxRanks": 1,
           "name": "Arcane Tempo",
           "icon": "1041230",
-          "description": "Your Haste is increased by 2%.",
+          "description": "Haste increased by 2%.",
           "choices": null
         },
         {
@@ -1341,7 +1341,7 @@
               "spellId": 342231,
               "name": "Arcane Echo",
               "icon": "1041234",
-              "description": "Direct damage you deal to enemies affected by Touch of the Magi, causes an explosion that deals 40 Arcane damage to all nearby enemies. Deals reduced damage beyond 8 targets.",
+              "description": "Direct damage you deal to enemies affected by Touch of the Magi, causes an explosion that deals 42 Arcane damage to all nearby enemies. Deals reduced damage beyond 8 targets.",
               "maxRanks": 1
             }
           ]
@@ -1389,9 +1389,9 @@
           "posX": 32,
           "posY": 8,
           "connections": [
+            110442,
             108535,
-            108536,
-            110442
+            108536
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1513,8 +1513,8 @@
           "posX": 40,
           "posY": 9,
           "connections": [
-            102451,
-            108551
+            108551,
+            102451
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1645,7 +1645,7 @@
           "ranks": [
             {
               "spellId": 1295923,
-              "description": "Arcane Barrage has a 1% chance per stack of Arcane Salvo consumed to replace your next Arcane Blast with Prismatic Bolt.\r\n\r\n Prismatic Bolt\r\nDevastates the target with overwhelming energy, dealing 16,111 Arcane damage to them and 10,184 Arcane damage to other nearby enemies. Damage reduced beyond 5 targets.\r\n\r\nGenerates 4 Arcane Charges.",
+              "description": "Arcane Barrage has a 1% chance per stack of Arcane Salvo consumed to replace your next Arcane Blast with Prismatic Bolt.\r\n\r\n Prismatic Bolt\r\nDevastates the target with overwhelming energy, dealing 16,441 Arcane damage to them and 10,563 Arcane damage to other nearby enemies. Damage reduced beyond 5 targets.\r\n\r\nGenerates 4 Arcane Charges.",
               "maxRanks": 1
             },
             {
@@ -1721,10 +1721,10 @@
           "posX": 20,
           "posY": 11,
           "connections": [
-            109673,
             94643,
             94650,
-            94648
+            94648,
+            109673
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -1797,7 +1797,7 @@
               "spellId": 1255166,
               "name": "Time Twist",
               "icon": "237538",
-              "description": "The cooldown of Alter Time is reduced by 10 sec.",
+              "description": "Alter Time's cooldown is reduced by 10 sec.",
               "maxRanks": 1
             }
           ]
@@ -1863,7 +1863,7 @@
               "spellId": 1246030,
               "name": "Explosive Potential",
               "icon": "1044088",
-              "description": "After casting Arcane Surge, your next Blink will cause a Blast Wave at your previous location, dealing 224 Fire damage, knocking enemies back 8 yds, and slowing them by 70% for 6 sec.",
+              "description": "After casting Arcane Surge, your next Blink will cause a Blast Wave at your previous location, dealing 225 Fire damage, knocking enemies back 8 yds, and slowing them by 70% for 6 sec.",
               "maxRanks": 1
             }
           ]
@@ -1955,7 +1955,7 @@
           "maxRanks": 1,
           "name": "Glorious Incandescence",
           "icon": "429590",
-          "description": "Arcane Barrage summons 1 Meteorite for every 5 Arcane Salvo stacks consumed.\r\n\r\n Meteorite\r\nCalls down a meteorite which lands at the target location after 3 sec, dealing 421 Fire damage to all enemies hit, reduced beyond 8 targets.",
+          "description": "Arcane Barrage summons 1 Meteorite for every 5 Arcane Salvo stacks consumed.\r\n\r\n Meteorite\r\nCalls down a meteorite which lands at the target location after 3 sec, dealing 436 Fire damage to all enemies hit, reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -1965,10 +1965,10 @@
           "posX": 20,
           "posY": 6,
           "connections": [
-            109667,
+            94655,
             94658,
             94657,
-            94655
+            109667
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -1976,7 +1976,7 @@
           "maxRanks": 1,
           "name": "Splinterstorm",
           "icon": "1387352",
-          "description": "Casting Arcane Surge generates 8 Arcane Splinters.\r\n\r\nDuring Arcane Surge, your chance to conjure an additional Arcane Splinter is increased to 100%.",
+          "description": "Casting Arcane Surge conjures 8 Arcane Splinters.\r\n\r\nDuring Arcane Surge, your chance to conjure an additional Arcane Splinter is increased to 100%.",
           "choices": null
         },
         {
@@ -2112,7 +2112,7 @@
               "spellId": 444784,
               "name": "Phantasmal Image",
               "icon": "135752",
-              "description": "Your Mirror Image summons 1 extra copy of you.",
+              "description": "Casting Mirror Image summons 1 extra copy of you.",
               "maxRanks": 1
             }
           ]
@@ -2184,7 +2184,7 @@
           "maxRanks": 1,
           "name": "Splintering Sorcery",
           "icon": "4578411",
-          "description": "Casting Arcane Blast or Arcane Pulse conjures an Arcane Splinter.\r\n\r\nArcane Splinter:\r\nConjure raw Arcane magic into a sharp projectile that deals 219 Arcane damage.\r\n",
+          "description": "Casting Arcane Blast or Arcane Pulse conjures an Arcane Splinter.\r\n\r\nArcane Splinter:\r\nConjure raw Arcane magic into a sharp projectile that deals 225 Arcane damage.\r\n",
           "choices": null
         },
         {
@@ -2220,7 +2220,7 @@
           "maxRanks": 1,
           "name": "Infused Splinters",
           "icon": "1033908",
-          "description": "Direct damage from Arcane Splinters have a 25% chance to grant 1 stack Arcane Salvo.\r\n\r\n Arcane Salvo\r\nIncreases the damage of your next Arcane Barrage by 3%.",
+          "description": "Direct damage from Arcane Splinters has a 25% chance to grant 1 stack Arcane Salvo.\r\n\r\n Arcane Salvo\r\nIncreases the damage of your next Arcane Barrage by 3%.",
           "choices": null
         },
         {
@@ -2320,7 +2320,7 @@
           "maxRanks": 1,
           "name": "Blazing Barrier",
           "icon": "132221",
-          "description": "Shields you in flame, absorbing 9,165 damage for 1 min.\r\n\r\nMelee attacks against you cause the attacker to take 59 Fire damage.",
+          "description": "Shields you in flame, absorbing 9,165 damage for 1 min.\r\n\r\nMelee attacks against you cause the attacker to take 60 Fire damage.",
           "choices": null
         },
         {
@@ -2384,7 +2384,7 @@
               "spellId": 1244090,
               "name": "Temporal Realignment",
               "icon": "4622478",
-              "description": "Upon dropping below 25% health, your past self corrects your timeline, casting Alter Time and instantly returning 20% of your maximum health and healing you for an additional 30% over 6 sec.",
+              "description": "When your health is brought below 25%, your past self corrects your timeline if Alter Time is not on cooldown, instantly restoring 20% of your maximum health and healing you for an additional 30% over 6 sec.\r\n\r\nThis effect places Alter Time on cooldown as if it had been cast.",
               "maxRanks": 1
             }
           ]
@@ -2403,7 +2403,7 @@
           "maxRanks": 2,
           "name": "Master of Time",
           "icon": "2026009",
-          "description": "Reduces the cooldown of Alter Time by 5 sec. ",
+          "description": "Alter Time's cooldown is reduced by 5 sec. ",
           "choices": null
         },
         {
@@ -2420,7 +2420,7 @@
           "maxRanks": 2,
           "name": "Winter's Protection",
           "icon": "252270",
-          "description": "The cooldown of Ice Block is reduced by 30 sec.",
+          "description": "Ice Block's cooldown is reduced by 30 sec.",
           "choices": null
         },
         {
@@ -2455,7 +2455,7 @@
           "maxRanks": 2,
           "name": "Arcane Warding",
           "icon": "135733",
-          "description": "Reduces magic damage taken by 4%.",
+          "description": "Magic damage taken reduced by 4%.",
           "choices": null
         },
         {
@@ -2465,8 +2465,8 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            62102,
-            62123
+            62123,
+            62102
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2549,14 +2549,14 @@
               "spellId": 31661,
               "name": "Dragon's Breath",
               "icon": "134153",
-              "description": "Enemies in a 12 yd cone in front of you take 275 Fire damage and are disoriented for 4 sec. Damage will cancel the effect.",
+              "description": "Enemies in a 12 yd cone in front of you take 288 Fire damage and are disoriented for 4 sec. Damage will cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 157980,
               "name": "Supernova",
               "icon": "1033912",
-              "description": "Pulses arcane energy around the target enemy or ally, dealing 173 Arcane damage to all enemies within 8 yds, and knocking them upward. A primary enemy target will take 100% increased damage.",
+              "description": "Pulses arcane energy around the target enemy or ally, dealing 179 Arcane damage to all enemies within 8 yds, and knocking them upward. A primary enemy target will take 100% increased damage.",
               "maxRanks": 1
             }
           ]
@@ -2568,8 +2568,8 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            62124,
-            108660
+            108660,
+            62124
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2706,8 +2706,8 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            108662,
-            62116
+            62116,
+            108662
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2745,7 +2745,7 @@
               "spellId": 205036,
               "name": "Ice Ward",
               "icon": "135850",
-              "description": "Frost Nova now has 2 charges.",
+              "description": "Frost Nova gains an additional charge.",
               "maxRanks": 1
             }
           ]
@@ -2783,7 +2783,7 @@
           "maxRanks": 1,
           "name": "Tome of Rhonin",
           "icon": "133736",
-          "description": "Increases critical strike chance by 2%.",
+          "description": "Critical strike chance by 2%.",
           "choices": null
         },
         {
@@ -2819,7 +2819,7 @@
           "maxRanks": 1,
           "name": "Tome of Antonidas",
           "icon": "355498",
-          "description": "Increases Haste by 2%. ",
+          "description": "Haste increased by 2%. ",
           "choices": null
         },
         {
@@ -2853,7 +2853,7 @@
           "maxRanks": 1,
           "name": "Master of Escape",
           "icon": "132220",
-          "description": "Reduces the cooldown of Invisibility by 60 sec.",
+          "description": "Invisibility's cooldown is reduced by 60 sec.",
           "choices": null
         },
         {
@@ -2899,16 +2899,16 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            110597,
             62098,
-            62127
+            62127,
+            110597
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flow of Time",
           "icon": "135736",
-          "description": "The cooldowns of Blink and Shimmer are reduced by 3 sec.",
+          "description": "Blink's cooldown is reduced by 3 sec.",
           "choices": null
         },
         {
@@ -2935,16 +2935,16 @@
           "posX": 12,
           "posY": 8,
           "connections": [
+            62112,
             108659,
-            62098,
-            62112
+            62098
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Charm of Medivh",
           "icon": "5948160",
-          "description": "Your Mastery is increased by 3%.",
+          "description": "Mastery increased by 3%.",
           "choices": null
         },
         {
@@ -2961,7 +2961,7 @@
           "maxRanks": 1,
           "name": "Permafrost Bauble",
           "icon": "4638564",
-          "description": "The cooldown of Ice Block and Ice Cold are reduced by 30 sec.",
+          "description": "Ice Block's cooldown is reduced by 30 sec.",
           "choices": null
         },
         {
@@ -2991,7 +2991,7 @@
               "spellId": 157997,
               "name": "Ice Nova",
               "icon": "1033909",
-              "description": "Causes a whirl of icy wind around the enemy, dealing 564 Frost damage to the target and all other enemies within 8 yds, freezing them in place for 2 sec. Damage reduced beyond 8 targets.",
+              "description": "Causes a whirl of icy wind around the enemy, dealing 582 Frost damage to the target and all other enemies within 8 yds, freezing them in place for 2 sec. Damage reduced beyond 8 targets.",
               "maxRanks": 1
             }
           ]
@@ -3042,7 +3042,7 @@
               "spellId": 383121,
               "name": "Mass Polymorph",
               "icon": "575585",
-              "description": "Transforms all enemies within 10 yards into sheep, wandering around incapacitated for 15 sec. While affected, the victims cannot take actions but will regenerate health very quickly. Damage will cancel the effect.\r\n\r\nOnly works on Beasts, Humanoids and Critters.",
+              "description": "Transforms all enemies within 10 yds into sheep, wandering around incapacitated for 15 sec. While affected, the victims cannot take actions but will regenerate health very quickly. Damage will cancel the effect.\r\n\r\nOnly works on Beasts, Humanoids and Critters.",
               "maxRanks": 1
             }
           ]
@@ -3063,7 +3063,7 @@
           "maxRanks": 1,
           "name": "Energized Barriers",
           "icon": "610472",
-          "description": "Casting your barrier removes all snare effects.",
+          "description": "Casting Prismatic Barrier removes all snare effects.",
           "choices": null
         },
         {
@@ -3097,7 +3097,7 @@
           "maxRanks": 1,
           "name": "Barrier Diffusion",
           "icon": "1045852",
-          "description": "When your Barrier is removed, reduce its cooldown by 5 sec.",
+          "description": "When Prismatic Barrier is removed, its remaining cooldown is reduced by 5 sec.",
           "choices": null
         },
         {
@@ -3116,7 +3116,7 @@
           "maxRanks": 1,
           "name": "Ice Cold",
           "icon": "135777",
-          "description": "Ice Block now reduces all damage taken by 70% for 6 sec but no longer grants Immunity, prevents movement, attacks, or casting spells. Does not incur the Global Cooldown.",
+          "description": "Your blood runs cold, reducing all damage you take by 70% for 6 sec.\r\n\r\nDoes not incur the Global Cooldown.\r\n\r\nCauses Hypothermia, preventing you from recasting Ice Cold for 30 sec.",
           "choices": null
         },
         {
@@ -3160,9 +3160,9 @@
           "posX": 12,
           "posY": 10,
           "connections": [
-            62100,
+            62091,
             62092,
-            62091
+            62100
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3184,7 +3184,7 @@
           "maxRanks": 1,
           "name": "Pyroblast",
           "icon": "135808",
-          "description": "Hurls an immense fiery boulder that causes 2,605 Fire damage.",
+          "description": "Hurls an immense fiery boulder that causes 2,681 Fire damage.",
           "choices": null
         },
         {
@@ -3201,7 +3201,7 @@
           "maxRanks": 1,
           "name": "Fire Blast",
           "icon": "135807",
-          "description": "Blasts the enemy, critically striking for 823 Fire damage.\r\n\r\nCastable while casting other spells.",
+          "description": "Blasts the enemy, critically striking for 845 Fire damage.\r\n\r\nCastable while casting other spells.",
           "choices": null
         },
         {
@@ -3241,14 +3241,14 @@
               "spellId": 2120,
               "name": "Flamestrike",
               "icon": "135826",
-              "description": "Calls down a pillar of fire, burning all enemies within the area for 1,389 Fire damage. Deals reduced damage beyond 8 targets.\r\n\r\nThis spell is cast at a selected location.",
+              "description": "Calls down a pillar of fire, burning all enemies within the area for 1,462 Fire damage. Deals reduced damage beyond 8 targets.\r\n\r\nThis spell is cast at a selected location.",
               "maxRanks": 1
             },
             {
               "spellId": 1254851,
               "name": "Flamestrike",
               "icon": "135826",
-              "description": "Calls down a pillar of fire on your target, burning all enemies within the area for 1,407 Fire damage. Deals reduced damage beyond 8 targets.\r\n\r\nThis spell is cast at your target.",
+              "description": "Calls down a pillar of fire on your target, burning all enemies within the area for 1,460 Fire damage. Deals reduced damage beyond 8 targets.\r\n\r\nThis spell is cast at your target.",
               "maxRanks": 1
             }
           ]
@@ -3353,7 +3353,7 @@
           "maxRanks": 1,
           "name": "Meteor",
           "icon": "1033911",
-          "description": "Calls down a meteor which lands at the target location after 3 sec, dealing 3,746 Fire damage to all enemies, and burns the ground, dealing 1,707 Fire damage over 4 sec to all enemies in the area.\r\n\r\nDamage reduced beyond 8 targets.",
+          "description": "Calls down a meteor which lands at the target location after 3 sec, dealing 3,798 Fire damage to all enemies, and burns the ground, dealing 3,509 Fire damage over 4 sec to all enemies in the area.\r\n\r\nDamage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -3370,7 +3370,7 @@
           "maxRanks": 1,
           "name": "Scorch",
           "icon": "135827",
-          "description": "Scorches an enemy for 406 Fire damage.\r\n\r\nWhen cast on a target below 30% health, Scorch is a guaranteed critical strike.\r\n\r\nCastable while moving.",
+          "description": "Scorches an enemy for 419 Fire damage.\r\n\r\nWhen cast on a target below 30% health, Scorch is a guaranteed critical strike.\r\n\r\nCastable while moving.",
           "choices": null
         },
         {
@@ -3485,9 +3485,9 @@
           "posX": 36,
           "posY": 6,
           "connections": [
+            101024,
             101029,
-            101009,
-            101024
+            101009
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3547,7 +3547,7 @@
           "maxRanks": 1,
           "name": "Conflagration",
           "icon": "459026",
-          "description": "Fire Blast deals 165 additional Fire damage to up to 8 nearby enemies.",
+          "description": "Fire Blast deals 169 additional Fire damage to up to 8 nearby enemies.",
           "choices": null
         },
         {
@@ -3646,9 +3646,9 @@
           "posX": 36,
           "posY": 8,
           "connections": [
-            109402,
             109398,
-            109412
+            109412,
+            109402
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3804,9 +3804,9 @@
           "posX": 36,
           "posY": 10,
           "connections": [
-            109396,
             109394,
-            109393
+            109393,
+            109396
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3862,7 +3862,7 @@
           "maxRanks": 1,
           "name": "Cinderstorm",
           "icon": "135815",
-          "description": "Casting Pyroblast or Flamestrike has a 8% chance to summon a storm of 5 cinders that pursue your target. Upon reaching your target, each cinder deals 836 Fire damage, applies Ignite at 100% effectiveness, and spreads 50% of your Ignite to up to 1 nearby target.",
+          "description": "Casting Pyroblast or Flamestrike has a 8% chance to summon a storm of 5 cinders that pursue your target. Upon reaching your target, each cinder deals 740 Fire damage, applies Ignite at 100% effectiveness, and spreads 50% of your Ignite to up to 1 nearby target.",
           "choices": null
         },
         {
@@ -3962,10 +3962,10 @@
           "posX": 20,
           "posY": 11,
           "connections": [
-            109673,
             94643,
             94650,
-            94648
+            94648,
+            109673
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4038,7 +4038,7 @@
               "spellId": 1255166,
               "name": "Time Twist",
               "icon": "237538",
-              "description": "The cooldown of Alter Time is reduced by 10 sec.",
+              "description": "Alter Time's cooldown is reduced by 10 sec.",
               "maxRanks": 1
             }
           ]
@@ -4104,7 +4104,7 @@
               "spellId": 1246030,
               "name": "Explosive Potential",
               "icon": "1044088",
-              "description": "After casting Arcane Surge, your next Blink will cause a Blast Wave at your previous location, dealing 223 Fire damage, knocking enemies back 8 yds, and slowing them by 70% for 6 sec.",
+              "description": "After casting Arcane Surge, your next Blink will cause a Blast Wave at your previous location, dealing 225 Fire damage, knocking enemies back 8 yds, and slowing them by 70% for 6 sec.",
               "maxRanks": 1
             }
           ]
@@ -4196,7 +4196,7 @@
           "maxRanks": 1,
           "name": "Glorious Incandescence",
           "icon": "429590",
-          "description": "Arcane Barrage summons 1 Meteorite for every 5 Arcane Salvo stacks consumed.\r\n\r\n Meteorite\r\nCalls down a meteorite which lands at the target location after 3 sec, dealing 413 Fire damage to all enemies hit, reduced beyond 8 targets.",
+          "description": "Arcane Barrage summons 1 Meteorite for every 5 Arcane Salvo stacks consumed.\r\n\r\n Meteorite\r\nCalls down a meteorite which lands at the target location after 3 sec, dealing 434 Fire damage to all enemies hit, reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -4275,10 +4275,10 @@
           "posX": 44,
           "posY": 5,
           "connections": [
-            109670,
             94632,
             94639,
-            94637
+            94637,
+            109670
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4286,7 +4286,7 @@
           "maxRanks": 1,
           "name": "Isothermic Core",
           "icon": "7439205",
-          "description": "Meteor now also calls down a Comet Storm, dealing 2,625 Frost damage to nearby enemies.\r\n\r\nComet Storm now also calls down a Meteor, dealing 3,657 Fire damage to nearby enemies.",
+          "description": "Meteor now also calls down a Comet Storm, dealing 2,687 Frost damage to nearby enemies.\r\n\r\nComet Storm now also calls down a Meteor, dealing 2,624 Fire damage to nearby enemies.",
           "choices": null
         },
         {
@@ -4340,7 +4340,7 @@
           "maxRanks": 1,
           "name": "Frostfire Infusion",
           "icon": "4622287",
-          "description": "Frostfire Bolt has and additional 5% chance to grant Brain Freeze and its critical strike chance is increased by 15%.\r\n\r\nThe damage of your Frost spells and Fire spells are increased by 4%.",
+          "description": "Frostfire Bolt grants Brain Freeze 5% more often and its critical strike chance is increased by 15%.\r\n\r\nThe damage of your Frost spells and Fire spells are increased by 4%.",
           "choices": null
         },
         {
@@ -4391,7 +4391,7 @@
           "maxRanks": 1,
           "name": "Frostfire Empowerment",
           "icon": "429384",
-          "description": "Casting Frostfire spells has a 10% chance to activate Frostfire Empowerment, causing your next Frostfire Bolt to be instant cast, deal 60% increased damage, explode for 60% of its damage to nearby enemies. Damage reduced beyond 5 targets.\r\n\r\nDamage from Frostfire Empowerment applies 1 stack of Freezing.",
+          "description": "Casting Frostfire spells has a 10% chance to activate Frostfire Empowerment, causing your next Frostfire Bolt to be instant cast, deal 60% increased damage, and explode for 60% of its damage to nearby enemies. Damage reduced beyond 5 targets.\r\n\r\nDamage from Frostfire Empowerment applies 1 stack of Freezing.",
           "choices": null
         },
         {
@@ -4442,7 +4442,7 @@
           "maxRanks": 1,
           "name": "Elemental Conduit",
           "icon": "6035320",
-          "description": "Meteor and Pyroblast now apply Ignite.\r\n\r\nYour Haste is increased by 2%.",
+          "description": "Meteor and Pyroblast now apply Ignite.\r\n\r\nHaste increased by 2%.",
           "choices": null
         },
         {
@@ -4478,7 +4478,7 @@
           "maxRanks": 1,
           "name": "Duality",
           "icon": "236217",
-          "description": "Casting Glacial Spike also casts a Pyroblast, dealing 3,662 Fire damage.",
+          "description": "Casting Glacial Spike also casts a Pyroblast, dealing 3,703 Fire damage.",
           "choices": null
         },
         {
@@ -4494,7 +4494,7 @@
           "maxRanks": 1,
           "name": "Frostfire Bolt",
           "icon": "5927630",
-          "description": "Launches a bolt of frostfire at the enemy, causing 1,057 Frostfire damage, slowing movement speed by 50%, and causing an additional 99 Frostfire damage over 8 sec.",
+          "description": "Launches a bolt of frostfire at the enemy, causing 1,115 Frostfire damage, slowing movement speed by 50%, and causing an additional 102 Frostfire damage over 8 sec.",
           "choices": null
         }
       ]
@@ -4561,7 +4561,7 @@
           "maxRanks": 1,
           "name": "Ice Barrier",
           "icon": "135988",
-          "description": "Shields you with ice, absorbing 9,165 damage for 1 min.\r\n\r\nMelee attacks against you reduce the attacker's movement speed by 50%.",
+          "description": "Shields you with ice, absorbing 10,692 damage for 1 min.\r\n\r\nMelee attacks against you reduce the attacker's movement speed by 50%.",
           "choices": null
         },
         {
@@ -4625,7 +4625,7 @@
               "spellId": 1244090,
               "name": "Temporal Realignment",
               "icon": "4622478",
-              "description": "Upon dropping below 25% health, your past self corrects your timeline, casting Alter Time and instantly returning 20% of your maximum health and healing you for an additional 30% over 6 sec.",
+              "description": "When your health is brought below 25%, your past self corrects your timeline if Alter Time is not on cooldown, instantly restoring 20% of your maximum health and healing you for an additional 30% over 6 sec.\r\n\r\nThis effect places Alter Time on cooldown as if it had been cast.",
               "maxRanks": 1
             }
           ]
@@ -4644,7 +4644,7 @@
           "maxRanks": 2,
           "name": "Master of Time",
           "icon": "2026009",
-          "description": "Reduces the cooldown of Alter Time by 5 sec. ",
+          "description": "Alter Time's cooldown is reduced by 5 sec. ",
           "choices": null
         },
         {
@@ -4661,7 +4661,7 @@
           "maxRanks": 2,
           "name": "Winter's Protection",
           "icon": "252270",
-          "description": "The cooldown of Ice Block is reduced by 30 sec.",
+          "description": "Ice Block's cooldown is reduced by 30 sec.",
           "choices": null
         },
         {
@@ -4696,7 +4696,7 @@
           "maxRanks": 2,
           "name": "Arcane Warding",
           "icon": "135733",
-          "description": "Reduces magic damage taken by 4%.",
+          "description": "Magic damage taken reduced by 4%.",
           "choices": null
         },
         {
@@ -4706,8 +4706,8 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            62102,
-            62123
+            62123,
+            62102
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4790,14 +4790,14 @@
               "spellId": 31661,
               "name": "Dragon's Breath",
               "icon": "134153",
-              "description": "Enemies in a 12 yd cone in front of you take 277 Fire damage and are disoriented for 4 sec. Damage will cancel the effect.",
+              "description": "Enemies in a 12 yd cone in front of you take 279 Fire damage and are disoriented for 4 sec. Damage will cancel the effect.",
               "maxRanks": 1
             },
             {
               "spellId": 157980,
               "name": "Supernova",
               "icon": "1033912",
-              "description": "Pulses arcane energy around the target enemy or ally, dealing 172 Arcane damage to all enemies within 8 yds, and knocking them upward. A primary enemy target will take 100% increased damage.",
+              "description": "Pulses arcane energy around the target enemy or ally, dealing 179 Arcane damage to all enemies within 8 yds, and knocking them upward. A primary enemy target will take 100% increased damage.",
               "maxRanks": 1
             }
           ]
@@ -4809,8 +4809,8 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            62124,
-            108660
+            108660,
+            62124
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4947,8 +4947,8 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            108662,
-            62116
+            62116,
+            108662
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4986,7 +4986,7 @@
               "spellId": 205036,
               "name": "Ice Ward",
               "icon": "135850",
-              "description": "Frost Nova now has 2 charges.",
+              "description": "Frost Nova gains an additional charge.",
               "maxRanks": 1
             }
           ]
@@ -5024,7 +5024,7 @@
           "maxRanks": 1,
           "name": "Tome of Rhonin",
           "icon": "133736",
-          "description": "Increases critical strike chance by 2%.",
+          "description": "Critical strike chance by 2%.",
           "choices": null
         },
         {
@@ -5060,7 +5060,7 @@
           "maxRanks": 1,
           "name": "Tome of Antonidas",
           "icon": "355498",
-          "description": "Increases Haste by 2%. ",
+          "description": "Haste increased by 2%. ",
           "choices": null
         },
         {
@@ -5094,7 +5094,7 @@
           "maxRanks": 1,
           "name": "Master of Escape",
           "icon": "132220",
-          "description": "Reduces the cooldown of Invisibility by 60 sec.",
+          "description": "Invisibility's cooldown is reduced by 60 sec.",
           "choices": null
         },
         {
@@ -5140,16 +5140,16 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            110597,
             62098,
-            62127
+            62127,
+            110597
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Flow of Time",
           "icon": "135736",
-          "description": "The cooldowns of Blink and Shimmer are reduced by 3 sec.",
+          "description": "Blink's cooldown is reduced by 3 sec.",
           "choices": null
         },
         {
@@ -5176,16 +5176,16 @@
           "posX": 12,
           "posY": 8,
           "connections": [
+            62112,
             108659,
-            62098,
-            62112
+            62098
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Charm of Medivh",
           "icon": "5948160",
-          "description": "Your Mastery is increased by 3%.",
+          "description": "Mastery increased by 3%.",
           "choices": null
         },
         {
@@ -5202,7 +5202,7 @@
           "maxRanks": 1,
           "name": "Permafrost Bauble",
           "icon": "4638564",
-          "description": "The cooldown of Ice Block and Ice Cold are reduced by 30 sec.",
+          "description": "Ice Block's cooldown is reduced by 30 sec.",
           "choices": null
         },
         {
@@ -5232,7 +5232,7 @@
               "spellId": 157997,
               "name": "Ice Nova",
               "icon": "1033909",
-              "description": "Causes a whirl of icy wind around the enemy, dealing 566 Frost damage to the target and all other enemies within 8 yds, freezing them in place for 2 sec. Damage reduced beyond 8 targets.",
+              "description": "Causes a whirl of icy wind around the enemy, dealing 580 Frost damage to the target and all other enemies within 8 yds, freezing them in place for 2 sec. Damage reduced beyond 8 targets.",
               "maxRanks": 1
             }
           ]
@@ -5283,7 +5283,7 @@
               "spellId": 383121,
               "name": "Mass Polymorph",
               "icon": "575585",
-              "description": "Transforms all enemies within 10 yards into sheep, wandering around incapacitated for 15 sec. While affected, the victims cannot take actions but will regenerate health very quickly. Damage will cancel the effect.\r\n\r\nOnly works on Beasts, Humanoids and Critters.",
+              "description": "Transforms all enemies within 10 yds into sheep, wandering around incapacitated for 15 sec. While affected, the victims cannot take actions but will regenerate health very quickly. Damage will cancel the effect.\r\n\r\nOnly works on Beasts, Humanoids and Critters.",
               "maxRanks": 1
             }
           ]
@@ -5304,7 +5304,7 @@
           "maxRanks": 1,
           "name": "Energized Barriers",
           "icon": "610472",
-          "description": "Casting your barrier removes all snare effects.",
+          "description": "Casting Prismatic Barrier removes all snare effects.",
           "choices": null
         },
         {
@@ -5338,7 +5338,7 @@
           "maxRanks": 1,
           "name": "Barrier Diffusion",
           "icon": "1045852",
-          "description": "When your Barrier is removed, reduce its cooldown by 5 sec.",
+          "description": "When Prismatic Barrier is removed, its remaining cooldown is reduced by 5 sec.",
           "choices": null
         },
         {
@@ -5357,7 +5357,7 @@
           "maxRanks": 1,
           "name": "Ice Cold",
           "icon": "135777",
-          "description": "Ice Block now reduces all damage taken by 70% for 6 sec but no longer grants Immunity, prevents movement, attacks, or casting spells. Does not incur the Global Cooldown.",
+          "description": "Your blood runs cold, reducing all damage you take by 70% for 6 sec.\r\n\r\nDoes not incur the Global Cooldown.\r\n\r\nCauses Hypothermia, preventing you from recasting Ice Cold for 30 sec.",
           "choices": null
         },
         {
@@ -5401,9 +5401,9 @@
           "posX": 12,
           "posY": 10,
           "connections": [
-            62100,
             62092,
-            62091
+            62091,
+            62100
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -5425,7 +5425,7 @@
           "maxRanks": 1,
           "name": "Ice Lance",
           "icon": "135844",
-          "description": "Quickly fling a shard of ice at the target, dealing 758 Frost damage.\r\n\r\nShatters 4 stacks of Freezing.",
+          "description": "Quickly fling a shard of ice at the target, dealing 774 Frost damage.\r\n\r\nShatters 4 stacks of Freezing.",
           "choices": null
         },
         {
@@ -5448,14 +5448,14 @@
               "spellId": 190356,
               "name": "Blizzard",
               "icon": "135857",
-              "description": "Ice shards pelt the target area, dealing 1,480 Frost damage over 10.7 sec and reducing movement speed by 50% for 3 sec.\r\n\r\nThis spell is cast at a selected location",
+              "description": "Ice shards pelt the target area, dealing 1,617 Frost damage over 10.7 sec and reducing movement speed by 50% for 3 sec.\r\n\r\nThis spell is cast at a selected location",
               "maxRanks": 1
             },
             {
               "spellId": 1248829,
               "name": "Blizzard",
               "icon": "135857",
-              "description": "Ice shards pelt the target area, dealing 1,439 Frost damage over 10.7 sec and reducing movement speed by 50% for 3 sec.\r\n\r\nThis spell is cast at your target.",
+              "description": "Ice shards pelt the target area, dealing 1,614 Frost damage over 10.7 sec and reducing movement speed by 50% for 3 sec.\r\n\r\nThis spell is cast at your target.",
               "maxRanks": 1
             }
           ]
@@ -5491,7 +5491,7 @@
           "maxRanks": 1,
           "name": "Frostbite",
           "icon": "135842",
-          "description": "When Frostbolt critically strikes, it applies 1 additional stack of Freezing.\r\n\r\nEach stack of Freezing that you Shatter deals 92 damage to nearby enemies. Damage reduced beyond 5 targets.",
+          "description": "When Frostbolt critically strikes, it applies 1 additional stack of Freezing.\r\n\r\nEach stack of Freezing that you Shatter deals 115 damage to nearby enemies. Damage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -5508,7 +5508,7 @@
           "maxRanks": 1,
           "name": "Icicles",
           "icon": "1698699",
-          "description": "While in combat, Frost crystallizes around you, generating an Icicle every 5.4 sec. Upon generating 5 Icicles, Frostbolt upgrades to Glacial Spike for its next cast.\r\n\r\n Glacial Spike\r\nConjures a massive spike of ice that impales your target, dealing 5,405 damage and slowing the target's movement speed by 50% for 8 sec.\r\n\r\nApplies 3 stacks of Freezing.",
+          "description": "While in combat, Frost crystallizes around you, generating an Icicle every 5.4 sec. Upon generating 5 Icicles, Frostbolt upgrades to Glacial Spike for its next cast.\r\n\r\n Glacial Spike\r\nConjures a massive spike of ice that impales your target, dealing 5,553 damage and slowing the target's movement speed by 50% for 8 sec.\r\n\r\nApplies 3 stacks of Freezing.",
           "choices": null
         },
         {
@@ -5525,7 +5525,7 @@
           "maxRanks": 1,
           "name": "Flurry",
           "icon": "1390940",
-          "description": "Unleash a flurry of ice, striking the target 3 times for a total of 1,586 Frost damage.\r\n\r\nApplies 3 stacks of Freezing.",
+          "description": "Unleash a flurry of ice, striking the target 3 times for a total of 1,623 Frost damage.\r\n\r\nApplies 3 stacks of Freezing.",
           "choices": null
         },
         {
@@ -5556,7 +5556,7 @@
               "spellId": 1244110,
               "name": "Glacial Bulwark",
               "icon": "135835",
-              "description": "Ice Block now has an additional charge and its cooldown is reduced by 30 sec.",
+              "description": "Ice Block gains an additional charge and its cooldown is reduced by 30 sec.",
               "maxRanks": 1
             }
           ]
@@ -5575,7 +5575,7 @@
           "maxRanks": 1,
           "name": "Frozen Orb",
           "icon": "629077",
-          "description": "Launches an orb of swirling ice in front of you, dealing up to 5,534 Frost damage to all enemies it passes through over 15 sec. After a short delay, Frozen Orb will pursue its target. Deals reduced damage beyond 8 targets.\r\n\r\nEnemies damaged by the Frozen Orb are slowed by 50% for 8 sec.",
+          "description": "Launches an orb of swirling ice in front of you, dealing up to 6,604 Frost damage to all enemies it passes through over 15 sec. After a short delay, Frozen Orb will pursue its target. Deals reduced damage beyond 8 targets.\r\n\r\nEnemies damaged by the Frozen Orb are slowed by 50% for 8 sec.",
           "choices": null
         },
         {
@@ -5626,7 +5626,7 @@
           "maxRanks": 1,
           "name": "Ray of Frost",
           "icon": "1698700",
-          "description": "Channel an icy beam at the enemy for 3.6 sec, dealing 1,846 Frost damage every 0.45 sec.\r\n\r\nApplies 8 stacks of Freezing over its duration.",
+          "description": "Channel an icy beam at the enemy for 3.6 sec, dealing 1,898 Frost damage every 0.45 sec.\r\n\r\nApplies 8 stacks of Freezing over its duration.",
           "choices": null
         },
         {
@@ -5993,7 +5993,7 @@
           "maxRanks": 1,
           "name": "Glacial Assault",
           "icon": "135152",
-          "description": "Flurry has a 12% chance each hit to call down an icy comet, crashing into your target and nearby enemies for 615 Frost damage.\r\n\r\nApplies 1 stack of Freezing.",
+          "description": "Flurry has a 12% chance each hit to call down an icy comet, crashing into your target and nearby enemies for 949 Frost damage.\r\n\r\nApplies 1 stack of Freezing.",
           "choices": null
         },
         {
@@ -6147,7 +6147,7 @@
           "maxRanks": 1,
           "name": "Comet Storm",
           "icon": "2126034",
-          "description": "Casting Ray of Frost replaces your Ray of Frost with Comet Storm, calling down a series of 7 icy comets on and around the target, that deals up to 2,448 Frost damage to all enemies within 8 yds of its impacts.\r\n\r\nEach Comet Shatters 1 stack of Freezing.",
+          "description": "Casting Ray of Frost replaces your Ray of Frost with Comet Storm, calling down a series of 7 icy comets on and around the target, that deals up to 3,817 Frost damage to all enemies within 8 yds of its impacts.\r\n\r\nEach Comet Shatters 1 stack of Freezing.",
           "choices": null
         },
         {
@@ -6171,7 +6171,7 @@
           "ranks": [
             {
               "spellId": 1262935,
-              "description": "Shattering an enemy has a 10% chance to summon a Hand of Frost to pursue your target, dealing 1,935 Frost damage and applying 1 stack of Freezing on contact.",
+              "description": "Shattering an enemy has a 10% chance to summon a Hand of Frost to pursue your target, dealing 2,105 Frost damage and applying 1 stack of Freezing on contact.",
               "maxRanks": 1
             },
             {
@@ -6193,10 +6193,10 @@
           "posX": 20,
           "posY": 6,
           "connections": [
-            109667,
+            94655,
             94658,
             94657,
-            94655
+            109667
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -6204,7 +6204,7 @@
           "maxRanks": 1,
           "name": "Splinterstorm",
           "icon": "1387352",
-          "description": "Casting Arcane Surge generates 8 Arcane Splinters.\r\n\r\nDuring Arcane Surge, your chance to conjure an additional Arcane Splinter is increased to 100%.",
+          "description": "Casting Arcane Surge conjures 8 Arcane Splinters.\r\n\r\nDuring Arcane Surge, your chance to conjure an additional Arcane Splinter is increased to 100%.",
           "choices": null
         },
         {
@@ -6340,7 +6340,7 @@
               "spellId": 444784,
               "name": "Phantasmal Image",
               "icon": "135752",
-              "description": "Your Mirror Image summons 1 extra copy of you.",
+              "description": "Casting Mirror Image summons 1 extra copy of you.",
               "maxRanks": 1
             }
           ]
@@ -6412,7 +6412,7 @@
           "maxRanks": 1,
           "name": "Splintering Sorcery",
           "icon": "4578411",
-          "description": "Casting Arcane Blast or Arcane Pulse conjures an Arcane Splinter.\r\n\r\nArcane Splinter:\r\nConjure raw Arcane magic into a sharp projectile that deals 219 Arcane damage.\r\n",
+          "description": "Casting Arcane Blast or Arcane Pulse conjures an Arcane Splinter.\r\n\r\nArcane Splinter:\r\nConjure raw Arcane magic into a sharp projectile that deals 225 Arcane damage.\r\n",
           "choices": null
         },
         {
@@ -6448,7 +6448,7 @@
           "maxRanks": 1,
           "name": "Infused Splinters",
           "icon": "1033908",
-          "description": "Direct damage from Arcane Splinters have a 25% chance to grant 1 stack Arcane Salvo.\r\n\r\n Arcane Salvo\r\nIncreases the damage of your next Arcane Barrage by 3%.",
+          "description": "Direct damage from Arcane Splinters has a 25% chance to grant 1 stack Arcane Salvo.\r\n\r\n Arcane Salvo\r\nIncreases the damage of your next Arcane Barrage by 3%.",
           "choices": null
         },
         {
@@ -6560,10 +6560,10 @@
           "posX": 44,
           "posY": 5,
           "connections": [
-            109670,
             94632,
             94639,
-            94637
+            94637,
+            109670
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -6571,7 +6571,7 @@
           "maxRanks": 1,
           "name": "Isothermic Core",
           "icon": "7439205",
-          "description": "Meteor now also calls down a Comet Storm, dealing 2,695 Frost damage to nearby enemies.\r\n\r\nComet Storm now also calls down a Meteor, dealing 3,641 Fire damage to nearby enemies.",
+          "description": "Meteor now also calls down a Comet Storm, dealing 2,731 Frost damage to nearby enemies.\r\n\r\nComet Storm now also calls down a Meteor, dealing 2,621 Fire damage to nearby enemies.",
           "choices": null
         },
         {
@@ -6587,7 +6587,7 @@
           "maxRanks": 1,
           "name": "Frostfire Bolt",
           "icon": "5927630",
-          "description": "Launches a bolt of frostfire at the enemy, causing 1,063 Frostfire damage, slowing movement speed by 50%, and causing an additional 99 Frostfire damage over 8 sec.",
+          "description": "Launches a bolt of frostfire at the enemy, causing 1,080 Frostfire damage, slowing movement speed by 50%, and causing an additional 102 Frostfire damage over 8 sec.",
           "choices": null
         },
         {
@@ -6641,7 +6641,7 @@
           "maxRanks": 1,
           "name": "Frostfire Infusion",
           "icon": "4622287",
-          "description": "Frostfire Bolt has and additional 5% chance to grant Brain Freeze and its critical strike chance is increased by 15%.\r\n\r\nThe damage of your Frost spells and Fire spells are increased by 4%.",
+          "description": "Frostfire Bolt grants Brain Freeze 5% more often and its critical strike chance is increased by 15%.\r\n\r\nThe damage of your Frost spells and Fire spells are increased by 4%.",
           "choices": null
         },
         {
@@ -6692,7 +6692,7 @@
           "maxRanks": 1,
           "name": "Frostfire Empowerment",
           "icon": "429384",
-          "description": "Casting Frostfire spells has a 10% chance to activate Frostfire Empowerment, causing your next Frostfire Bolt to be instant cast, deal 60% increased damage, explode for 60% of its damage to nearby enemies. Damage reduced beyond 5 targets.\r\n\r\nDamage from Frostfire Empowerment applies 1 stack of Freezing.",
+          "description": "Casting Frostfire spells has a 10% chance to activate Frostfire Empowerment, causing your next Frostfire Bolt to be instant cast, deal 60% increased damage, and explode for 60% of its damage to nearby enemies. Damage reduced beyond 5 targets.\r\n\r\nDamage from Frostfire Empowerment applies 1 stack of Freezing.",
           "choices": null
         },
         {
@@ -6743,7 +6743,7 @@
           "maxRanks": 1,
           "name": "Elemental Conduit",
           "icon": "6035320",
-          "description": "Meteor and Pyroblast now apply Ignite.\r\n\r\nYour Haste is increased by 2%.",
+          "description": "Meteor and Pyroblast now apply Ignite.\r\n\r\nHaste increased by 2%.",
           "choices": null
         },
         {
@@ -6779,7 +6779,7 @@
           "maxRanks": 1,
           "name": "Duality",
           "icon": "236217",
-          "description": "Casting Glacial Spike also casts a Pyroblast, dealing 3,654 Fire damage.",
+          "description": "Casting Glacial Spike also casts a Pyroblast, dealing 3,678 Fire damage.",
           "choices": null
         }
       ]

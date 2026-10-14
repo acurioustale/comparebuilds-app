@@ -210,8 +210,8 @@
           "posX": 4,
           "posY": 4,
           "connections": [
-            90764,
-            110325
+            110325,
+            90764
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -262,8 +262,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            90695,
-            110324
+            110324,
+            90695
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -397,8 +397,8 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            90745,
-            90637
+            90637,
+            90745
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -432,9 +432,9 @@
           "posX": 8,
           "posY": 6,
           "connections": [
+            110323,
             90745,
-            90746,
-            110323
+            90746
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -468,8 +468,8 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            90746,
-            90687
+            90687,
+            90746
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -627,9 +627,9 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            110576,
             90743,
-            94562
+            94562,
+            110576
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -879,7 +879,7 @@
               "spellId": 470669,
               "name": "Echoing Reprimand",
               "icon": "6035317",
-              "description": "After consuming a supercharged combo point, your next Mutilate also strikes the target with an Echoing Reprimand dealing 41 Physical damage.",
+              "description": "After consuming a supercharged combo point, your next Mutilate also strikes the target with an Echoing Reprimand dealing 40 Physical damage.",
               "maxRanks": 1
             },
             {
@@ -1005,7 +1005,7 @@
           "maxRanks": 1,
           "name": "Crimson Tempest",
           "icon": "7439214",
-          "description": "Slash all enemies within 10 yds dealing 39 damage. Deals reduced damage beyond 5 targets.\r\n\r\nCopy the longest Garrote and Rupture on the enemies you hit onto up to 2 other enemies. \r\n\r\nAwards 1 combo point.",
+          "description": "Slash all enemies within 10 yds dealing 38 damage. Deals reduced damage beyond 5 targets.\r\n\r\nCopy the longest Garrote and Rupture on the enemies you hit onto up to 2 other enemies. \r\n\r\nAwards 1 combo point.",
           "choices": null
         },
         {
@@ -1679,7 +1679,7 @@
             },
             {
               "spellId": 1265387,
-              "description": "After striking with Kingsbane, rapidly strike that target 5 times over 1 sec for 105 Physical and 73 Nature damage. Each strike applies the Lethal Poisons on your weapons and generates a combo point.",
+              "description": "After striking with Kingsbane, rapidly strike that target 5 times over 1 sec for 106 Physical and 72 Nature damage. Each strike applies the Lethal Poisons on your weapons and generates a combo point.",
               "maxRanks": 1
             }
           ]
@@ -2501,8 +2501,8 @@
           "posX": 4,
           "posY": 4,
           "connections": [
-            90764,
-            110325
+            110325,
+            90764
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2553,8 +2553,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            90695,
-            110324
+            110324,
+            90695
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2688,8 +2688,8 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            90745,
-            90637
+            90637,
+            90745
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2723,9 +2723,9 @@
           "posX": 8,
           "posY": 6,
           "connections": [
+            110323,
             90745,
-            90746,
-            110323
+            90746
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2759,8 +2759,8 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            90746,
-            90687
+            90687,
+            90746
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2918,9 +2918,9 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            110576,
             90743,
-            94562
+            94562,
+            110576
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3413,7 +3413,7 @@
           "maxRanks": 1,
           "name": "Deft Maneuvers",
           "icon": "589068",
-          "description": "Blade Flurry's initial damage is increased by 100% and generates 1 combo point per target struck, but its Energy cost is increased by 30.",
+          "description": "Blade Flurry's initial damage is increased by 100% and it generates 1 combo point per target struck, but its Energy cost is increased by 5 for each target struck, up to 30.",
           "choices": null
         },
         {
@@ -3500,7 +3500,7 @@
           "maxRanks": 1,
           "name": "Blade Rush",
           "icon": "1016243",
-          "description": "Charge to your target with your blades out, dealing 300 Physical damage to the target and 130 to all other nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nWhile Blade Flurry is active, damage to non-primary targets is increased by 100%.\r\n\r\nGenerates 25 Energy over 5 sec.",
+          "description": "Charge to your target with your blades out, dealing 304 Physical damage to the target and 132 to all other nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nWhile Blade Flurry is active, damage to non-primary targets is increased by 100%.\r\n\r\nGenerates 25 Energy over 5 sec.",
           "choices": null
         },
         {
@@ -3684,9 +3684,9 @@
           "posX": 30,
           "posY": 9,
           "connections": [
-            90680,
             90641,
-            90678
+            90678,
+            90680
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3703,8 +3703,8 @@
           "posX": 34,
           "posY": 9,
           "connections": [
-            90678,
-            90654
+            90654,
+            90678
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3753,8 +3753,8 @@
           "posX": 38,
           "posY": 9,
           "connections": [
-            90668,
-            90654
+            90654,
+            90668
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3771,9 +3771,9 @@
           "posX": 42,
           "posY": 9,
           "connections": [
-            90671,
             90669,
-            90668
+            90668,
+            90671
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3870,7 +3870,7 @@
           "maxRanks": 1,
           "name": "Killing Spree",
           "icon": "6735718",
-          "description": "Finishing move that unleashes a barrage of gunfire, striking random enemies within 8 yards for Physical damage. Number of strikes increased per combo point.\r\n\r\nRestores 1 combo point every 0.45 sec. Each combo point spent above 5 increases damage by 15%.\r\n\r\n   1 point  : 318 over 0.45 sec\r\n   2 points: 477 over 0.89 sec\r\n   3 points: 636 over 1.34 sec\r\n   4 points: 795 over 1.78 sec\r\n   5 points: 954 over 2.23 sec",
+          "description": "Finishing move that unleashes a barrage of gunfire, striking random enemies within 8 yards for Physical damage. Number of strikes increased per combo point.\r\n\r\nRestores 1 combo point every 0.45 sec. Each combo point spent above 5 increases damage by 15%.\r\n\r\n   1 point  : 313 over 0.45 sec\r\n   2 points: 470 over 0.89 sec\r\n   3 points: 626 over 1.34 sec\r\n   4 points: 783 over 1.78 sec\r\n   5 points: 939 over 2.23 sec",
           "choices": null
         },
         {
@@ -3951,7 +3951,7 @@
             },
             {
               "spellId": 1265862,
-              "description": "When you spend 5 or more combo points on Dispatch, immediately strike your target with an underhanded Scoundrel Strike for 56 Physical damage.",
+              "description": "When you spend 5 or more combo points on Dispatch, immediately strike your target with an underhanded Scoundrel Strike for 60 Physical damage.",
               "maxRanks": 2
             },
             {
@@ -4184,7 +4184,7 @@
           "maxRanks": 1,
           "name": "Unseen Blade",
           "icon": "135690",
-          "description": "Backstab and Shadowstrike now also strike with an Unseen Blade dealing 98 damage. Targets struck are Fazed for 10 sec.\r\n\r\nFazed enemies take 5% more damage from you and cannot parry your attacks.\r\n\r\nThis effect may occur once every 20 sec.",
+          "description": "Backstab and Shadowstrike now also strike with an Unseen Blade dealing 99 damage. Targets struck are Fazed for 10 sec.\r\n\r\nFazed enemies take 5% more damage from you and cannot parry your attacks.\r\n\r\nThis effect may occur once every 20 sec.",
           "choices": null
         },
         {
@@ -4778,8 +4778,8 @@
           "posX": 4,
           "posY": 4,
           "connections": [
-            90764,
-            110325
+            110325,
+            90764
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4830,8 +4830,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            90695,
-            110324
+            110324,
+            90695
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4965,8 +4965,8 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            90745,
-            90637
+            90637,
+            90745
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5000,9 +5000,9 @@
           "posX": 8,
           "posY": 6,
           "connections": [
+            110323,
             90745,
-            90746,
-            110323
+            90746
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5036,8 +5036,8 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            90746,
-            90687
+            90687,
+            90746
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5195,9 +5195,9 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            110576,
             90743,
-            94562
+            94562,
+            110576
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5782,8 +5782,8 @@
           "posX": 36,
           "posY": 6,
           "connections": [
-            90701,
-            90733
+            90733,
+            90701
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5817,8 +5817,8 @@
           "posX": 40,
           "posY": 6,
           "connections": [
-            90714,
-            90733
+            90733,
+            90714
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5884,9 +5884,9 @@
           "posX": 34,
           "posY": 7,
           "connections": [
-            90727,
             90699,
-            90734
+            90734,
+            90727
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5903,9 +5903,9 @@
           "posX": 38,
           "posY": 7,
           "connections": [
-            90715,
             90709,
-            90734
+            90734,
+            90715
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6000,7 +6000,7 @@
           "maxRanks": 1,
           "name": "Goremaw's Bite",
           "icon": "1120132",
-          "description": "Lash out at your target and 2 additional nearby enemies, inflicting 219 Shadow damage and causing them to Bleed for 435 damage over 14 sec.\r\n\r\n20% of all damage from Finishing Moves is repeated as Shadow, split evenly among affected enemies.",
+          "description": "Lash out at your target and 2 additional nearby enemies, inflicting 222 Shadow damage and causing them to Bleed for 433 damage over 14 sec.\r\n\r\n20% of all damage from Finishing Moves is repeated as Shadow, split evenly among affected enemies.",
           "choices": null
         },
         {
@@ -6232,7 +6232,7 @@
           "maxRanks": 1,
           "name": "Danse Macabre",
           "icon": "538039",
-          "description": "While Shadow Dance is active, each different attack that generates or spends combo points lashes out at the target, dealing 147 Shadow damage.",
+          "description": "While Shadow Dance is active, each different attack that generates or spends combo points lashes out at the target, dealing 149 Shadow damage.",
           "choices": null
         },
         {
@@ -6529,7 +6529,7 @@
           "maxRanks": 1,
           "name": "Unseen Blade",
           "icon": "135690",
-          "description": "Backstab and Shadowstrike now also strike with an Unseen Blade dealing 98 damage. Targets struck are Fazed for 10 sec.\r\n\r\nFazed enemies take 5% more damage from you and cannot parry your attacks.\r\n\r\nThis effect may occur once every 20 sec.",
+          "description": "Backstab and Shadowstrike now also strike with an Unseen Blade dealing 97 damage. Targets struck are Fazed for 10 sec.\r\n\r\nFazed enemies take 5% more damage from you and cannot parry your attacks.\r\n\r\nThis effect may occur once every 20 sec.",
           "choices": null
         },
         {

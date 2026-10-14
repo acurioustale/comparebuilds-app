@@ -316,9 +316,9 @@
           "posX": 6,
           "posY": 5,
           "connections": [
-            101146,
             101161,
-            101153
+            101153,
+            101146
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -406,9 +406,9 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            110024,
             101160,
-            101145
+            101145,
+            110024
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -428,7 +428,7 @@
               "spellId": 123986,
               "name": "Chi Burst",
               "icon": "135734",
-              "description": "Hurls a torrent of Chi energy up to 40 yds forward, dealing 97 Nature damage to all enemies, and 76 healing to the Monk and all allies in its path. Healing and damage reduced beyond 5 targets.\r\n\r\n\r\nCasting Chi Burst does not prevent avoiding attacks.",
+              "description": "Hurls a torrent of Chi energy up to 40 yds forward, dealing 98 Nature damage to all enemies, and 75 healing to the Monk and all allies in its path. Healing and damage reduced beyond 5 targets.\r\n\r\n\r\nCasting Chi Burst does not prevent avoiding attacks.",
               "maxRanks": 1
             }
           ]
@@ -476,9 +476,9 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            101184,
             101152,
-            110027
+            110027,
+            101184
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -644,8 +644,8 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            110025,
-            101183
+            101183,
+            110025
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1106,7 +1106,7 @@
           "maxRanks": 1,
           "name": "Keg Smash",
           "icon": "594274",
-          "description": "Smash a keg of brew, dealing 100 Physical damage to your primary target and 66 Physical damage to all other enemies within 8 yds, and reducing their movement speed by 20% for 15 sec. Deals reduced damage beyond 5 targets.",
+          "description": "Smash a keg of brew, dealing 101 Physical damage to your primary target and 66 Physical damage to all other enemies within 8 yds, and reducing their movement speed by 20% for 15 sec. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -1187,7 +1187,7 @@
               "spellId": 388505,
               "name": "Quick Sip",
               "icon": "645193",
-              "description": "Purify 5% of your Staggered damage each time you gain 3 sec of Shuffle duration.",
+              "description": "Purify 8% of your Staggered damage each time you gain 3 sec of Shuffle duration.",
               "maxRanks": 1
             }
           ]
@@ -1259,7 +1259,7 @@
           "maxRanks": 1,
           "name": "Gift of the Ox",
           "icon": "236155",
-          "description": "When you take damage, you have a chance to summon a Healing Sphere.\r\n\r\nHealing Sphere:\r\nSummon a Healing Sphere visible only to you. Moving through this Healing Sphere heals you for 114.",
+          "description": "When you take damage, you have a chance to summon a Healing Sphere.\r\n\r\nHealing Sphere:\r\nSummon a Healing Sphere visible only to you. Moving through this Healing Sphere heals you for 117.",
           "choices": null
         },
         {
@@ -1269,9 +1269,9 @@
           "posX": 36,
           "posY": 5,
           "connections": [
-            101085,
             101072,
-            101065
+            101065,
+            101085
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -1284,7 +1284,7 @@
               "spellId": 196730,
               "name": "Special Delivery",
               "icon": "594274",
-              "description": "Drinking from your Brews has a 100% chance to toss a keg high into the air that lands nearby after 3 sec, dealing 35 Physical damage to all enemies within 8 yards and reducing their movement speed by 50% for 15 sec.",
+              "description": "Drinking from your Brews has a 100% chance to toss a keg high into the air that lands nearby after 3 sec, dealing 34 Physical damage to all enemies within 8 yards and reducing their movement speed by 50% for 15 sec.",
               "maxRanks": 1
             },
             {
@@ -1351,14 +1351,14 @@
               "spellId": 322507,
               "name": "Celestial Brew",
               "icon": "1360979",
-              "description": "A swig of strong brew that coalesces purified chi escaping your body into a celestial guard, absorbing 1,984 damage.",
+              "description": "A swig of strong brew that coalesces purified chi escaping your body into a celestial guard, absorbing 2,381 damage.",
               "maxRanks": 1
             },
             {
               "spellId": 1241059,
               "name": "Celestial Infusion",
               "icon": "613399",
-              "description": "A strong herbal brew that coalesces purified chi escaping your body into a celestial guard, absorbing 30% of incoming damage, up to 1,984 total.",
+              "description": "A strong herbal brew that coalesces purified chi escaping your body into a celestial guard, absorbing 30% of incoming damage, up to 2,381 total.",
               "maxRanks": 1
             }
           ]
@@ -1395,7 +1395,7 @@
           "maxRanks": 1,
           "name": "Celestial Flames",
           "icon": "463567",
-          "description": "Drinking from Brews has a 30% chance to coat you with Celestial Flames for 6 sec. While Celestial Flames is active:\r\n\r\n Special Delivery:\r\nKegs thrown by Special Delivery are ignited and splash upon landing, dealing 35 Fire damage to up to 5 nearby enemies.\r\n\r\n Rushing Jade Wind:\r\nRushing Jade Wind becomes a firestorm, increasing its radius by 30% and causing it to deal Fire damage.\r\n",
+          "description": "Drinking from Brews has a 30% chance to coat you with Celestial Flames for 6 sec. While Celestial Flames is active:\r\n\r\n Special Delivery:\r\nKegs thrown by Special Delivery are ignited and splash upon landing, dealing 34 Fire damage to up to 5 nearby enemies.\r\n\r\n Rushing Jade Wind:\r\nRushing Jade Wind becomes a firestorm, increasing its radius by 30% and causing it to deal Fire damage.\r\n",
           "choices": null
         },
         {
@@ -1405,8 +1405,8 @@
           "posX": 38,
           "posY": 6,
           "connections": [
-            101202,
-            101086
+            101086,
+            101202
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1509,9 +1509,9 @@
           "posX": 38,
           "posY": 7,
           "connections": [
+            101078,
             109882,
-            101076,
-            101078
+            101076
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1543,15 +1543,15 @@
           "posX": 42,
           "posY": 7,
           "connections": [
-            109882,
-            101710
+            101710,
+            109882
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Pretense of Instability",
           "icon": "516667",
-          "description": "Drinking a Brew grants you 10% dodge for 5 sec.",
+          "description": "Drinking a Brew grants you 10% dodge for 8 sec.",
           "choices": null
         },
         {
@@ -1644,9 +1644,9 @@
           "posX": 36,
           "posY": 8,
           "connections": [
-            101082,
             102004,
-            101076
+            101076,
+            101082
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1748,9 +1748,9 @@
           "posX": 32,
           "posY": 9,
           "connections": [
+            101188,
             101190,
-            101068,
-            101188
+            101068
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1767,9 +1767,9 @@
           "posX": 36,
           "posY": 9,
           "connections": [
-            101077,
             101190,
-            101074
+            101074,
+            101077
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1801,9 +1801,9 @@
           "posX": 40,
           "posY": 9,
           "connections": [
+            101080,
             101083,
-            101077,
-            101080
+            101077
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1837,9 +1837,9 @@
           "posX": 30,
           "posY": 10,
           "connections": [
+            101188,
             101189,
-            101187,
-            101188
+            101187
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1909,9 +1909,9 @@
           "posX": 42,
           "posY": 10,
           "connections": [
+            101080,
             101081,
-            101079,
-            101080
+            101079
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1962,9 +1962,9 @@
           "posX": 36,
           "posY": 11,
           "connections": [
-            101196,
+            101199,
             101193,
-            101199
+            101196
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -2223,10 +2223,10 @@
           "posX": 46,
           "posY": 6,
           "connections": [
-            109699,
             101244,
             101253,
-            101251
+            101251,
+            109699
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2518,10 +2518,10 @@
           "posX": 20,
           "posY": 11,
           "connections": [
-            109696,
             101228,
             101220,
-            101226
+            101226,
+            109696
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2749,7 +2749,7 @@
           "maxRanks": 1,
           "name": "Rising Sun Kick",
           "icon": "642415",
-          "description": "Kick upwards, dealing 50 Physical damage.",
+          "description": "Kick upwards, dealing 49 Physical damage.",
           "choices": null
         },
         {
@@ -2932,8 +2932,8 @@
           "posX": 2,
           "posY": 5,
           "connections": [
-            101144,
-            101146
+            101146,
+            101144
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2982,9 +2982,9 @@
           "posX": 6,
           "posY": 5,
           "connections": [
-            101146,
             101161,
-            101153
+            101153,
+            101146
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -3081,7 +3081,7 @@
           "maxRanks": 1,
           "name": "Chi Wave",
           "icon": "606541",
-          "description": "Every 15 sec, your next Rising Sun Kick or Vivify releases a wave of Chi energy that flows through friends and foes, dealing 7 Nature damage or 20 healing. Bounces up to 7 times to targets within 25 yards.",
+          "description": "Every 15 sec, your next Rising Sun Kick or Vivify releases a wave of Chi energy that flows through friends and foes, dealing 6 Nature damage or 21 healing. Bounces up to 7 times to targets within 25 yards.",
           "choices": null
         },
         {
@@ -3110,9 +3110,9 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            101184,
             110097,
-            110027
+            110027,
+            101184
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3277,8 +3277,8 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            110025,
-            101183
+            101183,
+            110025
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3739,7 +3739,7 @@
           "maxRanks": 1,
           "name": "Enveloping Mist",
           "icon": "775461",
-          "description": "Wraps the target in healing mists, healing for 3,189 over 6 sec, and increasing healing received from your other spells by 10%. ",
+          "description": "Wraps the target in healing mists, healing for 3,668 over 6 sec, and increasing healing received from your other spells by 10%. ",
           "choices": null
         },
         {
@@ -3756,7 +3756,7 @@
           "maxRanks": 1,
           "name": "Thunder Focus Tea",
           "icon": "611418",
-          "description": "Receive a jolt of energy, empowering your next spell cast:\r\n\r\nEnveloping Mist: Immediately heals for 2,904 and is instant cast.\r\nRenewing Mist: Duration increased by 10 sec.\r\nRising Sun Kick: Cooldown reduced by 9 sec.\r\n",
+          "description": "Receive a jolt of energy, empowering your next spell cast:\r\n\r\nEnveloping Mist: Immediately heals for 3,282 and is instant cast.\r\nRenewing Mist: Duration increased by 10 sec.\r\nRising Sun Kick: Cooldown reduced by 9 sec.\r\n",
           "choices": null
         },
         {
@@ -3825,7 +3825,7 @@
           "maxRanks": 1,
           "name": "Invigorating Mists",
           "icon": "1360980",
-          "description": "Vivify heals all allies with your Renewing Mist active for 1,243.\r\n\r\nSheilun's Gift's healing is increased by 500% on its primary target.",
+          "description": "Vivify heals all allies with your Renewing Mist active for 1,406.\r\n\r\nSheilun's Gift's healing is increased by 500% on its primary target.",
           "choices": null
         },
         {
@@ -3865,14 +3865,14 @@
               "spellId": 115310,
               "name": "Revival",
               "icon": "1020466",
-              "description": "Heals all party and raid members within 40 yds for 22,987 and clears them of 3 harmful Magic, all Poison, and all Disease effects.\r\n\r\nHealing reduced beyond 5 targets.",
+              "description": "Heals all party and raid members within 40 yds for 22,358 and clears them of 3 harmful Magic, all Poison, and all Disease effects.\r\n\r\nHealing reduced beyond 5 targets.",
               "maxRanks": 1
             },
             {
               "spellId": 388615,
               "name": "Restoral",
               "icon": "1381300",
-              "description": "Heals all party and raid members within 40 yds for 23,135 and clears them of all harmful Poison and Disease effects. \r\n\r\nCastable while stunned.\r\n\r\nHealing reduced beyond 5 targets.",
+              "description": "Heals all party and raid members within 40 yds for 23,144 and clears them of all harmful Poison and Disease effects. \r\n\r\nCastable while stunned.\r\n\r\nHealing reduced beyond 5 targets.",
               "maxRanks": 1
             }
           ]
@@ -4021,7 +4021,7 @@
           "maxRanks": 1,
           "name": "Zen Pulse",
           "icon": "613397",
-          "description": "Renewing Mist's heal over time has a chance to cause your next Vivify to also trigger a Zen Pulse on its target and all allies with Renewing Mist, healing them for 620 increased by 6% per Renewing Mist active, up to 30%.",
+          "description": "Renewing Mist's heal over time has a chance to cause your next Vivify to also trigger a Zen Pulse on its target and all allies with Renewing Mist, healing them for 595 increased by 6% per Renewing Mist active, up to 30%.",
           "choices": null
         },
         {
@@ -4175,7 +4175,7 @@
           "maxRanks": 1,
           "name": "Yu'lon's Whisper",
           "icon": "988193",
-          "description": "While channeling Mana Tea you exhale the breath of Yu'lon, healing up to 5 allies within 15 yards for 349 every 0.4 sec.",
+          "description": "While channeling Mana Tea you exhale the breath of Yu'lon, healing up to 5 allies within 15 yards for 351 every 0.4 sec.",
           "choices": null
         },
         {
@@ -4399,7 +4399,7 @@
           "maxRanks": 1,
           "name": "Sheilun's Gift",
           "icon": "7439208",
-          "description": "Draws in all nearby clouds of mist, healing the friendly target and up to 2 nearby allies for 1,584 and an additional 79 per cloud absorbed.\r\n\r\nA cloud of mist is generated every 8 sec while in combat.",
+          "description": "Draws in all nearby clouds of mist, healing the friendly target and up to 2 nearby allies for 1,822 and an additional 91 per cloud absorbed.\r\n\r\nA cloud of mist is generated every 8 sec while in combat.",
           "choices": null
         },
         {
@@ -4554,7 +4554,7 @@
           "maxRanks": 1,
           "name": "Emperor's Elixir",
           "icon": "132812",
-          "description": "Thunder Focus Tea now empowers Enveloping Mist and Rising Sun Kick further.\r\n\r\n Enveloping Mist:\r\nBegins a channel of Soothing Mist onto your target.\r\n\r\n Rising Sun Kick:\r\nReleases a Jadefire Stomp infront of you that transfers damage into Ancient Teachings at 20% effectiveness.\r\n\r\n Jadefire Stomp:\r\nYou release a Jadefire Stomp, dealing 35 damage to 5 enemies in front of you.\r\n",
+          "description": "Thunder Focus Tea now empowers Enveloping Mist and Rising Sun Kick further.\r\n\r\n Enveloping Mist:\r\nBegins a channel of Soothing Mist onto your target.\r\n\r\n Rising Sun Kick:\r\nReleases a Jadefire Stomp infront of you that transfers damage into Ancient Teachings at 20% effectiveness.\r\n\r\n Jadefire Stomp:\r\nYou release a Jadefire Stomp, dealing 34 damage to 5 enemies in front of you.\r\n",
           "choices": null
         },
         {
@@ -4954,7 +4954,7 @@
           "maxRanks": 1,
           "name": "Celestial Conduit",
           "icon": "5927619",
-          "description": "The August Celestials empower you, causing you to radiate 289 Nature damage onto enemies and 21,146 healing onto up to 5 injured allies within 15 yds over 3.6 sec, reduced beyond 5 targets.\r\n\r\nYou may move while channeling, but casting other healing or damaging spells cancels this effect.\r\n",
+          "description": "The August Celestials empower you, causing you to radiate 293 Nature damage onto enemies and 21,107 healing onto up to 5 injured allies within 15 yds over 3.6 sec, reduced beyond 5 targets.\r\n\r\nYou may move while channeling, but casting other healing or damaging spells cancels this effect.\r\n",
           "choices": null
         },
         {
@@ -5169,10 +5169,10 @@
           "posX": 20,
           "posY": 11,
           "connections": [
-            109696,
             101228,
             101220,
-            101226
+            101226,
+            109696
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5400,7 +5400,7 @@
           "maxRanks": 1,
           "name": "Rising Sun Kick",
           "icon": "642415",
-          "description": "Kick upwards, dealing 49 Physical damage.",
+          "description": "Kick upwards, dealing 50 Physical damage.",
           "choices": null
         },
         {
@@ -5583,8 +5583,8 @@
           "posX": 2,
           "posY": 5,
           "connections": [
-            101144,
-            101146
+            101146,
+            101144
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5618,9 +5618,9 @@
           "posX": 6,
           "posY": 5,
           "connections": [
-            101146,
             101161,
-            101153
+            101153,
+            101146
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5654,9 +5654,9 @@
           "posX": 10,
           "posY": 5,
           "connections": [
+            101150,
             101153,
-            101148,
-            101150
+            101148
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5690,8 +5690,8 @@
           "posX": 14,
           "posY": 5,
           "connections": [
-            101185,
-            101150
+            101150,
+            101185
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5763,9 +5763,9 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            101184,
             110098,
-            110027
+            110027,
+            101184
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5931,8 +5931,8 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            110025,
-            101183
+            101183,
+            110025
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6427,7 +6427,7 @@
           "maxRanks": 1,
           "name": "Combat Wisdom",
           "icon": "627486",
-          "description": "While out of combat, your Chi balances to 2 instead of depleting to empty.\r\n\r\nYour stamina is increased by 5% and every 15 sec, your next Tiger Palm also casts Expel Harm.\r\n\r\n Expel Harm\r\nExpel negative chi from your body, healing for 452 and dealing 10% of the amount healed as Nature damage to an enemy within 20 yards.",
+          "description": "While out of combat, your Chi balances to 2 instead of depleting to empty.\r\n\r\nYour stamina is increased by 5% and every 15 sec, your next Tiger Palm also casts Expel Harm.\r\n\r\n Expel Harm\r\nExpel negative chi from your body, healing for 461 and dealing 10% of the amount healed as Nature damage to an enemy within 20 yards.",
           "choices": null
         },
         {
@@ -6530,7 +6530,7 @@
           "maxRanks": 1,
           "name": "Dual Threat",
           "icon": "574577",
-          "description": "Your auto attacks have a 30% chance to instead kick your target dealing 169 Physical damage. Damage increased while using a two-handed weapon.",
+          "description": "Your auto attacks have a 30% chance to instead kick your target dealing 203 Physical damage. Damage increased while using a two-handed weapon.",
           "choices": null
         },
         {
@@ -6816,8 +6816,8 @@
           "posX": 34,
           "posY": 8,
           "connections": [
-            101057,
-            101052
+            101052,
+            101057
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6854,7 +6854,7 @@
               "spellId": 152175,
               "name": "Whirling Dragon Punch",
               "icon": "988194",
-              "description": "Performs a devastating whirling upward strike, dealing 333 damage to all nearby enemies and an additional 157 damage to the first target struck. Damage reduced beyond 5 targets.\r\n\r\nOnly usable while both Fists of Fury and Rising Sun Kick are on cooldown.",
+              "description": "Performs a devastating whirling upward strike, dealing 333 damage to all nearby enemies and an additional 155 damage to the first target struck. Damage reduced beyond 5 targets.\r\n\r\nOnly usable while both Fists of Fury and Rising Sun Kick are on cooldown.",
               "maxRanks": 1
             }
           ]
@@ -7135,7 +7135,7 @@
           "maxRanks": 1,
           "name": "Jadefire Stomp",
           "icon": "6035313",
-          "description": "At the end of your Fists of Fury channel, you release a Jadefire Stomp, dealing 35 damage to 5 enemies in front of you and increasing your movement speed by 20% for 3 sec.",
+          "description": "At the end of your Fists of Fury channel, you release a Jadefire Stomp, dealing 34 damage to 5 enemies in front of you and increasing your movement speed by 20% for 3 sec.",
           "choices": null
         },
         {
@@ -7481,7 +7481,7 @@
           "maxRanks": 1,
           "name": "Invoke Xuen, the White Tiger",
           "icon": "620832",
-          "description": "Summons an effigy of Xuen, the White Tiger for 20 sec. Xuen attacks your primary target, and strikes 3 enemies within 10 yards every 0.9 sec with Tiger Lightning for 9 Nature damage.",
+          "description": "Summons an effigy of Xuen, the White Tiger for 20 sec. Xuen attacks your primary target, and strikes 3 enemies within 10 yards every 0.9 sec with Tiger Lightning for 8 Nature damage.",
           "choices": null
         },
         {
@@ -7571,7 +7571,7 @@
           "maxRanks": 1,
           "name": "Celestial Conduit",
           "icon": "5927619",
-          "description": "After Invoking Xuen, the White Tiger you may cast Celestial Conduit within 1 min.\r\n\r\n Celestial Conduit:\r\nThe August Celestials empower you, causing you to radiate 290 Nature damage onto enemies and 21,180 healing onto up to 5 injured allies within 15 yds over 3.6 sec, reduced beyond 5 targets.\r\n\r\nYou may move while channeling, but casting other healing or damaging spells cancels this effect.\r\n",
+          "description": "After Invoking Xuen, the White Tiger you may cast Celestial Conduit within 1 min.\r\n\r\n Celestial Conduit:\r\nThe August Celestials empower you, causing you to radiate 288 Nature damage onto enemies and 21,069 healing onto up to 5 injured allies within 15 yds over 3.6 sec, reduced beyond 5 targets.\r\n\r\nYou may move while channeling, but casting other healing or damaging spells cancels this effect.\r\n",
           "choices": null
         },
         {
@@ -7786,10 +7786,10 @@
           "posX": 46,
           "posY": 6,
           "connections": [
-            109699,
             101244,
             101253,
-            101251
+            101251,
+            109699
           ],
           "spentRequired": 0,
           "alreadyGranted": false,

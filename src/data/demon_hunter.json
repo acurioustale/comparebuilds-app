@@ -85,7 +85,7 @@
           "maxRanks": 1,
           "name": "Voidblade",
           "icon": "7554171",
-          "description": "Unleash your glaives and charge to your target, dealing 857 Cosmic damage.\r\n",
+          "description": "Unleash your glaives and charge to your target, dealing 950 Cosmic damage.\r\n",
           "choices": null
         },
         {
@@ -241,7 +241,7 @@
           "maxRanks": 1,
           "name": "Void Nova",
           "icon": "7554172",
-          "description": "Unleash an eruption of void energy, dealing 102 Cosmic damage and stunning your target and all nearby enemies for 2 sec.",
+          "description": "Unleash an eruption of void energy, dealing 103 Cosmic damage and stunning your target and all nearby enemies for 2 sec.",
           "choices": null
         },
         {
@@ -582,8 +582,8 @@
           "posY": 8,
           "connections": [
             91004,
-            90936,
-            90939
+            90939,
+            90936
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -600,8 +600,8 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            90947,
             91004,
+            90947,
             90927
           ],
           "spentRequired": 8,
@@ -996,7 +996,7 @@
           "maxRanks": 1,
           "name": "Collapsing Star",
           "icon": "7554199",
-          "description": "While in Void Metamorphosis, every 30 Soul Fragments harvested grants access to Collapsing Star.\r\n\r\n Collapsing Star\r\nChannel an immense amount of void energy into a single, cataclysmic blast, dealing 2,401 Cosmic damage to your target and 1,767 Cosmic damage to all nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nWhile casting Collapsing Star, your Fury drain is significantly reduced.",
+          "description": "While in Void Metamorphosis, every 30 Soul Fragments harvested grants access to Collapsing Star.\r\n\r\n Collapsing Star\r\nChannel an immense amount of void energy into a single, cataclysmic blast, dealing 4,801 Cosmic damage to your target and 2,404 Cosmic damage to all nearby enemies. Damage reduced beyond 8 targets.\r\n\r\nWhile casting Collapsing Star, your Fury drain is significantly reduced.",
           "choices": null
         },
         {
@@ -1034,6 +1034,23 @@
           "choices": null
         },
         {
+          "id": 109503,
+          "type": "square",
+          "treeType": "spec",
+          "posX": 32,
+          "posY": 6,
+          "connections": [
+            108726
+          ],
+          "spentRequired": 8,
+          "alreadyGranted": false,
+          "maxRanks": 1,
+          "name": "The Hunt",
+          "icon": "7554167",
+          "description": "Charge to your target, striking them for 2,532 Cosmic damage, rooting them in place for 1.5 sec and inflicting 1,628 Cosmic damage over 6 sec to up to 5 enemies in your path.",
+          "choices": null
+        },
+        {
           "id": 108122,
           "type": "round",
           "treeType": "spec",
@@ -1052,7 +1069,7 @@
           "choices": null
         },
         {
-          "id": 107999,
+          "id": 110172,
           "type": "round",
           "treeType": "spec",
           "posX": 38,
@@ -1064,9 +1081,26 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Waste Not",
-          "icon": "7554223",
-          "description": "Damage from Void Ray has a 200% increased chance to generate a Soul Fragment.",
+          "name": "Star Fragments",
+          "icon": "7554216",
+          "description": "Collapsing Star now generates 3 Soul Fragments.",
+          "choices": null
+        },
+        {
+          "id": 107345,
+          "type": "round",
+          "treeType": "spec",
+          "posX": 40,
+          "posY": 6,
+          "connections": [
+            107770
+          ],
+          "spentRequired": 8,
+          "alreadyGranted": false,
+          "maxRanks": 1,
+          "name": "Eradicate",
+          "icon": "7554203",
+          "description": "Fully channeling Void Ray upgrades your Reap to Eradicate.\r\n\r\n Eradicate\r\nSlam your Scythe to the ground, dealing 2,285 Cosmic damage to your primary target and 1,897 to all other enemies within a 25 yd cone in front of you. Damage reduced beyond 5 targets.\r\n\r\nEradicate gathers up to 4 nearby souls.",
           "choices": null
         },
         {
@@ -1098,7 +1132,7 @@
           "maxRanks": 1,
           "name": "Demonsurge",
           "icon": "7554161",
-          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,363 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
+          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,380 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -1125,6 +1159,7 @@
           "posX": 32,
           "posY": 7,
           "connections": [
+            109503,
             107775,
             108122
           ],
@@ -1160,7 +1195,7 @@
           "posX": 36,
           "posY": 7,
           "connections": [
-            107999,
+            110172,
             108122
           ],
           "spentRequired": 8,
@@ -1178,7 +1213,7 @@
           "posX": 38,
           "posY": 7,
           "connections": [
-            107999
+            110172
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1195,8 +1230,9 @@
           "posX": 40,
           "posY": 7,
           "connections": [
-            107342,
-            107999
+            107345,
+            110172,
+            107342
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1207,7 +1243,7 @@
           "choices": null
         },
         {
-          "id": 110174,
+          "id": 107999,
           "type": "round",
           "treeType": "spec",
           "posX": 42,
@@ -1218,9 +1254,9 @@
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Voidpurge",
-          "icon": "7554220",
-          "description": "Void Ray's cooldown during Void Metamorphosis is reduced by 2.0 sec.",
+          "name": "Waste Not",
+          "icon": "7554223",
+          "description": "Damage from Void Ray has a 200% increased chance to generate a Soul Fragment.",
           "choices": null
         },
         {
@@ -1366,9 +1402,9 @@
           "posX": 40,
           "posY": 8,
           "connections": [
+            107999,
             108144,
-            108628,
-            110174
+            108628
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1409,7 +1445,7 @@
           "maxRanks": 1,
           "name": "Violent Transformation",
           "icon": "237559",
-          "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and The Hunt.\r\n\r\nThe Hunt deals 25% increased damage and resets the cooldown of Soul Immolation.",
+          "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and Soul Immolation.",
           "choices": null
         },
         {
@@ -1447,27 +1483,10 @@
           "choices": null
         },
         {
-          "id": 110171,
-          "type": "round",
-          "treeType": "spec",
-          "posX": 30,
-          "posY": 9,
-          "connections": [
-            108136
-          ],
-          "spentRequired": 20,
-          "alreadyGranted": false,
-          "maxRanks": 1,
-          "name": "Soulforged Blades",
-          "icon": "7439190",
-          "description": "Hungering Slash and Voidblade's critical strike chance is increased by 15%.",
-          "choices": null
-        },
-        {
           "id": 110170,
           "type": "round",
           "treeType": "spec",
-          "posX": 32,
+          "posX": 30,
           "posY": 9,
           "connections": [
             108136
@@ -1514,23 +1533,6 @@
           "name": "Devourer's Edge",
           "icon": "7554202",
           "description": "Reap and Consume damage increased by 10%.",
-          "choices": null
-        },
-        {
-          "id": 110169,
-          "type": "round",
-          "treeType": "spec",
-          "posX": 40,
-          "posY": 9,
-          "connections": [
-            107774
-          ],
-          "spentRequired": 20,
-          "alreadyGranted": false,
-          "maxRanks": 1,
-          "name": "Voidglare Boon",
-          "icon": "5976933",
-          "description": "After fully channeling Void Ray, gain 10 Fury.",
           "choices": null
         },
         {
@@ -1613,7 +1615,7 @@
           "maxRanks": 1,
           "name": "Monster Rising",
           "icon": "236293",
-          "description": "Intellect increased by 15% while not in demon form.",
+          "description": "Intellect increased by 10% while not in demon form.",
           "choices": null
         },
         {
@@ -1640,7 +1642,7 @@
           "posX": 32,
           "posY": 10,
           "connections": [
-            110171,
+            110165,
             110170
           ],
           "spentRequired": 20,
@@ -1652,7 +1654,7 @@
           "choices": null
         },
         {
-          "id": 110167,
+          "id": 110171,
           "type": "round",
           "treeType": "spec",
           "posX": 34,
@@ -1663,9 +1665,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Devourer's Bite",
-          "icon": "7554201",
-          "description": "Damage from Voidblade and the Hunt increases the damage your target takes from you by 12% for 10 sec. Multiple applications may overlap.",
+          "name": "Soulforged Blades",
+          "icon": "7439190",
+          "description": "Hungering Slash and Voidblade's critical strike chance is increased by 18%.",
           "choices": null
         },
         {
@@ -1704,21 +1706,21 @@
           "choices": null
         },
         {
-          "id": 110172,
+          "id": 110169,
           "type": "round",
           "treeType": "spec",
           "posX": 40,
           "posY": 10,
           "connections": [
-            110168,
-            110169
+            108143,
+            110168
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Star Fragments",
-          "icon": "7554216",
-          "description": "Collapsing Star now generates 3 Soul Fragments.",
+          "name": "Voidglare Boon",
+          "icon": "5976933",
+          "description": "After fully channeling Void Ray, gain 10 Fury.",
           "choices": null
         },
         {
@@ -1730,20 +1732,20 @@
           "connections": [
             94904,
             94902,
-            109772,
-            94909
+            94909,
+            109772
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Demonic Intensity",
           "icon": "1378283",
-          "description": "Activating Void Metamorphosis greatly empowers The Hunt.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
+          "description": "Void Metamorphosis greatly empowers The Hunt and casting Collapsing Star resets its cooldown.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
           "choices": null
         },
         {
-          "id": 109503,
-          "type": "square",
+          "id": 110167,
+          "type": "round",
           "treeType": "spec",
           "posX": 32,
           "posY": 11,
@@ -1753,9 +1755,9 @@
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "The Hunt",
-          "icon": "7554167",
-          "description": "Charge to your target, striking them for 2,300 Cosmic damage, rooting them in place for 1.5 sec and inflicting 1,628 Cosmic damage over 6 sec to up to 5 enemies in your path.",
+          "name": "Devourer's Bite",
+          "icon": "7554201",
+          "description": "Damage from Voidblade and the Hunt increases the damage your target takes from you by 12% for 10 sec. Multiple applications may overlap.",
           "choices": null
         },
         {
@@ -1791,20 +1793,20 @@
           ]
         },
         {
-          "id": 107345,
+          "id": 110174,
           "type": "round",
           "treeType": "spec",
           "posX": 40,
           "posY": 11,
           "connections": [
-            110172
+            110169
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
-          "name": "Eradicate",
-          "icon": "7554203",
-          "description": "Fully channeling Void Ray upgrades your Reap to Eradicate.\r\n\r\n Eradicate\r\nSlam your Scythe to the ground, dealing 2,404 Cosmic damage to your primary target and 2,043 to all other enemies within a 25 yd cone in front of you. Damage reduced beyond 5 targets.\r\n\r\nEradicate gathers up to 4 nearby souls.",
+          "name": "Voidpurge",
+          "icon": "7554220",
+          "description": "Void Ray's cooldown during Void Metamorphosis is reduced by 2.5 sec.",
           "choices": null
         },
         {
@@ -1897,7 +1899,7 @@
           "maxRanks": 1,
           "name": "Dark Matter",
           "icon": "4914669",
-          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,306 Cosmic damage over 6 sec.",
+          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,298 Cosmic damage over 6 sec.",
           "choices": null
         },
         {
@@ -2000,7 +2002,7 @@
           "maxRanks": 1,
           "name": "Voidfall",
           "icon": "7554218",
-          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 666 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
+          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 658 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -2141,7 +2143,7 @@
           "maxRanks": 1,
           "name": "Monster Rising",
           "icon": "236293",
-          "description": "Intellect increased by 15% while not in demon form.",
+          "description": "Intellect increased by 10% while not in demon form.",
           "choices": null
         },
         {
@@ -2298,7 +2300,7 @@
           "maxRanks": 1,
           "name": "Demonsurge",
           "icon": "7554161",
-          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,361 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
+          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,392 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -2367,7 +2369,7 @@
           "maxRanks": 1,
           "name": "Violent Transformation",
           "icon": "237559",
-          "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and The Hunt.\r\n\r\nThe Hunt deals 25% increased damage and resets the cooldown of Soul Immolation.",
+          "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and Soul Immolation.",
           "choices": null
         },
         {
@@ -2388,7 +2390,7 @@
           "maxRanks": 1,
           "name": "Demonic Intensity",
           "icon": "1378283",
-          "description": "Activating Void Metamorphosis greatly empowers The Hunt.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
+          "description": "Void Metamorphosis greatly empowers The Hunt and casting Collapsing Star resets its cooldown.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
           "choices": null
         },
         {
@@ -2999,8 +3001,8 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            90936,
             91004,
+            90936,
             90939
           ],
           "spentRequired": 8,
@@ -3018,8 +3020,8 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            90947,
             91004,
+            90947,
             90927
           ],
           "spentRequired": 8,
@@ -3264,7 +3266,7 @@
           "maxRanks": 1,
           "name": "Demonsurge",
           "icon": "7554161",
-          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,421 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
+          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,349 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -3445,7 +3447,7 @@
           "maxRanks": 1,
           "name": "Violent Transformation",
           "icon": "237559",
-          "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and The Hunt.\r\n\r\nThe Hunt deals 25% increased damage and resets the cooldown of Soul Immolation.",
+          "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and Soul Immolation.",
           "choices": null
         },
         {
@@ -3531,7 +3533,7 @@
           "maxRanks": 1,
           "name": "First Blood",
           "icon": "538039",
-          "description": "Blade Dance deals 100 Chaos damage to the first target struck.",
+          "description": "Blade Dance deals 102 Chaos damage to the first target struck.",
           "choices": null
         },
         {
@@ -3631,7 +3633,7 @@
           "maxRanks": 1,
           "name": "Monster Rising",
           "icon": "236293",
-          "description": "Intellect increased by 15% while not in demon form.",
+          "description": "Intellect increased by 10% while not in demon form.",
           "choices": null
         },
         {
@@ -3721,7 +3723,7 @@
           "maxRanks": 1,
           "name": "Demonic Intensity",
           "icon": "1378283",
-          "description": "Activating Void Metamorphosis greatly empowers The Hunt.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
+          "description": "Void Metamorphosis greatly empowers The Hunt and casting Collapsing Star resets its cooldown.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
           "choices": null
         },
         {
@@ -3822,7 +3824,7 @@
           "maxRanks": 1,
           "name": "Voidfall",
           "icon": "7554218",
-          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 659 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
+          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 661 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {
@@ -4048,7 +4050,7 @@
           "maxRanks": 1,
           "name": "The Hunt",
           "icon": "6035307",
-          "description": "Charge to your target, striking them for 258 Chaos damage, rooting them in place for 1.5 sec and inflicting 188 Chaos damage over 6 sec to up to 5 enemies in your path. ",
+          "description": "Charge to your target, striking them for 260 Chaos damage, rooting them in place for 1.5 sec and inflicting 188 Chaos damage over 6 sec to up to 5 enemies in your path. ",
           "choices": null
         },
         {
@@ -4208,9 +4210,9 @@
           "posX": 32,
           "posY": 9,
           "connections": [
-            90921,
             91036,
-            91021
+            91021,
+            90921
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -4259,9 +4261,9 @@
           "posX": 38,
           "posY": 9,
           "connections": [
-            90921,
             90917,
-            91013
+            91013,
+            90921
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -4351,7 +4353,7 @@
           "maxRanks": 1,
           "name": "Dark Matter",
           "icon": "4914669",
-          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,281 Cosmic damage over 6 sec.",
+          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,305 Cosmic damage over 6 sec.",
           "choices": null
         },
         {
@@ -4508,7 +4510,7 @@
               "spellId": 390152,
               "name": "Collective Anguish",
               "icon": "1392554",
-              "description": "Eye Beam summons an allied Vengeance Demon Hunter who casts Fel Devastation, dealing 90 Fire damage over 2 sec. Dealing damage heals you for up to 61 health.",
+              "description": "Eye Beam summons an allied Vengeance Demon Hunter who casts Fel Devastation, dealing 93 Fire damage over 2 sec. Dealing damage heals you for up to 74 health.",
               "maxRanks": 1
             }
           ]
@@ -4626,8 +4628,8 @@
           "connections": [
             94904,
             94902,
-            109772,
-            94909
+            94909,
+            109772
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4635,7 +4637,7 @@
           "maxRanks": 1,
           "name": "Demonic Intensity",
           "icon": "1378283",
-          "description": "Activating Void Metamorphosis greatly empowers The Hunt.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
+          "description": "Void Metamorphosis greatly empowers The Hunt and casting Collapsing Star resets its cooldown.\r\n\r\nVoidsurge damage is increased by 10% for each time it previously triggered while your demon form is active.",
           "choices": null
         },
         {
@@ -4722,7 +4724,7 @@
           "maxRanks": 1,
           "name": "Monster Rising",
           "icon": "236293",
-          "description": "Intellect increased by 15% while not in demon form.",
+          "description": "Intellect increased by 10% while not in demon form.",
           "choices": null
         },
         {
@@ -4740,7 +4742,7 @@
           "maxRanks": 1,
           "name": "Violent Transformation",
           "icon": "237559",
-          "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and The Hunt.\r\n\r\nThe Hunt deals 25% increased damage and resets the cooldown of Soul Immolation.",
+          "description": "Entering Void Metamorphosis resets the cooldown of Voidblade and Soul Immolation.",
           "choices": null
         },
         {
@@ -4807,7 +4809,7 @@
           "maxRanks": 1,
           "name": "Demonsurge",
           "icon": "7554161",
-          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,416 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
+          "description": "Void Metamorphosis now also greatly empowers Voidblade and Hungering Slash.\r\n\r\nWhile demon form is active, the first cast of each empowered ability induces a Voidsurge, causing you to explode with Void energy, dealing 2,371 Cosmic damage to nearby enemies. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -4984,7 +4986,7 @@
           "maxRanks": 1,
           "name": "Reaver's Mark",
           "icon": "132175",
-          "description": "When enhanced by Reaver's Glaive, Shear applies Reaver's Mark, which causes the target to take 7% increased damage for 20 sec. Max 2 stacks.\r\n\r\nApplies 1 additional stack of Reaver's Mark If cast after Soul Cleave.",
+          "description": "When enhanced by Reaver's Glaive, Shear applies Reaver's Mark, which causes the target to take 8% increased damage for 20 sec. Max 2 stacks.\r\n\r\nApplies 1 additional stack of Reaver's Mark If cast after Soul Cleave.",
           "choices": null
         },
         {
@@ -5102,7 +5104,7 @@
           "maxRanks": 1,
           "name": "Art of the Glaive",
           "icon": "5927616",
-          "description": "Consuming 20 Soul Fragments or casting Sigil of Spite converts your next Throw Glaive into Reaver's Glaive.\r\n\r\n Reaver's Glaive: \r\nThrow a glaive enhanced with the essence of consumed souls at your target, dealing 134 Physical damage and ricocheting to 2 additional enemies.\r\n \r\nBegins a well-practiced pattern of glaivework, enhancing your next Shear and Soul Cleave.\r\n\r\nThe enhanced ability you cast first deals 10% increased damage, and the second deals 20% increased damage.",
+          "description": "Consuming 20 Soul Fragments or casting Sigil of Spite converts your next Throw Glaive into Reaver's Glaive.\r\n\r\n Reaver's Glaive: \r\nThrow a glaive enhanced with the essence of consumed souls at your target, dealing 168 Physical damage and ricocheting to 2 additional enemies.\r\n \r\nBegins a well-practiced pattern of glaivework, enhancing your next Shear and Soul Cleave.\r\n\r\nThe enhanced ability you cast first deals 15% increased damage, and the second deals 30% increased damage.",
           "choices": null
         },
         {
@@ -5114,8 +5116,8 @@
           "connections": [
             94910,
             94895,
-            109769,
-            94906
+            94906,
+            109769
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5177,7 +5179,7 @@
           "maxRanks": 1,
           "name": "Broken Spirit",
           "icon": "1778228",
-          "description": "The Hunt shatters 1 Soul Fragment. Blade Dance and Chaos Strike have a 15% chance to shatter a Soul Fragment.",
+          "description": "The Hunt shatters 1 Soul Fragment. Blade Dance and Chaos Strike have a 20% chance to shatter a Soul Fragment.",
           "choices": null
         }
       ]
@@ -5259,7 +5261,7 @@
           "maxRanks": 1,
           "name": "Felblade",
           "icon": "1344646",
-          "description": "Charge to your target and deal 42 Fire damage.\r\n\r\nGenerates 15 Fury.",
+          "description": "Charge to your target and deal 43 Fire damage.\r\n\r\nGenerates 15 Fury.",
           "choices": null
         },
         {
@@ -5755,8 +5757,8 @@
           "posY": 8,
           "connections": [
             91004,
-            90936,
-            90939
+            90939,
+            90936
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5773,8 +5775,8 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            90947,
             91004,
+            90947,
             90927
           ],
           "spentRequired": 8,
@@ -6019,7 +6021,7 @@
           "maxRanks": 1,
           "name": "Fel Devastation",
           "icon": "1450143",
-          "description": "Unleash the fel within you, damaging enemies directly in front of you for 162 Fire damage over 2 sec.",
+          "description": "Unleash the fel within you, damaging enemies directly in front of you for 163 Fire damage over 2 sec.",
           "choices": null
         },
         {
@@ -6036,7 +6038,7 @@
           "maxRanks": 1,
           "name": "Spirit Bomb",
           "icon": "1097742",
-          "description": "Consume up to 5 Soul Fragments then explode, dealing 71 Fire damage to nearby enemies, increased by 20% per fragment consumed. Deals reduced damage beyond 8 targets.",
+          "description": "Consume up to 5 Soul Fragments then explode, dealing 70 Fire damage to nearby enemies, increased by 20% per fragment consumed. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
@@ -6053,7 +6055,7 @@
           "maxRanks": 1,
           "name": "Fiery Brand",
           "icon": "1344647",
-          "description": "Brand yourself and an enemy target with demonic symbols, reducing the damage you take by 40% and instantly dealing 145 Fire damage to the enemy.",
+          "description": "Brand yourself and an enemy target with demonic symbols, reducing the damage you take by 40% and instantly dealing 146 Fire damage to the enemy.",
           "choices": null
         },
         {
@@ -6207,7 +6209,7 @@
           "maxRanks": 1,
           "name": "Sigil of Spite",
           "icon": "6035306",
-          "description": "Place a demonic sigil at the target location that activates after 2 sec.\r\n\r\nDetonates to deal 247 Chaos damage and shatter up to 3 Soul Fragments from enemies affected by the sigil. Deals reduced damage beyond 5 targets.",
+          "description": "Place a demonic sigil at the target location that activates after 2 sec.\r\n\r\nDetonates to deal 241 Chaos damage and shatter up to 3 Soul Fragments from enemies affected by the sigil. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -6434,7 +6436,7 @@
           "maxRanks": 1,
           "name": "Void Reaver",
           "icon": "237561",
-          "description": "Frailty now also reduces all damage you take from afflicted targets by 5%.",
+          "description": "Frailty now also reduces all damage you take from afflicted targets by 6%.",
           "choices": null
         },
         {
@@ -6687,7 +6689,7 @@
           "maxRanks": 1,
           "name": "Soul Carver",
           "icon": "1309072",
-          "description": "Carve into the soul of your target, dealing 171 Fire damage and an additional 104 Fire damage over 3 sec.  Immediately shatters 3 Soul Fragments from the target and 1 additional Soul Fragment every 1 sec.",
+          "description": "Carve into the soul of your target, dealing 171 Fire damage and an additional 107 Fire damage over 3 sec.  Immediately shatters 3 Soul Fragments from the target and 1 additional Soul Fragment every 1 sec.",
           "choices": null
         },
         {
@@ -6880,7 +6882,7 @@
           "maxRanks": 1,
           "name": "Reaver's Mark",
           "icon": "132175",
-          "description": "When enhanced by Reaver's Glaive, Shear applies Reaver's Mark, which causes the target to take 7% increased damage for 20 sec. Max 2 stacks.\r\n\r\nApplies 1 additional stack of Reaver's Mark If cast after Soul Cleave.",
+          "description": "When enhanced by Reaver's Glaive, Shear applies Reaver's Mark, which causes the target to take 8% increased damage for 20 sec. Max 2 stacks.\r\n\r\nApplies 1 additional stack of Reaver's Mark If cast after Soul Cleave.",
           "choices": null
         },
         {
@@ -6998,7 +7000,7 @@
           "maxRanks": 1,
           "name": "Art of the Glaive",
           "icon": "5927616",
-          "description": "Consuming 20 Soul Fragments or casting Sigil of Spite converts your next Throw Glaive into Reaver's Glaive.\r\n\r\n Reaver's Glaive: \r\nThrow a glaive enhanced with the essence of consumed souls at your target, dealing 134 Physical damage and ricocheting to 2 additional enemies.\r\n \r\nBegins a well-practiced pattern of glaivework, enhancing your next Shear and Soul Cleave.\r\n\r\nThe enhanced ability you cast first deals 10% increased damage, and the second deals 20% increased damage.",
+          "description": "Consuming 20 Soul Fragments or casting Sigil of Spite converts your next Throw Glaive into Reaver's Glaive.\r\n\r\n Reaver's Glaive: \r\nThrow a glaive enhanced with the essence of consumed souls at your target, dealing 168 Physical damage and ricocheting to 2 additional enemies.\r\n \r\nBegins a well-practiced pattern of glaivework, enhancing your next Shear and Soul Cleave.\r\n\r\nThe enhanced ability you cast first deals 15% increased damage, and the second deals 30% increased damage.",
           "choices": null
         },
         {
@@ -7010,8 +7012,8 @@
           "connections": [
             94910,
             94895,
-            109769,
-            94906
+            94906,
+            109769
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -7073,7 +7075,7 @@
           "maxRanks": 1,
           "name": "Broken Spirit",
           "icon": "1778228",
-          "description": "The Hunt shatters 1 Soul Fragment. Blade Dance and Chaos Strike have a 15% chance to shatter a Soul Fragment.",
+          "description": "The Hunt shatters 1 Soul Fragment. Blade Dance and Chaos Strike have a 20% chance to shatter a Soul Fragment.",
           "choices": null
         },
         {
@@ -7130,7 +7132,7 @@
           "maxRanks": 1,
           "name": "Dark Matter",
           "icon": "4914669",
-          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,294 Cosmic damage over 6 sec.",
+          "description": "Your first Collapsing Star after casting Void Metamorphosis causes a Cosmic meteor shower to assault the area, dealing 2,269 Cosmic damage over 6 sec.",
           "choices": null
         },
         {
@@ -7233,7 +7235,7 @@
           "maxRanks": 1,
           "name": "Voidfall",
           "icon": "7554218",
-          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 666 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
+          "description": "Consume has a 35% chance to grant 1 stack of Voidfall.\r\n\r\nUpon reaching 3 stacks of Voidfall, Reap consumes a stack to reach into the Void and call down a meteor strike at your target's location, dealing 665 Cosmic damage to all enemies within 8 yards. Damage reduced beyond 8 targets.",
           "choices": null
         },
         {

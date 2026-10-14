@@ -134,7 +134,7 @@
           "maxRanks": 1,
           "name": "Thunder Clap",
           "icon": "136105",
-          "description": "Blasts all enemies within 8 yards for 83 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
+          "description": "Blasts all enemies within 8 yards for 82 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -169,7 +169,7 @@
           "maxRanks": 1,
           "name": "Impending Victory",
           "icon": "589768",
-          "description": "Instantly attack the target, causing 20 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
+          "description": "Instantly attack the target, causing 21 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
           "choices": null
         },
         {
@@ -179,8 +179,8 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            90343,
-            90328
+            90328,
+            90343
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -222,7 +222,7 @@
           "maxRanks": 1,
           "name": "Storm Bolt",
           "icon": "613535",
-          "description": "Hurls your weapon at an enemy, causing 10 Physical damage and stunning for 4 sec.",
+          "description": "Hurls your weapon at an enemy, causing 9 Physical damage and stunning for 4 sec.",
           "choices": null
         },
         {
@@ -240,7 +240,7 @@
           "maxRanks": 1,
           "name": "Rend",
           "icon": "132155",
-          "description": "Wounds the target, causing 44 Physical damage instantly and an additional 74 Bleed damage over 15 sec.",
+          "description": "Wounds the target, causing 43 Physical damage instantly and an additional 74 Bleed damage over 15 sec.",
           "choices": null
         },
         {
@@ -267,9 +267,9 @@
           "posX": 6,
           "posY": 5,
           "connections": [
-            90328,
             90326,
-            90346
+            90346,
+            90328
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -303,8 +303,8 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            90337,
-            90346
+            90346,
+            90337
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -362,7 +362,7 @@
           "maxRanks": 1,
           "name": "Shockwave",
           "icon": "236312",
-          "description": "Sends a wave of force in a frontal cone, causing 6 damage and stunning all enemies within 10 yards for 2 sec.",
+          "description": "Sends a wave of force in a frontal cone, causing 7 damage and stunning all enemies within 10 yards for 2 sec.",
           "choices": null
         },
         {
@@ -456,14 +456,14 @@
               "spellId": 384110,
               "name": "Wrecking Throw",
               "icon": "460959",
-              "description": "Hurl your weapon at the enemy, causing 208 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
+              "description": "Hurl your weapon at the enemy, causing 213 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 64382,
               "name": "Shattering Throw",
               "icon": "311430",
-              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 211 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
+              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 209 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
               "maxRanks": 1
             }
           ]
@@ -594,8 +594,8 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            108705,
-            90348
+            90348,
+            108705
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -700,8 +700,8 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            90347,
-            110118
+            110118,
+            90347
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -736,8 +736,8 @@
           "posX": 12,
           "posY": 10,
           "connections": [
-            108686,
-            108685
+            108685,
+            108686
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -829,7 +829,7 @@
           "maxRanks": 1,
           "name": "Mortal Strike",
           "icon": "132355",
-          "description": "A vicious strike that deals 179 Physical damage and reduces the effectiveness of healing on the target by 50% for 10 sec.",
+          "description": "A vicious strike that deals 178 Physical damage and reduces the effectiveness of healing on the target by 50% for 10 sec.",
           "choices": null
         },
         {
@@ -1016,7 +1016,7 @@
           "maxRanks": 1,
           "name": "Colossus Smash",
           "icon": "2065633",
-          "description": "Smash the ground and shatter the armor of all enemies within 10 yds, dealing 104 Physical damage and increasing damage you deal to them by 30% for 10 sec. Deals reduced damage beyond 8 targets.\r\n",
+          "description": "Smash the ground and shatter the armor of all enemies within 10 yds, dealing 107 Physical damage and increasing damage you deal to them by 30% for 10 sec. Deals reduced damage beyond 8 targets.\r\n",
           "choices": null
         },
         {
@@ -1183,7 +1183,7 @@
           "maxRanks": 1,
           "name": "Cleave",
           "icon": "132338",
-          "description": "Strikes all enemies in front of you for 82 Physical damage. Deals reduced damage beyond 5 targets.\r\n\r\nIf you know Rend, inflicts Rend on all targets.",
+          "description": "Strikes all enemies in front of you for 79 Physical damage. Deals reduced damage beyond 5 targets.\r\n\r\nIf you know Rend, inflicts Rend on all targets.",
           "choices": null
         },
         {
@@ -1236,7 +1236,7 @@
           "maxRanks": 1,
           "name": "Dreadnaught",
           "icon": "135275",
-          "description": "Overpower's impact causes a seismic wave, dealing 48 damage to all enemies in a 10 yd line around your target. Deals reduced damage beyond 5 targets.\r\n\r\nDreadnaught benefits from all effects that modify Overpower's damage.",
+          "description": "Overpower's impact causes a seismic wave, dealing 49 damage to all enemies in a 10 yd line around your target. Deals reduced damage beyond 5 targets.\r\n\r\nDreadnaught benefits from all effects that modify Overpower's damage.",
           "choices": null
         },
         {
@@ -1365,14 +1365,14 @@
               "spellId": 227847,
               "name": "Bladestorm",
               "icon": "236303",
-              "description": "Become an unstoppable storm of destructive force, striking all nearby enemies for 657 Physical damage over 5.4 sec. Deals reduced damage beyond 8 targets.\r\n\r\nYou are immune to movement impairing and loss of control effects, but can use defensive abilities and can avoid attacks.\r\n",
+              "description": "Become an unstoppable storm of destructive force, striking all nearby enemies for 663 Physical damage over 5.4 sec. Deals reduced damage beyond 8 targets.\r\n\r\nYou are immune to movement impairing and loss of control effects, but can use defensive abilities and can avoid attacks.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 228920,
               "name": "Ravager",
               "icon": "970854",
-              "description": "Throws a whirling weapon at your target that chases nearby enemies, inflicting 371 Physical damage to all enemies over 12 sec. Deals reduced damage beyond 8 targets.\r\n\r\nEnemies damaged by Ravager take 50% additional damage from your Bleeds for 12 sec.",
+              "description": "Throws a whirling weapon at your target that chases nearby enemies, inflicting 370 Physical damage to all enemies over 12 sec. Deals reduced damage beyond 8 targets.\r\n\r\nEnemies damaged by Ravager take 50% additional damage from your Bleeds for 12 sec.",
               "maxRanks": 1
             }
           ]
@@ -1384,8 +1384,8 @@
           "posX": 40,
           "posY": 9,
           "connections": [
-            109682,
-            90291
+            90291,
+            109682
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1723,7 +1723,7 @@
           "maxRanks": 1,
           "name": "Reap the Storm",
           "icon": "1016243",
-          "description": "When Cleave hits 3 or more targets you have a 20% chance to unleash a flurry of steel, striking all nearby enemies for 267 Physical damage and applying Overwhelmed. Deals reduced damage beyond 8 targets.\r\n",
+          "description": "When Cleave hits 3 or more targets you have a 20% chance to unleash a flurry of steel, striking all nearby enemies for 272 Physical damage and applying Overwhelmed. Deals reduced damage beyond 8 targets.\r\n",
           "choices": null
         },
         {
@@ -1775,7 +1775,7 @@
           "maxRanks": 1,
           "name": "Slayer's Dominance",
           "icon": "5927649",
-          "description": "Your attacks against your primary target have a 25% chance to overwhelm their defenses and trigger a Slayer's Strike, dealing 294 Physical damage and granting you a stack of Executioner, increasing your Execute damage by 3% for 12 sec. Multiple stacks of Executioner may overlap.",
+          "description": "Your attacks against your primary target have a 25% chance to overwhelm their defenses and trigger a Slayer's Strike, dealing 297 Physical damage and granting you a stack of Executioner, increasing your Execute damage by 3% for 12 sec. Multiple stacks of Executioner may overlap.",
           "choices": null
         },
         {
@@ -2076,7 +2076,7 @@
           "maxRanks": 1,
           "name": "Demolish",
           "icon": "5927618",
-          "description": "Unleash a series of precise and powerful strikes against your target, dealing 791 damage to it, and 429 damage to enemies within 10 yds of it. Deals reduced damage beyond 8 targets.\r\n\r\nWhile channeling Demolish, you take 10% less damage and are immune to stuns, knockbacks, and forced movement effects.\r\n\r\nYou can block, parry, dodge, and use certain defensive abilities while channeling Demolish.",
+          "description": "Unleash a series of precise and powerful strikes against your target, dealing 794 damage to it, and 437 damage to enemies within 10 yds of it. Deals reduced damage beyond 8 targets.\r\n\r\nWhile channeling Demolish, you take 10% less damage and are immune to stuns, knockbacks, and forced movement effects.\r\n\r\nYou can block, parry, dodge, and use certain defensive abilities while channeling Demolish.",
           "choices": null
         },
         {
@@ -2281,7 +2281,7 @@
           "maxRanks": 1,
           "name": "Thunder Clap",
           "icon": "136105",
-          "description": "Blasts all enemies within 8 yards for 83 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
+          "description": "Blasts all enemies within 8 yards for 81 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -2316,7 +2316,7 @@
           "maxRanks": 1,
           "name": "Impending Victory",
           "icon": "589768",
-          "description": "Instantly attack the target, causing 20 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
+          "description": "Instantly attack the target, causing 21 damage and healing you for 30% of your maximum health.\r\n\r\nKilling an enemy that yields experience or honor resets the cooldown of Impending Victory and makes it cost no Rage.",
           "choices": null
         },
         {
@@ -2326,8 +2326,8 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            90343,
-            90328
+            90328,
+            90343
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2369,7 +2369,7 @@
           "maxRanks": 1,
           "name": "Storm Bolt",
           "icon": "613535",
-          "description": "Hurls your weapon at an enemy, causing 9 Physical damage and stunning for 4 sec.",
+          "description": "Hurls your weapon at an enemy, causing 10 Physical damage and stunning for 4 sec.",
           "choices": null
         },
         {
@@ -2414,9 +2414,9 @@
           "posX": 6,
           "posY": 5,
           "connections": [
-            90328,
             90326,
-            90346
+            90346,
+            90328
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2450,8 +2450,8 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            90337,
-            90346
+            90346,
+            90337
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2468,8 +2468,8 @@
           "posX": 14,
           "posY": 5,
           "connections": [
-            90337,
-            90371
+            90371,
+            90337
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2501,8 +2501,8 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            110654,
-            90352
+            90352,
+            110654
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2571,8 +2571,8 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            108674,
-            90353
+            90353,
+            108674
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2589,8 +2589,8 @@
           "posX": 2,
           "posY": 7,
           "connections": [
-            110654,
-            90375
+            90375,
+            110654
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2603,14 +2603,14 @@
               "spellId": 384110,
               "name": "Wrecking Throw",
               "icon": "460959",
-              "description": "Hurl your weapon at the enemy, causing 211 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
+              "description": "Hurl your weapon at the enemy, causing 208 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 64382,
               "name": "Shattering Throw",
               "icon": "311430",
-              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 209 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
+              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 214 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
               "maxRanks": 1
             }
           ]
@@ -2705,8 +2705,8 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            108674,
-            90385
+            90385,
+            108674
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2741,8 +2741,8 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            108705,
-            90348
+            90348,
+            108705
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -2847,8 +2847,8 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            90347,
-            110118
+            110118,
+            90347
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -2883,8 +2883,8 @@
           "posX": 12,
           "posY": 10,
           "connections": [
-            108686,
-            108685
+            108685,
+            108686
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -2926,7 +2926,7 @@
           "maxRanks": 1,
           "name": "Champion's Spear",
           "icon": "6035322",
-          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear's location and dealing 83 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
+          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear's location and dealing 82 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
           "choices": null
         },
         {
@@ -2976,7 +2976,7 @@
           "maxRanks": 1,
           "name": "Bloodthirst",
           "icon": "136012",
-          "description": "Assault the target in a bloodthirsty craze, dealing 149 Physical damage and restoring 3% of your health.\r\n\r\nGenerates 8 Rage and has a 30% chance to Enrage you.",
+          "description": "Assault the target in a bloodthirsty craze, dealing 150 Physical damage and restoring 3% of your health.\r\n\r\nGenerates 8 Rage and has a 30% chance to Enrage you.",
           "choices": null
         },
         {
@@ -2993,7 +2993,7 @@
           "maxRanks": 1,
           "name": "Raging Blow",
           "icon": "589119",
-          "description": "A mighty blow with both weapons that deals a total of 76 Physical damage.\r\n\r\nGenerates 12 Rage.",
+          "description": "A mighty blow with both weapons that deals a total of 77 Physical damage.\r\n\r\nGenerates 12 Rage.",
           "choices": null
         },
         {
@@ -3156,8 +3156,8 @@
           "posX": 32,
           "posY": 6,
           "connections": [
-            90403,
-            90395
+            90395,
+            90403
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3191,15 +3191,15 @@
           "posX": 36,
           "posY": 6,
           "connections": [
-            90395,
-            90394
+            90394,
+            90395
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Rampage",
           "icon": "132352",
-          "description": "Unleash a series of 4 brutal strikes for a total of 105 Physical damage.\r\n\r\nEnrages you.",
+          "description": "Unleash a series of 4 brutal strikes for a total of 106 Physical damage.\r\n\r\nEnrages you.",
           "choices": null
         },
         {
@@ -3244,8 +3244,8 @@
           "posX": 30,
           "posY": 7,
           "connections": [
-            90410,
-            90399
+            90399,
+            90410
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3347,8 +3347,8 @@
           "posX": 42,
           "posY": 7,
           "connections": [
-            90390,
-            90391
+            90391,
+            90390
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3416,8 +3416,8 @@
           "posY": 8,
           "connections": [
             90407,
-            109965,
-            109969
+            109969,
+            109965
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3487,9 +3487,9 @@
           "posX": 36,
           "posY": 9,
           "connections": [
+            90412,
             90405,
-            109962,
-            90412
+            109962
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3506,8 +3506,8 @@
           "posX": 40,
           "posY": 9,
           "connections": [
-            90405,
-            90387
+            90387,
+            90405
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -3651,7 +3651,7 @@
               "spellId": 227847,
               "name": "Bladestorm",
               "icon": "236303",
-              "description": "Become an unstoppable storm of destructive force, striking all nearby enemies for 669 Physical damage over 5.4 sec. Deals reduced damage beyond 8 targets.\r\n\r\nYou are immune to movement impairing and loss of control effects, but can use defensive abilities and can avoid attacks.\r\n",
+              "description": "Become an unstoppable storm of destructive force, striking all nearby enemies for 673 Physical damage over 5.4 sec. Deals reduced damage beyond 8 targets.\r\n\r\nYou are immune to movement impairing and loss of control effects, but can use defensive abilities and can avoid attacks.\r\n",
               "maxRanks": 1
             }
           ]
@@ -3860,7 +3860,7 @@
           "maxRanks": 1,
           "name": "Reap the Storm",
           "icon": "1016243",
-          "description": "When Cleave hits 3 or more targets you have a 20% chance to unleash a flurry of steel, striking all nearby enemies for 267 Physical damage and applying Overwhelmed. Deals reduced damage beyond 8 targets.\r\n",
+          "description": "When Cleave hits 3 or more targets you have a 20% chance to unleash a flurry of steel, striking all nearby enemies for 275 Physical damage and applying Overwhelmed. Deals reduced damage beyond 8 targets.\r\n",
           "choices": null
         },
         {
@@ -3912,7 +3912,7 @@
           "maxRanks": 1,
           "name": "Slayer's Dominance",
           "icon": "5927649",
-          "description": "Your attacks against your primary target have a 25% chance to overwhelm their defenses and trigger a Slayer's Strike, dealing 294 Physical damage and granting you a stack of Executioner, increasing your Execute damage by 3% for 12 sec. Multiple stacks of Executioner may overlap.",
+          "description": "Your attacks against your primary target have a 25% chance to overwhelm their defenses and trigger a Slayer's Strike, dealing 292 Physical damage and granting you a stack of Executioner, increasing your Execute damage by 3% for 12 sec. Multiple stacks of Executioner may overlap.",
           "choices": null
         },
         {
@@ -4005,7 +4005,7 @@
           "maxRanks": 1,
           "name": "Thunder Blast",
           "icon": "460957",
-          "description": "Shield Slam and Bloodthirst have a 35% chance to grant you Thunder Blast, stacking up to 2 charges.\r\n\r\nThunder Blast\r\nYour next Thunder Clap becomes a Thunder Blast that deals 81 Stormstrike damage and generates 2 Rage.",
+          "description": "Shield Slam and Bloodthirst have a 35% chance to grant you Thunder Blast, stacking up to 2 charges.\r\n\r\nThunder Blast\r\nYour next Thunder Clap becomes a Thunder Blast that deals 82 Stormstrike damage and generates 2 Rage.",
           "choices": null
         },
         {
@@ -4122,7 +4122,7 @@
           "maxRanks": 1,
           "name": "Ground Current",
           "icon": "458976",
-          "description": "Lightning Strikes also deal 39 Nature damage to enemies near their target. Damage reduced beyond 5 targets.",
+          "description": "Lightning Strikes also deal 59 Nature damage to enemies near their target. Damage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -4138,7 +4138,7 @@
           "maxRanks": 1,
           "name": "Lightning Strikes",
           "icon": "252174",
-          "description": "Damaging enemies with Thunder Clap, Raging Blow, or Execute has a 25% chance to also strike one with a lightning bolt, dealing 54 Nature damage.\r\n\r\nLightning Strikes occur 30% more often during Avatar.",
+          "description": "Damaging enemies with Thunder Clap, Raging Blow, or Execute has a 25% chance to also strike one with a lightning bolt, dealing 81 Nature damage.\r\n\r\nLightning Strikes occur 30% more often during Avatar.",
           "choices": null
         },
         {
@@ -4148,10 +4148,10 @@
           "posX": 46,
           "posY": 5,
           "connections": [
-            109809,
             94797,
             94792,
-            94807
+            94807,
+            109809
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4433,7 +4433,7 @@
           "maxRanks": 1,
           "name": "Thunder Clap",
           "icon": "136105",
-          "description": "Blasts all enemies within 8 yards for 81 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
+          "description": "Blasts all enemies within 8 yards for 82 Physical damage and reduces their movement speed by 20% for 10 sec. Deals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -4478,8 +4478,8 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            90343,
-            90328
+            90328,
+            90343
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4521,7 +4521,7 @@
           "maxRanks": 1,
           "name": "Storm Bolt",
           "icon": "613535",
-          "description": "Hurls your weapon at an enemy, causing 9 Physical damage and stunning for 4 sec.",
+          "description": "Hurls your weapon at an enemy, causing 10 Physical damage and stunning for 4 sec.",
           "choices": null
         },
         {
@@ -4566,9 +4566,9 @@
           "posX": 6,
           "posY": 5,
           "connections": [
-            90328,
             90326,
-            90346
+            90346,
+            90328
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4602,8 +4602,8 @@
           "posX": 10,
           "posY": 5,
           "connections": [
-            90337,
-            90346
+            90346,
+            90337
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -4638,15 +4638,15 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            110653,
-            90352
+            90352,
+            110653
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Shockwave",
           "icon": "236312",
-          "description": "Sends a wave of force in a frontal cone, causing 6 damage and stunning all enemies within 10 yards for 2 sec.",
+          "description": "Sends a wave of force in a frontal cone, causing 7 damage and stunning all enemies within 10 yards for 2 sec.",
           "choices": null
         },
         {
@@ -4726,8 +4726,8 @@
           "posX": 2,
           "posY": 7,
           "connections": [
-            110653,
-            90375
+            90375,
+            110653
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4740,14 +4740,14 @@
               "spellId": 384110,
               "name": "Wrecking Throw",
               "icon": "460959",
-              "description": "Hurl your weapon at the enemy, causing 209 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
+              "description": "Hurl your weapon at the enemy, causing 208 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.\r\n",
               "maxRanks": 1
             },
             {
               "spellId": 64382,
               "name": "Shattering Throw",
               "icon": "311430",
-              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 209 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
+              "description": "Hurl your weapon at the enemy,  removing any magical immunities and causing 211 Physical damage, ignoring armor. Deals up to 500% increased damage to absorb shields.",
               "maxRanks": 1
             }
           ]
@@ -4878,8 +4878,8 @@
           "posX": 8,
           "posY": 8,
           "connections": [
-            108705,
-            90348
+            90348,
+            108705
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4984,8 +4984,8 @@
           "posX": 4,
           "posY": 10,
           "connections": [
-            90347,
-            110118
+            110118,
+            90347
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5020,8 +5020,8 @@
           "posX": 12,
           "posY": 10,
           "connections": [
-            108686,
-            108685
+            108685,
+            108686
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5063,7 +5063,7 @@
           "maxRanks": 1,
           "name": "Champion's Spear",
           "icon": "6035322",
-          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear's location and dealing 85 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
+          "description": "Throw a spear at the target location, chaining all enemies in the area to the spear's location and dealing 83 Physical damage instantly and an additional 128 Physical damage over 6 sec. \r\n\r\nWhile the spear is active, activating this ability will cause you to leap to the spear, dealing 16 Physical damage to all targets.\r\n\r\nAll damage dealt reduced beyond 5 targets.\r\n\r\nGenerates 10 Rage.",
           "choices": null
         },
         {
@@ -5147,7 +5147,7 @@
           "maxRanks": 1,
           "name": "Revenge",
           "icon": "132353",
-          "description": "Swing in a wide arc, dealing 98 Physical damage to all enemies in front of you. Deals reduced damage beyond 5 targets.\r\n\r\nYour successful dodges, parries, and auto-attacks have a chance to make your next Revenge cost no Rage.",
+          "description": "Swing in a wide arc, dealing 99 Physical damage to all enemies in front of you. Deals reduced damage beyond 5 targets.\r\n\r\nYour successful dodges, parries, and auto-attacks have a chance to make your next Revenge cost no Rage.",
           "choices": null
         },
         {
@@ -5198,7 +5198,7 @@
           "maxRanks": 1,
           "name": "Fight Through the Flames",
           "icon": "1786407",
-          "description": "Defensive Stance additionally reduces magic damage you take by 6%.",
+          "description": "Defensive Stance additionally reduces magic damage you take by 8%.",
           "choices": null
         },
         {
@@ -5544,8 +5544,8 @@
           "posX": 36,
           "posY": 8,
           "connections": [
-            90318,
-            90264
+            90264,
+            90318
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5791,7 +5791,7 @@
           "maxRanks": 1,
           "name": "Shield Charge",
           "icon": "4667427",
-          "description": "Charge to an enemy with your shield, granting you Shield Block and dealing 292 Physical damage to it and 94 Physical damage to all enemies within 10 yards.\r\n\r\nAlso stuns the primary target for 4 sec.\r\n\r\nGenerates 20 Rage.",
+          "description": "Charge to an enemy with your shield, granting you Shield Block and dealing 295 Physical damage to it and 93 Physical damage to all enemies within 10 yards.\r\n\r\nAlso stuns the primary target for 4 sec.\r\n\r\nGenerates 20 Rage.",
           "choices": null
         },
         {
@@ -5840,7 +5840,7 @@
               "spellId": 228920,
               "name": "Ravager",
               "icon": "970854",
-              "description": "Throws a whirling weapon at your target that chases nearby enemies, inflicting 378 Physical damage to all enemies over 12 sec. Deals reduced damage beyond 8 targets.\r\n\r\nEnemies damaged by Ravager take 50% additional damage from your Bleeds for 12 sec.",
+              "description": "Throws a whirling weapon at your target that chases nearby enemies, inflicting 377 Physical damage to all enemies over 12 sec. Deals reduced damage beyond 8 targets.\r\n\r\nEnemies damaged by Ravager take 50% additional damage from your Bleeds for 12 sec.",
               "maxRanks": 1
             }
           ]
@@ -6013,7 +6013,7 @@
           "maxRanks": 1,
           "name": "Ground Current",
           "icon": "458976",
-          "description": "Lightning Strikes also deal 39 Nature damage to enemies near their target. Damage reduced beyond 5 targets.",
+          "description": "Lightning Strikes also deal 58 Nature damage to enemies near their target. Damage reduced beyond 5 targets.",
           "choices": null
         },
         {
@@ -6029,7 +6029,7 @@
           "maxRanks": 1,
           "name": "Lightning Strikes",
           "icon": "252174",
-          "description": "Damaging enemies with Thunder Clap, Raging Blow, or Execute has a 25% chance to also strike one with a lightning bolt, dealing 55 Nature damage.\r\n\r\nLightning Strikes occur 30% more often during Avatar.",
+          "description": "Damaging enemies with Thunder Clap, Raging Blow, or Execute has a 25% chance to also strike one with a lightning bolt, dealing 81 Nature damage.\r\n\r\nLightning Strikes occur 30% more often during Avatar.",
           "choices": null
         },
         {
@@ -6039,10 +6039,10 @@
           "posX": 46,
           "posY": 5,
           "connections": [
-            109809,
             94797,
             94792,
-            94807
+            94807,
+            109809
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -6417,7 +6417,7 @@
           "maxRanks": 1,
           "name": "Demolish",
           "icon": "5927618",
-          "description": "Unleash a series of precise and powerful strikes against your target, dealing 794 damage to it, and 429 damage to enemies within 10 yds of it. Deals reduced damage beyond 8 targets.\r\n\r\nWhile channeling Demolish, you take 10% less damage and are immune to stuns, knockbacks, and forced movement effects.\r\n\r\nYou can block, parry, dodge, and use certain defensive abilities while channeling Demolish.",
+          "description": "Unleash a series of precise and powerful strikes against your target, dealing 801 damage to it, and 434 damage to enemies within 10 yds of it. Deals reduced damage beyond 8 targets.\r\n\r\nWhile channeling Demolish, you take 10% less damage and are immune to stuns, knockbacks, and forced movement effects.\r\n\r\nYou can block, parry, dodge, and use certain defensive abilities while channeling Demolish.",
           "choices": null
         },
         {

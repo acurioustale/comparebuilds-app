@@ -68,7 +68,7 @@
           "maxRanks": 1,
           "name": "Chain Heal",
           "icon": "6712961",
-          "description": "Heals the friendly target for 870, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
+          "description": "Heals the friendly target for 874, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
           "choices": null
         },
         {
@@ -83,7 +83,7 @@
           "maxRanks": 1,
           "name": "Lava Burst",
           "icon": "237582",
-          "description": "Hurls molten lava at the target, dealing 696 Fire damage. Lava Burst will always critically strike if the target is affected by Flame Shock and its damage is increased by your critical strike chance.",
+          "description": "Hurls molten lava at the target, dealing 692 Fire damage. Lava Burst will always critically strike if the target is affected by Flame Shock and its damage is increased by your critical strike chance.",
           "choices": null
         },
         {
@@ -98,7 +98,7 @@
           "maxRanks": 1,
           "name": "Chain Lightning",
           "icon": "136015",
-          "description": "Hurls a lightning bolt at the enemy, dealing 441 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
+          "description": "Hurls a lightning bolt at the enemy, dealing 440 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
           "choices": null
         },
         {
@@ -200,7 +200,7 @@
           "maxRanks": 1,
           "name": "Frost Shock",
           "icon": "135849",
-          "description": "Chills the target with frost, causing 273 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
+          "description": "Chills the target with frost, causing 277 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
           "choices": null
         },
         {
@@ -279,8 +279,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            109492,
-            103581
+            103581,
+            109492
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -337,7 +337,7 @@
           "maxRanks": 1,
           "name": "Healing Stream Totem",
           "icon": "135127",
-          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 252 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
+          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 257 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
           "choices": null
         },
         {
@@ -415,8 +415,8 @@
           "posX": 14,
           "posY": 5,
           "connections": [
-            109493,
-            103613
+            103613,
+            109493
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -557,8 +557,8 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            103579,
-            103622
+            103622,
+            103579
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -729,8 +729,8 @@
           "posX": 14,
           "posY": 8,
           "connections": [
-            103628,
-            103585
+            103585,
+            103628
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -801,9 +801,9 @@
           "posX": 12,
           "posY": 9,
           "connections": [
-            103623,
             103607,
-            103612
+            103612,
+            103623
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -902,8 +902,8 @@
           "posX": 10,
           "posY": 10,
           "connections": [
-            103625,
-            103586
+            103586,
+            103625
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -1019,14 +1019,14 @@
               "spellId": 8042,
               "name": "Earth Shock",
               "icon": "136026",
-              "description": "Instantly shocks the target with concussive force, causing 3,026 Nature damage.",
+              "description": "Instantly shocks the target with concussive force, causing 2,999 Nature damage.",
               "maxRanks": 1
             },
             {
               "spellId": 117014,
               "name": "Elemental Blast",
               "icon": "651244",
-              "description": "Harnesses the raw power of the elements, dealing 776 Elemental damage and increasing your Critical Strike or Haste by 3% or Mastery by 6% for 10 sec.",
+              "description": "Harnesses the raw power of the elements, dealing 755 Elemental damage and increasing your Critical Strike or Haste by 3% or Mastery by 6% for 10 sec.",
               "maxRanks": 1
             }
           ]
@@ -1051,14 +1051,14 @@
               "spellId": 462620,
               "name": "Earthquake",
               "icon": "451165",
-              "description": "Causes the earth within 8 yards of your target to tremble and break, dealing 1,411 Nature damage over 6 sec and has a 5% chance to knock the enemy down. Multiple uses of Earthquake may overlap.\r\n\r\nThis spell is cast at your target.",
+              "description": "Causes the earth within 8 yards of your target to tremble and break, dealing 1,462 Nature damage over 6 sec and has a 5% chance to knock the enemy down. Multiple uses of Earthquake may overlap.\r\n\r\nThis spell is cast at your target.",
               "maxRanks": 1
             },
             {
               "spellId": 61882,
               "name": "Earthquake",
               "icon": "451165",
-              "description": "Causes the earth within 8 yards of the target location to tremble and break, dealing 1,442 Nature damage over 6 sec and has a 5% chance to knock the enemy down. Multiple uses of Earthquake may overlap.\r\n\r\nThis spell is cast at a selected location.",
+              "description": "Causes the earth within 8 yards of the target location to tremble and break, dealing 1,444 Nature damage over 6 sec and has a 5% chance to knock the enemy down. Multiple uses of Earthquake may overlap.\r\n\r\nThis spell is cast at a selected location.",
               "maxRanks": 1
             }
           ]
@@ -1493,9 +1493,9 @@
           "posX": 34,
           "posY": 8,
           "connections": [
+            103633,
             110066,
-            103631,
-            103633
+            103631
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1529,15 +1529,15 @@
           "posX": 38,
           "posY": 8,
           "connections": [
-            81005,
-            103633
+            103633,
+            81005
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Earthen Rage",
           "icon": "1016245",
-          "description": "Your damaging spells incite the earth around you to come to your aid for 6 sec, repeatedly dealing 160 Nature damage to your most recently attacked target.",
+          "description": "Your damaging spells incite the earth around you to come to your aid for 6 sec, repeatedly dealing 159 Nature damage to your most recently attacked target.",
           "choices": null
         },
         {
@@ -1582,9 +1582,9 @@
           "posX": 32,
           "posY": 9,
           "connections": [
-            80995,
             81015,
-            103636
+            103636,
+            80995
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1618,9 +1618,9 @@
           "posX": 36,
           "posY": 9,
           "connections": [
-            81015,
             81010,
-            103634
+            103634,
+            81015
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1655,8 +1655,8 @@
           "posX": 30,
           "posY": 10,
           "connections": [
-            81003,
-            80993
+            80993,
+            81003
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1708,15 +1708,15 @@
           "posX": 38,
           "posY": 10,
           "connections": [
-            81008,
-            103641
+            103641,
+            81008
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
           "maxRanks": 1,
           "name": "Voltaic Blaze",
           "icon": "4638593",
-          "description": "Instantly shocks the target and 5 enemies within 10 yds with blazing thunder, applying Flame Shock and dealing 1,523 Nature damage. Always critically strikes.\r\n\r\nGenerates 1 stack of Maelstrom Weapon.",
+          "description": "Instantly shocks the target and 5 enemies within 10 yds with blazing thunder, applying Flame Shock and dealing 1,536 Nature damage. Always critically strikes.\r\n\r\nGenerates 1 stack of Maelstrom Weapon.",
           "choices": null
         },
         {
@@ -2515,7 +2515,7 @@
           "maxRanks": 1,
           "name": "Chain Heal",
           "icon": "6712961",
-          "description": "Heals the friendly target for 889, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
+          "description": "Heals the friendly target for 876, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
           "choices": null
         },
         {
@@ -2530,7 +2530,7 @@
           "maxRanks": 1,
           "name": "Lava Lash",
           "icon": "236289",
-          "description": "Charges your off-hand weapon with lava and burns your target, dealing 4 Fire damage.\r\n\r\nDamage is increased by 100% if your offhand weapon is imbued with Flametongue Weapon. ",
+          "description": "Charges your off-hand weapon with lava and burns your target, dealing 6 Fire damage.\r\n\r\nDamage is increased by 100% if your offhand weapon is imbued with Flametongue Weapon. ",
           "choices": null
         },
         {
@@ -2545,7 +2545,7 @@
           "maxRanks": 1,
           "name": "Chain Lightning",
           "icon": "136015",
-          "description": "Hurls a lightning bolt at the enemy, dealing 445 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
+          "description": "Hurls a lightning bolt at the enemy, dealing 446 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
           "choices": null
         },
         {
@@ -2562,7 +2562,7 @@
           "maxRanks": 1,
           "name": "Earth Shield",
           "icon": "136089",
-          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 341 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
+          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 337 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
           "choices": null
         },
         {
@@ -2647,7 +2647,7 @@
           "maxRanks": 1,
           "name": "Frost Shock",
           "icon": "135849",
-          "description": "Chills the target with frost, causing 276 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
+          "description": "Chills the target with frost, causing 274 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
           "choices": null
         },
         {
@@ -2726,8 +2726,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            109492,
-            103581
+            103581,
+            109492
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2784,7 +2784,7 @@
           "maxRanks": 1,
           "name": "Healing Stream Totem",
           "icon": "135127",
-          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 253 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
+          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 257 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
           "choices": null
         },
         {
@@ -2862,8 +2862,8 @@
           "posX": 14,
           "posY": 5,
           "connections": [
-            109493,
-            103613
+            103613,
+            109493
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -3004,8 +3004,8 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            103579,
-            103622
+            103622,
+            103579
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3176,8 +3176,8 @@
           "posX": 14,
           "posY": 8,
           "connections": [
-            103628,
-            103585
+            103585,
+            103628
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3248,9 +3248,9 @@
           "posX": 12,
           "posY": 9,
           "connections": [
-            103623,
             103607,
-            103612
+            103612,
+            103623
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -3349,8 +3349,8 @@
           "posX": 10,
           "posY": 10,
           "connections": [
-            103625,
-            103586
+            103586,
+            103625
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -3529,7 +3529,7 @@
           "maxRanks": 1,
           "name": "Crash Lightning",
           "icon": "1370984",
-          "description": "Electrocutes all enemies in front of you, dealing 63 Nature damage. \r\n\r\nEnhances your weapons for 12 sec, causing Stormstrike and Lava Lash to discharge 33 Nature damage split between up to 5 enemies in front of you. ",
+          "description": "Electrocutes all enemies in front of you, dealing 63 Nature damage. \r\n\r\nEnhances your weapons for 12 sec, causing Stormstrike and Lava Lash to discharge 34 Nature damage split between up to 5 enemies in front of you. ",
           "choices": null
         },
         {
@@ -3624,8 +3624,8 @@
           "posX": 32,
           "posY": 6,
           "connections": [
-            80939,
-            80968
+            80968,
+            80939
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3695,8 +3695,8 @@
           "posY": 7,
           "connections": [
             80968,
-            80960,
-            80944
+            80944,
+            80960
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3741,7 +3741,7 @@
           "maxRanks": 1,
           "name": "Voltaic Blaze",
           "icon": "4638593",
-          "description": "Instantly shocks the target and 5 enemies within 10 yds with blazing thunder, applying Flame Shock and dealing 1,500 Nature damage. Always critically strikes.\r\n\r\nGenerates 1 stack of Maelstrom Weapon.",
+          "description": "Instantly shocks the target and 5 enemies within 10 yds with blazing thunder, applying Flame Shock and dealing 1,531 Nature damage. Always critically strikes.\r\n\r\nGenerates 1 stack of Maelstrom Weapon.",
           "choices": null
         },
         {
@@ -3751,8 +3751,8 @@
           "posX": 28,
           "posY": 8,
           "connections": [
-            80960,
-            80967
+            80967,
+            80960
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3786,8 +3786,8 @@
           "posX": 32,
           "posY": 8,
           "connections": [
-            80961,
-            80967
+            80967,
+            80961
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3874,8 +3874,8 @@
           "posX": 30,
           "posY": 9,
           "connections": [
-            103871,
             109192,
+            103871,
             80973
           ],
           "spentRequired": 20,
@@ -3921,7 +3921,7 @@
           "maxRanks": 1,
           "name": "Sundering",
           "icon": "524794",
-          "description": "Shatters a line of earth in front of you with your main hand weapon, causing 89 Flamestrike damage to any enemy hit.",
+          "description": "Shatters a line of earth in front of you with your main hand weapon, causing 90 Flamestrike damage to any enemy hit.",
           "choices": null
         },
         {
@@ -4091,7 +4091,7 @@
           "maxRanks": 1,
           "name": "Primordial Storm",
           "icon": "643246",
-          "description": "Sundering transforms into a single use Primordial Storm for 15 sec after it is cast.\r\n\r\nPrimordial Storm\r\nDevastate nearby enemies with a Primordial Storm dealing 41 Flamestrike, 41 Froststrike, 41 Stormstrike damage, and unleashing a Lightning Bolt or a Chain Lightning at 150% effectiveness. Deals reduced damage beyond 5 targets.\r\n\r\nConsumes Maelstrom Weapon for increased damage.",
+          "description": "Sundering transforms into a single use Primordial Storm for 15 sec after it is cast.\r\n\r\nPrimordial Storm\r\nDevastate nearby enemies with a Primordial Storm dealing 42 Flamestrike, 41 Froststrike, 41 Stormstrike damage, and unleashing a Lightning Bolt or a Chain Lightning at 150% effectiveness. Deals reduced damage beyond 5 targets.\r\n\r\nConsumes Maelstrom Weapon for increased damage.",
           "choices": null
         },
         {
@@ -4278,7 +4278,7 @@
           "maxRanks": 1,
           "name": "Surging Totem",
           "icon": "5927655",
-          "description": "Summons a totem at the target location that creates a Tremor immediately and every 5.4 sec for 42 Flamestrike damage. Damage reduced beyond 5 targets. Lasts 25 sec.",
+          "description": "Summons a totem at the target location that creates a Tremor immediately and every 5.4 sec for 43 Flamestrike damage. Damage reduced beyond 5 targets. Lasts 25 sec.",
           "choices": null
         },
         {
@@ -4368,7 +4368,7 @@
           "maxRanks": 1,
           "name": "Totemic Rebound",
           "icon": "252174",
-          "description": "Chain Heal now jumps to a nearby totem within 20 yards once it reaches its last target, causing the totem to cast Chain Heal on an injured ally within 30 yards for 846. Jumps to 2 nearby targets within 20 yards.",
+          "description": "Chain Heal now jumps to a nearby totem within 20 yards once it reaches its last target, causing the totem to cast Chain Heal on an injured ally within 30 yards for 840. Jumps to 2 nearby targets within 20 yards.",
           "choices": null
         },
         {
@@ -4805,7 +4805,7 @@
           "maxRanks": 1,
           "name": "Chain Heal",
           "icon": "6712961",
-          "description": "Heals the friendly target for 876, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
+          "description": "Heals the friendly target for 874, then jumps up to 20 yards to heal the 3 most injured nearby allies. Healing is reduced by 30% with each jump.",
           "choices": null
         },
         {
@@ -4820,7 +4820,7 @@
           "maxRanks": 1,
           "name": "Lava Burst",
           "icon": "237582",
-          "description": "Hurls molten lava at the target, dealing 687 Fire damage. Lava Burst will always critically strike if the target is affected by Flame Shock and its damage is increased by your critical strike chance.",
+          "description": "Hurls molten lava at the target, dealing 679 Fire damage. Lava Burst will always critically strike if the target is affected by Flame Shock and its damage is increased by your critical strike chance.",
           "choices": null
         },
         {
@@ -4835,7 +4835,7 @@
           "maxRanks": 1,
           "name": "Chain Lightning",
           "icon": "136015",
-          "description": "Hurls a lightning bolt at the enemy, dealing 444 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
+          "description": "Hurls a lightning bolt at the enemy, dealing 443 Nature damage and then jumping to additional nearby enemies. Affects 3 total targets",
           "choices": null
         },
         {
@@ -4852,7 +4852,7 @@
           "maxRanks": 1,
           "name": "Earth Shield",
           "icon": "136089",
-          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 330 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
+          "description": "Protects the target with an earthen shield, increasing your healing on them by 20% and healing them for 331 when they take damage. This heal can only occur once every 3 sec. Maximum 9 charges.\r\n\r\nEarth Shield can only be placed on one target at a time. Only one Elemental Shield can be active on the Shaman.",
           "choices": null
         },
         {
@@ -4937,7 +4937,7 @@
           "maxRanks": 1,
           "name": "Frost Shock",
           "icon": "135849",
-          "description": "Chills the target with frost, causing 274 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
+          "description": "Chills the target with frost, causing 279 Frost damage and reducing the target's movement speed by 50% for 6 sec.",
           "choices": null
         },
         {
@@ -5016,8 +5016,8 @@
           "posX": 12,
           "posY": 4,
           "connections": [
-            109492,
-            103581
+            103581,
+            109492
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5074,7 +5074,7 @@
           "maxRanks": 1,
           "name": "Healing Stream Totem",
           "icon": "135127",
-          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 260 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
+          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 256 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
           "choices": null
         },
         {
@@ -5152,8 +5152,8 @@
           "posX": 14,
           "posY": 5,
           "connections": [
-            109493,
-            103613
+            103613,
+            109493
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5466,8 +5466,8 @@
           "posX": 14,
           "posY": 8,
           "connections": [
-            103628,
-            103585
+            103585,
+            103628
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5538,9 +5538,9 @@
           "posX": 12,
           "posY": 9,
           "connections": [
-            103623,
             103607,
-            103612
+            103612,
+            103623
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5639,8 +5639,8 @@
           "posX": 10,
           "posY": 10,
           "connections": [
-            103625,
-            103586
+            103586,
+            103625
           ],
           "spentRequired": 23,
           "alreadyGranted": false,
@@ -5750,7 +5750,7 @@
           "maxRanks": 1,
           "name": "Riptide",
           "icon": "252995",
-          "description": "Restorative waters wash over a friendly target, healing them for 2,246 and an additional 2,036 over 18 sec.",
+          "description": "Restorative waters wash over a friendly target, healing them for 2,267 and an additional 2,036 over 18 sec.",
           "choices": null
         },
         {
@@ -5767,7 +5767,7 @@
           "maxRanks": 1,
           "name": "Healing Rain",
           "icon": "136037",
-          "description": "Blanket the target area in healing rains, restoring 1,086 health to up to 6 allies over 18 sec.\r\n\r\nYou can only have one Healing Rain active at a time.",
+          "description": "Blanket the target area in healing rains, restoring 1,037 health to up to 6 allies over 18 sec.\r\n\r\nYou can only have one Healing Rain active at a time.",
           "choices": null
         },
         {
@@ -5784,7 +5784,7 @@
           "maxRanks": 1,
           "name": "Healing Stream Totem",
           "icon": "135127",
-          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 255 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
+          "description": "Summons a totem at your feet for 15 sec that heals an injured party or raid member within 40 yards for 253 every 1.8 sec.\r\n\r\nIf you already know Healing Stream Totem, instead gain 1 additional charge of Healing Stream Totem.",
           "choices": null
         },
         {
@@ -5818,7 +5818,7 @@
           "maxRanks": 1,
           "name": "Acid Rain",
           "icon": "136007",
-          "description": "Deal 379 Nature damage every 1.8 sec to up to 5 enemies inside of your Healing Rain.",
+          "description": "Deal 377 Nature damage every 1.8 sec to up to 5 enemies inside of your Healing Rain.",
           "choices": null
         },
         {
@@ -5842,14 +5842,14 @@
               "spellId": 114052,
               "name": "Ascendance",
               "icon": "8026698",
-              "description": "Immediately heals for 4,918 split between allies within 20 yds and transforms into a Water Ascendant for 15 sec.\r\n\r\nWhile ascended, Chain Heal jumps to 3 additional allies with 10% healing reduced for all jumps, Healing Wave always critical heals and heals 1 additional ally at 50% effectiveness, and the mana cost of Chain Heal and Healing Wave is reduced by 25%.",
+              "description": "Immediately heals for 4,871 split between allies within 20 yds and transforms into a Water Ascendant for 15 sec.\r\n\r\nWhile ascended, Chain Heal jumps to 3 additional allies with 10% healing reduced for all jumps, Healing Wave always critical heals and heals 1 additional ally at 50% effectiveness, and the mana cost of Chain Heal and Healing Wave is reduced by 25%.",
               "maxRanks": 1
             },
             {
               "spellId": 108280,
               "name": "Healing Tide Totem",
               "icon": "538569",
-              "description": "Summons a totem at your feet for 10 sec, which pulses every 1.8 sec, healing all party or raid members within 40 yards for 1,941.\r\n\r\nHealing reduced beyond 5 targets.",
+              "description": "Summons a totem at your feet for 10 sec, which pulses every 1.8 sec, healing all party or raid members within 40 yards for 2,001.\r\n\r\nHealing reduced beyond 5 targets.",
               "maxRanks": 1
             }
           ]
@@ -6096,7 +6096,7 @@
           "maxRanks": 1,
           "name": "Unleash Life",
           "icon": "462328",
-          "description": "Unleash elemental forces of Life, healing a friendly target for 4,719.\r\n\r\nIncreases the healing of your next Riptide, Chain Heal, or Healing Wave by 25% and reduces its cast time by 30%.",
+          "description": "Unleash elemental forces of Life, healing a friendly target for 4,747.\r\n\r\nIncreases the healing of your next Riptide, Chain Heal, or Healing Wave by 25% and reduces its cast time by 30%.",
           "choices": null
         },
         {
@@ -6123,8 +6123,8 @@
           "posX": 38,
           "posY": 7,
           "connections": [
-            103427,
-            81047
+            81047,
+            103427
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6141,8 +6141,8 @@
           "posX": 42,
           "posY": 7,
           "connections": [
-            103427,
-            81048
+            81048,
+            103427
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6195,9 +6195,9 @@
           "posX": 36,
           "posY": 8,
           "connections": [
+            81049,
             92675,
-            103432,
-            81049
+            103432
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6231,9 +6231,9 @@
           "posX": 40,
           "posY": 8,
           "connections": [
-            103427,
             81046,
-            81049
+            81049,
+            103427
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6273,7 +6273,7 @@
           "maxRanks": 1,
           "name": "Downpour",
           "icon": "1698701",
-          "description": "Casting Healing Rain grants a use of Downpour for 16 sec.\r\n\r\n Downpour\r\nA burst of water at your Healing Rain's location heals up to 5 injured allies within 12 yards for 1,249.",
+          "description": "Casting Healing Rain grants a use of Downpour for 16 sec.\r\n\r\n Downpour\r\nA burst of water at your Healing Rain's location heals up to 5 injured allies within 12 yards for 1,237.",
           "choices": null
         },
         {
@@ -6283,9 +6283,9 @@
           "posX": 34,
           "posY": 9,
           "connections": [
+            110083,
             81037,
-            81044,
-            110083
+            81044
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -6302,9 +6302,9 @@
           "posX": 38,
           "posY": 9,
           "connections": [
-            81044,
             81031,
-            81050
+            81050,
+            81044
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -6391,8 +6391,8 @@
           "posX": 36,
           "posY": 10,
           "connections": [
-            81055,
-            81041
+            81041,
+            81055
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -6461,9 +6461,9 @@
           "posX": 34,
           "posY": 11,
           "connections": [
-            81052,
+            81043,
             103433,
-            81043
+            81052
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -6480,9 +6480,9 @@
           "posX": 38,
           "posY": 11,
           "connections": [
-            81052,
+            113376,
             103915,
-            113376
+            81052
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -6531,7 +6531,7 @@
           "ranks": [
             {
               "spellId": 1267016,
-              "description": "Riptide has a 6% chance to upgrade your next Healing Stream Totem to Stormstream Totem which heals for 10% more, heals 1 additional ally at 100% effectiveness, and heals 2 injured allies for 5,006 healing when used.",
+              "description": "Riptide has a 6% chance to upgrade your next Healing Stream Totem to Stormstream Totem which heals for 10% more, heals 1 additional ally at 100% effectiveness, and heals 2 injured allies for 4,960 healing when used.",
               "maxRanks": 1
             },
             {
@@ -6694,7 +6694,7 @@
           "maxRanks": 1,
           "name": "Surging Totem",
           "icon": "5927655",
-          "description": "Summons a totem at the target location that creates a Tremor immediately and every 5.4 sec for 42 Flamestrike damage. Damage reduced beyond 5 targets. Lasts 25 sec.",
+          "description": "Summons a totem at the target location that creates a Tremor immediately and every 5.4 sec for 43 Flamestrike damage. Damage reduced beyond 5 targets. Lasts 25 sec.",
           "choices": null
         },
         {
@@ -6784,7 +6784,7 @@
           "maxRanks": 1,
           "name": "Totemic Rebound",
           "icon": "252174",
-          "description": "Chain Heal now jumps to a nearby totem within 20 yards once it reaches its last target, causing the totem to cast Chain Heal on an injured ally within 30 yards for 818. Jumps to 2 nearby targets within 20 yards.",
+          "description": "Chain Heal now jumps to a nearby totem within 20 yards once it reaches its last target, causing the totem to cast Chain Heal on an injured ally within 30 yards for 855. Jumps to 2 nearby targets within 20 yards.",
           "choices": null
         },
         {

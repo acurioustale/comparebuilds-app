@@ -100,7 +100,7 @@
           "maxRanks": 1,
           "name": "Hammer of Wrath",
           "icon": "7439209",
-          "description": "During Avenging Wrath, Judgment is empowered into Hammer of Wrath.\r\n\r\n Hammer of Wrath\r\nHurls a divine hammer that strikes an enemy for 43 Holy damage.\r\n\r\nGenerates 1 Holy Power.",
+          "description": "During Avenging Wrath, Judgment is empowered into Hammer of Wrath.\r\n\r\n Hammer of Wrath\r\nHurls a divine hammer that strikes an enemy for 44 Holy damage.\r\n\r\nGenerates 1 Holy Power.",
           "choices": null
         },
         {
@@ -214,9 +214,9 @@
           "posX": 4,
           "posY": 4,
           "connections": [
+            81508,
             103859,
-            109999,
-            81508
+            109999
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -250,9 +250,9 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            109999,
             81598,
-            81600
+            81600,
+            109999
           ],
           "spentRequired": 0,
           "alreadyGranted": true,
@@ -477,7 +477,7 @@
               "spellId": 114165,
               "name": "Holy Prism",
               "icon": "613408",
-              "description": "Fires a beam of light that scatters to strike a clump of targets. \r\n\r\nIf the beam is aimed at an enemy target, it deals 2,497 Holy damage and radiates 2,554 healing to 5 allies within 30 yds.\r\n\r\nIf the beam is aimed at a friendly target, it heals for 6,013 and radiates 922 Holy damage to 5 enemies within 30 yds.\r\n\r\nGenerates 3 Holy Power.",
+              "description": "Fires a beam of light that scatters to strike a clump of targets. \r\n\r\nIf the beam is aimed at an enemy target, it deals 2,459 Holy damage and radiates 2,578 healing to 5 allies within 30 yds.\r\n\r\nIf the beam is aimed at a friendly target, it heals for 6,074 and radiates 930 Holy damage to 5 enemies within 30 yds.\r\n\r\nGenerates 3 Holy Power.",
               "maxRanks": 1
             }
           ]
@@ -521,9 +521,9 @@
           "posX": 12,
           "posY": 6,
           "connections": [
-            92220,
             110092,
-            81631
+            81631,
+            92220
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -540,8 +540,8 @@
           "posX": 2,
           "posY": 7,
           "connections": [
-            81630,
-            103860
+            103860,
+            81630
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -575,9 +575,9 @@
           "posX": 6,
           "posY": 7,
           "connections": [
-            81630,
             81605,
-            81496
+            81496,
+            81630
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -626,9 +626,9 @@
           "posX": 10,
           "posY": 7,
           "connections": [
-            93009,
             93520,
-            81496
+            81496,
+            93009
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -679,9 +679,9 @@
           "posX": 4,
           "posY": 8,
           "connections": [
-            109998,
             93168,
-            81614
+            81614,
+            109998
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -780,9 +780,9 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            109997,
             81543,
-            81616
+            81616,
+            109997
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -875,7 +875,7 @@
           "maxRanks": 1,
           "name": "Holy Ritual",
           "icon": "134917",
-          "description": "Allies are healed for 7,526 when you cast Blessing of Protection or Blessing of Sacrifice on them.",
+          "description": "Allies are healed for 7,637 when you cast Blessing of Protection or Blessing of Sacrifice on them.",
           "choices": null
         },
         {
@@ -1123,7 +1123,7 @@
           "maxRanks": 1,
           "name": "Holy Shock",
           "icon": "135972",
-          "description": "Triggers a burst of Light on the target, dealing 821 Holy damage to an enemy, or 4,272 healing to an ally.\r\n\r\nGenerates 1 Holy Power.\r\n",
+          "description": "Triggers a burst of Light on the target, dealing 822 Holy damage to an enemy, or 4,309 healing to an ally.\r\n\r\nGenerates 1 Holy Power.\r\n",
           "choices": null
         },
         {
@@ -1369,8 +1369,8 @@
           "posX": 40,
           "posY": 6,
           "connections": [
-            81575,
-            81568
+            81568,
+            81575
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1404,9 +1404,9 @@
           "posX": 30,
           "posY": 7,
           "connections": [
+            81571,
             81590,
-            81570,
-            81571
+            81570
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1485,7 +1485,7 @@
           "maxRanks": 1,
           "name": "Shining Righteousness",
           "icon": "135922",
-          "description": "Shield of the Righteous deals 968 damage to its first target struck.\r\n\r\nShield of the Righteous now has a 35% chance to activate Divine Purpose if talented.",
+          "description": "Shield of the Righteous deals 977 damage to its first target struck.\r\n\r\nShield of the Righteous now has a 35% chance to activate Divine Purpose if talented.",
           "choices": null
         },
         {
@@ -1545,9 +1545,9 @@
           "posX": 32,
           "posY": 8,
           "connections": [
-            81570,
             81574,
-            93523
+            93523,
+            81570
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -1653,8 +1653,8 @@
           "posY": 9,
           "connections": [
             81580,
-            81573,
-            102502
+            102502,
+            81573
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1876,8 +1876,8 @@
           "posX": 44,
           "posY": 10,
           "connections": [
-            81558,
-            81560
+            81560,
+            81558
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1946,9 +1946,9 @@
           "posX": 38,
           "posY": 11,
           "connections": [
-            81584,
             81592,
-            81587
+            81587,
+            81584
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -1980,9 +1980,9 @@
           "posX": 42,
           "posY": 11,
           "connections": [
+            81589,
             108034,
-            81587,
-            81589
+            81587
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -2023,7 +2023,7 @@
             },
             {
               "spellId": 1245368,
-              "description": "Every 8 sec or when Beacon of the Savior transfers to a new injured target, they are granted an absorb shield that prevents the next 1,046 damage and reduces damage taken by 10% for 15 sec.\r\n\r\nBeacon of the Savior now additionally follows the target of your Holy Light and Flash of Light spells once every 5 sec.",
+              "description": "Every 8 sec or when Beacon of the Savior transfers to a new injured target, they are granted an absorb shield that prevents the next 1,061 damage and reduces damage taken by 10% for 15 sec.\r\n\r\nBeacon of the Savior now additionally follows the target of your Holy Light and Flash of Light spells once every 5 sec.",
               "maxRanks": 1
             }
           ]
@@ -2205,7 +2205,7 @@
               "spellId": 433106,
               "name": "Divine Guidance",
               "icon": "135931",
-              "description": "For each Holy Power ability cast, your next Consecration deals 760 damage immediately, split across all enemies.\r\n\r\nUp to 3 nearby allies are each healed for 30% of the damage amount.",
+              "description": "For each Holy Power ability cast, your next Consecration deals 806 damage immediately, split across all enemies.\r\n\r\nUp to 3 nearby allies are each healed for 30% of the damage amount.",
               "maxRanks": 1
             },
             {
@@ -2733,7 +2733,7 @@
           "maxRanks": 1,
           "name": "Hammer of Wrath",
           "icon": "7439209",
-          "description": "During Avenging Wrath, Judgment is empowered into Hammer of Wrath.\r\n\r\n Hammer of Wrath\r\nHurls a divine hammer that strikes an enemy for 44 Holy damage.\r\n\r\nGenerates 1 Holy Power.",
+          "description": "During Avenging Wrath, Judgment is empowered into Hammer of Wrath.\r\n\r\n Hammer of Wrath\r\nHurls a divine hammer that strikes an enemy for 43 Holy damage.\r\n\r\nGenerates 1 Holy Power.",
           "choices": null
         },
         {
@@ -2847,9 +2847,9 @@
           "posX": 4,
           "posY": 4,
           "connections": [
+            81507,
             109999,
-            103859,
-            81507
+            103859
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -2883,9 +2883,9 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            109999,
             81598,
-            81600
+            81600,
+            109999
           ],
           "spentRequired": 0,
           "alreadyGranted": true,
@@ -3161,8 +3161,8 @@
           "posX": 2,
           "posY": 7,
           "connections": [
-            81630,
-            103860
+            103860,
+            81630
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3196,9 +3196,9 @@
           "posX": 6,
           "posY": 7,
           "connections": [
+            81605,
             81630,
-            110006,
-            81605
+            110006
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3247,9 +3247,9 @@
           "posX": 10,
           "posY": 7,
           "connections": [
+            93187,
             93009,
-            110006,
-            93187
+            110006
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3283,8 +3283,8 @@
           "posX": 14,
           "posY": 7,
           "connections": [
-            93009,
-            93165
+            93165,
+            93009
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3301,9 +3301,9 @@
           "posX": 4,
           "posY": 8,
           "connections": [
-            109998,
             93168,
-            81614
+            81614,
+            109998
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3402,9 +3402,9 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            109997,
             81543,
-            81616
+            81616,
+            109997
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -3497,7 +3497,7 @@
           "maxRanks": 1,
           "name": "Holy Ritual",
           "icon": "134917",
-          "description": "Allies are healed for 7,499 when you cast Blessing of Protection or Blessing of Sacrifice on them.",
+          "description": "Allies are healed for 7,449 when you cast Blessing of Protection or Blessing of Sacrifice on them.",
           "choices": null
         },
         {
@@ -3745,7 +3745,7 @@
           "maxRanks": 1,
           "name": "Avenger's Shield",
           "icon": "135874",
-          "description": "Hurls your shield at an enemy target, dealing 69 Holy damage, interrupting and silencing the non-Player target for 3 sec, and then jumping to 2 additional nearby enemies. \r\n",
+          "description": "Hurls your shield at an enemy target, dealing 71 Holy damage, interrupting and silencing the non-Player target for 3 sec, and then jumping to 2 additional nearby enemies. \r\n",
           "choices": null
         },
         {
@@ -3785,7 +3785,7 @@
               "spellId": 53595,
               "name": "Hammer of the Righteous",
               "icon": "236253",
-              "description": "Hammers the current target for 70 Physical damage.\r\n\r\nGenerates 1 Holy Power.",
+              "description": "Hammers the current target for 71 Physical damage.\r\n\r\nGenerates 1 Holy Power.",
               "maxRanks": 1
             },
             {
@@ -3907,7 +3907,7 @@
               "spellId": 378425,
               "name": "Uther's Counsel",
               "icon": "135910",
-              "description": "Your Lay on Hands, Divine Shield, Blessing of Protection, and Blessing of Spellwarding have 15% reduced cooldown.",
+              "description": "Your Lay on Hands, Divine Shield, and Blessing of Protection have 15% reduced cooldown.",
               "maxRanks": 1
             }
           ]
@@ -4122,8 +4122,8 @@
           "posX": 34,
           "posY": 7,
           "connections": [
-            81483,
-            81499
+            81499,
+            81483
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4278,9 +4278,9 @@
           "posX": 40,
           "posY": 8,
           "connections": [
-            81612,
             81485,
-            81470
+            81470,
+            81612
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -4402,8 +4402,8 @@
           "posY": 10,
           "connections": [
             81484,
-            81490,
-            103877
+            103877,
+            81490
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -4420,8 +4420,8 @@
           "posX": 40,
           "posY": 10,
           "connections": [
-            81488,
             81498,
+            81488,
             103877
           ],
           "spentRequired": 20,
@@ -4491,9 +4491,9 @@
           "posX": 38,
           "posY": 11,
           "connections": [
-            81471,
             81497,
-            103877
+            103877,
+            81471
           ],
           "spentRequired": 20,
           "alreadyGranted": false,
@@ -4552,7 +4552,7 @@
             },
             {
               "spellId": 1267215,
-              "description": "Your next cast of Shield of the Righteous after Vanguard deals 100% additional damage to your primary target and causes light to refract onto 4 other targets for 70 Holy damage.\r\n\r\nDuring Avenging Wrath your Avenger's Shield always benefits from Vanguard.",
+              "description": "Your next cast of Shield of the Righteous after Vanguard deals 100% additional damage to your primary target and causes light to refract onto 4 other targets for 175 Holy damage.\r\n\r\nDuring Avenging Wrath your Avenger's Shield always benefits from Vanguard.",
               "maxRanks": 1
             }
           ]
@@ -4624,7 +4624,7 @@
           "maxRanks": 1,
           "name": "Light's Guidance",
           "icon": "571556",
-          "description": "Wake of Ashes is replaced with Hammer of Light for 20 sec after it is cast.\r\n\r\n Hammer of Light:\r\nHammer down your enemy with the power of the Light, dealing 243 Holy damage and 122 Holy damage up to 7 nearby enemies. \r\n\r\nAdditionally, calls down Empyrean Hammers from the sky to strike 3 nearby enemies for 16 Holy damage each.\r\n\r\nCosts 5 Holy Power.\r\n",
+          "description": "Wake of Ashes is replaced with Hammer of Light for 20 sec after it is cast.\r\n\r\n Hammer of Light:\r\nHammer down your enemy with the power of the Light, dealing 363 Holy damage and 183 Holy damage up to 7 nearby enemies. \r\n\r\nAdditionally, calls down Empyrean Hammers from the sky to strike 3 nearby enemies for 17 Holy damage each.\r\n\r\nCosts 5 Holy Power.\r\n",
           "choices": null
         },
         {
@@ -5048,7 +5048,7 @@
               "spellId": 433106,
               "name": "Divine Guidance",
               "icon": "135931",
-              "description": "For each Holy Power ability cast, your next Consecration deals 760 damage immediately, split across all enemies.\r\n\r\nUp to 3 nearby allies are each healed for 30% of the damage amount.",
+              "description": "For each Holy Power ability cast, your next Consecration deals 806 damage immediately, split across all enemies.\r\n\r\nUp to 3 nearby allies are each healed for 30% of the damage amount.",
               "maxRanks": 1
             },
             {
@@ -5262,7 +5262,7 @@
           "maxRanks": 1,
           "name": "Hammer of Wrath",
           "icon": "7439209",
-          "description": "During Avenging Wrath, Judgment is empowered into Hammer of Wrath.\r\n\r\n Hammer of Wrath\r\nHurls a divine hammer that strikes an enemy for 43 Holy damage.\r\n\r\nGenerates 1 Holy Power.",
+          "description": "During Avenging Wrath, Judgment is empowered into Hammer of Wrath.\r\n\r\n Hammer of Wrath\r\nHurls a divine hammer that strikes an enemy for 44 Holy damage.\r\n\r\nGenerates 1 Holy Power.",
           "choices": null
         },
         {
@@ -5376,9 +5376,9 @@
           "posX": 4,
           "posY": 4,
           "connections": [
+            81507,
             103859,
-            109999,
-            81507
+            109999
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5427,9 +5427,9 @@
           "posX": 8,
           "posY": 4,
           "connections": [
-            109999,
             81598,
-            81600
+            81600,
+            109999
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -5633,9 +5633,9 @@
           "posX": 4,
           "posY": 6,
           "connections": [
-            109867,
             81605,
-            103860
+            103860,
+            109867
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5723,8 +5723,8 @@
           "posX": 2,
           "posY": 7,
           "connections": [
-            81630,
-            103860
+            103860,
+            81630
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5758,9 +5758,9 @@
           "posX": 6,
           "posY": 7,
           "connections": [
+            81605,
             81630,
-            109368,
-            81605
+            109368
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5809,9 +5809,9 @@
           "posX": 10,
           "posY": 7,
           "connections": [
+            93174,
             93009,
-            109368,
-            93174
+            109368
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5863,9 +5863,9 @@
           "posX": 4,
           "posY": 8,
           "connections": [
-            109998,
             93168,
-            81614
+            81614,
+            109998
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -5964,9 +5964,9 @@
           "posX": 12,
           "posY": 8,
           "connections": [
-            109997,
             81543,
-            81616
+            81616,
+            109997
           ],
           "spentRequired": 8,
           "alreadyGranted": false,
@@ -6059,7 +6059,7 @@
           "maxRanks": 1,
           "name": "Holy Ritual",
           "icon": "134917",
-          "description": "Allies are healed for 7,507 when you cast Blessing of Protection or Blessing of Sacrifice on them.",
+          "description": "Allies are healed for 7,713 when you cast Blessing of Protection or Blessing of Sacrifice on them.",
           "choices": null
         },
         {
@@ -6324,7 +6324,7 @@
           "maxRanks": 1,
           "name": "Divine Storm",
           "icon": "236250",
-          "description": "Unleashes a whirl of divine energy, dealing 91 Holy damage to all nearby enemies. \r\n\r\nDeals reduced damage beyond 5 targets.",
+          "description": "Unleashes a whirl of divine energy, dealing 90 Holy damage to all nearby enemies. \r\n\r\nDeals reduced damage beyond 5 targets.",
           "choices": null
         },
         {
@@ -6425,7 +6425,7 @@
           "maxRanks": 1,
           "name": "Final Verdict",
           "icon": "461860",
-          "description": "Unleashes a powerful weapon strike that deals 160 Holy damage to an enemy target,\r\n\r\nHas a 15% chance to reset the cooldown of Judgment.",
+          "description": "Unleashes a powerful weapon strike that deals 166 Holy damage to an enemy target,\r\n\r\nHas a 15% chance to reset the cooldown of Judgment.",
           "choices": null
         },
         {
@@ -6435,9 +6435,9 @@
           "posX": 36,
           "posY": 5,
           "connections": [
+            81544,
             81521,
-            93161,
-            81544
+            93161
           ],
           "spentRequired": 0,
           "alreadyGranted": false,
@@ -6727,14 +6727,14 @@
               "spellId": 406646,
               "name": "Templar Strikes",
               "icon": "1109508",
-              "description": "Crusader Strike loses a charge but is now a combo ability.\r\n\r\nTemplar Strike slashes an enemy for 66 Radiant damage and gets followed up by Templar Slash that deals 74 Radiant damage. Templar Slash always critically strikes.",
+              "description": "Crusader Strike loses a charge but is now a combo ability.\r\n\r\nTemplar Strike slashes an enemy for 66 Radiant damage and gets followed up by Templar Slash that deals 76 Radiant damage. Templar Slash always critically strikes.",
               "maxRanks": 1
             },
             {
               "spellId": 404542,
               "name": "Crusading Strikes",
               "icon": "135278",
-              "description": "Crusader Strike replaces your auto-attacks and deals 82 Physical damage.\r\n\r\nAuto-attack speed is decreased by 15%.",
+              "description": "Crusader Strike replaces your auto-attacks and deals 81 Physical damage.\r\n\r\nAuto-attack speed is decreased by 15%.",
               "maxRanks": 1
             }
           ]
@@ -6809,7 +6809,7 @@
           "maxRanks": 1,
           "name": "Wake of Ashes",
           "icon": "1112939",
-          "description": "Lash out at your enemies, dealing 112 Radiant damage to all enemies within 14 yds in front of you, and applying Truth's Wake, burning the targets for an additional 67 damage over 9 sec.\r\n\r\nDemon and Undead enemies are also stunned for 5 sec.\r\n\r\nGenerates 3 Holy Power.",
+          "description": "Lash out at your enemies, dealing 111 Radiant damage to all enemies within 14 yds in front of you, and applying Truth's Wake, burning the targets for an additional 67 damage over 9 sec.\r\n\r\nDemon and Undead enemies are also stunned for 5 sec.\r\n\r\nGenerates 3 Holy Power.",
           "choices": null
         },
         {
@@ -6980,7 +6980,7 @@
             },
             {
               "spellId": 1261159,
-              "description": "Art of War further empowers Blade of Justice to unleash a wave of Holy energy, dealing 288 Holy damage to its primary target and 116 Holy damage to all other enemies in its path.",
+              "description": "Art of War further empowers Blade of Justice to unleash a wave of Holy energy, dealing 293 Holy damage to its primary target and 116 Holy damage to all other enemies in its path.",
               "maxRanks": 1
             }
           ]
@@ -7052,7 +7052,7 @@
           "maxRanks": 1,
           "name": "Light's Guidance",
           "icon": "571556",
-          "description": "Wake of Ashes is replaced with Hammer of Light for 20 sec after it is cast.\r\n\r\n Hammer of Light:\r\nHammer down your enemy with the power of the Light, dealing 245 Holy damage and 123 Holy damage up to 7 nearby enemies. \r\n\r\nAdditionally, calls down Empyrean Hammers from the sky to strike 3 nearby enemies for 16 Holy damage each.\r\n\r\nCosts 5 Holy Power.\r\n",
+          "description": "Wake of Ashes is replaced with Hammer of Light for 20 sec after it is cast.\r\n\r\n Hammer of Light:\r\nHammer down your enemy with the power of the Light, dealing 370 Holy damage and 182 Holy damage up to 7 nearby enemies. \r\n\r\nAdditionally, calls down Empyrean Hammers from the sky to strike 3 nearby enemies for 18 Holy damage each.\r\n\r\nCosts 5 Holy Power.\r\n",
           "choices": null
         },
         {
@@ -7280,7 +7280,7 @@
           "maxRanks": 1,
           "name": "Divine Hammer",
           "icon": "626003",
-          "description": "Divine Toll summons Divine Hammers that spin around you for 8 sec.\r\n\r\nDivine Hammer\r\nStrikes all enemies nearby for 51 Holy damage every 2 sec. Deals reduced damage beyond 8 targets.",
+          "description": "Divine Toll summons Divine Hammers that spin around you for 8 sec.\r\n\r\nDivine Hammer\r\nStrikes all enemies nearby for 49 Holy damage every 2 sec. Deals reduced damage beyond 8 targets.",
           "choices": null
         },
         {
