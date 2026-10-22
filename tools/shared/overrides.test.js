@@ -2,7 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   withoutOverride,
-  advisorySummary,
+  parseAudit,
+  introducedAdvisories,
   report,
   isAdvisoryFailure,
 } from "./overrides.mjs";
@@ -54,120 +55,174 @@ test("withoutOverride tolerates a manifest with no overrides at all", () => {
   assert.deepEqual(withoutOverride({ name: "site" }, "a"), { name: "site" });
 });
 
-test("advisorySummary returns npm's count line, trimmed", () => {
-  const output = "\nfixed 0 of 3\n\n2 high severity vulnerabilities  \n";
-  assert.equal(advisorySummary(output), "2 high severity vulnerabilities");
+// A trimmed `npm audit --json` report: `vulnerabilities` keyed by package, each
+// with a `via` list mixing advisory objects and dependency-chain strings.
+function auditJson(vulnerabilities) {
+  return JSON.stringify({ auditReportVersion: 2, vulnerabilities });
+}
+
+const katex = {
+  source: 1240101,
+  name: "katex",
+  severity: "low",
+  url: "https://github.com/advisories/GHSA-238p-pmpm-9mq7",
+};
+const smolToml = {
+  source: 1240090,
+  name: "smol-toml",
+  severity: "moderate",
+  url: "https://github.com/advisories/GHSA-r4xh-jqrq-34v2",
+};
+const braces = {
+  source: 1240110,
+  name: "braces",
+  severity: "high",
+  url: "https://github.com/advisories/GHSA-aaaa-bbbb-cccc",
+};
+
+test("parseAudit keys each advisory by the GHSA in its URL", () => {
+  const advisories = parseAudit(auditJson({ katex: { via: [katex] } }));
+  assert.deepEqual([...advisories.keys()], ["GHSA-238p-pmpm-9mq7"]);
+  assert.deepEqual(advisories.get("GHSA-238p-pmpm-9mq7"), {
+    id: "GHSA-238p-pmpm-9mq7",
+    name: "katex",
+    severity: "low",
+  });
 });
 
-test("advisorySummary matches the singular npm prints for one advisory", () => {
-  assert.equal(
-    advisorySummary("1 moderate severity vulnerability"),
-    "1 moderate severity vulnerability",
+test("parseAudit skips the dependency-chain strings in via", () => {
+  // markdownlint is "vulnerable" only because it depends on katex. Counting
+  // that string as an advisory of its own would invent one per dependent.
+  const advisories = parseAudit(
+    auditJson({
+      katex: { via: [katex] },
+      "micromark-extension-math": { via: ["katex"] },
+      markdownlint: { via: ["micromark-extension-math"] },
+    }),
+  );
+  assert.deepEqual([...advisories.keys()], ["GHSA-238p-pmpm-9mq7"]);
+});
+
+test("parseAudit falls back to npm's numeric source without a GHSA URL", () => {
+  const advisories = parseAudit(
+    auditJson({ a: { via: [{ source: 42, name: "a", severity: "low" }] } }),
+  );
+  assert.deepEqual([...advisories.keys()], ["42"]);
+});
+
+test("parseAudit reads a clean report as no advisories", () => {
+  assert.equal(parseAudit(auditJson({})).size, 0);
+});
+
+test("parseAudit refuses npm's JSON error report", () => {
+  // The regression this guards: `npm audit --json` without a lockfile exits 1
+  // with this on stdout, which isAdvisoryFailure accepts. Read as a report it
+  // has no advisories, and every override would come out stale.
+  const enolock = JSON.stringify({
+    error: {
+      code: "ENOLOCK",
+      summary: "This command requires an existing lockfile.",
+    },
+  });
+  assert.throws(() => parseAudit(enolock), /npm audit failed: ENOLOCK/);
+});
+
+test("parseAudit refuses output that is not an audit report", () => {
+  assert.throws(() => parseAudit("{}"), /no vulnerabilities field/);
+  assert.throws(() => parseAudit("null"), /no vulnerabilities field/);
+  assert.throws(() => parseAudit("2 high severity vulnerabilities"));
+});
+
+test("introducedAdvisories ignores advisories the current tree already has", () => {
+  // The case the check used to get wrong: braces has no fix, so it is in both
+  // trees, and it says nothing about the smol-toml pin.
+  const current = parseAudit(auditJson({ braces: { via: [braces] } }));
+  const without = parseAudit(auditJson({ braces: { via: [braces] } }));
+  assert.deepEqual(introducedAdvisories(current, without), []);
+});
+
+test("introducedAdvisories returns what removing the override lets in", () => {
+  const current = parseAudit(auditJson({ braces: { via: [braces] } }));
+  const without = parseAudit(
+    auditJson({
+      braces: { via: [braces] },
+      "smol-toml": { via: [smolToml] },
+      katex: { via: [katex] },
+    }),
+  );
+  assert.deepEqual(
+    introducedAdvisories(current, without).map((a) => a.id),
+    ["GHSA-238p-pmpm-9mq7", "GHSA-r4xh-jqrq-34v2"],
   );
 });
 
-test("advisorySummary reads the count line whatever its case", () => {
-  assert.equal(
-    advisorySummary("FOUND 2 VULNERABILITIES"),
-    "FOUND 2 VULNERABILITIES",
+test("introducedAdvisories ignores advisories that removing the override clears", () => {
+  // A pin can itself hold a package inside a vulnerable range; dropping it then
+  // removes an advisory, which is the stale case, not a reason to keep it.
+  const current = parseAudit(auditJson({ "smol-toml": { via: [smolToml] } }));
+  const without = parseAudit(auditJson({}));
+  assert.deepEqual(introducedAdvisories(current, without), []);
+});
+
+const smolIntroduced = [
+  { id: "GHSA-r4xh-jqrq-34v2", name: "smol-toml", severity: "moderate" },
+];
+
+test("report calls an override stale when removing it lets nothing in", () => {
+  const out = report([{ name: "markdown-it", introduced: [] }]);
+  assert.match(
+    out,
+    /markdown-it: STALE - removing it lets in no advisory the tree does not already have\./,
   );
-});
-
-test("advisorySummary skips the report's 'vulnerable versions' prose", () => {
-  // npm's per-advisory block says "Depends on vulnerable versions of x" above
-  // the count. The stem is "vulnerabilit", so that line is not a false match.
-  const output = [
-    "# npm audit report",
-    "",
-    "smol-toml  <=1.7.0",
-    "  markdownlint-cli2  >=0.22.0",
-    "  Depends on vulnerable versions of smol-toml",
-    "",
-    "2 high severity vulnerabilities",
-  ].join("\n");
-  assert.equal(advisorySummary(output), "2 high severity vulnerabilities");
-});
-
-test("advisorySummary is undefined when no line states a count", () => {
-  assert.equal(advisorySummary("up to date, audited 1 package"), undefined);
-});
-
-test("report calls an override stale when its tree audits clean", () => {
-  const out = report([{ name: "markdown-it", advisories: null }]);
-  assert.match(out, /markdown-it: STALE - the tree is clean without it\./);
   assert.match(out, /Remove this override from package\.json/);
   assert.match(out, /markdown-it\.$/);
 });
 
-test("report quotes the remaining advisories for a load-bearing override", () => {
-  const out = report([
-    { name: "smol-toml", advisories: "\n2 high severity vulnerabilities\n" },
-  ]);
-  assert.match(out, /smol-toml: still load-bearing - 2 high severity/);
+test("report names the advisories a load-bearing override keeps out", () => {
+  const out = report([{ name: "smol-toml", introduced: smolIntroduced }]);
+  assert.match(
+    out,
+    /smol-toml: still load-bearing - without it: GHSA-r4xh-jqrq-34v2 \(smol-toml, moderate\)/,
+  );
   assert.match(out, /Every override is still earning its place\./);
 });
 
-test("report marks a load-bearing override dev-only when the runtime tree is clean", () => {
+test("report marks a load-bearing override dev-only when the runtime tree lets nothing in", () => {
   // A pin protecting build and test tooling is a different finding from one
   // protecting code served to a visitor, so the line has to say which.
   const out = report([
-    {
-      name: "smol-toml",
-      advisories: "2 high severity vulnerabilities",
-      runtimeAdvisories: null,
-    },
+    { name: "smol-toml", introduced: smolIntroduced, runtimeIntroduced: [] },
   ]);
-  assert.match(
-    out,
-    /smol-toml: still load-bearing \(dev only\) - 2 high severity vulnerabilities/,
-  );
+  assert.match(out, /smol-toml: still load-bearing \(dev only\) - without it:/);
 });
 
-test("report marks a load-bearing override runtime when the runtime tree is dirty", () => {
+test("report marks a load-bearing override runtime when the runtime tree lets something in", () => {
+  const introduced = [{ id: "GHSA-x", name: "react-dom", severity: "high" }];
   const out = report([
-    {
-      name: "react-dom",
-      advisories: "3 high severity vulnerabilities",
-      runtimeAdvisories: "1 high severity vulnerability",
-    },
+    { name: "react-dom", introduced, runtimeIntroduced: introduced },
   ]);
-  assert.match(
-    out,
-    /react-dom: still load-bearing \(runtime\) - 3 high severity vulnerabilities/,
-  );
+  assert.match(out, /react-dom: still load-bearing \(runtime\) - without it:/);
 });
 
 test("report leaves the line unqualified when the caller did not split the tree", () => {
   // Claiming "dev only" from a measurement nobody took would be worse than
-  // saying nothing, so an absent runtimeAdvisories reads as unmeasured rather
+  // saying nothing, so an absent runtimeIntroduced reads as unmeasured rather
   // than as a clean runtime tree.
-  const out = report([
-    { name: "a", advisories: "1 low severity vulnerability" },
-  ]);
-  assert.match(out, /a: still load-bearing - 1 low severity vulnerability/);
-  assert.doesNotMatch(out, /dev only|runtime/);
+  const out = report([{ name: "a", introduced: smolIntroduced }]);
+  assert.match(out, /a: still load-bearing - without it:/);
+  assert.doesNotMatch(out, /dev only|\(runtime\)/);
 });
 
 test("report ignores the runtime tree for an override that is stale anyway", () => {
-  const out = report([
-    { name: "a", advisories: null, runtimeAdvisories: null },
-  ]);
-  assert.match(out, /a: STALE - the tree is clean without it\./);
-});
-
-test("report falls back when the audit output states no count", () => {
-  // A dirty tree whose output we could not summarise is still load-bearing —
-  // the exit status decided that, not the string — so say so rather than
-  // printing an empty reason.
-  const out = report([{ name: "smol-toml", advisories: "something else" }]);
-  assert.match(out, /smol-toml: still load-bearing - advisories remain/);
+  const out = report([{ name: "a", introduced: [], runtimeIntroduced: [] }]);
+  assert.match(out, /a: STALE/);
 });
 
 test("report pluralises the removal line for more than one stale override", () => {
   const out = report([
-    { name: "a", advisories: null },
-    { name: "b", advisories: "1 low severity vulnerability" },
-    { name: "c", advisories: null },
+    { name: "a", introduced: [] },
+    { name: "b", introduced: smolIntroduced },
+    { name: "c", introduced: [] },
   ]);
   assert.match(
     out,
