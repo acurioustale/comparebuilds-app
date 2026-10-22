@@ -127,6 +127,18 @@ test("parseAudit refuses npm's JSON error report", () => {
   assert.throws(() => parseAudit(enolock), /npm audit failed: ENOLOCK/);
 });
 
+test("parseAudit still refuses an error report that carries no code or summary", () => {
+  // The refusal must not depend on npm filling in the fields it describes the
+  // error with, or a terser error report would slip through as a clean tree.
+  assert.throws(() => parseAudit(JSON.stringify({ error: {} })), {
+    message: "npm audit failed: error",
+  });
+});
+
+test("parseAudit tolerates a package entry with no via list", () => {
+  assert.equal(parseAudit(auditJson({ a: {} })).size, 0);
+});
+
 test("parseAudit refuses output that is not an audit report", () => {
   assert.throws(() => parseAudit("{}"), /no vulnerabilities field/);
   assert.throws(() => parseAudit("null"), /no vulnerabilities field/);
