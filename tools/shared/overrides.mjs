@@ -1,9 +1,9 @@
 // The pure half of the stale-override check: what a manifest looks like with one
-// `overrides` entry removed, and how to read npm's verdict on the tree that
-// results. The check itself (tools/check-stale-overrides.mjs) resolves and
-// audits that manifest, which needs a subprocess and the registry; everything
-// decidable without either lives here, with a test, rather than as untested
-// arithmetic inside the guard.
+// `overrides` entry removed, how to read npm's audit of the tree that results,
+// and what the difference from the current tree means. The check itself
+// (tools/check-stale-overrides.mjs) resolves and audits those trees, which needs
+// a subprocess and the registry; everything decidable without either lives
+// here, with a test, rather than as untested arithmetic inside the guard.
 //
 // Dependency-free on purpose: small string and object work over our own
 // manifest and npm's own output, not a package-manager library.
@@ -24,29 +24,70 @@ export function withoutOverride(pkg, name) {
   return trimmed;
 }
 
-// The one line of `npm audit` output that states the count, e.g.
-// "2 high severity vulnerabilities", or undefined when no line does.
+// Every advisory an `npm audit --json` report names, as a Map from advisory id
+// to `{ id, name, severity }`.
 //
-// Matching on the "vulnerabilit" stem covers both the singular and the plural
-// npm prints, and the line is returned trimmed so it can be dropped straight
-// into a report. This reads a human summary on purpose: the check only needs
-// something to show next to a still-load-bearing override, and the exit status
-// — not this string — is what decides stale from load-bearing.
-export function advisorySummary(auditOutput) {
-  return auditOutput
-    .split("\n")
-    .find((line) => /vulnerabilit/i.test(line))
-    ?.trim();
+// The id is the GHSA from the advisory's URL, falling back to npm's numeric
+// `source` when there is none, so the same advisory reads as the same key in
+// two reports. Only the object entries of each package's `via` are advisories;
+// the string entries are the dependency chain ("markdownlint-cli2 is affected
+// via markdownlint") and would double-count the advisory they point at.
+//
+// Throws on anything that is not a report. Under `--json` npm prints its own
+// failures to stdout as `{ "error": { … } }` — a missing lockfile exits 1 that
+// way, the same status as advisories found — so a caller that trusted the exit
+// code alone would read a run that never audited anything as a tree with no
+// advisories in it, and call every override stale on the strength of it.
+export function parseAudit(json) {
+  const report = JSON.parse(json);
+  if (report?.error) {
+    throw new Error(
+      `npm audit failed: ${report.error.code ?? "error"} ${report.error.summary ?? ""}`.trim(),
+    );
+  }
+  const vulnerabilities = report?.vulnerabilities;
+  if (typeof vulnerabilities !== "object" || vulnerabilities === null) {
+    throw new Error("npm audit output has no vulnerabilities field");
+  }
+  const advisories = new Map();
+  for (const entry of Object.values(vulnerabilities)) {
+    for (const via of entry?.via ?? []) {
+      if (typeof via !== "object" || via === null) continue;
+      const id =
+        via.url?.match(/GHSA(?:-[0-9a-z]{4}){3}/i)?.[0] ?? String(via.source);
+      advisories.set(id, { id, name: via.name, severity: via.severity });
+    }
+  }
+  return advisories;
+}
+
+// The advisories in `without` that `current` does not have, sorted by id.
+//
+// This is the whole question an override answers to: does removing it let in an
+// advisory the tree is free of today? Comparing against the current tree rather
+// than against a clean one is the point. An advisory nobody can fix yet (no
+// patched release exists) sits in both trees, so it says nothing about the pin;
+// requiring a clean audit instead would keep every override "load-bearing" for
+// as long as any unrelated advisory stayed open anywhere in the tree.
+//
+// Keyed by advisory, not by installed copy: a pin that fixes one copy of a
+// package while another copy elsewhere in the tree stays on the same advisory
+// reads as stale here. npm applies an override to every copy it matches, so
+// that only happens when the pin's selector is narrower than the package.
+export function introducedAdvisories(current, without) {
+  return [...without.values()]
+    .filter((advisory) => !current.has(advisory.id))
+    .sort((a, b) => a.id.localeCompare(b.id));
 }
 
 // One override's verdict line.
 //
-// `advisories` is the audit output for the whole tree without this override, or
-// null when that tree was clean. Clean means the advisory the pin was added for
-// no longer applies, so the pin is now only holding a package back — which is
-// the whole finding.
+// `introduced` is what removing this override lets in (introducedAdvisories
+// against the current tree). Empty means nothing the pin is doing is still
+// needed, so it is now only holding a package back — which is the whole
+// finding.
 //
-// `runtimeAdvisories` is the same for the runtime-only tree (`npm audit
+// `runtimeIntroduced` is the same for the runtime-only tree (`npm audit
 // --omit=dev`), and is what keeps this usable in a repo that ships runtime
 // dependencies. An override held alive by a runtime advisory is protecting code
 // served to every visitor; one held alive by a dev-only advisory is protecting
@@ -55,17 +96,19 @@ export function advisorySummary(auditOutput) {
 // is dev — so say which, whenever the caller measured it. Omit the field (or
 // pass undefined) to say it did not split the tree, and the line stays
 // unqualified rather than claiming a distinction nobody checked.
-function verdict({ name, advisories, runtimeAdvisories }) {
-  if (advisories === null)
-    return `  ${name}: STALE - the tree is clean without it.`;
-  const reason = advisorySummary(advisories) ?? "advisories remain";
+function verdict({ name, introduced, runtimeIntroduced }) {
+  if (introduced.length === 0)
+    return `  ${name}: STALE - removing it lets in no advisory the tree does not already have.`;
   const scope =
-    runtimeAdvisories === undefined
+    runtimeIntroduced === undefined
       ? ""
-      : runtimeAdvisories === null
+      : runtimeIntroduced.length === 0
         ? " (dev only)"
         : " (runtime)";
-  return `  ${name}: still load-bearing${scope} - ${reason}`;
+  const reasons = introduced
+    .map(({ id, name: pkg, severity }) => `${id} (${pkg}, ${severity})`)
+    .join(", ");
+  return `  ${name}: still load-bearing${scope} - without it: ${reasons}`;
 }
 
 // The report for a finished run: one line per override, then the verdict.
@@ -73,7 +116,9 @@ function verdict({ name, advisories, runtimeAdvisories }) {
 // `results` is an array of the objects `verdict` reads above.
 export function report(results) {
   const lines = results.map(verdict);
-  const stale = results.filter((r) => r.advisories === null).map((r) => r.name);
+  const stale = results
+    .filter((r) => r.introduced.length === 0)
+    .map((r) => r.name);
   lines.push(
     "",
     stale.length === 0
@@ -99,6 +144,8 @@ export function report(results) {
 // length test covers the rest: such a failure leaves stdout empty, and under
 // `stdio: "pipe"` an empty stdout is a zero-length Buffer — truthy, so a bare
 // `err.stdout` check would pass it through as a report of no advisories at all.
+// What this cannot see is a `--json` error, which exits 1 with its report on
+// stdout; parseAudit is what refuses that one.
 export function isAdvisoryFailure(err) {
   return err?.status === 1 && err?.stdout?.length > 0;
 }

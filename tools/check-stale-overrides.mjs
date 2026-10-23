@@ -12,13 +12,16 @@
 //
 // How it decides, and why not a semver comparison: the question is not "does
 // this override change the resolved version". A stale pin very much does — that
-// is exactly how it holds a major back. The question is whether the tree is
-// still unsafe WITHOUT it. So for each override in turn, resolve a lockfile with
-// that single entry removed and audit it. A clean audit means upstream has
-// caught up and the entry can go; a dirty one names the advisory still keeping
-// it alive.
+// is exactly how it holds a major back. The question is whether removing it
+// lets in an advisory the tree is free of today. So resolve the current tree
+// once and audit it, then for each override in turn resolve a lockfile with that
+// single entry removed, audit that, and compare. Nothing new means upstream has
+// caught up and the entry can go; anything new is named as the advisory still
+// keeping it alive. Comparing against the current tree rather than demanding a
+// clean audit is what keeps an unrelated, unfixable advisory elsewhere in the
+// tree from making every pin look load-bearing.
 //
-// The audit is run twice per override, mirroring the hard/soft split in
+// Every audit is run twice, mirroring the hard/soft split in
 // audit.yml: the runtime tree is bundled and served to every visitor, the dev
 // tree is build and test tooling that never reaches a browser, and an override
 // held alive by one is a different finding from one held alive by the other.
@@ -35,6 +38,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   withoutOverride,
+  parseAudit,
+  introducedAdvisories,
   report,
   isAdvisoryFailure,
 } from "./shared/overrides.mjs";
@@ -49,52 +54,63 @@ if (names.length === 0) {
   process.exit(0);
 }
 
-// Audit an already-resolved tree in `dir`. Returns null when it is clean, or
-// npm's audit output when it is not.
+// Audit an already-resolved tree in `dir`, as parseAudit's Map of advisories.
 //
 // Advisories are a result rather than a failure; anything else (a resolution
 // error, a registry outage, npm missing) is rethrown, so a broken check can
-// never read as a verdict. Which is which is isAdvisoryFailure's call — see
-// there for why both halves of it matter.
+// never read as a verdict. Which is which is isAdvisoryFailure's call, and
+// parseAudit's for the `--json` error report that gets past it — see there for
+// why both matter.
 function audit(dir, args = []) {
+  let stdout;
   try {
-    execFileSync("npm", ["audit", ...args], { cwd: dir, stdio: "pipe" });
-    return null;
+    stdout = execFileSync("npm", ["audit", "--json", ...args], {
+      cwd: dir,
+      stdio: "pipe",
+    });
   } catch (err) {
-    if (isAdvisoryFailure(err)) return err.stdout.toString();
-    throw err;
+    if (!isAdvisoryFailure(err)) throw err;
+    stdout = err.stdout;
   }
+  return parseAudit(stdout.toString());
 }
 
-// Resolve a lockfile for `pkg` minus one override and audit it, whole tree and
-// runtime-only.
+// Resolve a lockfile for `manifest` and audit it, whole tree and runtime-only.
 //
 // --package-lock-only keeps this to a resolution plus a registry query: nothing
 // is installed and no node_modules is ever written. It runs in a temp directory
-// so the repo's own lockfile is never touched. The runtime pass is skipped when
-// the whole tree is clean, since it cannot then be dirty.
-function auditWithout(name) {
+// so the repo's own lockfile is never touched — and so the current tree is
+// resolved the same way as every trimmed one, rather than read from a lockfile
+// that may be older than a fresh resolution, which would show up as a
+// difference that has nothing to do with the override.
+function auditTree(manifest) {
   const dir = mkdtempSync(join(tmpdir(), "stale-override-"));
   try {
-    writeFileSync(
-      join(dir, "package.json"),
-      JSON.stringify(withoutOverride(pkg, name), null, 2),
-    );
+    writeFileSync(join(dir, "package.json"), JSON.stringify(manifest, null, 2));
     execFileSync("npm", ["install", "--package-lock-only", "--silent"], {
       cwd: dir,
       stdio: "ignore",
     });
-    const advisories = audit(dir);
-    return {
-      name,
-      advisories,
-      runtimeAdvisories:
-        advisories === null ? null : audit(dir, ["--omit=dev"]),
-    };
+    return { all: audit(dir), runtime: audit(dir, ["--omit=dev"]) };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
 }
 
 console.log("check-stale-overrides: testing each override without itself\n");
-console.log(report(names.map(auditWithout)));
+const current = auditTree(pkg);
+console.log(
+  report(
+    names.map((name) => {
+      const without = auditTree(withoutOverride(pkg, name));
+      return {
+        name,
+        introduced: introducedAdvisories(current.all, without.all),
+        runtimeIntroduced: introducedAdvisories(
+          current.runtime,
+          without.runtime,
+        ),
+      };
+    }),
+  ),
+);
